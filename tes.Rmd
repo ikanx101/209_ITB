@@ -1,0 +1,10 @@
+---
+title : "uji coba"
+output: github_document
+---
+
+# uji coba
+
+```{r}
+mtcars
+```
