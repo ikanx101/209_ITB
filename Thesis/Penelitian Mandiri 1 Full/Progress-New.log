@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  7 OCT 2021 15:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  7 OCT 2021 19:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -666,7 +666,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [8]
-<Progress-New_files/figure-latex/unnamed-chunk-1-1.pdf, id=390, 3764.0625pt x 1
+<Progress-New_files/figure-latex/unnamed-chunk-1-1.pdf, id=409, 3764.0625pt x 1
 533.73pt>
 File: Progress-New_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (type 
 pdf)
@@ -683,7 +683,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [9 <./Progress-New_files/figure-latex/unnamed-chunk-1-1.pdf>]
-<Progress-New_files/figure-latex/unnamed-chunk-2-1.pdf, id=410, 2352.79pt x 102
+<Progress-New_files/figure-latex/unnamed-chunk-2-1.pdf, id=429, 2352.79pt x 102
 7.84pt>
 File: Progress-New_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type 
 pdf)
@@ -709,7 +709,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [11]
-<Screenshot from 2021-08-31 18-58-26.png, id=456, 581.17125pt x 600.2425pt>
+<Screenshot from 2021-08-31 18-58-26.png, id=475, 581.17125pt x 600.2425pt>
 File: Screenshot from 2021-08-31 18-58-26.png Graphic file (type png)
 <use Screenshot from 2021-08-31 18-58-26.png>
 Package pdftex.def Info: Screenshot from 2021-08-31 18-58-26.png  used on input
@@ -751,7 +751,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [15]
-<Progress-New_files/figure-latex/unnamed-chunk-4-1.pdf, id=513, 2360.82pt x 963
+<Progress-New_files/figure-latex/unnamed-chunk-4-1.pdf, id=532, 2360.82pt x 963
 .6pt>
 File: Progress-New_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type 
 pdf)
@@ -795,7 +795,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [19]
-<Progress-New_files/figure-latex/unnamed-chunk-5-1.pdf, id=571, 505.89pt x 289.
+<Progress-New_files/figure-latex/unnamed-chunk-5-1.pdf, id=590, 505.89pt x 289.
 08pt>
 File: Progress-New_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type 
 pdf)
@@ -821,7 +821,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [21]
-<Progress-New_files/figure-latex/unnamed-chunk-9-1.pdf, id=591, 1168.365pt x 16
+<Progress-New_files/figure-latex/unnamed-chunk-9-1.pdf, id=610, 1168.365pt x 16
 22.06pt>
 File: Progress-New_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type 
 pdf)
@@ -1048,16 +1048,43 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[45] (./Progress-New.aux)
+[45]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[46]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[47]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[48] (./Progress-New.aux)
 Package rerunfilecheck Info: File `Progress-New.out' has not changed.
-(rerunfilecheck)             Checksum: 2D2B6A00B99D55FB5854260F312BE062;9131.
+(rerunfilecheck)             Checksum: 41E18C8FAD9C84E7CD8C17E59ADFBB47;9642.
  ) 
 Here is how much of TeX's memory you used:
- 13767 strings out of 480559
- 208722 string characters out of 5902712
- 552761 words of memory out of 5000000
- 30594 multiletter control sequences out of 15000+600000
- 507666 words of font info for 218 fonts, out of 8000000 for 9000
+ 13793 strings out of 480559
+ 209119 string characters out of 5902712
+ 561557 words of memory out of 5000000
+ 30603 multiletter control sequences out of 15000+600000
+ 507757 words of font info for 219 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,12n,66p,405b,491s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/ho
@@ -1084,10 +1111,10 @@ sy8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pf
 b></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></ho
 me/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtto10.pfb></home/ik
 anx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Progress-New.pdf (45 pages, 1357393 bytes).
+Output written on Progress-New.pdf (48 pages, 1366948 bytes).
 PDF statistics:
- 939 PDF objects out of 1000 (max. 8388607)
- 824 compressed objects within 9 object streams
- 279 named destinations out of 1000 (max. 500000)
- 53719 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 980 PDF objects out of 1000 (max. 8388607)
+ 862 compressed objects within 9 object streams
+ 294 named destinations out of 1000 (max. 500000)
+ 53743 words of extra memory for PDF output out of 61914 (max. 10000000)
 

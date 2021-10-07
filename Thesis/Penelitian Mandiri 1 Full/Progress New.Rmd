@@ -1115,6 +1115,57 @@ ___Constraints___
 
 Kita juga perlu perhatikan bahwa $x_i \geq 0, i \in \{1,2,3,4,5,6,7\}$.
 
+Kita akan selesaikan dengan `library(ompr)` di __R__. Berikut adalah skripnya:
+
+```{r,warning=FALSE,message=FALSE}
+rm(list=ls())
+
+# memanggil libraries
+library(dplyr)
+library(ompr)
+library(ompr.roi)
+library(ROI.plugin.glpk)
+
+# membuat model
+integer_prog = 
+  MIPModel() %>% 
+  # membuat variabel
+  add_variable(x[i],
+               type = "integer",
+               lb = 0,
+               i = 1:7) %>% 
+  # set fungsi objective
+  set_objective(sum_expr(x[i],i = 1:7),"min") %>% 
+  # memasukkan constraints
+  # senin
+  add_constraint(sum_expr(x[i], i = c(1,4,5,6,7)) >= 24) %>% 
+  add_constraint(sum_expr(x[i], i = c(1,4,5,6,7)) <= 29) %>% 
+  # selasa
+  add_constraint(sum_expr(x[i], i = c(1,2,5,6,7)) >= 22) %>% 
+  add_constraint(sum_expr(x[i], i = c(1,2,5,6,7)) <= 27) %>% 
+  # rabu
+  add_constraint(sum_expr(x[i], i = c(1,2,3,6,7)) >= 23) %>% 
+  add_constraint(sum_expr(x[i], i = c(1,2,3,6,7)) <= 28) %>% 
+  # kamis
+  add_constraint(sum_expr(x[i], i = c(1,2,3,4,7)) >= 11) %>% 
+  add_constraint(sum_expr(x[i], i = c(1,2,3,4,7)) <= 16) %>% 
+  # jumat
+  add_constraint(sum_expr(x[i], i = 1:5) >= 16) %>% 
+  add_constraint(sum_expr(x[i], i = 1:5) <= 21) %>% 
+  # sabtu
+  add_constraint(sum_expr(x[i], i = 2:6) >= 20) %>% 
+  add_constraint(sum_expr(x[i], i = 2:6) <= 25) %>% 
+  # minggu
+  add_constraint(sum_expr(x[i], i = 3:7) >= 12) %>% 
+  add_constraint(sum_expr(x[i], i = 3:7) <= 17)
+
+integer_prog
+hasil = integer_prog %>% solve_model(with_ROI(solver = "glpk",verbose = T))
+# solusi yang dihasilkan
+hasil$solution
+```
+
+
 ## _Binary Programming_
 
 _Binary programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan biner (0,1). Biasanya metode ini dipakai dalam masalah penjadwalan yang memerlukan prinsip _matching_ antar kondisi yang ada.
