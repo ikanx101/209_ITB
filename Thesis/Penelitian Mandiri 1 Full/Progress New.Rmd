@@ -1072,10 +1072,31 @@ nakes %>%
   knitr::kable("simple",align = "c",caption = "Tabel Kebutuhan Nakes Harian")
 ```
 
-Jika berlaku kondisi sebagai berikut:
+Di rumah sakit tersebut berlaku kondisi sebagai berikut:
 
-1.
+1. Setiap nakes hanya diperbolehkan bekerja selama 5 hari berturut-turut dan harus libur selama 2 hari berturut-turut.
+1. Tidak ada pemberlakuan _shift_ bagi nakes.
 
+Berapa banyak nakes yang harus dipekerjakan oleh rumah sakit tersebut? Bagaimana konfigurasi penjadwalannya?
+
+Untuk memudahkan dalam mencari solusi permasalahan di atas, kita bisa membuat tabel ilustrasi berikut:
+
+```{r,echo=FALSE}
+nakes %>%
+  mutate(x1 = c('x','x','x','x','x','' , ''),
+	 x2 = c('' ,'x','x','x','x','x', ''),
+	 x3 = c('' , '','x','x','x','x','x'),
+	 x4 = c('x', '', '','x','x','x','x'),
+	 x5 = c('x','x', '', '','x','x','x'),
+	 x6 = c('x','x','x', '', '','x','x'),
+	 x7 = c('x','x','x','x', '', '','x')) %>%
+  rename("Min Nakes Required" = min,
+	 "Max Nakes Required" = max) %>%
+  knitr::kable("simple",align = "c",caption = "Konfigurasi Penjadwalan Nakes")
+```
+
+
+xxx
 ## _Binary Programming_
 
 _Binary programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan biner (0,1). Biasanya metode ini dipakai dalam masalah penjadwalan yang memerlukan prinsip _matching_ antar kondisi yang ada.
