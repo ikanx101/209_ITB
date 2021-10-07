@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Penelitian Mandiri Sains Komputasi I</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mohammad Rizka Fadhli Ikang" />
+    <meta name="date" content="2021-09-10" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/fc.css" rel="stylesheet" />
+    <link href="libs/remark-css/fc-fonts.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/es6shim/es6shim.js"></script>
+    <script src="libs/es7shim/es7shim.js"></script>
+    <script src="libs/graphre/graphre.js"></script>
+    <script src="libs/nomnoml/nomnoml.js"></script>
+    <script src="libs/nomnoml-binding/nomnoml.js"></script>
+    <link rel="stylesheet" href="footer-header.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Penelitian Mandiri Sains Komputasi I
+## Update Progress Minggu II
+### Mohammad Rizka Fadhli<br>Ikang
+### <a href="mailto:20921004@mahasiswa.itb.ac.id" class="email">20921004@mahasiswa.itb.ac.id</a>
+### 10 September 2021
+
+---
+
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;Update Minggu I ---- 20921004@mahasiswa.itb.ac.id&lt;/span&gt;&lt;/div&gt;
+
+
+
+---
+class: middle,inverse
+
+# REKAP MINGGU SEBELUMNYA
+
+## Rencana Judul Thesis
+### Optimisasi Pembelian Raw Material Minuman Serbuk Menggunakan Metode XXX: Studi Kasus PT. XYZ.
+
+---
+class: middle,inverse
+
+# REKAP MINGGU SEBELUMNYA
+
+## _Output_ Perkuliahan
+
+### Dokumentasi model-model optimisasi yang relevan dengan penelitian dan _computer codes_ dari metode optimisasi yang dipelajari.
+---
+class: middle,center,inverse
+
+# AGENDA HARI INI
+## Jenis-Jenis Optimisasi
+
+---
+# DEFINISI
+
+## Optimisasi 
+__Optimisasi__ merupakan salah satu cabang dari __riset operasi__ yang berfokus pada pencarian nilai minimum (atau maksimum) dari suatu variabel keputusan yang dibatasi oleh kendala tertentu (_constraints_) yang merepresentasikan suatu permasalahan _real_. Oleh karena itu, optimisasi erat kaitannya dengan pemodelan matematika.
+
+--
+
+## Riset Operasi
+Sedangkan __riset operasi__ adalah metode antar disiplin ilmu yang digunakan untuk menganalisa masalah nyata dan membuat keputusan untuk kegiatan operasional organisasi atau perusahaan.
+
+--
+
+## Masalah Optimisasi
+__Masalah optimisasi__ adalah masalah dalam pencarian __solusi terbaik__ dari semua kemungkinan solusi yang _feasible_.
+
+---
+# DEFINISI
+
+## Model Optimisasi
+Model optimisasi adalah ekspresi matematika dari suatu permasalahan optimisasi. Dari ekspresi matematika tersebut, ada beberapa hal yang perlu diketahui, yakni:
+
+1. __Variabel__ adalah suatu simbol yang memiliki banyak nilai dan nilainya ingin kita ketahui. Setiap nilai yang mungkin dari suatu variabel muncul akibat suatu kondisi tertentu di sistem.
+1. __Parameter__ di suatu model matematika adalah suatu konstanta yang menggambarkan suatu karakteristik dari sistem yang sedang diteliti. 
+1. ___Constraints___ (atau kendala) adalah kondisi atau batasan yang harus dipenuhi. Kendala-kendala ini dapat dituliskan menjadi suatu persamaan atau pertaksamaan. Suatu masalah optimisasi dapat memiliki hanya satu kendala atau banyak kendala.
+1. ___Objective function___ adalah satu fungsi (pemetaan dari variabel-varibel keputusan ke suatu nilai di daerah _feasible_) yang nilainya akan kita minimumkan atau kita maksimumkan.
+
+--
+
+Ekspresi matematika dari model optimisasi adalah sebagai berikut:
+
+Cari `\(x\)` yang meminimumkan atau memaksimumkan `\(f_i(x),\ i=1,..,m\)` dengan kendala `\(g_j(x),\ j=1,..,n\)` dan `\(x \geq 0\)`.
+
+Dari ekspresi tersebut, kita bisa membagi-bagi masalah optimisasi tergantung dari:
+
+1. Tipe variabel yang terlibat.
+1. Jenis fungsi yang ada (baik _objective function_ ataupun _constraint_).
+
+---
+# JENIS-JENIS OPTIMISASI 
+
+Pada bagian ini kita akan membahas jenis-jenis masalah optimisasi.
+
+&lt;img src="Screenshot from 2021-08-30 15-07-21.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+---
+class: middle
+
+# JENIS-JENIS OPTIMISASI 
+
+.pull-left[
+
+Masalah optimisasi bisa dibagi dua menjadi dua kategori berdasarkan tipe _variables_ yang terlibat, yakni:
+
+1. _Discrete Optimization_: merupakan masalah optimisasi di mana variabel yang terkait merupakan variabel diskrit, seperti _binary_ atau _integer_.
+1. _Continuous Optimization_: merupakan masalah optimisasi di mana nilai optimal ditemukan pada fungsi kontinu (termasuk fungsi yang _multimodal_).
+    - Sebagaimana yang telah kita pelajari di kalkulus, suatu fungsi kontinu __bisa terdiferensiabel__ atau __tidak terdiferensiabel__ di selang tertentu.
+    - Hal ini mengakibatkan pendekatan yang berbeda juga dalam penyelesaian optmisasinya.
+    
+]
+
+.pull-right[
+
+<div id="htmlwidget-46db7b97badcc85322ee" style="width:75%;height:504px;" class="nomnoml html-widget"></div>
+<script type="application/json" data-for="htmlwidget-46db7b97badcc85322ee">{"x":{"code":"\n#fill: #FEFEFF\n#lineWidth: 1\n#zoom: 4\n#direction: right\n\n#direction:down,\n                 [Optimisasi] -> [Variabel]\n                 [Variabel] -> [Diskrit]\n                 [Variabel] -> [Kontinu]\n                 ","svg":false},"evals":[],"jsHooks":[]}</script>
+
+]
+
+---
+class:middle
+
+# OPTIMISASI KONTINU
+
+## _Linear Programming_
+
+_Linear programming_ adalah bentuk metode optimisasi sederhana yang memanfaatkan relasi linear (semua fungsi dan _constraints_ merupakan fungsi linear).
+
+## _Non Linear Programming_
+
+Beberapa permasalahan tidak bisa ditulis sebagai fungsi linear, oleh karena itu muncullah permasalahan _non linear programming_. Bentuk dasar pemodelannya sama dengan _linear programming_ tapi ada fungsi yang tidak linear di dalamnya. Sebagai contoh fungsi yang terlibat ada logaritmik atau fungsi trigonometri.
+
+---
+# LINEAR PROGRAMMING
+
+## Contoh Masalah _Linear Programming_ 
+
+Saya memiliki area parkir seluas 1.960 `\(m^2\)`. Luas rata-rata untuk mobil berukuran kecil adalah 4 `\(m^2\)` dan mobil besar adalah 20 `\(m^2\)`. Daya tampung maksimum hanya 250 kendaraan, biaya parkir mobil kecil adalah Rp 7.000 per jam dan mobil besar adalah Rp 12.000 per jam. Jika dalam 1 jam area parkir saya terisi penuh dan tidak ada kendaraan yang pergi dan datang, maka berapa pendapatan maksimum yang bisa saya dapatkan dari tempat parkir itu?
+
+--
+
+Dari kasus di atas kita bisa tuliskan model matematikanya sebagai berikut:
+
+Misal `\(x_1\)` adalah mobil kecil dan `\(x_2\)` adalah mobil besar.
+
+`$$max(7000x_1 + 12000x_2)$$`
+
+--
+
+Dengan _constraints_: 
+
+`$$4 x_1 + 20 x_2 \leq 1960$$`
+
+--
+
+dan
+
+`$$x_1 + x_2 \leq 250$$`
+
+--
+
+serta `\(x_1 \geq 0, x_2 \geq 0\)`.
+
+---
+&lt;img src="Update-Progress-Jumat_files/figure-html/unnamed-chunk-3-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+---
+# NON LINEAR PROGRAMMING
+## Contoh Masalah _Non Linear Programming_ 
+
+Suatu perusahaan menjual suatu produk yang memiliki model _price elasticity_ seperti di bawah ini:
+
+&lt;img src="Screenshot from 2021-08-31 18-58-26.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+Di mana `\(p(x)\)` adalah harga saat menjual produk sebanyak `\(x\)`.
+
+---
+# NON LINEAR PROGRAMMING
+## Contoh Masalah _Non Linear Programming_ 
+
+Omset perusahaan tersebut didefinisikan sebagai `terjual x harga`, yakni `\(x p(x)\)`. Sedangkan profit adalah omset dikurangi dengan biaya produksi per produk yang terjual.
+
+--
+
+Sehingga didapatkan:
+
+`$$P(x) = x p(x) - c x, \text{ dengan c adalah fixed cost}$$`
+
+Karena `\(p(x)\)` non linear, maka didapatkan `\(P(x)\)` juga non linear.
+
+---
+class: middle
+
+# DISCRETE OPTIMIZATION
+
+## _Integer Programming_
+
+Pada _integer programming_, semua variabel yang terkait __wajib__ berupa _integer_ atau _binary_.
+
+Contoh masalah _Integer Programming_ adalah _nurse schedulling problem_, yakni bagaimana memasangkan perawat tepat ke _shift_ kerja yang tersedia.
+
+---
+class: middle
+
+# CONTOH MASALAH INTEGER PROGRAMMING
+
+## Latar Belakang
+
+Di suatu rumah sakit, ada satu lantai berisi kamar rawat inap kelas VIP dengan total ada 30 orang perawat yang ditugaskan di sana. Para perawat bekerja dengan sistem _shift_ dengan peraturan sebagai berikut:
+
+- Terdapat `3` shift kerja yaitu:
+    - _day shift_ (8.00 - 16.00), 
+    - _evening shift_ (16.00 - 24.00), dan
+    - _night shift_ (24.00 - 8.00)
+- Pada setiap shift dibutuhkan minimal 5 orang perawat.
+
+Selain itu, terdapat beberapa __aturan kerja__ yang harus dipenuhi, yakni:
+
+1. Setiap perawat dalam satu hari hanya boleh ditugaskan ke dalam satu _shift_.
+1. Jika seorang perawat ditugaskan pada _shift_ malam, maka dia tidak dapat ditugaskan di _shift_ pagi di hari berikutnya.
+1. Jika seorang perawat ditugaskan dalam `4` hari berturut-turut, maka hari ke-`5` harus diberi libur.
+1. Jika seorang perawat ditugaskan pada suatu _shift_ di _weekend_, maka dia tidak dapat ditugaskan di _weekend_ berikutnya.
+1. _Workload_ (banyaknya penugasan) setiap perawat harus __sama__.
+
+---
+class: middle
+
+# CONTOH MASALAH INTEGER PROGRAMMING
+
+## Di mana letak _integer_-nya?
+
+--
+
+&gt; Salah satu tujuan optimisasi ini adalah memasangkan (_matching_) antara perawat siapa, masuk hari apa di _shift_ yang mana.
+
+--
+
+### _Decision Variable_
+
+Saya definisikan:
+
+`$$x_{n,h,s} = \begin{cases} 1,&amp; \text{ jika di perawat ke } n \text{ bekerja di hari } h \text{ pada shift ke }s\\ 0, &amp; \text{ lainnya.}\end{cases}$$`
+
+---
+class: middle
+
+# CONTINUOUS DAN INTEGER 
+## _Mixed Integer Linear Programming_
+
+.pull-left[
+
+### Masalah Optimisasi Lainnya
+
+Ada kalanya kita memiliki masalah yang _decision variables_ lebih dari satu dan merupakan perpaduan antara _integer_, _binary_, dan kontinu.
+
+Ada satu metode lain yang dinamakan _mixed integer linear programming_ (__MILP__).
+
+Contoh masalah yang sering ditemui adalah penentuan _plant_ produksi.
+
+
+]
+
+.pull-right[
+
+<div id="htmlwidget-e8055e7ab93f2581eddc" style="width:504px;height:504px;" class="nomnoml html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e8055e7ab93f2581eddc">{"x":{"code":"\n#fill: #FEFEFF\n#lineWidth: 1\n#zoom: 4\n#direction: right\n\n#direction:down,\n                 [Masalah] -> [Variable]\n                 [Variable] -> [Kontinu]\n                 [Variable] -> [Diskrit]\n                 [Diskrit] <-> [Kontinu]\n                 ","svg":false},"evals":[],"jsHooks":[]}</script>
+
+]
+
+---
+class: middle
+
+# CONTOH MASALAH MILP
+
+## _Production Planning_
+
+Suatu pabrik makanan/minuman sedang berencana untuk membuat `3` produk baru yang rencananya akan diproduksi di `2` _plant_ yang berbeda.
+
+
+|       keterangan        | produk_1 | produk_2 | produk_3 | limit_production_time_per_plant_per_day |
+|:-----------------------:|:--------:|:--------:|:--------:|:---------------------------------------:|
+|      Plant 1, jam       |    3     |    4     |    2     |                   30                    |
+|      Plant 2, jam       |    4     |    6     |    2     |                   40                    |
+|     Profit per ton      |    5     |    7     |    3     |                                         |
+| Sales Potential per ton |    7     |    5     |    9     |                                         |
+
+Masalah timbul saat mereka harus memilih maksimal `2` dari `3` produk baru yang harus diproduksi. Selain itu, mereka juga harus memilih hanya `1` dari `2` _plant_ yang memproduksi produk-produk tersebut.
+
+&gt; Bagaimana cara mereka memilihnya? Lalu berapa ton yang harus diproduksi dari produk yang dipilih tersebut?
+
+---
+class: middle
+
+# CONTOH MASALAH MILP
+
+## _Production Planning_
+
+#### Kita harus memilih maksimal `2` produk: _binary integer_.
+
+--
+
+#### Kita harus menentukan berapa ton yang harus di produksi: _continuous_.
+
+--
+
+#### Kita harus memilih `1` _plant_: _binary integer_.
+
+---
+class: middle,center,inverse
+
+# NEXT WEEK AGENDA
+
+## Jenis Algoritma: _Exact_ dan Aproksimasi (Numerik)
+
+---
+class: middle,center,inverse
+
+# Terima Kasih
+## _Feel free to discuss_
+
+_Find me at_ [ikanx101.com](https://ikanx101.com/)
+
+##### _created using Xaringan in R_
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "18:10",
+"slideNumberFormat": "%current%",
+"highlightStyle": "ir-black",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

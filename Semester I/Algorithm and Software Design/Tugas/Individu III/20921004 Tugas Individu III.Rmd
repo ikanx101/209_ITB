@@ -1,0 +1,568 @@
+---
+title: "SK5002 ALGORITMA DAN RANCANGAN PERANGKAT LUNAK"
+author: |
+  | Mohammad Rizka Fadhli
+  | 20921004@mahasiswa.itb.ac.id
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document:
+    number_sections: no
+    toc: no
+    fig_width: 7
+    fig_height: 4
+    fig_caption: yes
+    highlight: espresso
+fontsize: 12pt
+subtitle: |
+  | Tugas Individu
+  | Minggu IV
+header-includes:
+- \usepackage{titling}
+- \pretitle{\begin{center}\includegraphics[width=4in,height=4in]{Screenshot_20210918_115544.jpg}\LARGE\\}
+- \posttitle{\end{center}}
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+library(Ryacas)
+library(dplyr)
+library(ggplot2)
+```
+
+\newpage
+
+# _TASK_ 1
+## Soal
+Buatlah algoritma sederhana dengan metode Monte Carlo untuk mencari solusi dari integral berikut:
+
+$$f(x) = \int_1^5 x^2 dx$$
+
+Bandingkan nilainya jika integralnya dipecah menjadi dua sebagai berikut:
+
+$$f(x) = \int_1^3 x^2 dx + \int_3^5 x^2 dx$$
+
+Bandingkan dengan solusi analitiknya!
+
+## Jawab
+
+Berikut adalah langkah kerja yang dilakukan untuk menjawab soal ini:
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.align='center',fig.cap="Alur Kerja"}
+nomnoml::nomnoml("
+                 [Langkah Kerja] -> [Analitik]
+                 [Analitik] -> [Eksak|Mengintegralkan langsung]
+                 [Langkah Kerja] -> [Numerik]
+                 [Numerik] -> [Brute force]
+                 [Numerik] -> [Modifikasi Monte Carlo]
+                 ")
+```
+
+Kelak akan kita bandingkan metode numerik dengan hasil eksaknya.
+
+### Analitik
+
+Perhatikan bahwa pada integral tentu berlaku:
+
+$$\int_a^b f(x) dx = F(b) - F(a)$$
+
+Oleh karena itu, jika kita memiliki $f(x) = x^2$, maka $F(x) = \int f(x) dx = \frac{x^3}{3}$ dari soal:
+
+$$\int_1^5 x^2 dx = \frac{5^3}{3} - \frac{1^3}{3} \approx 41.33333$$
+
+\newpage
+
+### Numerik
+
+#### _Brute Force_
+
+Analogi dari metode numerik ini adalah seperti melempar _darts_. Luas area di bawah kurva bisa didefinisikan sebagai:
+
+$$L = \frac{N darts_{ \text{on target} }} {N darts_{ \text{All} }}$$
+
+Berikut adalah _flowchart_-nya:
+
+```{r out.width="40%",echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Flowchart Brute Force",fig.align='center'}
+nomnoml::nomnoml("#direction: down,
+                 [<start> start] -> [<input> f(x), a, b, N]
+                 [<input> f(x), a, b, N] -> [PENENTUAN BATAS|sb x: dari a - b|sb y: dari 0 - max(f(x)) di selang a - b|on_target = 0|i = 0]
+                 [PENENTUAN BATAS] -> [<choice> i <= N]
+                 
+                 [<choice> i <= N] -> N [return (on_target/N)]
+                 [return (on_target/N)] -> [<end> end]
+                 
+                 [<choice> i <= N] -> Y [GENERATE RANDOM|xi,yi di batas sb x dan sb y]
+                 [GENERATE RANDOM] -> [<choice> yi <= f(xi)]
+                 [<choice> yi <= f(xi)] -> Y [on_target = on_target + 1]
+                 [<choice> yi <= f(xi)] -> N [i = i+1]
+                 [on_target = on_target + 1] -> [i = i+1]
+                 [i = i+1] -> [<choice> i <= N]
+                 ")
+```
+
+Hal terpenting dalam metode ini adalah __mendefinisikan batas titik__ $x,y$ untuk di-_random_. Kenapa?
+
+> Kita tidak ingin _darts_ yang kita lempar jatuh ke area sembarang! Kita harus definisikan di mana __area bermain__ _darts_.
+
+\newpage
+
+Perhatikan grafik $f(x)$ berikut:
+
+```{r out.width="70%",echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Grafik f(x)",fig.align='center'}
+f = function(x)x^2
+
+plot = 
+  data.frame(x = seq(0,6,by = .05)) %>% 
+  mutate(y = f(x)) %>% 
+  ggplot(aes(x,y)) +
+  geom_line(group=1,
+            color = "steelblue") +
+  geom_vline(xintercept = 0,
+             color = "black") +
+  geom_hline(yintercept = 0,
+             color = "black") +
+  scale_x_continuous(breaks = (0:6))
+
+plot +
+  geom_vline(xintercept = 1, color = "red") +
+  geom_vline(xintercept = 5, color = "red") +
+  theme_minimal() +
+  labs(title = "Grafik fungsi f(x) di selang 1 dan 5",
+       caption = "Digambar oleh 20921004") +
+  annotate("label", x = 4, y = 5, label = "Area Integral")
+```
+
+Untuk sumbu $x$, batas titik yang akan di-_random_ sudah jelas, yakni: $[1,5]$.
+
+Lantas bagaimana dengan sumbu $y$?
+
+```{r out.width="70%",echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Penentuan Batas Titik Random",fig.align='center'}
+plot = 
+  plot +
+  annotate("segment",x = 1,xend = 1,y = 0 , yend = 25, color = "darkred") +
+  annotate("segment",x = 5,xend = 5,y = 0 , yend = 25, color = "darkred") +
+  annotate("segment",x = 1,xend = 5,y = 25 , yend = 25, color = "darkred") +
+  annotate("segment",x = 1,xend = 5,y = 0 , yend = 0, color = "darkred") +
+  theme_minimal() +
+  labs(caption = "Digambar oleh 20921004 dengan R")
+
+plot +
+  labs(title = "Grafik fungsi f(x) di selang 1 dan 5",
+       subtitle = "Batas titik random pada sb x: 1 - 5\nBatas titik random pada sb y: 0 - 25") +
+  annotate("label", x = 4, y = 5, label = "Area Integral:\nON TARGET") +
+  annotate("label", x = 2, y = 20, label = "Di Luar Area Integral:\nOFF TARGET")
+```
+
+Kita akan membuat sejumlah _random_ di dalam area kotak merah dari grafik di atas. Kelak luas akan dihitung dari rasio titik di dalam area __on target__ dengan __total semua titik yang ada__ dikalikan dengan luas dari kotak merah.
+
+$$L = 4 \times 25 \times \frac{N darts_{ \text{on target} }} {N darts_{ \text{All} }}$$
+
+Berikut adalah algoritmanya dalam __R__:
+
+```{r,warning=FALSE,message=FALSE}
+set.seed(2021)
+
+brute_force = function(f,x1,x2,y1,y2,N){
+  # generating random number
+  x = runif(N,x1,x2)
+  y = runif(N,y1,y2)
+  
+  # pengecekan y <= f(x)
+  rekap = 
+    data.frame(x,y) %>% 
+    mutate(f_x = f(x),
+           on_target = ifelse(y <= f_x,1,0))
+  
+  # hitung rasio on target vs all dots
+  rasio = sum(rekap$on_target) / N
+  # hitung luas
+  luas = (x2-x1)*(y2-y1)*rasio
+  
+  # perbandingan dengan eksak
+  eksak = ((5^3)/3) - 1/3
+  delta = abs(eksak - luas)
+  
+  # output plot
+  plot_sim = 
+    plot +
+    geom_point(data = rekap,aes(x,y,color = on_target)) +
+    theme(legend.position = "none") +
+    labs(title = paste0("Hasil Simulasi dengan ",N," titik"),
+         subtitle = paste0("Didapat nilai rasio sebesar ",rasio))
+  
+  # output
+  output = list(
+    "Plot Brute Force" = plot_sim,
+    "Luas area di bawah kurva" = luas,
+    "Absolute selisih dg solusi eksak" = delta
+    )
+  
+  return(output)
+}
+
+```
+
+Saya menghitung _error_ atau __selisih solusi numerik dengan solusi eksak__ dengan cara:
+
+$$\Delta = |eksak - numerik|$$
+
+Dari _function_ di atas, kita akan coba hitung dengan berbagai nilai $N$ sebagai berikut:
+
+$N=10$ 
+
+```{r}
+brute_force(f,x1 = 1,x2 = 5,y1 = 0,y2 = 25,N = 10)
+```
+
+\newpage
+$N=50$
+
+```{r}
+brute_force(f,x1 = 1,x2 = 5,y1 = 0,y2 = 25,N = 50)
+```
+
+\newpage
+$N=100$
+
+```{r}
+brute_force(f,x1 = 1,x2 = 5,y1 = 0,y2 = 25,N = 100)
+```
+
+\newpage
+$N=1000$
+
+```{r}
+brute_force(f,x1 = 1,x2 = 5,y1 = 0,y2 = 25,N = 1000)
+```
+
+\newpage
+$N=10000$
+
+```{r}
+brute_force(f,x1 = 1,x2 = 5,y1 = 0,y2 = 25,N = 10000)
+```
+
+
+\newpage
+$N=50000$
+
+```{r}
+brute_force(f,x1 = 1,x2 = 5,y1 = 0,y2 = 25,N = 50000)
+```
+
+\newpage
+
+> __Bagaimana jika selang integralnya dipisah menjadi:___
+
+$$f(x) = \int_1^3 x^2 dx + \int_3^5 x^2 dx$$
+
+Menggunakan prinsip yang sama seperti bagian sebelumnya, saya akan buat tabel perbandingan sebagai berikut:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+rm(list=ls())
+options(scipen = 99)
+
+f = function(x)x^2
+
+brute_force = function(f,x1,x2,y1,y2,N){
+  # generating random number
+  x = runif(N,x1,x2)
+  y = runif(N,y1,y2)
+  
+  # pengecekan y <= f(x)
+  rekap = 
+    data.frame(x,y) %>% 
+    mutate(f_x = f(x),
+           on_target = ifelse(y <= f_x,1,0))
+  
+  # hitung rasio on target vs all dots
+  rasio = sum(rekap$on_target) / N
+  # hitung luas
+  luas = (x2-x1)*(y2-y1)*rasio
+  # return luas
+  return(luas)
+}
+
+hasil = 
+  data.frame(N = c(10,100,500,750,1000,5000,7500,10000,25000,50000,100000,250000,500000,750000)) %>% 
+  rowwise() %>% 
+  mutate(selang_full = brute_force(f,1,5,0,25,N),
+         selang_pecah = brute_force(f,1,3,0,25,N) + brute_force(f,3,5,0,25,N)) %>% 
+  ungroup() %>% 
+  mutate(selisih_full_eksak = abs(selang_full - (124/3)),
+         selisih_pecah_eksak = abs(selang_pecah - (124/3))) 
+
+hasil %>% 
+  rename("Selang 1-5" = selang_full,
+         "Selang 1-3 + 3-5" = selang_pecah,
+         "Delta 1-5" = selisih_full_eksak,
+         "Delta 1-3 + 3-5" = selisih_pecah_eksak) %>% 
+  knitr::kable("simple",align = "c",caption = "Hasil Perbandingan Solusi Numerik dan Eksak")
+```
+
+```{r out.width="70%",echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Perbandingan Solusi Numerik dan Eksak",fig.align='center'}
+hasil %>% 
+  ggplot() +
+  geom_line(aes(N,selisih_full_eksak),group = 1,color = "red") +
+  geom_line(aes(N,selisih_pecah_eksak),group = 1, color = "blue") +
+  theme_minimal() +
+  labs(title = "Visualisasi Tabel Perbandingan Solusi Numerik dan Eksak",
+       x = "N titik",
+       y = "Delta",
+       subtitle = "Kedua garis melambangkan nilai absolut selisih solusi numerik dengan solusi eksak\nGaris merah merupakan solusi numerik selang 1-5\nGaris biru merupakan solusi numerik selang 1-3 + 3-5",
+       caption = "Digambar oleh 20921004 dengan R")
+  
+```
+
+\newpage
+
+#### Konklusi Sementara {-}
+
+Secara intuitif, kita bisa melihat bahwa saat selang dibagi menjadi dua, sejatinya kita telah membuat $2 \times$ titik lebih banyak dibanding menggunakan selang awal.
+
+#### Modifikasi Monte Carlo
+
+Ide dari algoritma ini adalah men-_generate_ titik _random_ di selang integral, kemudian dihitung luas _square_ yang ada.
+
+$$I = \int_z^b f(x)dx$$
+
+dihitung sebagai:
+
+$$<F^N> = \frac{b-a}{N+1} \sum_{i=0}^N f(a + (b-a) \xi_i)$$
+
+dengan
+
+$$\xi_i \text{ adalah random number antara 0 dan 1}$$
+
+Berikut adalah _flowchart_-nya:
+
+```{r out.width="50%",echo=FALSE,message=FALSE,warning=FALSE,fig.align = "center",fig.cap="Flowchart Modifikasi Monte Carlo"}
+nomnoml::nomnoml("#direction: down,
+                 [<start> start] -> [<input> f(x), a, b, N]
+                 [<input> f(x), a, b, N] -> [DEFINE|sum = 0|i = 0]
+                 [DEFINE] -> [<choice> i <= N]
+                 
+                 [<choice> i <= N] -> N [return (sum * (b-a) / N)]
+                 [return (sum * (b-a) / N)] -> [<end> end]
+                 
+                 [<choice> i <= N] -> Y [GENERATE RANDOM|xi di selang a - b]
+                 [GENERATE RANDOM] -> [sum = sum + (b-a)*f(xi)]
+                 [sum = sum + (b-a)*f(xi)] -> [i = i + 1]
+                 [i = i + 1] -> [<choice> i <= N]
+                 ")
+
+rm(list=ls())
+```
+
+\newpage
+
+Berdasarkan _flowchart_ di atas, berikut adalah _function_ di __R__ -nya:
+
+```{r}
+modif_monte = function(f,x1,x2,N){
+  # generating random number
+  x = runif(N,x1,x2)
+  # hitung f(x)
+  f_x = f(x)
+  # hitung luas
+  luas = (x2-x1) * f_x
+  # mean luas
+  mean_luas = mean(luas)
+  # output
+  return(mean_luas)
+  }
+```
+
+Saya menghitung _error_ atau __selisih solusi numerik dengan solusi eksak__ dengan cara:
+
+$$\Delta = |eksak - numerik|$$
+
+Dari _function_ di atas, kita akan coba hitung dengan berbagai nilai $N$ sebagai berikut:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+f = function(x)x^2
+N = (sample(1:10000,135) * 100) %>% sort()
+
+hasil = 
+  data.frame(N = N) %>% 
+  rowwise() %>% 
+  mutate(selang_full = modif_monte(f,1,5,N),
+         selang_pecah = modif_monte(f,1,3,N) + modif_monte(f,3,5,N)) %>% 
+  ungroup() %>% 
+  mutate(selisih_full_eksak = abs(selang_full - (124/3)),
+         selisih_pecah_eksak = abs(selang_pecah - (124/3))) 
+
+hasil %>% 
+  rename("Selang 1-5" = selang_full,
+         "Selang 1-3 + 3-5" = selang_pecah,
+         "Delta 1-5" = selisih_full_eksak,
+         "Delta 1-3 + 3-5" = selisih_pecah_eksak) %>% 
+  knitr::kable("simple",align = "c",caption = "Hasil Perbandingan Solusi Numerik dan Eksak")
+```
+
+\newpage
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Perbandingan Solusi Numerik dan Eksak",fig.align='center'}
+hasil %>% 
+  ggplot() +
+  geom_line(aes(N,selisih_full_eksak),group = 1,color = "red") +
+  geom_line(aes(N,selisih_pecah_eksak),group = 1, color = "blue") +
+  theme_minimal() +
+  labs(title = "Visualisasi Tabel Perbandingan Solusi Numerik dan Eksak",
+       x = "N titik",
+       y = "Delta",
+       subtitle = "Kedua garis melambangkan nilai absolut selisih solusi numerik dengan solusi eksak\nGaris merah merupakan solusi numerik selang 1-5\nGaris biru merupakan solusi numerik selang 1-3 + 3-5",
+       caption = "Digambar oleh 20921004 dengan R")
+  
+```
+
+\newpage
+
+# _TASK_ 2
+## Soal
+Buatlah algoritma sederhana dengan metode Monte Carlo untuk mencari solusi dari integral berikut:
+
+$$f(x) = \int_2^3 (x^2 + 4x \sin{x}) dx$$
+
+Bandingkan dengan solusi analitiknya!
+
+## Jawab
+
+### Analitik
+
+Solusi analitik dari $f(x) = \int (x^2 + 4x \sin{x}) dx$ adalah:
+
+$$F(x) = \frac{x^3}{3} - 4x \cos{x} + 4 \sin{x}$$
+
+Sehingga:
+
+$$\int_2^3 (x^2 + 4x \sin{x}) dx \approx 11.811358925$$
+
+#### _Brute Force_
+
+Hal yang paling penting bagi metode ini adalah menentukan batas di sumbu $y$. Oleh karena itu, perhatikan grafik sebagai berikut:
+
+```{r out.width="70%",echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Grafik f(x)",fig.align='center'}
+rm(list=ls())
+f = function(x){x^2 + 4*x*sin(x)}
+
+plot = 
+  data.frame(x = seq(0,4,by = .005)) %>% 
+  mutate(y = f(x)) %>% 
+  ggplot(aes(x,y)) +
+  geom_line(group=1,
+            color = "steelblue") +
+  geom_vline(xintercept = 0,
+             color = "black") +
+  geom_hline(yintercept = 0,
+             color = "black") 
+
+plot +
+  geom_vline(xintercept = 2, color = "red") +
+  geom_vline(xintercept = 3, color = "red") +
+  theme_minimal() +
+  labs(title = "Grafik fungsi f(x) di selang 2 dan 3",
+       caption = "Digambar oleh 20921004") +
+  annotate("label", x = 2.5, y = 5, label = "Area Integral")
+```
+
+Untuk sumbu $x$, batas titik yang akan di-_random_ sudah jelas, yakni: $[2,3]$.
+
+Lantas bagaimana dengan sumbu $y$?
+
+```{r out.width="70%",echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Penentuan Batas Titik Random",fig.align='center'}
+plot = 
+  plot +
+  annotate("segment",x = 2,xend = 2,y = 0 , yend = 15, color = "darkred") +
+  annotate("segment",x = 3,xend = 3,y = 0 , yend = 15, color = "darkred") +
+  annotate("segment",x = 2,xend = 3,y = 15 , yend = 15, color = "darkred") +
+  annotate("segment",x = 2,xend = 3,y = 0 , yend = 0, color = "darkred") +
+  theme_minimal() +
+  labs(caption = "Digambar oleh 20921004 dengan R")
+
+plot +
+  labs(title = "Grafik fungsi f(x) di selang 2 dan 3",
+       subtitle = "Batas titik random pada sb x: 2 - 3\nBatas titik random pada sb y: 0 - 15") +
+  annotate("label", x = 2.5, y = 5, label = "Area Integral:\nON TARGET",size = 2) +
+  annotate("label", x = 2.5, y = 14, label = "Di Luar Area Integral:\nOFF TARGET",size = 2)
+```
+
+Kita bisa pilih batas atas $y=15$ sehingga nanti luas dihitung dari $L = (3-2) \times 15 \times rasio_{darts}$.
+
+Menggunakan algoritma pada bagian sebelumnya, didapatkan:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+brute_force = function(f,x1,x2,y1,y2,N){
+  # generating random number
+  x = runif(N,x1,x2)
+  y = runif(N,y1,y2)
+  
+  # pengecekan y <= f(x)
+  rekap = 
+    data.frame(x,y) %>% 
+    mutate(f_x = f(x),
+           on_target = ifelse(y <= f_x,1,0))
+  
+  # hitung rasio on target vs all dots
+  rasio = sum(rekap$on_target) / N
+  # hitung luas
+  luas = (x2-x1)*(y2-y1)*rasio
+  # return luas
+  return(luas)
+}
+
+hasil = 
+  data.frame(N = c(10,100,500,750,1000,5000,7500,10000,25000,50000,100000,250000,500000,750000)) %>% 
+  rowwise() %>% 
+  mutate(selang_full = brute_force(f,2,3,0,15,N)) %>% 
+  ungroup() %>% 
+  mutate(selisih_full_eksak = abs(selang_full - (11.811358925))) 
+
+hasil %>% 
+  rename("Selang 2-3" = selang_full,
+         "Delta 2-3" = selisih_full_eksak) %>% 
+  knitr::kable("simple",align = "c",caption = "Hasil Perbandingan Solusi Numerik dan Eksak")
+```
+
+\newpage
+
+#### Modifikasi Monte Carlo
+
+Sedangkan berikut adalah hasil perhitungan menggunakan algoritma lainnya:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+#N = (sample(1:10000,135) * 100) %>% sort()
+rm(list = ls())
+f = function(x){x^2 + 4*x*sin(x)}
+
+modif_monte = function(f,x1,x2,N){
+  # generating random number
+  x = runif(N,x1,x2)
+  # hitung f(x)
+  f_x = f(x)
+  # hitung luas
+  luas = (x2-x1) * f_x
+  # mean luas
+  mean_luas = mean(luas)
+  # output
+  return(mean_luas)
+}
+
+hasil = 
+  data.frame(N = c(10,100,500,750,1000,5000,7500,10000,25000,50000,100000,250000,500000,750000)) %>% 
+  rowwise() %>% 
+  mutate(selang_full = modif_monte(f,2,3,N)) %>% 
+  ungroup() %>% 
+  mutate(selisih_full_eksak = abs(selang_full - (11.811358925))) 
+
+hasil %>% 
+  rename("Selang 2-3" = selang_full,
+         "Delta 2-3" = selisih_full_eksak) %>% 
+  knitr::kable("simple",align = "c",caption = "Hasil Perbandingan Solusi Numerik dan Eksak")
+```
+
+# == END == {-}

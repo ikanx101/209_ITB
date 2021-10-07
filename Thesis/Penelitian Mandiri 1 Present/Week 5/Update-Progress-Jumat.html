@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Penelitian Mandiri Sains Komputasi I</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mohammad Rizka Fadhli Ikang" />
+    <meta name="date" content="2021-09-24" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/fc.css" rel="stylesheet" />
+    <link href="libs/remark-css/fc-fonts.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/es6shim/es6shim.js"></script>
+    <script src="libs/es7shim/es7shim.js"></script>
+    <script src="libs/graphre/graphre.js"></script>
+    <script src="libs/nomnoml/nomnoml.js"></script>
+    <script src="libs/nomnoml-binding/nomnoml.js"></script>
+    <link rel="stylesheet" href="footer-header.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Penelitian Mandiri Sains Komputasi I
+## Update Progress Minggu V
+### Mohammad Rizka Fadhli<br>Ikang
+### <a href="mailto:20921004@mahasiswa.itb.ac.id" class="email">20921004@mahasiswa.itb.ac.id</a>
+### 24 September 2021
+
+---
+
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;Update Minggu V ---- 20921004@mahasiswa.itb.ac.id&lt;/span&gt;&lt;/div&gt;
+
+
+
+---
+class: middle,inverse
+
+# REKAP MINGGU SEBELUMNYA
+
+## Metode Penyelesaian Optimisasi
+### _Exact_ dan _Approximate_
+
+---
+class: middle,inverse
+
+# AGENDA HARI INI
+## _Simplex Method_
+### Penjelasan dan Cara Menyelesaikan
+
+---
+class: middle
+
+# _SIMPLEX METHOD_
+
+.pull-left[
+
+## Sejarah
+
+- Metode _simplex_ adalah salah satu metode yang paling umum digunakan dalam menyelesaikan permasalahan _linear programming_. 
+- Metode ini dikembangkan oleh seorang profesor matematika bernama George Dantzig pada 1947 pasca perang dunia II. Sedangkan nama _simplex_ diusulkan oleh Theodore Motzkin.
+
+
+]
+
+.pull-right[
+
+## Cara Kerja
+
+- Metode _simplex_ menggunakan prosedur aljabar. Namun _underlying concept_ dari metode ini adalah _geometric_.
+- Jika kita bisa memahami konsep geometrinya, kita bisa mengetahui bagaimana cara kerjanya dan kenapa metode ini sangat efisien.
+
+]
+
+--
+
+### Saya akan ambil satu contoh masalah optimisasi sederhana untuk memberikan ilustrasi bagaimana cara kerja metode ini.
+
+---
+class: middle
+
+# CONTOH MASALAH OPTIMISASI
+
+.pull-left[
+
+Cari `\(x_1,x2\)` yang `\(\max{(Z = 3x_1 + 5x_2)}\)` dengan _constraints_:
+
+`$$\begin{matrix}
+x1 \leq 4  \\
+2x_2 \leq 12 \\
+3x_1 + 2x_2 \leq 18 \\
+\text{serta } x_1 \geq 0, x_2 \geq 0 \\
+\end{matrix}$$`
+
+]
+
+--
+
+.pull-right[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="Update-Progress-Jumat_files/figure-html/unnamed-chunk-1-1.png" alt="Grafik Permasalahan Optimisasi"  /&gt;
+&lt;p class="caption"&gt;Grafik Permasalahan Optimisasi&lt;/p&gt;
+&lt;/div&gt;
+
+]
+
+---
+class: middle
+
+# CORNER POINT FEASIBLES (CPF)
+
+.pull-left[
+
+## Daftar CPF
+
+
+Table: Titik yang termasuk ke dalam CPF
+
+| Titik.ke |  CPF   |
+|:--------:|:------:|
+|    1     | (0, 0) |
+|    2     | (0, 6) |
+|    3     | (2, 6) |
+|    4     | (4, 3) |
+|    5     | (4, 0) |
+
+]
+
+.pull-right[
+
+## _Properties of CPF Solutions_ 
+
+Untuk setiap permasalahan _linear programming_ yang memiliki _feasible soultions_ dan _feasible region_ yang terbatas:
+
+&gt; __Property 1__: (a) If there is exactly one optimal solution, then it must be a CPF solution. (b) If there are multiple optimal solutions (and a bounded feasible region), then at least two must be adjacent CPF solutions.
+
+&gt; __Property 2__: There are only a finite number of CPF solutions.
+
+&gt; __Property 3__: If a CPF solution has no adjacent CPF solutions that are better (as measured by Z), then there are no better CPF solutions anywhere. Therefore, such a CPF solution is guaranteed to be an optimal solution (by Property 1), assuming only that the problem possesses at least one optimal solution (guaranteed if the problem possesses feasible solutions and a bounded feasible region).
+
+]
+
+---
+class:middle
+
+# MEMULAI SIMPLEX
+
+.pull-left[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="Update-Progress-Jumat_files/figure-html/unnamed-chunk-3-1.png" alt="Grafik Permasalahan Optimisasi"  /&gt;
+&lt;p class="caption"&gt;Grafik Permasalahan Optimisasi&lt;/p&gt;
+&lt;/div&gt;
+
+]
+
+.pull-right[
+
+Untuk mulai melakukan metode simplex kita perhatikan kembali grafik di atas. Kita bisa temukan beberapa pasang __CPF__ berbagi _constraint_ yang sama satu sama lain. 
+
+Sebagai contoh:
+
+1. `\(CPF_1\)` dan `\(CPF_2\)` berbagi _constraint_ yang sama, yakni saat `\(x_1 \geq 0\)`.
+1. `\(CPF_2\)` dan `\(CPF_3\)` berbagi _constraint_ yang sama, yakni saat `\(x_2 \leq 6\)`.
+
+Definisi umum:
+
+&gt; _For any linear programming problem with n decision variables, two CPF solutions are_ ___adjacent___ _to each other if they share_ `\(n-1\)` _constraint boundaries._ _The two adjacent CPF solutions are connected by a line segment that lies on these same shared constraint boundaries. Such a line segment is referred to as an_ ___edge___ _of the feasible region._
+
+]
+
+---
+class:middle
+
+# MEMULAI SIMPLEX
+
+.pull-left[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="Update-Progress-Jumat_files/figure-html/unnamed-chunk-4-1.png" alt="Grafik Permasalahan Optimisasi"  /&gt;
+&lt;p class="caption"&gt;Grafik Permasalahan Optimisasi&lt;/p&gt;
+&lt;/div&gt;
+
+]
+
+.pull-right[
+_Feasible region_ di atas memiliki 5 _edges_ di mana setiap 2 _edges_ memotong / memunculkan __CPF__. Setiap __CPF__ memiliki 2 __CPF__ lainnya yang _adjacent_.
+
+
+Table: Adjacent CPF
+
+| Titik.ke |  CPF   |   Adjacent.CPF    |
+|:--------:|:------:|:-----------------:|
+|    1     | (0, 0) | (0, 6) dan (4, 0) |
+|    2     | (0, 6) | (2, 6) dan (0, 0) |
+|    3     | (2, 6) | (4, 3) dan (0, 6) |
+|    4     | (4, 3) | (4, 0) dan (2, 6) |
+|    5     | (4, 0) | (0, 0) dan (4, 3) |
+
+]
+
+---
+class:middle
+
+# MEMULAI SIMPLEX
+
+.pull-left[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="Update-Progress-Jumat_files/figure-html/unnamed-chunk-6-1.png" alt="Grafik Permasalahan Optimisasi"  /&gt;
+&lt;p class="caption"&gt;Grafik Permasalahan Optimisasi&lt;/p&gt;
+&lt;/div&gt;
+
+]
+
+.pull-right[
+__CPF__ pada kolom pertama _adjacent_ terhadap dua __CPF__ di kolom setelahnya tapi kedua __CPF__ tersebut tidak saling _adjacent_ satu sama lain.
+
+&gt; ___Optimality test:___ _Consider any linear programming problem that possesses at least one optimal solution. If a CPF solution has no adjacent_ ___CPF___ _solutions that are better (as measured by_ `\(Z\)`_), then it must be an optimal solution._
+
+Berdasarkan _optimality test_ tersebut, kita bisa mencari solusi optimal dari __CPF__ dengan cara mengambil __initial CPF__ untuk dites secara rekursif.
+
+
+
+]
+
+---
+class:middle
+
+# MEMULAI SIMPLEX
+
+.pull-left[
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="Update-Progress-Jumat_files/figure-html/unnamed-chunk-8-1.png" alt="Grafik Permasalahan Optimisasi"  /&gt;
+&lt;p class="caption"&gt;Grafik Permasalahan Optimisasi&lt;/p&gt;
+&lt;/div&gt;
+
+]
+
+.pull-right[
+
+## Algoritma
+
+- __STEP 1__ Pilih _initial_ __CPF__, misal `\((0,0)\)`. Kita akan hitung nilai `\(Z(0,0)=\)` 0. Bandingkan dengan _adjacent_ __CPF__-nya, yakni `\(Z(0,6)=\)` 30 dan `\(Z(4,0) =\)` 12.
+- __STEP 2__ Oleh karena `\(Z(0,6)\)` memiliki nilai tertinggi, maka kita akan pilih titik ini di iterasi pertama. Kita akan bandingkan terhadap _adjacent_ __CPF__-nya, yakni: `\(Z(2,6)=\)` 36. Perhatikan bahwa _adjacent_ __CPF__ `\((0,0)\)` sudah kita evaluasi pada langkah sebelumnya.
+- __STEP 3__ Oleh karena `\(Z(2,6)\)` memiliki nilai tertinggi, maka kita akan pilih titik ini di iterasi kedua. Kita akan bandingkan terhadap _adjacent_ __CPF__-nya, yakni: `\(Z(4,3)=\)` 27. Kita dapatkan bahwa titik `\((2,6)\)` menghasilkan `\(Z\)` tertinggi.
+
+__Kesimpulan__: `\((2,6)\)` merupakan titik yang bisa memaksimumkan `\(Z\)`.
+
+]
+
+---
+class:middle,center
+# _FLOWCHART_ PENYELESAIAN MASALAH OPTIMISASI
+
+&lt;div class="figure" style="text-align: center"&gt;
+<div id="htmlwidget-1d322454ac21847ea796" style="width:100%;height:504px;" class="nomnoml html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1d322454ac21847ea796">{"x":{"code":"\n#fill: #FEFEFF\n#lineWidth: 1\n#zoom: 4\n#direction: right\n\n\n                 [<start> start] -> [Cari CPF]\n                 [Cari CPF] -> [<input> Set initial CPF]\n                 [<input> Set initial CPF] -> [<choice> Optimality Test\nOptimal?]\n                 [<choice> Optimality Test\nOptimal?] -> Yes [<end> end]\n                 [<choice> Optimality Test\nOptimal?] -> No [Cari adjacent CPF\nTeroptimal]\n                 [Cari adjacent CPF\nTeroptimal] -> [<choice> Optimality Test\nOptimal?]\n                 ","svg":false},"evals":[],"jsHooks":[]}</script>
+&lt;p class="caption"&gt;Algoritma Metode Simplex&lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: middle,inverse
+
+# MASALAH
+
+### Algoritma di atas akan sangat mudah dilakukan saat kita berhadapan dengan masalah optimisasi dengan 2 _decision variables_ (atau 3 _decision variables_). 
+
+--
+
+## Bagaimana jika masalah yang dihadapi memiliki banyak _decision variables_?
+
+--
+
+### Tentunya kita tidak bisa melakukan analisa secara visual seperti di atas. Namun kita bisa menggunakan bantuan aljabar dan operasi baris elementer untuk menemukan solusi yang optimal.
+
+---
+class: middle,inverse
+
+# _NEXT WEEK_ AGENDA
+## Penyelesaian Metode Simplex dengan Operasi Baris Elementer Matriks Aljabar
+
+---
+class: middle,center,inverse
+
+# Terima Kasih
+## _Feel free to discuss_
+
+_Find me at_ [ikanx101.com](https://ikanx101.com/)
+
+##### _created using Xaringan in R_
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "18:10",
+"slideNumberFormat": "%current%",
+"highlightStyle": "ir-black",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

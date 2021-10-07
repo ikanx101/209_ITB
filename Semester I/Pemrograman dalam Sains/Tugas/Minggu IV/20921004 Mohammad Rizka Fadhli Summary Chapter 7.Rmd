@@ -1,0 +1,763 @@
+---
+title: "INTRODUCTION TO COMPUTATIONAL MODELS WITH PHYTON"
+subtitle: | 
+    | Tugas Mata Kuliah SK5003 Pemrograman dalam Sains
+    | Summary Chapter VII
+author: | 
+    | Mohammad Rizka Fadhli (Ikang)
+    | 20921004@mahasiswa.itb.ac.id
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: true
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: zenburn
+header-includes:
+- \usepackage{titling}
+- \pretitle{\begin{center}\includegraphics[width=4in,height=4in]{MicrosoftTeams-image.png}\LARGE\\}
+- \posttitle{\end{center}}
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/S2 Sains Komputasi ITB/Kuliah/Semester I/Pemrograman dalam Sains/Tugas/Minggu IV")
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+# CHAPTER VII 
+# _Lists, Strings, and Sequences_ {.unlisted .unnumbered}
+
+## _Lists_
+
+Di beberapa _programming language_, kita mengenal tipe data berbentuk _vector_ atau _arrays_, yakni sebuah himpunan atau barisan dari beberapa data (_entry_).
+
+Di _Python_, kita menggunakan istilah _lists_ karena merupakan bentuk yang lebih umum untuk merepresentasikan _array_.
+
+> _List_ adalah sekumpulan _ordered items_ yang bisa memiliki berbagai macam tipe data.
+
+Untuk melakukan definisi dari _lists_ di Python, kita cukup menggunakan perintah:
+
+```
+v = [p1, p2, p3, ..., pn]
+```
+
+Kita menggunakan _bracket_, yakni `[ ]` berisi _items_ yang hendak kita masukkan.
+
+Sebagai contoh, saya akan membuat satu _array_ yang saya beri nama `bilangan`.
+
+```
+>>> bilangan = [1,2,3,4,5,6,7,8,9,10]
+```
+
+### _Index List_
+
+Python memiliki sistem _indexing_ dimulai dari `0`. Hal ini berbeda dengan _programming languages_ lain yang memulai _indexing_ dari `1`.
+
+Perhatikan `bilangan` yang telah kita definisikan sebelumnya:
+
+```
+>>> bilangan
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+Jika kita hendak mengambil elemen pertama dari `bilangan`, kita perlu menambahkan _index_ `[0]` setelah nama _object_-nya.
+
+```
+>>> bilangan[0]
+1
+```
+
+Demikian pula jika hendak mengambil elemen kedua dari `bilangan`, kita perlu menambahkan index `[1]` setelah nama _object_.
+
+```
+>>> bilangan[1]
+2
+```
+
+Dari sini kita bisa mendapatkan bentuk umum sebagai berikut:
+
+> Untuk data berbentuk _list_ di Python, elemen ke $n$ dipanggil dengan cara menuliskan $list[n-1]$.
+
+Mari kita lihat lagi contohnya sebagai berikut:
+
+```
+>>> bilangan[9]
+10
+
+>>> n = 5
+>>> bilangan[n]
+6
+```
+
+#### _Index_ Negatif
+
+Python bisa mendapatkan input _index_ negatif. Jika kita perhatikan kembali, `bilangan` memiliki 10 elemen (_index_ `[0-9]`). Kita bisa memberikan input _index_ `[-1]` yang berarti __elemen pertama dari akhir__.
+
+```
+>>> bilangan[-1]
+10
+```
+
+Demikian juga dengan nilai _index_ negatif lainnya. Mari kita coba:
+
+```
+>>> bilangan[-2]
+9
+
+>>> bilangan[-3]
+8
+
+>>> bilangan[-4]
+7
+```
+
+### Mengubah Nilai dalam _List_
+
+Dari _list_ bernama `bilangan` di atas, kita bisa mengubah nilai elemen yang ada di sana dengan cara memanggil elemennya dan melakukan pendefinisian ulang.
+
+Misalkan, kita hendak mengambil elemen ke-`5` dan mengubahnya menjadi bilangan lain. Misalkan $bilgangan_5 = 101$. Maka berikut adalah perintahnya:
+
+```
+>>> bilangan[4] = 101
+```
+
+Mari kita lihat hasilnya:
+
+```
+>>> bilangan
+[1, 2, 3, 5, 101, 7, 8, 9, 10]
+```
+
+### _List Slicing_
+
+Ada kalanya kita hanya ingin bekerja di beberapa elemen dalam suatu _list_ saja. Kita tidak memerlukan keseluruhan elemen _list_ tersebut. Maka kita bisa memilih elemen-elemen yang diinginkan dari _list_ tersebut.
+
+Proses tersebut bernama _slicing operation_.
+
+Sebagai contoh, kita hanya ingin mengeluarkan $bilangan_1,bilangan_2,bilangan_3$. Maka yang perlu diketikkan ke dalam Python adalah:
+
+```
+>>> bilangan
+[1, 2, 3, 4, 101, 6, 7, 8, 9, 10]
+
+>>> bilangan[0:3]
+[1, 2, 3]
+```
+
+Selain melakukan _slicing_ seperti di atas, kita bisa menyimpan hasil _slicing_ ke dalam variabel baru (_assigned as new variable_). Sebagai contoh, saya akan membuat _list_ baru bernama `number` yakni berisi $bilangan_i, i \in [5,10]$
+
+
+```
+>>> number = bilangan [4:9]
+>>> number
+[101, 6, 7, 8, 9]
+```
+
+_Slicing_ bisa juga dilakukan untuk melakukan _assignment_ terhadap _slicing_ yang lain. Berikut contohnys:
+
+Kita hendak mengubah $bilangan_1 \rightarrow bilangan_2$ dan $bilangan_2 \rightarrow bilangan_3$.
+
+```
+>>> bilangan[0:2] = bilangan[1:3]
+>>> bilangan
+[2, 3, 3, 4, 101, 6, 7, 8, 9, 10]
+```
+
+Cara lain melakukan _slicing_ adalah dengan menggunakan perintah `:` dalam _bracket_ `[ ]`. Agar memudahkan, saya akan _define_ _list_ baru bernama `bil_baru` berisi `[0,1,2,3,4,5,6]`.
+
+```
+>>> bil_baru = [0,1,2,3,4,5,6]
+>>> bil_baru
+[0, 1, 2, 3, 4, 5, 6]
+```
+
+Misalkan saya hendak mengambil elemen `bil_baru` dengan _index_ `1` ke atas:
+
+```
+>>> bil_baru[1:]
+[1, 2, 3, 4, 5, 6]
+```
+
+Jika ingin mengambil elemen `bil_baru` dengan _index_ `4` ke atas:
+
+```
+>>> bil_baru[4:]
+[4, 5, 6]
+```
+
+Sedangkan jika ingin mengambil elemen `bil_baru` dengan _index_ `5` ke bawah:
+
+```
+>>> bil_baru[:5]
+[0, 1, 2, 3, 4]
+```
+
+Jika ingin mengambil elemen `bil_baru` dengan _index_ `3` ke bawah:
+
+```
+>>> bil_baru[:3]
+[0, 1, 2]
+```
+
+### Fungsi `len()` 
+
+Fungsi `len()` digunakan untuk mengukur seberapa banyak isi elemen dari suatu _list_. Contohnya:
+
+```
+>>> bilangan
+[2, 3, 3, 4, 101, 6, 7, 8, 9, 10]
+
+>>> len(bilangan)
+10
+
+>>> bil_baru
+[0, 1, 2, 3, 4, 5, 6]
+
+>>> len(bil_baru)
+7
+```
+
+\newpage
+
+### Fungsi `range()`
+
+Fungsi `range()` digunakan untuk membuat suatu _sequences_. Biasanya kita gunakan `range()` dalam _looping_. Contoh:
+ 
+ ```
+ >>> for i in range(5):
+       print(i)
+0
+1
+2
+3
+4
+```
+
+## Iterasi dalam Suatu _List_
+
+Fungsi `len()` dari suatu _list_ bisa digunakan sebagai bagian dari iterasi tertentu. Contohnya adalah misalkan saya memiliki data `20` berat badan sebagai berikut:
+
+```
+>>> berat_badan = [34, 44, 48, 41, 14, 15, 13, 19, 8, 38, 
+                   16, 43, 39, 32, 5, 18, 49, 29, 2, 35]
+```
+
+Misalkan saya hendak menghitung menggunakan _looping_, saat `berat_badan` $\geq 30$, kita akan `print()` _index_ dari elemennya dan kita akan hitung rata-ratanya dengan cara:
+
+$$\bar{bb} = \frac{\sum{bb}}{n}$$
+
+Berikut adalah perintah dan hasilnya:
+
+```
+>>> n_bb = range(len(berat_badan))
+>>> total = 0.0
+>>> n = 0
+>>> for i in n_bb :
+      if berat_badan[i] >= 30 :
+          print("Index dg bb >= 30 ada di: ",i)
+          total = total + berat_badan[i]
+          n += 1
+Index dg bb >= 30 ada di:  0
+Index dg bb >= 30 ada di:  1
+Index dg bb >= 30 ada di:  2
+Index dg bb >= 30 ada di:  3
+Index dg bb >= 30 ada di:  9
+Index dg bb >= 30 ada di:  11
+Index dg bb >= 30 ada di:  12
+Index dg bb >= 30 ada di:  13
+Index dg bb >= 30 ada di:  16
+Index dg bb >= 30 ada di:  19
+
+>>> print("Rata-rata: ",total/n)
+Rata-rata:  40.3
+```
+
+## Membuat _List_ Menggunakan _Loop_
+
+Suatu _list_ bisa dibuat dari _list_ yang kosong terlebih dahulu. Sebagai contoh, kita membuat satu _list_ kosong bernama `listk` dan direncanakan akan memiliki elemen sebanyak `10` sebagai berikut:
+
+```
+>>> listk = []
+>>> n_el = 10
+```
+
+Kita akan isi `listk` dengan angka-angka kelipatan `7`. Berikut skripnya:
+
+```
+>>> for j in range(1, n_el+1):
+      item = j * 7
+      listk.append(item)
+>>> print("Hasilnya sebagai berikut: ", listk)
+Hasilnya sebagai berikut:  [7, 14, 21, 28, 35, 42, 49, 56, 63, 70]
+```
+
+## Membuat _Function_ untuk Membuat _List_
+
+Dari bagian sebelumnya, kita bisa mendefinisikan _function_ untuk membuat suatu _list_ berisi `n` elemen dan kelipatan bilangan `k` tertentu.
+
+Misalkan:
+
+```
+>>> def generate (nama_list, n_elemen, k_kelipatan) :
+      for i in range(1, n_elemen+1) :
+        item = i * k_kelipatan
+        nama_list.append(item)
+    print("Berikut adalah hasilnya: ",nama_list)
+```
+
+Jika saya _run_ dengan beberapa kondisi, didapatkan hasil berikut:
+
+```
+>>> list_5 = []
+>>> n_5 = 5
+>>> k_5 = 5
+>>> generate(list_5, n_5, k_5)
+Berikut adalah hasilnya:  [5, 10, 15, 20, 25]
+```
+
+Mari kita coba untuk _input_ lainnya:
+
+```
+>>> list_2 = []
+>>> n_2 = 15
+>>> k_2 = 2
+>>> generate(list_2, n_2, k_2)
+Berikut adalah hasilnya:  [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
+```
+
+## Menggabungkan Beberapa _Lists_ dengan `extend()`
+
+Kita bisa menggambungkan beberapa _lists_ dengan cara melakukan _extending_. Misalkan ada dua _lists_ sebagai berikut:
+
+```
+>>> bil_1 = [2, 4, 8, 10, 12, 14]
+>>> bil_2 = [3, 7, 9]
+```
+
+Kita akan masukkan semua elemen `bil_2` ke dalam `bil_1` dengan cara:
+
+```
+>>> bil_1.extend(bil_2)
+>>> bil_1
+[2, 4, 8, 10, 12, 14, 3, 7, 9]
+```
+
+## _Insert_ Elemen ke Dalam _List_
+
+Kita bisa memasukkan (_insert_) suatu elemen ke _list_ di _index_ tertentu dengan perintah `nama_list.insert(index, nilai)`.
+```
+>>> bil_1.insert(2,100)
+>>> bil_1
+[2, 4, 100, 8, 10, 12, 14, 3, 7, 9]
+```
+
+## Menghapus Elemen _List_
+
+Selain menambahkan, kita juga bisa menghapus elemen suatu _list_. Sebagai contoh, saya memiliki _list_ bernama `prime` berikut:
+
+```
+>>> prime = [2,3,5,7,11,13,17,23,11,29]
+>>> prime
+[2, 3, 5, 7, 11, 13, 17, 23, 11, 29]
+```
+
+Jika kita hendak menghapus elemen dengan nilai `11`, maka kita lakukan:
+
+```
+>>> prime.remove(11)
+>>> prime
+[2, 3, 5, 7, 13, 17, 23, 11, 29]
+```
+
+Ternyata Python hanya menghapus elemen `11` yang pertama saja. Ketika kita ingin menghapus elemen `11` yang lainnya, kita cukup ulang:
+
+```
+>>> prime.remove(11)
+>>> prime
+[2, 3, 5, 7, 13, 17, 23, 29]
+```
+
+Jika kita hendak menghapus elemen terakhir, kita perlu lakukan:
+
+```
+>>> prime.pop()
+29
+
+>>> prime
+[2, 3, 5, 7, 13, 17, 23]
+```
+
+`prime.pop()` bertugas untuk __menampilkan dan menghapus__ elemen terakhir dari _list_ bernama `prime`.
+
+## Menemukan _Index_ dari Suatu Elemen _List_
+
+Adakalanya kita hendak mencari dimana letak elemen tertentu dari suatu _list_. Misalkan kita hendak mencari di elemen ke berapa angka `13` muncul. Kita bisa gunakan perintah berikut:
+
+```
+>>> prime.index(13)
+4
+```
+
+Terlihat bahwa angka `13` berada di elemen ke `4`.
+
+\newpage
+
+# Hubungan _Function_ dan _List_
+
+Kita bisa membuat suatu _function_ yang memiliki _input_ sebuah _list_ dan mengeluarkan _output_ berupa _list_ kembali. Sebagai contoh, saya hendak membuat _function_ untuk menghitung BMI dari _input_ berupa dua buah _lists_ `berat_badan` dan `tinggi_badan`.
+
+```
+>>> def hitung_bmi (berat_badan,tinggi_badan) :
+      n = len(bb)
+      bmi = []
+      for i in range(0,n):
+        bmi_hit = berat_badan[i] / (tinggi_badan[i]/100)**2
+        bmi_hit = round(bmi_hit,2)
+        bmi.append(bmi_hit)
+      print(bmi)
+
+>>> bb = [77,78,60,56,83,50,63,74,62,70]
+>>> tb = [152,181,159,157,185,172,190,173,150,154]
+
+>>> hitung_bmi(bb,tb)
+[33.33, 23.81, 23.73, 22.72, 24.25, 16.9, 17.45, 24.73, 27.56, 29.52]
+```
+
+\newpage
+
+# _Generating Sequences_ ke dalam _List_
+
+Ada kalanya kita perlu membuat _sequence_ dan dimasukkan ke dalam _list_.
+
+## _Sequence_ Repetisi
+
+Misal, kita hendak membuat suatu _list_ dengan `8` elemen berisi nilai `5`. Berikut adalah caranya:
+
+```
+>>> n = 8
+>>> seq = [5 for i in range(n)]
+>>> seq
+[5, 5, 5, 5, 5, 5, 5, 5]
+```
+
+Selain cara tersebut, kita juga bisa memanfaatkan perintah `append()` dan _loop_ `for` seperti ini:
+
+```
+>>> seq_2 = []
+>>> for i in range(n):
+     seq_2.append(5)
+ 
+>>> seq_2
+[5, 5, 5, 5, 5, 5, 5, 5]
+```
+
+Kita bisa memodifikasi kalkulasi yang ada dengan berbagai fungsi agar tercipta suatu deret dengan nilai yang berbeda-beda.
+
+Contoh:
+
+```
+>>> n = 10
+>>> seq_3 = [i + 2 for i in range(n)]
+>>> seq_3
+[2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+```
+
+\newpage
+
+# _List_ di Dalam _List_
+
+Suatu bentuk data berupa _list_ di dalam _list_ disebut dengan _nested list_ atau _multidimensional arrays_. Misalkan kita akan membuat satu _list_ bernama `daftar_1`, kemudian akan kita masukkan ke dalam _list_ berikutnya bernama `daftar_2`.
+
+```
+>>> daftar_1 = [2,4,3]
+>>> daftar_2 = [9,7,5,daftar_1,10,4]
+>>> daftar_2
+[9, 7, 5, [2, 4, 3], 10, 4]
+```
+
+Kita telah lihat bahwa pada _index_ ke `3` bentuknya adalah _list_. Jika kita hitung berapa elemen, didapatkan:
+
+```
+>>> len(daftar_2)
+6
+```
+
+Tetap `6` elemen. _List_ di elemen ke `3` tetap dianggap menjadi 1 elemen. Mari kita coba panggil `daftar_1` dari `daftar_2`:
+
+```
+>>> daftar_2[3]
+[2, 4, 3]
+```
+
+Untuk memanggil elemen pertama dari `daftar_1` melalui `daftar_2` adalah sebagai berikut:
+
+```
+>>> daftar_2[3][0]
+2
+```
+
+\newpage
+
+# Matriks dalam Python
+
+Kita bisa membuat matriks dalam Python. Misalkan kita hendak mendefinisikan sebuah matriks berukuran 2 baris x 3 kolom berikut:
+
+```
+>>> smx = [[9,1,7],[2,6,1]]
+>>> smx
+[[9, 1, 7], [2, 6, 1]]
+```
+
+Seandainya kita hendak mengambil elemen matriks di baris pertama kolom pertama, maka:
+
+```
+>>> smx[0][0]
+9
+```
+
+Jika hendak mengambil elemen matriks baris kedua kolom terakhir, maka:
+
+```
+>>> smx[1][2]
+1
+```
+
+### Membuat Matriks dengan Looping
+
+Misalkan kita hendak membuat matriks berukuran `3 x 4` dengan isi berupa angka dari `1` hingga `12`. Kita bisa membuat _looping_ sebagai berikut:
+
+```
+# membuat template matriks
+matriks = [[]]
+# initial
+x = 1
+# looping
+for i in range(3):
+  baris = []
+  for j in range(4):
+    baris.append(x)
+    x += 1
+  matriks.append(baris)
+
+# oleh karena elemen pertama merupakan baris = []
+# kita perlu menghapusnya dengan cara
+matriks.pop(0)
+
+# menampilkan output
+print(matriks)
+```
+
+Saya _save_ program tersebut bernama `matriks.py` dan saya _run_, sehingga menghasilkan:
+
+```
+[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+```
+
+Selain menggunakan _looping_ di atas, kita bisa menggunakan perintah _nested list_ sebagai berikut:
+
+```
+>>> matriks_2 = [[1 for i in range(4)] for j in range (3)]
+>>> matriks_2
+[[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]]
+```
+
+\newpage
+
+# _Tuples_
+
+_Tuples_ adalah bentuk _sequence_ dalam Python selain _list_. Perbedaannya adalah Tuples _immutable_. Isinya tidak bisa diubah dan elemennya tidak bisa ditambah. Namun kita tetap bisa membuat _nested tuples_.
+
+Contoh:
+
+```
+>>> tp = (2,5,8,3,9,4)
+>>> tp
+(2, 5, 8, 3, 9, 4)
+```
+
+Kita tetap bisa memanggil elemen dengan _index_.
+
+```
+>>> tp[2]
+8
+```
+
+Berikut adalah contoh dari _nested tuples_:
+
+```
+>>> tp2 = (1,2,tp)
+>>> tp2
+(1, 2, (2, 5, 8, 3, 9, 4))
+```
+
+Menghitung panjang _tuples_ dengan`len()`:
+
+```
+>>> len(tp2)
+3
+```
+
+## _Converting Tuples_ ke dalam _List_
+
+Kita bisa ubah suatu _tuples_ menjadi _list_ dengan cara:
+
+```
+>>> tp_new = list(tp)
+>>> tp_new
+[2, 5, 8, 3, 9, 4]
+```
+
+## _Converting List_ ke dalam _Tuples_
+
+Kita juga bisa mengembalikan prosesnya sebagai berikut:
+
+```
+>>> tp_new_2 = tuple(tp_new)
+>>> tp_new_2
+(2, 5, 8, 3, 9, 4)
+```
+
+## _Tuples_ di dalam _List_
+
+Kita bisa membuat _list_ berisi _tuples_:
+
+```
+>>> new = [(2,4,3),(1,9,6),(3,8,6)]
+>>> new
+[(2, 4, 3), (1, 9, 6), (3, 8, 6)]
+```
+
+## _List_ di dalam _Tuples_ 
+
+Atau kita bisa membuat kebalikannya:
+
+```
+>>> baru = ([6,5,3],[4,5,9],[9,4,6])
+>>> baru
+([6,5,3],[4,5,9],[9,4,6])
+```
+
+\newpage
+
+# _Dictionaries_
+
+Ada kalanya kita membutuhkan struktur data yang memiliki _index_ bukan angka, tapi suatu _key_. Kita bisa menggunakan bentuk _dictionaries_ berikut:
+
+```
+>>> dct = {'nama' : 'ikang', 'nim' : 20921004, 'tinggi' : 175}
+>>> dct
+{'nama': 'ikang', 'nim': 20921004, 'tinggi': 175}
+```
+
+Kita bisa memanggil data yang ada dengan menggunakan _key index_ berikut:
+
+```
+>>> dct['nama']
+'ikang'
+```
+
+Kita bisa mengubah isi _dictionaries_ dengan cara mendefinisikan ulang via _index key_:
+
+```
+>>> dct['nama'] = "MRF"
+>>> dct
+{'nama': 'MRF', 'nim': 20921004, 'tinggi': 175}
+```
+
+\newpage
+
+# _Strings_
+
+_Strings_ adalah data dalam bentuk karakter.
+
+Contoh:
+
+```
+>>> pesan = 'selamat pagi'
+>>> pesan
+'selamat pagi'
+```
+
+## _Concatenante_
+
+Yakni menempel _string_ lain ke _string_ yang sudah ada. Contoh:
+
+```
+>>> pesan_2 = pesan + ' ' + dct['nama']
+>>> pesan_2
+'selamat pagi MRF'
+```
+
+## Beberapa Perintah Lain Terkait _String_
+
+```
+>>> len(pesan_2) # panjang string
+16
+
+>>> pesan_2[10]
+'g'
+
+>>> print(pesan_2[1:4])
+ela
+
+>>> print(pesan_2[0:8])
+selamat 
+
+>>> "sela" in pesan_2
+True
+
+>>> pesan_3 = pesan_2 + "\nHave a nice day"
+>>> pesan_3
+'selamat pagi MRF\nHave a nice day'
+
+>>> print(pesan_3)
+selamat pagi MRF
+Have a nice day
+
+>>> pesan_4 = pesan_2 + "\nhave a \"nice\" day"
+>>> pesan_4
+'selamat pagi MRF\nhave a "nice" day'
+
+>>> print(pesan_4)
+selamat pagi MRF
+have a "nice" day
+
+>>> pesan_4.find("day")
+31
+
+>>> number = "0810"
+>>> number.isdigit()
+True
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+# == End == {.unlisted .unnumbered}

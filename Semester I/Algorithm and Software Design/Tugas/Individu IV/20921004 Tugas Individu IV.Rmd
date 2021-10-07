@@ -1,0 +1,722 @@
+---
+title: "SK5002 ALGORITMA DAN RANCANGAN PERANGKAT LUNAK"
+author: |
+  | Mohammad Rizka Fadhli
+  | 20921004@mahasiswa.itb.ac.id
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document:
+    number_sections: no
+    toc: no
+    fig_width: 7
+    fig_height: 4
+    fig_caption: yes
+    highlight: espresso
+fontsize: 12pt
+subtitle: |
+  | Tugas Individu
+  | Bellman Ford
+header-includes:
+- \usepackage{titling}
+- \pretitle{\begin{center}\includegraphics[width=4in,height=4in]{teams.jpg}\LARGE\\}
+- \posttitle{\end{center}}
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+```{r,include=FALSE}
+data = data.frame(
+  label = c("s","t","x","y","z"),
+  x = c(0,2,4,2,4),
+  y = c(0,5,5,-5,-5)
+)
+
+graf = 
+  ggplot() +
+  # s-t
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # s-y
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-x
+  geom_curve(aes(x=2,xend=4-.1,
+                 y=5,yend=5-.1),
+             arrow = arrow(length = unit(.2,"cm"))) +
+  # x-t
+  geom_segment(aes(x=4,xend=2+.1,
+                   y=5,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-y
+  geom_segment(aes(x=2,xend=2,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-x
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-x
+  geom_segment(aes(x=4,xend=4,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-s
+  geom_segment(aes(x=4,xend=0+.1,
+                   y=-5,yend=0+.1),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  geom_label(data = data,
+             aes(x = x, 
+                 y = y,
+                 label = label),
+             size = 7) +
+  theme_void()
+```
+
+\newpage
+
+# _TASK_ 1
+## Soal
+
+Jalankan _Bellman-Ford Algorithm_ dengan titik $z$ sebagai titik awal!
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.align='center',fig.cap="Graf Soal I"}
+graf_soal = 
+  graf +
+  # s-t = 6
+  annotate("text",x = 1,y=3,label = "6") +
+  # s-y = 7
+  annotate("text",x = 1,y=-3,label = "7") +
+  # t-x = 5
+  annotate("text",x = 3,y=3.4,label = "5") +
+  # x-t = -2
+  annotate("text",x = 3,y=4.6,label = "-2") +
+  # z-x = 7 
+  annotate("text",x = 3.9,y=0,label = "7") +
+  # y-z = 9
+  annotate("text",x = 3,y=-4.8,label = "9") +
+  # t-y = 8
+  annotate("text",x = 2.1,y=1,label = "8") +
+  # z-s = 2 
+  annotate("text",x = 1,y=-0.5,label = "2") +
+  # y-x = -3
+  annotate("text",x = 2.6,y=-1.5,label = "-3") +
+  # t-z = -4
+  annotate("text",x = 3.5,y=-3,label = "-4")
+
+graf_soal
+```
+
+## Jawab
+
+### Langkah I
+
+Jika kita bermula dari titik $z$, kita hanya punya dua pilihan: $s$ atau $x$.
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.align='center',fig.cap="Langkah I"}
+data = data.frame(
+# label = c("s","t","x","y","z")
+  label = c("2","t","7","y","0"),
+  x = c(0,2,4,2,4),
+  y = c(0,5,5,-5,-5)
+)
+
+graf = 
+  ggplot() +
+  # s-t
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # s-y
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-x
+  geom_curve(aes(x=2,xend=4-.1,
+                 y=5,yend=5-.1),
+             arrow = arrow(length = unit(.2,"cm"))) +
+  # x-t
+  geom_segment(aes(x=4,xend=2+.1,
+                   y=5,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-y
+  geom_segment(aes(x=2,xend=2,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-x
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-x
+  geom_segment(aes(x=4,xend=4,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # z-s
+  geom_segment(aes(x=4,xend=0+.1,
+                   y=-5,yend=0+.1),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  geom_label(data = data,
+             aes(x = x, 
+                 y = y,
+                 label = label),
+             size = 7) +
+  theme_void()
+
+graf
+```
+
+\newpage
+
+### Langkah II
+
+Dari titik $s$ bisa ke $t$ atau $y$. Sedangkan dari $x$ hanya bisa ke $t$.
+
+Perhatikan bahwa dari $s-t$ akan menghasilkan nilai 8 sedangkan dari $x-t$ akan menghasilkan nilai 5. Oleh karena itu kita tidak akan memilih $s-t$.
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.align='center',fig.cap="Langkah II"}
+data = data.frame(
+# label = c("s","t","x","y","z")
+  label = c("2","5","7","9","0"),
+  x = c(0,2,4,2,4),
+  y = c(0,5,5,-5,-5)
+)
+
+graf = 
+  ggplot() +
+  # s-t
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # s-y
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=-5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # t-x
+  geom_curve(aes(x=2,xend=4-.1,
+                 y=5,yend=5-.1),
+             arrow = arrow(length = unit(.2,"cm"))) +
+  # x-t
+  geom_segment(aes(x=4,xend=2+.1,
+                   y=5,yend=5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # t-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-y
+  geom_segment(aes(x=2,xend=2,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-x
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-x
+  geom_segment(aes(x=4,xend=4,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # z-s
+  geom_segment(aes(x=4,xend=0+.1,
+                   y=-5,yend=0+.1),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  geom_label(data = data,
+             aes(x = x, 
+                 y = y,
+                 label = label),
+             size = 7) +
+  theme_void()
+
+graf
+```
+
+### Langkah III
+
+Dari $y$ kita hanya bisa memilih ke $x$, sehingga $y-x$ akan menghasilkan nilai 6. __Nilai ini lebih rendah daripada jalur__ $z-x$ sebelumnya. Sehingga kita akan menghapus alternatif rute $z-x$ yang telah ada.
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.align='center',fig.cap="Langkah III"}
+data = data.frame(
+# label = c("s","t","x","y","z")
+  label = c("2","t","6","9","0"),
+  x = c(0,2,4,2,4),
+  y = c(0,5,5,-5,-5)
+)
+
+graf = 
+  ggplot() +
+  # s-t
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # s-y
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=-5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # t-x
+  geom_curve(aes(x=2,xend=4-.1,
+                 y=5,yend=5-.1),
+             arrow = arrow(length = unit(.2,"cm"))) +
+  # x-t
+  geom_segment(aes(x=4,xend=2+.1,
+                   y=5,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-y
+  geom_segment(aes(x=2,xend=2,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-x
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # z-x
+  geom_segment(aes(x=4,xend=4,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-s
+  geom_segment(aes(x=4,xend=0+.1,
+                   y=-5,yend=0+.1),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  geom_label(data = data,
+             aes(x = x, 
+                 y = y,
+                 label = label),
+             size = 7) +
+  theme_void()
+
+graf
+```
+
+\newpage
+
+### Langkah IV
+
+Langkah berikutnya sudah jelas, tinggal menyelesaikan dari $x$ ke $t$ saja.
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.align='center',fig.cap="Langkah III"}
+data = data.frame(
+# label = c("s","t","x","y","z")
+  label = c("2","4","6","9","0"),
+  x = c(0,2,4,2,4),
+  y = c(0,5,5,-5,-5)
+)
+
+graf = 
+  ggplot() +
+  # s-t
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # s-y
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=-5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # t-x
+  geom_curve(aes(x=2,xend=4-.1,
+                 y=5,yend=5-.1),
+             arrow = arrow(length = unit(.2,"cm"))) +
+  # x-t
+  geom_segment(aes(x=4,xend=2+.1,
+                   y=5,yend=5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # t-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-y
+  geom_segment(aes(x=2,xend=2,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-x
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # z-x
+  geom_segment(aes(x=4,xend=4,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-s
+  geom_segment(aes(x=4,xend=0+.1,
+                   y=-5,yend=0+.1),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  geom_label(data = data,
+             aes(x = x, 
+                 y = y,
+                 label = label),
+             size = 7) +
+  theme_void()
+
+graf
+```
+
+### Kesimpulan
+
+> Rutenya adalah __z-s-y-x-t__.
+
+---
+
+\newpage
+
+```{r,include=FALSE}
+rm(list=ls())
+data = data.frame(
+  label = c("s","t","x","y","z"),
+  x = c(0,2,4,2,4),
+  y = c(0,5,5,-5,-5)
+)
+
+graf = 
+  ggplot() +
+  # s-t
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # s-y
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-x
+  geom_curve(aes(x=2,xend=4-.1,
+                 y=5,yend=5-.1),
+             arrow = arrow(length = unit(.2,"cm"))) +
+  # x-t
+  geom_segment(aes(x=4,xend=2+.1,
+                   y=5,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-y
+  geom_segment(aes(x=2,xend=2,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-x
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-x
+  geom_segment(aes(x=4,xend=4,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-s
+  geom_segment(aes(x=4,xend=0+.1,
+                   y=-5,yend=0+.1),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  geom_label(data = data,
+             aes(x = x, 
+                 y = y,
+                 label = label),
+             size = 7) +
+  theme_void()
+```
+
+# _TASK_ 2
+## Soal
+
+Jalankan _Bellman-Ford Algorithm_ dengan titik $s$ sebagai titik awal!
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.align='center',fig.cap="Graf Soal II"}
+graf_soal = 
+  graf +
+  # s-t = 6
+  annotate("text",x = 1,y=3,label = "6") +
+  # s-y = 7
+  annotate("text",x = 1,y=-3,label = "7") +
+  # t-x = 5
+  annotate("text",x = 3,y=3.4,label = "5") +
+  # x-t = -2
+  annotate("text",x = 3,y=4.6,label = "-2") +
+  # z-x = 4 
+  annotate("text",x = 3.9,y=0,label = "4") +
+  # y-z = 9
+  annotate("text",x = 3,y=-4.8,label = "9") +
+  # t-y = 8
+  annotate("text",x = 2.1,y=1,label = "8") +
+  # z-s = 2 
+  annotate("text",x = 1,y=-0.5,label = "2") +
+  # y-x = -3
+  annotate("text",x = 2.6,y=-1.5,label = "-3") +
+  # t-z = -4
+  annotate("text",x = 3.5,y=-3,label = "-4")
+
+graf_soal
+```
+
+## Jawab
+
+### Langkah I
+
+Dari titik $s$ kita bisa pergi ke titik $t$ dan titik $y$.
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.align='center',fig.cap="Langkah I"}
+data = data.frame(
+# label = c("s","t","x","y","z")
+  label = c("0","6","x","7","z"),
+  x = c(0,2,4,2,4),
+  y = c(0,5,5,-5,-5)
+)
+
+graf = 
+  ggplot() +
+  # s-t
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # s-y
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=-5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # t-x
+  geom_curve(aes(x=2,xend=4-.1,
+                 y=5,yend=5-.1),
+             arrow = arrow(length = unit(.2,"cm"))) +
+  # x-t
+  geom_segment(aes(x=4,xend=2+.1,
+                   y=5,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-y
+  geom_segment(aes(x=2,xend=2,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-x
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-x
+  geom_segment(aes(x=4,xend=4,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-s
+  geom_segment(aes(x=4,xend=0+.1,
+                   y=-5,yend=0+.1),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  geom_label(data = data,
+             aes(x = x, 
+                 y = y,
+                 label = label),
+             size = 7) +
+  theme_void()
+
+graf
+```
+
+\newpage
+### Langkah II
+
+Dari titik $t$ kita bisa pergi ke titik $y$ dan titik $x$. Namun $t-y$ akan menghasilkan nilai 14, nilai tersebut lebih besar dibandingkan rute _existing_ dari $s-y$ sehingga kita akan abaikan rute ini. Rute $t-x$ menghasilkan nilai 11.
+
+Dari titik $y$ kita bisa pergi ke $x$ dan titik $z$. Rute $y-x$ menghasilkan nilai 4. Kalau dibandingkan dengan rite $t-x$, nilai rute $y-x$ lebih rendah sehingga kita akan abaikan rute $t-x$.
+
+Sedangkan $y-z$ akan menghasilkan nilai 16.
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.align='center',fig.cap="Langkah II"}
+data = data.frame(
+# label = c("s","t","x","y","z")
+  label = c("0","6","4","7","16"),
+  x = c(0,2,4,2,4),
+  y = c(0,5,5,-5,-5)
+)
+
+graf = 
+  ggplot() +
+  # s-t
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # s-y
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=-5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # t-x
+  geom_curve(aes(x=2,xend=4-.1,
+                 y=5,yend=5-.1),
+             arrow = arrow(length = unit(.2,"cm"))) +
+  # x-t
+  geom_segment(aes(x=4,xend=2+.1,
+                   y=5,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # t-y
+  geom_segment(aes(x=2,xend=2,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=-5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # y-x
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # z-x
+  geom_segment(aes(x=4,xend=4,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-s
+  geom_segment(aes(x=4,xend=0+.1,
+                   y=-5,yend=0+.1),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  geom_label(data = data,
+             aes(x = x, 
+                 y = y,
+                 label = label),
+             size = 7) +
+  theme_void()
+
+graf
+```
+
+### Langkah III
+
+Dari titik $z$ kita tidak mungkin kembali ke $s$ dan ke $x$ karena nilai yang sudah ada sekarang masih lebih rendah dari rute yang baru.
+Sehingga secara jelas, kita hanya bisa memilih rute $x-t$ lalu $t-z$.
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.align='center',fig.cap="Langkah III"}
+data = data.frame(
+# label = c("s","t","x","y","z")
+  label = c("0","2","4","7","-2"),
+  x = c(0,2,4,2,4),
+  y = c(0,5,5,-5,-5)
+)
+
+graf = 
+  ggplot() +
+  # s-t
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # s-y
+  geom_segment(aes(x=0,xend=2-.1,
+                   y=0,yend=-5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # t-x
+  geom_curve(aes(x=2,xend=4-.1,
+                 y=5,yend=5-.1),
+             arrow = arrow(length = unit(.2,"cm"))) +
+  # x-t
+  geom_segment(aes(x=4,xend=2+.1,
+                   y=5,yend=5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # t-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # t-y
+  geom_segment(aes(x=2,xend=2,
+                   y=5,yend=-5+.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-z
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=-5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # y-x
+  geom_segment(aes(x=2,xend=4-.1,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm")),
+               color = "red") +
+  # z-x
+  geom_segment(aes(x=4,xend=4,
+                   y=-5,yend=5-.5),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # z-s
+  geom_segment(aes(x=4,xend=0+.1,
+                   y=-5,yend=0+.1),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  geom_label(data = data,
+             aes(x = x, 
+                 y = y,
+                 label = label),
+             size = 7) +
+  theme_void()
+
+graf
+```
+
+\newpage
+
+### Kesimpulan
+
+Kita dapatkan bahwa ada ___negative cycle___. Hal ini tidak boleh terjadi, jika kita teruskan kembali prosesnya, tidak akan konklusif sehingga terjadi _endless looping_.
+
+> Rutenya: __Tidak ditemukan__.
+
+\center
+
+# == END == {-}
