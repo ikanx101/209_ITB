@@ -20,15 +20,15 @@ bin_prog =
 		"max") %>%
   # menambah constraints
   # max kapasitas kelas
-  add_constraint(sum_expr(x[i,j],i = 1:20) >= 4,
+  add_constraint(sum_expr(x[i,j],i = 1:20) >= 5,
 		 j = 1:5) %>%
-  add_constraint(sum_expr(x[i,j],i = 1:20) <= 6,
+  add_constraint(sum_expr(x[i,j],i = 1:20) <= 8,
 		 j = 1:5) %>%
   # frek kunjungan siswa
   add_constraint(sum_expr(x[i,j],j = 1:5) >= 2,
-		 i = 1:5) %>%
+		 i = 1:20) %>%
   add_constraint(sum_expr(x[i,j],j = 1:5) <= 3,
-		 i = 1:5) %>%
+		 i = 1:20) %>%
   # jeda sehari
   add_constraint(x[i,j] + x[i,j+1] <= 1,
 		 i = 1:20,

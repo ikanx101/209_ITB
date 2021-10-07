@@ -1184,7 +1184,7 @@ Beberapa minggu ke belakang, kasus harian Covid semakin menurun. Pemerintah mula
 Suatu sekolah memiliki kelas berisi 20 orang siswa. Mereka hendak menggelar PTMT dengana aturan sebagai berikut:
 
 1. PTMT digelar dari Senin hingga Jumat (5 hari).
-1. Dalam sehari, siswa yang boleh hadir dibatasi 4-6 orang saja.
+1. Dalam sehari, siswa yang boleh hadir dibatasi 4-8 orang saja.
 1. Dalam seminggu, diharapkan siswa bisa hadir 2-3 kali.
 1. Siswa yang hadir di selang sehari baru bisa hadir kembali.
 
@@ -1207,7 +1207,7 @@ ___Constraints___
 
 Dalam sehari, ada pembatasan jumlah siswa yang hadir.
 
-$$4 \leq \sum_i x_{i,j} \leq 6, j \in \{1,2,..,5\}$$
+$$4 \leq \sum_i x_{i,j} \leq 8, j \in \{1,2,..,5\}$$
 
 Dalam seminggu, siswa hadir dalam frekuensi tertentu.
 
@@ -1222,8 +1222,71 @@ Jangan lupa bahwa $x_{i,j} \geq 0$.
 Berikut adalah skrip di __R__-nya:
 
 ```{r}
+rm(list=ls())
 
+library(dplyr)
+library(ompr)
+library(ompr.roi)
+library(ROI.plugin.glpk)
+
+bin_prog = 
+  MIPModel() %>%
+  # menambah variabel
+  add_variable(x[i,j],
+	       i = 1:20,
+	       j = 1:5,
+	       type = "binary",
+	       lb = 0) %>%
+  # membuat objective function
+  set_objective(sum_expr(x[i,j],
+			 i = 1:20,
+			 j = 1:5),
+		"max") %>%
+  # menambah constraints
+  # max kapasitas kelas
+  add_constraint(sum_expr(x[i,j],i = 1:20) >= 4,
+		 j = 1:5) %>%
+  add_constraint(sum_expr(x[i,j],i = 1:20) <= 8,
+		 j = 1:5) %>%
+  # frek kunjungan siswa
+  add_constraint(sum_expr(x[i,j],j = 1:5) >= 2,
+		 i = 1:20) %>%
+  add_constraint(sum_expr(x[i,j],j = 1:5) <= 3,
+		 i = 1:20) %>%
+  # jeda sehari
+  add_constraint(x[i,j] + x[i,j+1] <= 1,
+		 i = 1:20,
+		 j = 1:4)
+
+bin_prog
+
+hasil = 
+  bin_prog %>%
+  solve_model(with_ROI(solver = "glpk",
+		       verbose = T))
+
+rekap = 
+  hasil %>% 
+  get_solution(x[i,j]) %>%
+  filter(value == 1) %>%
+  rename(siswa = i,
+         hari = j) 
+
+rekap %>%
+  group_by(hari) %>%
+  summarise(presensi = paste(siswa,collapse = ",")) %>%
+  ungroup() %>%
+  knitr::kable("simple",caption = "Jadwal Kunjungan Siswa")
+
+rekap %>%
+  group_by(siswa) %>%
+  tally() %>%
+  ungroup() %>%
+  rename("jumlah kehadiran" = n) %>%
+  knitr::kable("simple",caption = "Rekap Presensi Siswa")
 ```
+
+Jika kita hendak __meratakan frekuensi kunjungan siswa__, kita bisa mengubah _constraint_ yang ada, namun hal tersebut __tidak menjamin__ adanya solusi yang optimal. Kita bisa melakukan _post optimality test_ dengan mengubah beberapa parameter yang ada.
 
 \newpage
 
@@ -1235,7 +1298,7 @@ Berikut adalah skrip di __R__-nya:
 
 # MIXED INTEGER LINEAR PROGRAMMING
 
-
+xxxx
 
 \newpage
 
