@@ -1045,7 +1045,9 @@ detach("package:boot", unload = TRUE)
 
 # INTEGER DAN BINARY PROGRAMMING
 
+Pada bagian ini, kita akan membahas lebih detail terkait _integer_ 
 
+sampai sini
 
 
 
