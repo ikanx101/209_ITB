@@ -1045,9 +1045,42 @@ detach("package:boot", unload = TRUE)
 
 # INTEGER DAN BINARY PROGRAMMING
 
-Pada bagian ini, kita akan membahas lebih detail terkait _integer_ 
+Pada bagian ini, kita akan membahas lebih detail terkait _integer_ dan _binary programming_.
 
-sampai sini
+## _Integer Programming_
+
+_Integer programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan bulat (_integer_). Jika fungsi-fungsi yang terkait merupakan _linear_, maka disebut dengan _integer linear programming_. Sebagai contoh, variabel yang merupakan bilangan bulat adalah banyak orang.
+
+### Contoh _Integer Programming_
+
+#### Jadwal Kebutuhan Tenaga Kesehatan {-}
+
+Suatu rumah sakit membutuhkan tenaga kesehatan setiap harinya dengan spesifikasi berikut:
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+nakes = data.frame(
+  hari = c('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'),
+  min = c(24,22,23,11,16,20,12),
+  max = c(29,27,28,16,21,25,17)
+)
+
+nakes %>%
+  rename("Min Nakes Required" = min,
+	 "Max Nakes Required" = max) %>%
+  knitr::kable("simple",align = "c",caption = "Tabel Kebutuhan Nakes Harian")
+```
+
+Jika berlaku kondisi sebagai berikut:
+
+1.
+
+## _Binary Programming_
+
+_Binary programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan biner (0,1). Biasanya metode ini dipakai dalam masalah penjadwalan yang memerlukan prinsip _matching_ antar kondisi yang ada.
+
+
 
 
 
