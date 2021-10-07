@@ -1,4 +1,3 @@
-# CLIR
-Antara versi 2
+# SAINS KOMPUTASI ITB
 
-Sebuah repo antara Bandung, Bekasi, dan Rawabali.
+Catatan kuliah, PR, tugas, dan lain sebagainya.
