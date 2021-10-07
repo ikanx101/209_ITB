@@ -1095,8 +1095,26 @@ nakes %>%
   knitr::kable("simple",align = "c",caption = "Konfigurasi Penjadwalan Nakes")
 ```
 
+Kolom $x_i, i =1,2,3,4,5,6,7$ menandakan kelompok nakes yang perlu dipekerjaan pada hari-hari tertentu. Setiap nilai $x_i$ tersebut merupakan __bilangan bulat positif__ $x \geq 0, x \in \mathbb{Z}$.
 
-xxx
+Dari ilustrasi di atas, kita bisa membuat model optimisasinya sebagai berikut:
+
+___Objective Function___
+
+$$\min{ \sum_{i=1}^7 x_i}$$
+
+___Constraints___
+
+- Hari Senin: $24 \leq \sum x_i \leq 29, i \in \{1,4,5,6,7\}$.
+- Hari Selasa: $22 \leq \sum x_i \leq 27, i \in \{1,2,5,6,7\}$.
+- Hari Rabu: $23 \leq \sum x_i \leq 28, i \in \{1,2,3,6,7\}$.
+- Hari Kamis: $11 \leq \sum x_i \leq 16, i \in \{1,2,3,4,7\}$.
+- Hari Jumat: $16 \leq \sum x_i \leq 21, i \in \{1,2,3,4,5\}$.
+- Hari Sabtu: $20 \leq \sum x_i \leq 25, i \in \{2,3,4,5,6\}$.
+- Hari Minggu: $12 \leq \sum x_i \leq 17, i \in \{3,4,5,6,7\}$.
+
+Kita juga perlu perhatikan bahwa $x_i \geq 0, i \in \{1,2,3,4,5,6,7\}$.
+
 ## _Binary Programming_
 
 _Binary programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan biner (0,1). Biasanya metode ini dipakai dalam masalah penjadwalan yang memerlukan prinsip _matching_ antar kondisi yang ada.
