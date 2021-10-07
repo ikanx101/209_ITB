@@ -1165,6 +1165,9 @@ hasil = integer_prog %>% solve_model(with_ROI(solver = "glpk",verbose = T))
 hasil$solution
 ```
 
+Kita telah mendapatkan konfigurasi jadwal nakes yang optimal. 
+
+xxxx
 
 ## _Binary Programming_
 
