@@ -1292,7 +1292,6 @@ rekap %>%
   knitr::kable("simple",caption = "Rekap Presensi Siswa")
 ```
 
-Jika kita hendak __meratakan frekuensi kunjungan siswa__, kita bisa mengubah _constraint_ yang ada, namun hal tersebut __tidak menjamin__ adanya solusi yang optimal. Kita bisa melakukan _post optimality test_ dengan mengubah beberapa parameter yang ada.
 
 \newpage
 
@@ -1308,7 +1307,7 @@ Pada bagian sebelumnya, kita telah membahas masalah optimisasi dengan variabel b
 
 ## Contoh Penerapan _MILP_
 
-### Pemilihan dan Penentuan Item Produksi {-}
+#### Pemilihan dan Penentuan Item Produksi {-}
 
 Suatu pabrik makanan dan minuman berencana untuk membuat tiga produk baru yang bisa diproduksi di dua _plants_ yang berbeda.
 
