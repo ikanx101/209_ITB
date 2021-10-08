@@ -1306,7 +1306,82 @@ Pada bagian sebelumnya, kita telah membahas masalah optimisasi dengan variabel b
 
 ## Contoh Penerapan _MILP_
 
+### Pemilihan dan Penentuan Item Produksi {-}
 
+Suatu pabrik makanan dan minuman berencana untuk membuat tiga produk baru yang bisa diproduksi di dua _plants_ yang berbeda.
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+runtime = data.frame(Produk = c("Item 1","Item 2","Item 3"),
+		     run1 = c(3,4,2),
+		     run2 = c(4,6,2)
+		    )
+runtime %>%
+  rename("Runtime Plant 1" = run1,
+	 "Runtime Plant 2" = run2) %>%
+  knitr::kable("simple",caption = "Tabel Runtime Item Produk per Plant (harian - dalam jam)")
+```
+
+__Plant 1__ memiliki maksimum _working hours_ sebesar 30 jam perhari.
+
+__Plant 2__ memiliki maksimum _working hours_ sebesar 40 jam perhari.
+
+```{r,echo=FALSE}
+profit = data.frame(Produk = c("Item 1","Item 2","Item 3"),
+		    profit = c(5,7,3),
+		    sales = c(7,5,9)
+			)
+
+profit %>%
+  rename("Profit per ton" = profit,
+	 "Sales potential per ton" = sales) %>%
+  knitr::kable("simple",caption = "Tabel Profit dan Potensi Sales Item Produk")
+```
+
+Masalah timbul saat mereka harus memilih __dua dari tiga__ produk baru tersebut yang harus di produksi. Selain itu, mereka juga harus memilih __satu dari dua__ _plants_ yang memproduksi _items_ tersebut.
+
+Misalkan saya definisikan:
+
+- $x_i \geq 0, i = 1,2,3$ sebagai `berapa ton` yang harus diproduksi dari item $i$.
+- $y_i \in [0,1], i = 1,2,3$ sebagai _binary_.
+	- Jika bernilai 0, maka produk $i$ tidak dipilih.
+	- Jika bernilai 1, maka produk $i$ dipilih.
+- $z \in [0,1]$ sebagai _binary_.
+	- Jika bernilai 0, maka _plant_ pertama dipilih.
+	- Jika bernilai 1, maka _plant_ kedua dipilih.
+
+Saya akan mendefinisikan suatu variabel _dummy_ $M = 99999$ berisi suatu nilai yang besar. Kelak variabel ini akan berguna untuk _reinforce model_ agar bisa memilih _items_ dan _plants_ secara bersamaan.
+
+___Objective function___ dari masalah ini adalah memaksimalkan _profit_.
+
+$$\max{ \sum_{i=1}^3 x_i \times \text{profit}_i }$$
+
+___Constraints___ dari masalah ini adalah:
+
+Tonase produksi tidak boleh melebihi angka _sales potential_ per items.
+
+$$x_i \leq \text{sales potential}_i, i = 1,2,3$$
+
+Kita akan memilih dua produk sekaligus menghitung tonase. Jika produk tersebut __dipilih__, maka akan ada angka tonase produksinya. Sebaliknya, jika produk tersebut __tidak dipilih__, maka tidak ada angka tonase produksinya.
+
+$$x_i - y_i \times M \leq 0, i = 1,2,3$$
+
+$$\sum_{i=1}^3 y_i \leq 2$$
+
+Kita akan memilih _plant_ dari waktu produksinya.
+
+$$3x_1 + 4x_2 + 2x_3 - M \times z \leq 30$$
+
+$$4x_1 + 6x_2 + 2x_3 + M \times z \leq 40 + M$$
+
+Kita akan coba selesaikan dengan skrip berikut ini:
+
+```{r}
+
+```
+
+xxxxx
 
 \newpage
 
