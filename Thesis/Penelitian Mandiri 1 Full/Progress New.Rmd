@@ -1258,8 +1258,12 @@ bin_prog =
 		 i = 1:20,
 		 j = 1:4)
 
-bin_prog
+bin_prog 
+```
 
+Berikut adalah hasilnya:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
 hasil = 
   bin_prog %>%
   solve_model(with_ROI(solver = "glpk",
@@ -1270,7 +1274,7 @@ rekap =
   get_solution(x[i,j]) %>%
   filter(value == 1) %>%
   rename(siswa = i,
-         hari = j) 
+         hari = j)
 
 rekap %>%
   group_by(hari) %>%
@@ -1298,7 +1302,11 @@ Jika kita hendak __meratakan frekuensi kunjungan siswa__, kita bisa mengubah _co
 
 # MIXED INTEGER LINEAR PROGRAMMING
 
-xxxx
+Pada bagian sebelumnya, kita telah membahas masalah optimisasi dengan variabel berupa diskrit dan kontinu. Permasalahan _real_ yang ada di kehidupan sehari-hari biasanya merupakan memiliki variabel yang _mixed_ antara keduanya. Oleh karena itu, ada metode yang disebut dengan _mixed integer linear programming_. Pada masalah optimisasi tipe ini, _decision variables_ yang terlibat bisa saja berupa _binary_, _integer_, dan _continuous_ sekaligus.
+
+## Contoh Penerapan _MILP_
+
+
 
 \newpage
 
