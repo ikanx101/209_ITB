@@ -1,0 +1,11 @@
+---
+title: Read Me
+author: Ikang Fadhli
+output: github_document
+---
+
+# Sains Komputasi ITB
+
+_Repository_ ini berisi semua _resources_ yang saya kumpulkan selama berkuliah di Magister Sains Komputasi ITB.
+
+
