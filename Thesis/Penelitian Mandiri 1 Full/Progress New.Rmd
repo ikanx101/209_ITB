@@ -1045,11 +1045,13 @@ detach("package:boot", unload = TRUE)
 
 # INTEGER DAN BINARY PROGRAMMING
 
-Pada bagian ini, kita akan membahas lebih detail terkait _integer_ dan _binary programming_.
+Pada pembahasan mengenai _linear programming_ di bagian sebelumnya. Kita telah mengetahui bahwa penyelesaiannya relatif mudah dilakukan. Sebagai contoh, kita bisa menggunakan pendekatan geometris atau aljabar di metode simplex. Namun demikian, kita akan menemukan kesulitan saat semua variabel yang ada diwajibkan berupa _integer_. Membulatkan bilangan solusi dari perhitungan _linear programming_ tidak selalu memberikan solusi yang terbaik.
 
 ## _Integer Programming_
 
-_Integer programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan bulat (_integer_). Jika fungsi-fungsi yang terkait merupakan _linear_, maka disebut dengan _integer linear programming_. Sebagai contoh, variabel yang merupakan bilangan bulat adalah banyak orang.
+_Integer programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan bulat (_integer_). Jika fungsi-fungsi yang terkait merupakan _linear_, maka disebut dengan _integer linear programming_.
+
+Sebagai contoh, variabel yang merupakan bilangan bulat adalah banyak orang.
 
 ### Contoh _Integer Programming_
 
@@ -1463,10 +1465,10 @@ Dari ketiga produk baru, perusahaan bisa memilih produk __1 dan 3__ sebanyak __5
 # MILP IN SUPPLIER SELECTION
 
 # UPDATE MINGGU X {.unlisted .unnumbered}
-# R CODES INTEGER PROGRAMMING
+# R CODES INTEGER PROGRAMMING {.unlisted .unnumbered}
 
 # UPDATE MINGGU XI {.unlisted .unnumbered}
-# R CODES BINARY PROGRAMMING
+# R CODES BINARY PROGRAMMING {.unlisted .unnumbered}
 
 # UPDATE MINGGU XII - XIII {.unlisted .unnumbered}
 # SOLVING SUPPLIER SELECTION PROBLEM
