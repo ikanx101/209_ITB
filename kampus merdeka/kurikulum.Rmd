@@ -1,0 +1,10 @@
+---
+title: "Kurikulum Pengantar Market Research"
+author: "Mohammad Rizka Fadhli"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: word_document
+---
+
+```{r,include=FALSE}
+rm(list=ls())
+```
