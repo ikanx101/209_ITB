@@ -2,6 +2,7 @@
 
 import numpy as np
 from numpy.polynomial.polynomial import polyval
+from numpy.polynomial.polynomial import polyroots
 import matplotlib.pyplot as plt
 
 # pecah data menjadi 30 selang
@@ -36,6 +37,12 @@ for j in range(M):
 # save file
 f.close()
 
+# mencari akar
+r = polyroots(c)
+print("The roots: ")
+print(r)
+
+# menggambar dan menyimpan plot
 plt.figure(figsize = (16,9))
 plt.plot(x,y,'o-')
 plt.xlabel('x')

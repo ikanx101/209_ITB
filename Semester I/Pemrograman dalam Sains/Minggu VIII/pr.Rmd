@@ -88,6 +88,21 @@ Berikut adalah gambar grafiknya:
 knitr::include_graphics("15_1.png")
 ```
 
+Berikut adalah nilai $x,y$ dari fungsi di atas:
+
+```{r,echo=FALSE}
+data = read.csv("15_1.csv")
+data
+```
+
+Berikut adalah _roots_ dari $y = f(x) = 0$.
+
+```
+The roots:
+[-0.56822148-1.52409831j -0.56822148+1.52409831j  0.56822148-1.52409831j
+  0.56822148+1.52409831j]
+```
+
 \newpage
 
 # TASK 2
