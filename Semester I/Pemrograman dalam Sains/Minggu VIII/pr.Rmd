@@ -113,7 +113,7 @@ f = open("15_1.csv","w+")
 
 for j in range(M):
      print (j,". x = ",round(x[j],4),"; y = ",round(y[j],4))
-     f.write(str(j)+","+str(round(x[j],4))+","+str(round(y[j],4)))
+     f.write(str(j)+","+str(round(x[j],4))+","+str(round(y[j],4))+"\n")
 
 # save file
 f.close()
@@ -144,6 +144,8 @@ data = read.csv("15_1.csv")
 data
 ```
 
+Dari grafik dan data yang ada, terlihat bahwa $f(x)$ tidak memiliki akar _real_. Sehingga bisa diduga hasil perhitungan _roots_ Python akan menghasilkan akar-akar bilangan kompleks.
+
 Berikut adalah _roots_ dari $y = f(x) = 0$.
 
 ```
@@ -151,6 +153,8 @@ The roots:
 [-0.56822148-1.52409831j -0.56822148+1.52409831j  0.56822148-1.52409831j
   0.56822148+1.52409831j]
 ```
+
+Dugaan kita terkonfirmasi.
 
 \newpage
 
