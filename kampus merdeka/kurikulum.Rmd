@@ -1,6 +1,6 @@
 ---
 title: "P2MS-ITB TEACHING FACTORY-NETWORK"
-subtitle: "Pengantar Market Research"
+subtitle: "Basic Market Research"
 author: "Mohammad Rizka Fadhli<br>ikanx101@gmail.com"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output: word_document
@@ -11,4 +11,10 @@ rm(list=ls())
 library(dplyr)
 ```
 
+# Tujuan Kuliah
 
+Kuliah ___Basic Market Research___ dirancang untuk:
+
+1. Menambah pengetahuan peserta kuliah terhadap _market research_ dan peranannya dalam dunia bisnis sebagai salah satu _decision support system_. Kelak akan dijelaskan pula berbagai jenis _research_ yang lazim digunakan seperti:
+  1. _Qualitative research_: _focus group discussion_ (FGD), _In-depth Interview_ (IDI), dan _qualitative observation_.
+  1. _Quantitative research_: _surveys_ dan _quantitative observation_.
