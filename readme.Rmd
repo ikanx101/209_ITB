@@ -9,3 +9,14 @@ output: github_document
 _Repository_ ini berisi semua _resources_ yang saya kumpulkan selama berkuliah di Magister Sains Komputasi ITB.
 
 
+## Semester I
+
+Berisi catatan per mata kuliah.
+
+## Thesis
+
+Berisi _update progress_ thesis.
+
+## Kampus Merdeka
+
+Berisi materi kolaborasi saya dengan P2MS ITB.
