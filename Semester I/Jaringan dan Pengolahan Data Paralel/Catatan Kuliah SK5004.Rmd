@@ -21,7 +21,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("~/S2 Sains Komputasi ITB/Kuliah/Semester I/Jaringan dan Pengolahan Data Paralel")
+setwd("~/209_ITB/Semester I/Jaringan dan Pengolahan Data Paralel")
 library(dplyr)
 library(ggplot2)
 
@@ -143,7 +143,7 @@ chmod 777 bash1
 # PERTEMUAN MINGGU XXX
 24 September 2021
 
-`/etc/resolve.conf` memberi tahu kernel server nama mana yang harus ditanyakan ketika sebuah program meminta untuk _me-resolve_ alamat IP.
+`/etc/resolve.conf` memberi tahu kernel _server_ nama mana yang harus ditanyakan ketika sebuah program meminta untuk _me-resolve_ alamat IP.
 
 `/etcsysconfig/network-scripts/ifcfg-eth0` konfigurasi jaringan seperti protokol _boot_ (status / dhcp), alamat IP, netmask, alamat jaringan, alamat broadcast.
 
