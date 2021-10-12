@@ -1,10 +1,14 @@
 ---
-title: "Kurikulum Pengantar Market Research"
-author: "Mohammad Rizka Fadhli"
+title: "P2MS-ITB TEACHING FACTORY-NETWORK"
+subtitle: "Pengantar Market Research"
+author: "Mohammad Rizka Fadhli<br>ikanx101@gmail.com"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output: word_document
 ---
 
 ```{r,include=FALSE}
 rm(list=ls())
+library(dplyr)
 ```
+
+
