@@ -1,5 +1,5 @@
 ---
-title: "MENYELESAIKAN POLINOMIAL DENGAN NUMPY"
+title: "TUGAS POLINOMIAL CHAPTER 15"
 subtitle: | 
     | Tugas Mata Kuliah SK5003 Pemrograman dalam Sains
     | Numpy Python 3
@@ -31,6 +31,25 @@ knitr::opts_chunk$set(echo = TRUE)
 rm(list=ls())
 library(dplyr)
 library(ggplot2)
+
+gambar_fx = function(f,a,b,delta){
+  temp = data.frame(
+    x = seq(a,b,by = delta)
+  ) %>% 
+    mutate(y = f(x)) %>% 
+    filter(!is.nan(y))
+  subtitle = paste0("Pada selang [",a,",",b,"]")
+  caption = "Digambar dengan R\nikanx101.com"
+  temp %>% 
+    ggplot(aes(x,y)) +
+    geom_line(color = "steelblue") +
+    theme_minimal() +
+    labs(title = "Grafik f(x)",
+         subtitle = subtitle,
+         caption = caption)
+   
+}
+
 ```
 
 \newpage
@@ -43,11 +62,19 @@ library(ggplot2)
 
 ## Soal
 
-Develop a Python program to evaluate polynomial function $y = x^4 + 4x^2 +7$. Find an appropriate interval of $x$ for which the function evaluation is done and plot the graph.
+__15.1__ Develop a Python program to evaluate polynomial function $y = x^4 + 4x^2 +7$. Find an appropriate interval of $x$ for which the function evaluation is done and plot the graph.
+
+__15.4__ Develop a Python program to solve the polynomial function $y = x^4 + 4x^2 + 7$.
 
 ## Jawab
 
-Ini digambar dulu
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+f = function(x){x^4 + 4*x^2 + 7}
+a = -5
+b = 5
+delta = .05
+gambar_fx(f,a,b,delta)
+```
 
 \newpage
 
@@ -66,16 +93,6 @@ Develop a Python program to evaluate the polynomial function $y = 3x^5 + 6$. Fin
 ## Soal
 
 Develop a Python program to evaluate the polynomial function $y = 2x^6 - 1.5x^5 + 5x^4 -6.5x^3 + 6x^2 -3x + 4.5$. Find an appropriate interval of $x$ for which the function evaluation is done and plot the relevant data.
-
-## Jawab
-
-\newpage
-
-# TASK 4
-
-## Soal
-
-Develop a Python program to solve the polynomial function $y = x^4 + 4x^2 + 7$.
 
 ## Jawab
 
