@@ -127,7 +127,9 @@ metode %>%
 	 " " = x1,
 	 "Cara Penyampaian Materi" = y2,
 	 "  " = x2) %>%
-  knitr::kable("simple")
+  knitr::kable("pipe")
 ```
+
+# Silabus dan Jadwal Mingguan
 
 xxx
