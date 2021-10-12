@@ -36,7 +36,8 @@ for j in range(M):
 # save file
 f.close()
 
+plt.figure(figsize = (16,9))
 plt.plot(x,y,'o-')
 plt.xlabel('x')
 plt.ylabel('y')
-plt.savefig('15_1.png')
+plt.savefig('15_1.png',dpi = 250)

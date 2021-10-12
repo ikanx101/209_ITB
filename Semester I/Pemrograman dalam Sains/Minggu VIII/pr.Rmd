@@ -84,7 +84,7 @@ program di mari
 
 Berikut adalah gambar grafiknya:
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.1"}
+```{r out.width = "90%",echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.1"}
 knitr::include_graphics("15_1.png")
 ```
 
