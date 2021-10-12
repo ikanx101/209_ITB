@@ -169,7 +169,7 @@ __15.5__ Develop a Python program to solve the polynomial function $y = 3x^5 + 6
 
 ## Jawab
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.2"}
+```{r,include=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.2"}
 f = function(x){3*x^5 + 6}
 a = -5
 b = 5
@@ -250,8 +250,10 @@ Berikut adalah _roots_ dari $y = f(x) = 0$.
 
 ```
 The roots:
-[-1.14869835+0.j		-0.35496731-1.09247706j 
- -0.35496731+1.09247706j	0.92931649-0.67518795j  
+[-1.14869835+0.j		
+ -0.35496731-1.09247706j 
+ -0.35496731+1.09247706j	
+ 0.92931649-0.67518795j  
  0.92931649+0.67518795j]
 ```
 
@@ -267,7 +269,7 @@ __15.6__ Develop a Python program to solve the polynomial function $y = 2x^6 - 1
 
 ## Jawab
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.3"}
+```{r,include=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.3"}
 f = function(x){2*x^6 - 1.5*x^5 + 5*x^4 - 6.5*x^3 + 6*x^2 - 3*x + 4.5}
 a = -5
 b = 5
