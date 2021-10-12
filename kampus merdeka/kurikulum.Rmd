@@ -1,7 +1,7 @@
 ---
 title: "P2MS-ITB TEACHING FACTORY-NETWORK"
 subtitle: "Basic Market Research"
-author: "Mohammad Rizka Fadhli<br>ikanx101@gmail.com"
+author: "Mohammad Rizka Fadhli ikanx101@gmail.com"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output: word_document
 ---
@@ -51,9 +51,11 @@ _Case studies_ yang akan digunakan sebagai bahan ajar:
 1. _Service Audit_: Pengukuran kualitas layanan bank dengan _mystery shopping_.
 1. _Retail Audit_: _Telco retail audit_.
 
+\newpage
+
 _Case study_ yang akan dijadikan tugas melakukan _market research_:
 
-> Mencari tren makanan dan minuman pada suatu segmen konsumen tertentu (misalkan: anak muda kelas menengah ke atas, ibu hamil kelas menengah ke bawah, dan orang tua kelas menengah).
+___Mencari tren makanan dan minuman pada suatu segmen konsumen tertentu (misalkan: anak muda kelas menengah ke atas, ibu hamil kelas menengah ke bawah, dan orang tua kelas menengah).___
 
 # _Learning Outcomes_
 
@@ -84,3 +86,30 @@ C11. Media skill
 C12. Coding skill
 
 C13. Networking skill
+
+Setelah mengambil kuliah ini, peserta diharapkan:
+
+1. Mengetahui perbedaan masing-masing jenis _research_ dan bisa memasangkannya dengan tujuan dari bisnis (C1, C2, C7, dan C8).
+1. Mampu melaksanakan _market research_ dengan tahapan-tahapan yang benar (C3 dan C10).
+1. Mampu melakukan _data preparation_ hingga _data analysis_ untuk dijadikan laporan _market research_ (C10, C12, dan C6).
+
+# Pengampu
+
+- Mohammad Rizka Fadhli
+
+# _Blending Teaching Methods and Modes of Delivery_
+
+```{r,echo=FALSE}
+met1 = c("Case-based learning",
+	 "Problem-based learning",
+	 "Challenge-based learning",
+	 "Project-based learning",
+	 "Experimental learning")
+metode = data.frame(x = c("x","","","x",""),
+	            y = met1)
+
+metode %>%
+  rename("Metode Pengajaran (pilih beberapa)" = y,
+	 " " = x) %>%
+  knitr::kable("simple",caption = "Teaching Methods")
+```
