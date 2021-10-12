@@ -1,0 +1,103 @@
+---
+title: "MENYELESAIKAN POLINOMIAL DENGAN NUMPY"
+subtitle: | 
+    | Tugas Mata Kuliah SK5003 Pemrograman dalam Sains
+    | Numpy Python 3
+author: | 
+    | Mohammad Rizka Fadhli (Ikang)
+    | 20921004@mahasiswa.itb.ac.id
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: false
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: zenburn
+    dev: png
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Semester I/Pemrograman dalam Sains/Minggu VIII")
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+# TASK 1
+
+## Soal
+
+Develop a Python program to evaluate polynomial function $y = x^4 + 4x^2 +7$. Find an appropriate interval of $x$ for which the function evaluation is done and plot the graph.
+
+## Jawab
+
+\newpage
+
+# TASK 2
+
+## Soal
+
+Develop a Python program to evaluate the polynomial function $y = 3x^5 + 6$. Find an appropriate interval of $x$ for which the function evaluation is done and plot the graph.
+
+## Jawab
+
+\newpage
+
+# TASK 3
+
+## Soal
+
+Develop a Python program to evaluate the polynomial function $y = 2x^6 - 1.5x^5 + 5x^4 -6.5x^3 + 6x^2 -3x + 4.5$. Find an appropriate interval of $x$ for which the function evaluation is done and plot the relevant data.
+
+## Jawab
+
+\newpage
+
+# TASK 4
+
+## Soal
+
+Develop a Python program to solve the polynomial function $y = x^4 + 4x^2 + 7$.
+
+## Jawab
+
+\newpage
+
+# TASK 5
+
+
+## Soal
+
+Develop a Python program to solve the polynomial function $y = 3x^5 + 6$.
+
+## Jawab
+
+\newpage
+
+# TASK 6
+
+
+## Soal
+
+Develop a Python program to solve the polynomial function $y = 2x^6 - 1.5x^5 + 5x^4 -6.5x^3 + 6x^2 -3x + 4.5$.
+
+## Jawab
+
+# == End == {.unlisted .unnumbered}
+
