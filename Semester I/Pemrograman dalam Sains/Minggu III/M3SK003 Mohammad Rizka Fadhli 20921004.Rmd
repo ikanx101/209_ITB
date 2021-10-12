@@ -2,12 +2,12 @@
 title: "Modul Praktikum Minggu 3"
 author: "Mohammad Rizka Fadhli - 20921004"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-output: word_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("~/S2 Sains Komputasi ITB/Kuliah/Semester I/Pemrograman dalam Sains/Tugas/Minggu III")
+setwd("~/209_ITB/Semester I/Pemrograman dalam Sains/Minggu III")
 rm(list=ls())
 
 library(dplyr)
