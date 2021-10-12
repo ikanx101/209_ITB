@@ -68,7 +68,7 @@ __15.4__ Develop a Python program to solve the polynomial function $y = x^4 + 4x
 
 ## Jawab
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.1"}
+```{r,include=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.1"}
 f = function(x){x^4 + 4*x^2 + 7}
 a = -5
 b = 5
@@ -84,7 +84,7 @@ program di mari
 
 Berikut adalah gambar grafiknya:
 
-```{r out.width = "90%",echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.1"}
+```{r out.width = "100%",echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.1"}
 knitr::include_graphics("15_1.png")
 ```
 
