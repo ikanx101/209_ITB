@@ -68,12 +68,41 @@ __15.4__ Develop a Python program to solve the polynomial function $y = x^4 + 4x
 
 ## Jawab
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.caption = "Gambar 15.1"}
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.1"}
 f = function(x){x^4 + 4*x^2 + 7}
 a = -5
 b = 5
 delta = .05
 gambar_fx(f,a,b,delta)
+```
+
+Untuk menggambarnya, kita akan gunakan program _Python_ berikut ini:
+
+```
+# import libraries yang dibutuhkan
+import numpy as np
+from numpy.polynomial.polynomial import polyval
+import matplotlib.pyplot as plt
+
+M = 50   # number of data points
+xi = -5  # first value of x
+xf = 5   # final value
+
+x = np.linspace(xi, xf, M)
+c = np.array([7,0,4,0,1])
+
+print ("Coefficient list")
+print (c)
+
+y = polyval(x, c)
+print ("Evaluating a polynomial")
+
+for j in range(M):
+     print (x[j], y[j])
+plt.plot(x,y,'o-')
+plt.xlabel('x')
+plt.ylabel('y')
+
 ```
 
 \newpage
@@ -88,7 +117,7 @@ __15.5__ Develop a Python program to solve the polynomial function $y = 3x^5 + 6
 
 ## Jawab
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.caption = "Gambar 15.2"}
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.2"}
 f = function(x){3*x^5 + 6}
 a = -5
 b = 5
@@ -108,7 +137,7 @@ __15.6__ Develop a Python program to solve the polynomial function $y = 2x^6 - 1
 
 ## Jawab
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.caption = "Gambar 15.3"}
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina = 10,fig.cap = "Gambar 15.3"}
 f = function(x){2*x^6 - 1.5*x^5 + 5*x^4 - 6.5*x^3 + 6*x^2 - 3*x + 4.5}
 a = -5
 b = 5

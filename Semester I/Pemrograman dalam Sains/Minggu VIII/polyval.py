@@ -6,11 +6,13 @@ import numpy as np
 from numpy.polynomial.polynomial import polyval
 import matplotlib.pyplot as plt
 
-M = 20     # number of data points
-xi = -6.0  # first value of x
-xf = 7.0   # final value
+M = 50     # number of data points
+xi = -5.0  # first value of x
+xf = 5.0   # final value
+
 x = np.linspace(xi, xf, M)
-c = np.array([14.0, -36.0, -3.0, 2.0])
+c = np.array([7,0,4,0,1])
+
 print ("Coefficient list")
 print (c)
 y = polyval(x, c)
@@ -20,4 +22,4 @@ for j in range(M):
 plt.plot(x,y,'o-')
 plt.xlabel('x')
 plt.ylabel('y')
-plt.savefig('tes.png')
+plt.savefig('15_1.png')
