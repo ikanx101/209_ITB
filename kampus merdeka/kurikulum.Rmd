@@ -192,6 +192,12 @@ Dasar__.
 
 # _Assesments_
 
+Penilaian dilakukan berdasarkan tugas yang dilakukan secara berkelompok (2-3 orang per kelompok). Bobot penilaiannya:
+
+- Proposal: 35%.
+- Quesioner: 25%.
+- _Report_ dan analisa: 40%.
+
 # Buku/_resource_ Tambahan Selain Materi yang Telah Ditulis di LMS
 
 1. E. Chapman, E. M. Feit, _R for Marketing Research and Analytics_, 2nd edition, Springer, 2019.
