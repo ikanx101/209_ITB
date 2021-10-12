@@ -32,7 +32,7 @@ f = open("15_1.csv","w+")
 
 for j in range(M):
      print (j,". x = ",round(x[j],4),"; y = ",round(y[j],4))
-     f.write(str(j)+","+str(round(x[j],4))+","+str(round(y[j],4)))
+     f.write(str(j)+","+str(round(x[j],4))+","+str(round(y[j],4))+"\n")
 
 # save file
 f.close()
