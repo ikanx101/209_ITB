@@ -51,7 +51,6 @@ _Case studies_ yang akan digunakan sebagai bahan ajar:
 1. _Service Audit_: Pengukuran kualitas layanan bank dengan _mystery shopping_.
 1. _Retail Audit_: _Telco retail audit_.
 
-\newpage
 
 _Case study_ yang akan dijadikan tugas melakukan _market research_:
 
@@ -104,12 +103,31 @@ met1 = c("Case-based learning",
 	 "Problem-based learning",
 	 "Challenge-based learning",
 	 "Project-based learning",
-	 "Experimental learning")
-metode = data.frame(x = c("x","","","x",""),
-	            y = met1)
+	 "Experimental learning",
+	 "",
+	 "",
+	 "")
+
+met2 = c("Team-based learning",
+	 "Collaborative team learning",
+	 "Team learning",
+	 "Lecture",
+	 "Online learning",
+	 "Debate",
+	 "Concept Questions",
+	 "Computational Lab Project (Colab)")
+
+metode = data.frame(x1 = c("x","","","x","","","",""),
+	            y1 = met1,
+		    x2 = c("","","x","x","x","","",""),
+		    y2 = met2)
 
 metode %>%
-  rename("Metode Pengajaran (pilih beberapa)" = y,
-	 " " = x) %>%
-  knitr::kable("simple",caption = "Teaching Methods")
+  rename("Metode Pengajaran (pilih beberapa)" = y1,
+	 " " = x1,
+	 "Cara Penyampaian Materi" = y2,
+	 "  " = x2) %>%
+  knitr::kable("simple")
 ```
+
+xxx
