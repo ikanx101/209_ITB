@@ -132,4 +132,67 @@ metode %>%
 
 # Silabus dan Jadwal Mingguan
 
-xxx
+```{r,echo=FALSE}
+week = 1:15
+
+cara = c(rep("Online learning",9),
+	 "Lecture",
+	 rep("Online learning",2),
+	 rep("Lecture",3))
+
+topik = c("Pendahuluan",
+          "Workflow",
+          "Market Research Problem",
+          "Pengelompokkan Data",
+          "Jenis-jenis Riset",
+          "Metode Pengumpulan Data Riset Kualitatif",
+          "Metode Pengumpulan Data Riset Kuantitatif",
+          "Sample Design",
+          "Designing Questionnaire",
+	  "Tugas",
+          "Data Processing",
+          "Analisa Data",
+          "Melaksanakan Desk Research",
+	  "Contoh Projects Market Research",
+          "Tugas")
+
+detail = c("Latar belakang kenapa harus melakukan market riset. Strategi perusahaan untuk melakukan atau tidak.",
+           "Langkah-langkah melakukan riset atau penelitian. Penjelasan mengenai 3 titik kritis dalam melakukan riset.",
+           "Jenis-jenis masalah dalam bisnis.",
+           "Jenis-jenis data dalam market riset.",
+           "Riset kualitatif vs riset kuantitatif beserta contoh aplikasi dan bagaimana menentukan yang sebaiknya dilakukan.",
+           "Berbagai contoh metode pengumpulan data riset kualitatif.",
+           "Berbagai contoh metode pengumpulan data riset kuantitatif.",
+           "Perkenalan berbagai macam teknik sampling dan menghitung berapa banyak sampel data yang harus diambil.",
+           "Berbagai panduan membuat kuesioner riset kuantitatif.",
+           "Penugasan dan praktek market riset.",
+	   "Tahapan sebelum melakukan analisa: data preparation dan data cleaning.",
+           "Contoh analisa deskriptif dalam report market riset.",
+           "Pengenalan dan panduan singkat terhadap desk research.",
+	   "Beberapa contoh projects market riset di berbagai industri seperti telco, banking, oil and gas, e-commerce, FMCG, retail, property, healthcare, etc.",
+	   "Pengumpulan tugas")
+
+silabus = data.frame(week,cara,topik,detail)
+
+silabus %>%
+  rename(Minggu = week,
+	 "Cara Penyampaian Materi/Kegiatan" = cara,
+	 "Topik" = topik,
+	 "Sub topik" = detail) %>%
+  knitr::kable("pipe")
+```
+
+# Prasyarat
+
+Prasyarat peserta kuliah:
+
+1. Para peserta kuliah harus sudah pernah mengikuti kuliah statistika seperti: __Analisa Data__ atau __Statistika
+Dasar__.
+1. Mampu dan menguasai _tools_ pengolahan data seperti Ms. Excel, SPSS, MiniTab, R, atau Python (minimal salah satu).
+
+# _Assesments_
+
+# Buku/_resource_ Tambahan Selain Materi yang Telah Ditulis di LMS
+
+1. E. Chapman, E. M. Feit, _R for Marketing Research and Analytics_, 2nd edition, Springer, 2019.
+1. G. James, D. Witten, T. Hastie, R. Tibshirani, _An introduction to Statistical Learning in R_, 2013 (e-book).
