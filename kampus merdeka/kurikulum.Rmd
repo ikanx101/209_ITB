@@ -11,6 +11,8 @@ rm(list=ls())
 library(dplyr)
 ```
 
+\newpage
+
 # Tujuan Kuliah
 
 Kuliah ___Basic Market Research___ dirancang untuk:
@@ -32,3 +34,53 @@ Kuliah ___Basic Market Research___ dirancang untuk:
 		- Menggunakan _tools_ seperti _interrelationship diagram_ untuk memisahkan antara `sebab` dan `akibat` dari suatu masalah.
 	1. Menuliskan tujuan _research_.
 	1. Melakukan _sample design_.
+		- Mendefinisikan populasi dan _sample_.
+		- Menghitung _sample size_.
+		- Menentukan teknik _sampling_ yang hendak digunakan.
+	1. Membuat quesioner.
+	1. Mengumpulkan data dan melakukan _quality control_.
+	1. _Data entry_, _data preparation_, dan _data processing_.
+	1. _Analysis_ dan _reporting_.
+	1. _Feedbacks_.
+
+_Case studies_ yang akan digunakan sebagai bahan ajar:
+
+1. _Market Entry Study_: Suatu perusahaan _healthy FnB_ _overseas_ hendak masuk ke Indonesia.
+1. _TV Campaign_: Bagaimana suatu perusahaan popok bayi membuat dan mengevaluasi iklan TV?
+1. _Brand Health_: __Top Brand Index__ dan _customer satisfaction survey_.
+1. _Service Audit_: Pengukuran kualitas layanan bank dengan _mystery shopping_.
+1. _Retail Audit_: _Telco retail audit_.
+
+_Case study_ yang akan dijadikan tugas melakukan _market research_:
+
+> Mencari tren makanan dan minuman pada suatu segmen konsumen tertentu (misalkan: anak muda kelas menengah ke atas, ibu hamil kelas menengah ke bawah, dan orang tua kelas menengah).
+
+# _Learning Outcomes_
+
+Rujukan _outcomes_:
+
+C1. Analytical thinking
+
+C2. Process understanding
+
+C3. Research skill
+
+C4. Ability to work in team
+
+C5. Conflict skill
+
+C6. Communication skill
+
+C7. Problem Solving
+
+C8. Decision Making
+
+C9. Research skill 
+
+C10. Technical skill
+
+C11. Media skill
+
+C12. Coding skill
+
+C13. Networking skill
