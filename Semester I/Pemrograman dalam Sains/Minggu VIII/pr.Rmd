@@ -27,7 +27,7 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("~/209_ITB/Semester I/Pemrograman dalam Sains/Minggu VIII")
+
 rm(list=ls())
 library(dplyr)
 library(ggplot2)
@@ -46,6 +46,8 @@ library(ggplot2)
 Develop a Python program to evaluate polynomial function $y = x^4 + 4x^2 +7$. Find an appropriate interval of $x$ for which the function evaluation is done and plot the graph.
 
 ## Jawab
+
+Ini digambar dulu
 
 \newpage
 
@@ -100,4 +102,3 @@ Develop a Python program to solve the polynomial function $y = 2x^6 - 1.5x^5 + 5
 ## Jawab
 
 # == End == {.unlisted .unnumbered}
-
