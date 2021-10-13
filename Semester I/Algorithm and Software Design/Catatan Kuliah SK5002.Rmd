@@ -26,7 +26,7 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("~/S2 Sains Komputasi ITB/Kuliah/Semester I/Algorithm and Software Design")
+setwd("~/209_ITB/Semester I/Algorithm and Software Design")
 library(dplyr)
 library(ggplot2)
 ```
@@ -61,8 +61,8 @@ Ruang lingkup perkuliahan:
     - Pola pemrograman algoritma rekursif. 
 - Optimasi Algoritma: 
     - _Bellman Algorithm_, 
-    - Pencarian jalan terdekat, pengukuran efisiensi, Djikstra Algorithm. 
-- Aplikasi _Djikstra_, _Genetic algorithm_, _Holland theory_, aplikasi GA; 
+    - Pencarian jalan terdekat, pengukuran efisiensi, Dijkstra Algorithm. 
+- Aplikasi _Dijkstra_, _Genetic algorithm_, _Holland theory_, aplikasi GA; 
 - Perancangan program terstruktur: 
     - Program _design_, _water fall_, _quick_, _proto typing_, pengertian _system_ dan aliran data.
 - Rancangan _context diagram_
@@ -827,7 +827,7 @@ $$\xi_i \text{ adalah random number antara 0 dan 1}$$
 ```{r out.width="40%",echo=FALSE,message=FALSE,warning=FALSE,fig.align = "center",fig.cap="Flowchart Modifikasi Monte Carlo"}
 nomnoml::nomnoml("#direction: down,
                  [<start> start] -> [<input> f(x), a, b, N]
-                 [<input> f(x), a, b, N] -> [DEFINE|sum = 0|i = 0]
+                 [<input> f(x), a, b, N] -> [DEFINE|sum = 0|i = 1]
                  [DEFINE] -> [<choice> i <= N]
                  
                  [<choice> i <= N] -> N [return (sum * (b-a) / N)]
@@ -847,6 +847,8 @@ nomnoml::nomnoml("#direction: down,
 ## _Shortest Path Problems_
 
 > Menggunakan energi seminimum mungkin untuk menyusui _path_ tertentu.
+
+Dalam membuat beberapa algoritma, saya akan menggunakan pendekatan struktur data seperti _data frame_ sebagai inputnya.
 
 ### _Breadth-First Search_
 
@@ -971,11 +973,11 @@ d_titik = data.frame(titik = c("z","t","y","x","s"),
 d_titik
 ```
 
-Berikut adalah algoritmanya^[https://www.youtube.com/watch?v=FtN3BYH2Zes]:
+Berikut adalah panduan melakukan _relaxation_ di semua _shortest path algorithm_^[https://www.youtube.com/watch?v=FtN3BYH2Zes]:
 
 ```
 if d[u] + c(u,v) < d[v]
-  d[v] = d[u] + c(u,v)
+   d[v] = d[u] + c(u,v)
 ```
 
 Sederhana kan?
@@ -1061,11 +1063,305 @@ Rutenya adalah __z-s-y-x-t__.
 
 \newpage
 
-### Djikstra
+### Dijkstra
 
-Kalau __Djikstra__ mirip dengan __Bellman-Ford__ tapi nilai bobotnya selalu __positif__.
+Kalau __Dijkstra__ hanya bisa digunakan pada graf dengan bobot _edges_ __positif__. Algoritmanya berbeda dengan _Bellman-Ford_. __Dijkstra__ hanya memilih _vertex_ dengan bobot terendah untuk kemudian dilakukan _relaxation_.
 
-### _A-star_ $A^*$ Algorithm
+#### Contoh Kasus {-}
+
+Perhatikan graf berarah berikut ini:
+
+```{r out.width="90%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.align='center',fig.cap="Graf Soal Dijkstra"}
+
+rm(list=ls())
+
+graf_dj = 
+  ggplot() +
+  # definisi titik
+  geom_label(aes(x = 0,y = 1,label = "1")) +
+  geom_label(aes(x = 1,y = 2,label = "2")) +
+  geom_label(aes(x = 1,y = 0,label = "3")) +
+  geom_label(aes(x = 2,y = 2,label = "4")) +
+  geom_label(aes(x = 2,y = 0,label = "5")) +
+  geom_label(aes(x = 3,y = 1,label = "6")) +
+  # definisi edges
+  # 1-2
+  geom_segment(aes(x=0+.1,xend=1-.1,
+                   y=1+.1,yend=2),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # 1-3
+  geom_segment(aes(x=0+.1,xend=1-.1,
+                   y=1-.1,yend=0),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # 2-3
+  geom_segment(aes(x=1,xend=1,
+                   y=2-.1,yend=0+.1),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # 4-5
+  geom_segment(aes(x=2,xend=2,
+                   y=0+.1,yend=2-.1),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # 2-4
+  geom_segment(aes(x=1+.1,xend=2-.1,
+                   y=2,yend=2),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # 3-5
+  geom_segment(aes(x=1+.1,xend=2-.1,
+                   y=0,yend=0),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # 4-6
+  geom_segment(aes(x=2+.1,xend=3-.1,
+                   y=2,yend=1+.1),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  # 5-6
+  geom_segment(aes(x=2+.1,xend=3-.1,
+                   y=0,yend=1-.1),
+               arrow = arrow(length = unit(.2,"cm"))) +
+  theme_void() +
+  # 1-2 = 2
+  annotate("text",x = 0.5,y=1.4,label = "2") +
+  # 1-3 = 4
+  annotate("text",x = 0.5,y=0.6,label = "4") +
+  # 2-4 = 7
+  annotate("text",x = 1.5,y=1.9,label = "7") +
+  # 3-5 = 3
+  annotate("text",x = 1.5,y=0.1,label = "3") +
+  # 2-3 = 1
+  annotate("text",x = 1.1,y=1,label = "1") +
+  # 4-5 = 2
+  annotate("text",x = 2.1,y=1,label = "2") +
+  # 4-6 = 1
+  annotate("text",x = 2.5,y=1.4,label = "1") +
+  # 5-6 = 5
+  annotate("text",x = 2.5,y=.6,label = "2") 
+  
+  
+graf_dj
+```
+
+Jika kita mulai dari _vertex_ `1`, tentukan _shortest path_ ke semua _vertexes_-nya!
+
+Mari kita mulai algoritma __Dijkstra__-nya:
+
+__STEP 1__ Dari `1` kita bisa memilih ke `2` atau `3`. Akibatnya $d[2] = 2$ dam $d[3] = 4$. Sementara itu $d[4] = d[5] = d[6] = \infty$.
+
+Kita hapus _vertex_ `1` dari graf.
+
+__STEP 2__ Karena $d[2]$ memiliki nilai terkecil __dari semua vertexes__, maka kita akan pilih `2` sebagai __awal baru__. Pada _step_ ini kita akan mulai melakukan _relaxation_. Dari `2` kita bisa memilih ke `3` atau `4`. Akibatnya:
+
+- $d[4] = 9$.
+- $d[3]$ di-_update_ menjadi $d[3]=3$.
+- $d[5] = d[6] = \infty$.
+  
+Kita hapus _vertex_ `2` dari graf.
+  
+__STEP 3__ Karena $d[3]$ memiliki nilai terkecil __dari semua vertexes__, maka kita akan pilih `3` sebagai __awal baru__. _Vertex_ `3` hanya bisa ke `5`. Akibatnya:
+
+- $d[4] = 9$.
+- $d[5] = 6$.
+- $d[6] = \infty$.
+
+Kita hapus _vertex_ `3` dari graf.
+
+__STEP 4__ Karena $d[5]$ memiliki nilai terkecil __dari semua vertexes__, maka kita akan pilih `5` sebagai __awal baru__. _Vertex_ `5` bisa ke `4` atau `6`. Akibatnya:
+
+- _Update_ nilai $d[4] = 8$.
+- $d[6] = 11$.
+
+Kita hapus _vertex_ `5` dari graf.
+
+__STEP 5__ Karena $d[4]<d[6]$ maka kita akan pilih `4` sebagai awal baru dan hanya bisa ke `6`. Akibatnya $d[6] = 9$.
+
+#### Kesimpulan {-}
+
+Maka rutenya adalah: __1-2-3-5-4-6__ dengan jarak final berikut:
+
+```{r,echo=FALSE}
+data.frame(u      = c(1,2,3,5,4,6),
+           `d[u]` = c(0,2,3,6,8,9)) %>% 
+  knitr::kable("simple",align = "c",caption = "Rute Final Dijkstra")
+```
+
+#### __R__ _Function_ Dijkstra {-}
+
+Dengan prinsip yang sama dengan _function_ _Bellman-Ford_:
+
+Inputnya dalam bentuk _data frame_ berikut:
+
+```{r}
+graf_df = data.frame(from  = c(1,1,2,2,3,4,5,5),
+                     to    = c(2,3,3,4,5,6,4,6),
+                     bobot = c(2,4,1,7,3,1,2,2)
+                     )
+graf_df
+
+d_titik = data.frame(titik = 1:6,
+                     bobot = c(0,rep(Inf,5))
+                     )
+d_titik
+```
+
+Berikut adalah _function_-nya:
+
+```{r}
+# fungsi yang dbutuhkan
+# ambil bobot edges dari u ke v
+c = function(u,v){
+  temp = 
+    graf_df %>% 
+    filter(from == u) %>% 
+    filter(to == v)
+  temp$bobot
+}
+
+# nilai node u
+d = function(u){
+  temp = 
+    d_titik %>% 
+    filter(titik == u)
+  temp$bobot
+}
+
+# update node v
+upd = function(v,value){
+  d_titik$bobot[d_titik$titik == v] <<- value
+}
+
+hasil = data.frame(titik = NA,bobot = NA)
+
+for(ikang in 1:nrow(d_titik)){
+  # kita mulai
+  init = d_titik %>% filter(bobot == min(bobot)) %>% select(titik)
+  init = init$titik[1]
+
+  temp = graf_df %>% filter(from == init)
+  i = 1
+  while(i <= nrow(temp)){
+    u = temp$from[i]
+    v = temp$to[i]
+    if(d(u) + c(u,v) < d(v)){
+              val = d(u) + c(u,v)
+              upd(v,val)}
+  i = i + 1
+  }
+  hasil[ikang,] = d_titik %>% filter(titik == init)
+  d_titik = d_titik %>% filter(titik != init)
+  ikang = ikang+1
+}
+
+hasil
+```
+
+Perhatikan bahwa _flaw_ terjadi pada _step_ terakhir di mana bobot _edges_ dari vertex `4` ke `6` sebesar `1` belum dimasukkan.
+
+> Oleh karena itu perlu diperhatikan pada saat __closing__ jangan sampai ada yang terlewat.
+
+```{r,include=FALSE}
+rm(list = ls())
+```
+
+\newpage
+
+#### __R__ _Function_ dari Sumber Lain {-}
+
+Saya menemukan satu _function_ untuk melakukan algoritma Dijkstra di internet^[https://www.algorithms-and-technologies.com/dijkstra/r] sebagai berikut:
+
+```{r}
+dijkstra <- function(graph, start){
+  #' Implementation of dijkstra using adjacency matrix.
+  #' This returns an array containing the length of the shortest 
+    # path from the start node to each other node.
+  #' It is only guaranteed to return correct results if there are no 
+    # negative edges in the graph. Positive cycles are fine.
+  #' This has a runtime of O(|V|^2) (|V| = number of Nodes), 
+    # for a faster implementation see @see ../fast/Dijkstra.java (using adjacency lists)
+  #' @param graph an adjacency-matrix-representation of the graph where (x,y) 
+    # is the weight of the edge or 0 if there is no edge.
+  #' @param start the node to start from.
+  #' @return an array containing the shortest distances from the given start 
+    # node to each other node
+  
+  
+  # This contains the distances from the start node to all other nodes
+  distances = rep(Inf, nrow(graph))
+  
+  # This contains whether a node was already visited
+  visited = rep(FALSE, nrow(graph))
+  
+  # The distance from the start node to itself is of course 0
+  distances[start] = 0
+  
+  # While there are nodes left to visit...
+  repeat{
+    
+    # ... find the node with the currently shortest distance from the start node...
+    shortest_distance = Inf
+    shortest_index = -1
+    for(i in seq_along(distances)) {
+      # ... by going through all nodes that haven't been visited yet
+      if(distances[i] < shortest_distance && !visited[i]){
+        shortest_distance = distances[i]
+        shortest_index = i
+      }
+    }
+    
+    cat("Visiting node ", shortest_index, 
+        " with current distance ", shortest_distance, "\n")
+    
+    if(shortest_index == -1){
+      # There was no node not yet visited --> We are done
+      return (distances)
+    }
+    # ...then, for all neighboring nodes that haven't been visited yet....
+    for(i in seq_along(graph[shortest_index,])) {
+      # ...if the path over this edge is shorter...
+      if(graph[shortest_index,i] != 0 && distances[i] > 
+         distances[shortest_index] + graph[shortest_index,i]){
+        # ...Save this path as new shortest path.
+        distances[i] = distances[shortest_index] + graph[shortest_index,i]
+        cat("Updating distance of node ", i, " to ", distances[i], "\n")
+      }
+      # Lastly, note that we are finished with this node.
+      visited[shortest_index] = TRUE
+      cat("Visited nodes: ", visited, "\n")
+      cat("Currently lowest distances: ", distances, "\n")
+    }
+  }
+}
+
+```
+
+
+Mari kita coba dengan kasus sebelumnya. Jika pada sebelumnya saya membuat _input_ dari _data frame_ kali ini saya mengkonversi _dataframe_ tersebut ke dalam bentuk matriks.
+
+```{r,message=FALSE,warning=FALSE}
+# perhatikan ada modifikasi pada bagian 1-1 dan 6-6 agar matriks 
+# yang dihasilkan sempurna dimensinya nxn
+graf_df = data.frame(from  = c(1,1,2,2,3,4,5,5,1,6),
+                     to    = c(2,3,3,4,5,6,4,6,1,6),
+                     bobot = c(2,4,1,7,3,1,2,2,0,0)
+                     )
+graf_new = 
+  graf_df %>% 
+  reshape2::dcast(from~to,
+                  value.var = "bobot") %>% 
+  select(-from)
+
+graf_new[is.na(graf_new)] = 0
+graf_new = as.matrix(graf_new)
+
+graf_new
+```
+
+```{r}
+dijkstra(graf_new,1)
+```
+
+Perhatikan bahwa hasilnya sama dengan yang sudah saya kerjakan sebelumnya.
+
+\newpage
+
+### _A-star_ $(A^*)$ Algorithm
 
 Menggunakan _heuristic function_ untuk menentukan _path_ mana yang harus dipilih.
 
@@ -1074,6 +1370,343 @@ _Heuristic functions_ yang bisa dipilih:
 1. __Euclidean distance__: $h = \sqrt{(x - x')^2 + (y - y')^2}$.
 1. __Manhattan distance__: $h = |x - x'| + |y - y'|$.
 1. __Diagonal distance__: $h = \max{ \{ |x-x'|,|y-y'|\} }$.
+
+Jadi akan ada dua value, yakni bobot _edges_ dan nilai _heuristic_ per _vertex_.
+
+#### Contoh Soal {-}
+
+Perhatikan soal berikut ini:
+
+```{r out.width="50%",echo=FALSE,fig.retina=10,fig.align='center',message=FALSE,warning=FALSE,fig.cap="Contoh Soal A Star"}
+knitr::include_graphics("Screenshot from 2021-10-13 20-36-20.png")
+```
+
+\newpage
+
+Untuk menyelesaikannya, kita harus membuat dua buah tabel pembantu perhitungan sebagai berikut:
+
+```{r,echo=FALSE}
+data.frame(node = rep(" ",4),
+           `g-score` = rep(" ",4),
+           `f-score` = rep(" ",4),
+           previous = rep(" ",4)) %>% knitr::kable(caption = "Unvisited List")
+
+data.frame(node = rep(" ",4),
+           `g-score` = rep(" ",4),
+           `f-score` = rep(" ",4),
+           previous = rep(" ",4)) %>% knitr::kable(caption = "Visited List")
+```
+
+Definisikan:
+
+$$\text{g-score} = \sum \omega_{i}$$
+
+Di mana $i$ adalah semua _vertexes_ yang dilalui.
+
+$$\text{f-score} = \omega_{edges} + \text{heuristic}_{vertex}$$
+
+Setiap kali kita melakukan _relaxation_ dan pemilihan, kita akan meng-_update_ kedua tabel tersebut.
+
+__STEP 1__ Kita akan mulai dari `A`, maka:
+
+```{r,echo=FALSE}
+data.frame(node = c("A"),
+           `g-score` = c(0),
+           `f-score` = c(10),
+           previous = c(NA)) %>% knitr::kable(caption = "Unvisited List - Step I")
+
+data.frame(node = rep(" ",4),
+           `g-score` = rep(" ",4),
+           `f-score` = rep(" ",4),
+           previous = rep(" ",4)) %>% knitr::kable(caption = "Visited List - Step II")
+```
+
+__STEP 2__ Pindahkan `A` ke dalam __visited list__. Lalu kita bisa beranjak ke `B`, `C`, dan `D`.
+
+```{r,echo=FALSE}
+data.frame(node = c("B","C","D"),
+           `g-score` = c(10,12,5),
+           `f-score` = c(25,17,10),
+           previous = c("A","A","A")) %>% knitr::kable(caption = "Unvisited List - Step II")
+
+data.frame(node = c("A"),
+           `g-score` = c(0),
+           `f-score` = c(10),
+           previous = c(NA)) %>% knitr::kable(caption = "Visited List - Step II")
+```
+
+__STEP 3__ Pindahkan `D` ke dalam __visited list__ karena memiliki nilai `f-score` terendah. Lalu kita jadikan `D` sebagai patokan untuk melangkah. Kita bisa beranjak ke `C`, dan `F`. Perhatikan bahwa nilai `C` yang sebelumnya bisa kita _update_ jika `f-score` terbarunya ternyata __lebih kecil__ dari sebelumnya. 
+
+> Perhatikan bahwa nilai `g-score` kali ini sudah merupakan penjumlahan dari dua _edges_!
+
+```{r,echo=FALSE}
+data.frame(node = c("B","C","F"),
+           `g-score` = c(10,11,19),
+           `f-score` = c(25,16,19),
+           previous = c("A","D","D")) %>% knitr::kable(caption = "Unvisited List - Step III")
+
+data.frame(node = c("A","D"),
+           `g-score` = c(0,5),
+           `f-score` = c(10,10),
+           previous = c(NA,"A")) %>% knitr::kable(caption = "Visited List - Step III")
+```
+
+
+__STEP 4__ Pindahkan `C` ke dalam __visited list__ karena memiliki nilai `f-score` terendah. Lalu kita jadikan `C` sebagai patokan untuk melangkah. Kita bisa beranjak ke `E`, dan `F`. Perhatikan bahwa nilai `F` yang sebelumnya bisa kita _update_ jika `f-score` terbarunya ternyata __lebih kecil__ dari sebelumnya. 
+
+> Perhatikan bahwa nilai `g-score` kali ini sudah merupakan penjumlahan dari tiga _edges_!
+
+Perhatikan bahwa jalur `F` dari `D` dengan jalur `F` dari `C` memiliki nilai yang sama. Oleh karena itu kita akan tetap memilih jalur `F` dari `D` karena berasal dari iterasi yang sebelumnya.
+
+```{r,echo=FALSE}
+data.frame(node = c("B","E","F","F"),
+           `g-score` = c(10,22,5+6+8,5+14),
+           `f-score` = c(25,22+10,5+6+8,5+14),
+           previous = c("A","C","C","D")) %>% knitr::kable(caption = "Unvisited List - Step III")
+
+data.frame(node = c("A","D","C"),
+           `g-score` = c(0,5,11),
+           `f-score` = c(10,10,16),
+           previous = c(NA,"A","D")) %>% knitr::kable(caption = "Visited List - Step III")
+```
+
+
+__STEP 5__ Pindahkan `F` jalur dari `D` ke dalam __visited list__ karena memiliki nilai `f-score` terendah.
+
+```{r,echo=FALSE}
+data.frame(node = c("B","E","F"),
+           `g-score` = c(10,22,5+6+8),
+           `f-score` = c(25,22+10,5+6+8),
+           previous = c("A","C","C")) %>% knitr::kable(caption = "Unvisited List - Step III")
+
+data.frame(node = c("A","D","C","F"),
+           `g-score` = c(0,5,11,5+14),
+           `f-score` = c(10,10,16,5+14),
+           previous = c(NA,"A","D","D")) %>% knitr::kable(caption = "Visited List - Step III")
+```
+
+#### Kesimpulan {-}
+
+Jalur yang dilalui adalah __A - D - F__.
+
+```{r,include=FALSE}
+rm(list=ls())
+```
+
+#### __R__ _Function_ _A-Star_ {-}
+
+Sekarang kita akan membuat _function_ mandiri dari algoritma _A-Star_ ini. Seperti biasa, inputnya adalah _data frame_ untuk grafnya dan nilai _heuristic_-nya.
+
+```{r,echo=FALSE}
+graf_df = data.frame(from  = c('a','b','a','d','a','c','c','d','b','e','c','e','c','f','d','f'),
+                     to    = c('b','a','d','a','c','a','d','c','e','b','e','c','f','c','f','d'),
+                     bobot = c(10,10,5,5,12,12,6,6,11,11,11,11,8,8,14,14)
+                     )
+graf_df
+
+d_titik = data.frame(titik = c('a','b','c','d','e','f'),
+                     bobot = c(10,15,5,5,10,0)
+                     )
+d_titik
+```
+
+Berikut adalah langkahnya:
+
+```{r,message=FALSE,warning=FALSE}
+# function ambil nilai heuristic
+heureuy = function(v){
+  h = d_titik %>% filter(titik == v)
+  h = h$bobot
+  return(h)
+}
+
+# bikin rumah
+visited = data.frame(from = NA,
+                     to = NA,
+                     g_skor = NA,
+                     f_skor = NA)
+unvisited = data.frame(from = NA,
+                       to = NA,
+                       g_skor = NA,
+                       f_skor = NA)
+
+
+# step 1
+start = "a"
+visited[1,] = list(NA,start,0,d_titik$bobot[d_titik$titik == start])
+
+# step 2
+temp = 
+  graf_df %>% 
+  filter(from == start) %>% 
+  rowwise() %>% 
+  mutate(g_skor = bobot,
+         f_skor = g_skor + heureuy(to)) %>% 
+  ungroup() %>% 
+  select(-bobot)
+
+pivot = temp %>% filter(f_skor == min(f_skor))
+visited[2,] = pivot
+unvisited = temp %>% filter(f_skor != min(f_skor))
+
+visited
+unvisited
+
+# step 3
+temp = 
+  graf_df %>% 
+  filter(from == pivot$to) %>% 
+  filter(to != start) %>% 
+  rowwise() %>% 
+  mutate(g_skor = bobot + visited$g_skor[visited$to == from],
+         f_skor = g_skor + heureuy(to)) %>% 
+  ungroup() %>% 
+  select(-bobot)
+
+pivot = temp %>% filter(f_skor == min(f_skor))
+visited[3,] = pivot
+unvisited = temp %>% filter(f_skor != min(f_skor))
+
+visited
+unvisited
+
+# step 4
+temp = 
+  graf_df %>% 
+  filter(from == pivot$to) %>% 
+  filter(to != start) %>% 
+  rowwise() %>% 
+  mutate(g_skor = bobot + visited$g_skor[visited$to == from],
+         f_skor = g_skor + heureuy(to)) %>% 
+  ungroup() %>% 
+  select(-bobot)
+
+pivot = temp %>% filter(f_skor == min(f_skor))
+visited[4,] = pivot
+unvisited = temp %>% filter(f_skor != min(f_skor))
+
+visited
+unvisited
+```
+
+Ini juga perlu ada subjektivitas dalam melihat hasilnya. Kita bisa jadikan _step_ 3 dan _step_ 4 dalam bentuk _looping_ dengan `while()`.
+
+```{r,include=FALSE}
+rm(list=ls())
+```
+
+#### __R__ _Function_ dari Sumber Lain {-}
+
+Sumbernya dari sini^[https://www.algorithms-and-technologies.com/a_star/r].
+
+```{r}
+a_star <- function(graph, heuristic, start, goal) {
+  #' Finds the shortest distance between two nodes using the A-star (A*) algorithm
+  #' @param graph an adjacency-matrix-representation of the graph where (x,y) is the weight of the edge or 0 if there is no edge.
+  #' @param heuristic an estimation of distance from node x to y that is guaranteed to be lower than the actual distance. E.g. straight-line distance
+  #' @param start the node to start from.
+  #' @param goal the node we're searching for
+  #' @return The shortest distance to the goal node. Can be easily modified to return the path.
+
+  # This contains the distances from the start node to all other nodes, initialized with a distance of "Infinity"
+  distances = rep(Inf, nrow(graph))
+  
+  # The distance from the start node to itself is of course 0
+  distances[start] = 0
+  
+  # This contains the priorities with which to visit the nodes, calculated using the heuristic.
+  priorities = rep(Inf, nrow(graph))
+  
+  # start node has a priority equal to straight line distance to goal. It will be the first to be expanded.
+  priorities[start] = heuristic[start,goal]
+  
+  # This contains whether a node was already visited
+  visited = rep(FALSE, nrow(graph))
+  
+  # While there are nodes left to visit...
+  repeat {
+    # ... find the node with the currently lowest priority...
+    lowest_priority = Inf
+    lowest_priority_index = -1
+    for(i in seq_along(priorities)) {
+      # ... by going through all nodes that haven't been visited yet
+      if(priorities[i] < lowest_priority && !visited[i]){
+        lowest_priority = priorities[i]
+        lowest_priority_index = i
+      }
+    }
+    if (lowest_priority_index == -1){
+      # There was no node not yet visited --> Node not found
+      return (-1)
+    } else if (lowest_priority_index == goal){
+      # Goal node found
+      print("Goal node found!")
+      return(distances[lowest_priority_index])
+    }
+    cat("Visiting node ", lowest_priority_index, " with currently lowest priority of ", lowest_priority)
+    
+    # ...then, for all neighboring nodes that haven't been visited yet....
+    for(i in seq_along(graph[lowest_priority_index,])) {
+      if(graph[lowest_priority_index,i] != 0 && !visited[i]){
+        # ...if the path over this edge is shorter...
+        if(distances[lowest_priority_index] + graph[lowest_priority_index,i] < distances[i]){
+          # ...save this path as new shortest path
+          distances[i] = distances[lowest_priority_index] + graph[lowest_priority_index,i]
+          # ...and set the priority with which we should continue with this node
+          priorities[i] = distances[i] + heuristic[i,goal]
+          cat("\nUpdating distance of node ", i, " to ", distances[i], " and priority to ", priorities[i], "\n")
+        }
+        # Lastly, note that we are finished with this node.
+        visited[lowest_priority_index] = TRUE
+        cat("\nVisited nodes: ", visited, "\n")
+        cat("Currently lowest distances: ", distances, "\n")
+      }
+    }
+  }
+}
+```
+
+
+Kita ubah dulu inputnya menjadi matriks:
+
+```{r,message=FALSE,warning=FALSE}
+# perhatikan ada modifikasi pada bagian 1-1 dan 6-6 agar matriks 
+# yang dihasilkan sempurna dimensinya nxn
+graf_df = data.frame(from  = c('a','b','a','d','a','c','c','d','b','e','c','e','c','f','d','f'),
+                     to    = c('b','a','d','a','c','a','d','c','e','b','e','c','f','c','f','d'),
+                     bobot = c(10,10,5,5,12,12,6,6,11,11,11,11,8,8,14,14)
+                     )
+
+heri = matrix(c(10,15,5,5,10,0,
+                10,15,5,5,10,0,
+                10,15,5,5,10,0,
+                10,15,5,5,10,0,
+                10,15,5,5,10,0,
+                10,15,5,5,10,0),
+              byrow = T,
+              ncol = 6)
+
+
+graf_new = 
+  graf_df %>% 
+  reshape2::dcast(from~to,
+                  value.var = "bobot") %>% 
+  select(-from)
+
+graf_new[is.na(graf_new)] = 0
+graf_new = as.matrix(graf_new)
+
+graf_new
+heri
+```
+
+Mari kita coba _function_-nya:
+
+```{r}
+a_star(graf_new, heri, 1, 6)
+```
+
+Agak pusing dilihatnya tapi bener hasilnya sama dengan _function_ sendiri.
 
 \newpage
 
@@ -1299,6 +1932,9 @@ Proses di atas kita lakukan berulang-uang hingga mendapatkan hasil paling optima
 
 \newpage
 
-# EPILOG {-}
+# EPILOG
 
-_Alhamdulillah_.
+## Tugas Kuliah
+
+Tugas kuliah individu bisa diakses di _repository_ berikut ini^[https://github.com/ikanx101/209_ITB/tree/main/Semester%20I/Algorithm%20and%20Software%20Design/Tugas]. 
+
