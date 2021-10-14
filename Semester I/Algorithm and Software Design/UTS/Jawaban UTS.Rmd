@@ -490,9 +490,177 @@ $$\frac{dy}{dx} = (x^2 + y) \sin{(x^2 y)}$$
 
 Pilih sebuah metode numerik untuk menyelesaikan suatu persamaan diferensial dan rancanglah algoritma dari metode tersebut!
 
+### Jawaban Sub Soal Ib i
+
+Dari suatu persamaan diferensial dengan bentuk:
+
+$$\frac{dy}{dx} = f(x,y)$$
+
+dan memiliki _initial condition_ $y(x_0) = y_0$. Kita bisa menyelesaikannya dengan metode __Runge-Kutta__ order 4. Bentuk umumnya adalah sebagai berikut:
+
+$$y_{n+1} = y_n + h \sum_{i=1}^n b_i k_i$$
+
+dimana $k_i, i=1,2,3,4$ adalah konstanta yang harus dicari.
+
+$$k_1 = f(x_0,y_0)$$
+
+$$k_2 = f(x_0 + 0.5h,y_0 + 0.5k_1h)$$
+
+$$k_3 = f(x_0 + 0.5h,y_0 + 0.5k_2h)$$
+
+$$k4 = f(x_0 + h,y_0 + k_3h)$$
+
+Bentuk algoritmanya dalam _pseudocode_ adalah sebagai berikut:
+
+```
+INPUT x0,y0,xmax
+
+COMPUTE n = (xmax-x0)/h
+
+FOR i 1:n
+    k1 = f(x0,y0)
+    k2 = f(x0 + 0.5*h,y0 + 0.5*k1*h)
+    k3 = f(x0 + 0.5*h,y0 + 0.5*k2*h)
+    k4 = f(x0 + h,y0 + k3*h)
+    y0 = y0 + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+    x0 = x0 + h
+```
+
+Jika dibuat dalam program __R__:
+
+```{r}
+rk_4order = function(f,      # dy/dx
+                     x0, y0, # init condition
+                     h,      # selang
+                     xmax){  # x max
+  # initial condition
+  x = x0
+  y = y0
+  n = (xmax-x0)/h
+  # proses iterasi
+  for(i in 1:n){
+    k1 = f(x0,y0)
+    k2 = f(x0 + 0.5*h,y0 + 0.5*k1*h)
+    k3 = f(x0 + 0.5*h,y0 + 0.5*k2*h)
+    k4 = f(x0 + h,y0 + k3*h)
+    y0 = y0 + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+    x0 = x0 + h
+    x = c(x, x0)
+    y = c(y, y0)
+  }
+  # output
+  output = data.frame(x = x,
+                      y = y)
+  return(output)
+}
+```
+
+Saya _save_ program tersebut dengan nama __numode__.
+
+\newpage
+
 ### Sub Soal Ib ii
 
 Tentukanlah solusi persamaan diferensial di atas untuk rentang $0 \leq x \leq 2$ dengan kondisi awal $y(0) = 5$ dan rentang partisi $h = 0.2$.
+
+### Jawaban Sub Soal Ib ii
+
+Mari kita selesaikan:
+
+```{r}
+dydx = function(x,y){(x^2 + y)*sin((x^2) * y)}
+x0 = 0
+y0 = 5
+xmax = 2
+h = 0.2
+solusi = rk_4order(dydx,x0,y0,h,xmax)
+```
+
+```{r,echo=FALSE}
+solusi %>% 
+  knitr::kable("simple",align = "c",
+               caption = "Solusi Persamaan Diferensial dengan RK4")
+```
+
+\newpage
+
+Dalam bentuk grafik:
+
+```{r,echo=FALSE,fig.retina=10,fig.cap="Solusi dy/dx pada [0,2] dengan h = 0.2"}
+solusi %>% 
+  ggplot(aes(x,y)) +
+  geom_line() +
+  labs(title = "Solusi Persamaan Diferensial dengan RK4",
+       subtitle = "Pada selang x = [0,2] dengan h = 0.2",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id") +
+  theme_minimal()
+```
+
+\newpage
+
+
+### Sub Soal Ib iii
+
+Bandingkan kurva solusinya (kurva $y$ vs $x$) jika digunakan nilai $h=0.1$ dan $h = 0.01$.
+
+### Jawaban Sub Soal Ib iii
+
+Mari kita selesaikan:
+
+```{r}
+solusi_h1 = rk_4order(dydx,x0,y0,0.1,xmax)
+solusi_h2 = rk_4order(dydx,x0,y0,0.01,xmax)
+```
+
+Berikut grafik perbandingannya:
+
+```{r,echo=FALSE,fig.retina=10,fig.cap="Solusi dy/dx pada [0,2] dengan h = 0.1 vs h = 0.01"}
+ggplot() +
+  geom_line(data = solusi_h1,aes(x,y),
+            color = "red") +
+  geom_line(data = solusi_h2,aes(x,y),
+            color = "blue",
+            alpha = .7) +
+  labs(title = "Perbandingan Solusi Persamaan Diferensial dengan RK4",
+       subtitle = "Pada selang x = [0,2] dengan h = 0.1 vs h = 0.01\nGaris merah menandakan h = 0.1\nGaris biru menandakah h = 0.01",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id") +
+  theme_minimal() +
+  annotate("label",
+           x = 1.3,
+           y = 6,
+           label = "Pada saat terjadi lengkungan,\nkurva biru lebih halus beloknya")
+```
+
+Secara visual dan intuitif bisa kita simpulkan bahwa semakin kecil $h$, maka nilai hampirannya lebih baik karena penambahan $x$ terjadi secara perlahan.
+
+\newpage
+
+```{r,include=FALSE}
+rm(list=ls())
+```
+
+# SHORTEST ALGORITHM {-}
+
+# Soal 2
+
+## Soal Utama
+
+Perhatikan graf berikut ini:
+
+```{r,echo=FALSE,fig.retina=10,fig.cap="Graf Soal"}
+graf = data.frame(
+  from  = c("A","A","B","C","B","D","C","C","E","G","G","E","D"),
+  to    = c("B","C","C","B","D","E","E","G","G","E","F","F","F"),
+  bobot = c(10 ,20 , 12, 27, 50,-20,-15, 57, 40,-25, 42, 10, -2)
+)
+graf
+```
+
+
+
+
+
+
 
 
 
