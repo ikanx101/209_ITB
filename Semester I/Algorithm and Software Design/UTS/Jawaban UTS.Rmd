@@ -109,7 +109,9 @@ Program untuk menghitung luas area di bawah kurva dengan metode trapesium saya l
 
 Program untuk menghitung luas area di bawah kurva dengan metode Monte Carlo saya lampirkan pada jawaban __Sub Soal Ia ii__.
 
-### Program 
+### Program `numode`
+
+Program `numode` merupakan program untuk menemukan solusi numerik dari persamaan diferensial. Ditulis berdasarkan metode __Runge Kutta__ order 4. Program ini dilampirkan pada jawaban __Sub Soal Ib i__. 
 
 
 \newpage
@@ -731,10 +733,12 @@ for(init in d_titik$titik){
 }
 }
 
-hasil[1:7]
+hasil[1:6]
 ```
 
-Setelah iterasi ke lima, bobot _vertex_ __tetap__ (tidak berubah). Sehingga bobot tersebut adalah bobot final _shortest path_ dari _vertex_ A.
+Setelah iterasi ke kelima, bobot _vertex_ __tetap__ (tidak berubah). Sehingga bobot tersebut adalah bobot final _shortest path_ dari _vertex_ A.
+
+\newpage
 
 Berikut adalah gambar rutenya:
 
@@ -750,4 +754,84 @@ Gambarkan lintasan minimumnya jika _vertex_ B menjadi titik sumber dan bobot $(e
 
 ### Jawaban Sub Soal 2ii
 
+Graf dengan bobot _edge_ yang ter-_update_ saya buat dalam bentuk tabel berikut:
 
+```{r,echo=FALSE}
+rm(list=ls())
+graf_df = data.frame(
+  from  = c("A","A","B","C","B","D","C","C","E","G","G","E","D"),
+  to    = c("B","C","C","B","D","E","E","G","G","E","F","F","F"),
+  bobot = c(10 ,20 , 12, 27, 50,-20,-15, 57,-10,-25, 42, 10, -2)
+)
+graf_df
+```
+
+Sedangkan ini adalah tabel dari bobot semua _vertex_:
+
+```{r}
+d_titik = data.frame(titik = c("B","C",'D','E','F','G',"A"),
+                     bobot = c(0,rep(Inf,6))
+                     )
+d_titik
+```
+
+Jika kita jalankan algoritma __Bellman-Ford__ didapatkan:
+
+```{r,echo=FALSE}
+# fungsi yang dbutuhkan
+# ambil bobot edges dari u ke v
+c = function(u,v){
+  temp = 
+    graf_df %>% 
+    filter(from == u) %>% 
+    filter(to == v)
+  temp$bobot
+}
+
+# nilai node u
+d = function(u){
+  temp = 
+    d_titik %>% 
+    filter(titik == u)
+  temp$bobot
+}
+
+# update node v
+upd = function(v,value){
+  d_titik$bobot[d_titik$titik == v] <<- value
+}
+
+hasil = vector("list")
+ix = 1
+# proses iterasi
+for(ikanx in 1:6){ # diulang berkali-kali
+for(init in d_titik$titik){
+  temp = graf_df %>% filter(from == init)
+  for(u in temp$from){
+    for(v in temp$to){
+      if(d(u) + c(u,v) < d(v)){
+            val = d(u) + c(u,v)
+            upd(v,val)
+        }
+    }
+  }
+}
+  hasil[[ix]] = list("iterasi ke: " = ix,
+                     "hasil bobot vertex" = d_titik)
+  ix = ix + 1
+}
+
+hasil
+```
+
+Algoritma __Bellman-Ford__ menghasilkan _infinite looping_, sehingga nilainya selalu menurun terus. Hal ini terjadi karena ada _loop_ negatif sehingga tidak ditemukan rute yang konklusif.
+
+Selain itu, _vertex_ __A__ selalu bernilai $\infty$ karena tidak ada jalur masuk yang bisa meng-_update_ nilainya.
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10, fig.cap="Shortest Path dari B"}
+knitr::include_graphics("WhatsApp Image 2021-10-14 at 17.14.34.jpeg")
+```
+
+\center
+
+__SELESAI__
