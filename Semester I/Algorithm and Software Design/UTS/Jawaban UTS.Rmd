@@ -647,27 +647,107 @@ rm(list=ls())
 
 Perhatikan graf berikut ini:
 
-```{r,echo=FALSE,fig.retina=10,fig.cap="Graf Soal"}
-graf = data.frame(
+```{r out.width="75%",echo=FALSE,fig.retina=10,fig.cap="Graf Soal"}
+knitr::include_graphics("Screenshot from 2021-10-14 14-26-23.png")
+```
+
+### Sub Soal 2i
+
+Jika __vertex A__ merupakan titik sumber, tentukanlah lintasan minimum yang mungkin untuk graf tersebut! Apakah graf memiliki _loop_ negatif?
+
+### Jawaban Sub Soal 2i
+
+Untuk menentukan _shortest path_ dari __A__, kita akan menggunakan algoritma __Bellman-Ford__ dengan aturan _relaxation_ sebagai berikut:
+
+```
+if d[u] + c(u,v) < d[v]
+   d[v] = d[u] + c(u,v)
+```
+
+Untuk menyelesaikannya, graf di atas saya tuliskan sebagai bentuk tabel berikut:
+
+```{r,echo=FALSE}
+rm(list=ls())
+graf_df = data.frame(
   from  = c("A","A","B","C","B","D","C","C","E","G","G","E","D"),
   to    = c("B","C","C","B","D","E","E","G","G","E","F","F","F"),
   bobot = c(10 ,20 , 12, 27, 50,-20,-15, 57, 40,-25, 42, 10, -2)
 )
-graf
+graf_df
 ```
 
+Dengan bobot _vertex_ awal sebagai berikut:
 
+```{r}
+d_titik = data.frame(titik = c("A","B","C",'D','E','F','G'),
+                     bobot = c(0,rep(Inf,6))
+                     )
+d_titik
+```
 
+Jika dijalankan algoritma __Bellman-Ford__ didapatkan _update_ bobot sebagai berikut:
 
+```{r,echo=FALSE}
+# fungsi yang dbutuhkan
+# ambil bobot edges dari u ke v
+c = function(u,v){
+  temp = 
+    graf_df %>% 
+    filter(from == u) %>% 
+    filter(to == v)
+  temp$bobot
+}
 
+# nilai node u
+d = function(u){
+  temp = 
+    d_titik %>% 
+    filter(titik == u)
+  temp$bobot
+}
 
+# update node v
+upd = function(v,value){
+  d_titik$bobot[d_titik$titik == v] <<- value
+}
 
+hasil = vector("list")
+ix = 1
+# proses iterasi
+for(ikanx in 1:6){ # diulang berkali-kali
+for(init in d_titik$titik){
+  temp = graf_df %>% filter(from == init)
+  for(u in temp$from){
+    for(v in temp$to){
+      if(d(u) + c(u,v) < d(v)){
+            val = d(u) + c(u,v)
+            upd(v,val)
+        }
+    }
+  }
+  hasil[[ix]] = list("iterasi ke: " = ix,
+                     "hasil bobot vertex" = d_titik)
+  ix = ix + 1
+}
+}
 
+hasil[1:7]
+```
 
+Setelah iterasi ke lima, bobot _vertex_ __tetap__ (tidak berubah). Sehingga bobot tersebut adalah bobot final _shortest path_ dari _vertex_ A.
 
+Berikut adalah gambar rutenya:
 
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10, fig.cap="Shortest Path dari A"}
+knitr::include_graphics("WhatsApp Image 2021-10-14 at 15.00.14.jpeg")
+```
 
+Terlihat juga bahwa __tidak ada loop negatif__ pada graf.
 
+### Sub Soal 2ii
 
+Gambarkan lintasan minimumnya jika _vertex_ B menjadi titik sumber dan bobot $(e,g)$ menjadi $-10$! Apakah graf memiliki _loop_ negatif?
+
+### Jawaban Sub Soal 2ii
 
 
