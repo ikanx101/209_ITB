@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  14 OCT 2021 09:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  14 OCT 2021 12:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -582,7 +582,11 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 2.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 2.
-)
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 8
+.
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+))
 \tf@toc=\write5
 \openout5 = `Jawaban-UTS.toc'.
 
@@ -607,13 +611,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [3]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-49.
-(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 190.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 193.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -632,13 +631,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [5]
-<Jawaban-UTS_files/figure-latex/unnamed-chunk-2-1.png, id=105, 505.89pt x 289.0
+<Jawaban-UTS_files/figure-latex/unnamed-chunk-2-1.png, id=162, 505.89pt x 289.0
 8pt>
 File: Jawaban-UTS_files/figure-latex/unnamed-chunk-2-1.png Graphic file (type p
 ng)
 <use Jawaban-UTS_files/figure-latex/unnamed-chunk-2-1.png>
 Package pdftex.def Info: Jawaban-UTS_files/figure-latex/unnamed-chunk-2-1.png  
-used on input line 255.
+used on input line 275.
 (pdftex.def)             Requested size: 422.7833pt x 241.59045pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -649,16 +648,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [6 <./Jawaban-UTS_files/figure-latex/unnamed-chunk-2-1.png (PNG copy)>]
-<Jawaban-UTS_files/figure-latex/unnamed-chunk-3-1.png, id=119, 505.89pt x 289.0
+<Jawaban-UTS_files/figure-latex/unnamed-chunk-3-1.png, id=176, 505.89pt x 289.0
 8pt>
 File: Jawaban-UTS_files/figure-latex/unnamed-chunk-3-1.png Graphic file (type p
 ng)
 <use Jawaban-UTS_files/figure-latex/unnamed-chunk-3-1.png>
 Package pdftex.def Info: Jawaban-UTS_files/figure-latex/unnamed-chunk-3-1.png  
-used on input line 265.
+used on input line 285.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 265--265
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 285--285
 [][] 
  []
 
@@ -671,10 +670,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [7 <./Jawaban-UTS_files/figure-latex/unnamed-chunk-3-1.png (PNG copy)>]
-<images.png, id=126, 401.5pt x 331.2375pt>
+<images.png, id=183, 401.5pt x 331.2375pt>
 File: images.png Graphic file (type png)
 <use images.png>
-Package pdftex.def Info: images.png  used on input line 287.
+Package pdftex.def Info: images.png  used on input line 307.
 (pdftex.def)             Requested size: 281.87514pt x 232.54698pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -693,41 +692,202 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[9] (./Jawaban-UTS.aux)
+[9]
+<Jawaban-UTS_files/figure-latex/unnamed-chunk-9-1.png, id=196, 2554.54375pt x 3
+011.25pt>
+File: Jawaban-UTS_files/figure-latex/unnamed-chunk-9-1.png Graphic file (type p
+ng)
+<use Jawaban-UTS_files/figure-latex/unnamed-chunk-9-1.png>
+Package pdftex.def Info: Jawaban-UTS_files/figure-latex/unnamed-chunk-9-1.png  
+used on input line 415.
+(pdftex.def)             Requested size: 281.81924pt x 332.20343pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10 <./Jawaban-UTS_files/figure-latex/unnamed-chunk-9-1.png>]
+<Jawaban-UTS_files/figure-latex/unnamed-chunk-10-1.png, id=206, 505.89pt x 289.
+08pt>
+File: Jawaban-UTS_files/figure-latex/unnamed-chunk-10-1.png Graphic file (type 
+png)
+<use Jawaban-UTS_files/figure-latex/unnamed-chunk-10-1.png>
+Package pdftex.def Info: Jawaban-UTS_files/figure-latex/unnamed-chunk-10-1.png 
+ used on input line 433.
+(pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
+
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 433--433
+[][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[11 <./Jawaban-UTS_files/figure-latex/unnamed-chunk-10-1.png (PNG copy)>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[12]
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
+501.
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+<Jawaban-UTS_files/figure-latex/unnamed-chunk-12-1.png, id=215, 505.89pt x 289.
+08pt>
+File: Jawaban-UTS_files/figure-latex/unnamed-chunk-12-1.png Graphic file (type 
+png)
+<use Jawaban-UTS_files/figure-latex/unnamed-chunk-12-1.png>
+Package pdftex.def Info: Jawaban-UTS_files/figure-latex/unnamed-chunk-12-1.png 
+ used on input line 504.
+(pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
+
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 504--504
+[][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[13 <./Jawaban-UTS_files/figure-latex/unnamed-chunk-12-1.png (PNG copy)>]
+<Jawaban-UTS_files/figure-latex/unnamed-chunk-13-1.png, id=222, 505.89pt x 289.
+08pt>
+File: Jawaban-UTS_files/figure-latex/unnamed-chunk-13-1.png Graphic file (type 
+png)
+<use Jawaban-UTS_files/figure-latex/unnamed-chunk-13-1.png>
+Package pdftex.def Info: Jawaban-UTS_files/figure-latex/unnamed-chunk-13-1.png 
+ used on input line 525.
+(pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
+
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 525--525
+[][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[14 <./Jawaban-UTS_files/figure-latex/unnamed-chunk-13-1.png (PNG copy)>]
+<Jawaban-UTS_files/figure-latex/unnamed-chunk-14-1.png, id=227, 505.89pt x 289.
+08pt>
+File: Jawaban-UTS_files/figure-latex/unnamed-chunk-14-1.png Graphic file (type 
+png)
+<use Jawaban-UTS_files/figure-latex/unnamed-chunk-14-1.png>
+Package pdftex.def Info: Jawaban-UTS_files/figure-latex/unnamed-chunk-14-1.png 
+ used on input line 546.
+(pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
+
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 546--546
+[][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[15 <./Jawaban-UTS_files/figure-latex/unnamed-chunk-14-1.png (PNG copy)>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[16]
+<Jawaban-UTS_files/figure-latex/unnamed-chunk-18-1.png, id=236, 505.89pt x 289.
+08pt>
+File: Jawaban-UTS_files/figure-latex/unnamed-chunk-18-1.png Graphic file (type 
+png)
+<use Jawaban-UTS_files/figure-latex/unnamed-chunk-18-1.png>
+Package pdftex.def Info: Jawaban-UTS_files/figure-latex/unnamed-chunk-18-1.png 
+ used on input line 648.
+(pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
+
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 648--648
+[][] 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[17 <./Jawaban-UTS_files/figure-latex/unnamed-chunk-18-1.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[18] (./Jawaban-UTS.aux)
 Package rerunfilecheck Info: File `Jawaban-UTS.out' has not changed.
-(rerunfilecheck)             Checksum: 7E034B3557603797A431968E203DDB18;1598.
+(rerunfilecheck)             Checksum: 30DFFCBC8A7C7E6833B949DBAF4327C8;2643.
  ) 
 Here is how much of TeX's memory you used:
- 13122 strings out of 480559
- 197524 string characters out of 5902712
- 537532 words of memory out of 5000000
- 30385 multiletter control sequences out of 15000+600000
- 465754 words of font info for 115 fonts, out of 8000000 for 9000
+ 13310 strings out of 480559
+ 202875 string characters out of 5902712
+ 540346 words of memory out of 5000000
+ 30507 multiletter control sequences out of 15000+600000
+ 473085 words of font info for 129 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,11n,66p,330b,379s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/i
-kanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/ikanx_s
-erver/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/ikanx_server/
-.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ikanx_server/.TinyT
-eX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_server/.TinyTeX/texmf-d
-ist/fonts/type1/public/lm/lmbx12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fo
-nts/type1/public/lm/lmbxi10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/t
-ype1/public/lm/lmex10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/p
-ublic/lm/lmmi12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/
-lm/lmmi8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr1
-2.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><
-/home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></home/ik
-anx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/ikanx_serv
-er/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></home/ikanx_server/.Ti
-nyTeX/texmf-dist/fonts/type1/public/lm/lmro12.pfb></home/ikanx_server/.TinyTeX/
-texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-
-dist/fonts/type1/public/lm/lmtk10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/f
-onts/type1/public/lm/lmtt12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/t
-ype1/public/lm/lmtti10.pfb>
-Output written on Jawaban-UTS.pdf (9 pages, 769168 bytes).
+ 60i,11n,66p,443b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/home/
+ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ikanx_
+server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/.Ti
+nyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/ikanx_server/.TinyTeX/
+texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/ikanx_server/.TinyTeX/texmf-
+dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_server/.TinyTeX/texmf-dist/fonts
+/type1/public/lm/lmbx12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1
+/public/lm/lmbxi10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/publ
+ic/lm/lmex10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/
+lmmi12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.
+pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></h
+ome/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/ika
+nx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></home/ikanx_serve
+r/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/ikanx_server/.TinyT
+eX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></home/ikanx_server/.TinyTeX/tex
+mf-dist/fonts/type1/public/lm/lmro12.pfb></home/ikanx_server/.TinyTeX/texmf-dis
+t/fonts/type1/public/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/font
+s/type1/public/lm/lmsy8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1
+/public/lm/lmtk10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/publi
+c/lm/lmtt12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/l
+mtti10.pfb>
+Output written on Jawaban-UTS.pdf (18 pages, 2578684 bytes).
 PDF statistics:
- 222 PDF objects out of 1000 (max. 8388607)
- 174 compressed objects within 2 object streams
- 40 named destinations out of 1000 (max. 500000)
- 32872 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 344 PDF objects out of 1000 (max. 8388607)
+ 275 compressed objects within 3 object streams
+ 72 named destinations out of 1000 (max. 500000)
+ 37062 words of extra memory for PDF output out of 42996 (max. 10000000)
 

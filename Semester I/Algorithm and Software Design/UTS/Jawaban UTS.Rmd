@@ -31,6 +31,7 @@ options(digits = 9)
 rm(list=ls())
 library(dplyr)
 library(ggplot2)
+set.seed(20921004)
 ```
 
 \newpage
@@ -60,7 +61,9 @@ Program yang digunakan untuk menjawab soal akan di kirimkan sebagai lampiran dan
 
 Seluruh jawaban numerik akan ditampilkan menggunakan __delapan angka berarti__.
 
-## Program untuk Menggambar Fungsi
+## Lampiran Program 
+
+### Program untuk Menggambar Fungsi
 
 Berikut adalah program yang saya buat untuk menggambar fungsi:
 
@@ -98,11 +101,22 @@ gambar_grafik = function(x_lower,x_upper, # selang x
 }
 ```
 
+### Program `luastrap`
+
+Program untuk menghitung luas area di bawah kurva dengan metode trapesium saya lampirkan pada jawaban __Sub Soal Ia i__.
+
+### Program `luasmc`
+
+Program untuk menghitung luas area di bawah kurva dengan metode Monte Carlo saya lampirkan pada jawaban __Sub Soal Ia ii__.
+
+### Program 
+
+
 \newpage
 
-# SOAL 1
+# ALGORITMA KOMPUTASI NUMERIK {-}
 
-# Algoritma Komputasi Numerik {-}
+# SOAL 1a
 
 ## Soal Utama
 
@@ -110,11 +124,11 @@ Diketahui sebuah fungsi:
 
 $$\frac{(x+1)^2}{16} + \frac{(y-1)^2}{8} = 1$$
 
-### Sub Soal I
+### Sub Soal Ia i
 
 Gambarlah fungsi tersebut. Hitunglah luas area di bawah kurva pada kuadran pertama untuk nilai $x \in [0, \sqrt{14}-1]$ dengan metode partisi trapesium.
 
-### Jawaban Sub Soal I
+### Jawaban Sub Soal Ia i
 
 __Gambar Fungsi__ Berikut adalah gambar fungsi yang saya buat dengan __R__.
 
@@ -212,7 +226,7 @@ luas_trap = function(x0, # titik awal
 
 Sekarang kita akan bandingkan hasilnya untuk berbagai banyak selang.
 
-```{r,echo=FALSE}
+```{r}
 N = c(10,50,100,200,1000,2500,5000,100000,250000,500000,750000,1000000)
 Luas = c()
 for(i in 1:length(N)){
@@ -221,23 +235,271 @@ for(i in 1:length(N)){
                       N[i],
                       g)
 }
+```
 
+```{r,echo=FALSE}
 data.frame(N,Luas) %>% 
   rename("n banyak selang" = N,
          "Luas aproksimasi" = Luas) %>% 
-  knitr::kable("simple",caption = "Hasil Perhitungan Luas",align = "c")
+  knitr::kable("simple",caption = "Hasil Perhitungan Luas Trapesium",align = "c")
 ```
 
 Terlihat bahwa semakin banyak selangnya, hasilnya konvergen ke suatu nilai yang sama yakni: __8.65536904__.
 
-### Sub Soal II
+\newpage
+
+### Sub Soal Ia ii
 
 Buatlah algoritma dan _flowchart_ untuk menghitung luas soal sebelumnya dengan metode Monte Carlo. Lakukan analisa hasil yang diperoleh dengan jumlah sampling yang diberikan. Anggaplah perhitungan analitis adalah yang benar sehingga merupakan rujukan nilai.
 
-### Jawaban Sub Soal II
+### Jawaban Sub Soal Ia ii
 
 __Perhitungan Analitis__ Kita bisa menghitung secara analitis luas area di bawah kurva dengan cara melakukan integral tentu berikut ini:
 
-$$\int_0^{\sqrt{14}-1} 1+ \sqrt{8 - \frac{(x+1)^2}{2}} \text{ dx}$$
+$$\int_0^{\sqrt{14}-1} 1+ \sqrt{8 - \frac{(x+1)^2}{2}} \text{ dx} \simeq 8.65536904$$
+
+__Metode Monte Carlo__ Analogi dari metode ini adalah seperti melempar sekian banyak _darts_ ke suatu target. Luas area di bawah kurva didefinisikan sebagai rasio dari banyaknya _darts_ yang jatuh di bawah kurva dengan total semua _darts_ yang dilempar.
+
+Berikut adalah _flowchart_-nya:
+
+```{r out.width="60%",echo=FALSE,message=FALSE,warning=FALSE,fig.align = "center",fig.cap="Flowchart Brute Force Monte Carlo"}
+nomnoml::nomnoml("#direction: down,
+                 [<start> start] -> [<input> f(x), a, b, N]
+                 [<input> f(x), a, b, N] -> [PENENTUAN BATAS|sb x: dari a - b|sb y: dari 0 - max(f(x)) di selang a - b|on_target = 0|i = 1]
+                 [PENENTUAN BATAS] -> [<choice> i <= N]
+                 
+                 [<choice> i <= N] -> N [return (on_target/N)]
+                 [return (on_target/N)] -> [<end> end]
+                 
+                 [<choice> i <= N] -> Y [GENERATE RANDOM|xi,yi di batas sb x dan sb y]
+                 [GENERATE RANDOM] -> [<choice> yi <= f(xi)]
+                 [<choice> yi <= f(xi)] -> Y [on_target = on_target + 1]
+                 [<choice> yi <= f(xi)] -> N [i = i+1]
+                 [on_target = on_target + 1] -> [i = i+1]
+                 [i = i+1] -> [<choice> i <= N]
+                 ")
+```
+
+Hal terpenting dalam metode ini adalah __mendefinisikan batas titik__ $x,y$ untuk di-_random_. Kenapa?
+
+> Kita tidak ingin _darts_ yang kita lempar jatuh ke area sembarang! Kita harus definisikan di mana __area bermain__ _darts_.
+
+Perhatikan kembali grafik di bawah ini:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10, fig.cap="Area Monte Carlo"}
+soal = 
+  soal +
+  geom_segment(x = 0, xend = 0,
+               y = 0, yend = 4,
+               color = "darkgreen",
+               size = 1) +
+  geom_segment(x = sqrt(14)-1, xend = sqrt(14)-1,
+               y = 0, yend = 4,
+               color = "darkgreen",
+               size = 1) +
+  geom_segment(x = 0, xend = sqrt(14)-1,
+               y = 0, yend = 0,
+               color = "darkgreen",
+               size = 1) +
+  geom_segment(x = 0, xend = sqrt(14)-1,
+               y = 4, yend = 4,
+               color = "darkgreen",
+               size = 1) 
+
+soal +
+  annotate("label",
+           x = 1.25,
+           y = 1.25,
+           label = "Area on target") +
+  annotate("label",
+           x = 2,
+           y = 3.5,
+           label = "Area off target")
+```
+
+Saya akan menjadikan area di __dalam kotak warna hijau__ sebagai area random titik metode Monte Carlo. Jika titik tersebut jatuh ke bawah kurva, maka akan dihitung sebagai __on target__. Jika jatuh di atasnya, berarti __off target__.
+
+Kelak luas akan dihitung dengan cara:
+
+$$L = 4 \times (\sqrt{14}-1) \times ratio$$
+
+\newpage
+
+Berikut adalah programnya dalam __R__:
+
+```{r,warning=FALSE,message=FALSE}
+brute_force = function(f,x1,x2,y1,y2,N){
+  # generating random number
+  x = runif(N,x1,x2)
+  y = runif(N,y1,y2)
+  
+  # pengecekan y <= f(x)
+  rekap = 
+    data.frame(x,y) %>% 
+    mutate(f_x = f(x),
+           on_target = ifelse(y <= f_x,1,0))
+  
+  # hitung rasio on target vs all dots
+  rasio = sum(rekap$on_target) / N
+  # hitung luas
+  luas = (x2-x1)*(y2-y1)*rasio
+  
+  # perbandingan dengan eksak
+  eksak = 8.65536904
+  delta = abs(eksak - luas)
+  
+  # output plot
+  plot_sim = 
+    soal +
+    geom_point(data = rekap,aes(x,y,color = on_target)) +
+    theme(legend.position = "none") +
+    labs(subtitle = paste0("Didapat nilai rasio sebesar ",rasio))
+  
+  # output
+  output = list(
+    "Plot Brute Force" = plot_sim,
+    "Luas area di bawah kurva" = luas,
+    "Absolute selisih dg solusi eksak" = delta
+    )
+  
+  return(output)
+}
+```
+
+Saya menghitung _error_ atau __selisih solusi numerik dengan solusi eksak__ dengan cara:
+
+$$\Delta = |eksak - numerik|$$
+
+\newpage
+
+Sekarang kita akan coba program tersebut untuk N = 100
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10, fig.cap="Brute force Monte Carlo dengan N = 100"}
+brute_force(g,0,sqrt(14)-1,0,4,100)
+```
+
+
+\newpage
+
+Sekarang kita akan coba program tersebut untuk N = 200
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10, fig.cap="Brute force Monte Carlo dengan N = 200"}
+brute_force(g,0,sqrt(14)-1,0,4,200)
+```
+
+\newpage
+
+Sekarang kita akan coba program tersebut untuk N = 500
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10, fig.cap="Brute force Monte Carlo dengan N = 500"}
+brute_force(g,0,sqrt(14)-1,0,4,500)
+```
+
+\newpage
+
+__Masalah pada Brute Force__ Salah satu prinsip metode ini adalah _random bumber generator_. Oleh karena itu, bisa jadi pada __N__ besar hasilnya tidak lebih baik pada __N__ kecil __dalam sekali run__. 
+
+Untuk mengatasi hal tersebut kita harus melakukan _run_ berulang-ulang dan menghitung nilai rata-ratanya sebagai _output_ finalnya. Saya akan coba melakukan pengulangan sebanyak __100 kali__ setiap kali _run_ untuk mendapatkan aproksimasi yang lebih baik.
+
+Berikut adalah modifikasi program sebelumnya yang saya berikan nama __luasmc__.
+
+```{r,warning=FALSE,message=FALSE}
+luas_mc = function(f,x1,x2,y1,y2,N){
+  # membuat template vector luas
+  luas = c()
+  # lakukan 100 x pengulangan
+  for(ikanx in 1:100){
+    # generating random number
+    x = runif(N,x1,x2)
+    y = runif(N,y1,y2)
+  
+    # pengecekan y <= f(x)
+    rekap = 
+      data.frame(x,y) %>% 
+      rowwise() %>% 
+      mutate(f_x = f(x),
+             on_target = ifelse(y <= f_x,1,0)) %>% 
+      ungroup()
+  
+    # hitung rasio on target vs all dots
+    rasio = sum(rekap$on_target) / N
+    # hitung luas
+    luas_temp = (x2-x1)*(y2-y1)*rasio
+    # memasukkan ke dalam template
+    luas = c(luas,luas_temp)
+  }
+  
+  # menghitung rata-rata luas
+  return(mean(luas))
+}
+```
+
+Kita akan coba hitung untuk nilai __N__ yang berbeda-beda sebagai berikut:
+
+```{r}
+N = c(10,50,100,200,500,1000,2500,5000,10000,20000)
+Luas = c()
+for(i in 1:length(N)){
+  Luas[i] = luas_mc(g,0,sqrt(14)-1,0,4,N[i])
+}
+
+```
+
+
+```{r,echo=FALSE}
+hasil_mc = 
+  data.frame(N,Luas) %>% 
+  mutate(delta = abs(8.65536904 - Luas)) 
+
+hasil_mc %>% 
+  rename("n banyak titik" = N,
+         "Luas aproksimasi" = Luas,
+         "Absolute selisih dengan eksak" = delta) %>% 
+  knitr::kable("simple",caption = "Hasil Perhitungan Luas Monte Carlo",align = "c")
+```
+
+Kita bisa lihat bahwa ada indikasi semakin tinggi __N__ yag digunakan, nilai absolut selisih aproksiasi dengan eksak relatif semakin kecil.
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.cap="Plot Selisih Aproksimasi vs Eksak"}
+hasil_mc %>% 
+  ggplot(aes(x = N,
+             y = delta)) +
+  geom_line() +
+  labs(title = "Grafik Selisih Luas Aproksimasi dengan Luas Eksak",
+       subtitle = "Menggunakan Metode Monte Carlo dengan Berbagai Nilai N\nPengulangan Dilakukan 100x Per Nilai N") +
+  theme_minimal()
+```
+
+Namun agar metode ini lebih __stabil__ dan konvergen, kita bisa mengulang komputasi lebih banyak per nilai __N__ dengan konsekuensi _runtime_ yang semakin panjang. Pada soal ini, saya menggunakan 100 x pengulangan.
+
+\newpage
+
+```{r,include=FALSE}
+rm(list=ls())
+```
+
+# SOAL 1b
+
+## Soal Utama
+
+Diketahui persamaan diferensial sebagai berikut:
+
+$$\frac{dy}{dx} = (x^2 + y) \sin{(x^2 y)}$$
+
+### Sub Soal Ib i
+
+Pilih sebuah metode numerik untuk menyelesaikan suatu persamaan diferensial dan rancanglah algoritma dari metode tersebut!
+
+### Sub Soal Ib ii
+
+Tentukanlah solusi persamaan diferensial di atas untuk rentang $0 \leq x \leq 2$ dengan kondisi awal $y(0) = 5$ dan rentang partisi $h = 0.2$.
+
+
+
+
+
+
+
+
 
 
