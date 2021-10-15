@@ -45,9 +45,6 @@ rand_titik = function(a,b){
   runif(2,a,b)
 }
 
-rot = 20
-x0 = rand_titik(0,10)
-
 # function mulai dari sini
 rotasi_kan = function(x0,rot){
   # menghitung theta
@@ -112,9 +109,16 @@ rotasi_kan = function(x0,rot){
   list("Grafik" = plot,
        "Data" = final)
   }
+```
 
+Kita uji coba dengan titik sembarang berikut ini:
 
-rotasi_kan(c(3,4),6)
+```{r}
+# uji coba
+rot = 20
+x0 = rand_titik(0,10)
+
+rotasi_kan(x0,rot)
 ```
 
 ### Operasi Matriks Rotasi dan Kontraksi
