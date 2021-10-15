@@ -1,0 +1,172 @@
+---
+title: "Optimization Story: Membuat Jadwal Tatap Muka Terbatas di Sekolah"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Beberapa minggu ini, penambahan kasus positif harian Covid 19 semakin menurun di Pulau Jawa. Akibatnya pemerintah mulai melonggarkan aturan PPKM sehingga sekolah-sekolah mulai menggelar pengajaran tatap muka terbatas (PTMT) untuk siswanya secara _offline_. 
+
+Hal ini juga berlaku di sekolah si sulung. Untuk bisa mengikuti PTMT, kami sebagai orang tua harus mendaftar terlebih dahulu ke wali kelasnya. Kemudian wali kelas membuat jadwal kunjungan untuk semua siswa yang mendaftar. Walaupun terkesan hal yang remeh, tapi menyusun jadwal merupakan pekerjaan yang melelahkan.
+
+---
+
+Terinspirasi dari sekolah si sulung, saya hendak memberikan ilustrasi bagaimana model optimisasi (baca: matematika alias ___artificial intelligence___) bisa digunakan untuk membuat penjadwalan.
+
+Suatu sekolah memiliki kelas berisi 20 orang siswa. Mereka hendak menggelar PTMT dengana aturan sebagai berikut:
+
+1. PTMT digelar dari Senin hingga Jumat (5 hari).
+1. Dalam sehari, siswa yang boleh hadir dibatasi 4-8 orang saja.
+1. Dalam seminggu, diharapkan siswa bisa hadir 2-3 kali.
+1. Siswa yang hadir di selang sehari baru bisa hadir kembali.
+
+Saat membuat jadwal berdasarkan aturan di atas, tiba-tiba beberapa orang tua murid menelepon sang guru. Ternyata didapatkan:
+
+1. `3` orang siswa hanya bisa hadir di __Senin dan Jumat__.
+1. `2` orang siswa ingin hadir di __Rabu__ dan hari lainnya bebas.
+
+Berdasarkan semua kondisi yang ada ini, sang guru mulai pusing membuat jadwalnya.
+
+---
+
+Dari uraian di atas, kita bisa membuat model optimisasinya sebagai berikut:
+
+Saya definisikan $x_{i,j} \in (0,1)$ sebagai bilangan biner di mana $i \in \{1,2,..,20\}$ menandakan siswa dan $j \in \{1,2,..,5\}$ menandakan hari. Berlaku:
+
+$$x_{i,j} = \left\{\begin{matrix}
+0, \text{ siswa i tidak masuk di hari j}\\ 
+1, \text{ siswa i masuk di hari j}
+\end{matrix}\right.$$
+
+___Objective Function___
+
+Tujuan utama kita adalah memaksimalkan siswa yang hadir.
+
+$$\max{\sum_{j=1}^5 \sum_{i=1}^{20} x_{i,j} }$$
+
+___Constraints___
+
+Dalam sehari, ada pembatasan jumlah siswa yang hadir.
+
+$$4 \leq \sum_i x_{i,j} \leq 8, j \in \{1,2,..,5\}$$
+
+Dalam seminggu, siswa hadir dalam frekuensi tertentu.
+
+$$2 \leq \sum_j x_{i,j} \leq 3, i \in \{1,2,..,20\}$$
+
+Ada jeda sehari agar siswa bisa masuk kembali.
+
+$$x_{i,j} + x_{i,j+1} \leq 1$$
+
+Ada `3` orang yang hanya bisa masuk di hari Senin dan Jumat.
+
+$$x_{i,1} + x_{i,5} = 2, i = 1,2,3$$
+
+Ada `2` orang yang masuk di hari Rabu sedangkan hari lainnya bebas.
+
+$$x_{i,3} = 1, i = 4,5$$
+
+Jangan lupa bahwa $x_{i,j} \geq 0$.
+
+Sekarang kita akan coba selesaikan model di atas dengan menggunakan `library(ompr)`. Berikut adalah skrip di __R__-nya:
+
+```{r,message=FALSE,warning=FALSE}
+rm(list=ls())
+
+library(dplyr)
+library(ompr)
+library(ompr.roi)
+library(ROI.plugin.glpk)
+
+bin_prog = 
+  MIPModel() %>%
+  # menambah variabel
+  add_variable(x[i,j],
+	       i = 1:20,
+	       j = 1:5,
+	       type = "binary",
+	       lb = 0) %>%
+  # membuat objective function
+  set_objective(sum_expr(x[i,j],
+			 i = 1:20,
+			 j = 1:5),
+		"max") %>%
+  # menambah constraints
+  # max kapasitas kelas
+  add_constraint(sum_expr(x[i,j],i = 1:20) >= 4,
+		 j = 1:5) %>%
+  add_constraint(sum_expr(x[i,j],i = 1:20) <= 8,
+		 j = 1:5) %>%
+  # frek kunjungan siswa
+  add_constraint(sum_expr(x[i,j],j = 1:5) >= 2,
+		 i = 1:20) %>%
+  add_constraint(sum_expr(x[i,j],j = 1:5) <= 3,
+		 i = 1:20) %>%
+  # jeda sehari
+  add_constraint(x[i,j] + x[i,j+1] <= 1,
+		 i = 1:20,
+		 j = 1:4) %>%
+  # 3 anak di senin dan jumat
+  add_constraint(x[i,1] + x[i,5] == 2,
+		 i = 1:3) %>%
+  # 2 anak di hari rabu
+  add_constraint(x[i,3] == 1,
+		 i = 4:5)
+
+bin_prog 
+```
+
+```{r,include = FALSE}
+hasil = 
+  bin_prog %>%
+  solve_model(with_ROI(solver = "glpk",
+		       verbose = T))
+```
+
+Berikut adalah hasilnya:
+
+### Jadwal Kunjungan Siswa
+
+Berikut adalah jadwal kunjungan siswa perhari:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+rekap = 
+  hasil %>% 
+  get_solution(x[i,j]) %>%
+  filter(value == 1) %>%
+  rename(siswa = i,
+         hari = j)
+
+rekap %>%
+  group_by(hari) %>%
+  summarise(presensi = paste(siswa,collapse = ",")) %>%
+  ungroup() %>%
+  knitr::kable("html")
+```
+
+### Rekap Presensi Siswa
+
+Berikut adalah rekap frekuensi kedatangan siswa selama seminggu:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+rekap %>%
+  group_by(siswa) %>%
+  tally() %>%
+  ungroup() %>%
+  rename("jumlah kehadiran" = n) %>%
+  knitr::kable("simple",caption = "Rekap Presensi Siswa")
+```
+
+Ternyata semua siswa mendapatkan kesempatan yang sama untuk bisa hadir ke sekolah.
+
+---
+
+Dari model di atas, kita bisa melakukan modifikasi jikalau ada peraturan baru yang akan diterapkan di sekolah tersebut atau ada kondisi lain yang terjadi di beberapa orang siswa tertentu. 
+
+Selain itu kita bisa melakukan _sensitivity test_ dengan cara mengubah-ubah parameter yang ada sehingga bisa mendapatkan gambaran tentang sistem yang ada. Apakah ada perubahan solusi saat ada perubahan nilai parameter?
+
+---
+
+`if you find this article helpful, support this blog by clicking the ads.`
