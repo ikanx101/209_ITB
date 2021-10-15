@@ -1,21 +1,31 @@
 ---
-title: "Optimization Story: Membuat Jadwal Tatap Muka Terbatas di Sekolah"
-output: pdf_document
+title: UPDATE PROGRESS PENELITIAN MANDIRI DALAM SAINS KOMPUTASI
+subtitle: |
+   | Contoh Kasus Binary Programming|
+   | Membuat Jadwal Tatap Muka Terbatas di Sekolah
+author: |
+   | Mohammad Rizka Fadhli
+   | NIM: 20921004
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_section: false
+    toc: false
+    highlight: tango
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
 ```
+# PENDAHULUAN
 
-Beberapa minggu ini, penambahan kasus positif harian Covid 19 semakin menurun di Pulau Jawa. Akibatnya pemerintah mulai melonggarkan aturan PPKM sehingga sekolah-sekolah mulai menggelar pengajaran tatap muka terbatas (PTMT) untuk siswanya secara _offline_. 
+Pada minggu ini saya akan memberikan _update progress_ penelitian mandiri dalam sains komputasi I berupa contoh penggunaan _binary programming_ dalam memecahkan masalah _real_. Sebagaimana yang telah dijelaskan pada presentasi sebelumnya, _binary programming_ erat kaitannya dengan permasalahan _matching_ antara suatu hal (kita akan sebut sebagai indeks) dengan hal (indeks) lainnya. Saya akan berikan contoh terkait penjadwalan __Pembelajaran Tatap Muka Terbatas__ (PTMT) yang terjadi di suatu sekolah dasar.
 
-Hal ini juga berlaku di sekolah si sulung. Untuk bisa mengikuti PTMT, kami sebagai orang tua harus mendaftar terlebih dahulu ke wali kelasnya. Kemudian wali kelas membuat jadwal kunjungan untuk semua siswa yang mendaftar. Walaupun terkesan hal yang remeh, tapi menyusun jadwal merupakan pekerjaan yang melelahkan.
+# MASALAH
 
----
-
-Terinspirasi dari sekolah si sulung, saya hendak memberikan ilustrasi bagaimana model optimisasi (baca: matematika alias ___artificial intelligence___) bisa digunakan untuk membuat penjadwalan.
-
-Suatu sekolah memiliki kelas berisi 20 orang siswa. Mereka hendak menggelar PTMT dengana aturan sebagai berikut:
+Suatu sekolah memiliki kelas berisi 20 orang siswa. Mereka hendak menggelar PTMT dengan aturan sebagai berikut:
 
 1. PTMT digelar dari Senin hingga Jumat (5 hari).
 1. Dalam sehari, siswa yang boleh hadir dibatasi 4-8 orang saja.
@@ -27,7 +37,7 @@ Saat membuat jadwal berdasarkan aturan di atas, tiba-tiba beberapa orang tua mur
 1. `3` orang siswa hanya bisa hadir di __Senin dan Jumat__.
 1. `2` orang siswa ingin hadir di __Rabu__ dan hari lainnya bebas.
 
-Berdasarkan semua kondisi yang ada ini, sang guru mulai pusing membuat jadwalnya.
+Berdasarkan semua kondisi yang ada ini, sang guru harus membuat jadwal kunjungan siswa.
 
 ---
 
@@ -118,7 +128,7 @@ bin_prog =
 bin_prog 
 ```
 
-```{r,include = FALSE}
+```{r}
 hasil = 
   bin_prog %>%
   solve_model(with_ROI(solver = "glpk",
@@ -131,7 +141,7 @@ Berikut adalah hasilnya:
 
 Berikut adalah jadwal kunjungan siswa perhari:
 
-```{r,echo=FALSE,warning=FALSE,message=FALSE}
+```{r,warning=FALSE,message=FALSE}
 rekap = 
   hasil %>% 
   get_solution(x[i,j]) %>%
@@ -150,7 +160,7 @@ rekap %>%
 
 Berikut adalah rekap frekuensi kedatangan siswa selama seminggu:
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE}
 rekap %>%
   group_by(siswa) %>%
   tally() %>%
@@ -167,6 +177,3 @@ Dari model di atas, kita bisa melakukan modifikasi jikalau ada peraturan baru ya
 
 Selain itu kita bisa melakukan _sensitivity test_ dengan cara mengubah-ubah parameter yang ada sehingga bisa mendapatkan gambaran tentang sistem yang ada. Apakah ada perubahan solusi saat ada perubahan nilai parameter?
 
----
-
-`if you find this article helpful, support this blog by clicking the ads.`
