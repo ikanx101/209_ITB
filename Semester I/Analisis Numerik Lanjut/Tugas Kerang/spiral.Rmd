@@ -1,0 +1,23 @@
+---
+title: SPIRAL OPTIMIZATION ALGORITHM
+subtitle: |
+  | Tugas Kuliah
+  | SK5001 Analisis Numerik Lanjut
+author: |
+  | Mohammad Rizka Fadhli
+  | NIM: 20921004
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fotsize: 12pt
+output:
+  pdf_document:
+   number_section: true
+   toc: false
+   highlight: tango
+---
+
+```{r setup, include=FALSE}
+rm(list=ls())
+options(digits = 4)
+```
+
+# Pendahuluan
