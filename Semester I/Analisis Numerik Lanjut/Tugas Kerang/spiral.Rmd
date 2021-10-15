@@ -23,6 +23,20 @@ library(dplyr)
 library(ggplot2)
 ```
 
+# PENDAHULUAN
+
+## Spiral Optimization Algorithm
+
+_Spiral Optimization Algorithm_ adalah salah satu metode _meta heuristic_ yang digunakan untuk mencari minimum global dari suatu sistem persamaan. 
+
+Algoritmanya mudah dipahami dan intuitif tanpa harus memiliki latar keilmuan tertentu. Proses kerjanya adalah dengan melakukan _random number generating_ pada suatu selang dan melakukan rotasi sekaligus kontraksi dengan titik paling minimum pada setiap iterasi sebagai pusatnya.
+
+## Penjelasan Geometri
+
+### Operasi Matriks Rotasi
+
+### Operasi Matriks Rotasi dan Kontraksi
+
 # SOAL 1
 
 Tentukanlah akar-akar sistem persamaan berikut dengan __SOA__. Buatlah terlebih dahulu _contour plot_-nya:
