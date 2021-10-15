@@ -35,6 +35,88 @@ Algoritmanya mudah dipahami dan intuitif tanpa harus memiliki latar keilmuan ter
 
 ### Operasi Matriks Rotasi
 
+$$\begin{bmatrix} x_1 (k+1) \\ x_2 (k+1) \end{bmatrix} = \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} \begin{bmatrix} x_1 (k) \\ x_2 (k) \end{bmatrix}$$
+
+Contoh:
+
+```{r}
+# function untuk random titik
+rand_titik = function(a,b){
+  runif(2,a,b)
+}
+
+rot = 20
+x0 = rand_titik(0,10)
+
+# function mulai dari sini
+rotasi_kan = function(x0,rot){
+  # menghitung theta
+  theta = 2*pi/rot
+
+  # definisi matriks rotasi
+  A = matrix(c(cos(theta),-sin(theta),
+             sin(theta),cos(theta)),
+           ncol = 2,byrow = T)
+  
+  # bikin template
+  temp = vector("list")
+  temp[[1]] = x0
+
+  # proses rotasi
+  for(i in 2:rot){
+    xk = A %*% x0
+    temp[[i]] = xk
+    x0 = xk
+  }
+  
+  # bikin template data frame
+  final = data.frame(x = rep(NA,rot),
+                     y = rep(NA,rot))
+  
+  # gabung data dari list
+  for(i in 1:rot){
+    tempura = temp[[i]]
+    final$x[i] = tempura[1]
+    final$y[i] = tempura[2]
+  }
+
+  # bikin plot
+  plot = 
+    ggplot() +
+    geom_point(aes(x,y),data = final) +
+    geom_point(aes(x[1],y[1]),
+               data = final,
+               color = "red") +
+    coord_equal() +
+    labs(title = "titik merah adalah titik initial") 
+  
+  # enrich
+  panah = data.frame(
+    x_start = final$x[1:(rot-1)],
+    x_end = final$x[2:rot],
+    y_start = final$y[1:(rot-1)],
+    y_end = final$y[2:rot]
+  )
+  
+  plot = 
+    plot + 
+    geom_segment(aes(x = x_start,
+                 xend = x_end,
+                 y = y_start,
+                 yend = y_end),
+                 data = panah,
+                 arrow = arrow(length = unit(.3,"cm"))
+                 )
+  
+  # definisi output
+  list("Grafik" = plot,
+       "Data" = final)
+  }
+
+
+rotasi_kan(c(3,4),6)
+```
+
 ### Operasi Matriks Rotasi dan Kontraksi
 
 # SOAL 1
