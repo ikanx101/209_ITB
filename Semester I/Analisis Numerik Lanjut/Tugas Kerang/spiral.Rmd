@@ -86,7 +86,7 @@ rand_titik = function(a,b){
 ```
 
 ```{r}
-# function mulai dari sini
+# mendefinisikan program
 rotasi_kan = function(x0,rot){
   # menghitung theta
   theta = 2*pi/rot
@@ -96,7 +96,7 @@ rotasi_kan = function(x0,rot){
              sin(theta),cos(theta)),
            ncol = 2,byrow = T)
   
-  # bikin template
+  # membuat template
   temp = vector("list")
   temp[[1]] = x0
 
@@ -107,7 +107,7 @@ rotasi_kan = function(x0,rot){
     x0 = xk
   }
   
-  # bikin template data frame
+  # membuat template data frame
   final = data.frame(x = rep(NA,rot),
                      y = rep(NA,rot))
   
@@ -118,7 +118,7 @@ rotasi_kan = function(x0,rot){
     final$y[i] = tempura[2]
   }
 
-  # bikin plot
+  # membuat plot
   plot = 
     ggplot() +
     geom_point(aes(x,y),data = final) +
@@ -128,14 +128,14 @@ rotasi_kan = function(x0,rot){
     coord_equal() +
     labs(title = "titik merah adalah titik initial") 
   
-  # enrich
+  # enrich dengan garis panah
   panah = data.frame(
     x_start = final$x[1:(rot-1)],
     x_end = final$x[2:rot],
     y_start = final$y[1:(rot-1)],
     y_end = final$y[2:rot]
   )
-  
+  # menambahkan garis panah ke plot
   plot = 
     plot + 
     geom_segment(aes(x = x_start,
@@ -146,36 +146,46 @@ rotasi_kan = function(x0,rot){
                  arrow = arrow(length = unit(.3,"cm"))
                  )
   
-  # definisi output
-  list("Grafik" = plot,
-       "Data" = final)
+  # menyiapkan output
+  list("Grafik rotasi" = plot,
+       "Titik-titik rotasi" = final)
   }
 ```
+
+\newpage
 
 Mari kita uji coba dengan titik sembarang berikut ini:
 
 ```{r}
 # uji coba
-rot = 20 # berapa banyak rotasi
+rot = 12 # berapa banyak rotasi
 x0 = rand_titik(0,10) # generate random titik
 
 rotasi_kan(x0,rot)
 ```
+
+\newpage
 
 Kita coba kembali dengan titik sembarang lainnya berikut ini:
 
 ```{r}
 # uji coba
-rot = 20 # berapa banyak rotasi
+rot = 7 # berapa banyak rotasi
 x0 = rand_titik(0,10) # generate random titik
 
 rotasi_kan(x0,rot)
 ```
 
-
 \newpage
 
 ### Operasi Matriks Rotasi dan Kontraksi
+
+Jika pada sebelumnya kita __hanya melakukan rotasi__, kali ini kita akan memodifikasi operasi matriks agar melakukan rotasi dan konstraksi secara bersamaan. Untuk melakukan hal tersebut, kita akan definisikan $r,0<r<1$ dan melakukan operasi matriks sebagai berikut:
+
+$$\begin{bmatrix} x_1 (k+1) \\ x_2 (k+1) \end{bmatrix} = \begin{bmatrix} r \\ r \end{bmatrix} \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} \begin{bmatrix} x_1 (k) \\ x_2 (k) \end{bmatrix}$$
+
+
+\newpage
 
 # SOAL 1
 
