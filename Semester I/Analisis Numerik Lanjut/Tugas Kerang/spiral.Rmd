@@ -13,6 +13,7 @@ output:
    number_section: false
    toc: false
    highlight: tango
+   dev: png
 ---
 
 ```{r setup, include=FALSE}
@@ -156,7 +157,7 @@ rotasi_kan = function(x0,rot){
 
 Berikut adalah uji coba dengan titik sembarang berikut ini:
 
-```{r}
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi I"}
 # uji coba
 rot = 12 # berapa banyak rotasi
 x0 = rand_titik(0,10) # generate random titik
@@ -168,7 +169,7 @@ rotasi_kan(x0,rot)
 
 Uji coba kembali dengan titik sembarang lainnya berikut ini:
 
-```{r}
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi II"}
 # uji coba
 rot = 7 # berapa banyak rotasi
 x0 = rand_titik(0,10) # generate random titik
@@ -258,7 +259,7 @@ rotasi_konstraksi_kan = function(x0,rot,r){
 
 Saya akan uji coba untuk sembarang titik berikut ini:
 
-```{r}
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi I"}
 # uji coba
 rot = 20 # berapa banyak rotasi
 x0 = rand_titik(0,4) # generate random titik
@@ -270,7 +271,7 @@ rotasi_konstraksi_kan(x0,rot,r)
 
 Saya akan uji coba kembali untuk sembarang titik lainnya berikut ini:
 
-```{r}
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi II"}
 # uji coba
 rot = 10 # berapa banyak rotasi
 x0 = rand_titik(0,4) # generate random titik
@@ -280,7 +281,7 @@ rotasi_konstraksi_kan(x0,rot,r)
 
 \newpage
 
-### Operasi Matriks Rotasi dan Kontraksi dengan Titik $y$ Sebagai Pusatnya
+### Operasi Matriks Rotasi dan Kontraksi dengan Titik $x^*$ Sebagai Pusatnya
 
 Salah satu prinsip utama dari _spiral optimization algorithm_ adalah menjadikan titik $x^*$ sebagai pusat rotasi di setiap iterasinya. Oleh karena itu kita akan modifikasi program bagian sebelumnya menjadi sebagai berikut:
 
@@ -325,7 +326,6 @@ rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bin){
     geom_point(aes(x[1],y[1]),
                data = final,
                color = "red") +
-    coord_equal() +
     geom_point(aes(x = x_bin[1],
 		   y = x_bin[1]),
 	       color = "blue") +
@@ -359,11 +359,24 @@ rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bin){
 
 Saya akan coba dengan sembarang titik berikut:
 
-```{r}
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi Terhadap x* I"}
 # uji coba
 rot = 10 # berapa banyak rotasi
 x0 = rand_titik(0,4) # generate random titik
 x_bintang = c(1,1) # contoh pusat rotasi
+r = .7
+rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
+```
+
+\newpage
+
+Saya akan coba kembali dengan sembarang titik lainnya:
+
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi Terhadap x* II"}
+# uji coba
+rot = 20 # berapa banyak rotasi
+x0 = rand_titik(0,10) # generate random titik
+x_bintang = c(2,3) # contoh pusat rotasi
 r = .7
 rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
 ```
