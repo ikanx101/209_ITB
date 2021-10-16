@@ -43,11 +43,36 @@ INPUT
   theta  # sudut rotasi (0 <= theta <= 2pi)
   r      # konstraksi
   k_max  # iterasi maksimum
+
+PROCESS
+  1 generate m buah titik secara acak
+      x_i
+
+  2 initial condition
+      k = 0 # untuk keperluan iterasi
+
+  3 cari x_* yang memenuhi
+      min(f(x_*))
+  
+  4 lakukan rotasi dan konstraksi semua x_i
+      x_* sebagai pusat rotasi
+      k = k + 1
+
+  5 ulangi proses 3 dan 4
+
+  6 hentikan proses saat k = k_max
+      output x_*
 ```
+
+Berdasarkan algoritma di atas, salah satu proses yang penting adalah melakukan __rotasi__ dan __konstraksi__ terhadap semua titik yang telah di-_generate_.
+
+Agar memudahkan, saya akan memberikan ilustrasi geometri beserta operasi matriks aljabar terkait kedua hal tersebut.
 
 ## Penjelasan Geometri
 
 ### Operasi Matriks Rotasi
+
+Misalkan saya memiliki titik $x \in \mathbb{R}^2$. Untuk melakukan rotasi sebesar $\theta$, kita bisa menggunakan suatu matrik $A_{2 \times 2}$ berisi fungsi-fungsi trigonometri. Berikut adalah caranya:
 
 $$\begin{bmatrix} x_1 (k+1) \\ x_2 (k+1) \end{bmatrix} = \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} \begin{bmatrix} x_1 (k) \\ x_2 (k) \end{bmatrix}$$
 
