@@ -25,6 +25,8 @@ library(ggplot2)
 
 # PENDAHULUAN
 
+## Bahasa yang Digunakan
+
 ## Spiral Optimization Algorithm
 
 _Spiral Optimization Algorithm_ adalah salah satu metode _meta heuristic_ yang digunakan untuk mencari minimum global dari suatu sistem persamaan. 
