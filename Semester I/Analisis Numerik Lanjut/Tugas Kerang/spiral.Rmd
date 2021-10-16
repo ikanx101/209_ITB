@@ -286,7 +286,7 @@ Salah satu prinsip utama dari _spiral optimization algorithm_ adalah menjadikan 
 
 ```{r}
 # mendefinisikan program
-rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bintang){
+rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bin){
   # menghitung theta
   theta = 2*pi/rot
 
@@ -301,7 +301,7 @@ rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bintang){
 
   # proses rotasi dan konstraksi
   for(i in 2:rot){
-    xk = A %*% (x0-x_bin)
+    xk = A %*% (x0-x_bin) # diputar dengan x_bin sebagai pusat
     xk = x_bin + (r * xk)
     temp[[i]] = xk
     x0 = xk
@@ -326,7 +326,10 @@ rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bintang){
                data = final,
                color = "red") +
     coord_equal() +
-    labs(title = "titik merah adalah titik initial") 
+    geom_point(aes(x = x_bin[1],
+		   y = x_bin[1]),
+	       color = "blue") +
+    labs(title = "titik merah adalah titik initial\ntitik biru adalah pusat rotasi") 
   
   # enrich dengan garis panah
   panah = data.frame(
@@ -362,7 +365,7 @@ rot = 10 # berapa banyak rotasi
 x0 = rand_titik(0,4) # generate random titik
 x_bintang = c(1,1) # contoh pusat rotasi
 r = .7
-rotasi_konstraksi_kan(x0,rot,r)
+rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
 ```
 
 \newpage
