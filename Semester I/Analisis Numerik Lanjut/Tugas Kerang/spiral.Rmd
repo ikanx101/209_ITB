@@ -363,8 +363,8 @@ Saya akan coba dengan sembarang titik berikut:
 # uji coba
 rot = 10 # berapa banyak rotasi
 x0 = rand_titik(0,4) # generate random titik
-x_bintang = c(1,1) # contoh pusat rotasi
-r = .7
+x_bintang = c(0,1) # contoh pusat rotasi
+r = .6
 rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
 ```
 
@@ -377,7 +377,7 @@ Saya akan coba kembali dengan sembarang titik lainnya:
 rot = 20 # berapa banyak rotasi
 x0 = rand_titik(0,10) # generate random titik
 x_bintang = c(2,3) # contoh pusat rotasi
-r = .7
+r = .9
 rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
 ```
 
