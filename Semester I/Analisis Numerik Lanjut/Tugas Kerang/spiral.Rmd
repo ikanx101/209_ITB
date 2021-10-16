@@ -72,11 +72,11 @@ Agar memudahkan, saya akan memberikan ilustrasi geometri beserta operasi matriks
 
 ### Operasi Matriks Rotasi
 
-Misalkan saya memiliki titik $x \in \mathbb{R}^2$. Untuk melakukan rotasi sebesar $\theta$, kita bisa menggunakan suatu matriks $A_{2 \times 2}$ berisi fungsi-fungsi trigonometri sebagai berikut:
+Misalkan saya memiliki titik $x \in \mathbb{R}^2$. Untuk melakukan rotasi sebesar $\theta$, saya bisa menggunakan suatu matriks $A_{2 \times 2}$ berisi fungsi-fungsi trigonometri sebagai berikut:
 
 $$\begin{bmatrix} x_1 (k+1) \\ x_2 (k+1) \end{bmatrix} = \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} \begin{bmatrix} x_1 (k) \\ x_2 (k) \end{bmatrix}$$
 
-Berdasarkan operasi matriks di atas, kita bisa membuat __program__ di __R__ dengan beberapa modifikasi. Sebagai contoh, saya akan membuat program yang bertujuan untuk melakukan rotasi suatu titik $x \in \mathbb{R}$ sebanyak $n$ kali:
+Berdasarkan operasi matriks di atas, saya membuat __program__ di __R__ dengan beberapa modifikasi. Sebagai contoh, saya akan membuat program yang bertujuan untuk melakukan rotasi suatu titik $x \in \mathbb{R}$ sebanyak $n$ kali:
 
 ```{r,include = FALSE}
 # function untuk random titik
@@ -154,7 +154,7 @@ rotasi_kan = function(x0,rot){
 
 \newpage
 
-Mari kita uji coba dengan titik sembarang berikut ini:
+Berikut adalah uji coba dengan titik sembarang berikut ini:
 
 ```{r}
 # uji coba
@@ -166,7 +166,7 @@ rotasi_kan(x0,rot)
 
 \newpage
 
-Kita coba kembali dengan titik sembarang lainnya berikut ini:
+Uji coba kembali dengan titik sembarang lainnya berikut ini:
 
 ```{r}
 # uji coba
@@ -180,10 +180,89 @@ rotasi_kan(x0,rot)
 
 ### Operasi Matriks Rotasi dan Kontraksi
 
-Jika pada sebelumnya kita __hanya melakukan rotasi__, kali ini kita akan memodifikasi operasi matriks agar melakukan rotasi dan konstraksi secara bersamaan. Untuk melakukan hal tersebut, kita akan definisikan $r,0<r<1$ dan melakukan operasi matriks sebagai berikut:
+Jika pada sebelumnya saya __hanya melakukan rotasi__, kali ini saya akan memodifikasi operasi matriks agar melakukan rotasi dan konstraksi secara bersamaan. Untuk melakukan hal tersebut, saya akan definisikan $r,0<r<1$ dan melakukan operasi matriks sebagai berikut:
 
 $$\begin{bmatrix} x_1 (k+1) \\ x_2 (k+1) \end{bmatrix} = \begin{bmatrix} r \\ r \end{bmatrix} \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} \begin{bmatrix} x_1 (k) \\ x_2 (k) \end{bmatrix}$$
 
+Oleh karena itu saya akan modifikasi program __R__ sebelumnya menjadi sebagai berikut:
+
+```{r}
+# mendefinisikan program
+rotasi_konstraksi_kan = function(x0,rot,r){
+  # menghitung theta
+  theta = 2*pi/rot
+
+  # definisi matriks rotasi
+  A = matrix(c(cos(theta),-sin(theta),
+             sin(theta),cos(theta)),
+           ncol = 2,byrow = T)
+  
+  # membuat template
+  temp = vector("list")
+  temp[[1]] = x0
+
+  # proses rotasi dan konstraksi
+  for(i in 2:rot){
+    xk = A %*% x0
+    xk = r * xk
+    temp[[i]] = xk
+    x0 = xk
+  }
+  
+  # membuat template data frame
+  final = data.frame(x = rep(NA,rot),
+                     y = rep(NA,rot))
+  
+  # gabung data dari list
+  for(i in 1:rot){
+    tempura = temp[[i]]
+    final$x[i] = tempura[1]
+    final$y[i] = tempura[2]
+  }
+
+  # membuat plot
+  plot = 
+    ggplot() +
+    geom_point(aes(x,y),data = final) +
+    geom_point(aes(x[1],y[1]),
+               data = final,
+               color = "red") +
+    coord_equal() +
+    labs(title = "titik merah adalah titik initial") 
+  
+  # enrich dengan garis panah
+  panah = data.frame(
+    x_start = final$x[1:(rot-1)],
+    x_end = final$x[2:rot],
+    y_start = final$y[1:(rot-1)],
+    y_end = final$y[2:rot]
+  )
+  # menambahkan garis panah ke plot
+  plot = 
+    plot + 
+    geom_segment(aes(x = x_start,
+                 xend = x_end,
+                 y = y_start,
+                 yend = y_end),
+                 data = panah,
+                 arrow = arrow(length = unit(.3,"cm"))
+                 )
+  
+  # menyiapkan output
+  list("Grafik rotasi" = plot,
+       "Titik-titik rotasi" = final)
+  }
+```
+
+\newpage
+
+```{r}
+# uji coba
+rot = 15 # berapa banyak rotasi
+x0 = rand_titik(0,4) # generate random titik
+r = .8
+rotasi_konstraksi_kan(x0,rot,r)
+```
 
 \newpage
 
