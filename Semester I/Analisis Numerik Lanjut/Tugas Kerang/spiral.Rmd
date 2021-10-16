@@ -279,13 +279,20 @@ r = .7
 rotasi_konstraksi_kan(x0,rot,r)
 ```
 
+__Catatan penting:__
+
 Terlihat bahwa semakin banyak rotasi dan konstraksi yang dilakukan akan membuat titik _initial_ __menuju pusat__ $(0,0)$.
 
 \newpage
 
 ### Operasi Matriks Rotasi dan Kontraksi dengan Titik $x^*$ Sebagai Pusatnya
 
-Salah satu prinsip utama dari _spiral optimization algorithm_ adalah menjadikan titik $x^*$ sebagai pusat rotasi di setiap iterasinya. Oleh karena itu kita akan modifikasi program bagian sebelumnya menjadi sebagai berikut:
+Salah satu prinsip utama dari _spiral optimization algorithm_ adalah menjadikan titik $x^*$ sebagai pusat rotasi di setiap iterasinya. Operasi matriksnya adalah sebagai berikut:
+
+$$\begin{bmatrix} x_1 (k+1) \\ x_2 (k+1) \end{bmatrix} = \begin{bmatrix} x_1^* \\ x_2^* \end{bmatrix} + \begin{bmatrix} r \\ r \end{bmatrix} \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} ( \begin{bmatrix} x_1 (k) \\ x_2 (k) \end{bmatrix} - \begin{bmatrix} x_1^* \\ x_2^* \end{bmatrix} )$$
+
+
+Oleh karena itu kita akan modifikasi program bagian sebelumnya menjadi seperti ini:
 
 ```{r}
 # mendefinisikan program
