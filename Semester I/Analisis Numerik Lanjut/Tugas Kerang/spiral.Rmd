@@ -256,13 +256,33 @@ rotasi_konstraksi_kan = function(x0,rot,r){
 
 \newpage
 
+Saya akan uji coba untuk sembarang titik berikut ini:
+
 ```{r}
 # uji coba
-rot = 15 # berapa banyak rotasi
+rot = 20 # berapa banyak rotasi
 x0 = rand_titik(0,4) # generate random titik
-r = .8
+r = .99
 rotasi_konstraksi_kan(x0,rot,r)
 ```
+
+\newpage
+
+Saya akan uji coba kembali untuk sembarang titik lainnya berikut ini:
+
+```{r}
+# uji coba
+rot = 10 # berapa banyak rotasi
+x0 = rand_titik(0,4) # generate random titik
+r = .7
+rotasi_konstraksi_kan(x0,rot,r)
+```
+
+\newpage
+
+## Program _Spiral Optimization Algorithm_
+
+Berbekal program yang telah dituliskan di bagian sebelumnya, kita akan sempurnakan program untuk melakukan _spiral optimization_ sebagai berikut
 
 \newpage
 
