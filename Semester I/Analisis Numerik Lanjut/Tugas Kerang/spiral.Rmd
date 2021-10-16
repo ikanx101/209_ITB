@@ -261,7 +261,7 @@ Saya akan uji coba untuk sembarang titik berikut ini:
 
 ```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi I"}
 # uji coba
-rot = 20 # berapa banyak rotasi
+rot = 25 # berapa banyak rotasi
 x0 = rand_titik(0,4) # generate random titik
 r = .9
 rotasi_konstraksi_kan(x0,rot,r)
@@ -279,6 +279,8 @@ r = .7
 rotasi_konstraksi_kan(x0,rot,r)
 ```
 
+Terlihat bahwa semakin banyak rotasi dan konstraksi yang dilakukan akan membuat titik _initial_ __menuju pusat__ $(0,0)$.
+
 \newpage
 
 ### Operasi Matriks Rotasi dan Kontraksi dengan Titik $x^*$ Sebagai Pusatnya
@@ -288,6 +290,9 @@ Salah satu prinsip utama dari _spiral optimization algorithm_ adalah menjadikan 
 ```{r}
 # mendefinisikan program
 rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bin){
+  # pusat rotasi
+  pusat = x_bin
+
   # menghitung theta
   theta = 2*pi/rot
 
@@ -302,8 +307,8 @@ rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bin){
 
   # proses rotasi dan konstraksi
   for(i in 2:rot){
-    xk = A %*% (x0-x_bin) # diputar dengan x_bin sebagai pusat
-    xk = x_bin + (r * xk)
+    xk = A %*% (x0-pusat) # diputar dengan x_bin sebagai pusat
+    xk = pusat + (r * xk)
     temp[[i]] = xk
     x0 = xk
   }
@@ -326,8 +331,8 @@ rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bin){
     geom_point(aes(x[1],y[1]),
                data = final,
                color = "red") +
-    geom_point(aes(x = x_bin[1],
-		   y = x_bin[1]),
+    geom_point(aes(x = pusat[1],
+		   y = pusat[2]),
 	       color = "blue") +
     labs(title = "titik merah adalah titik initial\ntitik biru adalah pusat rotasi") 
   
