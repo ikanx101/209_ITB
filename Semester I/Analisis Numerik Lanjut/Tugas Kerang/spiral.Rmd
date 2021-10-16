@@ -18,7 +18,7 @@ output:
 
 ```{r setup, include=FALSE}
 rm(list=ls())
-options(digits = 4)
+options(digits = 6)
 
 library(dplyr)
 library(ggplot2)
@@ -400,16 +400,12 @@ rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
 Berbekal program yang telah dituliskan di bagian sebelumnya, kita akan sempurnakan program untuk melakukan _spiral optimization_ sebagai berikut:
 
 ```{r}
-# definisi
-N = 50
-a = -4
-b = 4
-k_max = 50
-r = .9
-rot = 16
-f = function(x1,x2){
-	((x1^4 - 16 * x1^2 + 5 * x1)/2) + ((x2^4 - 16 * x2^2 + 5* x2)/2)
-	}
+soa_mrf = function(N,	  # banyak titik
+		   a,	  # batas bawah
+		   b,	  # batas atas
+		   rot,	  # berapa banyak rotasi
+		   k_max, # iterasi maks
+		   r){	  # berapa rate konstraksi
 
 # N pasang titik random di selang [a,b] di R2
 x1 = runif(N,a,b)
@@ -449,7 +445,37 @@ for(i in 1:k_max){
     temp = temp %>% mutate(f = f(x1,x2))
     }
 
-temp %>% filter(f == min(f))
+# proses output hasil
+output = temp %>% filter(f == min(f))
+return(output)
+}
+
+```
+
+\newpage
+
+Kita akan coba performa program tersebut untuk menyelesaikan fungsi berikut:
+
+$$f(x_1,x_2) = \frac{x_1^4 - 16 x_1^2 + 5 x_1}{2} + \frac{x_2^4 - 16 x_2^2 + 5 x_2}{2}$$
+
+$$-4 \leq x_1,x_2 \leq 4$$
+
+Dengan $r = 0.8, N = 50, rot = 20, k_max = 60$.
+
+```{r}
+# definisi
+N = 50
+a = -4
+b = 4
+k_max = 60
+r = .8
+rot = 20
+f = function(x1,x2){
+	((x1^4 - 16 * x1^2 + 5 * x1)/2) + ((x2^4 - 16 * x2^2 + 5* x2)/2)
+	}
+
+# solving
+soa_mrf(N,a,b,rot,k_max,r)
 ```
 
 
