@@ -282,7 +282,13 @@ rotasi_konstraksi_kan(x0,rot,r)
 
 ## Program _Spiral Optimization Algorithm_
 
-Berbekal program yang telah dituliskan di bagian sebelumnya, kita akan sempurnakan program untuk melakukan _spiral optimization_ sebagai berikut
+Berbekal program yang telah dituliskan di bagian sebelumnya, kita akan sempurnakan program untuk melakukan _spiral optimization_ sebagai berikut:
+
+```
+baru sampai sini....
+```
+
+
 
 \newpage
 
