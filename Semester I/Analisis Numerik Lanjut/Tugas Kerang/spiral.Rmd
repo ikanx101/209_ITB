@@ -72,18 +72,20 @@ Agar memudahkan, saya akan memberikan ilustrasi geometri beserta operasi matriks
 
 ### Operasi Matriks Rotasi
 
-Misalkan saya memiliki titik $x \in \mathbb{R}^2$. Untuk melakukan rotasi sebesar $\theta$, kita bisa menggunakan suatu matrik $A_{2 \times 2}$ berisi fungsi-fungsi trigonometri. Berikut adalah caranya:
+Misalkan saya memiliki titik $x \in \mathbb{R}^2$. Untuk melakukan rotasi sebesar $\theta$, kita bisa menggunakan suatu matriks $A_{2 \times 2}$ berisi fungsi-fungsi trigonometri sebagai berikut:
 
 $$\begin{bmatrix} x_1 (k+1) \\ x_2 (k+1) \end{bmatrix} = \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} \begin{bmatrix} x_1 (k) \\ x_2 (k) \end{bmatrix}$$
 
-Contoh:
+Berdasarkan operasi matriks di atas, kita bisa membuat __program__ di __R__ dengan beberapa modifikasi. Sebagai contoh, saya akan membuat program yang bertujuan untuk melakukan rotasi suatu titik $x \in \mathbb{R}$ sebanyak $n$ kali:
 
-```{r}
+```{r,include = FALSE}
 # function untuk random titik
 rand_titik = function(a,b){
   runif(2,a,b)
 }
+```
 
+```{r}
 # function mulai dari sini
 rotasi_kan = function(x0,rot){
   # menghitung theta
@@ -150,15 +152,28 @@ rotasi_kan = function(x0,rot){
   }
 ```
 
-Kita uji coba dengan titik sembarang berikut ini:
+Mari kita uji coba dengan titik sembarang berikut ini:
 
 ```{r}
 # uji coba
-rot = 20
-x0 = rand_titik(0,10)
+rot = 20 # berapa banyak rotasi
+x0 = rand_titik(0,10) # generate random titik
 
 rotasi_kan(x0,rot)
 ```
+
+Kita coba kembali dengan titik sembarang lainnya berikut ini:
+
+```{r}
+# uji coba
+rot = 20 # berapa banyak rotasi
+x0 = rand_titik(0,10) # generate random titik
+
+rotasi_kan(x0,rot)
+```
+
+
+\newpage
 
 ### Operasi Matriks Rotasi dan Kontraksi
 
