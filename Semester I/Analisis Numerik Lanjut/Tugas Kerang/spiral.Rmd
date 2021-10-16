@@ -27,11 +27,23 @@ library(ggplot2)
 
 ## Bahasa yang Digunakan
 
+Saya membuat program _spiral optimization algorithm_ menggunakan bahasa __R__ yang bisa dieksekusi pada versi minimal `3.5.3`.
+
 ## Spiral Optimization Algorithm
 
 _Spiral Optimization Algorithm_ adalah salah satu metode _meta heuristic_ yang digunakan untuk mencari minimum global dari suatu sistem persamaan. 
 
 Algoritmanya mudah dipahami dan intuitif tanpa harus memiliki latar keilmuan tertentu. Proses kerjanya adalah dengan melakukan _random number generating_ pada suatu selang dan melakukan rotasi sekaligus kontraksi dengan titik paling minimum pada setiap iterasi sebagai pusatnya.
+
+Berikut adalah algoritmanya:
+
+```
+INPUT
+  m >= 2 # jumlah titik
+  theta  # sudut rotasi (0 <= theta <= 2pi)
+  r      # konstraksi
+  k_max  # iterasi maksimum
+```
 
 ## Penjelasan Geometri
 
