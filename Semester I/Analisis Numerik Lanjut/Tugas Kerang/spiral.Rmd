@@ -494,6 +494,24 @@ __Catatan__
 
 Pada algoritma ini, penentuan $\theta, r, x$ menjadi penentu hasil perhitungan.
 
+### Mengubah Optimisasi Menjadi Pencarian Akar
+
+_Spiral optimization algorithm_ adalah suatu metode untuk mencari solusi minimum global. Jika kita hendak memakainya untuk mencari suatu akar persamaan (atau sistem persamaan), kita bisa melakukan modifikasi pada fungsi-fungsi yang terlibat (membuat fungsi _merit_).
+
+Misalkan suatu sistem persamaan non linear:
+
+$$g_1 (x_1,x_2,..,x_n) = 0$$
+
+$$g_2 (x_1,x_2,..,x_n) = 0$$
+
+$$g_n (x_1,x_2,..,x_n) = 0$$
+
+dengan $(x_1,x_2,..,x_n)^T \in D$
+
+$$D = a_1,b_1 \times a_2,b_2 \times .. \times a_n,b_n \subset \mathbb{R}^n$$
+
+__Pencarian akar__
+
 \newpage
 
 ```{r,include=FALSE}
