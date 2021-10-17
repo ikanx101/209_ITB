@@ -526,10 +526,22 @@ dengan $-10 \leq x_1,x_2 \leq 10$
 
 ## _Contour Plot_
 
-```{r,echo=FALSE,fig.retina=10}
+Pertama-tama, saya akan buat _contour plot_ dari $f_1 (x_1,x_2)$ sebagai berikut:
+
+```{r,echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 1: f1"}
 f1 = function(x1,x2){cos(2* x1) - cos(2*x2) - 0.4}
-ikanx(f1,-10,10)
+ikanx(f1,-10,10) + labs(title = "Contour Plot f1(x1,x2)")
 ```
+
+\newpage
+
+Selanjutnya, saya akan buat _contour plot_ dari $f_2 (x_1,x_2)$ sebagai berikut:
+
+```{r,echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 1: f2"}
+f2 = function(x1,x2){2*(x2 - x1) + sin(x2) - sin(x1) - 1.2}
+ikanx(f2,-10,10) + labs(title = "Contour Plot f2(x1,x2)")
+```
+
 
 \newpage
 
