@@ -603,8 +603,8 @@ df1 = ikanx_2(f1,-10,10)
 df2 = ikanx_2(f2,-10,10)
 
 ggplot() +
-  geom_point(data = df1, aes(x,y),color = "steelblue",size = .5) +
-  geom_point(data = df2, aes(x,y),color = "darkgreen",size = .5) +
+  geom_point(data = df1, aes(x,y),color = "steelblue",size = .25) +
+  geom_point(data = df2, aes(x,y),color = "darkgreen",size = .25) +
   theme_minimal() +
   labs(x = "x1",y = "x2",
        title = "Plot f1 dan f2",
@@ -632,8 +632,19 @@ f = function(x1,x2){
   hasil = 1/bawah
   return(hasil)
 }
+```
 
-f(1,3)
+Sekarang saya akan selesaikan dengan program yang telah dibuat sebelumnya:
+
+```{r}
+# solving
+N = 50
+a = -10
+b = 10
+rot = 20
+k_max = 60
+r = .8
+soa_mrf(N,a,b,rot,k_max,r)
 ```
 
 
@@ -677,8 +688,8 @@ df1 = ikanx_2(f1,-10,10)
 df2 = ikanx_2(f2,-10,10)
 
 ggplot() +
-  geom_point(data = df1, aes(x,y),color = "steelblue",size = .5) +
-  geom_point(data = df2, aes(x,y),color = "darkgreen",size = .5) +
+  geom_point(data = df1, aes(x,y),color = "steelblue",size = .25) +
+  geom_point(data = df2, aes(x,y),color = "darkgreen",size = .25) +
   theme_minimal() +
   labs(x = "x1",y = "x2",
        title = "Plot f1 dan f2",
@@ -725,8 +736,8 @@ df1 = ikanx_2(f1,-20,5)
 df2 = ikanx_2(f2,-20,5)
 
 ggplot() +
-  geom_point(data = df1, aes(x,y),color = "steelblue",size = .5) +
-  geom_point(data = df2, aes(x,y),color = "darkgreen",size = .5) +
+  geom_point(data = df1, aes(x,y),color = "steelblue",size = .25) +
+  geom_point(data = df2, aes(x,y),color = "darkgreen",size = .25) +
   theme_minimal() +
   labs(x = "x",y = "y",
        title = "Plot g1 dan g2",
