@@ -720,6 +720,20 @@ soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 ```
 
+\newpage
+
+Saya coba _run_ sebanyak __100 kali__, berikut adalah rekap akar yang saya dapatkan:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+rekap = data.frame()
+
+for(i in 1:100){
+  ahnaf = soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+  rekap = rbind(ahnaf,rekap)
+}
+
+rekap %>% distinct()
+```
 
 \newpage
 
