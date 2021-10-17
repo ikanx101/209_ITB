@@ -514,14 +514,14 @@ ikanx = function(f,a,b){
 
 # untuk sistem persamaan
 ikanx_2 = function(f,a,b){
-  x = seq(a,b,by = .25)
+  x = seq(a,b,by = .1)
 
   temp_plot =
     expand.grid(x,x) %>%
     rename(x = Var1,
            y = Var2) %>%
     mutate(z = f(x,y)) %>%
-    filter(round(z,3) == 0)
+    filter(round(z,1) == 0)
 
   return(temp_plot)
 }
