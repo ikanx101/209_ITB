@@ -512,8 +512,22 @@ ikanx = function(f,a,b){
      geom_contour()
 }
 
-```
+# untuk sistem persamaan
+ikanx_2 = function(f,a,b){
+  x = seq(a,b,by = .25)
 
+  temp_plot =
+    expand.grid(x,x) %>%
+    rename(x = Var1,
+           y = Var2) %>%
+    mutate(z = f(x,y)) %>%
+    filter(round(z,3) == 0)
+
+  return(temp_plot)
+}
+
+
+```
 
 # SOAL 1
 
@@ -551,7 +565,14 @@ ikanx(f2,-10,10) + labs(title = "Contour Plot f2(x1,x2)")
 
 Kita akan mencari akar-akar sistem persamaan saat $f_1 = 0$ dan $f_2=0$ dengan bantuan grafik sebagai berikut:
 
-xxxxx
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Plot Soal 1: f1 dan f2"}
+df1 = ikanx_2(f1,-10,10)
+df2 = ikanx_2(f2,-10,10)
+
+ggplot() +
+  geom_point(data = df1, aes(x,y)) +
+  geom_point(data = df2, aes(x,y))
+```
 
 \newpage
 
