@@ -495,24 +495,20 @@ Pada algoritma ini, penentuan $\theta, r, x$ menjadi penentu hasil perhitungan.
 \newpage
 
 ```{r,include=FALSE}
-gambar_con = function(f,a,b){
-  # generate
-  x = seq(a,b,by = 0.25)
-  # data frame
-  temp_plot = 
+ikanx = function(f,a,b){
+  x = seq(a,b,by = .25)
+
+  temp_plot =
     expand.grid(x,x) %>%
-    as.data.frame() %>%
     rename(x = Var1,
-	   y = Var2) %>%
-    mutate(z = f(x,y)) %>%
-  # bikin plot
-  temp_plot 
-#    ggplot(aes(x = x,
-#	       y = y,
-#	       z = z)) +
-#    geom_contour() +
-#    geom_contour_filled() 
+           y = Var2) %>%
+    mutate(z = f(x,y))
+
+  temp_plot %>%
+     ggplot(aes(x = x,y = y,z = z)) +
+     geom_contour()
 }
+
 ```
 
 
@@ -532,7 +528,7 @@ dengan $-10 \leq x_1,x_2 \leq 10$
 
 ```{r,echo=FALSE,fig.retina=10}
 f1 = function(x1,x2){cos(2* x1) - cos(2*x2) - 0.4}
-gambar_con(f1,-10,10)
+ikanx(f1,-10,10)
 ```
 
 \newpage

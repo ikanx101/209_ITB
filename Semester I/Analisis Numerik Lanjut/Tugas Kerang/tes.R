@@ -14,7 +14,10 @@ ikanx = function(f,a,b){
 	   y = Var2) %>%
     mutate(z = f(x,y))
 
-  return(temp_plot)
+  temp_plot %>%
+     ggplot(aes(x = x,y = y,z = z)) +
+     geom_contour() +
+     geom_contour_filled()
 }
 
 
