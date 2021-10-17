@@ -411,15 +411,17 @@ Berbekal program yang telah dituliskan di bagian sebelumnya, kita akan sempurnak
 
 ```{r}
 soa_mrf = function(N,	  # banyak titik
-		   a,	  # batas bawah
-		   b,	  # batas atas
+		   x1_d,  # batas bawah x1
+		   x1_u,  # batas atas x1
+		   x2_d,  # batas bawah x2
+		   x2_u,  # batas atas x2
 		   rot,	  # berapa banyak rotasi
 		   k_max, # iterasi maks
 		   r){	  # berapa rate konstraksi
 		   
 # N pasang titik random di selang [a,b] di R2
-x1 = runif(N,a,b)
-x2 = runif(N,a,b)
+x1 = runif(N,x1_d,x1_u)
+x2 = runif(N,x2_d,x2_u)
 
 # hitung theta
 theta = 2*pi / rot
@@ -435,7 +437,13 @@ temp = data.frame(x1,x2) %>% mutate(f = f(x1,x2))
 # proses iterasi
 for(i in 1:k_max){
   # mencari titik x* dengan min(f)
-  f_min = temp %>% filter(f == min(f))
+  f_min = 
+	temp %>% 
+	# pastikan x* berada di selang x1 dan x2
+	filter(x1 >= x1_d & x1 <= x1_u) %>%
+	filter(x2 >= x2_d & x2 <= x2_u) %>%
+	# mengambil x* yang memiliki f terkecil
+	filter(f == min(f))
   pusat = c(f_min$x1,f_min$x2)
 
   for(j in 1:N){
@@ -477,8 +485,8 @@ Dengan $r = 0.8, N = 50, rot = 20, k_{max} = 60$.
 ```{r}
 # definisi
 N = 50
-a = -4
-b = 4
+a = -4 # x1 dan x2 punya batas bawah yang sama
+b = 4  # x1 dan x2 punya batas atas yang sama
 k_max = 60
 r = .8
 rot = 20
@@ -487,7 +495,7 @@ f = function(x1,x2){
 	}
 
 # solving
-soa_mrf(N,a,b,rot,k_max,r)
+soa_mrf(N,a,b,a,b,rot,k_max,r)
 ```
 
 __Catatan__
@@ -639,12 +647,12 @@ Sekarang saya akan selesaikan dengan program yang telah dibuat sebelumnya:
 ```{r}
 # solving
 N = 50
-a = -10
-b = 10
+a = -10  # x1 dan x2 punya batas yang sama
+b = 10   # x1 dan x2 punya batas yang sama
 rot = 20
 k_max = 60
 r = .8
-soa_mrf(N,a,b,rot,k_max,r)
+soa_mrf(N,a,b,a,b,rot,k_max,r)
 ```
 
 
