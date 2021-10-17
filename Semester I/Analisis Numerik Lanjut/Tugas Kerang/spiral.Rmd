@@ -510,7 +510,9 @@ dengan $(x_1,x_2,..,x_n)^T \in D$
 
 $$D = a_1,b_1 \times a_2,b_2 \times .. \times a_n,b_n \subset \mathbb{R}^n$$
 
-__Pencarian akar__
+\newpage
+
+#### Pencarian Akar
 
 Sistem di atas memiliki solusi $x = (x_1,x_2,..,x_n)^T$ jika $F(x)$ yang kita definisikan sebagai:
 
@@ -518,6 +520,8 @@ $$F(x) = \frac{1}{1+ \sum_{i=1}^n |g_i(x)|}$$
 
 
 memiliki nilai maksimum sama dengan 1.
+
+__Kelak__ $F(x)$ __akan digunakan untuk menjawab soal-soal yang ada dalam tugas ini.__
 
 \newpage
 
@@ -534,12 +538,15 @@ ikanx = function(f,a,b){
 
   temp_plot %>%
      ggplot(aes(x = x,y = y,z = z)) +
-     geom_contour()
+     geom_contour() +
+     theme_minimal() +
+     labs(x = "x1",y = "x2",
+	  caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id")
 }
 
 # untuk sistem persamaan
 ikanx_2 = function(f,a,b){
-  x = seq(a,b,by = .1)
+  x = seq(a,b,by = .05)
 
   temp_plot =
     expand.grid(x,x) %>%
@@ -595,9 +602,19 @@ df1 = ikanx_2(f1,-10,10)
 df2 = ikanx_2(f2,-10,10)
 
 ggplot() +
-  geom_point(data = df1, aes(x,y)) +
-  geom_point(data = df2, aes(x,y))
+  geom_point(data = df1, aes(x,y),color = "steelblue") +
+  geom_point(data = df2, aes(x,y),color = "darkgreen") +
+  theme_minimal() +
+  labs(x = "x1",y = "x2",
+       title = "Plot f1 dan f2",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id")
 ```
+
+Terlihat bahwa ada beberapa titik solusi (persinggungan antara $f_1(x_1,x_2)$ dengan $f_2(x_1,x_2)$.
+
+\newpage
+
+Untuk mencari akarnya
 
 \newpage
 
