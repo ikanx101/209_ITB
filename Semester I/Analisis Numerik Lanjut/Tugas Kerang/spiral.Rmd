@@ -416,7 +416,7 @@ soa_mrf = function(N,	  # banyak titik
 		   rot,	  # berapa banyak rotasi
 		   k_max, # iterasi maks
 		   r){	  # berapa rate konstraksi
-
+		   
 # N pasang titik random di selang [a,b] di R2
 x1 = runif(N,a,b)
 x2 = runif(N,a,b)
@@ -546,7 +546,7 @@ ikanx = function(f,a,b){
 
 # untuk sistem persamaan
 ikanx_2 = function(f,a,b){
-  x = seq(a,b,by = .05)
+  x = seq(a,b,by = .025)
 
   temp_plot =
     expand.grid(x,x) %>%
@@ -602,8 +602,8 @@ df1 = ikanx_2(f1,-10,10)
 df2 = ikanx_2(f2,-10,10)
 
 ggplot() +
-  geom_point(data = df1, aes(x,y),color = "steelblue") +
-  geom_point(data = df2, aes(x,y),color = "darkgreen") +
+  geom_point(data = df1, aes(x,y),color = "steelblue",size = .5) +
+  geom_point(data = df2, aes(x,y),color = "darkgreen",size = .5) +
   theme_minimal() +
   labs(x = "x1",y = "x2",
        title = "Plot f1 dan f2",
@@ -614,7 +614,28 @@ Terlihat bahwa ada beberapa titik solusi (persinggungan antara $f_1(x_1,x_2)$ de
 
 \newpage
 
-Untuk mencari akarnya
+## Mencari Akar Sistem Persamaan
+
+Untuk mencari akarnya kita perlu membentuk $F(x)$ sebagaimana yang telah dijelaskan pada bagian sebelumnya.
+
+```{r}
+# fungsi f1 dan f2 dari soal
+f1 = function(x1,x2){cos(2* x1) - cos(2*x2) - 0.4}
+f2 = function(x1,x2){2*(x2 - x1) + sin(x2) - sin(x1) - 1.2}
+
+# membuat F(x)
+# saya notasikan sebagai f kecil
+f = function(x1,x2){
+  sum = abs(f1(x1,x2)) + abs(f2(x1,x2))
+  bawah = 1 + sum
+  hasil = 1/bawah
+  return(hasil)
+}
+
+f(1,3)
+```
+
+
 
 \newpage
 
