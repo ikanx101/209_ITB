@@ -526,6 +526,7 @@ __Kelak__ $F(x)$ __akan digunakan untuk menjawab soal-soal yang ada dalam tugas 
 \newpage
 
 ```{r,include=FALSE}
+# fungsi plot
 # untuk contour plot
 ikanx = function(f,a,b){
   x = seq(a,b,by = .25)
@@ -665,4 +666,69 @@ Berikutnya adalah _contour plot_ dari $f_2 (x_1,x_2)$ sebagai berikut:
 ```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 2: f2"}
 f2 = function(x1,x2){cos(x1)*sin(x2) + 2*sin(x1)*cos(x2)}
 ikanx(f2,0,2*pi) + labs(title = "Contour Plot f2(x1,x2)")
+```
+
+## Grafik Sistem Persamaan
+
+Kita akan mencari akar-akar sistem persamaan saat $f_1 = 0$ dan $f_2=0$ dengan bantuan grafik sebagai berikut:
+
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Plot Soal 1: f1 dan f2"}
+df1 = ikanx_2(f1,-10,10)
+df2 = ikanx_2(f2,-10,10)
+
+ggplot() +
+  geom_point(data = df1, aes(x,y),color = "steelblue",size = .5) +
+  geom_point(data = df2, aes(x,y),color = "darkgreen",size = .5) +
+  theme_minimal() +
+  labs(x = "x1",y = "x2",
+       title = "Plot f1 dan f2",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id")
+```
+
+
+\newpage
+
+# SOAL 3
+
+Tentukanlah akar-akar sistem persamaan berikut dengan __SOA__. Buatlah terlebih dahulu _contour plot_-nya:
+
+$$g_1 (x,y) = 0.5 \sin{(xy)} - 0.25 \frac{y}{\pi} - 0.5 x = 0$$
+
+$$g_2 (x,y) = (1 - \frac{0.25}{\pi}) (e^{2x} - e) + e \frac{y}{\pi} - 2 e x  = 0$$
+
+dengan $-1 \leq x \leq 3, -20 \leq y \leq 5$
+
+## _Contour Plot_
+
+Pertama-tama, saya akan buat _contour plot_ dari $g_1 (x,y)$ sebagai berikut:
+
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 3: g1"}
+f1 = function(x,y){0.5*sin(x*y) - 0.25*(y)/(pi) - 0.5*x}
+ikanx(f1,-20,5) + labs(title = "Contour Plot g1(x,y)")
+```
+
+\newpage
+
+Berikutnya adalah _contour plot_ dari $g_2 (x,y)$ sebagai berikut:
+
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 3: g2"}
+f2 = function(x,y){(1 - .25/pi)*(exp(2*x)-exp(1)) + exp(1)*(y/pi) - 2*exp(1)*x}
+ikanx(f2,-20,5) + labs(title = "Contour Plot g2(x,y)")
+```
+
+## Grafik Sistem Persamaan
+
+Kita akan mencari akar-akar sistem persamaan saat $f_1 = 0$ dan $f_2=0$ dengan bantuan grafik sebagai berikut:
+
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Plot Soal 1: f1 dan f2"}
+df1 = ikanx_2(f1,-20,5)
+df2 = ikanx_2(f2,-20,5)
+
+ggplot() +
+  geom_point(data = df1, aes(x,y),color = "steelblue",size = .5) +
+  geom_point(data = df2, aes(x,y),color = "darkgreen",size = .5) +
+  theme_minimal() +
+  labs(x = "x",y = "y",
+       title = "Plot g1 dan g2",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id")
 ```
