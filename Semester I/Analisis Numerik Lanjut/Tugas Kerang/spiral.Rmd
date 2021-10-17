@@ -733,9 +733,9 @@ for(i in 1:100){
 }
 
 ceisya %>% 
-  mutate(x1 = round(x1,3),
-         x2 = round(x2,3),
-	 f = round(f,1)) %>% 
+  mutate(x1 = round(x1,1),
+         x2 = round(x2,1),
+	 f = round(f,0)) %>% 
   distinct() %>%
   arrange(x1,x2)
 ```
