@@ -512,6 +512,13 @@ $$D = a_1,b_1 \times a_2,b_2 \times .. \times a_n,b_n \subset \mathbb{R}^n$$
 
 __Pencarian akar__
 
+Sistem di atas memiliki solusi $x = (x_1,x_2,..,x_n)^T$ jika $F(x)$ yang kita definisikan sebagai:
+
+$$F(x) = \frac{1}{1+ \sum_{i=1}^n |g_i(x)|}$$
+
+
+memiliki nilai maksimum sama dengan 1.
+
 \newpage
 
 ```{r,include=FALSE}
