@@ -464,6 +464,8 @@ return(output)
 
 \newpage
 
+### Contoh Penggunaan Program
+
 Kita akan coba performa program tersebut untuk menyelesaikan fungsi berikut:
 
 $$f(x_1,x_2) = \frac{x_1^4 - 16 x_1^2 + 5 x_1}{2} + \frac{x_2^4 - 16 x_2^2 + 5 x_2}{2}$$
@@ -495,6 +497,7 @@ Pada algoritma ini, penentuan $\theta, r, x$ menjadi penentu hasil perhitungan.
 \newpage
 
 ```{r,include=FALSE}
+# untuk contour plot
 ikanx = function(f,a,b){
   x = seq(a,b,by = .25)
 
@@ -528,7 +531,7 @@ dengan $-10 \leq x_1,x_2 \leq 10$
 
 Pertama-tama, saya akan buat _contour plot_ dari $f_1 (x_1,x_2)$ sebagai berikut:
 
-```{r,echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 1: f1"}
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 1: f1"}
 f1 = function(x1,x2){cos(2* x1) - cos(2*x2) - 0.4}
 ikanx(f1,-10,10) + labs(title = "Contour Plot f1(x1,x2)")
 ```
@@ -537,11 +540,18 @@ ikanx(f1,-10,10) + labs(title = "Contour Plot f1(x1,x2)")
 
 Selanjutnya, saya akan buat _contour plot_ dari $f_2 (x_1,x_2)$ sebagai berikut:
 
-```{r,echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 1: f2"}
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 1: f2"}
 f2 = function(x1,x2){2*(x2 - x1) + sin(x2) - sin(x1) - 1.2}
 ikanx(f2,-10,10) + labs(title = "Contour Plot f2(x1,x2)")
 ```
 
+\newpage
+
+## Grafik Sistem Persamaan
+
+Kita akan mencari akar-akar sistem persamaan saat $f_1 = 0$ dan $f_2=0$ dengan bantuan grafik sebagai berikut:
+
+xxxxx
 
 \newpage
 
@@ -554,3 +564,21 @@ $$f_1 (x_1,x_2) = \sin{(x_1)} \cos{(x_2)} + 2 \cos{(x_1)} \sin{(x_2)} = 0$$
 $$f_2 (x_1,x_2) = \cos{(x_1)} \sin{(x_2)} + 2 \sin{(x_1)} \cos{(x_2)}  = 0$$
 
 dengan $0 \leq x_1,x_2 \leq 2 \pi$
+
+## _Contour Plot_
+
+Pertama-tama, saya akan buat _contour plot_ dari $f_1 (x_1,x_2)$ sebagai berikut:
+
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 2: f1"}
+f1 = function(x1,x2){sin(x1)*cos(x2) + 2*cos(x1)*sin(x2)}
+ikanx(f1,0,2*pi) + labs(title = "Contour Plot f1(x1,x2)")
+```
+
+\newpage
+
+Berikutnya adalah _contour plot_ dari $f_2 (x_1,x_2)$ sebagai berikut:
+
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 2: f2"}
+f2 = function(x1,x2){cos(x1)*sin(x2) + 2*sin(x1)*cos(x2)}
+ikanx(f2,0,2*pi) + labs(title = "Contour Plot f2(x1,x2)")
+```
