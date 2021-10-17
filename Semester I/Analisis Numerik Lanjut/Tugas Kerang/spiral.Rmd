@@ -19,7 +19,7 @@ output:
 ```{r setup, include=FALSE}
 rm(list=ls())
 options(digits = 6)
-
+set.seed(20921004)
 library(dplyr)
 library(ggplot2)
 ```
@@ -439,10 +439,6 @@ for(i in 1:k_max){
   # mencari titik x* dengan min(f)
   f_min = 
 	temp %>% 
-	# pastikan x* berada di selang x1 dan x2
-	filter(x1 >= x1_d & x1 <= x1_u) %>%
-	filter(x2 >= x2_d & x2 <= x2_u) %>%
-	# mengambil x* yang memiliki f terkecil
 	filter(f == min(f))
   pusat = c(f_min$x1,f_min$x2)
 
@@ -470,7 +466,6 @@ return(output)
 
 ```
 
-\newpage
 
 ### Contoh Penggunaan Program
 
@@ -502,6 +497,8 @@ __Catatan__
 
 Pada algoritma ini, penentuan $\theta, r, x$ menjadi penentu hasil perhitungan.
 
+\newpage
+
 ### Mengubah Optimisasi Menjadi Pencarian Akar
 
 _Spiral optimization algorithm_ adalah suatu metode untuk mencari solusi minimum global. Jika kita hendak memakainya untuk mencari suatu akar persamaan (atau sistem persamaan), kita bisa melakukan modifikasi pada fungsi-fungsi yang terlibat (membuat fungsi _merit_).
@@ -518,7 +515,6 @@ dengan $(x_1,x_2,..,x_n)^T \in D$
 
 $$D = a_1,b_1 \times a_2,b_2 \times .. \times a_n,b_n \subset \mathbb{R}^n$$
 
-\newpage
 
 #### Pencarian Akar
 
@@ -530,6 +526,66 @@ $$F(x) = \frac{1}{1+ \sum_{i=1}^n |g_i(x)|}$$
 memiliki nilai maksimum sama dengan 1.
 
 __Kelak__ $F(x)$ __akan digunakan untuk menjawab soal-soal yang ada dalam tugas ini.__
+
+Akibatnya algoritma yang sebelumnya adalah mencari $\min{F(x)}$ diubah menjadi $\max{F(x)}$.
+
+```{r,include = FALSE}
+soa_mrf_2 = function(N,	  # banyak titik
+		     x1_d,  # batas bawah x1
+		     x1_u,  # batas atas x1
+		     x2_d,  # batas bawah x2
+		     x2_u,  # batas atas x2
+		     rot,   # berapa banyak rotasi
+		     k_max, # iterasi maks
+		     r){    # berapa rate konstraksi
+		   
+# N pasang titik random di selang [a,b] di R2
+x1 = runif(N,x1_d,x1_u)
+x2 = runif(N,x2_d,x2_u)
+
+# hitung theta
+theta = 2*pi / rot
+
+# definisi matriks rotasi
+A = matrix(c(cos(theta),-sin(theta),
+             sin(theta),cos(theta)),
+           ncol = 2,byrow = T)
+
+# bikin data frame
+temp = data.frame(x1,x2) %>% mutate(f = f(x1,x2))
+
+# proses iterasi
+for(i in 1:k_max){
+  # mencari titik x* dengan max(f)
+  f_min = 
+	temp %>% 
+	filter(f == max(f))
+  pusat = c(f_min$x1,f_min$x2)
+
+  for(j in 1:N){
+	# kita akan ambil titiknya satu persatu
+	x0 = c(temp$x1[j],temp$x2[j])
+	
+	# proses rotasi dan konstraksi terhadap pusat x*
+	xk = A %*% (x0-pusat) # diputar dengan x_bin sebagai pusat
+        xk = pusat + (r * xk)
+	
+	# proses mengembalikan nilai ke temp
+	temp$x1[j] = xk[1]
+	temp$x2[j] = xk[2]
+	}
+    
+    # hitung kembali nilai f(x1,x2)
+    temp = temp %>% mutate(f = f(x1,x2))
+    }
+
+# proses output hasil
+output = temp %>% filter(f == min(f))
+return(output)
+}
+
+```
+
 
 \newpage
 
@@ -652,7 +708,7 @@ b = 10   # x1 dan x2 punya batas yang sama
 rot = 20
 k_max = 60
 r = .8
-soa_mrf(N,a,b,a,b,rot,k_max,r)
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 ```
 
 
