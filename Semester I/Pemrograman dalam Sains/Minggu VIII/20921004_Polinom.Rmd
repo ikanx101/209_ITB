@@ -358,5 +358,6 @@ The roots:
 
 Dugaan kita terkonfirmasi.
 
+\center
 
 # == End == {.unlisted .unnumbered}
