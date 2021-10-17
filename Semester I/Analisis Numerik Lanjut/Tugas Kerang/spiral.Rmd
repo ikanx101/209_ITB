@@ -725,14 +725,19 @@ soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 Saya coba _run_ sebanyak __100 kali__, berikut adalah rekap akar yang saya dapatkan:
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
-rekap = data.frame()
+ceisya = data.frame()
 
 for(i in 1:100){
   ahnaf = soa_mrf_2(N,a,b,a,b,rot,k_max,r)
-  rekap = rbind(ahnaf,rekap)
+  ceisya = rbind(ahnaf,ceisya)
 }
 
-rekap %>% distinct()
+ceisya %>% 
+  mutate(x1 = round(x1,3),
+         x2 = round(x2,3),
+	 f = round(f,1)) %>% 
+  distinct() %>%
+  arrange(x1,x2)
 ```
 
 \newpage
