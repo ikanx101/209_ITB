@@ -265,13 +265,15 @@ rotasi_konstraksi_kan = function(x0,rot,r){
   }
 ```
 
+Berikutnya saya akan tunjukkan ilustrasi dari program ini.
+
 \newpage
 
 Saya akan uji coba untuk sembarang titik berikut ini:
 
 ```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi I"}
 # uji coba
-rot = 25 # berapa banyak rotasi
+rot = 40 # berapa banyak rotasi
 x0 = rand_titik(0,4) # generate random titik
 r = .9
 rotasi_konstraksi_kan(x0,rot,r)
@@ -283,7 +285,7 @@ Saya akan uji coba kembali untuk sembarang titik lainnya berikut ini:
 
 ```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi II"}
 # uji coba
-rot = 10 # berapa banyak rotasi
+rot = 6 # berapa banyak rotasi
 x0 = rand_titik(0,4) # generate random titik
 r = .7
 rotasi_konstraksi_kan(x0,rot,r)
@@ -377,6 +379,9 @@ rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bin){
   }
 ```
 
+Berikutnya saya akan tunjukkan ilustrasi dari program ini.
+
+
 \newpage
 
 Saya akan coba dengan sembarang titik berikut:
@@ -396,10 +401,10 @@ Saya akan coba kembali dengan sembarang titik lainnya:
 
 ```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi Terhadap x* II"}
 # uji coba
-rot = 20 # berapa banyak rotasi
+rot = 45 # berapa banyak rotasi
 x0 = rand_titik(0,10) # generate random titik
 x_bintang = c(2,3) # contoh pusat rotasi
-r = .9
+r = .87
 rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
 ```
 
@@ -714,15 +719,11 @@ soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 # run III
 soa_mrf_2(N,a,b,a,b,rot,k_max,r)
-# run IV
-soa_mrf_2(N,a,b,a,b,rot,k_max,r)
-# run V
-soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 ```
 
 \newpage
 
-Saya coba _run_ sebanyak __100 kali__, berikut adalah rekap akar yang saya dapatkan:
+Berikutnya saya coba _run_ sebanyak __100 kali__, berikut adalah rekap semua akar yang saya dapatkan:
 
 ```{r,echo=FALSE,warning=FALSE,message=FALSE}
 ceisya = data.frame()
@@ -733,9 +734,9 @@ for(i in 1:100){
 }
 
 ceisya %>% 
-  mutate(x1 = round(x1,1),
-         x2 = round(x2,1),
-	 f = round(f,0)) %>% 
+  mutate(x1 = round(x1,3),
+         x2 = round(x2,3),
+	 f = round(f,2)) %>% 
   distinct() %>%
   arrange(x1,x2)
 ```
@@ -770,11 +771,13 @@ f2 = function(x1,x2){cos(x1)*sin(x2) + 2*sin(x1)*cos(x2)}
 ikanx(f2,0,2*pi) + labs(title = "Contour Plot f2(x1,x2)")
 ```
 
+\newpage
+
 ## Grafik Sistem Persamaan
 
 Kita akan mencari akar-akar sistem persamaan saat $f_1 = 0$ dan $f_2=0$ dengan bantuan grafik sebagai berikut:
 
-```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Plot Soal 1: f1 dan f2"}
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Plot Soal 2: f1 dan f2"}
 df1 = ikanx_2(f1,-10,10)
 df2 = ikanx_2(f2,-10,10)
 
@@ -785,6 +788,66 @@ ggplot() +
   labs(x = "x1",y = "x2",
        title = "Plot f1 dan f2",
        caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id")
+```
+
+
+\newpage
+
+## Mencari Akar Sistem Persamaan
+
+Untuk mencari akarnya kita perlu membentuk $F(x)$ sebagaimana yang telah dijelaskan pada bagian sebelumnya.
+
+```{r}
+# fungsi f1 dan f2 dari soal
+f1 = function(x1,x2){sin(x1)*cos(x2) + 2*cos(x1)*sin(x2)}
+f2 = function(x1,x2){cos(x1)*sin(x2) + 2*sin(x1)*cos(x2)}
+
+# membuat F(x)
+# saya notasikan sebagai f kecil
+f = function(x1,x2){
+  sum = abs(f1(x1,x2)) + abs(f2(x1,x2))
+  bawah = 1 + sum
+  hasil = 1/bawah
+  return(hasil)
+}
+```
+
+Oleh karena solusi dari grafik ada banyak, maka kita akan _run_ program yang telah dibuat sebelumnya berulang kali:
+
+```{r}
+# solving
+N = 50
+a = 0      # x1 dan x2 punya batas yang sama
+b = 2*pi   # x1 dan x2 punya batas yang sama
+rot = 30
+k_max = 80
+r = .75
+# run I
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+# run II
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+# run III
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+```
+
+\newpage
+
+Berikutnya saya coba _run_ sebanyak __100 kali__, berikut adalah rekap semua akar yang saya dapatkan:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+ceisya = data.frame()
+
+for(i in 1:100){
+  ahnaf = soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+  ceisya = rbind(ahnaf,ceisya)
+}
+
+ceisya %>% 
+  mutate(x1 = round(x1,3),
+         x2 = round(x2,3),
+	 f = round(f,2)) %>% 
+  distinct() %>%
+  arrange(x1,x2)
 ```
 
 
@@ -818,11 +881,13 @@ f2 = function(x,y){(1 - .25/pi)*(exp(2*x)-exp(1)) + exp(1)*(y/pi) - 2*exp(1)*x}
 ikanx(f2,-20,5) + labs(title = "Contour Plot g2(x,y)")
 ```
 
+\newpage
+
 ## Grafik Sistem Persamaan
 
 Kita akan mencari akar-akar sistem persamaan saat $f_1 = 0$ dan $f_2=0$ dengan bantuan grafik sebagai berikut:
 
-```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Plot Soal 1: f1 dan f2"}
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Plot Soal 3: g1 dan g2"}
 df1 = ikanx_2(f1,-20,5)
 df2 = ikanx_2(f2,-20,5)
 
@@ -834,3 +899,69 @@ ggplot() +
        title = "Plot g1 dan g2",
        caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id")
 ```
+
+
+\newpage
+
+## Mencari Akar Sistem Persamaan
+
+Untuk mencari akarnya kita perlu membentuk $F(x)$ sebagaimana yang telah dijelaskan pada bagian sebelumnya.
+
+```{r}
+# fungsi g1 dan g2 dari soal
+g1 = function(x,y){0.5*sin(x*y) - 0.25*(y)/(pi) - 0.5*x}
+g2 = function(x,y){(1 - .25/pi)*(exp(2*x)-exp(1)) + exp(1)*(y/pi) - 2*exp(1)*x}
+
+# membuat F(x)
+# saya notasikan sebagai f kecil
+f = function(x1,x2){
+  sum = abs(g1(x1,x2)) + abs(g2(x1,x2))
+  bawah = 1 + sum
+  hasil = 1/bawah
+  return(hasil)
+}
+```
+
+Oleh karena solusi dari grafik ada banyak, maka kita akan _run_ program yang telah dibuat sebelumnya berulang kali:
+
+```{r}
+# solving
+N = 60
+x1_lower = -1  # batas x1
+x1_upper = 3   # batas x1
+x2_lower = -20 # batas x2
+x2_upper = 5   # batas x2
+rot = 30
+k_max = 80
+r = .75
+# run I
+soa_mrf_2(N,x1_lower,x1_upper,x2_lower,x2_upper,rot,k_max,r)
+# run II
+soa_mrf_2(N,x1_lower,x1_upper,x2_lower,x2_upper,rot,k_max,r)
+# run III
+soa_mrf_2(N,x1_lower,x1_upper,x2_lower,x2_upper,rot,k_max,r)
+```
+
+\newpage
+
+Berikutnya saya coba _run_ sebanyak __100 kali__, berikut adalah rekap semua akar yang saya dapatkan:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+ceisya = data.frame()
+
+for(i in 1:100){
+  ahnaf = soa_mrf_2(N,x1_lower,x1_upper,x2_lower,x2_upper,rot,k_max,r)
+  ceisya = rbind(ahnaf,ceisya)
+}
+
+ceisya %>% 
+  mutate(x1 = round(x1,3),
+         x2 = round(x2,3),
+	 f = round(f,2)) %>% 
+  distinct() %>%
+  arrange(x1,x2)
+```
+
+\center
+
+# == END == {-}
