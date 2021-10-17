@@ -482,9 +482,9 @@ Dengan $r = 0.8, N = 50, rot = 20, k_{max} = 60$.
 N = 50
 a = -4 # x1 dan x2 punya batas bawah yang sama
 b = 4  # x1 dan x2 punya batas atas yang sama
-k_max = 60
-r = .8
-rot = 20
+k_max = 70
+r = .75
+rot = 30
 f = function(x1,x2){
 	((x1^4 - 16 * x1^2 + 5 * x1)/2) + ((x2^4 - 16 * x2^2 + 5* x2)/2)
 	}
@@ -523,11 +523,11 @@ Sistem di atas memiliki solusi $x = (x_1,x_2,..,x_n)^T$ jika $F(x)$ yang kita de
 $$F(x) = \frac{1}{1+ \sum_{i=1}^n |g_i(x)|}$$
 
 
-memiliki nilai maksimum sama dengan 1.
+memiliki nilai maksimum sama dengan 1. __Akibatnya algoritma yang sebelumnya adalah mencari $\min{F(x)}$ diubah menjadi__ $\max{F(x)}$. Kenapa demikian?
+
+> Karena jika $F(x) = 1$ artinya $\sum_{i=1}^n |g_i(x)| = 0$ yang merupakan akar dari $g_i,i = 1,2,..,n$.
 
 __Kelak__ $F(x)$ __akan digunakan untuk menjawab soal-soal yang ada dalam tugas ini.__
-
-Akibatnya algoritma yang sebelumnya adalah mencari $\min{F(x)}$ diubah menjadi $\max{F(x)}$.
 
 ```{r,include = FALSE}
 soa_mrf_2 = function(N,	  # banyak titik
@@ -698,7 +698,7 @@ f = function(x1,x2){
 }
 ```
 
-Sekarang saya akan selesaikan dengan program yang telah dibuat sebelumnya:
+Oleh karena solusi dari grafik ada banyak, maka kita akan _run_ program yang telah dibuat sebelumnya berulang kali:
 
 ```{r}
 # solving
@@ -707,10 +707,18 @@ a = -10  # x1 dan x2 punya batas yang sama
 b = 10   # x1 dan x2 punya batas yang sama
 rot = 20
 k_max = 60
-r = .8
+r = .65
+# run I
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+# run II
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+# run III
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+# run IV
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+# run V
 soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 ```
-
 
 
 \newpage
