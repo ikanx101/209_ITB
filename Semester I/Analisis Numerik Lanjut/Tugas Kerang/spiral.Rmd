@@ -28,7 +28,7 @@ library(ggplot2)
 
 ## Bahasa yang Digunakan
 
-Saya membuat program _spiral optimization algorithm_ menggunakan bahasa __R__ yang bisa dieksekusi pada versi minimal `3.5.3`.
+Untuk membuat program _spiral optimization algorithm_, saya menggunakan bahasa __R__ yang bisa dieksekusi pada versi minimal `3.5.3`.
 
 ## Spiral Optimization Algorithm
 
@@ -69,7 +69,17 @@ Berdasarkan algoritma di atas, salah satu proses yang penting adalah melakukan _
 
 Agar memudahkan, saya akan memberikan ilustrasi geometri beserta operasi matriks aljabar terkait kedua hal tersebut.
 
-## Penjelasan Geometri
+## Membuat Program 
+
+Untuk menyelesaikan tugas soal yang diberikan, pertama-tama saya harus membuat program _spiral optimization algorithm_. Untuk membuatnya, saya akan melakukannya perlahan-lahan dengan bantuan ilustrasi geometri. Berikut adalah langkah-langkah yang ditempuh:
+
+1. __Pertama__ saya akan membuat program yang bisa merotasi suatu titik berdasarkan suatu $\theta$ tertentu.
+1. __Kedua__ saya akan memodifikasi program tersebut untuk melakukan rotasi sekaligus konstraksi dengan rasio $r$ tertentu.
+1. __Ketiga__ saya akan memodifikasi program tersebut untuk melakukan rotasi sekaligus konstraksi dengan __titik pusat rotasi tertentu__.
+
+Dari program yang terakhir, akan saya pakai untuk __membangun program__ ___spiral optimization algorithm___ yang sebenarnya.
+
+## Langkah dan Ilustrasi Geometri
 
 ### Operasi Matriks Rotasi
 
@@ -460,7 +470,7 @@ $$f(x_1,x_2) = \frac{x_1^4 - 16 x_1^2 + 5 x_1}{2} + \frac{x_2^4 - 16 x_2^2 + 5 x
 
 $$-4 \leq x_1,x_2 \leq 4$$
 
-Dengan $r = 0.8, N = 50, rot = 20, k_max = 60$.
+Dengan $r = 0.8, N = 50, rot = 20, k_{max} = 60$.
 
 ```{r}
 # definisi
@@ -478,8 +488,33 @@ f = function(x1,x2){
 soa_mrf(N,a,b,rot,k_max,r)
 ```
 
+__Catatan__
+
+Pada algoritma ini, penentuan $\theta, r, x$ menjadi penentu hasil perhitungan.
 
 \newpage
+
+```{r,include=FALSE}
+gambar_con = function(f,a,b){
+  # generate
+  x = seq(a,b,by = 0.25)
+  # data frame
+  temp_plot = 
+    expand.grid(x,x) %>%
+    as.data.frame() %>%
+    rename(x = Var1,
+	   y = Var2) %>%
+    mutate(z = f(x,y)) %>%
+  # bikin plot
+  temp_plot 
+#    ggplot(aes(x = x,
+#	       y = y,
+#	       z = z)) +
+#    geom_contour() +
+#    geom_contour_filled() 
+}
+```
+
 
 # SOAL 1
 
@@ -494,6 +529,11 @@ dengan $-10 \leq x_1,x_2 \leq 10$
 # JAWAB
 
 ## _Contour Plot_
+
+```{r,echo=FALSE,fig.retina=10}
+f1 = function(x1,x2){cos(2* x1) - cos(2*x2) - 0.4}
+gambar_con(f1,-10,10)
+```
 
 \newpage
 
