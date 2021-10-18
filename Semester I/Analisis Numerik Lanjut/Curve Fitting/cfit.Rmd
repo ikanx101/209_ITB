@@ -43,10 +43,11 @@ model1
 ```{r}
 n = length(x)
 sum_xi = sum(x)
+sum_xi_xi = sum(x^2)
 sum_xi_yi = sum(x*y)
 sum_yi = sum(y)
 
-A = matrix(c(n,sum_xi,sum_xi,sum_xi_yi),nrow = 2,byrow = T)
+A = matrix(c(n,sum_xi,sum_xi,sum_xi_xi),nrow = 2,byrow = T)
 A
 A_inv = solve(A)
 A_inv

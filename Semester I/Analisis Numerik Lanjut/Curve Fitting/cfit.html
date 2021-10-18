@@ -627,27 +627,28 @@ body {
 </code></pre>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">n =<span class="st"> </span><span class="kw">length</span>(x)</a>
 <a class="sourceLine" id="cb4-2" title="2">sum_xi =<span class="st"> </span><span class="kw">sum</span>(x)</a>
-<a class="sourceLine" id="cb4-3" title="3">sum_xi_yi =<span class="st"> </span><span class="kw">sum</span>(x<span class="op">*</span>y)</a>
-<a class="sourceLine" id="cb4-4" title="4">sum_yi =<span class="st"> </span><span class="kw">sum</span>(y)</a>
-<a class="sourceLine" id="cb4-5" title="5"></a>
-<a class="sourceLine" id="cb4-6" title="6">A =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(n,sum_xi,sum_xi,sum_xi_yi),<span class="dt">nrow =</span> <span class="dv">2</span>,<span class="dt">byrow =</span> T)</a>
-<a class="sourceLine" id="cb4-7" title="7">A</a></code></pre></div>
+<a class="sourceLine" id="cb4-3" title="3">sum_xi_xi =<span class="st"> </span><span class="kw">sum</span>(x<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb4-4" title="4">sum_xi_yi =<span class="st"> </span><span class="kw">sum</span>(x<span class="op">*</span>y)</a>
+<a class="sourceLine" id="cb4-5" title="5">sum_yi =<span class="st"> </span><span class="kw">sum</span>(y)</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">A =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(n,sum_xi,sum_xi,sum_xi_xi),<span class="dt">nrow =</span> <span class="dv">2</span>,<span class="dt">byrow =</span> T)</a>
+<a class="sourceLine" id="cb4-8" title="8">A</a></code></pre></div>
 <pre><code>##       [,1]     [,2]
-## [1,]   8.0   890.50
-## [2,] 890.5 59912.45
+## [1,]   8.0    890.5
+## [2,] 890.5 113092.2
 </code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">A_inv =<span class="st"> </span><span class="kw">solve</span>(A)</a>
 <a class="sourceLine" id="cb6-2" title="2">A_inv</a></code></pre></div>
 <pre><code>##              [,1]          [,2]
-## [1,] -0.190992145  2.838784e-03
-## [2,]  0.002838784 -2.550283e-05
+## [1,]  1.012031562 -7.968841e-03
+## [2,] -0.007968841  7.158981e-05
 </code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">b =<span class="st"> </span><span class="kw">c</span>(sum_yi,sum_xi_yi)</a>
 <a class="sourceLine" id="cb8-2" title="2"></a>
 <a class="sourceLine" id="cb8-3" title="3">A_inv <span class="op">%*%</span><span class="st"> </span>b</a></code></pre></div>
-<pre><code>##            [,1]
-## [1,] 52.9812209
-## [2,]  0.2125213
+<pre><code>##             [,1]
+## [1,] 143.0437906
+## [2,]  -0.5965753
 </code></pre>
 
 </body>
