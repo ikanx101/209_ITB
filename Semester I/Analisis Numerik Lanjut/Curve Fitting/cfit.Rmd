@@ -1,10 +1,10 @@
 ---
 title: "Belajar Curve Fitting"
 subtitle: "Cobain dulu yah"
-output: github_markdown
+output: github_document
 ---
 
-```{r}
+```{r,include = FALSE}
 # mulai dari nol
 rm(list=ls())
 
@@ -19,12 +19,12 @@ Kita akan belajar dulu dari dasarnya. Kita juga akan lihat dan bandingkan cara p
 
 ## Linear _Curve Fitting_
 
-Sering disebut sbebagai regresi linear.
+Sering disebut sebagai regresi linear.
 
 ```{r}
 # ini data contoh
-x <- c(32,64,96,118,126,144,152.5,158)
-y <- c(99.5,104.8,108.5,100,86,64,35.3,15)
+x = c(32,64,96,118,126,144,152.5,158)
+y = c(99.5,104.8,108.5,100,86,64,35.3,15)
 
 # we will make y the response variable and x the predictor
 # the response variable is usually on the y-axis
@@ -32,9 +32,13 @@ plot(x,y,pch=19)
 
 ```
 
+Untuk membuat model linear, kita bisa gunakan `base` __R__ via `lm()`. Berikut adalah caranya:
+
+```{r}
 # linear regression
 model1 = lm(y~x)
-print(model1)
+model1
+```
 
 # polinom regression
 model2 = lm(y~poly(x,2,raw=TRUE)) # 2nd order
