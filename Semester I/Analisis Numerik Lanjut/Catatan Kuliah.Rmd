@@ -4403,7 +4403,35 @@ knitr::include_graphics("Screenshot_20211018_101202.jpg")
 
 Dari mana operasi matriks tersebut berasal?
 
+Perhatikan bahwa kita menginginkan $y$ dapat ditulis sebagai fungsi dari $x$.
 
+$$y = f(x) = ax + b$$
+
+Dengan memodifikasi 2 hal berikut ini:
+
+1. Mengalikan $f(x)$ dengan $x$ mengakibatkan $yx = a x^2 + bx$ lalu menjumlahkan semua data yang ada $\sum_i y_i x_i = a \sum_i x_i^2 + b \sum_i x_i$.
+1. Menjumlahkan $f(x)$ menjadi $\sum_i y = a \sum_i x_i + n b$, dengan $n$ adalah banyaknya data (panjang vektor $x$ atau $y$).
+
+Akibatnya kita bisa menuliskannya dalam bentuk operasi matriks berikut ini:
+
+$$\begin{bmatrix} n & \sum x_i \\ \sum x_i & \sum x_i^2 \end{bmatrix} \begin{bmatrix} b \\ a \end{bmatrix} = \begin{bmatrix} \sum y_i \\ \sum x_i y_i \end{bmatrix}$$
+
+Karena kita telah memiliki data $X$ dan $Y$, artinya untuk mencari $(b,a)^T$ kita cukup melakukan operasi matriks sederhana:
+
+$$A^{-1} b = x$$
+
+Cukup cari invers matriks dan kalikan dengan vektor yang ada.
+
+Pada contoh soal ini, kita bisa menghitung:
+
+```{r}
+n = length(x)
+sum_xi = sum(x)
+sum_xi_yi = sum(x*y)
+
+A = matrix(c(n,sum_xi,sum_xi,sum_xi_yi),nrow = 2,byrow = T)
+
+```
 
 
 # END {-}

@@ -40,55 +40,17 @@ model1 = lm(y~x)
 model1
 ```
 
-Kita bisa membuat program mandiri untuk menyelesaikan masalah ini dengan cara sebagai berikut:
+```{r}
+n = length(x)
+sum_xi = sum(x)
+sum_xi_yi = sum(x*y)
+sum_yi = sum(y)
 
-### Algoritma _Linear Curve Fitting_
+A = matrix(c(n,sum_xi,sum_xi,sum_xi_yi),nrow = 2,byrow = T)
+A
+A_inv = solve(A)
+A_inv
+b = c(sum_yi,sum_xi_yi)
 
-Misalkan suatu vektor $X$ dan $Y$ hendak dibuat persamaan linear sebagai berikut $f(x) = ax + b$.
-
-```{r,echo=FALSE}
-knitr::include_graphics("Screenshot_20211018_101202.jpg")
+A_inv %*% b
 ```
-
-
-
-# polinom regression
-model2 = lm(y~poly(x,2,raw=TRUE)) # 2nd order
-print(model2)
-
-model3 = lm(y~poly(x,3,raw=TRUE)) # 3nd order
-print(model3)
-
-# itu jika kita selesaikan dengan base nya si R
-# sekarang kita akan coba buat sendiri algoritmanya
-# bagaimana caranya?
-
-# function polinom
-poli_fitting_ikanx = function(X,  # vector x
-			      Y,  # vector y
-			      M){ # order tertinggi si polinom 
-
-  # Input: 
-	# X vektor absis 1 x n
-	# Y vektor ordinat 1 x n
-	# M derajat polinom least square
-  # Output: C koefisien polinom least square
-  
-  # STEP 1
-  # initial
-  n = length(X)
-  B = matrix(0,ncol = 1,nrow = (M+1))
-  F = matrix(0,ncol = n,nrow = (M+1))
-  
-  # STEP 2
-  # mengisi kolom-kolom F dengan pangkat-pangkat dari X
-for k = 1:M+1
- F(:,k)=X'.^(k-1);
-end
-% Menyelesaikaq
-  
-  # dummy output
-  return(list(n,B,F))
-} 
-
-poli_fitting_ikanx(x,y,4)
