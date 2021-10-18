@@ -40,6 +40,16 @@ model1
     ## (Intercept)            x  
     ##    143.0438      -0.5966
 
+Kita bisa membuat program mandiri untuk menyelesaikan masalah ini dengan
+cara sebagai berikut:
+
+### Algoritma *Linear Curve Fitting*
+
+Misalkan suatu vektor \(X\) dan \(Y\) hendak dibuat persamaan linear
+sebagai berikut \(f(x) = ax + b\).
+
+![](Screenshot_20211018_101202.jpg)<!-- -->
+
 # polinom regression
 
 model2 = lm(y\~poly(x,2,raw=TRUE)) \# 2nd order print(model2)
