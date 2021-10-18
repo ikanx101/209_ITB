@@ -20,7 +20,7 @@ header-includes:
 - \usepackage{fancyhdr}
 - \pagestyle{fancy}
 - \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
-- \fancyfoot[LE,RO]{hal \thepage}
+- \fancyfoot[LE,RO]{hal \thepage}  
 
 ---
 
@@ -3697,8 +3697,6 @@ Sebagai catatan, karena ini adalah metode _meta heuristic_ maka __tidak ada jami
 
 \newpage
 
-# NUMERICAL OPTIMIZATION part II
-
 ## _Spiral Optimization Algorithm_
 
 _Spiral Optimization Algorithm_ adalah salah satu metode _meta heuristic_ yang digunakan untuk mencari minimum global dari suatu sistem persamaan. 
@@ -4060,7 +4058,7 @@ rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
 
 \newpage
 
-## Program _Spiral Optimization Algorithm_
+### Program _Spiral Optimization Algorithm_
 
 Berbekal program yang telah dituliskan di bagian sebelumnya, kita akan sempurnakan program untuk melakukan _spiral optimization_ sebagai berikut:
 
@@ -4115,7 +4113,7 @@ return(output)
 ```
 
 
-### Contoh Penggunaan Program
+#### Contoh Penggunaan Program
 
 Kita akan coba performa program tersebut untuk menyelesaikan fungsi berikut:
 
@@ -4257,7 +4255,7 @@ ikanx_2 = function(f,a,b){
 }
 ```
 
-# SOAL 1
+### Soal Latihan
 
 Tentukanlah akar-akar sistem persamaan berikut dengan __SOA__. Buatlah terlebih dahulu _contour plot_-nya:
 
@@ -4267,9 +4265,9 @@ $$f_2 (x_1,x_2) = 2 (x_2 - x_1) + \sin{ (x_2) } - \sin{(x_1)} - 1.2 = 0$$
 
 dengan $-10 \leq x_1,x_2 \leq 10$
 
-# JAWAB
+### Jawaban {-}
 
-## _Contour Plot_
+#### _Contour Plot_
 
 Pertama-tama, saya akan buat _contour plot_ dari $f_1 (x_1,x_2)$ sebagai berikut:
 
@@ -4289,7 +4287,7 @@ ikanx(f2,-10,10) + labs(title = "Contour Plot f2(x1,x2)")
 
 \newpage
 
-## Grafik Sistem Persamaan
+#### Grafik Sistem Persamaan
 
 Kita akan mencari akar-akar sistem persamaan saat $f_1 = 0$ dan $f_2=0$ dengan bantuan grafik sebagai berikut:
 
@@ -4309,7 +4307,7 @@ Terlihat bahwa ada beberapa titik solusi (persinggungan antara $f_1(x_1,x_2)$ de
 
 \newpage
 
-## Mencari Akar Sistem Persamaan
+#### Mencari Akar Sistem Persamaan
 
 Untuk mencari akarnya kita perlu membentuk $F(x)$ sebagaimana yang telah dijelaskan pada bagian sebelumnya.
 
