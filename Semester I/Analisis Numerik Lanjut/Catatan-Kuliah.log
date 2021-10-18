@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  18 OCT 2021 14:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  18 OCT 2021 14:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -660,7 +660,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [9]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-1-1.pdf, id=848, 505.89pt x 28
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-1-1.pdf, id=863, 505.89pt x 28
 9.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (typ
 e pdf)
@@ -677,7 +677,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [10 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-1-1.pdf>]
-<Screenshot from 2021-08-23 09-17-45.png, id=859, 1167.36125pt x 726.715pt>
+<Screenshot from 2021-08-23 09-17-45.png, id=874, 1167.36125pt x 726.715pt>
 File: Screenshot from 2021-08-23 09-17-45.png Graphic file (type png)
 <use Screenshot from 2021-08-23 09-17-45.png>
 Package pdftex.def Info: Screenshot from 2021-08-23 09-17-45.png  used on input
@@ -727,7 +727,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 LaTeX Warning: Command \textendash invalid in math mode on input line 390.
 
-<Screenshot from 2021-08-23 12-56-59.png, id=895, 1068.99374pt x 679.53876pt>
+<Screenshot from 2021-08-23 12-56-59.png, id=910, 1068.99374pt x 679.53876pt>
 File: Screenshot from 2021-08-23 12-56-59.png Graphic file (type png)
 <use Screenshot from 2021-08-23 12-56-59.png>
 Package pdftex.def Info: Screenshot from 2021-08-23 12-56-59.png  used on input
@@ -742,7 +742,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [15 <./Screenshot from 2021-08-23 12-56-59.png>]
-<Screenshot from 2021-08-23 13-33-11.png, id=901, 1074.0125pt x 844.15375pt>
+<Screenshot from 2021-08-23 13-33-11.png, id=916, 1074.0125pt x 844.15375pt>
 File: Screenshot from 2021-08-23 13-33-11.png Graphic file (type png)
 <use Screenshot from 2021-08-23 13-33-11.png>
 Package pdftex.def Info: Screenshot from 2021-08-23 13-33-11.png  used on input
@@ -757,7 +757,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [16 <./Screenshot from 2021-08-23 13-33-11.png>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-5-1.pdf, id=908, 505.89pt x 28
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-5-1.pdf, id=923, 505.89pt x 28
 9.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (typ
 e pdf)
@@ -792,7 +792,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [19]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-9-1.pdf, id=932, 505.89pt x 28
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-9-1.pdf, id=947, 505.89pt x 28
 9.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (typ
 e pdf)
@@ -839,7 +839,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [22]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-12-1.pdf, id=958, 505.89pt x 2
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-12-1.pdf, id=973, 505.89pt x 2
 89.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (ty
 pe pdf)
@@ -883,8 +883,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [26]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-15-1.pdf, id=995, 505.89pt x 2
-89.08pt>
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-15-1.pdf, id=1010, 505.89pt x 
+289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (ty
 pe pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-15-1.pdf>
@@ -947,7 +947,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [32]
-<Screenshot from 2021-08-26 11-29-35.png, id=1053, 1067.99pt x 634.37pt>
+<Screenshot from 2021-08-26 11-29-35.png, id=1069, 1067.99pt x 634.37pt>
 File: Screenshot from 2021-08-26 11-29-35.png Graphic file (type png)
 <use Screenshot from 2021-08-26 11-29-35.png>
 Package pdftex.def Info: Screenshot from 2021-08-26 11-29-35.png  used on input
@@ -971,7 +971,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [34]
-<Screenshot from 2021-08-28 15-31-11.png, id=1068, 894.34125pt x 615.29875pt>
+<Screenshot from 2021-08-28 15-31-11.png, id=1083, 894.34125pt x 615.29875pt>
 File: Screenshot from 2021-08-28 15-31-11.png Graphic file (type png)
 <use Screenshot from 2021-08-28 15-31-11.png>
 Package pdftex.def Info: Screenshot from 2021-08-28 15-31-11.png  used on input
@@ -986,7 +986,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [35 <./Screenshot from 2021-08-28 15-31-11.png>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-21-1.pdf, id=1075, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-21-1.pdf, id=1090, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (ty
 pe pdf)
@@ -1003,7 +1003,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [36]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-22-1.pdf, id=1086, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-22-1.pdf, id=1101, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-22-1.pdf Graphic file (ty
 pe pdf)
@@ -1039,7 +1039,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [39]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-28-1.pdf, id=1118, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-28-1.pdf, id=1133, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-28-1.pdf Graphic file (ty
 pe pdf)
@@ -1083,7 +1083,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [43]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-31-1.pdf, id=1158, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-31-1.pdf, id=1174, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-31-1.pdf Graphic file (ty
 pe pdf)
@@ -1100,7 +1100,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [44]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-32-1.pdf, id=1168, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-32-1.pdf, id=1183, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-32-1.pdf Graphic file (ty
 pe pdf)
@@ -1153,7 +1153,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [49]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-37-1.pdf, id=1208, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-37-1.pdf, id=1223, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-37-1.pdf Graphic file (ty
 pe pdf)
@@ -1186,7 +1186,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [51]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-39-1.pdf, id=1230, 2554.54375p
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-39-1.pdf, id=1245, 2554.54375p
 t x 3011.25pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-39-1.pdf Graphic file (ty
 pe pdf)
@@ -1212,7 +1212,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [53]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-41-1.pdf, id=1248, 2340.745pt 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-41-1.pdf, id=1263, 2340.745pt 
 x 967.615pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-41-1.pdf Graphic file (ty
 pe pdf)
@@ -1229,7 +1229,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [54 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-41-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-42-1.pdf, id=1267, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-42-1.pdf, id=1282, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-42-1.pdf Graphic file (ty
 pe pdf)
@@ -1246,7 +1246,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [55 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-42-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-43-1.pdf, id=1278, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-43-1.pdf, id=1294, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-43-1.pdf Graphic file (ty
 pe pdf)
@@ -1263,7 +1263,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [56 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-43-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-44-1.pdf, id=1289, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-44-1.pdf, id=1304, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-44-1.pdf Graphic file (ty
 pe pdf)
@@ -1280,7 +1280,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [57 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-44-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-45-1.pdf, id=1299, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-45-1.pdf, id=1314, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-45-1.pdf Graphic file (ty
 pe pdf)
@@ -1297,7 +1297,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [58 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-45-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-46-1.pdf, id=1309, 2220.295pt 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-46-1.pdf, id=1324, 2220.295pt 
 x 2415.0225pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-46-1.pdf Graphic file (ty
 pe pdf)
@@ -1350,7 +1350,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [63]
-<Screenshot from 2021-09-23 21-45-37.png, id=1355, 1236.62pt x 219.82124pt>
+<Screenshot from 2021-09-23 21-45-37.png, id=1370, 1236.62pt x 219.82124pt>
 File: Screenshot from 2021-09-23 21-45-37.png Graphic file (type png)
 <use Screenshot from 2021-09-23 21-45-37.png>
 Package pdftex.def Info: Screenshot from 2021-09-23 21-45-37.png  used on input
@@ -1365,13 +1365,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [64 <./Screenshot from 2021-09-23 21-45-37.png>]
-<Screenshot from 2021-09-23 21-20-29.png, id=1368, 615.29875pt x 243.91125pt>
+<Screenshot from 2021-09-23 21-20-29.png, id=1383, 615.29875pt x 243.91125pt>
 File: Screenshot from 2021-09-23 21-20-29.png Graphic file (type png)
 <use Screenshot from 2021-09-23 21-20-29.png>
 Package pdftex.def Info: Screenshot from 2021-09-23 21-20-29.png  used on input
  line 2350.
 (pdftex.def)             Requested size: 281.85788pt x 111.73158pt.
-<Screenshot from 2021-09-23 21-29-16.png, id=1369, 1290.8225pt x 517.935pt>
+<Screenshot from 2021-09-23 21-29-16.png, id=1384, 1290.8225pt x 517.935pt>
 File: Screenshot from 2021-09-23 21-29-16.png Graphic file (type png)
 <use Screenshot from 2021-09-23 21-29-16.png>
 Package pdftex.def Info: Screenshot from 2021-09-23 21-29-16.png  used on input
@@ -1430,7 +1430,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [69]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-57-1.pdf, id=1412, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-57-1.pdf, id=1427, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-57-1.pdf Graphic file (ty
 pe pdf)
@@ -1447,7 +1447,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [70 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-57-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-58-1.pdf, id=1424, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-58-1.pdf, id=1439, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-58-1.pdf Graphic file (ty
 pe pdf)
@@ -1478,7 +1478,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [72 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-58-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-59-1.pdf, id=1438, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-59-1.pdf, id=1453, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-59-1.pdf Graphic file (ty
 pe pdf)
@@ -1500,7 +1500,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [73 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-59-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-60-1.pdf, id=1449, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-60-1.pdf, id=1464, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-60-1.pdf Graphic file (ty
 pe pdf)
@@ -1522,7 +1522,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [74 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-60-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-61-1.pdf, id=1460, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-61-1.pdf, id=1475, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-61-1.pdf Graphic file (ty
 pe pdf)
@@ -1544,7 +1544,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [75 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-61-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-62-1.pdf, id=1470, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-62-1.pdf, id=1485, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-62-1.pdf Graphic file (ty
 pe pdf)
@@ -1683,7 +1683,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [89]
-<Screenshot from 2021-09-27 12-03-25.png, id=1559, 717.68124pt x 369.38pt>
+<Screenshot from 2021-09-27 12-03-25.png, id=1574, 717.68124pt x 369.38pt>
 File: Screenshot from 2021-09-27 12-03-25.png Graphic file (type png)
 <use Screenshot from 2021-09-27 12-03-25.png>
 Package pdftex.def Info: Screenshot from 2021-09-27 12-03-25.png  used on input
@@ -1698,7 +1698,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [90 <./Screenshot from 2021-09-27 12-03-25.png>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-71-1.pdf, id=1567, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-71-1.pdf, id=1582, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-71-1.pdf Graphic file (ty
 pe pdf)
@@ -1724,7 +1724,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [92]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-73-1.pdf, id=1586, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-73-1.pdf, id=1601, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-73-1.pdf Graphic file (ty
 pe pdf)
@@ -1732,7 +1732,7 @@ pe pdf)
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-73-1.p
 df  used on input line 3661.
 (pdftex.def)             Requested size: 469.76265pt x 268.43579pt.
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-75-1.pdf, id=1587, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-75-1.pdf, id=1602, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-75-1.pdf Graphic file (ty
 pe pdf)
@@ -1749,7 +1749,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [93 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-73-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-77-1.pdf, id=1597, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-77-1.pdf, id=1613, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-77-1.pdf Graphic file (ty
 pe pdf)
@@ -1766,7 +1766,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [94 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-75-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-79-1.pdf, id=1607, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-79-1.pdf, id=1623, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-79-1.pdf Graphic file (ty
 pe pdf)
@@ -1792,7 +1792,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [96 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-79-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-80-1.pdf, id=1627, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-80-1.pdf, id=1642, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-80-1.pdf Graphic file (ty
 pe pdf)
@@ -1805,7 +1805,7 @@ Overfull \hbox (36.14915pt too wide) in paragraph at lines 3731--3732
  [][] 
  []
 
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-81-1.pdf, id=1628, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-81-1.pdf, id=1643, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-81-1.pdf Graphic file (ty
 pe pdf)
@@ -1854,7 +1854,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [100]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-84-1.pdf, id=1661, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-84-1.pdf, id=1676, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-84-1.pdf Graphic file (ty
 pe pdf)
@@ -1876,7 +1876,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [101 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-84-1.pdf>]
-<Screenshot from 2021-10-03 12-37-25.png, id=1671, 813.0375pt x 792.9625pt>
+<Screenshot from 2021-10-03 12-37-25.png, id=1686, 813.0375pt x 792.9625pt>
 File: Screenshot from 2021-10-03 12-37-25.png Graphic file (type png)
 <use Screenshot from 2021-10-03 12-37-25.png>
 Package pdftex.def Info: Screenshot from 2021-10-03 12-37-25.png  used on input
@@ -1970,16 +1970,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [110]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-95-1.pdf, id=1741, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-95-1.pdf, id=1756, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-95-1.pdf Graphic file (ty
 pe pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-95-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-95-1.p
-df  used on input line 4403.
+df  used on input line 4402.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 4403--4404
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 4402--4403
  [][] 
  []
 
@@ -2010,16 +2010,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [113]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-97-1.pdf, id=1764, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-97-1.pdf, id=1779, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-97-1.pdf Graphic file (ty
 pe pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-97-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-97-1.p
-df  used on input line 4486.
+df  used on input line 4485.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 4486--4487
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 4485--4486
  [][] 
  []
 
@@ -2032,16 +2032,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [114 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-97-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-98-1.pdf, id=1777, 505.89pt x 
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-98-1.pdf, id=1792, 505.89pt x 
 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-98-1.pdf Graphic file (ty
 pe pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-98-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-98-1.p
-df  used on input line 4503.
+df  used on input line 4502.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 4503--4504
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 4502--4503
  [][] 
  []
 
@@ -2063,16 +2063,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [116]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-100-1.pdf, id=1792, 505.89pt x
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-100-1.pdf, id=1807, 505.89pt x
  289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-100-1.pdf Graphic file (t
 ype pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-100-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-100-1.
-pdf  used on input line 4589.
+pdf  used on input line 4588.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 4589--4590
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 4588--4589
  [][] 
  []
 
@@ -2121,16 +2121,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [121]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-104-1.pdf, id=1830, 505.89pt x
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-104-1.pdf, id=1845, 505.89pt x
  289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-104-1.pdf Graphic file (t
 ype pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-104-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-104-1.
-pdf  used on input line 4825.
+pdf  used on input line 4824.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 4825--4825
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 4824--4824
  [] 
  []
 
@@ -2152,16 +2152,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [123]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-105-1.pdf, id=1844, 505.89pt x
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-105-1.pdf, id=1859, 505.89pt x
  289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-105-1.pdf Graphic file (t
 ype pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-105-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-105-1.
-pdf  used on input line 4862.
+pdf  used on input line 4861.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 4862--4862
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 4861--4861
  [] 
  []
 
@@ -2192,16 +2192,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [126]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-107-1.pdf, id=1864, 505.89pt x
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-107-1.pdf, id=1879, 505.89pt x
  289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-107-1.pdf Graphic file (t
 ype pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-107-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-107-1.
-pdf  used on input line 4980.
+pdf  used on input line 4979.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 4980--4980
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 4979--4979
  [] 
  []
 
@@ -2223,16 +2223,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [128]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-108-1.pdf, id=1879, 505.89pt x
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-108-1.pdf, id=1894, 505.89pt x
  289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-108-1.pdf Graphic file (t
 ype pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-108-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-108-1.
-pdf  used on input line 5046.
+pdf  used on input line 5045.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 5046--5046
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 5045--5045
  [] 
  []
 
@@ -2263,16 +2263,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [131]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-110-1.pdf, id=1899, 505.89pt x
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-110-1.pdf, id=1914, 505.89pt x
  289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-110-1.pdf Graphic file (t
 ype pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-110-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-110-1.
-pdf  used on input line 5173.
+pdf  used on input line 5172.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 5173--5173
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 5172--5172
  [] 
  []
 
@@ -2294,16 +2294,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [133]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-111-1.pdf, id=1914, 505.89pt x
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-111-1.pdf, id=1929, 505.89pt x
  289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-111-1.pdf Graphic file (t
 ype pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-111-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-111-1.
-pdf  used on input line 5210.
+pdf  used on input line 5209.
 (pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
 
-Overfull \hbox (36.14915pt too wide) in paragraph at lines 5210--5210
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 5209--5209
  [] 
  []
 
@@ -2352,13 +2352,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [138]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-116-1.pdf, id=1946, 505.89pt x
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-116-1.pdf, id=1961, 505.89pt x
  289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-116-1.pdf Graphic file (t
 ype pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-116-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-116-1.
-pdf  used on input line 5430.
+pdf  used on input line 5429.
 (pdftex.def)             Requested size: 352.32199pt x 201.32684pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2369,13 +2369,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [139 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-116-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-117-1.pdf, id=1962, 505.89pt x
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-117-1.pdf, id=1977, 505.89pt x
  289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-117-1.pdf Graphic file (t
 ype pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-117-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-117-1.
-pdf  used on input line 5439.
+pdf  used on input line 5438.
 (pdftex.def)             Requested size: 352.32199pt x 201.32684pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2386,13 +2386,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [140 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-117-1.pdf>]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-118-1.pdf, id=1972, 505.89pt x
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-118-1.pdf, id=1987, 505.89pt x
  289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-118-1.pdf Graphic file (t
 ype pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-118-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-118-1.
-pdf  used on input line 5451.
+pdf  used on input line 5450.
 (pdftex.def)             Requested size: 352.32199pt x 201.32684pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2430,6 +2430,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [144]
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-123-1.pdf, id=2013, 505.89pt x
+ 289.08pt>
+File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-123-1.pdf Graphic file (t
+ype pdf)
+<use Catatan-Kuliah_files/figure-latex/unnamed-chunk-123-1.pdf>
+Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-123-1.
+pdf  used on input line 5623.
+(pdftex.def)             Requested size: 469.76265pt x 268.43579pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2438,16 +2446,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[145] (./Catatan-Kuliah.aux)
+[145 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-123-1.pdf>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[146] (./Catatan-Kuliah.aux)
 Package rerunfilecheck Info: File `Catatan-Kuliah.out' has not changed.
-(rerunfilecheck)             Checksum: C6FEE3C40BA12387ED18502E994DF84A;23143.
+(rerunfilecheck)             Checksum: 0FC2663283A45E6047F066583638FED0;23480.
  ) 
 Here is how much of TeX's memory you used:
- 14787 strings out of 480559
- 242392 string characters out of 5902712
- 557098 words of memory out of 5000000
- 31228 multiletter control sequences out of 15000+600000
- 507076 words of font info for 229 fonts, out of 8000000 for 9000
+ 14815 strings out of 480559
+ 243091 string characters out of 5902712
+ 557249 words of memory out of 5000000
+ 31242 multiletter control sequences out of 15000+600000
+ 511734 words of font info for 233 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,12n,66p,728b,491s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/ho
@@ -2477,10 +2494,10 @@ x_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></home/ikanx_serv
 er/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></home/ikanx_server/.Ti
 nyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></home/ikanx_server/.TinyTeX
 /texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Catatan-Kuliah.pdf (145 pages, 6868649 bytes).
+Output written on Catatan-Kuliah.pdf (146 pages, 6876086 bytes).
 PDF statistics:
- 2244 PDF objects out of 2487 (max. 8388607)
- 1914 compressed objects within 20 object streams
- 591 named destinations out of 1000 (max. 500000)
- 54652 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 2273 PDF objects out of 2487 (max. 8388607)
+ 1940 compressed objects within 20 object streams
+ 598 named destinations out of 1000 (max. 500000)
+ 56729 words of extra memory for PDF output out of 61914 (max. 10000000)
 

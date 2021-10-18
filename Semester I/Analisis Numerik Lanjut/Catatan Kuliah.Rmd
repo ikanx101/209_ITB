@@ -26,7 +26,6 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-#setwd("~/S2 Sains Komputasi ITB/Kuliah/Semester I/Analisis Numerik Lanjut")
 
 library(dplyr)
 library(ggplot2)
@@ -3297,7 +3296,7 @@ rm(list=ls())
 
 # CHAPTER V {-}
 
-# NUMERICAL OPTIMIZATION part I
+# NUMERICAL OPTIMIZATION
 
 Domain optimisasi akan selalu ada di berbagai bidang kehidupan. Kali ini kita akan mencoba mencari solusi optimal secara numeric. Ada beberapa metode _metaheuristic_ yang akan kita bahas di bagian-bagian selanjutnya.
 
@@ -4362,5 +4361,49 @@ ceisya %>%
 ```
 
 \newpage
+
+# CHAPTER VI {-}
+
+# _CURVE FITTING_
+
+_Curve fitting_ alias pencocokan kurva adalah suatu metode yang lazim digunakan untuk mendekati suatu data _real_ dengan fungsi dengan _error_ terkecil. Ada banyak metode untuk melakukannya, seperti pendekatan linear, polinomial, dan _spline cubic_.
+
+## Linear _Curve Fitting_
+
+Biasa kita kenal dengan regresi linear. Menggunakan `base` dari __R__ kita bisa dengan mudah menghitungnya. Sebagai contoh:
+
+```{r,include=FALSE}
+rm(list=ls())
+```
+
+```{r}
+# ini data contoh
+x = c(32,64,96,118,126,144,152.5,158)
+y = c(99.5,104.8,108.5,100,86,64,35.3,15)
+# we will make y the response variable and x the predictor
+# the response variable is usually on the y-axis
+plot(x,y,pch=19)
+```
+
+Untuk membuat model linear, kita bisa gunakan `base` __R__ via `lm()`. Berikut adalah caranya:
+
+```{r}
+# linear regression
+model1 = lm(y~x)
+model1
+```
+
+Lantas bagaimana caranya jika kita hendak membuat algoritmanya sendiri? 
+
+Misalkan suatu vektor $X$ dan $Y$ hendak dibuat persamaan linear sebagai berikut $f(x) = ax + b$.
+
+```{r out.width="70%",echo=FALSE,fig.retina=10,fig.cap="Dasar Regresi Linear"}
+knitr::include_graphics("Screenshot_20211018_101202.jpg")
+```
+
+Dari mana operasi matriks tersebut berasal?
+
+
+
 
 # END {-}
