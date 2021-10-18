@@ -26,7 +26,7 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("~/S2 Sains Komputasi ITB/Kuliah/Semester I/Analisis Numerik Lanjut")
+#setwd("~/S2 Sains Komputasi ITB/Kuliah/Semester I/Analisis Numerik Lanjut")
 
 library(dplyr)
 library(ggplot2)
@@ -3297,7 +3297,7 @@ rm(list=ls())
 
 # CHAPTER V {-}
 
-# NUMERICAL OPTIMIZATION
+# NUMERICAL OPTIMIZATION part I
 
 Domain optimisasi akan selalu ada di berbagai bidang kehidupan. Kali ini kita akan mencoba mencari solusi optimal secara numeric. Ada beberapa metode _metaheuristic_ yang akan kita bahas di bagian-bagian selanjutnya.
 
@@ -3695,5 +3695,674 @@ Sebagai catatan, karena ini adalah metode _meta heuristic_ maka __tidak ada jami
 
 > Kita bisa menyiasatinya dengan cara melakukan percobaan berkali-kali agar hasil yang kita dapatkan konvergen ke suatu solusi tertentu.
 
+\newpage
+
+# NUMERICAL OPTIMIZATION part II
+
+## _Spiral Optimization Algorithm_
+
+_Spiral Optimization Algorithm_ adalah salah satu metode _meta heuristic_ yang digunakan untuk mencari minimum global dari suatu sistem persamaan. 
+
+Algoritmanya mudah dipahami dan intuitif tanpa harus memiliki latar keilmuan tertentu. Proses kerjanya adalah dengan melakukan _random number generating_ pada suatu selang dan melakukan rotasi sekaligus kontraksi dengan titik paling minimum pada setiap iterasi sebagai pusatnya.
+
+Berikut adalah algoritmanya:
+
+```
+INPUT
+  m >= 2 # jumlah titik
+  theta  # sudut rotasi (0 <= theta <= 2pi)
+  r      # konstraksi
+  k_max  # iterasi maksimum
+PROCESS
+  1 generate m buah titik secara acak
+      x_i
+  2 initial condition
+      k = 0 # untuk keperluan iterasi
+  3 cari x_* yang memenuhi
+      min(f(x_*))
+  
+  4 lakukan rotasi dan konstraksi semua x_i
+      x_* sebagai pusat rotasi
+      k = k + 1
+  5 ulangi proses 3 dan 4
+  6 hentikan proses saat k = k_max
+      output x_*
+```
+
+Berdasarkan algoritma di atas, salah satu proses yang penting adalah melakukan __rotasi__ dan __konstraksi__ terhadap semua titik yang telah di-_generate_.
+
+Agar memudahkan penjeasan, saya akan memberikan ilustrasi geometri beserta operasi matriks aljabar terkait kedua hal tersebut.
+
+Berikut adalah langkah-langkah yang ditempuh:
+
+1. __Pertama__ saya akan membuat program yang bisa merotasi suatu titik berdasarkan suatu $\theta$ tertentu.
+1. __Kedua__ saya akan memodifikasi program tersebut untuk melakukan rotasi sekaligus konstraksi dengan rasio $r$ tertentu.
+1. __Ketiga__ saya akan memodifikasi program tersebut untuk melakukan rotasi sekaligus konstraksi dengan __titik pusat rotasi tertentu__.
+
+### Ilustrasi Geometris
+
+#### Operasi Matriks Rotasi
+
+Misalkan saya memiliki titik $x \in \mathbb{R}^2$. Untuk melakukan rotasi sebesar $\theta$, saya bisa menggunakan suatu matriks $A_{2 \times 2}$ berisi fungsi-fungsi trigonometri sebagai berikut:
+
+$$\begin{bmatrix} x_1 (k+1) \\ x_2 (k+1) \end{bmatrix} = \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} \begin{bmatrix} x_1 (k) \\ x_2 (k) \end{bmatrix}$$
+
+Berdasarkan operasi matriks di atas, saya membuat __program__ di __R__ dengan beberapa modifikasi. Sebagai contoh, saya akan membuat program yang bertujuan untuk melakukan rotasi suatu titik $x \in \mathbb{R}$ sebanyak $n$ kali:
+
+```{r,include = FALSE}
+rm(list=ls())
+
+# function untuk random titik
+rand_titik = function(a,b){
+  runif(2,a,b)
+}
+```
+
+```{r}
+# mendefinisikan program
+rotasi_kan = function(x0,rot){
+  # menghitung theta
+  theta = 2*pi/rot
+  # definisi matriks rotasi
+  A = matrix(c(cos(theta),-sin(theta),
+             sin(theta),cos(theta)),
+           ncol = 2,byrow = T)
+  
+  # membuat template
+  temp = vector("list")
+  temp[[1]] = x0
+  # proses rotasi
+  for(i in 2:rot){
+    xk = A %*% x0
+    temp[[i]] = xk
+    x0 = xk
+  }
+  
+  # membuat template data frame
+  final = data.frame(x = rep(NA,rot),
+                     y = rep(NA,rot))
+  
+  # gabung data dari list
+  for(i in 1:rot){
+    tempura = temp[[i]]
+    final$x[i] = tempura[1]
+    final$y[i] = tempura[2]
+  }
+  # membuat plot
+  plot = 
+    ggplot() +
+    geom_point(aes(x,y),data = final) +
+    geom_point(aes(x[1],y[1]),
+               data = final,
+               color = "red") +
+    coord_equal() +
+    labs(title = "titik merah adalah titik initial") 
+  
+  # enrich dengan garis panah
+  panah = data.frame(
+    x_start = final$x[1:(rot-1)],
+    x_end = final$x[2:rot],
+    y_start = final$y[1:(rot-1)],
+    y_end = final$y[2:rot]
+  )
+  # menambahkan garis panah ke plot
+  plot = 
+    plot + 
+    geom_segment(aes(x = x_start,
+                 xend = x_end,
+                 y = y_start,
+                 yend = y_end),
+                 data = panah,
+                 arrow = arrow(length = unit(.3,"cm"))
+                 )
+  
+  # menyiapkan output
+  list("Grafik rotasi" = plot,
+       "Titik-titik rotasi" = final)
+  }
+```
+
+\newpage
+
+Berikut adalah uji coba dengan titik sembarang berikut ini:
+
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi I"}
+# uji coba
+rot = 12 # berapa banyak rotasi
+x0 = rand_titik(0,10) # generate random titik
+rotasi_kan(x0,rot)
+```
+
+\newpage
+
+Uji coba kembali dengan titik sembarang lainnya berikut ini:
+
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi II"}
+# uji coba
+rot = 7 # berapa banyak rotasi
+x0 = rand_titik(0,10) # generate random titik
+rotasi_kan(x0,rot)
+```
+
+\newpage
+
+#### Operasi Matriks Rotasi dan Kontraksi
+
+Jika pada sebelumnya saya __hanya melakukan rotasi__, kali ini saya akan memodifikasi operasi matriks agar melakukan rotasi dan konstraksi secara bersamaan. Untuk melakukan hal tersebut, saya akan definisikan $r,0<r<1$ dan melakukan operasi matriks sebagai berikut:
+
+$$\begin{bmatrix} x_1 (k+1) \\ x_2 (k+1) \end{bmatrix} = \begin{bmatrix} r \\ r \end{bmatrix} \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} \begin{bmatrix} x_1 (k) \\ x_2 (k) \end{bmatrix}$$
+
+Oleh karena itu saya akan modifikasi program __R__ sebelumnya menjadi sebagai berikut:
+
+```{r}
+# mendefinisikan program
+rotasi_konstraksi_kan = function(x0,rot,r){
+  # menghitung theta
+  theta = 2*pi/rot
+  # definisi matriks rotasi
+  A = matrix(c(cos(theta),-sin(theta),
+             sin(theta),cos(theta)),
+           ncol = 2,byrow = T)
+  
+  # membuat template
+  temp = vector("list")
+  temp[[1]] = x0
+  # proses rotasi dan konstraksi
+  for(i in 2:rot){
+    xk = A %*% x0
+    xk = r * xk
+    temp[[i]] = xk
+    x0 = xk
+  }
+  
+  # membuat template data frame
+  final = data.frame(x = rep(NA,rot),
+                     y = rep(NA,rot))
+  
+  # gabung data dari list
+  for(i in 1:rot){
+    tempura = temp[[i]]
+    final$x[i] = tempura[1]
+    final$y[i] = tempura[2]
+  }
+  # membuat plot
+  plot = 
+    ggplot() +
+    geom_point(aes(x,y),data = final) +
+    geom_point(aes(x[1],y[1]),
+               data = final,
+               color = "red") +
+    coord_equal() +
+    labs(title = "titik merah adalah titik initial") 
+  
+  # enrich dengan garis panah
+  panah = data.frame(
+    x_start = final$x[1:(rot-1)],
+    x_end = final$x[2:rot],
+    y_start = final$y[1:(rot-1)],
+    y_end = final$y[2:rot]
+  )
+  # menambahkan garis panah ke plot
+  plot = 
+    plot + 
+    geom_segment(aes(x = x_start,
+                 xend = x_end,
+                 y = y_start,
+                 yend = y_end),
+                 data = panah,
+                 arrow = arrow(length = unit(.3,"cm"))
+                 )
+  
+  # menyiapkan output
+  list("Grafik rotasi" = plot,
+       "Titik-titik rotasi" = final)
+  }
+```
+
+Berikutnya saya akan tunjukkan ilustrasi dari program ini.
+
+\newpage
+
+Saya akan uji coba untuk sembarang titik berikut ini:
+
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi I"}
+# uji coba
+rot = 40 # berapa banyak rotasi
+x0 = rand_titik(0,4) # generate random titik
+r = .9
+rotasi_konstraksi_kan(x0,rot,r)
+```
+
+\newpage
+
+Saya akan uji coba kembali untuk sembarang titik lainnya berikut ini:
+
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi II"}
+# uji coba
+rot = 6 # berapa banyak rotasi
+x0 = rand_titik(0,4) # generate random titik
+r = .7
+rotasi_konstraksi_kan(x0,rot,r)
+```
+
+__Catatan penting:__
+
+Terlihat bahwa semakin banyak rotasi dan konstraksi yang dilakukan akan membuat titik _initial_ __menuju pusat__ $(0,0)$.
+
+\newpage
+
+#### Operasi Matriks Rotasi dan Kontraksi dengan Titik $x^*$ Sebagai Pusatnya
+
+Salah satu prinsip utama dari _spiral optimization algorithm_ adalah menjadikan titik $x^*$ sebagai pusat rotasi di setiap iterasinya. Operasi matriksnya adalah sebagai berikut:
+
+$$\begin{bmatrix} x_1 (k+1) \\ x_2 (k+1) \end{bmatrix} = \begin{bmatrix} x_1^* \\ x_2^* \end{bmatrix} + \begin{bmatrix} r \\ r \end{bmatrix} \begin{bmatrix} \cos{\theta} & -\sin{\theta} \\ \sin{\theta} & \cos{\theta} \end{bmatrix} ( \begin{bmatrix} x_1 (k) \\ x_2 (k) \end{bmatrix} - \begin{bmatrix} x_1^* \\ x_2^* \end{bmatrix} )$$
+
+
+Oleh karena itu kita akan modifikasi program bagian sebelumnya menjadi seperti ini:
+
+```{r}
+# mendefinisikan program
+rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bin){
+  # pusat rotasi
+  pusat = x_bin
+  # menghitung theta
+  theta = 2*pi/rot
+  # definisi matriks rotasi
+  A = matrix(c(cos(theta),-sin(theta),
+             sin(theta),cos(theta)),
+           ncol = 2,byrow = T)
+  
+  # membuat template
+  temp = vector("list")
+  temp[[1]] = x0
+  # proses rotasi dan konstraksi
+  for(i in 2:rot){
+    xk = A %*% (x0-pusat) # diputar dengan x_bin sebagai pusat
+    xk = pusat + (r * xk)
+    temp[[i]] = xk
+    x0 = xk
+  }
+  
+  # membuat template data frame
+  final = data.frame(x = rep(NA,rot),
+                     y = rep(NA,rot))
+  
+  # gabung data dari list
+  for(i in 1:rot){
+    tempura = temp[[i]]
+    final$x[i] = tempura[1]
+    final$y[i] = tempura[2]
+  }
+  # membuat plot
+  plot = 
+    ggplot() +
+    geom_point(aes(x,y),data = final) +
+    geom_point(aes(x[1],y[1]),
+               data = final,
+               color = "red") +
+    geom_point(aes(x = pusat[1],
+		   y = pusat[2]),
+	       color = "blue") +
+    labs(title = "titik merah adalah titik initial\ntitik biru adalah pusat rotasi") 
+  
+  # enrich dengan garis panah
+  panah = data.frame(
+    x_start = final$x[1:(rot-1)],
+    x_end = final$x[2:rot],
+    y_start = final$y[1:(rot-1)],
+    y_end = final$y[2:rot]
+  )
+  # menambahkan garis panah ke plot
+  plot = 
+    plot + 
+    geom_segment(aes(x = x_start,
+                 xend = x_end,
+                 y = y_start,
+                 yend = y_end),
+                 data = panah,
+                 arrow = arrow(length = unit(.3,"cm"))
+                 )
+  
+  # menyiapkan output
+  list("Grafik rotasi" = plot,
+       "Titik-titik rotasi" = final)
+  }
+```
+
+Berikutnya saya akan tunjukkan ilustrasi dari program ini.
+
+
+\newpage
+
+Saya akan coba dengan sembarang titik berikut:
+
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi Terhadap x* I"}
+# uji coba
+rot = 10 # berapa banyak rotasi
+x0 = rand_titik(0,4) # generate random titik
+x_bintang = c(0,1) # contoh pusat rotasi
+r = .6
+rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
+```
+
+\newpage
+
+Saya akan coba kembali dengan sembarang titik lainnya:
+
+```{r,fig.align="center",fig.retina = 10,fig.caption = "Uji Coba Rotasi-Konstraksi Terhadap x* II"}
+# uji coba
+rot = 45 # berapa banyak rotasi
+x0 = rand_titik(0,10) # generate random titik
+x_bintang = c(2,3) # contoh pusat rotasi
+r = .87
+rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
+```
+
+\newpage
+
+## Program _Spiral Optimization Algorithm_
+
+Berbekal program yang telah dituliskan di bagian sebelumnya, kita akan sempurnakan program untuk melakukan _spiral optimization_ sebagai berikut:
+
+```{r}
+soa_mrf = function(N,	  # banyak titik
+		   x1_d,  # batas bawah x1
+		   x1_u,  # batas atas x1
+		   x2_d,  # batas bawah x2
+		   x2_u,  # batas atas x2
+		   rot,	  # berapa banyak rotasi
+		   k_max, # iterasi maks
+		   r){	  # berapa rate konstraksi
+		   
+# N pasang titik random di selang [a,b] di R2
+x1 = runif(N,x1_d,x1_u)
+x2 = runif(N,x2_d,x2_u)
+# hitung theta
+theta = 2*pi / rot
+# definisi matriks rotasi
+A = matrix(c(cos(theta),-sin(theta),
+             sin(theta),cos(theta)),
+           ncol = 2,byrow = T)
+# bikin data frame
+temp = data.frame(x1,x2) %>% mutate(f = f(x1,x2))
+# proses iterasi
+for(i in 1:k_max){
+  # mencari titik x* dengan min(f)
+  f_min = 
+	temp %>% 
+	filter(f == min(f))
+  pusat = c(f_min$x1,f_min$x2)
+  for(j in 1:N){
+	# kita akan ambil titiknya satu persatu
+	x0 = c(temp$x1[j],temp$x2[j])
+	
+	# proses rotasi dan konstraksi terhadap pusat x*
+	xk = A %*% (x0-pusat) # diputar dengan x_bin sebagai pusat
+        xk = pusat + (r * xk)
+	
+	# proses mengembalikan nilai ke temp
+	temp$x1[j] = xk[1]
+	temp$x2[j] = xk[2]
+	}
+    
+    # hitung kembali nilai f(x1,x2)
+    temp = temp %>% mutate(f = f(x1,x2))
+    }
+# proses output hasil
+output = temp %>% filter(f == min(f))
+return(output)
+}
+```
+
+
+### Contoh Penggunaan Program
+
+Kita akan coba performa program tersebut untuk menyelesaikan fungsi berikut:
+
+$$f(x_1,x_2) = \frac{x_1^4 - 16 x_1^2 + 5 x_1}{2} + \frac{x_2^4 - 16 x_2^2 + 5 x_2}{2}$$
+
+$$-4 \leq x_1,x_2 \leq 4$$
+
+Dengan $r = 0.8, N = 50, rot = 20, k_{max} = 60$.
+
+```{r}
+# definisi
+N = 50
+a = -4 # x1 dan x2 punya batas bawah yang sama
+b = 4  # x1 dan x2 punya batas atas yang sama
+k_max = 70
+r = .75
+rot = 30
+f = function(x1,x2){
+	((x1^4 - 16 * x1^2 + 5 * x1)/2) + ((x2^4 - 16 * x2^2 + 5* x2)/2)
+	}
+# solving
+soa_mrf(N,a,b,a,b,rot,k_max,r)
+```
+
+__Catatan__
+
+Pada algoritma ini, penentuan $\theta, r, x$ menjadi penentu hasil perhitungan.
+
+\newpage
+
+### Mengubah Optimisasi Menjadi Pencarian Akar
+
+_Spiral optimization algorithm_ adalah suatu metode untuk mencari solusi minimum global. Jika kita hendak memakainya untuk mencari suatu akar persamaan (atau sistem persamaan), kita bisa melakukan modifikasi pada fungsi-fungsi yang terlibat (membuat fungsi _merit_).
+
+Misalkan suatu sistem persamaan non linear:
+
+$$g_1 (x_1,x_2,..,x_n) = 0$$
+
+$$g_2 (x_1,x_2,..,x_n) = 0$$
+
+$$g_n (x_1,x_2,..,x_n) = 0$$
+
+dengan $(x_1,x_2,..,x_n)^T \in D$
+
+$$D = a_1,b_1 \times a_2,b_2 \times .. \times a_n,b_n \subset \mathbb{R}^n$$
+
+
+#### Pencarian Akar
+
+Sistem di atas memiliki solusi $x = (x_1,x_2,..,x_n)^T$ jika $F(x)$ yang kita definisikan sebagai:
+
+$$F(x) = \frac{1}{1+ \sum_{i=1}^n |g_i(x)|}$$
+
+
+memiliki nilai maksimum sama dengan 1. __Akibatnya algoritma yang sebelumnya adalah mencari $\min{F(x)}$ diubah menjadi__ $\max{F(x)}$. Kenapa demikian?
+
+> Karena jika $F(x) = 1$ artinya $\sum_{i=1}^n |g_i(x)| = 0$ yang merupakan akar dari $g_i,i = 1,2,..,n$.
+
+```{r,include = FALSE}
+soa_mrf_2 = function(N,	  # banyak titik
+		     x1_d,  # batas bawah x1
+		     x1_u,  # batas atas x1
+		     x2_d,  # batas bawah x2
+		     x2_u,  # batas atas x2
+		     rot,   # berapa banyak rotasi
+		     k_max, # iterasi maks
+		     r){    # berapa rate konstraksi
+		   
+# N pasang titik random di selang [a,b] di R2
+x1 = runif(N,x1_d,x1_u)
+x2 = runif(N,x2_d,x2_u)
+# hitung theta
+theta = 2*pi / rot
+# definisi matriks rotasi
+A = matrix(c(cos(theta),-sin(theta),
+             sin(theta),cos(theta)),
+           ncol = 2,byrow = T)
+# bikin data frame
+temp = data.frame(x1,x2) %>% mutate(f = f(x1,x2))
+# proses iterasi
+for(i in 1:k_max){
+  # mencari titik x* dengan max(f)
+  f_min = 
+	temp %>% 
+	filter(f == max(f))
+  pusat = c(f_min$x1,f_min$x2)
+  for(j in 1:N){
+	# kita akan ambil titiknya satu persatu
+	x0 = c(temp$x1[j],temp$x2[j])
+	
+	# proses rotasi dan konstraksi terhadap pusat x*
+	xk = A %*% (x0-pusat) # diputar dengan x_bin sebagai pusat
+        xk = pusat + (r * xk)
+	
+	# proses mengembalikan nilai ke temp
+	temp$x1[j] = xk[1]
+	temp$x2[j] = xk[2]
+	}
+    
+    # hitung kembali nilai f(x1,x2)
+    temp = temp %>% mutate(f = f(x1,x2))
+    }
+# proses output hasil
+output = temp %>% filter(f == min(f))
+return(output)
+}
+```
+
+
+\newpage
+
+```{r,include=FALSE}
+# fungsi plot
+# untuk contour plot
+ikanx = function(f,a,b){
+  x = seq(a,b,by = .25)
+  temp_plot =
+    expand.grid(x,x) %>%
+    rename(x = Var1,
+           y = Var2) %>%
+    mutate(z = f(x,y))
+  temp_plot %>%
+     ggplot(aes(x = x,y = y,z = z)) +
+     geom_contour() +
+     theme_minimal() +
+     labs(x = "x1",y = "x2",
+	  caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id")
+}
+# untuk sistem persamaan
+ikanx_2 = function(f,a,b){
+  x = seq(a,b,by = .025)
+  temp_plot =
+    expand.grid(x,x) %>%
+    rename(x = Var1,
+           y = Var2) %>%
+    mutate(z = f(x,y)) %>%
+    filter(round(z,1) == 0)
+  return(temp_plot)
+}
+```
+
+# SOAL 1
+
+Tentukanlah akar-akar sistem persamaan berikut dengan __SOA__. Buatlah terlebih dahulu _contour plot_-nya:
+
+$$f_1 (x_1,x_2) = \cos{(2 x_1)} - \cos{(2 x_2)} - 0.4 = 0$$
+
+$$f_2 (x_1,x_2) = 2 (x_2 - x_1) + \sin{ (x_2) } - \sin{(x_1)} - 1.2 = 0$$
+
+dengan $-10 \leq x_1,x_2 \leq 10$
+
+# JAWAB
+
+## _Contour Plot_
+
+Pertama-tama, saya akan buat _contour plot_ dari $f_1 (x_1,x_2)$ sebagai berikut:
+
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 1: f1"}
+f1 = function(x1,x2){cos(2* x1) - cos(2*x2) - 0.4}
+ikanx(f1,-10,10) + labs(title = "Contour Plot f1(x1,x2)")
+```
+
+\newpage
+
+Selanjutnya, saya akan buat _contour plot_ dari $f_2 (x_1,x_2)$ sebagai berikut:
+
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Contour Plot Soal 1: f2"}
+f2 = function(x1,x2){2*(x2 - x1) + sin(x2) - sin(x1) - 1.2}
+ikanx(f2,-10,10) + labs(title = "Contour Plot f2(x1,x2)")
+```
+
+\newpage
+
+## Grafik Sistem Persamaan
+
+Kita akan mencari akar-akar sistem persamaan saat $f_1 = 0$ dan $f_2=0$ dengan bantuan grafik sebagai berikut:
+
+```{r out.width = "75%",echo=FALSE,fig.retina=10,fig.cap = "Plot Soal 1: f1 dan f2"}
+df1 = ikanx_2(f1,-10,10)
+df2 = ikanx_2(f2,-10,10)
+ggplot() +
+  geom_point(data = df1, aes(x,y),color = "steelblue",size = .25) +
+  geom_point(data = df2, aes(x,y),color = "darkgreen",size = .25) +
+  theme_minimal() +
+  labs(x = "x1",y = "x2",
+       title = "Plot f1 dan f2",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id")
+```
+
+Terlihat bahwa ada beberapa titik solusi (persinggungan antara $f_1(x_1,x_2)$ dengan $f_2(x_1,x_2)$.
+
+\newpage
+
+## Mencari Akar Sistem Persamaan
+
+Untuk mencari akarnya kita perlu membentuk $F(x)$ sebagaimana yang telah dijelaskan pada bagian sebelumnya.
+
+```{r}
+# fungsi f1 dan f2 dari soal
+f1 = function(x1,x2){cos(2* x1) - cos(2*x2) - 0.4}
+f2 = function(x1,x2){2*(x2 - x1) + sin(x2) - sin(x1) - 1.2}
+# membuat F(x)
+# saya notasikan sebagai f kecil
+f = function(x1,x2){
+  sum = abs(f1(x1,x2)) + abs(f2(x1,x2))
+  bawah = 1 + sum
+  hasil = 1/bawah
+  return(hasil)
+}
+```
+
+Oleh karena solusi dari grafik ada banyak, maka kita akan _run_ program yang telah dibuat sebelumnya berulang kali:
+
+```{r}
+# solving
+N = 50
+a = -10  # x1 dan x2 punya batas yang sama
+b = 10   # x1 dan x2 punya batas yang sama
+rot = 20
+k_max = 60
+r = .65
+# run I
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+# run II
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+# run III
+soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+```
+
+\newpage
+
+Berikutnya saya coba _run_ sebanyak __100 kali__, berikut adalah rekap semua akar yang saya dapatkan:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+ceisya = data.frame()
+for(i in 1:100){
+  ahnaf = soa_mrf_2(N,a,b,a,b,rot,k_max,r)
+  ceisya = rbind(ahnaf,ceisya)
+}
+ceisya %>% 
+  mutate(x1 = round(x1,3),
+         x2 = round(x2,3),
+	 f = round(f,2)) %>% 
+  distinct() %>%
+  arrange(x1,x2)
+```
+
+\newpage
 
 # END {-}
