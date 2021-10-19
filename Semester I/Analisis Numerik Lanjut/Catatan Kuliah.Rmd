@@ -4820,6 +4820,8 @@ Y = c(0,0.5,2.0,1.5)
 f_x = spline(X,Y)
 ```
 
+\newpage
+
 Ini adalah grafiknya:
 
 ```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Spline Base R"}
@@ -4833,6 +4835,94 @@ ggplot() +
     labs(title = "Hasil Regresi Polinom",
          subtitle = "Biru = Real values\nMerah = Fitted values")
 ```
+
+
+
+\newpage
+
+### _Natural Cubic Spline_
+
+Teorema:
+
+```{r out.width="80%",fig.align='center',echo=FALSE,fig.cap="Teorema Natural Cubic Spline"}
+knitr::include_graphics("Screenshot from 2021-10-19 21-26-57.png")
+```
+
+\newpage
+
+#### Contoh Soal
+
+_Use data points_ $(0,1),(1,e),(2,e^2),(3,e^3)$ _to form natural spline_ $S(x)$ _that approximate_ $f(x) = e^x$.
+
+##### Jawab
+
+Saya akan bentuk tabel data sebagai berikut:
+
+```{r,echo=FALSE}
+rm(list=ls())
+options(digits = 5)
+i = 0:3
+x = 0:3
+fx = c(1,exp(1),exp(2),exp(3))
+
+data.frame(i,x,fx) %>% knitr::kable()
+```
+
+Dari sini kita dapatkan:
+
+$$n = 3, a_0 = 1,a_1 = e,a_2 = e^2, a_3 = e^3$$
+
+> Kenapa $n=3$?
+
+Jawabannya ada di `algoritma 3.4`^[halaman 149].
+
+$$h_0 = h_1 = h_2 = 1$$
+
+```{r}
+# banyak selang
+n = length(x)-1
+
+# notasi di buku
+a = fx
+a = setNames(a,c(0:n))
+a
+
+# hitung h (selang)
+h = diff(x)
+h = setNames(h,c(0:(n-1)))
+h
+
+# cari matriks A
+A = matrix(0,
+           nrow = n+1,
+           ncol = n+1)
+A[1,1] = 1
+A[n+1,n+1] = 1
+
+A[2,1] = h[1]
+A[2,2] = 2*(h[1] + h[2])
+A[2,3] = h[2]
+
+A[3,2] = h[2]
+A[3,3] = 2*(h[2] + h[3])
+A[3,4] = h[3]
+
+A
+
+# hitung B
+b = c()
+b[1] = 0
+b[n+1] = 0
+b[2] = (3/h[2])*(a[3]-a[2]) - (3/h[1])*(a[2]-a[1])
+b[3] = (3/h[3])*(a[4]-a[3]) - (3/h[2])*(a[3]-a[2])
+b
+
+# hitung C
+c = solve(A) %*% b
+c
+```
+
+Sisanya bisa dilihat di halaman tersebut.
 
 \newpage
 
@@ -4848,7 +4938,6 @@ Pada bagian ini kita akan membahas soal-soal dari tahun lalu.
 
 Diberikan data sebagai berikut:
 
-
 ```{r,echo=FALSE}
 rm(list=ls())
 
@@ -4859,7 +4948,17 @@ data.frame(x,fx) %>% knitr::kable("simple")
 ```
 
 
-```{r}
+Untuk membuat aproksimasi _least square_ kuadratik: $P_2(x) = a_0 + a_1 x + a_2 x^2$. Tuliskan persamaan normalnya!
+
+#### Jawab {-}
+
+Perhatikan bahwa persamaan normal bisa dibentuk dengan aturan sebagai berikut:
+
+$$A^TAa = A^T y$$
+
+Maka didapatkan:
+
+```{r,echo=FALSE}
 banyak_order = 2
 y = fx
 
@@ -4878,6 +4977,98 @@ A_T = t(A)
 A_T %*% A %>% round(3)
 A_T %*% y
 ```
+
+### Soal II
+
+Diberikan data sebagai berikut:
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+x = c(-0.05,-0.025,0,0.025,0.05,0.075,.1,.125,.15,.175)
+fx = c(-2.017,-2.072,-2.109,-2.127,-2.126,-2.106,-2.067,-2.009,-1.932,-1.836)
+
+data.frame(x,fx) %>% knitr::kable("simple")
+```
+
+Konstruksi _natural cubic spline_ yang melewati `4` titik: $(0,-2.109),(0.025,-2.127),(0.05,-2.126),(0.075,-2.106),(0.1,-2.067)$. Tuliskan persamaan normalnya!
+
+#### Jawab {-}
+
+Data yang hendak kita pakai adalah:
+
+```{r,echo=FALSE}
+rm(list=ls())
+options(digits = 8)
+x = c(0,0.025,0.05,0.075,0.1)
+fx = c(-2.109,-2.127,-2.126,-2.106,-2.067)
+
+data.frame(x,fx) %>% knitr::kable("simple")
+```
+
+```{r}
+# banyak selang
+n = length(x)-1
+
+# notasi di buku
+a = fx
+a = setNames(a,c(0:n))
+a
+
+# hitung h (selang)
+h = diff(x)
+h = setNames(h,c(0:(n-1)))
+h
+
+# cari matriks A
+A = matrix(0,
+           nrow = n+1,
+           ncol = n+1)
+# baris 1 dan akhir
+A[1,1] = 1
+A[n+1,n+1] = 1
+
+# baris 2
+A[2,1] = h[1]
+A[2,2] = 2*(h[1] + h[2])
+A[2,3] = h[2]
+# baris 3
+A[3,2] = h[2]
+A[3,3] = 2*(h[2] + h[3])
+A[3,4] = h[3]
+# baris 4
+A[4,3] = h[3]
+A[4,4] = 2*(h[3] + h[4])
+A[4,5] = h[4]
+
+
+A
+
+# hitung B
+b = c()
+b[1] = 0
+b[n+1] = 0
+b[2] = (3/h[2])*(a[3]-a[2]) - (3/h[1])*(a[2]-a[1])
+b[3] = (3/h[3])*(a[4]-a[3]) - (3/h[2])*(a[3]-a[2])
+b[4] = (3/h[4])*(a[5]-a[4]) - (3/h[3])*(a[4]-a[3])
+b
+
+# hitung C
+c = solve(A) %*% b
+c
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \center 
