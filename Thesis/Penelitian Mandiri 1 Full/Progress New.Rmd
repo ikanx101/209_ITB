@@ -126,7 +126,7 @@ Masalah optimisasi bisa dibagi dua menjadi dua kategori berdasarkan tipe _variab
 
 \newpage
 
-## Berdasarkan Karakteristik Masalah
+## Berdasarkan Kepastian 
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Optimisasi Berdasarkan Kategori Masalah"}
 nomnoml::nomnoml("#direction: down
@@ -1471,3 +1471,20 @@ Dari ketiga produk baru, perusahaan bisa memilih produk __1 dan 3__ sebanyak __5
 
 # UPDATE MINGGU XII - XIII {.unlisted .unnumbered}
 # SOLVING SUPPLIER SELECTION PROBLEM
+
+
+Thesis:
+
+Memodelkan dan membuat teknik penyelesaian yang efisien.
+
+November berdiskusi tentang masalah.
+
+Tujuan:
+
+Menuliskan dari yang _general_ hingga ke __MILP__. Cari tau __MILP__ diselesaikan dengan metode apa.
+
+Cari tau perbedaan eksak dan heuristic programming.
+
+Eksak dijamin optimal, diselesaikan dengan analisis.
+
+Tambahan kompleksitas. contoh `np hard`.
