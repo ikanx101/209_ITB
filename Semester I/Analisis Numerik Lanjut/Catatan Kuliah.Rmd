@@ -1585,6 +1585,10 @@ g & h & i \\
 
 $$|A| = (aei + bfg + cdh) - (ceg + afh + bdi)$$
 
+Menghitung determinan bisa juga dengan mengalikan semua nilai _eigen_ yang ada d matriks tersebut.
+
+$$|A| = \lambda_1 \lambda_2 \lambda_3 .. \lambda_i$$
+
 ### Sifat-Sifat Determinan Matriks
 
 Misalkan $A$ adalah matriks yang memiliki determinan, maka:
@@ -2135,7 +2139,7 @@ Agar konvergen menuju solusi, perhatikan bahwa $A$ harus __diagonal dominan kuat
 
 Pada metode Jacobi:
 
-$$B_j = -D^{-1}C = -D^-1(L+U)$$
+$$B_j = -D^{-1}C = -D^{-1}(L+U)$$
 
 Jadi, untuk mengecek apakah $A$ akan konvergen atau tidak, kita akan mengecek $\rho(B) < 1$ sebagai __syarat perlu__. Sedangkan __syarat cukup__ kekonvergenan adalah $A$ harus dominan diagonal kuat.
 
@@ -2290,6 +2294,12 @@ Perhatikan bahwa saat $\omega = 1$ didapat $B_{GS} = B_{\omega}$.
 Bagaimana menentukan $\omega$?
 
 $$\omega = \frac{2}{1 + \sqrt{1 - [\rho (B_J)]^2}}$$
+
+Pembuktian $\omega$ bisa dicek di sini:
+
+```{r out.width="70%",fig.align='center',echo=FALSE,fig.cap="Pembuktian SOR"}
+knitr::include_graphics("Screenshot from 2021-10-20 14-16-02.png")
+```
 
 ### Skema Interasi dalam Bentuk Matriks
 
@@ -5483,10 +5493,84 @@ tolong_dibantu_poli_fit(x,y,2)
 
 \newpage
 
+## Sistem Persamaan Linear
 
+### Contoh Soal dari Materi Dosen
 
+Misalkan diketahui SPL sebagai berikut:
 
+$$4x - y + z = 7$$
 
+$$4x - 8y + z = -21$$
+
+$$-2x + y + 5z = 15$$
+
+Temukan solusinya!
+
+#### Jawab {-}
+
+Soal ini sudah saya jawab pada bagian `5.4.1` namun kali ini kita akan lakukan dengan cara yang berbeda.
+
+Suatu SPL sebenarnya bisa ditulis sebagai bentuk matriks $Ax = b$ dimana solusinya bisa dengan mudah didapatkan dengan $b = A^{-1}x$.
+
+```{r,echo=FALSE}
+rm(list=ls())
+A = matrix(c(4,-1,1,
+             4,-8,1,
+             -2,1,5),
+           byrow = T,
+           ncol = 3)
+b = c(7,-21,15)
+A
+b
+```
+
+Kita bisa tuliskan $Ax = b$ menjadi $Mx = (M-A)x + b \rightarrow x = (I-M^{-1}A)x + M^{-1}b$.
+
+Matriks $(I-M^{-1}A)$ akan dinotasikan sebagai $B$. Kekonvergenan $B$ akan diperoleh:
+
+1. Syarat perlu: __jika dan hanya jika__ $\rho (B) < 1$.
+1. Syarat cukup: $||B|| < 1$.
+
+##### Metode Jacobi {-}
+
+Definisi matriks $B$ adalah $B = -D^{-1}(L+U)$. Bagaimana cara membuat $B$ ?
+
+```{r}
+da = diag(A)
+D = diag(da)
+D
+D_inv = solve(D)
+D_inv
+C = A - D
+C
+B = -D_inv %*% C
+B
+```
+
+##### _Natural Norm_ {-}
+
+Kita hitung natural norm dari $A$ sebagai berikut:
+
+```{r,echo=FALSE}
+n_1 = norm(B,"1")
+n_infinity = norm(B,"I")
+```
+
+$||B||_{\infty} =$ `r n_infinity` dan $||B||_{1} =$ `r n_1`.
+
+##### Jari-Jari Spektral {-}
+
+Kita hitung jari-jari spektral:
+
+```{r,echo=FALSE}
+rho = function(matriks){
+ei = eigen(matriks)
+ei = max(abs(ei$values))
+return(ei)
+}
+rho(B)
+```
 
 \newpage
 
