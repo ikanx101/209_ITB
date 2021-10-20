@@ -1,0 +1,21 @@
+---
+title: "UJIAN TENGAH SEMESTER I"
+subtitle: "SK5001 Analisis Numerik Lanjut"
+author: |
+  |Mohammad Rizka Fadhli
+  |NIM: 20921004
+output:
+  pdf_document:
+   dev: png
+---
+
+```{r,include=FALSE}
+options(digit = 5)
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+# Pendahuluan
+
+
