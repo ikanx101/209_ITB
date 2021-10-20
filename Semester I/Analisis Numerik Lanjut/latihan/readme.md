@@ -82,26 +82,39 @@ sangat penting. Oleh karena itu, kita perlu melakukannya:
 
 ``` r
 library(Ryacas)
-```
-
-    ## 
-    ## Attaching package: 'Ryacas'
-
-    ## The following object is masked from 'package:stats':
-    ## 
-    ##     integrate
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     %*%, diag, diag<-, lower.tri, upper.tri
-
-``` r
 eq = "(x-1)*Tan(x) + x * Sin(x*Pi)"
 eq %>% y_fn("D(x)") %>% yac_str()
 ```
 
     ## [1] "(x-1)/Cos(x)^2+Tan(x)+x*Pi*Cos(x*Pi)+Sin(x*Pi)"
 
+Kita telah mendapatkan
+![f'(x)](https://latex.codecogs.com/png.latex?f%27%28x%29 "f'(x)").
 Setelah itu, kita akan set titik iterasi awalnya ![x\_0
 = 0.5](https://latex.codecogs.com/png.latex?x_0%20%3D%200.5
 "x_0 = 0.5").
+
+``` r
+# initial condition
+df = function(x){(x-1)/cos(x)^2+tan(x)+x*pi*cos(x*pi)+sin(x*pi)}
+x_0 = 0.5
+p = 100 # nilai dummy
+i = 1
+
+hasil = data.frame(iter = 0,
+           p = x_0)
+
+while(i <= iter_max && abs(p-x_0) > tol_max){
+  p = x_0 - (f(x_0) / df(x_0))
+  hasil[i+1,] = list(i,p)
+  x_0 = p
+  i = i + 1
+}
+
+hasil %>% knitr::kable()
+```
+
+| iter |         p |
+| ---: | --------: |
+|    0 | 0.5000000 |
+|    1 | 0.2471252 |

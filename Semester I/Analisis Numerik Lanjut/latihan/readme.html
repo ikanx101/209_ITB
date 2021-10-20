@@ -732,23 +732,47 @@ body {
 <p>Nilai <code>c</code> adalah akar persamaan yang kita cari.</p>
 <h2 id="metode-newton-rhapson">Metode Newton Rhapson</h2>
 <p>Pada metode ini, mencari turunan pertama dari <embed src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAATBAMAAAAHT8L5AAAAMFBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAv3aB7AAAAD3RSTlMAdmZU3TIiRM0Qibvvq5mze/DLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA40lEQVQYGS2OvU4CQRSFvx10FlyIdFQmK/gAG6K+ATF0lCQUbCch0Ri0ojAkdlabYG/jA9ja0VDQ4RtYmdjZ2nnmZ5Jzzz3fSWYGwmm0vSchJT1oxeLL++k5dAKh731wDatI6s7tL9TySI4KLbUVZGUk6R4ab893NAXuvxc/sNGW5XAAh8UkvwJdQXMEM0iYVup2Iq/SWOLEjaH0IL248OTGRnKVbk7tH+1APkXqFWdmaErsu9JWSgrml8sLMLn+496zew13sop07cNHANzA8ePIhdtI9GvT9XtaeDO+Dm3pzcI/CskjOBvqKF4AAAAASUVORK5CYII=" title="f(x)"></embed> adalah sangat penting. Oleh karena itu, kita perlu melakukannya:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(Ryacas)</a></code></pre></div>
-<pre><code>## 
-## Attaching package: 'Ryacas'
-
-## The following object is masked from 'package:stats':
-## 
-##     integrate
-
-## The following objects are masked from 'package:base':
-## 
-##     %*%, diag, diag&lt;-, lower.tri, upper.tri
-</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">eq =<span class="st"> &quot;(x-1)*Tan(x) + x * Sin(x*Pi)&quot;</span></a>
-<a class="sourceLine" id="cb4-2" title="2">eq <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">y_fn</span>(<span class="st">&quot;D(x)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">yac_str</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(Ryacas)</a>
+<a class="sourceLine" id="cb2-2" title="2">eq =<span class="st"> &quot;(x-1)*Tan(x) + x * Sin(x*Pi)&quot;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">eq <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">y_fn</span>(<span class="st">&quot;D(x)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">yac_str</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;(x-1)/Cos(x)^2+Tan(x)+x*Pi*Cos(x*Pi)+Sin(x*Pi)&quot;
 </code></pre>
-<p>Setelah itu, kita akan set titik iterasi awalnya <embed src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAAAPBAMAAABJi79qAAAAMFBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAv3aB7AAAAD3RSTlMARFSZImYQMrvddqvNie8Nf0xcAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA9ElEQVQYGWNgwAqkYgWA4ixno1qwSjMwsB9gOAJSMf+1Aw4VHAoMi0EqFHDIMzDwFzDIIVQImYiaoSutd2CoTwCasRTkHHaFioCJUBXWu4FgL5AjD1ThwMDAtoBhOgMDF1B1APuiBVBFEAooDVQEAhYgYjUDAwdDKIgFB/4FDPoJYN46EHmIgUGaoQLMhxH8Agx6QDanAsN6BgZGlm8MCxYz1IEk4e7gCACZzMDjALIlknUaq8NlBj+QCjhgbACGmHcCawLbEwYGXxVZdWDwgM2Aq2DQ0hVgqHNgiLrsABWTZpBAyGJl8aD5BVMR+6ILmIJQEQArNC/PY0gqYgAAAABJRU5ErkJggg==" title="x_0 = 0.5"></embed>.</p>
+<p>Kita telah mendapatkan <embed src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAATBAMAAAAOpGKDAAAAMFBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAv3aB7AAAAD3RSTlMAdmZU3TIiRM0Qibvvq5mze/DLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA9ElEQVQYGS2Pu0oDQRSGv50ku9kkYjqrwHh5gEXU1kok3ZYBi2ynCEpQKwsJ2FktaG/jA6S1S6NgF98glWAjae1yzpkZmP/ynYGZAVvNkrxvKQkg2eUYNkLJl+bbB/zBVmDsm5+c8wnTyNrq6YrWjIaPrFNIaEzpTOhWkWULyN+eJjn0BN3+3PzCXFLXi9CEVnHmT2ElrVcqu4CEce3hS9qrIkYqA5Wh7DsNvKg8qsxl21DvyNJ/+oF965B2zZ4buop0Ju3DWFJweXR/CM7L+/Ru+c3CTJ5Wkz3H8h7ZFWw+lKFcRyY/cTsxZ4UFF48EWpmlsAbHOia3nPczpQAAAABJRU5ErkJggg==" title="f'(x)"></embed>. Setelah itu, kita akan set titik iterasi awalnya <embed src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAAAPBAMAAABJi79qAAAAMFBMVEX///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAv3aB7AAAAD3RSTlMARFSZImYQMrvddqvNie8Nf0xcAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAA9ElEQVQYGWNgwAqkYgWA4ixno1qwSjMwsB9gOAJSMf+1Aw4VHAoMi0EqFHDIMzDwFzDIIVQImYiaoSutd2CoTwCasRTkHHaFioCJUBXWu4FgL5AjD1ThwMDAtoBhOgMDF1B1APuiBVBFEAooDVQEAhYgYjUDAwdDKIgFB/4FDPoJYN46EHmIgUGaoQLMhxH8Agx6QDanAsN6BgZGlm8MCxYz1IEk4e7gCACZzMDjALIlknUaq8NlBj+QCjhgbACGmHcCawLbEwYGXxVZdWDwgM2Aq2DQ0hVgqHNgiLrsABWTZpBAyGJl8aD5BVMR+6ILmIJQEQArNC/PY0gqYgAAAABJRU5ErkJggg==" title="x_0 = 0.5"></embed>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># initial condition</span></a>
+<a class="sourceLine" id="cb4-2" title="2">df =<span class="st"> </span><span class="cf">function</span>(x){(x<span class="dv">-1</span>)<span class="op">/</span><span class="kw">cos</span>(x)<span class="op">^</span><span class="dv">2</span><span class="op">+</span><span class="kw">tan</span>(x)<span class="op">+</span>x<span class="op">*</span>pi<span class="op">*</span><span class="kw">cos</span>(x<span class="op">*</span>pi)<span class="op">+</span><span class="kw">sin</span>(x<span class="op">*</span>pi)}</a>
+<a class="sourceLine" id="cb4-3" title="3">x_<span class="dv">0</span> =<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb4-4" title="4">p =<span class="st"> </span><span class="dv">100</span> <span class="co"># nilai dummy</span></a>
+<a class="sourceLine" id="cb4-5" title="5">i =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">hasil =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">iter =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb4-8" title="8">           <span class="dt">p =</span> x_<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb4-9" title="9"></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="cf">while</span>(i <span class="op">&lt;=</span><span class="st"> </span>iter_max <span class="op">&amp;&amp;</span><span class="st"> </span><span class="kw">abs</span>(p<span class="op">-</span>x_<span class="dv">0</span>) <span class="op">&gt;</span><span class="st"> </span>tol_max){</a>
+<a class="sourceLine" id="cb4-11" title="11">  p =<span class="st"> </span>x_<span class="dv">0</span> <span class="op">-</span><span class="st"> </span>(<span class="kw">f</span>(x_<span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="kw">df</span>(x_<span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb4-12" title="12">  hasil[i<span class="op">+</span><span class="dv">1</span>,] =<span class="st"> </span><span class="kw">list</span>(i,p)</a>
+<a class="sourceLine" id="cb4-13" title="13">  x_<span class="dv">0</span> =<span class="st"> </span>p</a>
+<a class="sourceLine" id="cb4-14" title="14">  i =<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-15" title="15">}</a>
+<a class="sourceLine" id="cb4-16" title="16"></a>
+<a class="sourceLine" id="cb4-17" title="17">hasil <span class="op">%&gt;%</span><span class="st"> </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">iter</th>
+<th align="right">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.5000000</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">0.2471252</td>
+</tr>
+</tbody>
+</table>
 
 </body>
 </html>

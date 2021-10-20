@@ -75,10 +75,30 @@ Nilai `c` adalah akar persamaan yang kita cari.
 
 Pada metode ini, mencari turunan pertama dari $f(x)$ adalah sangat penting. Oleh karena itu, kita perlu melakukannya:
 
-```{r}
+```{r,message = FALSE,warning = FALSE}
 library(Ryacas)
 eq = "(x-1)*Tan(x) + x * Sin(x*Pi)"
 eq %>% y_fn("D(x)") %>% yac_str()
 ```
 
-Setelah itu, kita akan set titik iterasi awalnya $x_0 = 0.5$.
+Kita telah mendapatkan $f'(x)$. Setelah itu, kita akan set titik iterasi awalnya $x_0 = 0.5$.
+
+```{r}
+# initial condition
+df = function(x){(x-1)/cos(x)^2+tan(x)+x*pi*cos(x*pi)+sin(x*pi)}
+x_0 = 0.5
+p = 100 # nilai dummy
+i = 1
+
+hasil = data.frame(iter = 0,
+		   p = x_0)
+
+while(i <= iter_max && abs(p-x_0) > tol_max){
+  p = x_0 - (f(x_0) / df(x_0))
+  hasil[i+1,] = list(i,p)
+  x_0 = p
+  i = i + 1
+}
+
+hasil %>% knitr::kable()
+```
