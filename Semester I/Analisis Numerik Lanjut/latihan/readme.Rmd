@@ -33,6 +33,7 @@ data.frame(x,y) %>%
   ggplot(aes(x,y)) +
   geom_line(color = "blue") +
   theme_minimal() +
-  labs(title = "Fungsi f(x)")
+  labs(title = "Fungsi f(x)") +
+  geom_hline(yintercept = 0,color = "black")
 
 ```
