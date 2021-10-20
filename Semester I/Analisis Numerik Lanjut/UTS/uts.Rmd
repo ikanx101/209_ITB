@@ -18,6 +18,16 @@ library(dplyr)
 library(ggplot2)
 ```
 
-# Pendahuluan
+# Beberapa Function yang Berguna
+
+```{r}
+bikin_matrix = function(n){
+  # membuat matrix random n x n
+  v = sample(0:9,n^2,replace = T)
+  A = matrix(v,byrow = T,ncol = n)
+  return(A)
+}
 
 
+bikin_matrix(4)
+```
