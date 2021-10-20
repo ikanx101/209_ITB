@@ -37,3 +37,32 @@ data.frame(x,y) %>%
   geom_hline(yintercept = 0,color = "black")
 
 ```
+
+Terlihat dari gambar di atas bahwa akar persamaan terletak di antara $[0.25,0.5]$.
+
+Pemilihan selang ini menjadi hal terpenting bagi metode _Bisection_ agar hasilnya konvergen.
+
+Mari kita selesaikan:
+
+```{r,message=FALSE,warning=FALSE}
+# informasi awal
+a = 0.25
+b = 0.5
+iter_max = 100
+tol_max = 10^(-5)
+i = 0
+
+hasil = data.frame(n = NA,a = NA,b = NA,c = NA)
+
+while(i <= iter_max && (b-a)/2 > tol_max){
+  p = a + ((b-a)/2)
+  FP = f(p)
+  FA = f(a)
+  FB = f(b)
+  hasil[i,] = list(i,a,b,p)
+  if(FA*FP < 0){b = p} else {a = p}
+  i = i+1
+}
+
+hasil
+```
