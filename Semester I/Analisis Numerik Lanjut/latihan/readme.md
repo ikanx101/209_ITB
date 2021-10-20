@@ -107,7 +107,7 @@ hasil = data.frame(iter = 0,
 while(i <= iter_max){
   p = x_0 - (f(x_0) / df(x_0))
   hasil[i+1,] = list(i,p)
-  if(abs(p-x_0) > tol_max){break}
+  if(abs(p-x_0) < tol_max){break}
   x_0 = p
   i = i + 1
 }
@@ -119,5 +119,8 @@ hasil %>% knitr::kable()
 | ---: | --------: |
 |    0 | 0.5000000 |
 |    1 | 0.2471252 |
+|    2 | 0.2708871 |
+|    3 | 0.2693853 |
+|    4 | 0.2693799 |
 
 Nilai `p` pada iterasi terakhir adalah akar yang kita cari.
