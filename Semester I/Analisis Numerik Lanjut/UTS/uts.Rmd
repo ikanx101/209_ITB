@@ -2,11 +2,13 @@
 title: "UJIAN TENGAH SEMESTER I"
 subtitle: "SK5001 Analisis Numerik Lanjut"
 author: |
-  |Mohammad Rizka Fadhli
-  |NIM: 20921004
+  | Mohammad Rizka Fadhli
+  | NIM: 20921004
 output:
   pdf_document:
    dev: png
+   toc: false
+   number_section: false
 ---
 
 ```{r,include=FALSE}
