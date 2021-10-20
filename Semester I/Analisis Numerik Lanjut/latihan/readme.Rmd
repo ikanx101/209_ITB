@@ -1,0 +1,34 @@
+---
+title: "Soal Latihan"
+output: github_document
+---
+
+```{r,include = FALSE}
+options(digit = 6)
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+# SOAL
+
+Temukan akar persamaan berikut:
+
+$$(x-1) \tan{x} + x \sin{\pi x} = 0, x \in [0,1]$$
+
+Dengan keakuratan hingga $10^{-5}$ menggunakan metode _Bisection_ dan _Newton-Rhapson_.
+
+# Jawab
+
+Pertama-tama, kita akan gambarkan terlebih dahulu fungsinya di selang tersebut:
+
+```{r,echo=FALSE,fig.retina = 10,fig.align = "center"}
+x = seq(0,1,by = 0.05)
+f = function(x){(x-1)*tan(x) + x * sin(x*pi)}
+y = f(x)
+
+data.frame(x,y) %>%
+  ggplot(aes(x,y)) +
+  geom_line(color = "blue")
+
+```
