@@ -4991,7 +4991,7 @@ fx = c(-2.017,-2.072,-2.109,-2.127,-2.126,-2.106,-2.067,-2.009,-1.932,-1.836)
 data.frame(x,fx) %>% knitr::kable("simple")
 ```
 
-Konstruksi _natural cubic spline_ yang melewati `4` titik: $(0,-2.109),(0.025,-2.127),(0.05,-2.126),(0.075,-2.106),(0.1,-2.067)$. Tuliskan persamaan normalnya!
+Konstruksi _natural cubic spline_ yang melewati `4` titik: $(0,-2.109),(0.025,-2.127)$, $(0.05,-2.126),(0.075,-2.106),(0.1,-2.067)$. Tuliskan persamaan normalnya!
 
 #### Jawab {-}
 
@@ -5058,18 +5058,437 @@ c = solve(A) %*% b
 c
 ```
 
+\newpage
+
+## _Roots Finding_
+
+### Soal I
+
+Temukan akar persamaan berikut:
+
+$$(x-1) \tan{x} + x \sin{\pi x} = 0, x \in [0,1]$$
+
+Dengan keakuratan hingga $10^{-5}$ menggunakan metode _Bisection_ dan _Newton-Rhapson_.
+
+#### Jawab {-}
+
+Pertama-tama, kita akan gambarkan terlebih dahulu fungsinya di selang tersebut:
+
+```{r,echo=FALSE,fig.retina = 10,fig.align = "center",fig.cap="Grafik Fungsi f(x)"}
+rm(list=ls())
+x = seq(0,1,by = 0.025)
+f = function(x){(x-1)*tan(x) + x * sin(x*pi)}
+y = f(x)
+
+data.frame(x,y) %>%
+  ggplot(aes(x,y)) +
+  geom_line(color = "blue") +
+  theme_minimal() +
+  labs(title = "Fungsi f(x)",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id") +
+  geom_hline(yintercept = 0,color = "black")
+
+```
+
+Terlihat dari gambar di atas bahwa akar persamaan terletak di antara $[0.25,0.5]$.
+
+##### Metode Bisection {-}
+
+Pemilihan selang ini menjadi hal terpenting bagi metode _bisection_ agar hasilnya konvergen.
+
+Mari kita selesaikan:
+
+```{r,message=FALSE,warning=FALSE}
+# informasi awal
+a = 0.25
+b = 0.5
+iter_max = 100
+tol_max = 10^(-5)
+i = 0
+
+hasil = data.frame(n = NA,a = NA,b = NA,c = NA)
+
+while(i <= iter_max && (b-a)/2 > tol_max){
+  p = a + ((b-a)/2)
+  FP = f(p)
+  FA = f(a)
+  FB = f(b)
+  hasil[i+1,] = list(i,a,b,p)
+  if(FA*FP < 0){b = p} else {a = p}
+  i = i+1
+}
+
+hasil %>% knitr::kable()
+```
+
+Nilai `c` adalah akar persamaan yang kita cari.
+
+##### Metode Newton Rhapson {-}
+
+Pada metode ini, mencari turunan pertama dari $f(x)$ adalah sangat penting. Oleh karena itu, kita perlu melakukannya:
+
+```{r,message = FALSE,warning = FALSE}
+library(Ryacas)
+eq = "(x-1)*Tan(x) + x * Sin(x*Pi)"
+eq %>% y_fn("D(x)") %>% yac_str()
+```
+
+Kita telah mendapatkan $f'(x)$. Setelah itu, kita akan set titik iterasi awalnya $x_0 = 0.5$.
+
+```{r}
+# initial condition
+df = function(x){(x-1)/cos(x)^2+tan(x)+x*pi*cos(x*pi)+sin(x*pi)}
+x_0 = 0.5
+p = 100 # nilai dummy
+i = 1
+
+hasil = data.frame(iter = 0,
+		   p = x_0)
+
+while(i <= iter_max){
+  p = x_0 - (f(x_0) / df(x_0))
+  hasil[i+1,] = list(i,p)
+  if(abs(p-x_0) < tol_max){break}
+  x_0 = p
+  i = i + 1
+}
+
+hasil %>% knitr::kable()
+```
+
+Nilai `p` pada iterasi terakhir adalah akar yang kita cari.
+
+\newpage
+
+# LATIHAN SOAL DARI BUKU
+
+## Exercise 2.1 Soal 6.a
+
+Gunakan _bisection_ untuk mencari akar persamaan:
+
+$$3x - e^x = 0, 0 \leq x \leq 1$$
+
+### Jawab {-}
+
+Kita buat terlebih dahulu grafiknya:
+
+```{r,echo=FALSE,fig.retina = 10,fig.align = "center",fig.cap="Grafik Fungsi f(x)"}
+rm(list=ls())
+x = seq(0,1,by = 0.025)
+f = function(x){3*x - exp(x)}
+y = f(x)
+
+data.frame(x,y) %>%
+  ggplot(aes(x,y)) +
+  geom_line(color = "blue") +
+  theme_minimal() +
+  labs(title = "Fungsi f(x)",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id") +
+  geom_hline(yintercept = 0,color = "black")
+
+```
+
+Kita akan ambil selang $[0.5,0.75]$.
+
+```{r,message=FALSE,warning=FALSE}
+# informasi awal
+a = 0.5
+b = 0.75
+iter_max = 100
+tol_max = 10^(-5)
+i = 0
+
+hasil = data.frame(n = NA,a = NA,b = NA,c = NA)
+
+while(i <= iter_max && (b-a)/2 > tol_max){
+  p = a + ((b-a)/2)
+  FP = f(p)
+  FA = f(a)
+  FB = f(b)
+  hasil[i+1,] = list(i,a,b,p)
+  if(FA*FP < 0){b = p} else {a = p}
+  i = i+1
+}
+
+hasil %>% knitr::kable()
+```
+
+Nilai `c` adalah akar persamaan yang dimaksud.
+
+\newpage
+
+## Exercise 2.3 Soal 6.b
+
+Temukan akar persamaan dari fungsi berikut:
+
+$$\ln(x-1) + \cos(x-1) = 0,1.3 \leq x \leq 2$$
+
+### Jawab {-}
+
+Kita akan buat grafiknya sebagai berikut:
+
+```{r,echo=FALSE,fig.retina = 10,fig.align = "center",fig.cap="Grafik Fungsi f(x)"}
+rm(list=ls())
+x = seq(1.3,2,by = 0.025)
+f = function(x){log(x-1) + cos(x-1)}
+y = f(x)
+
+data.frame(x,y) %>%
+  ggplot(aes(x,y)) +
+  geom_line(color = "blue") +
+  theme_minimal() +
+  labs(title = "Fungsi f(x)",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id") +
+  geom_hline(yintercept = 0,color = "black")
+
+```
+
+Untuk menyelesaikan dengan metode Newton, kita perlu mencari $f'(x)$.
+
+```{r,message=FALSE,warning=FALSE}
+library(Ryacas)
+eq = "Ln(x-1) + Cos(x-1)"
+eq %>% y_fn("D(x)") %>% yac_str() 
+```
+
+Kita telah mendapatkan $f'(x)$. Setelah itu, kita akan set titik iterasi awalnya $x_0 = 1.5$.
+
+```{r}
+# initial condition
+df = function(x){1/(x-1)-sin(x-1)}
+x_0 = 1.5
+p = 100 # nilai dummy
+i = 1
+iter_max = 20
+tol_max = 10^(-6)
+
+hasil = data.frame(iter = 0,
+		   p = x_0)
+
+while(i <= iter_max){
+  p = x_0 - (f(x_0) / df(x_0))
+  hasil[i+1,] = list(i,p)
+  if(abs(p-x_0) < tol_max){break}
+  x_0 = p
+  i = i + 1
+}
+
+hasil %>% knitr::kable()
+```
+
+\newpage
+
+## Exercise 2.3 Soal 17
+
+Temukan akar persamaan dari fungsi berikut:
+
+$$230 x^4 + 18 x^3 + 9 x^2 - 221 x - 9 = 0, x \in [-1,0]$$
+
+### Jawab {-}
+
+Kita akan buat grafiknya sebagai berikut:
+
+```{r,echo=FALSE,fig.retina = 10,fig.align = "center",fig.cap="Grafik Fungsi f(x)"}
+rm(list=ls())
+x = seq(-1,0,by = 0.025)
+f = function(x){230 * x^4 + 18 * x^3 + 9 * x^2 - 221 * x - 9}
+y = f(x)
+
+data.frame(x,y) %>%
+  ggplot(aes(x,y)) +
+  geom_line(color = "blue") +
+  theme_minimal() +
+  labs(title = "Fungsi f(x)",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id") +
+  geom_hline(yintercept = 0,color = "black")
+
+```
+
+Untuk menyelesaikan dengan metode Newton, kita perlu mencari $f'(x)$.
+
+```{r,message=FALSE,warning=FALSE}
+library(Ryacas)
+eq = "230 * x^4 + 18 * x^3 + 9 * x^2 - 221 * x - 9"
+eq %>% y_fn("D(x)") %>% yac_str() 
+```
+
+Kita telah mendapatkan $f'(x)$. Setelah itu, kita akan set titik iterasi awalnya $x_0 = -0.5$.
+
+```{r}
+# initial condition
+df = function(x){920*x^3+54*x^2+18*x-221}
+x_0 = -.5
+p = 100 # nilai dummy
+i = 1
+iter_max = 20
+tol_max = 10^(-6)
+
+hasil = data.frame(iter = 0,
+		   p = x_0)
+
+while(i <= iter_max){
+  p = x_0 - (f(x_0) / df(x_0))
+  hasil[i+1,] = list(i,p)
+  if(abs(p-x_0) < tol_max){break}
+  x_0 = p
+  i = i + 1
+}
+
+hasil %>% knitr::kable()
+```
+
+\newpage
+
+## Exercise 3.1 Soal 1.a
+
+Buat _curve fitting_ linear dan polinom orde 2 untuk mendekati fungsi $f(x) = \cos(x)$ untuk $x_0 = 0, x_1 = 0.6, x_2 = 0.9$. Hitung nilai _absolute error_!
+
+### Jawab {-}
+
+Mari kita buat terlebih dahulu titik-titik datanya:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+rm(list=ls())
+
+tolong_dibantu_linear_fit = function(x,y){
+  # hitung elemen-elemen yang dibutuhkan:
+  n = length(x)
+  sum_xi = sum(x)
+  sum_xi_xi = sum(x^2)
+  sum_xi_yi = sum(x*y)
+  sum_yi = sum(y)
+  # bikin persamaan reg linearnya
+  A = matrix(c(n,sum_xi,sum_xi,sum_xi_xi),nrow = 2,byrow = T)
+  A_inv = solve(A)
+  b = c(sum_yi,sum_xi_yi)
+  koef = A_inv %*% b
+  koef_ = round(koef,3)
+  a = koef_[2]
+  b = koef_[1]
+  # bikin persamaan
+  temuan_1 = ifelse(b <= 0,
+                    paste0("y = ",a,"x ",b),
+                    paste0("y = ",a,"x + ",b))
+  
+  # hitung fungsi
+  f_y = koef[2]*x + koef[1]
+  error = mean(abs(y - f_y))
+  
+  # bikin grafik perbandingan
+  plot = 
+    data.frame(x,y,f_y) %>% 
+    ggplot() +
+    geom_point(aes(x,y),
+               size = 1,
+               color = "darkred") +
+    geom_line(aes(x,f_y),
+              color = "steelblue",
+              alpha = .5) +
+    theme_minimal() +
+    labs(title = "Perbandingan Antara Titik Data dengan Hasil Curve Fitting",
+         subtitle = "Linear Curve Fitting untuk Dua Peubah",
+         caption = "Digambar dengan R\nikanx101.com")
+  
+  # tulis output
+  output = list("Persamaan regresi linear" = temuan_1,
+                "Mean Absolut Error" = error,
+                "Grafik" = plot)
+  return(output)
+}
+
+tolong_dibantu_poli_fit = function(x,y,banyak_order){
+  # definisi matriks
+  A = matrix(ncol = banyak_order+1,
+             nrow = length(x))
+
+  # untuk isi c0 hingga cn
+  for(i in 1:(banyak_order+1)){
+    A[,i] = x^(i-1)
+  }
+
+  # hitung transpose A
+  A_T = t(A)
+
+  # solve
+  C = solve(A_T %*% A) %*% A_T %*% y
+  Values = as.numeric(C) %>% round(4)
+  
+  # output data
+  hasil = data.frame(C = paste0("C",0:(banyak_order)),
+                     Values)
+  
+  # bikin plot
+  # dimulai dari vektor nol
+  f = rep(0,nrow(hasil))
+  # iterasi
+  for(i in 1:(banyak_order + 1)){
+    temp = x^(i-1) * C[i]
+    f = f + temp
+  }
+  
+  plot = 
+    data.frame(x,y,f) %>% 
+    ggplot() +
+    geom_point(aes(x,y),color = "blue") +
+    geom_point(aes(x,f), color = "red") +
+    theme_minimal() +
+    labs(title = "Hasil Regresi Polinom",
+         subtitle = "Biru = Real values\nMerah = Fitted values")
+  
+  # menghitung MAE
+  error = mean(abs(f - y))
+  
+  # membuat output
+  output = list("Konstanta" = hasil,
+                "MAE" = error,
+                "Grafik" = plot)
+  return(output)
+}
+
+# dari soal
+x = c(0,0.6,0.9)
+f = function(x)(cos(x))
+y = f(x)
+
+data.frame(x,y) %>% knitr::kable()
+```
+
+#### _Linear Curve Fitting_ {-}
+
+Untuk melakukan _linear curve fitting_ kita hitung terlebih dahulu:
+
+$$\begin{bmatrix} n & \sum x_i \\ \sum x_i & \sum x_i^2 \end{bmatrix} \begin{bmatrix} b \\ a \end{bmatrix} = \begin{bmatrix} \sum y_i \\ \sum x_i y_i \end{bmatrix}$$
+
+Karena kita telah memiliki data $X$ dan $Y$, artinya untuk mencari $(b,a)^T$ kita cukup melakukan operasi matriks sederhana:
+
+$$A^{-1} b = x$$
+
+Cukup cari invers matriks dan kalikan dengan vektor yang ada.
+
+Pada contoh soal ini, kita bisa menghitung:
+
+```{r}
+tolong_dibantu_linear_fit(x,y)
+```
+
+\newpage
+
+#### Polinomial _Curve Fitting_ {-}
+
+Kita akan buat polinom orde 2:
+
+```{r}
+tolong_dibantu_poli_fit(x,y,2)
+```
+
+\newpage
 
 
 
 
 
 
-
-
-
-
-
-
+\newpage
 
 \center 
 
