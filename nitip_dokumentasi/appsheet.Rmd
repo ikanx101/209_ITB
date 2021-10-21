@@ -1,6 +1,6 @@
 ---
-title: "Dokumentasi Converter Jotform"
-subtitle: "Divisi Area Marketing Nutrifood Indonesia"
+title: "Dokumentasi Converter AppSheet"
+subtitle: "Divisi Distribution Development Nutrifood Indonesia"
 author: |
   | Ikang Fadhli
   | Market Research Dept.
@@ -221,6 +221,6 @@ openxlsx::write.xlsx(data_final,"hasil.xlsx")
 
 \newpage
 
-# _Files_ yang Dibutuhkan
+# _Working Directory_
 
-Semua _files_ yang dibutuhkan terlampir di _folder_ ini.
+_Working directory_ bisa diunduh di _link_ berikut ini^[https://github.com/ikanx101/Marketing-Jotform].
