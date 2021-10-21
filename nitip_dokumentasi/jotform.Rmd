@@ -219,3 +219,8 @@ colnames(data_final) = proper(tes)
 openxlsx::write.xlsx(data_final,"hasil.xlsx")
 ```
 
+\newpage
+
+# _Working Directory_
+
+_Working directory_ bisa diunduh di _link_ berikut ini^[https://github.com/ikanx101/Marketing-Jotform].
