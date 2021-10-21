@@ -10,13 +10,14 @@ output:
    toc: false
    number_section: false
    dev: png
+   highlight: zenburn
 ---
 
 # Pendahuluan
 
 ## Latar Belakang
 
-Tim AM pada 2021 menggunakan _JotForm_ sebagai _backbone_ pengumpulan data lapangan. Data yang terkumpul kelak akan digabung secara nasional dan dianalisa di kemudian hari. Untuk melakukan itu, data hasil _JotForm_ perlu direkap dengan baik secara struktur data. _Converter_ ini digunakan untuk merapikan data sesuai dengan struktur yang diinginkan.
+Tim AM pada 2021 menggunakan _JotForm_ sebagai _framework_ pengumpulan data lapangan. Data yang terkumpul kelak akan digabung secara nasional dan dianalisa di kemudian hari. Untuk melakukan itu, data hasil _JotForm_ perlu direkap dengan baik secara struktur data. _Converter_ ini digunakan untuk merapikan data sesuai dengan struktur yang diinginkan.
 
 Tim AM memiliki __kustomisasi__ survey per departemen. Jadi diharapkan _converter_ bisa mengatasi hal tersebut.
 
