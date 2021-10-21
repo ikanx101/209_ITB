@@ -1932,6 +1932,68 @@ Proses di atas kita lakukan berulang-uang hingga mendapatkan hasil paling optima
 
 \newpage
 
+# PERANCANGAN PERANGKAT LUNAK
+
+## _Waterfall Model_
+
+Lima tahapan:
+
+1. _Defining and understanding the problem_.
+1. _Planning dan designing solution_.
+1. _Implementing solution_.
+1. _Testing and evaluation the solution_.
+1. _Maintenance_.
+
+## _Context Diagram_
+
+Digunakan untuk mendefinisikan masalah. Isinya berupa:
+
+1. ___System___: _big picture of your problems_.
+1. ___Data flow___: _needs and wants_.
+    - _Needs_: yang perlu diselesaikan oleh si perancang _software_.
+    - _Wants_: _features_ yang diinginkan pengguna. 
+1. ___External entities___: _big picture of your subject_.
+
+\newpage
+
+Contoh _context diagram_ kelompok kuliah beberapa tahun yang lalu:
+
+```{r out.width="85%",echo=FALSE,fig.retina=10,fig.align='center',message=FALSE,warning=FALSE,fig.cap="Context Diagram"}
+knitr::include_graphics("context.png")
+```
+
+Bisa juga disajikan dalam bentuk tabel sebagai berikut:
+
+```{r out.width="85%",echo=FALSE,fig.retina=10,fig.align='center',message=FALSE,warning=FALSE,fig.cap="Needs and Wants External Entities"}
+knitr::include_graphics("tabel.png")
+```
+
+\newpage
+
+## _Data Flow Diagram_
+
+Suatu _graphical modeling tool to depict data flow through a system and the work or processing performed by that system_. Diagram ini menggunakan simbol-simbol tertentu.
+
+```{r out.width="85%",echo=FALSE,fig.retina=10,fig.align='center',message=FALSE,warning=FALSE,fig.cap="Penggunaan Simbol DFD"}
+knitr::include_graphics("Screenshot from 2021-10-21 07-41-49.png")
+```
+
+\newpage
+
+Contoh DFD:
+
+```{r out.width="85%",echo=FALSE,fig.retina=10,fig.align='center',message=FALSE,warning=FALSE,fig.cap="Contoh DFD"}
+knitr::include_graphics("Screenshot from 2021-10-21 07-42-03.png")
+```
+
+Aturan:
+
+1. Setiap proses harus memiliki minimal satu input dan output.
+1. Setiap data yang di-_store_ harus memiliki minimal satu data _flow in_ dan _flow out_.
+
+
+\newpage
+
 # EPILOG
 
 ## Tugas Kuliah
