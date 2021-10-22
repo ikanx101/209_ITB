@@ -19,4 +19,4 @@ Berisi _update progress_ thesis.
 
 ## Kampus Merdeka
 
-Berisi materi kolaborasi saya dengan P2MS ITB.
+Berisi materi kolaborasi saya dengan __P2MS ITB__.
