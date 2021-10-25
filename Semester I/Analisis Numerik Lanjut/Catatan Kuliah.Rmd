@@ -2,7 +2,7 @@
 title: "SK5001 ANALISIS NUMERIK LANJUT"
 subtitle: | 
     | Catatan Kuliah
-    | Sebuah Usaha untuk Mencatat
+    | Menggunakan R
 author: | 
     | Ikang FADHLI
     | ikanx101.com
