@@ -65,9 +65,32 @@ Nilai $x_0 \in [a,b]$ disebut minimum atau maksimum di $f$ unimodal saat memenuh
 
 $$\frac{d}{dx}f(x_0) = 0$$
 
-__Pierre De Fermat__ dan __Joseph-Louis Lagrange__ adalah orang-orang yang pertama kali menemukan formula kalkulus untuk mecari nilai optimal. Sementara __Isaac Newton__ dan __Johann C. F.Gauss__ mengusulkan metode iteratif untuk mencari nilai optimal^[https://empowerops.com/en/blogs/2018/12/6/brief-history-of-optimization]. 
+__Pierre De Fermat__ dan __Joseph-Louis Lagrange__ adalah orang-orang yang pertama kali menemukan formula kalkulus untuk mencari nilai optimal. Sementara __Isaac Newton__ dan __Johann C. F.Gauss__ mengusulkan metode iteratif untuk mencari nilai optimal^[https://empowerops.com/en/blogs/2018/12/6/brief-history-of-optimization]. 
 
 Salah satu bentuk optimisasi yakni _linear programming_ dimulai oleh __Leonid Kantorovich__ pada 1939. __Metode Simplex__ merupakan salah satu metode penyelesaian optimisasi yang terkenal, pertama kali diperkenalkan pada 1947 oleh __George Dantzig__ sementara di tahun yang sama _Theory of Duality_ diperkenalkan oleh __John von Neumann__. 
+
+## Riset Operasi
+
+__Riset operasi__ adalah metode antar disiplin ilmu yang digunakan untuk menganalisa masalah nyata dan membuat keputusan untuk kegiatan operasional organisasi atau perusahaan^[Pengantar Riset Operasi dan Optimisasi, KampusX: PO101]. 
+
+Riset operasi dimulai pada era Perang Dunia II. Oleh karena peperangan, diperlukan suatu cara yang efektif untuk mengalokasikan _resources_ yang ada sehingga pihak militer Inggris dan Amerika Serikat mengumpulkan ilmuwan-ilmuwan untuk mencari pendekatan yang saintifik dalam memecahkan masalah^[Introduction to Operations Research, 7th Edition. Hillier / Lieberman hal. 1].
+
+Pada tahun 1940, sekelompok _researcher_ yang dipimpin oleh __PMS Blackett__ dari ___the University of Manchester___ melakukan studi tentang __Sistem Radar Baru Anti Pesawat Terbang__. Kelompok _researcher_ ini sering dijuluki sebagai __Kelompok Sirkus Blackett__ (_Blackett’s circus_). Julukan ini tampaknya lebih didasarkan pada
+keragaman anggota kelompok peneliti yang berasal dari berbagai disiplin
+ilmu. Kelompok peneliti Blackcett terdiri atas 3 orang ahli fisiologi, 2 orang
+ahli matematika, 1 orang ahli astronomi, 1 orang tentara, 1 orang surveyor, 1
+orang ahli fisika, dan 2 orang ahli matematika fisika. Keragaman ini
+merupakan hal yang sangat luar biasa pada waktu itu. Pada tahun 1941,
+kelompok Blackett terlibat dalam upaya penelitian yang berkaitan dengan
+pendeteksian kapal dan kapal selam dengan menggunakan radar pesawat
+terbang. Blackett kemudian memimpin Naval Operational Research pada
+Angkatan Laut Kerajaan Inggris Raya. Blackett bertugas melakukan studi
+untuk kepentingan keberhasilan operasi-operasi yang dijalankan oleh
+Angkatan Laut.
+
+
+
+
 
 __Masalah optimisasi__ adalah masalah matematika yang mewakili masalah nyata (_real_). Dari ekspresi matematika tersebut, ada beberapa hal yang perlu diketahui^[Pengantar Riset Operasi dan Optimisasi, KampusX: PO101], yakni:
 
@@ -86,6 +109,9 @@ Dari ekspresi tersebut, kita bisa membagi-bagi masalah optimisasi tergantung dar
 1. Jenis fungsi yang ada (baik _objective function_ ataupun _constraints_).
 
 \newpage
+
+
+
 
 # References
 
