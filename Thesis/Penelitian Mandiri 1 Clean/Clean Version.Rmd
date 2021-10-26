@@ -75,11 +75,11 @@ __Riset operasi__ adalah metode antar disiplin ilmu yang digunakan untuk mengana
 
 Riset operasi dimulai pada era Perang Dunia II. Oleh karena peperangan, diperlukan suatu cara yang efektif untuk mengalokasikan _resources_ yang ada sehingga pihak militer Inggris dan Amerika Serikat mengumpulkan ilmuwan-ilmuwan untuk mencari pendekatan yang saintifik dalam memecahkan masalah^[Introduction to Operations Research, 7th Edition. Hillier / Lieberman hal. 1].
 
-Pada tahun 1940, sekelompok _researcher_ yang dipimpin oleh __PMS Blackett__ dari ___the University of Manchester___ melakukan studi tentang __Sistem Radar Baru Anti Pesawat Terbang__. Kelompok _researcher_ ini sering dijuluki sebagai __Kelompok Sirkus Blackett__ (_Blackett’s circus_). Julukan ini tampaknya lebih didasarkan pada
-keragaman anggota kelompok peneliti yang berasal dari berbagai disiplin
-ilmu. Kelompok peneliti Blackcett terdiri atas 3 orang ahli fisiologi, 2 orang
-ahli matematika, 1 orang ahli astronomi, 1 orang tentara, 1 orang surveyor, 1
-orang ahli fisika, dan 2 orang ahli matematika fisika. Keragaman ini
+Pada tahun 1940, sekelompok _researchers_ yang dipimpin oleh __PMS Blackett__ dari ___the University of Manchester___ melakukan studi tentang __Sistem Radar Baru Anti Pesawat Terbang__. Kelompok _researchers_ ini sering dijuluki sebagai __Kelompok Sirkus Blackett__ (_Blackett’s circus_). Julukan ini terjadi karena keberagaman latar belakang disiplin ilmu para _researchers_ tersebut. Mereka terdiri dari disiplin ilmu fisiologi, matematika, astronomi, tentara, surveyor, dan fisika^[http://repository.ut.ac.id/3876/1/ADBI4530-M1.pdf].
+
+Pada 1941, kelompok ini terlibat dalam penelitian radar deteksi kapal selam dan pesawat terbang.
+
+Keragaman ini
 merupakan hal yang sangat luar biasa pada waktu itu. Pada tahun 1941,
 kelompok Blackett terlibat dalam upaya penelitian yang berkaitan dengan
 pendeteksian kapal dan kapal selam dengan menggunakan radar pesawat
