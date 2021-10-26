@@ -1,0 +1,91 @@
+---
+title: "Penelitian Mandiri Sains Komputasi I"
+subtitle: _Update Progress_
+author: | 
+    | Mohammad Rizka Fadhli 
+    | Ikang
+    | 20921004@mahasiswa.itb.ac.id
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: true
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: breezedark
+bibliography: references.bib
+linestretch: 1.5
+colorlinks: true
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+\newpage
+
+# CHAPTER I
+
+# SEJARAH {-}
+
+## Optimisasi
+
+Optimisasi adalah __proses mencari nilai yang optimal__ dari suatu masalah tertentu. Dalam matematika, optimisasi merujuk pada pencarian nilai minimal atau maksimal dari suatu _fungsi real_^[https://id.wikipedia.org/wiki/Optimisasi]. Notasi matematikanya dapat ditulis sebagai berikut:
+
+Misalkan suatu fungsi $f$ yang memetakan dari himpunan $A$ ke bilangan _real_.
+
+$$f: A \rightarrow \mathbb{R}$$
+
+Cari suatu nilai $x_0 \in A$ sedemikian sehingga:
+
+- $f(x_0) \leq f(x), \forall x \in A$ untuk proses __minimalisasi__.
+- $f(x_0) \geq f(x), \forall x \in A$ untuk proses __maksimalisasi__.
+
+Di dalam kalkulus, kita mengetahui salah satu pendekatan optimisasi di fungsi satu variabel bisa didapatkan dari turunan pertama yang bernilai __nol__ (bisa berupa nilai maksimum atau minimum dari fungsi tersebut).
+
+Nilai $x_0 \in [a,b]$ disebut minimum atau maksimum di $f$ unimodal saat memenuhi:
+
+$$\frac{d}{dx}f(x_0) = 0$$
+
+__Pierre De Fermat__ dan __Joseph-Louis Lagrange__ adalah orang-orang yang pertama kali menemukan formula kalkulus untuk mecari nilai optimal. Sementara __Isaac Newton__ dan __Johann C. F.Gauss__ mengusulkan metode iteratif untuk mencari nilai optimal^[https://empowerops.com/en/blogs/2018/12/6/brief-history-of-optimization]. 
+
+Salah satu bentuk optimisasi yakni _linear programming_ dimulai oleh __Leonid Kantorovich__ pada 1939. __Metode Simplex__ merupakan salah satu metode penyelesaian optimisasi yang terkenal, pertama kali diperkenalkan pada 1947 oleh __George Dantzig__ sementara di tahun yang sama _Theory of Duality_ diperkenalkan oleh __John von Neumann__. 
+
+__Masalah optimisasi__ adalah masalah matematika yang mewakili masalah nyata (_real_). Dari ekspresi matematika tersebut, ada beberapa hal yang perlu diketahui^[Pengantar Riset Operasi dan Optimisasi, KampusX: PO101], yakni:
+
+1. __Variabel__ adalah suatu simbol yang memiliki banyak nilai dan nilainya ingin kita ketahui. Setiap nilai yang mungkin dari suatu variabel muncul akibat suatu kondisi tertentu di sistem.
+1. __Parameter__ di suatu model matematika adalah suatu konstanta yang menggambarkan suatu karakteristik dari sistem yang sedang diteliti. Parameter bersifat _fixed_ atau _given_.
+1. ___Constraints___ (atau kendala) adalah kondisi atau batasan yang harus dipenuhi. Kendala-kendala ini dapat dituliskan menjadi suatu persamaan atau pertaksamaan. Suatu masalah optimisasi dapat memiliki hanya satu kendala atau banyak kendala.
+1. ___Objective function___ adalah satu fungsi (pemetaan dari variabel-varibel keputusan ke suatu nilai di daerah _feasible_) yang nilainya akan kita minimumkan atau kita maksimumkan.
+
+Ekspresi matematika dari model optimisasi adalah sebagai berikut:
+
+> Cari $x$ yang meminimumkan $f(x)$ dengan kendala $g(x) = 0, h(x) \leq 0$ dan $x \in D$.
+
+Dari ekspresi tersebut, kita bisa membagi-bagi masalah optimisasi tergantung dari:
+
+1. Tipe variabel yang terlibat.
+1. Jenis fungsi yang ada (baik _objective function_ ataupun _constraints_).
+
+\newpage
+
+# References
+
