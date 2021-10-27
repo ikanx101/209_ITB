@@ -42,9 +42,9 @@ library(ggplot2)
 
 \newpage
 
-# CHAPTER I
+# CHAPTER I {-}
 
-# SEJARAH {-}
+# SEJARAH 
 
 ## Optimisasi
 
@@ -75,22 +75,33 @@ __Riset operasi__ adalah metode antar disiplin ilmu yang digunakan untuk mengana
 
 Riset operasi dimulai pada era Perang Dunia II. Oleh karena peperangan, diperlukan suatu cara yang efektif untuk mengalokasikan _resources_ yang ada sehingga pihak militer Inggris dan Amerika Serikat mengumpulkan ilmuwan-ilmuwan untuk mencari pendekatan yang saintifik dalam memecahkan masalah^[Introduction to Operations Research, 7th Edition. Hillier / Lieberman hal. 1].
 
-Pada tahun 1940, sekelompok _researchers_ yang dipimpin oleh __PMS Blackett__ dari ___the University of Manchester___ melakukan studi tentang __Sistem Radar Baru Anti Pesawat Terbang__. Kelompok _researchers_ ini sering dijuluki sebagai __Kelompok Sirkus Blackett__ (_Blackett’s circus_). Julukan ini terjadi karena keberagaman latar belakang disiplin ilmu para _researchers_ tersebut. Mereka terdiri dari disiplin ilmu fisiologi, matematika, astronomi, tentara, surveyor, dan fisika^[http://repository.ut.ac.id/3876/1/ADBI4530-M1.pdf].
+Pada tahun 1940, sekelompok _researchers_ yang dipimpin oleh __PMS Blackett__ dari ___the University of Manchester___ melakukan studi tentang __Sistem Radar Baru Anti Pesawat Terbang__. Kelompok _researchers_ ini sering dijuluki sebagai __Kelompok Sirkus Blackett__ (_Blackett’s circus_). Julukan ini terjadi karena keberagaman latar belakang disiplin ilmu para _researchers_ tersebut. Mereka terdiri dari disiplin ilmu fisiologi, matematika, astronomi, tentara, surveyor, dan fisika. Pada 1941, kelompok ini terlibat dalam penelitian radar deteksi kapal selam dan pesawat terbang. _Blackett_ kemudian memimpin _Naval Operational Research_ pada Angkatan Laut Kerajaan Inggris Raya. Prinsip-prinsip ilmiah yang digunakan untuk mengambil keputusan dalam suatu operasi dinamai sebagai __Riset Operasi__.
 
-Pada 1941, kelompok ini terlibat dalam penelitian radar deteksi kapal selam dan pesawat terbang.
+```{r,include=FALSE}
+"http://repository.ut.ac.id/3876/1/ADBI4530-M1.pdf"
+```
 
-Keragaman ini
-merupakan hal yang sangat luar biasa pada waktu itu. Pada tahun 1941,
-kelompok Blackett terlibat dalam upaya penelitian yang berkaitan dengan
-pendeteksian kapal dan kapal selam dengan menggunakan radar pesawat
-terbang. Blackett kemudian memimpin Naval Operational Research pada
-Angkatan Laut Kerajaan Inggris Raya. Blackett bertugas melakukan studi
-untuk kepentingan keberhasilan operasi-operasi yang dijalankan oleh
-Angkatan Laut.
+Saat Amerika Serikat mulai terlibat pada Perang Dunia II, prinsip riset operasi juga digunakan untuk berbagai operasi militer mereka. Kelompok riset operasi AS bertugas untuk menganalisis serangan udara dan laut tentara NAZI Jerman.
 
+Selepas Perang Dunia II, penerapan riset operasi dinilai bisa diperluas ke dunia ekonomi, bisnis,_engineering_, dan sosial. Riset operasi banyak berkaitan dengan berbagai disiplin ilmu seperti matematika, statistika, _computer science_, dan lainnya. Tidak jarang beberapa pihak menganggap riset operasi itu _overlapping_ dengan disiplin-disiplin ilmu tersebut. 
 
+Oleh karena tujuan utama dari aplikasi riset operasi adalah tercapainya __hasil yang optimal__ dari semua kemungkinan perencanaan yang dibuat. Maka __pemodelan matematika dan optimisasi__ bisa dikatakan sebagai disiplin utama dari riset operasi.
 
+\newpage
 
+# CHAPTER II {-}
+
+# OPTIMISASI 
+
+## Bahasan dalam Optimisasi
+
+Bahasan dalam optimisasi dapat dikategorikan menjadi:
+
+- Pemodelan masalah nyata menjadi masalah optimisasi.
+- Pembahasan karakteristik dari masalah optimisasi dan keberadaan solusi dari masalah optimisasi tersebut.
+- Pengembangan dan penggunaan algoritma serta analisis numerik untuk mencari solusi dari masalah tersebut.
+
+## Masalah Optimisasi
 
 __Masalah optimisasi__ adalah masalah matematika yang mewakili masalah nyata (_real_). Dari ekspresi matematika tersebut, ada beberapa hal yang perlu diketahui^[Pengantar Riset Operasi dan Optimisasi, KampusX: PO101], yakni:
 

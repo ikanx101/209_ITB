@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.10.25)  26 OCT 2021 22:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.10.25)  27 OCT 2021 00:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -513,6 +513,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [5]
+Underfull \hbox (badness 1242) in paragraph at lines 161--165
+\T1/lmr/m/n/12 masalah ny-ata dan mem-buat kepu-tu-san un-tuk kegiatan op-era-s
+ional or-gan-isasi atau
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -530,18 +535,45 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[7] (./Clean-Version.aux)
+[7]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[8]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[9]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10] (./Clean-Version.aux)
 Package rerunfilecheck Info: File `Clean-Version.out' has not changed.
-(rerunfilecheck)             Checksum: 3FD0F1BB5F48CD47167FF8BE8FC2910E;371.
+(rerunfilecheck)             Checksum: CCC719412E0091C536D5D606BA216785;926.
  ) 
 Here is how much of TeX's memory you used:
- 10695 strings out of 480539
- 154000 string characters out of 5902403
+ 10716 strings out of 480539
+ 154295 string characters out of 5902403
  478175 words of memory out of 5000000
- 28109 multiletter control sequences out of 15000+600000
+ 28117 multiletter control sequences out of 15000+600000
  478232 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,11n,66p,247b,391s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,11n,66p,247b,393s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/ikanx/.T
 inyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/home/ikanx/.TinyTeX/texmf-dis
 t/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx/.TinyTeX/texmf-dist/fonts/enc/dvips
@@ -557,10 +589,10 @@ f-dist/fonts/type1/public/lm/lmri12.pfb></home/ikanx/.TinyTeX/texmf-dist/fonts/
 type1/public/lm/lmro12.pfb></home/ikanx/.TinyTeX/texmf-dist/fonts/type1/public/
 lm/lmsy10.pfb></home/ikanx/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on Clean-Version.pdf (7 pages, 243562 bytes).
+Output written on Clean-Version.pdf (10 pages, 255602 bytes).
 PDF statistics:
- 162 PDF objects out of 1000 (max. 8388607)
- 124 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 206 PDF objects out of 1000 (max. 8388607)
+ 165 compressed objects within 2 object streams
+ 41 named destinations out of 1000 (max. 500000)
+ 65 words of extra memory for PDF output out of 10000 (max. 10000000)
 
