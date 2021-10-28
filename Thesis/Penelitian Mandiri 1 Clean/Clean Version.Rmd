@@ -174,6 +174,8 @@ Tema penelitian terkait _supplier selection problem_ termasuk ke dalam masalah o
     - _Continuous_ karena melibatkan angka kuantitas _raw matt_ yang harus dipesan. 
 1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
 
+\newpage
+
 # PENJELASAN SINGKAT JENIS OPTIMISASI
 
 ## _Linear Programming_
@@ -441,20 +443,310 @@ Metode ini bisa dibagi menjadi dua berdasarkan keterkaitannya dengan suatu masal
     
 Namun demikian kedua metode ini bisa saling melengkapi dalam prakteknya.
 
-## Metode _Simplex_
+# METODE _SIMPLEX_
 
 Metode _simplex_ adalah salah satu metode yang paling umum digunakan dalam menyelesaikan permasalahan _linear programming_. Metode ini dikembangkan oleh seorang profesor matematika bernama George Dantzig^[https://en.wikipedia.org/wiki/George_Dantzig] pada 1947 pasca perang dunia II. Sedangkan nama _simplex_ diusulkan oleh Theodore Motzkin^[https://en.wikipedia.org/wiki/Theodore_Motzkin].
 
 Metode _simplex_ menggunakan prosedur aljabar^[Introduction to Operations Research, 7th Edition. Hillier / Lieberman hal. 109]. Namun _underlying concept_ dari metode ini adalah _geometric_.
 
+## Metode Simplex dengan Ilustrasi Geometris
+
 Jika kita bisa memahami konsep geometrinya, kita bisa mengetahui bagaimana cara kerjanya dan kenapa metode ini sangat efisien.
 
 Saya akan ambil satu contoh masalah optimisasi sederhana untuk memberikan ilustrasi bagaimana cara kerja metode ini.
 
+#### Contoh Masalah Optimisasi {-}
+
+Cari $x_1,x2$ yang $\max{(Z = 3x_1 + 5x_2)}$ dengan _constraints_:
+
+$$\begin{matrix}
+x1 \leq 4  \\
+2x_2 \leq 12 \\
+3x_1 + 2x_2 \leq 18 \\
+\text{serta } x_1 \geq 0, x_2 \geq 0 \\
+\end{matrix}$$
+
+Masalah di atas jika dibuat grafiknya:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Grafik Permasalahan Optimisasi"}
+rm(list=ls())
+f = function(x1){(18-3*x1)/2}
+data.frame(x = 0:6) %>% 
+  mutate(y = f(x)) %>% 
+  ggplot() +
+  geom_line(aes(x,y),
+            color = "red") +
+  scale_x_continuous(breaks = c(-1:10)) +
+  scale_y_continuous(breaks = c(-1:10)) +
+  coord_equal() +
+  geom_vline(xintercept = 0,
+             color = "black",
+             size = 1.1) +
+  geom_hline(yintercept = 0,
+             color = "black",
+             size = 1.1) +
+  geom_vline(xintercept = 4,
+             color = "red") +
+  geom_hline(yintercept = 6,
+             color = "red") +
+  annotate("segment",
+           x = 0, xend = 0,
+           y = 0, yend = 6,
+           color = "red") +
+  annotate("segment",
+           x = 0, xend = 4,
+           y = 0, yend = 0,
+           color = "red") +
+  annotate("point",x = 0, y = 0,
+           color = "darkgreen",
+           size = 4) +
+  annotate("point",x = 0, y = 6,
+           color = "darkgreen",
+           size = 4) +
+  annotate("point",x = 2, y = 6,
+           color = "darkgreen",
+           size = 4) +
+  annotate("point",x = 4, y = 3,
+           color = "darkgreen",
+           size = 4) +
+  annotate("point",x = 4, y = 0,
+           color = "darkgreen",
+           size = 4) +
+  annotate("point",x = 0, y = 9,
+           color = "purple",
+           size = 4) +
+  annotate("point",x = 4, y = 6,
+           color = "purple",
+           size = 4) +
+  annotate("point",x = 6, y = 0,
+           color = "purple",
+           size = 4) +
+  annotate("text",x = 2, y = 3,
+           color = "steelblue",
+           label = "Feasible Region") +
+  labs(x = "x1",
+       y = "x2",
+       title = "Grafik dari Permasalahan Optimisasi") 
+
+```
+
+\newpage
+
+Titik-titik hijau merupakan __beberapa titik__ solusi yang _feasible_ karena berada pada area penerimaan seluruh _constraints_ yang ada. Titik hijau ini menjadi spesial karena berada pada perpotongan 2 garis _constraints_. Selanjutnya titik hijau ini akan didefinisikan sebagai __CPF__ (_corner point feasible_).
+
+> _For a linear programming problem with n decision variables, each of its corner-point solutions lies at the intersection of n constraint boundaries._^[Introduction to Operations Research, 7th Edition. Hillier / Lieberman hal. 110]
+
+Sedangkan titik ungu merupakan titik solusi non _feasible_ karena solusi yang ada tidak berlaku untuk semua _constraints_.
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+cpf = data.frame(
+  `Titik-ke` = 1:5,
+  CPF = c("(0, 0)", 
+          "(0, 6)", 
+          "(2, 6)", 
+          "(4, 3)",
+          "(4, 0)")
+    )
+
+cpf %>% knitr::kable(align = "c",caption = "Titik yang termasuk ke dalam CPF")
+```
+
+---
+
+#### _Properties of CPF Solutions_ {-}
+
+Untuk setiap permasalahan _linear programming_ yang memiliki _feasible soultions_ dan _feasible region_ yang terbatas:
+
+> __Property 1__: (a) If there is exactly one optimal solution, then it must be a CPF solution. (b) If there are multiple optimal solutions (and a bounded feasible region), then at least two must be adjacent CPF solutions.
+
+> __Property 2__: There are only a finite number of CPF solutions.
+
+> __Property 3__: If a CPF solution has no adjacent CPF solutions that are better (as measured by Z), then there are no better CPF solutions anywhere. Therefore, such a CPF solution is guaranteed to be an optimal solution (by Property 1), assuming only that the problem possesses at least one optimal solution (guaranteed if the problem possesses feasible solutions and a bounded feasible region).
 
 
+---
+
+Untuk mulai melakukan metode simplex kita perhatikan kembali grafik di atas. Kita bisa temukan beberapa pasang __CPF__ berbagi _constraint_ yang sama satu sama lain. 
+
+Sebagai contoh:
+
+1. $CPF_1$ dan $CPF_2$ berbagi _constraint_ yang sama, yakni saat $x_1 \geq 0$.
+1. $CPF_2$ dan $CPF_3$ berbagi _constraint_ yang sama, yakni saat $x_2 \leq 6$.
+
+Definisi umum:
+
+> _For any linear programming problem with n decision variables, two CPF solutions are_ ___adjacent___ _to each other if they share_ $n-1$ _constraint boundaries._ _The two adjacent CPF solutions are connected by a line segment that lies on these same shared constraint boundaries. Such a line segment is referred to as an_ ___edge___ _of the feasible region._
+
+_Feasible region_ di atas memiliki 5 _edges_ di mana setiap 2 _edges_ memotong / memunculkan __CPF__. Setiap __CPF__ memiliki 2 __CPF__ lainnya yang _adjacent_.
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+cpf = data.frame(
+  `Titik-ke` = 1:5,
+  CPF = c("(0, 0)", 
+          "(0, 6)", 
+          "(2, 6)", 
+          "(4, 3)",
+          "(4, 0)"),
+  `Adjacent CPF` = c("(0, 6) dan (4, 0)",
+                     "(2, 6) dan (0, 0)",
+                     "(4, 3) dan (0, 6)",
+                     "(4, 0) dan (2, 6)",
+                     "(0, 0) dan (4, 3)")
+    )
+
+cpf %>% knitr::kable(align = "c",caption = "Adjacent CPF")
+```
+
+__CPF__ pada kolom pertama _adjacent_ terhadap dua __CPF__ di kolom setelahnya tapi kedua __CPF__ tersebut tidak saling _adjacent_ satu sama lain.
+
+> ___Optimality test:___ _Consider any linear programming problem that possesses at least one optimal solution. If a CPF solution has no adjacent_ ___CPF___ _solutions that are better (as measured by_ $Z$_), then it must be an optimal solution._
+
+Berdasarkan _optimality test_ tersebut, kita bisa mencari solusi optimal dari __CPF__ dengan cara mengambil __initial CPF__ untuk dites secara rekursif.
+
+```{r,include=FALSE}
+rm(list=ls())
+Z = function(x1,x2){3*x1 + 5*x2}
+```
+
+- __STEP 1__ Pilih _initial_ __CPF__, misal $(0,0)$. Kita akan hitung nilai $Z(0,0)=$ `r Z(0,0)`. Bandingkan dengan _adjacent_ __CPF__-nya, yakni $Z(0,6)=$ `r Z(0,6)` dan $Z(4,0) =$ `r Z(4,0)`.
+- __STEP 2__ Oleh karena $Z(0,6)$ memiliki nilai tertinggi, maka kita akan pilih titik ini di iterasi pertama. Kita akan bandingkan terhadap _adjacent_ __CPF__-nya, yakni: $Z(2,6)=$ `r Z(2,6)`. Perhatikan bahwa _adjacent_ __CPF__ $(0,0)$ sudah kita evaluasi pada langkah sebelumnya.
+- __STEP 3__ Oleh karena $Z(2,6)$ memiliki nilai tertinggi, maka kita akan pilih titik ini di iterasi kedua. Kita akan bandingkan terhadap _adjacent_ __CPF__-nya, yakni: $Z(4,3)=$ `r Z(4,3)`. Kita dapatkan bahwa titik $(2,6)$ menghasilkan $Z$ tertinggi.
+
+__Kesimpulan__: $(2,6)$ merupakan titik yang bisa memaksimumkan $Z$.
+
+\newpage
+
+### _Flowchart_ Metode Simplex dari Contoh Masalah
+
+Secara garis besar, _flowchart_ dari metode simplex untuk masalah di atas adalah:
+
+```{r out.width="45%",echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Algoritma Metode Simplex"}
+nomnoml::nomnoml("#direction: down,
+                 [<start> start] -> [Cari CPF]
+                 [Cari CPF] -> [<input> Set initial CPF]
+                 [<input> Set initial CPF] -> [<choice> Optimality Test\nOptimal?]
+                 [<choice> Optimality Test\nOptimal?] -> Yes [<end> end]
+                 [<choice> Optimality Test\nOptimal?] -> No [Cari adjacent CPF\nTeroptimal]
+                 [Cari adjacent CPF\nTeroptimal] -> [<choice> Optimality Test\nOptimal?]
+                 ")
+```
+
+\newpage
+
+Algoritma di atas akan sangat mudah dilakukan saat kita berhadapan dengan masalah optimisasi dengan 2 _decision variables_ (atau 3 _decision variables_). Pada contoh di atas ada $x_1,x_2$.
+
+> Bagaimana jika masalah yang dihadapi memiliki banyak _decision variables_?
+
+Tentunya kita tidak bisa melakukan analisa secara visual seperti di atas. Namun kita bisa menggunakan bantuan aljabar dan operasi baris elementer untuk menemukan solusi yang optimal.
+
+## Metode Simplex dengan Operasi Matriks
+
+Suatu masalah optimisasi bisa kita tulis dalam bentuk matriks sehingga bisa diselesaikan dengan melakukan _operasi baris elementer_.
+
+### Contoh Penyelesaian Masalah Optimisasi dengan _Simplex_
+
+Cari $x,y$ sehingga $\max{(P = 5x + 4y)}$ dengan _constraints_:
+
+$$\begin{matrix}
+3x + 5y \leq 78  \\
+4x + y \leq 36 \\
+\text{serta } x \geq 0, y \geq 0 \\
+\end{matrix}$$
+
+Untuk menyelesaikannya, kita perlu menambahkan $u,w$ sebagai variabel pembantu. Fungsi objectif $P$ juga harus diubah (dipindah sisi namun $P$ tetap positif).
+
+$$\begin{matrix}
+3x + 5y + u \leq 78  \\
+4x + y + w \leq 36 \\
+-5x - 4y + P = 0 \\
+\end{matrix}$$
+
+Setelah itu kita buat matriks (dalam hal ini saya akan buatkan tabelnya) sebagai berikut:
+
+```{r,echo=FALSE}
+rm(list=ls())
+simplex = data.frame(
+  x = c(3,4,-5),
+  y = c(5,1,-4),
+  u = c(1,0,0),
+  w = c(0,1,0),
+  P = c(0,0,1),
+  b = c(78,36,0)
+)
+
+simplex %>% knitr::kable("simple",caption = "Initial Condition Bentuk Matriks Simplex")
+```
+
+__STEP 1__ Kita akan pilih kolom yang memiliki nilai __negatif terbesar__ pada baris terakhir, yakni kolom $x$. Selanjutnya kita akan pilih baris mana yang akan menjadi pivot dengan cara menghitung rasio $\frac{b}{x}$ untuk semua baris dan memilih baris dengan __rasio terendah__.
+
+```{r,echo=FALSE}
+simplex = 
+  simplex %>% 
+  mutate(rasio = b/x)
+simplex %>% knitr::kable("simple",caption = "Pemilihan Baris Pivot")
+```
+
+__STEP 2__ Kita akan buat baris 2 kolom $x$ menjadi bernilai `1`, caranya dengan melakukan OBE seperti: $Row_2 = \frac{Row_2}{4}$.
+
+```{r,echo=FALSE}
+simplex$rasio = NULL
+simplex[2,] = simplex[2,] / 4
+simplex %>% knitr::kable("simple",caption = "OBE Iterasi 1")
+```
+
+__STEP 3__ Sekarang tujuan kita selanjutnya adalah membuat kolom $x$ baris `1` dan `3` menjadi bernilai __nol__. Caranya adalah:
+
+$$Row_1 = Row_1 - 3 Row_2$$
+
+$$Row_3 = Row_3 + 5 Row_2$$
+
+```{r,echo=FALSE}
+simplex[1,] = simplex[1,] - 3*simplex[2,]
+simplex[3,] = simplex[3,] + 5*simplex[2,]
+
+simplex %>% knitr::kable("simple",caption = "OBE Iterasi 2")
+```
+
+__STEP 4__ Kita akan lakukan hal yang sama pada _step 1_, yakni memilih kolom dengan negatif terbesar. Yakni kolom $y$. Lalu kita akan hitung rasio setiap baris dan akan memilih rasio paling rendah.
+
+```{r,echo=FALSE}
+simplex = 
+  simplex %>% 
+  mutate(rasio = b/y)
+simplex %>% knitr::kable("simple",caption = "Pemilihan Baris Pivot Kembali")
+```
+
+__STEP 5__ Maka kita akan pilih baris `1` menjadi pivot. Kolom $y$ pada baris `1` harus bernilai `1` sehingga kita harus membuat $Row_1 = \frac{4Row_1}{17}$.
+
+```{r,echo=FALSE}
+simplex$rasio = NULL
+simplex[1,] = 4*simplex[1,] / 17
+simplex %>% knitr::kable("simple",caption = "OBE Iterasi 3")
+```
+
+__STEP 6__ Kita akan buat klom $y$ di baris `2` dan `3` menjadi __nol__ dengan cara:
+
+$$Row_2 = Row_2 - \frac{Row_1}{4}$$
+
+$$Row_3 = Row_3 + \frac{11 Row_1}{4}$$
 
 
+```{r,echo=FALSE}
+simplex[2,] = simplex[2,] - simplex[1,] / 4
+simplex[3,] = simplex[3,] + (2.75*simplex[1,])
+
+simplex %>% knitr::kable("simple",caption = "OBE Iterasi 4")
+```
+
+Dari tabel terakhir di atas, kita bisa menuliskan $x=6,y=12$ dan nilai $\max{(P)}=78$. Bagaimana dengan nilau $u$ dan $w$? Karena tidak ada nlai `1` ditemukan pada kolom variabel tersebut, kita bisa simpulkan bahwa $u=0,w=0$.
+
+## _Post-Optimality Analysis_
+
+_Post-optimality analysis_ adalah analisa yang dilakukan pasca kita telah menemukan _optimal solution_ dari hasil perhitungan. Contohnya kita bisa melakukan __reoptimisasi__.
+
+## _Sensitivity Analysis_
+
+Salah satu proses dalam membuat model optimisasi adalah _parameter estimation_. Ada kalanya perubahan data mengakibatnya berubahnya suatu parameter. _Sensitivity analysis_ bertujuan untuk mengidentifikasi parameter yang sensitif (parameter yang harus dihitung dengan baik untuk menghindari kesalahan saat mencari solusi optimal).
 
 
 \newpage

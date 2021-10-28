@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.10.25)  28 OCT 2021 03:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.10.25)  28 OCT 2021 03:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -515,10 +515,6 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 2.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 2.
-)
-\tf@toc=\write4
-\openout4 = `Clean-Version.toc'.
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -527,7 +523,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[2]
+[2])
+\tf@toc=\write4
+\openout4 = `Clean-Version.toc'.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -600,7 +599,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [8]
-<Clean-Version_files/figure-latex/unnamed-chunk-2-1.pdf, id=205, 3450.8925pt x 
+<Clean-Version_files/figure-latex/unnamed-chunk-2-1.pdf, id=257, 3450.8925pt x 
 1534.73375pt>
 File: Clean-Version_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type
  pdf)
@@ -617,7 +616,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [9 <./Clean-Version_files/figure-latex/unnamed-chunk-2-1.pdf>]
-<Clean-Version_files/figure-latex/unnamed-chunk-3-1.pdf, id=222, 2308.625pt x 1
+<Clean-Version_files/figure-latex/unnamed-chunk-3-1.pdf, id=274, 2308.625pt x 1
 028.84375pt>
 File: Clean-Version_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type
  pdf)
@@ -689,7 +688,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [16]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 7
-00.
+02.
 (/home/rstudio/.TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -702,13 +701,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [17]
-<Clean-Version_files/figure-latex/unnamed-chunk-8-1.pdf, id=307, 2425.06pt x 96
+<Clean-Version_files/figure-latex/unnamed-chunk-8-1.pdf, id=359, 2425.06pt x 96
 4.60374pt>
 File: Clean-Version_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type
  pdf)
 <use Clean-Version_files/figure-latex/unnamed-chunk-8-1.pdf>
 Package pdftex.def Info: Clean-Version_files/figure-latex/unnamed-chunk-8-1.pdf
-  used on input line 765.
+  used on input line 767.
 (pdftex.def)             Requested size: 469.75801pt x 186.85324pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -737,6 +736,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [20]
+<Clean-Version_files/figure-latex/unnamed-chunk-9-1.pdf, id=398, 505.89pt x 289
+.08pt>
+File: Clean-Version_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type
+ pdf)
+<use Clean-Version_files/figure-latex/unnamed-chunk-9-1.pdf>
+Package pdftex.def Info: Clean-Version_files/figure-latex/unnamed-chunk-9-1.pdf
+  used on input line 893.
+(pdftex.def)             Requested size: 469.76265pt x 268.43579pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -754,23 +761,121 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[22] (./Clean-Version.aux)
+[22 <./Clean-Version_files/figure-latex/unnamed-chunk-9-1.pdf>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[23]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[24]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[25]
+<Clean-Version_files/figure-latex/unnamed-chunk-13-1.pdf, id=436, 1195.46625pt 
+x 1623.06375pt>
+File: Clean-Version_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (typ
+e pdf)
+<use Clean-Version_files/figure-latex/unnamed-chunk-13-1.pdf>
+Package pdftex.def Info: Clean-Version_files/figure-latex/unnamed-chunk-13-1.pd
+f  used on input line 1069.
+(pdftex.def)             Requested size: 211.38045pt x 286.98755pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[26 <./Clean-Version_files/figure-latex/unnamed-chunk-13-1.pdf>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[27]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[28]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[29]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[30]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[31]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[32] (./Clean-Version.aux)
 Package rerunfilecheck Info: File `Clean-Version.out' has not changed.
-(rerunfilecheck)             Checksum: 2E2749C70827572E46229D4EE5D89D68;3537.
+(rerunfilecheck)             Checksum: E485FC8CC2D7B1632F45F9CE43E83A98;5046.
  ) 
 Here is how much of TeX's memory you used:
- 11193 strings out of 480539
- 162828 string characters out of 5902403
- 489197 words of memory out of 5000000
- 28491 multiletter control sequences out of 15000+600000
- 485809 words of font info for 82 fonts, out of 8000000 for 9000
+ 11277 strings out of 480539
+ 164918 string characters out of 5902403
+ 491746 words of memory out of 5000000
+ 28533 multiletter control sequences out of 15000+600000
+ 490080 words of font info for 83 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,12n,66p,332b,495s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/home/rstudio/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/rstudi
-o/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/rstudio/.TinyTeX/
-texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/rstudio/.TinyTeX/texmf-dist/
-fonts/enc/dvips/lm/lm-ts1.enc}{/home/rstudio/.TinyTeX/texmf-dist/fonts/enc/dvip
-s/lm/lm-rm.enc}{/home/rstudio/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.
+ 60i,12n,66p,406b,495s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/home/rstudio/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/rstudi
+o/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/rstudio/.TinyTeX/texm
+f-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/rstudio/.TinyTeX/texmf-dist/font
+s/enc/dvips/lm/lm-mathit.enc}{/home/rstudio/.TinyTeX/texmf-dist/fonts/enc/dvips
+/lm/lm-ts1.enc}{/home/rstudio/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.
 enc}</home/rstudio/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/
 rstudio/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></home/rstudio/.T
 inyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></home/rstudio/.TinyTeX/texm
@@ -778,17 +883,17 @@ f-dist/fonts/type1/public/lm/lmmi12.pfb></home/rstudio/.TinyTeX/texmf-dist/font
 s/type1/public/lm/lmmi8.pfb></home/rstudio/.TinyTeX/texmf-dist/fonts/type1/publ
 ic/lm/lmr10.pfb></home/rstudio/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.
 pfb></home/rstudio/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/r
-studio/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></home/rstudio/.TinyT
-eX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/rstudio/.TinyTeX/texmf-dist
-/fonts/type1/public/lm/lmri12.pfb></home/rstudio/.TinyTeX/texmf-dist/fonts/type
-1/public/lm/lmro12.pfb></home/rstudio/.TinyTeX/texmf-dist/fonts/type1/public/lm
-/lmsy10.pfb></home/rstudio/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb
-></home/rstudio/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
-pfb>
-Output written on Clean-Version.pdf (22 pages, 1010160 bytes).
+studio/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></home/rstudio/.TinyT
+eX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></home/rstudio/.TinyTeX/texmf-dist
+/fonts/type1/public/lm/lmr8.pfb></home/rstudio/.TinyTeX/texmf-dist/fonts/type1/
+public/lm/lmri12.pfb></home/rstudio/.TinyTeX/texmf-dist/fonts/type1/public/lm/l
+mro12.pfb></home/rstudio/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><
+/home/rstudio/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></home/rstud
+io/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Clean-Version.pdf (32 pages, 1205800 bytes).
 PDF statistics:
- 459 PDF objects out of 1000 (max. 8388607)
- 389 compressed objects within 4 object streams
- 120 named destinations out of 1000 (max. 500000)
- 192 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 596 PDF objects out of 1000 (max. 8388607)
+ 507 compressed objects within 6 object streams
+ 160 named destinations out of 1000 (max. 500000)
+ 250 words of extra memory for PDF output out of 10000 (max. 10000000)
 
