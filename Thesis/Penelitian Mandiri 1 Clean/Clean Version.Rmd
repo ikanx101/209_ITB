@@ -71,13 +71,9 @@ Salah satu bentuk optimisasi yakni _linear programming_ dimulai oleh __Leonid Ka
 
 __Riset operasi__ adalah metode antar disiplin ilmu yang digunakan untuk menganalisa masalah nyata dan membuat keputusan untuk kegiatan operasional organisasi atau perusahaan^[Pengantar Riset Operasi dan Optimisasi, KampusX: PO101]. 
 
-Riset operasi dimulai pada era Perang Dunia II. Oleh karena peperangan, diperlukan suatu cara yang efektif untuk mengalokasikan _resources_ yang ada sehingga pihak militer Inggris dan Amerika Serikat mengumpulkan ilmuwan-ilmuwan untuk mencari pendekatan yang saintifik dalam memecahkan masalah^[Introduction to Operations Research, 7th Edition. Hillier / Lieberman hal. 1].
+Riset operasi dimulai pada era Perang Dunia II. Oleh karena peperangan, diperlukan suatu cara yang efektif untuk mengalokasikan _resources_ yang ada sehingga pihak militer Inggris dan Amerika Serikat mengumpulkan ilmuwan-ilmuwan untuk mencari pendekatan yang saintifik dalam memecahkan masalah[@lieberman].
 
-Pada tahun 1940, sekelompok _researchers_ yang dipimpin oleh __PMS Blackett__ dari ___the University of Manchester___ melakukan studi tentang __Sistem Radar Baru Anti Pesawat Terbang__. Kelompok _researchers_ ini sering dijuluki sebagai __Kelompok Sirkus Blackett__ (_Blackett’s circus_). Julukan ini terjadi karena keberagaman latar belakang disiplin ilmu para _researchers_ tersebut. Mereka terdiri dari disiplin ilmu fisiologi, matematika, astronomi, tentara, surveyor, dan fisika. Pada 1941, kelompok ini terlibat dalam penelitian radar deteksi kapal selam dan pesawat terbang. _Blackett_ kemudian memimpin _Naval Operational Research_ pada Angkatan Laut Kerajaan Inggris Raya. Prinsip-prinsip ilmiah yang digunakan untuk mengambil keputusan dalam suatu operasi dinamai sebagai __Riset Operasi__.
-
-```{r,include=FALSE}
-"http://repository.ut.ac.id/3876/1/ADBI4530-M1.pdf"
-```
+Pada tahun 1940, sekelompok _researchers_ yang dipimpin oleh __PMS Blackett__ dari ___the University of Manchester___ melakukan studi tentang __Sistem Radar Baru Anti Pesawat Terbang__. Kelompok _researchers_ ini sering dijuluki sebagai __Kelompok Sirkus Blackett__ (_Blackett’s circus_). Julukan ini terjadi karena keberagaman latar belakang disiplin ilmu para _researchers_ tersebut. Mereka terdiri dari disiplin ilmu fisiologi, matematika, astronomi, tentara, surveyor, dan fisika. Pada 1941, kelompok ini terlibat dalam penelitian radar deteksi kapal selam dan pesawat terbang. _Blackett_ kemudian memimpin _Naval Operational Research_ pada Angkatan Laut Kerajaan Inggris Raya. Prinsip-prinsip ilmiah yang digunakan untuk mengambil keputusan dalam suatu operasi dinamai sebagai __Riset Operasi__[@vincentius].
 
 Saat Amerika Serikat mulai terlibat pada Perang Dunia II, prinsip riset operasi juga digunakan untuk berbagai operasi militer mereka. Kelompok riset operasi AS bertugas untuk menganalisis serangan udara dan laut tentara NAZI Jerman.
 
@@ -161,8 +157,8 @@ nomnoml::nomnoml("#direction: down
     - Data melibatkan sesuatu di masa depan yang belum terjadi atau tidak pasti. Contoh: _demand_ produk, harga barang, dan sebagainya.
 1. _Deterministic optimization_; 
     - Model deterministik adalah model matematika di mana nilai dari semua parameter dan variabel yang terkandung di dalam model merupakan satu nilai pasti^[Pengantar Riset Operasi dan Optimisasi, KampusX: PO101].
-    - Pendekatan deterministik memanfaatkan sifat analitik masalah untuk menghasilkan barisan titik yang konvergen ke solusi optimal^[https://www.hindawi.com/journals/mpe/2012/756023/]. 
-    - Semua algoritma perhitungan mengikuti pendekatan matematis yang ketat^[https://link.springer.com/chapter/10.1007/978-3-642-31187-1_4].
+    - Pendekatan deterministik memanfaatkan sifat analitik masalah untuk menghasilkan barisan titik yang konvergen ke solusi optimal[@hindawi]. 
+    - Semua algoritma perhitungan mengikuti pendekatan matematis yang ketat[@marco].
 
 ## _Supplier Selection Problem_
 
@@ -176,7 +172,7 @@ Tema penelitian terkait _supplier selection problem_ termasuk ke dalam masalah o
 
 \newpage
 
-# PENJELASAN SINGKAT JENIS OPTIMISASI
+# JENIS OPTIMISASI
 
 ## _Linear Programming_
 
@@ -324,6 +320,9 @@ Jangan lupa bahwa $x_{i,j} \geq 0$.
 
 Pada bagian sebelumnya, kita telah membahas masalah optimisasi dengan variabel berupa diskrit dan kontinu. Permasalahan _real_ yang ada di kehidupan sehari-hari biasanya merupakan memiliki variabel yang _mixed_ antara keduanya. Oleh karena itu, ada metode yang disebut dengan _mixed integer linear programming_. Pada masalah optimisasi tipe ini, _decision variables_ yang terlibat bisa saja berupa _binary_, _integer_, dan _continuous_ sekaligus.
 
+### Menyelesaikan _MILP_
+
+_MILP_ secara eksak bisa diselesaikan dengan metode _simplex_.
 
 ### Contoh _MILP_
 
@@ -425,11 +424,11 @@ Dalam beberapa kasus, kita bisa mendapatkan _exact method_ bisa untuk menyelesai
 
 ## _Exact Method_
 
-Ciri khas dari _exact method_ adalah metode ini menjamin penyelesaian yang optimal karena menggunakan penyelesaian analitis metode matematika.
+Ciri khas dari _exact method_ adalah metode ini menjamin penyelesaian yang optimal karena menggunakan penyelesaian analitis metode matematika. Salah satu contoh metode eksak adalah _Simplex Method_.
 
 ## _Approximate Method_
 
-Ciri khas dari _approximate method_ adalah metode ini tidak menjamin penyelesaian yang optimal karena bersifat _aproksimasi_ atau pendekatan atau hampiran^[https://www.math.unipd.it/~luigi/courses/metmodoc1819/m02.meta.en.partial01.pdf]. Oleh karena itu kita perlu melakukan definisi di awal __seberapa dekat__ nilai __hampiran__ tersebut bisa kita terima.
+Ciri khas dari _approximate method_ adalah metode ini tidak menjamin penyelesaian yang optimal karena bersifat _aproksimasi_ atau pendekatan atau hampiran[@geovani]. Oleh karena itu kita perlu melakukan definisi di awal __seberapa dekat__ nilai __hampiran__ tersebut bisa kita terima.
 
 Metode ini bisa dibagi menjadi dua berdasarkan keterkaitannya dengan suatu masalah, yakni:
 
@@ -438,16 +437,98 @@ Metode ini bisa dibagi menjadi dua berdasarkan keterkaitannya dengan suatu masal
 1. _Meta heuristic_, metode ini bersifat _problem independent_. Artinya metode tersebut tidak tergantung dari jenis permasalahan tertentu. Contoh: 
     - _Genetic algorithm_.
     - _Simulated annealing_.
-    - _Spiral optimization_.
+    - _Spiral optimization_ untuk menyelesaikan masalah _mixed integer non linear programming_ [@kun].
     - _Artifical bee colony algorithm_.
     
 Namun demikian kedua metode ini bisa saling melengkapi dalam prakteknya.
+
+# KOMPLEKSITAS ALGORITMA
+
+Sebuah masalah bisa diselesaikan dengan berbagai macam algoritma. Sebuah algoritma tidak hanya diharuskan __benar__ tapi juga __efisien__. Efisiensi suatu algoritma biasanya diukur dari:
+
+1. Waktu eksekusi algoritma (_runtime_).
+1. Kebutuhan _memory_ komputasi (_memory allocation_).
+
+Algoritma yang baik adalah algoritma yang meminimumkan kebutuhan waktu dan _memory_ [@munir].
+
+Kebutuhan waktu dan _memory_ dari suatu algoritma bergantung pada ukuran _input_ ($n$) yang menyatakan jumlah data yang diproses. 
+
+#### Definisi {-}
+
+Besaran yang dipakai untuk mengukur waktu dan _memory_ ini disebut __kompleksitas algoritma__.
+
+## Perhitungan Kompleksitas Waktu
+
+Menghitung waktu _real_ dari eksekusi algoritma tidak bisa dilakukan karena bisa jadi ada perbedaan dalam hal:
+
+1. Spesifikasi perangkat keras yang digunakan.
+1. Spesifikasi perangkat lunak yang digunakan.
+
+#### Definisi {-}
+
+Perhitungan kompleksitas waktu $T(n)$ diukur dari tahapan komputasi yang dibutuhkan untuk menjalankan algoritma sebagai fungsi dari _input_ $n$.
+
+Sebagai contoh, suatu algoritma yang digunakan untuk menghitung rata-rata dari suatu data $\{1,2,..,n\}$ sebagai berikut:
+
+```
+sum = 0
+for i in 1 to n:
+  sum = sum + i
+avg = sum / n
+
+```
+
+Memiliki kompleksitas waktu $T(n)=n$. Dihitung dari operasi mendasar di dalamnya yakni `sum = sum + i` yang diulang sebanyak $n$ kali.
+
+Kompleksitas waktu dibedakan menjadi tiga macam:
+
+1. __Kebutuhan waktu maksimum__ terjadi saat $T(n) = \max{n}$.
+1. __Kebutuhan waktu minimum__ terjadi saat $T(n) = \min{n}$.
+1. __Kebutuhan waktu rata-rata__ terjadi saat $T(n) = \text{avg }{n}$
+
+## Kompleksitas Waktu Asimptotik
+
+Kompleksitas waktu asimptotik dinotasikan sebagai $O$ (O-besar).
+
+#### Definisi {-}
+
+$T(n) = O(f(n))$ dibaca: $T(n)$ berorde paling besar $f(n)$ bila terdapat konstanta $C$ dan $n_0$ sedemikian sehingga $T(n) \leq f(n)$ untuk $n \geq n_0$.
+
+Kompleksitas bisa berupa konstan, logaritmik, linear, kuadratik, kubik, atau eksponensial^[https://introprogramming.info/english-intro-csharp-book/read-online/chapter-19-data-structures-and-algorithm-complexity/].
+
+### Macam-macam Kompleksitas $O$
+
+#### Konstan {-}
+
+$O(k)$ dengan $k$ suatu nilai tertentu yang tetap. Artinya algoritma ini membutuhkan $k$ langkah dan tidak tergantung dari berapa banyak _input_ $n$.
+
+#### Linear {-}
+
+$O(n)$ artinya algoritma ini akan berjalan sebanyak $n$ langkah mengikuti _input_-nya.
+
+#### Logaritmik {-}
+
+$O(log(n))$ artinya algoritma ini membutuhkan $log(n)$ langkah.
+
+#### Kuadratik {-}
+
+$O(n^2)$ artinya algoritma ini membutuhkan $n^2$ langkah.
+
+#### Kubik {-}
+
+$O(n^3)$ artinya algoritma ini membutuhkan $n^3$ langkah.
+
+#### Eksponensial {-}
+
+$O(k^n)$ untuk suatu nilai $k$ tertentu. Artinya algoritma ini membutuhkan $k^n$ langkah.
+
+
 
 # METODE _SIMPLEX_
 
 Metode _simplex_ adalah salah satu metode yang paling umum digunakan dalam menyelesaikan permasalahan _linear programming_. Metode ini dikembangkan oleh seorang profesor matematika bernama George Dantzig^[https://en.wikipedia.org/wiki/George_Dantzig] pada 1947 pasca perang dunia II. Sedangkan nama _simplex_ diusulkan oleh Theodore Motzkin^[https://en.wikipedia.org/wiki/Theodore_Motzkin].
 
-Metode _simplex_ menggunakan prosedur aljabar^[Introduction to Operations Research, 7th Edition. Hillier / Lieberman hal. 109]. Namun _underlying concept_ dari metode ini adalah _geometric_.
+Metode _simplex_ menggunakan prosedur aljabar[@lieberman]. Namun _underlying concept_ dari metode ini adalah _geometric_.
 
 ## Metode Simplex dengan Ilustrasi Geometris
 
@@ -534,7 +615,7 @@ data.frame(x = 0:6) %>%
 
 Titik-titik hijau merupakan __beberapa titik__ solusi yang _feasible_ karena berada pada area penerimaan seluruh _constraints_ yang ada. Titik hijau ini menjadi spesial karena berada pada perpotongan 2 garis _constraints_. Selanjutnya titik hijau ini akan didefinisikan sebagai __CPF__ (_corner point feasible_).
 
-> _For a linear programming problem with n decision variables, each of its corner-point solutions lies at the intersection of n constraint boundaries._^[Introduction to Operations Research, 7th Edition. Hillier / Lieberman hal. 110]
+> _For a linear programming problem with n decision variables, each of its corner-point solutions lies at the intersection of n constraint boundaries._ [@lieberman]
 
 Sedangkan titik ungu merupakan titik solusi non _feasible_ karena solusi yang ada tidak berlaku untuk semua _constraints_.
 
@@ -740,6 +821,75 @@ simplex %>% knitr::kable("simple",caption = "OBE Iterasi 4")
 
 Dari tabel terakhir di atas, kita bisa menuliskan $x=6,y=12$ dan nilai $\max{(P)}=78$. Bagaimana dengan nilau $u$ dan $w$? Karena tidak ada nlai `1` ditemukan pada kolom variabel tersebut, kita bisa simpulkan bahwa $u=0,w=0$.
 
+## __R__ _Library_ untuk Metode _Simplex_
+
+Pada bagian sebelumnya, kita telah membahas bagaimana cara melakukan metode _simplex_ dengan operasi baris elementer. 
+
+> Apakah proses operasi tersebut bisa diformalkan dalam bentuk algoritma atau __R__ _codes_?
+
+Salah satu dari sekian banyak _packages_ yang memiliki _function_ metode _simplex_ yang siap pakai adalah `library(boot)` [@boot]. Pada bagian ini, kita akan membahas salah satu _function_ pada _library_ tersebut.
+
+Fungsi `simplex()` dari `library(boot)` digunakan untuk menyelesaikan masalah optimisasi linear  $ax$ dengan _constraints_ $A_1x \leq b_1$, $A_2x \leq b_2$, $A_3x \leq b_3$, dan $x \geq 0$. Secara _default_, _function_ ini akan mengukur _minimize_. Namun kita bisa mengubahnya menjadi _maximize_.
+
+### Penggunaan `simplex()`
+
+Penggunaannya adalah sebagai berikut:
+
+```
+simplex(a, A1 = NULL, b1 = NULL, A2 = NULL, b2 = NULL, A3 = NULL,
+        b3 = NULL, maxi = FALSE, n.iter = n + 2 * m, eps = 1e-10)
+```
+
+Dimana:
+
+- `a` = _vector_ yang merupakan koefisien dari _objective function_.
+- `A1` = merupakan matriks berisi koefisien dari constraints bertipa $\leq$.
+- `b1` = _vector_ pasangan dari matriks `A1`. Harus berisi _non-negative_.
+- `A2` = merupakan matriks berisi koefisien dari constraints bertipa $\geq$.
+- `b2` = _vector_ pasangan dari matriks `A2`. Harus berisi _non-negative_. Perhatikan bahwa _constraints_ $\geq 0$ secara _default_ sudah masuk.
+- `A3` = merupakan matriks berisi koefisien dari constraints bertipa $=$.
+- `b3` = _vector_ pasangan dari matriks `A3`. Harus berisi _non-negative_. Perhatikan bahwa _constraints_ $\geq 0$ secara _default_ sudah masuk.
+- `maxi` = _logical_, secara _default_ akan mencari _minimize_.
+
+#### Catatan Khusus {-}
+
+Penulis _packages_ ini memberikan suatu catatan khusus, yakni:
+
+> _The method employed here is suitable only for relatively small systems._
+
+### Contoh Penggunaan `simplex()`
+
+Saya akan ambil contoh masalah _linear programming_ sebagai berikut:
+
+$$\text{maximize: } 7x_1 + 3x_2 + x_3$$
+
+$$\text{subject to: } \begin{matrix}
+6x_1 + 4x_2  + 5x_3 \leq 60 \\ 8x_1 + x_2 + 2x_3 \leq 80 \\ 9x_1 + x_2 + 7x_3 \leq 70 \\ x_1,x_2,x_3 \geq 0
+\end{matrix}$$
+
+```{r}
+rm(list=ls())
+# panggil library
+library(boot)
+
+# set objective function
+obj = c(7, 3, 1)
+# membuat matriks A1
+c1 = c(6, 4, 5)
+c2 = c(8, 1, 2)
+c3 = c(9, 1, 7)
+A1 = rbind(c1,c2,c3)
+# membuat rhs dari matriks A1
+b1 = c(60, 80, 70)
+# solving masalah optimisasi
+simplex(a = obj, A1 = A1, b1 = b1,maxi = TRUE)
+
+```
+
+```{r,include=FALSE}
+detach("package:boot", unload = TRUE)
+```
+
 ## _Post-Optimality Analysis_
 
 _Post-optimality analysis_ adalah analisa yang dilakukan pasca kita telah menemukan _optimal solution_ dari hasil perhitungan. Contohnya kita bisa melakukan __reoptimisasi__.
@@ -747,6 +897,538 @@ _Post-optimality analysis_ adalah analisa yang dilakukan pasca kita telah menemu
 ## _Sensitivity Analysis_
 
 Salah satu proses dalam membuat model optimisasi adalah _parameter estimation_. Ada kalanya perubahan data mengakibatnya berubahnya suatu parameter. _Sensitivity analysis_ bertujuan untuk mengidentifikasi parameter yang sensitif (parameter yang harus dihitung dengan baik untuk menghindari kesalahan saat mencari solusi optimal).
+
+
+# __R__ _PACKAGES_ UNTUK OPTIMISASI 
+
+Untuk menyelesaikan masalah optimisasi menggunakan __R__, ada beberapa _packages_ yang bisa digunakan. Saya akan bahas beberapa _packages_ yang biasa digunakan untuk menyelesaikan masalah optimisasi di __R__, yakni:
+
+1. `ROI` _packages_ [@roi].
+1. `ompr` _packages_ [@ompr].
+
+## `ROI` _Packages_ di __R__ 
+
+`ROI` merupakan singkatan dari __R Optimization Infrastructure__ merupakan salah satu _packages_ yang memberikan infrastruktur untuk menyelesaikan _linear programming_, _quadratic programming_, _conic_, dan _general non linear programming_.
+
+`ROI` dikembangkan oleh __WU Vienna University of Economics and Business__^[https://epub.wu.ac.at/5858/], yakni:
+
+- Kurt Hornik,
+- David Meyer,
+- Florian Schwendinger,
+- Stefan Theussl,
+- Diethelm Wuertz.
+
+`ROI` bekerja dengan memanfaatkan berbagai _solver_ (disebut dengan ___plugins___) yang dikembangkan oleh pihak-pihak lain. Dari masalah yang ada, kita __bisa melihat dan menentukan__ _solver_ apa yang bisa kita pakai untuk menyelesaikan permasalahan tersebut.
+
+### `ROI` _Modelling_
+
+_Framework_ untuk menuliskan model optimisasi menggunakan `ROI` adalah sebagai berikut:
+
+#### _Objective Function_ {-}
+
+dimasukkan ke dalam _script_ dengan format tergantung dari masalah yang dihadapi:
+
+1. Jika berupa _linear programming_, _objective function_ akan berupa `vector` numerik.
+1. Jika berupa _quadratic programming_, _objective function_ akan berupa `matriks`.
+
+#### _Constraints_ {-}
+
+dalam `ROI` dimasukkan dalam bentuk pisahan berikut:
+
+$$(parameter) + (direction) + (rhs)$$
+
+#### _Bounds_ {-}
+
+atau batas _decision variables_ termasuk tipenya (_integer_ dan _kontinu_).
+
+#### Contoh Penyelesaian _Linear Programming_ I
+
+$$\text{minimize: } 7x_1 + 8x_2$$
+
+$$\text{subject to: } \begin{matrix}
+3x_1 + 4x_2 = 9 \\ 2x_1 + x_2 \geq 3 \\ -100 \leq x_1 , x2 \leq 100
+\end{matrix}$$
+
+Berikut adalah penyelesaian di __R__:
+
+```{r,message=FALSE,warning=FALSE}
+rm(list=ls())
+
+# libraries dan solver yang digunakan
+library(ROI)
+library(ROI.plugin.glpk)
+library(ROI.plugin.qpoases)
+library(ROI.plugin.ecos)
+library(ROI.plugin.scs)
+library(ROI.plugin.alabama)
+library(ROI.plugin.lpsolve)
+
+# pendefinisian objective function
+obj_func = L_objective(c(7, 8), names=c("x", "y"))
+obj_func
+
+# pendefinisian constraints
+const = L_constraint(L = rbind(c(3, 4), 
+                       c(2, 1)),
+                    dir = c("==", ">="), 
+                    rhs = c(9, 3)
+                    )
+const
+
+# pendefinisian bounds
+bou = V_bound(li = 1:2, # x dan y
+              ui = 1:2, # x dan y
+              lb = c(-100, -100), 
+              ub = c(100, 100))
+bou
+
+# menggabungkan semua komponen
+linear_problem = OP(objective = obj_func,
+                    constraints = const,
+                    bounds = bou)
+linear_problem
+```
+
+Untuk melihat _solver_ `ROI`, kita akan menggunakan perintah sebagai berikut:
+
+```{r,message=FALSE,warning=FALSE}
+ROI_applicable_solvers(linear_problem)
+
+```
+
+Terlihat ada `6` _solvers_ yang bisa dipilih. Proses mencari solusi dilakukan dengan perintah sebagai berikut:
+
+```
+ROI_solve(model ROI, solver = "nama solver")
+```
+
+Sebagai contoh, saya akan menggunakan _solver_ `glpk`, maka:
+
+```{r,message=FALSE,warning=FALSE}
+solusi = ROI_solve(linear_problem,
+                   solver = "glpk")
+```
+
+Berikut adalah hasilnya:
+
+```{r,message=FALSE,warning=FALSE}
+solution(solusi)
+```
+
+#### Contoh Penyelesaian _Linear Programming_ II
+
+$$\text{maximize: } 7x_1 + 3x_2 + x_3$$
+
+$$\text{subject to: } \begin{matrix}
+6x_1 + 4x_2  + 5x_3 \leq 60 \\ 8x_1 + x_2 + 2x_3 \leq 80 \\ 9x_1 + x_2 + 7x_3 \leq 70 \\ x_1,x_2,x_3 \geq 0
+\end{matrix}$$
+
+Berikut adalah penyelesaiannya di __R__:
+
+```{r,message=FALSE,warning=FALSE}
+linear_problem_2 = 
+  OP(# objective function
+     objective = L_objective(c(7, 1, 3), 
+                             names = c("x", "y", "z")),
+     # constraints
+     constraints = L_constraint(L = rbind(c(6, 4, 5), 
+                                          c(8, 0, 2), 
+                                          c(9, 1, 7)
+                                          ),
+                                dir = c("<=", "<=", "<="),
+                                rhs = c(60, 80, 70)),
+     # tidak ada bounds yang perlu diset
+     # pengaturan agar memaksimalkan obj function
+     maximum = TRUE)
+
+# proses pencarian solusi
+# tanpa memanggil solver (default)
+solusi_2 = ROI_solve(linear_problem_2)
+# output
+solution(solusi_2)
+```
+
+Perlu diperhatikan pada baris-baris akhir, `linear_problem_2` diselesaikan tanpa kita harus memanggil _solver_ yang ada. `ROI` akan memilihkan _default_ _solver_.
+
+#### Contoh Penyelesaian _Mixed Integer Linear Programming_ 
+
+$$\text{maximize: } 7x_1 + 3x_2 + x_3$$
+
+$$\text{subject to: } \begin{matrix}
+6x_1 + 4x_2  + 5x_3 \leq 60 \\ 8x_1 + x_2 + 2x_3 \leq 80 \\ 9x_1 + x_2 + 7x_3 \leq 70 \\ x_3 \geq 0 \\ x_1,x_2 \in \mathbb{Z}_{\geq 0}
+\end{matrix}$$
+
+Masalah kali ini adalah perpaduan antara variabel kontinu dan _integer_.
+
+Kita cukup memodifikasi perintah di __R__ untuk mendefinisikan tipe variabel yang terlibat sebagai berikut:
+
+
+```{r,message=FALSE,warning=FALSE}
+mixed_ilp = 
+  OP(# objective function
+     objective = L_objective(c(7, 1, 3), 
+                             names = c("x", "y", "z")),
+     # constraints
+     constraints = L_constraint(L = rbind(c(6, 4, 5), 
+                                          c(8, 0, 2), 
+                                          c(9, 1, 7)
+                                          ),
+                                dir = c("<=", "<=", "<="),
+                                rhs = c(60, 80, 70)),
+     # tidak ada bounds yang perlu diset
+     
+     # pendefinisian tipe variabel
+     types = c("I","I","C"),
+     # pengaturan agar memaksimalkan obj function
+     maximum = TRUE)
+
+# proses pencarian solusi
+# tanpa memanggil solver (default)
+solusi_3 = ROI_solve(mixed_ilp)
+# output
+solution(solusi_3)
+```
+
+### _Conclusion_
+
+Salah satu ciri khas dalam `ROI` adalah _input object_ berupa __matriks__ dan __vektor__.
+
+
+## `ompr` _Packages_ di __R__ 
+
+Ada satu _packages_ lain di __R__ yang bisa digunakan untuk menyelesaikan masalah optimisasi, yakni bernama `ompr`. _Packages_ `ompr` dibuat oleh __Dirk Schumacher__ pada 2018^[https://www.r-orms.org/].
+
+Salah satu keuntungan dari _library_ ini adalah pengunaan operator _pipe_ ` %>% ` pada perumusan algoritmanya. Sehingga bagi _user_ yang biasa menggunakan prinsip `tidyverse` akan merasa sangat terbantu.
+
+### `ompr` _Modelling_
+
+_Framework_ untuk menuliskan model optimisasi menggunakan `ompr` adalah sebagai berikut:
+
+```
+# mulai membangun model
+MIPModel() %>% 
+  
+  # menambah variabel
+  add_variable() %>% 
+  
+  # set objective
+  set_objective() %>% 
+  
+  # menambah constraints
+  add_constraint()
+```
+
+#### _Decision Variable_ {-} 
+
+harus didefinisikan sejak awal. Ada berapa dan tipenya seperti apa. Kita bisa menggunakan _indexed variables_ untuk menghemat notasi. Berikut adalah contohnya:
+
+```
+MIPModel() %>% 
+
+  # menambah variabel integer
+  add_variable(x, type = "integer") %>% 
+  
+  # menambah variabel kontinu
+  add_variable(y, type = "continuous") %>% 
+  
+  # menambah variabel binary integer
+  add_variable(z, type = "binary") %>% 
+  
+  # menambah variabel dengan lower bound
+  add_variable(x, lb = 10) %>% 
+  
+  # menambah variabel dengan upper dan lower bounds
+  add_variable(y, lb = 5, ub = 10) %>% 
+  
+  # menambah 10 variabel berindeks
+  add_variable(p[i], i = 1:10)
+```
+
+#### _Objective Function_ dan _Constraints_ {-} 
+
+dalam `ompr` bisa dituliskan sebagai fungsi matematika biasa. Bahkan kita bisa menuliskan _summation_ ke dalam algoritmanya. Berikut adalah contohnya:
+
+
+Misal ada `3` variabel $x_1,x_2,x_3$, dengan _objective function_ $\sum_i x_i$ dengan _constraint_ $\sum_i x_i \leq 7$.
+
+```
+MIPModel() %>% 
+  add_variable(x[i], i = 1:3) %>% 
+  set_objective(sum_expr(x[i], i = 1:3)) %>% 
+  add_constraint(sum_expr(x[i], i = 1:3) <= 7)
+```
+
+#### Contoh Penyelesaian _Mixed Integer Linear Programming_ 
+
+$$\text{maximize: } 7x_1 + 3x_2 + x_3$$
+
+$$\text{subject to: } \begin{matrix}
+6x_1 + 4x_2  + 5x_3 \leq 60 \\ 8x_1 + x_2 + 2x_3 \leq 80 \\ 9x_1 + x_2 + 7x_3 \leq 70 \\ x_3 \geq 0 \\ x_1,x_2 \in \mathbb{Z}_{\geq 0}
+\end{matrix}$$
+
+Mari kita tuliskan dalam `ompr` _framework_ berikut:
+
+```{r,message=FALSE,warning=FALSE}
+rm(list=ls())
+
+# memanggil libraries
+library(dplyr)
+library(ompr)
+library(ompr.roi)
+library(ROI.plugin.glpk)
+
+# membuat model
+milp_new = 
+  MIPModel() %>% 
+  
+  # membuat 2 variabel integer
+  add_variable(x1,type = "integer",lb = 0) %>% 
+  add_variable(x2,type = "integer",lb = 0) %>% 
+  
+  # membuat 1 variabel kontinu
+  add_variable(x3,type = "continuous",lb = 0) %>% 
+  
+  # set obj function
+  set_objective(7*x1 + 3*x2 + x3,
+                "max") %>% 
+  
+  # menuliskan semua constraints
+  add_constraint(6*x1 + 4*x2  + 5*x3 <= 60) %>% 
+  add_constraint(8*x1 + x2 + 2*x3 <= 80) %>% 
+  add_constraint(9*x1 + x2 + 7*x3 <= 70) 
+
+milp_new
+```
+
+Mari kita _solve_ modelnya:
+
+```{r,message=FALSE,warning=FALSE}
+result = solve_model(milp_new, with_ROI(solver = "glpk", verbose = TRUE))
+result
+```
+
+Berikut adalah hasilnya:
+
+```{r}
+result %>% get_solution(x1)
+result %>% get_solution(x2)
+result %>% get_solution(x3)
+```
+
+### _Conclusion_
+
+Salah satu ciri khas `ompr` adalah penulisannya yang mirip dengan notasi matematika sehingga saat kita memiliki suatu model dengan banyak variabel, kita tidak perlu menginputnya ke dalam bentuk matriks.
+
+### Penyelesaian Contoh Soal `3.2.1`
+
+Dengan menggunakan `library(ompr)`
+
+```{r,warning=FALSE,message=FALSE}
+rm(list=ls())
+
+# memanggil libraries
+library(dplyr)
+library(ompr)
+library(ompr.roi)
+library(ROI.plugin.glpk)
+
+# membuat model
+integer_prog = 
+  MIPModel() %>% 
+  # membuat variabel
+  add_variable(x[i],
+               type = "integer",
+               lb = 0,
+               i = 1:7) %>% 
+  # set fungsi objective
+  set_objective(sum_expr(x[i],i = 1:7),"min") %>% 
+  # memasukkan constraints
+  # senin
+  add_constraint(sum_expr(x[i], i = c(1,4,5,6,7)) >= 24) %>% 
+  add_constraint(sum_expr(x[i], i = c(1,4,5,6,7)) <= 29) %>% 
+  # selasa
+  add_constraint(sum_expr(x[i], i = c(1,2,5,6,7)) >= 22) %>% 
+  add_constraint(sum_expr(x[i], i = c(1,2,5,6,7)) <= 27) %>% 
+  # rabu
+  add_constraint(sum_expr(x[i], i = c(1,2,3,6,7)) >= 23) %>% 
+  add_constraint(sum_expr(x[i], i = c(1,2,3,6,7)) <= 28) %>% 
+  # kamis
+  add_constraint(sum_expr(x[i], i = c(1,2,3,4,7)) >= 11) %>% 
+  add_constraint(sum_expr(x[i], i = c(1,2,3,4,7)) <= 16) %>% 
+  # jumat
+  add_constraint(sum_expr(x[i], i = 1:5) >= 16) %>% 
+  add_constraint(sum_expr(x[i], i = 1:5) <= 21) %>% 
+  # sabtu
+  add_constraint(sum_expr(x[i], i = 2:6) >= 20) %>% 
+  add_constraint(sum_expr(x[i], i = 2:6) <= 25) %>% 
+  # minggu
+  add_constraint(sum_expr(x[i], i = 3:7) >= 12) %>% 
+  add_constraint(sum_expr(x[i], i = 3:7) <= 17)
+
+integer_prog
+hasil = integer_prog %>% solve_model(with_ROI(solver = "glpk",verbose = T))
+# solusi yang dihasilkan
+hasil$solution
+```
+
+Kita telah mendapatkan konfigurasi jadwal nakes yang optimal perharinya. 
+
+### Penyelesaian Contoh Soal `3.3.1`
+
+Dengan menggunakan `library(ompr)`
+
+```{r}
+rm(list=ls())
+
+library(dplyr)
+library(ompr)
+library(ompr.roi)
+library(ROI.plugin.glpk)
+
+bin_prog = 
+  MIPModel() %>%
+  # menambah variabel
+  add_variable(x[i,j],
+	       i = 1:20,
+	       j = 1:5,
+	       type = "binary",
+	       lb = 0) %>%
+  # membuat objective function
+  set_objective(sum_expr(x[i,j],
+			 i = 1:20,
+			 j = 1:5),
+		"max") %>%
+  # menambah constraints
+  # max kapasitas kelas
+  add_constraint(sum_expr(x[i,j],i = 1:20) >= 4,
+		 j = 1:5) %>%
+  add_constraint(sum_expr(x[i,j],i = 1:20) <= 8,
+		 j = 1:5) %>%
+  # frek kunjungan siswa
+  add_constraint(sum_expr(x[i,j],j = 1:5) >= 2,
+		 i = 1:20) %>%
+  add_constraint(sum_expr(x[i,j],j = 1:5) <= 3,
+		 i = 1:20) %>%
+  # jeda sehari
+  add_constraint(x[i,j] + x[i,j+1] <= 1,
+		 i = 1:20,
+		 j = 1:4)
+
+bin_prog 
+```
+
+Berikut adalah hasilnya:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+hasil = 
+  bin_prog %>%
+  solve_model(with_ROI(solver = "glpk",
+		       verbose = T))
+
+rekap = 
+  hasil %>% 
+  get_solution(x[i,j]) %>%
+  filter(value == 1) %>%
+  rename(siswa = i,
+         hari = j)
+
+rekap %>%
+  group_by(hari) %>%
+  summarise(presensi = paste(siswa,collapse = ",")) %>%
+  ungroup() %>%
+  knitr::kable("simple",caption = "Jadwal Kunjungan Siswa")
+
+rekap %>%
+  group_by(siswa) %>%
+  tally() %>%
+  ungroup() %>%
+  rename("jumlah kehadiran" = n) %>%
+  knitr::kable("simple",caption = "Rekap Presensi Siswa")
+```
+
+### Penyelesaian Contoh Soal `3.4.2`
+
+Dengan menggunakan `library(ompr)`
+
+```{r}
+rm(list=ls())
+
+library(dplyr)
+library(ompr)
+library(ompr.roi)
+library(ROI.plugin.glpk)
+
+# data yang dibutuhkan
+profit = c(5,7,3)
+sales = c(7,5,9)
+M = 99999
+
+# membuat model
+mil_prog = 
+  MIPModel() %>%
+  # menambah variabel
+  # xi
+  add_variable(x[i],
+	       i = 1:3,
+	       type = "continuous",
+	       lb = 0) %>%
+  # yi
+  add_variable(y[i],
+	       i = 1:3,
+	       type = "binary",
+	       lb = 0) %>%
+  # z
+  add_variable(z,type = "binary",lb = 0) %>%
+  # membuat objective function
+  set_objective(sum_expr(x[i] * profit[i],
+			 i = 1:3),
+		"max") %>%
+  # menambah constraints
+  # max tonase
+  add_constraint(x[i] <= sales[i],
+		 i = 1:3) %>%
+  # memilih 2 produk
+  add_constraint(x[i] - y[i] * M <= 0,
+		 i = 1:3) %>%
+  add_constraint(sum_expr(y[i],
+		 i = 1:3) <= 2) %>%
+  # memilih 1 plant
+  add_constraint(3*x[1] + 4*x[2] + 2*x[3] - M * z <= 30) %>%
+  add_constraint(4*x[1] + 6*x[2] + 2*x[3] + M * z <= 40 + M) 
+
+mil_prog
+
+hasil = 
+  mil_prog %>%
+  solve_model(with_ROI(solver = "glpk",
+		       verbose = T))
+
+xi = 
+  hasil %>% 
+  get_solution(x[i])
+
+yi = 
+  hasil %>%
+  get_solution(y[i])
+
+zi = 
+  hasil %>%
+  get_solution(z)
+
+```
+
+Berikut adalah hasilnya:
+
+```{r,echo=FALSE}
+xi
+yi
+zi
+```
+
+Dari ketiga produk baru, perusahaan bisa memilih produk __1 dan 3__ sebanyak __5.5 dan 9 ton__ di _plant_ __2__. Maka _profit_ yang bisa diraih adalah sebesar __54.5__.
+
+
+
 
 
 \newpage
