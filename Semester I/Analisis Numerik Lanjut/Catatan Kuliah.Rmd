@@ -5574,6 +5574,102 @@ rho(B)
 
 \newpage
 
+# CHAPTER VII {-}
+
+# PENYELESAIAN PDP SECARA NUMERIK 
+
+Pada bahasan ini, kita akan lokalisir hanya pada persamaan diferensial parsial order dua linear dalam dua peubah.
+
+__Bentuk umum__ (dengan $u = u(x,y)$)
+
+$$A(x,y) u_{xx} + B(x,y) u_{xy} + C(x,y) u_{yy} + D(x,y) u_x + E(x,y) u_y + F(x,y)u = G(x,y)$$
+
+Contoh:
+
+$$u_{tt} = e^{-t} u_{xx} + \sin t \text{, linear}$$
+
+$$uu_{xx} + u_t = 0 \text{, tak linear}$$
+
+$$u_{xx} + y u_{yy} = 0 \text{, linear}$$
+
+$$xu_{x} + y u_{y} + u^2 = 0 \text{, tak linear}$$
+
+__Tiga tipe dasar__
+
+- _Parabolik_ : $B^2 - 4AC = 0$ contoh: aliran panas, proses difusi.
+- _Hiperbolik_ : $B^2 - 4AC > 0$ contoh: getaran dawai, gelombang.
+- _Eliptik_ : $B^2 - 4AC < 0$ contoh: fenomena _ready-state_.
+
+__Contoh__
+
+$$u_t = u_{xx} \rightarrow B^2 - 4AC = 0^2 - 4(1)(0) = 0, \text{ parabolik}$$
+
+$$u_{tt} = u_{xx} \rightarrow B^2 - 4AC = 0^2 - 4(1)(-1) = 4, \text{hiperbolik}$$
+
+$$u_{xy} = 0 \rightarrow B^2 - 4AC = 1^2 - 4(0)(0) = 1, \text{hiperbolik}$$
+
+$$yu_{xx} + u_{yy} = 0 \rightarrow B^2 - 4AC = 0^2 - 4(y)(1) = -4y, \text{hiperbolik untuk y<0, eliptik untuk y>0, parabolik untuk y=0}$$
+
+## Solusi Numerik PDP
+
+Kita akan kaji bagaimana PDP dapat diubah menjadi sistem persamaan aljabar dengan menggantikan turunan-turunan parsial pada persamaan diferensialnya dengan hampiran-hampiran beda-hingga-nya. Selanjutnya sistem persamaan aljabar yang diperoleh diselesaikan secara numerik dengan proses iteratif untuk mendapatkan hampiran solusinya.
+
+### Hampiran Beda-Hingga Orde 1
+
+Perhatikan deret Taylor dari fungsi $f(x)$:
+
+$$f(x+h) = f(x) + f'(x)h + \frac{f''(x)}{2!} h^2 + ... $$
+
+Penulisan di atas adalah penulisan __eksak__. Sedangkan penulisan dibawah ini sudah masuk ke dalam penulisan __hampiran__.
+
+$$f(x+h) = f(x) + f'(x)h + O(h^2)$$
+
+Kita bisa tuliskan menjadi sebagai berikut:
+
+$$f'(x) \cong \frac{f(x+h) - f(x)}{h}$$
+
+Bentuk di atas dikenal sebagai __hampiran beda-maju__ untuk $f'(x)$ dengan galat berorde $O(h)$. Dengan mengganti $h$ menjadi $-h$ pada deret Taylor di atas, diperoleh __hampiran beda mundur__ dengan bentuk berikut:
+
+$$f'(x) \cong \frac{f(x) - f(x-h)}{h}$$
+
+dengan galat $O(h)$.
+
+Jika kita menghitung selisih antara $f(x+h)$ dan $f(x-h)$ kita bisa mendapatkan bentuk __hampiran beda pusat__ sebagai berikut:
+
+$$f'(x) = \frac{1}{2h}[f(x+h) - f(x-h)] + O(h^2)$$
+
+$$f'(x) \cong \frac{1}{2h}[f(x+h) - f(x-h)]$$
+
+Dengan galat orde $O(h^2)$.
+
+### Hampiran Beda-Hingga Orde 2
+
+Misalkan suatu deret Taylor berikut:
+
+$$f(x+h) = f(x) + f'(x)h + \frac{f''(x)}{2!} h^2 + \frac{f'''(x)}{3!} h^3 + O(h^4)$$
+
+Dengan langkah serupa dengan orde 1, kita bisa dapatkan:
+
+$$f''(x) = \frac{1}{h^2} [f(x+h) - 2 f(x) + f(x-h)] + O(h^2)$$
+
+Hampiran beda hingga tersebut bisa diperluas untuk fungsi dua peubah $u=u(x,y)$. Caranya kita mulai dari deret Taylor berikut ini:
+
+$$u(x+h,y) = u(x,y) + u_x(x,y) h + u_{xx} (x,y) \frac{h^2}{2!} + ...$$
+
+$$u(x-h,y) = u(x,y) - u_x(x,y) h + u_{xx} (x,y) \frac{h^2}{2!} - ...$$
+
+Dapat diperoleh hasil berikut:
+
+$$u_x(x,y) = \frac{u(x+h,y) - u(x,y)}{h} + O(h)$$
+
+
+$$u_{xx}(x,y) = \frac{1}{h^2} [u(x+h,y) - 2u(x,y) + u(x-h,y)] + O(h^2)$$
+
+$$u_y(x,y) = \frac{u(x,y+k) - u(x,y)}{k} + O(k)$$
+
+$$u_{yy}(x,y) = \frac{1}{k^2} [u(x,y+k) - 2u(x,y) + u(x,y-k)] + O(k^2)$$
+
+
 \center 
 
 # END {-}
