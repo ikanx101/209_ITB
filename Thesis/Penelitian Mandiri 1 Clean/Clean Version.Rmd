@@ -42,8 +42,6 @@ library(ggplot2)
 
 \newpage
 
-# CHAPTER I {-}
-
 # SEJARAH 
 
 ## Optimisasi
@@ -87,10 +85,6 @@ Selepas Perang Dunia II, penerapan riset operasi dinilai bisa diperluas ke dunia
 
 Oleh karena tujuan utama dari aplikasi riset operasi adalah tercapainya __hasil yang optimal__ dari semua kemungkinan perencanaan yang dibuat. Maka __pemodelan matematika dan optimisasi__ bisa dikatakan sebagai disiplin utama dari riset operasi.
 
-\newpage
-
-# CHAPTER II {-}
-
 # OPTIMISASI 
 
 ## Bahasan dalam Optimisasi
@@ -119,10 +113,351 @@ Dari ekspresi tersebut, kita bisa membagi-bagi masalah optimisasi tergantung dar
 1. Tipe variabel yang terlibat.
 1. Jenis fungsi yang ada (baik _objective function_ ataupun _constraints_).
 
+## Jenis-Jenis Masalah Optimisasi
+
+Masalah optimisasi bisa dibagi dua menjadi dua kategori berdasarkan tipe _variables_ yang terlibat^[Optimization problem. https://en.wikipedia.org/wiki/Optimization_problem], yakni:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Optimisasi Berdasarkan Jenis Variabel"}
+nomnoml::nomnoml("#direction: down
+                 [Optimisasi] -> [Diskrit]
+                 [Optimisasi] -> [Kontinu]
+                 
+                 [Diskrit] -> [Binary\nProgramming]
+                 [Diskrit] -> [Integer\nProgramming]
+                 [Diskrit] -> [Mixed Integer\nLinear Programming]
+                 
+                 [Kontinu] -> [Diferensiabel]
+                 [Kontinu] -> [Non Diferensiabel]
+                 
+                 [Diferensiabel] -> [Linear\nProgramming]
+                 [Diferensiabel] -> [Non Linear\nProgramming]
+                 [Diferensiabel] -> [Quadratic\nProgramming] 
+                 
+                 [Linear\nProgramming] --> [Mixed Integer\nLinear Programming]
+                 ")
+```
+
+
+1. _Discrete Optimization_: merupakan masalah optimisasi di mana variabel yang terkait merupakan variabel diskrit, seperti _binary_ atau _integer_ (bilangan bulat). Namun pada masalah optimisasi berbentuk _mixed integer linear programming_, dimungkinkan suatu masalah optimisasi memiliki berbagai jeni variabel yang terlibat (integer dan kontinu sekaligus).
+1. _Continuous Optimization_: merupakan masalah optimisasi di mana variabel yang terkait merupakan variabel kontinu (bilangan _real_). Pada masalah optimisasi jenis ini, fungsi-fungsi yang terlibat bisa diferensiabel atau tidak. Konsekuensinya adalah pada metode penyelesaiannya.
+
+Selain itu, kita juga bisa membagi masalah optimisasi berdasarkan __kategori masalah__ yang dihadapi sebagai berikut:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Optimisasi Berdasarkan Kategori Masalah"}
+nomnoml::nomnoml("#direction: down
+                 [Optimisasi] -> [Uncertainty]
+                 [Optimisasi] -> [Certain|Deterministic]
+                 
+                 [Uncertainty] -> [Stokastik\nprogramming]
+                 [Uncertainty] -> [Robust\noptimization]
+                 
+                 [Certain] -> [Kontinu]
+                 [Certain] -> [Diskrit]
+                 ")
+```
+
+1. _Optimization under uncertainty_^[https://neos-guide.org/content/optimization-under-uncertainty]; Pada beberapa kasus di dunia _real_, data dari masalah tidak dapat diketahui secara akurat karena berbagai alasan. Hal ini mungkin terjadi akibat:
+    - Kesalahan dalam pengukuran, atau
+    - Data melibatkan sesuatu di masa depan yang belum terjadi atau tidak pasti. Contoh: _demand_ produk, harga barang, dan sebagainya.
+1. _Deterministic optimization_; 
+    - Model deterministik adalah model matematika di mana nilai dari semua parameter dan variabel yang terkandung di dalam model merupakan satu nilai pasti^[Pengantar Riset Operasi dan Optimisasi, KampusX: PO101].
+    - Pendekatan deterministik memanfaatkan sifat analitik masalah untuk menghasilkan barisan titik yang konvergen ke solusi optimal^[https://www.hindawi.com/journals/mpe/2012/756023/]. 
+    - Semua algoritma perhitungan mengikuti pendekatan matematis yang ketat^[https://link.springer.com/chapter/10.1007/978-3-642-31187-1_4].
+
+## _Supplier Selection Problem_
+
+Tema penelitian terkait _supplier selection problem_ termasuk ke dalam masalah optimisasi deterministik yakni _mixed integer linear programming_, alasannya:
+
+1. Parameter dan variabel yang terlibat merupakan suatu nilai pasti.
+1. Variabel yang terlibat meliputi:
+    - _Binary_ karena melibatkan pengambilan keputusan _raw matt_ dari _supplier_ mana yang harus dipesan.
+    - _Continuous_ karena melibatkan angka kuantitas _raw matt_ yang harus dipesan. 
+1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
+
+# PENJELASAN SINGKAT JENIS OPTIMISASI
+
+## _Linear Programming_
+
+_Linear programming_ adalah bentuk metode optimisasi sederhana yang memanfaatkan relasi linear (semua fungsi dan _constraints_ merupakan fungsi linear).
+
+### Contoh Masalah _Linear Programming_
+
+Saya memiliki area parkir seluas 1.960 $m^2$. Luas rata-rata untuk mobil berukuran kecil adalah 4 $m^2$ dan mobil besar adalah 20 $m^2$. Daya tampung maksimum hanya 250 kendaraan, biaya parkir mobil kecil adalah Rp 7.000 per jam dan mobil besar adalah Rp 12.000 per jam. Jika dalam 1 jam area parkir saya terisi penuh dan tidak ada kendaraan yang pergi dan datang, maka berapa pendapatan maksimum yang bisa saya dapatkan dari tempat parkir itu?
+
+Dari kasus di atas kita bisa tuliskan model matematikanya sebagai berikut:
+
+Misal $x_1$ adalah mobil kecil dan $x_2$ adalah mobil besar.
+
+$$max(7000x_1 + 12000x_2)$$
+
+Dengan _constraints_: 
+
+$$4 x_1 + 20 x_2 \leq 1960$$
+
+dan
+
+$$x_1 + x_2 \leq 250$$
+
+serta $x_1 \geq 0, x_2 \geq 0$.
+
+## _Integer Programming_
+
+_Integer programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan bulat (_integer_). Jika fungsi-fungsi yang terkait merupakan _linear_, maka disebut dengan _integer linear programming_.
+
+Sebagai contoh, variabel yang merupakan bilangan bulat adalah banyak orang.
+
+### Contoh _Integer Programming_
+
+#### Jadwal Kebutuhan Tenaga Kesehatan {-}
+
+Suatu rumah sakit membutuhkan tenaga kesehatan setiap harinya dengan spesifikasi berikut:
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+nakes = data.frame(
+  hari = c('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'),
+  min = c(24,22,23,11,16,20,12),
+  max = c(29,27,28,16,21,25,17)
+)
+
+nakes %>%
+  rename("Min Nakes Required" = min,
+	 "Max Nakes Required" = max) %>%
+  knitr::kable("simple",align = "c",caption = "Tabel Kebutuhan Nakes Harian")
+```
+
+Di rumah sakit tersebut berlaku kondisi sebagai berikut:
+
+1. Setiap nakes hanya diperbolehkan bekerja selama 5 hari berturut-turut dan harus libur selama 2 hari berturut-turut.
+1. Tidak ada pemberlakuan _shift_ bagi nakes.
+
+Berapa banyak nakes yang harus dipekerjakan oleh rumah sakit tersebut? Bagaimana konfigurasi penjadwalannya?
+
+Untuk memudahkan dalam mencari solusi permasalahan di atas, kita bisa membuat tabel ilustrasi berikut:
+
+```{r,echo=FALSE}
+nakes %>%
+  mutate(x1 = c('x','x','x','x','x','' , ''),
+	 x2 = c('' ,'x','x','x','x','x', ''),
+	 x3 = c('' , '','x','x','x','x','x'),
+	 x4 = c('x', '', '','x','x','x','x'),
+	 x5 = c('x','x', '', '','x','x','x'),
+	 x6 = c('x','x','x', '', '','x','x'),
+	 x7 = c('x','x','x','x', '', '','x')) %>%
+  rename("Min Nakes Required" = min,
+	 "Max Nakes Required" = max) %>%
+  knitr::kable("simple",align = "c",caption = "Konfigurasi Penjadwalan Nakes")
+```
+
+Kolom $x_i, i =1,2,3,4,5,6,7$ menandakan kelompok nakes yang perlu dipekerjaan pada hari-hari tertentu. Setiap nilai $x_i$ tersebut merupakan __bilangan bulat positif__ $x \geq 0, x \in \mathbb{Z}$.
+
+Dari ilustrasi di atas, kita bisa membuat model optimisasinya sebagai berikut:
+
+___Objective Function___
+
+$$\min{ \sum_{i=1}^7 x_i}$$
+
+___Constraints___
+
+- Hari Senin: $24 \leq \sum x_i \leq 29, i \in \{1,4,5,6,7\}$.
+- Hari Selasa: $22 \leq \sum x_i \leq 27, i \in \{1,2,5,6,7\}$.
+- Hari Rabu: $23 \leq \sum x_i \leq 28, i \in \{1,2,3,6,7\}$.
+- Hari Kamis: $11 \leq \sum x_i \leq 16, i \in \{1,2,3,4,7\}$.
+- Hari Jumat: $16 \leq \sum x_i \leq 21, i \in \{1,2,3,4,5\}$.
+- Hari Sabtu: $20 \leq \sum x_i \leq 25, i \in \{2,3,4,5,6\}$.
+- Hari Minggu: $12 \leq \sum x_i \leq 17, i \in \{3,4,5,6,7\}$.
+
+Kita juga perlu perhatikan bahwa $x_i \geq 0, i \in \{1,2,3,4,5,6,7\}$.
+
+## _Binary Programming_
+
+_Binary programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan biner (0,1). Biasanya metode ini dipakai dalam masalah penjadwalan yang memerlukan prinsip _matching_ antar kondisi yang ada.
+
+### Contoh _Binary Programming_
+
+#### Jadwal Tatap Muka Terbatas Sekolah {-}
+
+Beberapa minggu ke belakang, kasus harian Covid semakin menurun. Pemerintah mulai melonggarkan aturan PPKM yang mengakibatkan sekolah-sekolah mulai menggelar pengajaran tatap muka terbatas (PTMT) untuk siswanya secara _offline_. 
+
+Suatu sekolah memiliki kelas berisi 20 orang siswa. Mereka hendak menggelar PTMT dengana aturan sebagai berikut:
+
+1. PTMT digelar dari Senin hingga Jumat (5 hari).
+1. Dalam sehari, siswa yang boleh hadir dibatasi 4-8 orang saja.
+1. Dalam seminggu, diharapkan siswa bisa hadir 2-3 kali.
+1. Siswa yang hadir di selang sehari baru bisa hadir kembali.
+
+Dari uraian di atas, kita bisa membuat model optimisasinya sebagai berikut:
+
+Saya definisikan $x_{i,j} \in (0,1)$ sebagai bilangan biner di mana $i \in \{1,2,..,20\}$ menandakan siswa dan $j \in \{1,2,..,5\}$ menandakan hari. Berlaku:
+
+$$x_{i,j} = \left\{\begin{matrix}
+0, \text{ siswa i tidak masuk di hari j}\\ 
+1, \text{ siswa i masuk di hari j}
+\end{matrix}\right.$$
+
+___Objective Function___
+
+Tujuan utama kita adalah memaksimalkan siswa yang hadir.
+
+$$\max{\sum_{j=1}^5 \sum_{i=1}^{20} x_{i,j} }$$
+
+___Constraints___
+
+Dalam sehari, ada pembatasan jumlah siswa yang hadir.
+
+$$4 \leq \sum_i x_{i,j} \leq 8, j \in \{1,2,..,5\}$$
+
+Dalam seminggu, siswa hadir dalam frekuensi tertentu.
+
+$$2 \leq \sum_j x_{i,j} \leq 3, i \in \{1,2,..,20\}$$
+
+Ada jeda sehari agar siswa bisa masuk kembali.
+
+$$x_{i,j} + x_{i,j+1} \leq 1$$
+
+Jangan lupa bahwa $x_{i,j} \geq 0$.
+
+## _Mixed Integer Linear Programming_
+
+Pada bagian sebelumnya, kita telah membahas masalah optimisasi dengan variabel berupa diskrit dan kontinu. Permasalahan _real_ yang ada di kehidupan sehari-hari biasanya merupakan memiliki variabel yang _mixed_ antara keduanya. Oleh karena itu, ada metode yang disebut dengan _mixed integer linear programming_. Pada masalah optimisasi tipe ini, _decision variables_ yang terlibat bisa saja berupa _binary_, _integer_, dan _continuous_ sekaligus.
+
+
+### Contoh _MILP_
+
+#### Pemilihan dan Penentuan Item Produksi {-}
+
+Suatu pabrik makanan dan minuman berencana untuk membuat tiga produk baru yang bisa diproduksi di dua _plants_ yang berbeda.
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+runtime = data.frame(Produk = c("Item 1","Item 2","Item 3"),
+		     run1 = c(3,4,2),
+		     run2 = c(4,6,2)
+		    )
+runtime %>%
+  rename("Runtime Plant 1" = run1,
+	 "Runtime Plant 2" = run2) %>%
+  knitr::kable("simple",caption = "Tabel Runtime Item Produk per Plant (harian - dalam jam)")
+```
+
+__Plant 1__ memiliki maksimum _working hours_ sebesar 30 jam perhari.
+
+__Plant 2__ memiliki maksimum _working hours_ sebesar 40 jam perhari.
+
+```{r,echo=FALSE}
+profit = data.frame(Produk = c("Item 1","Item 2","Item 3"),
+		    profit = c(5,7,3),
+		    sales = c(7,5,9)
+			)
+
+profit %>%
+  rename("Profit per ton" = profit,
+	 "Sales potential per ton" = sales) %>%
+  knitr::kable("simple",caption = "Tabel Profit dan Potensi Sales Item Produk")
+```
+
+Masalah timbul saat mereka harus memilih __dua dari tiga__ produk baru tersebut yang harus di produksi. Selain itu, mereka juga harus memilih __satu dari dua__ _plants_ yang memproduksi _items_ tersebut.
+
+Misalkan saya definisikan:
+
+- $x_i \geq 0, i = 1,2,3$ sebagai `berapa ton` yang harus diproduksi dari item $i$.
+- $y_i \in [0,1], i = 1,2,3$ sebagai _binary_.
+	- Jika bernilai 0, maka produk $i$ tidak dipilih.
+	- Jika bernilai 1, maka produk $i$ dipilih.
+- $z \in [0,1]$ sebagai _binary_.
+	- Jika bernilai 0, maka _plant_ pertama dipilih.
+	- Jika bernilai 1, maka _plant_ kedua dipilih.
+
+Saya akan mendefinisikan suatu variabel _dummy_ $M = 99999$ berisi suatu nilai yang besar. Kelak variabel ini akan berguna untuk _reinforce model_ (metode pemberian _penalty_) agar bisa memilih _items_ dan _plants_ secara bersamaan.
+
+___Objective function___ dari masalah ini adalah memaksimalkan _profit_.
+
+$$\max{ \sum_{i=1}^3 x_i \times \text{profit}_i }$$
+
+___Constraints___ dari masalah ini adalah:
+
+Tonase produksi tidak boleh melebihi angka _sales potential_ per items.
+
+$$x_i \leq \text{sales potential}_i, i = 1,2,3$$
+
+Kita akan memilih dua produk sekaligus menghitung tonase. Jika produk tersebut __dipilih__, maka akan ada angka tonase produksinya. Sebaliknya, jika produk tersebut __tidak dipilih__, maka tidak ada angka tonase produksinya.
+
+$$x_i - y_i \times M \leq 0, i = 1,2,3$$
+
+$$\sum_{i=1}^3 y_i \leq 2$$
+
+Kita akan memilih _plant_ dari waktu produksinya.
+
+$$3x_1 + 4x_2 + 2x_3 - M \times z \leq 30$$
+
+$$4x_1 + 6x_2 + 2x_3 + M \times z \leq 40 + M$$
+
+
+# ALGORITMA PENYELESAIAN OPTIMISASI
+
+Pada bagian ini kita akan membahas macam-macam algoritma yang digunakan untuk menyelesaikan masalah optimisasi.
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Algoritma Penyelesaian Optimisasi"}
+nomnoml::nomnoml("#direction: down
+                 [Algoritma\nOptimisasi] -> [Metode eksak]
+                 [Algoritma\nOptimisasi] -> [Metode aproksimasi]
+                 
+                 [Metode eksak] -> [Iteratif]
+                 [Metode eksak] -> [Enumeratif]
+                 
+                 [Metode aproksimasi] -> [AdHoc\nHeuristic]
+                 [Metode aproksimasi] -> [Metaheuristic]
+                 ")
+```
+
+Secara garis besar ada dua kelompok besar algoritma optimisasi, yakni:
+
+1. _Exact method_,
+1. _Approximate method_.
+
+Perbedaan keduanya adalah pada __konsep atau pendekatan apa yang digunakan__ untuk menyelesaikan masalah optimisasi. Kita akan bahas satu-persatu pada bagian selanjutnya.
+
+Dalam beberapa kasus, kita bisa mendapatkan _exact method_ bisa untuk menyelesaikan masalah optimisasi dengan efisien. Namun di kasus lain yang lebih kompleks tidak demikian. Kelemahan utama metode _exact_ adalah pada waktu komputasinya yang relatif lebih lama.
+
+## _Exact Method_
+
+Ciri khas dari _exact method_ adalah metode ini menjamin penyelesaian yang optimal karena menggunakan penyelesaian analitis metode matematika.
+
+## _Approximate Method_
+
+Ciri khas dari _approximate method_ adalah metode ini tidak menjamin penyelesaian yang optimal karena bersifat _aproksimasi_ atau pendekatan atau hampiran^[https://www.math.unipd.it/~luigi/courses/metmodoc1819/m02.meta.en.partial01.pdf]. Oleh karena itu kita perlu melakukan definisi di awal __seberapa dekat__ nilai __hampiran__ tersebut bisa kita terima.
+
+Metode ini bisa dibagi menjadi dua berdasarkan keterkaitannya dengan suatu masalah, yakni:
+
+1. _Heuristic_, metode ini bersifat _problem dependent_. Artinya metode tersebut hanya bisa dipakai untuk jenis permasalahan tertentu.
+    - Contoh: metode _nearest neighborhood_ hanya bisa dipakai untuk menyelesaikan masalah dalam lingkup _travelling salesperson problem_ (__TSP__).
+1. _Meta heuristic_, metode ini bersifat _problem independent_. Artinya metode tersebut tidak tergantung dari jenis permasalahan tertentu. Contoh: 
+    - _Genetic algorithm_.
+    - _Simulated annealing_.
+    - _Spiral optimization_.
+    - _Artifical bee colony algorithm_.
+    
+Namun demikian kedua metode ini bisa saling melengkapi dalam prakteknya.
+
+## Metode _Simplex_
+
+Metode _simplex_ adalah salah satu metode yang paling umum digunakan dalam menyelesaikan permasalahan _linear programming_. Metode ini dikembangkan oleh seorang profesor matematika bernama George Dantzig^[https://en.wikipedia.org/wiki/George_Dantzig] pada 1947 pasca perang dunia II. Sedangkan nama _simplex_ diusulkan oleh Theodore Motzkin^[https://en.wikipedia.org/wiki/Theodore_Motzkin].
+
+Metode _simplex_ menggunakan prosedur aljabar^[Introduction to Operations Research, 7th Edition. Hillier / Lieberman hal. 109]. Namun _underlying concept_ dari metode ini adalah _geometric_.
+
+Jika kita bisa memahami konsep geometrinya, kita bisa mengetahui bagaimana cara kerjanya dan kenapa metode ini sangat efisien.
+
+Saya akan ambil satu contoh masalah optimisasi sederhana untuk memberikan ilustrasi bagaimana cara kerja metode ini.
+
+
+
+
+
+
+
 \newpage
-
-
-
 
 # References
 
