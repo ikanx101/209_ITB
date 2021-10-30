@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  30 OCT 2021 12:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  30 OCT 2021 17:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -687,7 +687,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [9]
-<Clean-Version_files/figure-latex/unnamed-chunk-1-1.pdf, id=367, 3764.0625pt x 
+<Clean-Version_files/figure-latex/unnamed-chunk-1-1.pdf, id=384, 3764.0625pt x 
 1533.73pt>
 File: Clean-Version_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (type
  pdf)
@@ -704,7 +704,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [10 <./Clean-Version_files/figure-latex/unnamed-chunk-1-1.pdf>]
-<Clean-Version_files/figure-latex/unnamed-chunk-2-1.pdf, id=384, 2352.79pt x 10
+<Clean-Version_files/figure-latex/unnamed-chunk-2-1.pdf, id=401, 2352.79pt x 10
 27.84pt>
 File: Clean-Version_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type
  pdf)
@@ -798,13 +798,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [19]
-<Clean-Version_files/figure-latex/unnamed-chunk-7-1.pdf, id=468, 2360.82pt x 96
+<Clean-Version_files/figure-latex/unnamed-chunk-7-1.pdf, id=485, 2360.82pt x 96
 3.6pt>
 File: Clean-Version_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type
  pdf)
 <use Clean-Version_files/figure-latex/unnamed-chunk-7-1.pdf>
 Package pdftex.def Info: Clean-Version_files/figure-latex/unnamed-chunk-7-1.pdf
-  used on input line 832.
+  used on input line 833.
 (pdftex.def)             Requested size: 469.7421pt x 191.73146pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -833,7 +833,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [22]
-Underfull \hbox (badness 10000) in paragraph at lines 1013--1013
+Underfull \hbox (badness 10000) in paragraph at lines 1014--1014
 [][][][][]$\T1/lmr/m/n/10 (+6) https : / / introprogramming . info / english -[
 ] intro -[] csharp -[] book / read -[] online / chapter -[] 19 -[] data -[] str
 uctures -[] and -[]
@@ -857,13 +857,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [24]
-<Clean-Version_files/figure-latex/unnamed-chunk-8-1.pdf, id=547, 505.89pt x 289
+<Clean-Version_files/figure-latex/unnamed-chunk-8-1.pdf, id=564, 505.89pt x 289
 .08pt>
 File: Clean-Version_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type
  pdf)
 <use Clean-Version_files/figure-latex/unnamed-chunk-8-1.pdf>
 Package pdftex.def Info: Clean-Version_files/figure-latex/unnamed-chunk-8-1.pdf
-  used on input line 1102.
+  used on input line 1103.
 (pdftex.def)             Requested size: 469.76265pt x 268.43579pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -901,13 +901,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [28]
-<Clean-Version_files/figure-latex/unnamed-chunk-12-1.pdf, id=576, 1168.365pt x 
+<Clean-Version_files/figure-latex/unnamed-chunk-12-1.pdf, id=593, 1168.365pt x 
 1622.06pt>
 File: Clean-Version_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (typ
 e pdf)
 <use Clean-Version_files/figure-latex/unnamed-chunk-12-1.pdf>
 Package pdftex.def Info: Clean-Version_files/figure-latex/unnamed-chunk-12-1.pd
-f  used on input line 1298.
+f  used on input line 1299.
 (pdftex.def)             Requested size: 211.38412pt x 293.46799pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -973,7 +973,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [35]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1640.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1641.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1001,8 +1001,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [38]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1787.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1021,6 +1019,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [40]
+<Screenshot from 2021-10-30 17-35-28.png, id=674, 232.87pt x 146.5475pt>
+File: Screenshot from 2021-10-30 17-35-28.png Graphic file (type png)
+<use Screenshot from 2021-10-30 17-35-28.png>
+Package pdftex.def Info: Screenshot from 2021-10-30 17-35-28.png  used on input
+ line 1859.
+(pdftex.def)             Requested size: 232.71661pt x 146.45096pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1030,6 +1034,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [41]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1894.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1038,7 +1044,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[42]
+[42 <./Screenshot from 2021-10-30 17-35-28.png>]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1120,13 +1126,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [51]
-Underfull \vbox (badness 10000) detected at line 2366
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2366
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1154,6 +1153,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [54]
+Underfull \vbox (badness 10000) detected at line 2473
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2473
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1208,6 +1214,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [60]
+Underfull \vbox (badness 10000) detected at line 2711
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 2711
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1234,16 +1247,43 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[63] (./Clean-Version.aux)
+[63]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[64]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[65]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[66] (./Clean-Version.aux)
 Package rerunfilecheck Info: File `Clean-Version.out' has not changed.
-(rerunfilecheck)             Checksum: 272941647D6EC0EDF4CC15A8A53166B7;8534.
+(rerunfilecheck)             Checksum: 2E4963B5C3AB839DE35115732B7B947A;9250.
  ) 
 Here is how much of TeX's memory you used:
- 13944 strings out of 480559
- 211117 string characters out of 5902712
- 570088 words of memory out of 5000000
- 30698 multiletter control sequences out of 15000+600000
- 509882 words of font info for 240 fonts, out of 8000000 for 9000
+ 13985 strings out of 480559
+ 212095 string characters out of 5902712
+ 570575 words of memory out of 5000000
+ 30718 multiletter control sequences out of 15000+600000
+ 510011 words of font info for 241 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,12n,66p,497b,505s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/ho
@@ -1270,10 +1310,10 @@ sy8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pf
 b></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></ho
 me/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtto10.pfb></home/ik
 anx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Clean-Version.pdf (63 pages, 1373526 bytes).
+Output written on Clean-Version.pdf (66 pages, 1388205 bytes).
 PDF statistics:
- 980 PDF objects out of 1000 (max. 8388607)
- 849 compressed objects within 9 object streams
- 297 named destinations out of 1000 (max. 500000)
- 53658 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 1027 PDF objects out of 1200 (max. 8388607)
+ 891 compressed objects within 9 object streams
+ 314 named destinations out of 1000 (max. 500000)
+ 53687 words of extra memory for PDF output out of 61914 (max. 10000000)
 

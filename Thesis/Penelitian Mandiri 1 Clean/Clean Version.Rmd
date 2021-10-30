@@ -1021,7 +1021,85 @@ Salah satu proses dalam membuat model optimisasi adalah _parameter estimation_. 
 
 ## Metode _Branch and Bound_ untuk _MILP_
 
-Metode _simplex_ adalah metode eksak yang digunakan untuk menyelesaikan _linear programming_. Solusi yang dihasilkan merupakan bilangan _real_ atau kontinu. Pada _MILP_, variabel yang terlibat sangat beragam. Membulatkan bilangan solusi _linear programming_ untuk _MILP_ tidak menjamin keoptimalan tercapai.
+Metode _simplex_ adalah metode eksak yang digunakan untuk menyelesaikan _linear programming_. Solusi yang dihasilkan merupakan bilangan _real_ atau kontinu. Pada _MILP_, variabel yang terlibat sangat beragam (_integer_, _binary_, dan kontinu). Membulatkan bilangan solusi _linear programming_ untuk mendapatkan solusi _integer_ atau _binary_ dari suatu masalah _MILP_ tidak menjamin keoptimalan tercapai.
+
+Oleh karena itu, kita akan melakukan pendekatan tertentu dari _linear programming_ agar hasilnya bisa digunakan di _MILP_.
+
+### _Relaxation of Discrete Optimization Models_
+
+Salah satu pendekatan yang bisa dilakukan adalah melakukan _constraint relaxation_ [@benoit].
+
+#### Definisi {-}
+
+Model $R$ disebut dengan _constraint relaxation_ dari model $P$ jika:
+
+- Setiap _feasible solution_ dari $P$ juga _feasible_ di $R$.
+- $P$ dan $R$ memiliki fungsi objektif yang sama.
+
+#### Contoh {-}
+
+Berikut adalah _original MILP_:
+
+$$\min_{x,y} 7x_1 + x_2 + 3 y_1 + 6y_2$$
+
+$$\text{s.t. } x_1 + 10 x_2 + 2 y_1 + y_2 \geq 100$$
+
+$$y_1 + y_2 \leq 1$$
+
+$$x_1,x_2 \geq 0,y_1,y_2 \in \{0,1\}$$
+
+___Relaxation I___ : _relax constraints RHS_
+
+$$\min_{x,y} 7x_1 + x_2 + 3 y_1 + 6y_2$$
+
+$$\text{s.t. } x_1 + 10 x_2 + 2 y_1 + y_2 \geq 50$$
+
+$$y_1 + y_2 \leq 1$$
+
+$$x_1,x_2 \geq 0,y_1,y_2 \in \{0,1\}$$
+
+___Relaxation II___ : _Drop constraint_
+
+$$\min_{x,y} 7x_1 + x_2 + 3 y_1 + 6y_2$$
+
+$$\text{s.t. } x_1 + 10 x_2 + 2 y_1 + y_2 \geq 100$$
+
+$$x_1,x_2 \geq 0,y_1,y_2 \in \{0,1\}$$
+
+___Relaxation III___ : _remove integrality_
+
+$$\min_{x,y} 7x_1 + x_2 + 3 y_1 + 6y_2$$
+
+$$\text{s.t. } x_1 + 10 x_2 + 2 y_1 + y_2 \geq 100$$
+
+$$y_1 + y_2 \leq 1$$
+
+$$x_1,x_2 \geq 0, 0 \leq y_1,y_2 \leq 1$$
+
+### _Linear Programming Relaxation_
+
+#### Definisi {-}
+
+_LP relaxation_ dari _MILP_ dibentuk dengan memperlakukan variabel diskrit sebagai variabel kontinu sambil mempertahankan semua _constraints_ yang ada [@benoit].
+
+$$y \in \{0,1\} \Rightarrow 0 \leq y \leq 1$$
+
+\newpage
+
+Oleh karena itu bisa terjadi hal sebagai berikut:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Solusi LP Relaxation"}
+knitr::include_graphics("Screenshot from 2021-10-30 17-35-28.png")
+```
+
+Apakah _LP relaxation_ menjamin mendapatkan hasil yang _valid_?
+
+Berikut adalah sifat dari _LP relaxation_:
+
+1. Jika _LP relaxation_ _infeasible_, maka model MILP asalnya juga.
+1. Hasil optimal _LP relaxation_ dari _MILP_ maksimisasi
+
+
 
 Oleh karena itu ada suatu metode bernama _branch and bound_ yang dikombinasikan dengan metode _simplex_ untuk menyelesaikan _MILP_.
 
