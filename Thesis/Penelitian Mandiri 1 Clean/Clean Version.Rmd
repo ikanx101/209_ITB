@@ -137,9 +137,9 @@ nomnoml::nomnoml("#direction: down
 1. _Discrete Optimization_: merupakan masalah optimisasi di mana variabel yang terkait merupakan variabel diskrit, seperti _binary_ atau _integer_ (bilangan bulat). Namun pada masalah optimisasi berbentuk _mixed integer linear programming_, dimungkinkan suatu masalah optimisasi memiliki berbagai jeni variabel yang terlibat (integer dan kontinu sekaligus).
 1. _Continuous Optimization_: merupakan masalah optimisasi di mana variabel yang terkait merupakan variabel kontinu (bilangan _real_). Pada masalah optimisasi jenis ini, fungsi-fungsi yang terlibat bisa diferensiabel atau tidak. Konsekuensinya adalah pada metode penyelesaiannya.
 
-Selain itu, kita juga bisa membagi masalah optimisasi berdasarkan __kategori masalah__ yang dihadapi sebagai berikut:
+Selain itu, kita juga bisa membagi masalah optimisasi berdasarkan __kepastian nilai__ ___variable___ __dan parameter__ yang dihadapi sebagai berikut:
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Optimisasi Berdasarkan Kategori Masalah"}
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Optimisasi Berdasarkan Kepastian Nilai"}
 nomnoml::nomnoml("#direction: down
                  [Optimisasi] -> [Uncertainty]
                  [Optimisasi] -> [Certain|Deterministic]
@@ -322,7 +322,7 @@ Pada bagian sebelumnya, kita telah membahas masalah optimisasi dengan variabel b
 
 ### Menyelesaikan _MILP_
 
-_MILP_ secara eksak bisa diselesaikan dengan metode _simplex_.
+_MILP_ secara eksak bisa diselesaikan dengan metode _simplex_ dengan dikombinasikan dengan teknik _branch and bound_. Penjelasan terkait ini akan dibahas pada bab `6`.
 
 ### Contoh _MILP_
 
@@ -424,7 +424,7 @@ Dalam beberapa kasus, kita bisa mendapatkan _exact method_ bisa untuk menyelesai
 
 ## _Exact Method_
 
-Ciri khas dari _exact method_ adalah metode ini menjamin penyelesaian yang optimal karena menggunakan penyelesaian analitis metode matematika. Salah satu contoh metode eksak adalah _Simplex Method_.
+Ciri khas dari _exact method_ adalah metode ini menjamin penyelesaian yang optimal karena menggunakan pendekatan analitis [@franz]. Salah satu contoh metode eksak adalah _Simplex Method_.
 
 ## _Approximate Method_
 
@@ -521,8 +521,6 @@ $O(n^3)$ artinya algoritma ini membutuhkan $n^3$ langkah.
 #### Eksponensial {-}
 
 $O(k^n)$ untuk suatu nilai $k$ tertentu. Artinya algoritma ini membutuhkan $k^n$ langkah.
-
-
 
 # METODE _SIMPLEX_
 
@@ -636,14 +634,15 @@ cpf %>% knitr::kable(align = "c",caption = "Titik yang termasuk ke dalam CPF")
 
 #### _Properties of CPF Solutions_ {-}
 
-Untuk setiap permasalahan _linear programming_ yang memiliki _feasible soultions_ dan _feasible region_ yang terbatas:
+Untuk setiap permasalahan _linear programming_ yang memiliki _feasible solutions_ dan _feasible region_ yang terbatas, berlaku:
 
-> __Property 1__: (a) If there is exactly one optimal solution, then it must be a CPF solution. (b) If there are multiple optimal solutions (and a bounded feasible region), then at least two must be adjacent CPF solutions.
+- __Property 1__: 
+    - (a) If there is exactly one optimal solution, then it must be a __CPF solution__. 
+    - (b) If there are multiple optimal solutions (and a bounded feasible region), then at least two must be adjacent CPF solutions.
+- __Property 2__: There are only a __finite number__ of CPF solutions.
+- __Property 3__: If a CPF solution has no adjacent CPF solutions that are better (as measured by Z), then there are no better CPF solutions anywhere. Therefore, __such a CPF solution is guaranteed to be an optimal solution__ (by Property 1), assuming only that the problem possesses at least one optimal solution (guaranteed if the problem possesses feasible solutions and a bounded feasible region).
 
-> __Property 2__: There are only a finite number of CPF solutions.
-
-> __Property 3__: If a CPF solution has no adjacent CPF solutions that are better (as measured by Z), then there are no better CPF solutions anywhere. Therefore, such a CPF solution is guaranteed to be an optimal solution (by Property 1), assuming only that the problem possesses at least one optimal solution (guaranteed if the problem possesses feasible solutions and a bounded feasible region).
-
+_Properties_ di atas menjamin keberadaan solusi optimal pada CPF dari suatu masalah optimisasi _linear programming_.
 
 ---
 
@@ -720,11 +719,131 @@ Algoritma di atas akan sangat mudah dilakukan saat kita berhadapan dengan masala
 
 Tentunya kita tidak bisa melakukan analisa secara visual seperti di atas. Namun kita bisa menggunakan bantuan aljabar dan operasi baris elementer untuk menemukan solusi yang optimal.
 
-## Metode Simplex dengan Operasi Matriks
+## Transisi Geometris ke Aljabar
 
-Suatu masalah optimisasi bisa kita tulis dalam bentuk matriks sehingga bisa diselesaikan dengan melakukan _operasi baris elementer_.
+Pada penjelasan sebelumnya kita bisa melihat ilustrasi geometris dari suatu masalah optimisasi di mana solusi berada di __CPF__. Namun jika kita berhadapan dengan $n>2$ variabel, kita tidak bisa menggambarkan visualnya. Oleh karena itu kita akan menggunakan skema aljabar untuk menyelesaikannya. 
 
-### Contoh Penyelesaian Masalah Optimisasi dengan _Simplex_
+Ide dasarnya adalah dengan mengubah pertaksamaan yang ada di _constraints_ menjadi sebuah persamaan dengan menambahkan beberapa variabel _dummy_. Persamaan-persamaan tersebut akan kita jadikan SPL dan dicari solusinya dengan kondisi __semua kombinasi di mana__ $n-m$ __variabel dibuat sama dengan nol__ ($m$ banyaknya persamaan dan $n$ banyaknya variabel).
+
+- $n-m$ variabel yang dibuat __nol__ disebut dengan _non basic variables_, 
+- Sedangkan variabel $m$ sisanya disebut dengan _basic variables_. Solusi dari SPL ini disebut dengan _basic solution_ [@taha].
+
+Dengan contoh yang sama dengan sebelumnya, kita akan hitung sebagai berikut:
+
+#### Masalah Optimisasi {-}
+
+Cari $x_1,x2$ yang $\max{(Z = 3x_1 + 5x_2)}$ dengan _constraints_:
+
+$$\begin{matrix}
+x1 \leq 4  \\
+2x_2 \leq 12 \\
+3x_1 + 2x_2 \leq 18 \\
+\text{serta } x_1 \geq 0, x_2 \geq 0 \\
+\end{matrix}$$
+
+
+Pada _constraints_ yang mengandung pertaksamaan $\leq$, _right hand side_ menunjukkan batas dari _resources_ sementara _left hand side_ menunjukkan _usage_ dari _resources_. Selisih antara _rhs_ dan _lhs_ menunjukkan __sisa__ _resources_ yang tidak terpakai. Kita perlu mengubah pertaksamaan yang ada menjadi bentuk persamaan dengan cara menambahkan $u,v,w$ sebagai ___non negative slack variables___ [@taha].
+
+Oleh karena itu kita tuliskan _constraints_ menjadi sebagai berikut:
+
+$$\begin{matrix}
+x1 + u = 4  \\
+2x_2 + v = 12 \\
+3x_1 + 2x_2 + w = 18 \\
+\text{dengan } x_1 \geq 0, x_2 \geq 0, u \geq 0, v \geq 0, w \geq 0 \\
+\end{matrix}$$
+
+Perhatikan bahwa $m = 3$ dan $n = 5$ sehingga $n-m=2$. Maka kita akan buat semua kombinasi _non basic variables_.
+
+```{r,include=FALSE}
+rm(list=ls())
+var_ = c("x1","x2","u","v","w")
+non_basic = combn(var_,2,simplify = F)
+non_basic_d = data.frame(v1 = rep(NA,length(non_basic)),v2 = NA)
+for(i in 1:length(non_basic)){
+  temp = non_basic[[i]]
+  non_basic_d$v1[i] = temp[1]
+  non_basic_d$v2[i] = temp[2]
+}
+
+non_basic = non_basic_d
+non_basic
+```
+
+```{r,echo=FALSE}
+paste0("(",non_basic$v1,",",non_basic$v2,")")
+```
+
+Kemudian menyelesaikan _SPL_ yang ada pada kondisi _non basic variables_ tersebut __nol__. Dari masing-masing solusi yang ada, kita akan lihat apakah _feasible_ atau tidak? Serta dievaluasi nilai $z$-nya.
+
+Berikut adalah tabel hasilnya:
+
+```{r,echo=FALSE}
+# set SPL
+A = data.frame(x1 = c(1,0,3),
+               x2 = c(0,2,2),
+               u = c(1,0,0),
+               v = c(0,1,0),
+               w = c(0,0,1))
+c = c(4,12,18)
+obj_f = function(data){
+  # filter var
+  x1 = sol_val %>% filter(var %in% c("x1"))
+  x2 = sol_val %>% filter(var %in% c("x2"))
+  # ambil val
+  if(nrow(x1) != 1){x1 = 0}else{x1 = x1$value}
+  if(nrow(x2) != 1){x2 = 0}else{x2 = x2$value}
+  return(3*x1 + 5*x2)
+  }
+
+hasil = data.frame(non_basic_var = paste0("(",non_basic$v1,",",non_basic$v2,")"),
+                   basic_var = NA,
+                   solusi = NA,
+                   z = NA)
+
+for (i in 1:nrow(non_basic)) {
+  # siap print basic var
+  basic_var = var_[!grepl(non_basic$v1[i],var_)]
+  basic_var = basic_var[!grepl(non_basic$v2[i],basic_var)]
+  basic_var = paste(basic_var,collapse = ",")
+  hasil$basic_var[i] = paste0("(",basic_var,")")
+  
+  # hitung solusi SPL
+  B = A %>% select(-contains(non_basic$v1[i])) %>% select(-contains(non_basic$v2[i])) %>% as.matrix()
+  if(det(B) == 0){sol_print = NA}
+  else{
+    sol = solve(B) %*% c
+    sol_print = paste(row.names(sol),sol,sep = " = ")
+    sol_print = paste(sol_print,collapse = "; ")
+  }
+  hasil$solusi[i] = sol_print
+
+  # evaluasi obj function
+  if(det(B) == 0){z_hit = NA}
+  else{
+    sol_val = data.frame(var = row.names(sol),value = sol)
+    z_hit = obj_f(obj_f)
+  }
+  hasil$z[i] = z_hit
+  }
+
+hasil_final = 
+  hasil %>% 
+  mutate(feasible = ifelse(grepl("\\-",solusi) | is.na(solusi),
+                           "No",
+                           "Yes")
+         )
+
+hasil_final %>% knitr::kable(align = "c",caption = "Hasil Perhitungan Simplex dengan Metode Aljabar")
+```
+
+Terlihat di atas bahwa $\max z = 36$ terletak pada saat $x_1 = 2, x_2 = 6$. Sama persis dengan perhitungan dengan pendekatan geometris.
+
+## Metode Simplex dengan _Tableau_
+
+Pendekatan aljabar di atas bisa kita buat menjadi suatu operasi baris elementer di matriks. Berikut adalah contohnya:
+
+### Operasi Baris Elementer Matriks _Simplex_
 
 Cari $x,y$ sehingga $\max{(P = 5x + 4y)}$ dengan _constraints_:
 
@@ -734,11 +853,13 @@ $$\begin{matrix}
 \text{serta } x \geq 0, y \geq 0 \\
 \end{matrix}$$
 
-Untuk menyelesaikannya, kita perlu menambahkan $u,w$ sebagai variabel pembantu. Fungsi objectif $P$ juga harus diubah (dipindah sisi namun $P$ tetap positif).
+Pada _constraints_ yang mengandung pertaksamaan $\leq$, _right hand side_ menunjukkan batas dari _resources_ sementara _left hand side_ menunjukkan _usage_ dari _resources_. Selisih antara _rhs_ dan _lhs_ menunjukkan __sisa__ _resources_ yang tidak terpakai. 
+
+Kita perlu mengubah pertaksamaan yang ada menjadi bentuk persamaan dengan cara menambahkan $u,w$ sebagai ___non negative slack variables___ [@taha]. Fungsi objectif $P$ juga harus diubah (dipindah sisi namun $P$ tetap positif).
 
 $$\begin{matrix}
-3x + 5y + u \leq 78  \\
-4x + y + w \leq 36 \\
+3x + 5y + u = 78, \text{ dengan } u\geq 0  \\
+4x + y + w = 36, \text{ dengan } w \geq 0 \\
 -5x - 4y + P = 0 \\
 \end{matrix}$$
 
@@ -897,6 +1018,15 @@ _Post-optimality analysis_ adalah analisa yang dilakukan pasca kita telah menemu
 ## _Sensitivity Analysis_
 
 Salah satu proses dalam membuat model optimisasi adalah _parameter estimation_. Ada kalanya perubahan data mengakibatnya berubahnya suatu parameter. _Sensitivity analysis_ bertujuan untuk mengidentifikasi parameter yang sensitif (parameter yang harus dihitung dengan baik untuk menghindari kesalahan saat mencari solusi optimal).
+
+## Metode _Branch and Bound_ untuk _MILP_
+
+Metode _simplex_ adalah metode eksak yang digunakan untuk menyelesaikan _linear programming_. Solusi yang dihasilkan merupakan bilangan _real_ atau kontinu. Pada _MILP_, variabel yang terlibat sangat beragam. Membulatkan bilangan solusi _linear programming_ untuk _MILP_ tidak menjamin keoptimalan tercapai.
+
+Oleh karena itu ada suatu metode bernama _branch and bound_ yang dikombinasikan dengan metode _simplex_ untuk menyelesaikan _MILP_.
+
+### Algoritma _Branch and Bound_
+
 
 
 # __R__ _PACKAGES_ UNTUK OPTIMISASI 

@@ -1,0 +1,218 @@
+---
+title: "Penelitian Mandiri Sains Komputasi I"
+subtitle: _Update Progress Week X_
+author: | 
+    | Mohammad Rizka Fadhli 
+    | Ikang
+    | 20921004@mahasiswa.itb.ac.id
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+linestretch: 1.5
+output: 
+  pdf_document:
+    number_section: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+library(dplyr)
+```
+
+## Jenis-Jenis Masalah Optimisasi
+
+Masalah optimisasi bisa dibagi dua menjadi dua kategori berdasarkan tipe _variables_ yang terlibat^[Optimization problem. https://en.wikipedia.org/wiki/Optimization_problem], yakni:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Optimisasi Berdasarkan Jenis Variabel"}
+nomnoml::nomnoml("#direction: down
+                 [Optimisasi] -> [Diskrit]
+                 [Optimisasi] -> [Kontinu]
+                 
+                 [Diskrit] -> [Binary\nProgramming]
+                 [Diskrit] -> [Integer\nProgramming]
+                 [Diskrit] -> [Mixed Integer\nLinear Programming]
+                 
+                 [Kontinu] -> [Diferensiabel]
+                 [Kontinu] -> [Non Diferensiabel]
+                 
+                 [Diferensiabel] -> [Linear\nProgramming]
+                 [Diferensiabel] -> [Non Linear\nProgramming]
+                 [Diferensiabel] -> [Quadratic\nProgramming] 
+                 
+                 [Linear\nProgramming] --> [Mixed Integer\nLinear Programming]
+                 ")
+```
+
+
+1. _Discrete Optimization_: merupakan masalah optimisasi di mana variabel yang terkait merupakan variabel diskrit, seperti _binary_ atau _integer_ (bilangan bulat). Namun pada masalah optimisasi berbentuk _mixed integer linear programming_, dimungkinkan suatu masalah optimisasi memiliki berbagai jeni variabel yang terlibat (integer dan kontinu sekaligus).
+1. _Continuous Optimization_: merupakan masalah optimisasi di mana variabel yang terkait merupakan variabel kontinu (bilangan _real_). Pada masalah optimisasi jenis ini, fungsi-fungsi yang terlibat bisa diferensiabel atau tidak. Konsekuensinya adalah pada metode penyelesaiannya.
+
+## _Supplier Selection Problem_
+
+Tema penelitian terkait _supplier selection problem_ termasuk ke dalam masalah optimisasi deterministik yakni _mixed integer linear programming_, alasannya:
+
+1. Parameter dan variabel yang terlibat merupakan suatu nilai pasti.
+1. Variabel yang terlibat meliputi:
+    - _Binary_ karena melibatkan pengambilan keputusan _raw matt_ dari _supplier_ mana yang harus dipesan.
+    - _Continuous_ karena melibatkan angka kuantitas _raw matt_ yang harus dipesan. 
+1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
+
+## _Mixed Integer Linear Programming_
+
+Pada bagian sebelumnya, kita telah membahas masalah optimisasi dengan variabel berupa diskrit dan kontinu. Permasalahan _real_ yang ada di kehidupan sehari-hari biasanya merupakan memiliki variabel yang _mixed_ antara keduanya. Oleh karena itu, ada metode yang disebut dengan _mixed integer linear programming_. Pada masalah optimisasi tipe ini, _decision variables_ yang terlibat bisa saja berupa _binary_, _integer_, dan _continuous_ sekaligus.
+
+### Menyelesaikan _MILP_
+
+_MILP_ secara eksak bisa diselesaikan dengan metode _simplex_.
+
+### Contoh _MILP_
+
+#### Pemilihan dan Penentuan Item Produksi {-}
+
+Suatu pabrik makanan dan minuman berencana untuk membuat tiga produk baru yang bisa diproduksi di dua _plants_ yang berbeda.
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+runtime = data.frame(Produk = c("Item 1","Item 2","Item 3"),
+		     run1 = c(3,4,2),
+		     run2 = c(4,6,2)
+		    )
+runtime %>%
+  rename("Runtime Plant 1" = run1,
+	 "Runtime Plant 2" = run2) %>%
+  knitr::kable("simple",caption = "Tabel Runtime Item Produk per Plant (harian - dalam jam)")
+```
+
+__Plant 1__ memiliki maksimum _working hours_ sebesar 30 jam perhari.
+
+__Plant 2__ memiliki maksimum _working hours_ sebesar 40 jam perhari.
+
+```{r,echo=FALSE}
+profit = data.frame(Produk = c("Item 1","Item 2","Item 3"),
+		    profit = c(5,7,3),
+		    sales = c(7,5,9)
+			)
+
+profit %>%
+  rename("Profit per ton" = profit,
+	 "Sales potential per ton" = sales) %>%
+  knitr::kable("simple",caption = "Tabel Profit dan Potensi Sales Item Produk")
+```
+
+Masalah timbul saat mereka harus memilih __dua dari tiga__ produk baru tersebut yang harus di produksi. Selain itu, mereka juga harus memilih __satu dari dua__ _plants_ yang memproduksi _items_ tersebut.
+
+Misalkan saya definisikan:
+
+- $x_i \geq 0, i = 1,2,3$ sebagai `berapa ton` yang harus diproduksi dari item $i$.
+- $y_i \in [0,1], i = 1,2,3$ sebagai _binary_.
+	- Jika bernilai 0, maka produk $i$ tidak dipilih.
+	- Jika bernilai 1, maka produk $i$ dipilih.
+- $z \in [0,1]$ sebagai _binary_.
+	- Jika bernilai 0, maka _plant_ pertama dipilih.
+	- Jika bernilai 1, maka _plant_ kedua dipilih.
+
+Saya akan mendefinisikan suatu variabel _dummy_ $M = 99999$ berisi suatu nilai yang besar. Kelak variabel ini akan berguna untuk _reinforce model_ (metode pemberian _penalty_) agar bisa memilih _items_ dan _plants_ secara bersamaan.
+
+___Objective function___ dari masalah ini adalah memaksimalkan _profit_.
+
+$$\max{ \sum_{i=1}^3 x_i \times \text{profit}_i }$$
+
+___Constraints___ dari masalah ini adalah:
+
+Tonase produksi tidak boleh melebihi angka _sales potential_ per items.
+
+$$x_i \leq \text{sales potential}_i, i = 1,2,3$$
+
+Kita akan memilih dua produk sekaligus menghitung tonase. Jika produk tersebut __dipilih__, maka akan ada angka tonase produksinya. Sebaliknya, jika produk tersebut __tidak dipilih__, maka tidak ada angka tonase produksinya.
+
+$$x_i - y_i \times M \leq 0, i = 1,2,3$$
+
+$$\sum_{i=1}^3 y_i \leq 2$$
+
+Kita akan memilih _plant_ dari waktu produksinya.
+
+$$3x_1 + 4x_2 + 2x_3 - M \times z \leq 30$$
+
+$$4x_1 + 6x_2 + 2x_3 + M \times z \leq 40 + M$$
+
+### Penyelesaian Contoh Soal
+
+Dengan menggunakan `library(ompr)`
+
+```{r}
+rm(list=ls())
+
+library(dplyr)
+library(ompr)
+library(ompr.roi)
+library(ROI.plugin.glpk)
+
+# data yang dibutuhkan
+profit = c(5,7,3)
+sales = c(7,5,9)
+M = 99999
+
+# membuat model
+mil_prog = 
+  MIPModel() %>%
+  # menambah variabel
+  # xi
+  add_variable(x[i],
+	       i = 1:3,
+	       type = "continuous",
+	       lb = 0) %>%
+  # yi
+  add_variable(y[i],
+	       i = 1:3,
+	       type = "binary",
+	       lb = 0) %>%
+  # z
+  add_variable(z,type = "binary",lb = 0) %>%
+  # membuat objective function
+  set_objective(sum_expr(x[i] * profit[i],
+			 i = 1:3),
+		"max") %>%
+  # menambah constraints
+  # max tonase
+  add_constraint(x[i] <= sales[i],
+		 i = 1:3) %>%
+  # memilih 2 produk
+  add_constraint(x[i] - y[i] * M <= 0,
+		 i = 1:3) %>%
+  add_constraint(sum_expr(y[i],
+		 i = 1:3) <= 2) %>%
+  # memilih 1 plant
+  add_constraint(3*x[1] + 4*x[2] + 2*x[3] - M * z <= 30) %>%
+  add_constraint(4*x[1] + 6*x[2] + 2*x[3] + M * z <= 40 + M) 
+
+mil_prog
+
+hasil = 
+  mil_prog %>%
+  solve_model(with_ROI(solver = "glpk",
+		       verbose = T))
+
+xi = 
+  hasil %>% 
+  get_solution(x[i])
+
+yi = 
+  hasil %>%
+  get_solution(y[i])
+
+zi = 
+  hasil %>%
+  get_solution(z)
+
+```
+
+Berikut adalah hasilnya:
+
+```{r,echo=FALSE}
+xi
+yi
+zi
+```
+
+Dari ketiga produk baru, perusahaan bisa memilih produk __1 dan 3__ sebanyak __5.5 dan 9 ton__ di _plant_ __2__ sehingga _profit_ yang bisa diraih adalah sebesar __54.5__.
