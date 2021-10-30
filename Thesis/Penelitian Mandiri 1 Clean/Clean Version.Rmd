@@ -162,13 +162,32 @@ nomnoml::nomnoml("#direction: down
 
 ## _Supplier Selection Problem_
 
-Tema penelitian terkait _supplier selection problem_ termasuk ke dalam masalah optimisasi deterministik yakni _mixed integer linear programming_, alasannya:
+Tema penelitian yang diangkat adalah _supplier selection problem_.
+
+#### Latar Belakang {-}
+
+Suatu perusahaan makanan dan minuman memproduksi $>130$ jenis produk perbulannya dengan kuantitas yang disesuaikan dengan _sales forecast_ pada bulan tersebut. Untuk memproduksi satu jenis produk, dibutuhkan beberapa _raw material_. Perusahaan tersebut menggunakan strategi _multi supplier_ untuk menjaga keberadaan stok _raw material_. Artinya satu jenis _raw material_ bisa dibeli di beberapa _supplier_ yang berbeda. Akibatnya timbul perbedaan dalam hal:
+
+1. Harga (per ton),
+1. Minimum tonase pembelian,
+1. _Delivery time_.
+
+Mengenai kualitas _raw material_, __sudah dipastikan__ bahwa tidak ada perbedaan antar _supplier_ karena pemilihannya melalui proses seleksi yang ketat.
+
+#### Masalah yang Dihadapi {-}
+
+adalah meminimalkan ongkos pembelian _raw material_ dengan tetap mengamankan stok _raw material_ agar proses produksi tetap berjalan.
+
+Masalah ini termasuk ke dalam masalah optimisasi deterministik yakni _mixed integer linear programming_ (_MILP_), alasannya:
 
 1. Parameter dan variabel yang terlibat merupakan suatu nilai pasti.
 1. Variabel yang terlibat meliputi:
-    - _Binary_ karena melibatkan pengambilan keputusan _raw matt_ dari _supplier_ mana yang harus dipesan.
-    - _Continuous_ karena melibatkan angka kuantitas _raw matt_ yang harus dipesan. 
+    - _Binary_ karena melibatkan pengambilan keputusan _raw material_ dari _supplier_ mana yang harus dipesan.
+    - _Continuous_ karena melibatkan angka kuantitas _raw material_ yang harus dipesan. 
 1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
+    - Meminimumkan ongkos pembelian $harga \times tonase$.
+    - Kapasitas gudang _raw material_ dan rencana produksi produk.
+    - dan seterusnya.
 
 \newpage
 
