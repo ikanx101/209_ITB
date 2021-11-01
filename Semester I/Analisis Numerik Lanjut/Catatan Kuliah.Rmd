@@ -5608,7 +5608,9 @@ $$u_{tt} = u_{xx} \rightarrow B^2 - 4AC = 0^2 - 4(1)(-1) = 4, \text{hiperbolik}$
 
 $$u_{xy} = 0 \rightarrow B^2 - 4AC = 1^2 - 4(0)(0) = 1, \text{hiperbolik}$$
 
-$$yu_{xx} + u_{yy} = 0 \rightarrow B^2 - 4AC = 0^2 - 4(y)(1) = -4y, \text{hiperbolik untuk y<0, eliptik untuk y>0, parabolik untuk y=0}$$
+$$yu_{xx} + u_{yy} = 0 \rightarrow B^2 - 4AC = 0^2 - 4(y)(1) = -4y,$$
+
+hiperbolik untuk $y<0$, eliptik untuk $y>0$, parabolik untuk $y=0$.
 
 ## Solusi Numerik PDP
 
@@ -5668,6 +5670,47 @@ $$u_{xx}(x,y) = \frac{1}{h^2} [u(x+h,y) - 2u(x,y) + u(x-h,y)] + O(h^2)$$
 $$u_y(x,y) = \frac{u(x,y+k) - u(x,y)}{k} + O(k)$$
 
 $$u_{yy}(x,y) = \frac{1}{k^2} [u(x,y+k) - 2u(x,y) + u(x,y-k)] + O(k^2)$$
+
+
+### PDP Parabolik
+
+Perhatikan PDP parabolik berikut:
+
+$$\begin{matrix} u_t = u_{xx} & 0 < x < l, t>0 \\
+u(0,t) = u(l,t) = 0 & t > 0 \text{ (syarat batas)} \\
+u(x,0) = f(x) & 0 \leq x \leq l \text{ syarat batas}
+\end{matrix}$$
+
+Persamaan di atas disebut sebagai persamaan panas atau persamaan difusi.
+
+#### Model Eksplisit {-}
+
+atau disebut dengan _forward difference in time, central difference in space_ (___FTCS___). Metode ini melakukan dikritisasi untuk memperoleh persamaan beda hingga dengan membagi selang $[0,l]$ ke dalam $m$ sub-selang yang sama panjang dengan lebar $h = \frac{l}{m}$ dengan $m$ bulat positif dan pilih diskritisasi pada sumbu $t$ dengan lebar sub-selang yang sama panjang sebesar $k$, diperoleh titik bagi: $(x_i,t_j)$ dengan $x_i = ih,i=0,1,..,m$ dan $t_j = jk,j=0,1,..$
+
+Diperoleh:
+
+$$u_t (x_i,t_j) = \frac{u(x_i,t_j + k) - u(x_i,t_j)}{k} + O(k)$$
+
+$$u_{xx} (x_i,t_j) = \frac{u(x_i+h,t_j) - 2u(x_i,t_j) + u(x_i-h,t_j)}{h^2} + O(h^2)$$
+
+dengan $w_{i,j}$ dinotasikan sebagai hampiran untuk $u(x_i,t_j)$ dan $\lambda = \frac{k}{h^2}$ kita dapat tuliskan:
+
+#### Skema Iterasi {-}
+
+$$w_{i,j+1} = \lambda w_{i-1,j} + (1-2 \lambda) w_{i,j} + \lambda w_{i+1,j} $$
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \center 
