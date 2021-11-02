@@ -5699,15 +5699,120 @@ dengan $w_{i,j}$ dinotasikan sebagai hampiran untuk $u(x_i,t_j)$ dan $\lambda = 
 
 $$w_{i,j+1} = \lambda w_{i-1,j} + (1-2 \lambda) w_{i,j} + \lambda w_{i+1,j} $$
 
+#### Skema Iterasi dalam Aljabar {-}
 
+Untuk $j=0$, nilai-nilai $w_{i,0}$ sudah diberikan oleh syarat awal $w_{i,0} = u(x_i,0) = f(x_i), 0 \leq i \leq m$. Sementara pada batas diberikan $w_{0,j} = w_{m,j} = 0$.
 
+Kita tuliskan nilai-nilai $w$ pada waktu $j$ dalam vektor berikut:
 
+$$w^{(j)} =  \left ( \begin{matrix} w_{1,j} \\ w_{2,j} \\ .. \\ w_{m-1,j} \end{matrix} \right )$$
 
+dan matriks tridiagonal berukuran $(m - 1) \times (m - 1)$ berikut:
 
+$$A = \left ( \begin{matrix} 1-2\lambda & \lambda & 0 & .. & 0 \\
+\lambda & 1-2\lambda & \lambda & .. & .. \\
+0 & \lambda & 1-2\lambda & .. & .. \\
+.. & .. & ..& ..& .. \\
+0 & .. & 0 & \lambda & 1-2\lambda
+\end{matrix} \right )$$
 
+sehingga skema iterasi di atas, kita bisa tuliskan dalam bentuk matriks sebagai berikut:
 
+$$w^{(j+1)} = A w^{(j)}, j = 0,1,2,..$$
 
+dengan orde galat $O(k+h^2)$.
 
+\newpage
+
+#### Contoh Soal {-}
+
+Gunakan $h=0.1$ dan $k=0.0005$ untuk menghampiri _heat equation_ berikut ini:
+
+$$u_t - u_{xx} = 0, \begin{matrix} 0 < x < 1 \\ 0 \leq t \end{matrix}$$
+
+_boundary condition_ berikut:
+
+$$u(0,t) = u(1,t) = 0, 0<t$$
+
+_initial condition_ berikut:
+
+$$u(x,0) = \sin{(\pi x)}, 0 \leq x \leq 1$$
+
+Bandingkan pada $t=0.5$ menggunakan solusi eksak:
+
+$$u(x,t) = e^{-\pi^2 t} \sin{(\pi x)}$$
+
+#### Jawab {-}
+
+Kita coba lihat dulu grafik solusi eksaknya untuk $0 \leq x \leq 1$ berikut:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina=10,fig.align='center',fig.cap="Grafik Solusi Eksak"}
+rm(list=ls())
+k = 0.0005
+t = 0.5
+h = 0.1 
+lambda = k/h^2
+x = seq(0,1,by = h)
+ux = function(x){exp(-pi*pi*t)*sin(pi*x)}
+uxt = ux(x)
+
+data.frame(x,uxt) %>% 
+  ggplot(aes(x,uxt)) +
+  geom_line(group=1,
+            color = "steelblue") +
+  theme_minimal() +
+  labs(x = "x",
+       y = "u(x,t)",
+       title = "Plot u(x,t) pada t = 0.5",
+       subtitle = "Solusi eksak",
+       caption = "Digambar dengan R\nikanx101.com")
+```
+
+Oke, kita buat dulu ya.
+
+$$\lambda = \frac{k}{h^2} = \frac{0.0005}{(0.1)^2} = 0.05$$
+
+```{r,message=FALSE,warning=FALSE}
+rm(list=ls())
+h = 0.1
+k = 0.0005
+lambda = k/h^2
+
+x = seq(0,1,by = h)
+
+u_x0 = function(x){sin(pi*x)}
+w = u_x0(x)
+w = w[-1]
+w = w[-length(w)]
+
+A = matrix(0,
+           ncol = length(w),
+           nrow = length(w))
+
+for(i in 1:length(w)){
+  A[i,i] = 1-(2*lambda)
+}
+
+for(i in 1:(length(w)-1)){
+  A[i+1,i] = lambda
+  A[i,i+1] = lambda
+}
+
+# iterasi 1000 x
+for(i in 1:1000){
+  w = A %*% w
+}
+
+data.frame(x,y = c(0,w,0)) %>% 
+  ggplot(aes(x,y)) +
+  geom_line(group=1,color = "darkred") +
+  theme_minimal() +
+  labs(x = "x",
+       y = "u(x,t)",
+       title = "Plot u(x,t) pada t = 0.5",
+       subtitle = "Solusi numerik",
+       caption = "Digambar dengan R\nikanx101.com")
+```
 
 
 
