@@ -5827,6 +5827,12 @@ Misalkan $e$ adalah suatu _error_ yang dihasilkan oleh nilai hampiran $\bar{w}^{
 
 $$e^{(j)} = \bar{w}^{(j)} - w^{(j)}, \text{ untuk } j> 0$$
 
+Dari iterasi yang kita lakukan kita bisa mendapatkan:
+
+$$\bar{w}^{(j+1)} = A \bar{w}^{(j)} + r^{(j+1)}$$
+
+
+
 \center 
 
 # END {-}
