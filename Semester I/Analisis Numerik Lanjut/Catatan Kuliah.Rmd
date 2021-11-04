@@ -5821,10 +5821,11 @@ data.frame(x,y = c(0,w,0)) %>%
 
 ### Analisa Kestabilan Iterasi
 
-Bentuk aljabar atau matriks dari iterasi ini lebih mudah bagi kita untuk dijadikan basis analisa kestabilan. Misalkan $\omega_{t}$ adalah suatu solusi eksak dari PDP. Misalkan kita definisikan
+Bentuk aljabar atau matriks dari iterasi ini lebih mudah bagi kita untuk dijadikan basis analisa kestabilan. Prinsip mendasarnya adalah melihat jari-jari spektral dari matriks $A$ yang terbentuk.
 
+Misalkan $e$ adalah suatu _error_ yang dihasilkan oleh nilai hampiran $\bar{w}^{(j)}$ terhadap nilai eksak $w^{(j)}$.
 
-
+$$e^{(j)} = \bar{w}^{(j)} - w^{(j)}, \text{ untuk } j> 0$$
 
 \center 
 
