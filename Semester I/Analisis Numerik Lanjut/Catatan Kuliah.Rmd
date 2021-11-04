@@ -5775,8 +5775,12 @@ $$\lambda = \frac{k}{h^2} = \frac{0.0005}{(0.1)^2} = 0.05$$
 
 ```{r,message=FALSE,warning=FALSE}
 rm(list=ls())
-h = 0.1
-k = 0.0005
+L = 1
+Nx = 10
+h = L/Nx
+Te = 0.5
+Nt = 100
+k = Te/Nt
 lambda = k/h^2
 
 x = seq(0,1,by = h)
@@ -5799,8 +5803,8 @@ for(i in 1:(length(w)-1)){
   A[i,i+1] = lambda
 }
 
-# iterasi 1000 x
-for(i in 1:1000){
+# iterasi sesuai dengan NT
+for(i in 1:Nt){
   w = A %*% w
 }
 
@@ -5817,8 +5821,7 @@ data.frame(x,y = c(0,w,0)) %>%
 
 ### Analisa Kestabilan Iterasi
 
-Bentuk aljabar atau matriks dari iterasi ini lebih mudah bagi kita untuk dijadikan basis analisa kestabilan.
-
+Bentuk aljabar atau matriks dari iterasi ini lebih mudah bagi kita untuk dijadikan basis analisa kestabilan. Misalkan $\omega_{t}$ adalah suatu solusi eksak dari PDP.
 
 
 
