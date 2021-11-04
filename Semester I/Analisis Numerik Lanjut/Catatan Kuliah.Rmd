@@ -5722,6 +5722,7 @@ $$w^{(j+1)} = A w^{(j)}, j = 0,1,2,..$$
 
 dengan orde galat $O(k+h^2)$.
 
+
 \newpage
 
 #### Contoh Soal {-}
@@ -5813,6 +5814,10 @@ data.frame(x,y = c(0,w,0)) %>%
        subtitle = "Solusi numerik",
        caption = "Digambar dengan R\nikanx101.com")
 ```
+
+### Analisa Kestabilan Iterasi
+
+Bentuk aljabar atau matriks dari iterasi ini lebih mudah bagi kita untuk dijadikan basis analisa kestabilan.
 
 
 
