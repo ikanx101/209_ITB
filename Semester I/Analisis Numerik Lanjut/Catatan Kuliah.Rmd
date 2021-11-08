@@ -5861,6 +5861,7 @@ Sehingga:
 
 $$0 < k < \frac{h^2}{2}$$
 
+
 \center 
 
 # END {-}
