@@ -5672,7 +5672,7 @@ $$u_y(x,y) = \frac{u(x,y+k) - u(x,y)}{k} + O(k)$$
 $$u_{yy}(x,y) = \frac{1}{k^2} [u(x,y+k) - 2u(x,y) + u(x,y-k)] + O(k^2)$$
 
 
-### PDP Parabolik
+## PDP Parabolik
 
 Perhatikan PDP parabolik berikut:
 
@@ -5831,7 +5831,35 @@ Dari iterasi yang kita lakukan kita bisa mendapatkan:
 
 $$\bar{w}^{(j+1)} = A \bar{w}^{(j)} + r^{(j+1)}$$
 
+dengan vektor $r^{(j+1)}$ yang timbul akibat _rounding error_ saat menghitung $A \bar{w}^{(j)}$
 
+Kita asumsikan $r^{(j)} \simeq 0$ untuk $j>1$.
+
+Sehingga $w^{(j+1)} = A \bar{w}^{(j)}$. Dari hubungan $A e^{(j)} = A \bar{w}^{(j)} - Aw^{(j)}$ kita peroleh:
+
+$$e^{(j)} = A^j e^{(0)}$$
+
+Metode stabil jika _error_ tidak membesar seiring penambahan $j$. Dari teorema __kekonvergenan__ pada `5.1.7` kita bisa lihat bahwa iterasi akan stabil saat:
+
+$$\rho(A) < 1$$
+
+Di mana $\rho$ adalah jari-jari spektral dari matriks $A$. Kita tahu bahwa jari-jari spektral didefinisikan sebagai:
+
+$$\rho(A) = \max_k |\mu_k^A|$$
+
+> Jari-jari spektral adalah nilai eigen absolut terbesar dari matriks A.
+
+Dengan demikian kita peroleh __syarat kestabilan__ dari iterasi sebagai berikut:
+
+> Untuk $0 < \lambda < 1$ metode eksplisit $w^{(j+1)} = A w^{(j)}$ stabil.
+
+Karena berupa pertidaksamaan, maka metode iterasi ini __stabil bersyarat__. Kita tahu bahwa:
+
+$$\lambda = \frac{k}{h^2}$$
+
+Sehingga:
+
+$$0 < k < \frac{h^2}{2}$$
 
 \center 
 
