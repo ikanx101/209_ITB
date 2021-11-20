@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  30 OCT 2021 22:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  20 NOV 2021 14:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -142,53 +142,58 @@ Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
-Package: microtype 2021/03/14 v2.8c Micro-typographical refinements (RS)
+Package: microtype 2021/10/31 v3.0 Micro-typographical refinements (RS)
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks23
+) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count268
 )
 \MT@toks=\toks24
-\MT@count=\count268
-LaTeX Info: Redefining \textls on input line 790.
-\MT@outer@kern=\dimen148
-LaTeX Info: Redefining \textmicrotypecontext on input line 1374.
-\MT@listname@count=\count269
+\MT@count=\count269
+\MT@tempbox=\box52
+\MT@leftmarginkern=\dimen148
+\MT@rightmarginkern=\dimen149
+LaTeX Info: Redefining \textls on input line 1114.
+\MT@outer@kern=\dimen150
+LaTeX Info: Redefining \textmicrotypecontext on input line 1700.
+\MT@listname@count=\count270
 
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/microtype-pdftex.de
 f
-File: microtype-pdftex.def 2021/03/14 v2.8c Definitions specific to pdftex (RS)
-
+File: microtype-pdftex.def 2021/10/31 v3.0 Definitions specific to pdftex (RS)
 LaTeX Info: Redefining \lsstyle on input line 915.
 LaTeX Info: Redefining \lslig on input line 915.
 \MT@outer@space=\skip52
 )
 Package microtype Info: Loading configuration file microtype.cfg.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
-File: microtype.cfg 2021/03/14 v2.8c microtype main configuration file (RS)
+File: microtype.cfg 2021/10/31 v3.0 microtype main configuration file (RS)
 )) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Driver file: pdftex.def on input line 227.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 )
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
-Package xcolor Info: Model `RGB' extended on input line 1364.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1356.
+Package xcolor Info: Model `RGB' extended on input line 1368.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1370.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/graphics/dvipsnam.def
 File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/xcolor/svgnam.def
-File: svgnam.def 2016/05/11 v2.12 Predefined colors according to SVG 1.1 (UK)
+File: svgnam.def 2021/10/31 v2.13 Predefined colors according to SVG 1.1 (UK)
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/xcolor/x11nam.def
-File: x11nam.def 2016/05/11 v2.12 Predefined colors according to Unix/X11 (UK)
+File: x11nam.def 2021/10/31 v2.13 Predefined colors according to Unix/X11 (UK)
 )) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
@@ -219,9 +224,9 @@ Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
-\@linkdim=\dimen149
-\Hy@linkcounter=\count270
-\Hy@pagecounter=\count271
+\@linkdim=\dimen151
+\Hy@linkcounter=\count271
+\Hy@pagecounter=\count272
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -236,7 +241,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count272
+\Hy@SavedSpaceFactor=\count273
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -250,22 +255,22 @@ Package hyperref Info: Plain pages OFF on input line 4207.
 Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4445.
-\c@Hy@tempcnt=\count273
+\c@Hy@tempcnt=\count274
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4804.
-\XeTeXLinkMargin=\dimen150
+\XeTeXLinkMargin=\dimen152
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count274
-\Field@Width=\dimen151
-\Fld@charsize=\dimen152
+\Fld@menulength=\count275
+\Field@Width=\dimen153
+\Fld@charsize=\dimen154
 Package hyperref Info: Hyper figures OFF on input line 6076.
 Package hyperref Info: Link nesting OFF on input line 6081.
 Package hyperref Info: Hyper index ON on input line 6084.
@@ -279,9 +284,9 @@ LaTeX Info: Redefining \pageref on input line 6150.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count275
-\c@Item=\count276
-\c@Hfootnote=\count277
+\Hy@abspage=\count276
+\c@Item=\count277
+\c@Hfootnote=\count278
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -291,8 +296,8 @@ Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
 e
 with kernel methods
 )
-\Fld@listcount=\count278
-\c@bookmark@seq@number=\count279
+\Fld@listcount=\count279
+\c@bookmark@seq@number=\count280
 
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck
 .sty
@@ -313,98 +318,95 @@ Package: geometry 2020/01/02 v5.9 Page Geometry
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count280
-\Gm@cntv=\count281
-\c@Gm@tempcnt=\count282
-\Gm@bindingoffset=\dimen153
-\Gm@wd@mp=\dimen154
-\Gm@odd@mp=\dimen155
-\Gm@even@mp=\dimen156
-\Gm@layoutwidth=\dimen157
-\Gm@layoutheight=\dimen158
-\Gm@layouthoffset=\dimen159
-\Gm@layoutvoffset=\dimen160
+\Gm@cnth=\count281
+\Gm@cntv=\count282
+\c@Gm@tempcnt=\count283
+\Gm@bindingoffset=\dimen155
+\Gm@wd@mp=\dimen156
+\Gm@odd@mp=\dimen157
+\Gm@even@mp=\dimen158
+\Gm@layoutwidth=\dimen159
+\Gm@layoutheight=\dimen160
+\Gm@layouthoffset=\dimen161
+\Gm@layoutvoffset=\dimen162
 \Gm@dimlist=\toks25
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2021/10/15 v3.9 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count283
+\FV@CodeLineNo=\count284
 \FV@InFile=\read2
-\FV@TabBox=\box52
-\c@FancyVerbLine=\count284
-\FV@StepNumber=\count285
+\FV@TabBox=\box53
+\c@FancyVerbLine=\count285
+\FV@StepNumber=\count286
 \FV@OutFile=\write3
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip54
-\fb@frw=\dimen161
-\fb@frh=\dimen162
-\FrameRule=\dimen163
-\FrameSep=\dimen164
+\fb@frw=\dimen163
+\fb@frh=\dimen164
+\FrameRule=\dimen165
+\FrameSep=\dimen166
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2021-05-07 v4.16 Multi-page Table package (DPC)
 \LTleft=\skip55
 \LTright=\skip56
 \LTpre=\skip57
 \LTpost=\skip58
-\LTchunksize=\count286
-\LTcapwidth=\dimen165
-\LT@head=\box53
-\LT@firsthead=\box54
-\LT@foot=\box55
-\LT@lastfoot=\box56
-\LT@gbox=\box57
-\LT@cols=\count287
-\LT@rows=\count288
-\c@LT@tables=\count289
-\c@LT@chunks=\count290
+\LTchunksize=\count287
+\LTcapwidth=\dimen167
+\LT@head=\box54
+\LT@firsthead=\box55
+\LT@foot=\box56
+\LT@lastfoot=\box57
+\LT@gbox=\box58
+\LT@cols=\count288
+\LT@rows=\count289
+\c@LT@tables=\count290
+\c@LT@chunks=\count291
 \LT@p@ftn=\toks26
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen166
-\lightrulewidth=\dimen167
-\cmidrulewidth=\dimen168
-\belowrulesep=\dimen169
-\belowbottomsep=\dimen170
-\aboverulesep=\dimen171
-\abovetopsep=\dimen172
-\cmidrulesep=\dimen173
-\cmidrulekern=\dimen174
-\defaultaddspace=\dimen175
-\@cmidla=\count291
-\@cmidlb=\count292
-\@aboverulesep=\dimen176
-\@belowrulesep=\dimen177
-\@thisruleclass=\count293
-\@lastruleclass=\count294
-\@thisrulewidth=\dimen178
+\heavyrulewidth=\dimen168
+\lightrulewidth=\dimen169
+\cmidrulewidth=\dimen170
+\belowrulesep=\dimen171
+\belowbottomsep=\dimen172
+\aboverulesep=\dimen173
+\abovetopsep=\dimen174
+\cmidrulesep=\dimen175
+\cmidrulekern=\dimen176
+\defaultaddspace=\dimen177
+\@cmidla=\count292
+\@cmidlb=\count293
+\@aboverulesep=\dimen178
+\@belowrulesep=\dimen179
+\@thisruleclass=\count294
+\@lastruleclass=\count295
+\@thisrulewidth=\dimen180
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/tools/array.sty
 Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
-\col@sep=\dimen179
-\ar@mcellbox=\box58
-\extrarowheight=\dimen180
+\col@sep=\dimen181
+\ar@mcellbox=\box59
+\extrarowheight=\dimen182
 \NC@list=\toks27
 \extratabsurround=\skip59
 \backup@length=\skip60
-\ar@cellbox=\box59
+\ar@cellbox=\box60
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count295
-\calc@Bcount=\count296
-\calc@Adimen=\dimen181
-\calc@Bdimen=\dimen182
+\calc@Acount=\count296
+\calc@Bcount=\count297
+\calc@Adimen=\dimen183
+\calc@Bdimen=\dimen184
 \calc@Askip=\skip61
 \calc@Bskip=\skip62
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count297
+\calc@Ccount=\count298
 \calc@Cskip=\skip63
-) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count298
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
 Package: footnote 1997/01/28 1.13 Save footnotes around boxes
-\fn@notes=\box60
-\fn@width=\dimen183
+\fn@notes=\box61
+\fn@width=\dimen185
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
@@ -416,8 +418,8 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 )
-\Gin@req@height=\dimen184
-\Gin@req@width=\dimen185
+\Gin@req@height=\dimen186
+\Gin@req@width=\dimen187
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
 rs
@@ -446,7 +448,7 @@ less on input line 121.
 f
 File: l3backend-pdftex.def 2021-10-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count299
-\l__pdf_internal_box=\box61
+\l__pdf_internal_box=\box62
 ) (./Clean-Version.aux)
 \openout1 = `Clean-Version.aux'.
 
@@ -469,6 +471,10 @@ LaTeX Font Info:    ... okay on input line 159.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 159.
 LaTeX Font Info:    ... okay on input line 159.
 LaTeX Info: Redefining \microtypecontext on input line 159.
+Package microtype Info: Applying patch `item' on input line 159.
+Package microtype Info: Applying patch `toc' on input line 159.
+Package microtype Info: Applying patch `eqnum' on input line 159.
+Package microtype Info: Applying patch `footnote' on input line 159.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -913,7 +919,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [29]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1315.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1316.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -923,11 +929,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [30]
-Underfull \vbox (badness 10000) detected at line 1358
+Underfull \vbox (badness 10000) detected at line 1359
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1358
+Underfull \vbox (badness 10000) detected at line 1359
  []
 
 
@@ -1015,7 +1021,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 File: Screenshot from 2021-10-30 17-35-28.png Graphic file (type png)
 <use Screenshot from 2021-10-30 17-35-28.png>
 Package pdftex.def Info: Screenshot from 2021-10-30 17-35-28.png  used on input
- line 1677.
+ line 1678.
 (pdftex.def)             Requested size: 232.71661pt x 146.45096pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1032,7 +1038,7 @@ File: Clean-Version_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (typ
 e pdf)
 <use Clean-Version_files/figure-latex/unnamed-chunk-25-1.pdf>
 Package pdftex.def Info: Clean-Version_files/figure-latex/unnamed-chunk-25-1.pd
-f  used on input line 1745.
+f  used on input line 1746.
 (pdftex.def)             Requested size: 281.85983pt x 166.86102pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1049,7 +1055,7 @@ File: Clean-Version_files/figure-latex/unnamed-chunk-26-1.pdf Graphic file (typ
 e pdf)
 <use Clean-Version_files/figure-latex/unnamed-chunk-26-1.pdf>
 Package pdftex.def Info: Clean-Version_files/figure-latex/unnamed-chunk-26-1.pd
-f  used on input line 1776.
+f  used on input line 1777.
 (pdftex.def)             Requested size: 281.85896pt x 157.20705pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1089,7 +1095,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [45]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1968.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 1969.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1225,11 +1231,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [60]
-Underfull \vbox (badness 10000) detected at line 2645
+Underfull \vbox (badness 10000) detected at line 2646
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2645
+Underfull \vbox (badness 10000) detected at line 2646
  []
 
 
@@ -1259,7 +1265,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [63]
-Overfull \vbox (0.37134pt too high) detected at line 2785
+Overfull \vbox (0.37134pt too high) detected at line 2786
  []
 
 
@@ -1271,11 +1277,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [64]
-Underfull \vbox (badness 10000) detected at line 2785
+Underfull \vbox (badness 10000) detected at line 2786
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2785
+Underfull \vbox (badness 10000) detected at line 2786
  []
 
 
@@ -1314,7 +1320,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [68]
-Underfull \hbox (badness 10000) in paragraph at lines 2962--2962
+Underfull \hbox (badness 10000) in paragraph at lines 2963--2963
 [][][][][]$\T1/lmr/m/n/10 (+6) https : / / introprogramming . info / english -[
 ] intro -[] csharp -[] book / read -[] online / chapter -[] 19 -[] data -[] str
 uctures -[] and -[]
@@ -1360,13 +1366,13 @@ Package rerunfilecheck Info: File `Clean-Version.out' has not changed.
 (rerunfilecheck)             Checksum: ECA617BEDE3502063251495E88C7CEF4;9250.
  ) 
 Here is how much of TeX's memory you used:
- 14038 strings out of 480559
- 213510 string characters out of 5902712
- 569827 words of memory out of 5000000
- 30740 multiletter control sequences out of 15000+600000
+ 14145 strings out of 480559
+ 215434 string characters out of 5902712
+ 575353 words of memory out of 5000000
+ 30847 multiletter control sequences out of 15000+600000
  510272 words of font info for 244 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,12n,66p,498b,505s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,12n,66p,1010b,534s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/ho
 me/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/ikanx_s
 erver/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/.Tin
@@ -1391,7 +1397,7 @@ sy8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pf
 b></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></ho
 me/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtto10.pfb></home/ik
 anx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Clean-Version.pdf (72 pages, 1548287 bytes).
+Output written on Clean-Version.pdf (72 pages, 1548375 bytes).
 PDF statistics:
  1093 PDF objects out of 1200 (max. 8388607)
  944 compressed objects within 10 object streams

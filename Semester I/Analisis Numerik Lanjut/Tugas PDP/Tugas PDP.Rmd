@@ -1,0 +1,476 @@
+---
+title: PENYELESAIAN PERSAMAAN DIFERENSIAL PARSIAL SECARA NUMERIK
+subtitle: |
+  | Tugas Kuliah
+  | SK5001 Analisis Numerik Lanjut
+author: |
+  | Mohammad Rizka Fadhli
+  | NIM: 20921004
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+linestretch: 1.5
+colorlinks: true
+output:
+  pdf_document:
+   number_section: false
+   toc: false
+   highlight: tango
+   dev: png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Semester I/Analisis Numerik Lanjut/Tugas PDP")
+rm(list=ls())
+
+library(dplyr)
+library(ggplot2)
+```
+
+# PENDAHULUAN
+
+## Metode Beda Hingga
+
+Pada tugas ini, metode yang digunakan untuk menyelesaikan persamaan diferensial parsial parabolik secara numerik adalah metode beda hingga. Akan ada tiga metode yang akan dibuatkan program-nya, yakni:
+
+1. Metode eksplisit (__FTCS__: _forward difference in time, central difference in space_).
+1. Metode implisit (__BTCS__: _backward difference in time, central difference in space_).
+1. Metode __Crank-Nicolson__.
+
+## Bahasa yang Digunakan
+
+Untuk membuat ketiga program di atas, saya menggunakan bahasa __R__ yang bisa dieksekusi pada versi `4.1.1`.
+
+## PDP Parabolik
+
+Perhatikan PDP parabolik berikut:
+
+$$\begin{matrix} u_t = u_{xx} & 0 < x < l, t>0 \\
+u(0,t) = u(l,t) = 0 & t > 0 \text{ (syarat batas)} \\
+u(x,0) = f(x) & 0 \leq x \leq l \text{ syarat batas}
+\end{matrix}$$
+
+Persamaan di atas disebut sebagai persamaan panas atau persamaan difusi.
+
+# METODE EKSPLISIT
+
+Metode ini melakukan dikritisasi untuk memperoleh persamaan beda hingga dengan membagi selang $[0,l]$ ke dalam $m$ sub-selang yang sama panjang dengan lebar $h = \frac{l}{m}$ dengan $m$ bulat positif dan pilih diskritisasi pada sumbu $t$ dengan lebar sub-selang yang sama panjang sebesar $k$, diperoleh titik bagi: $(x_i,t_j)$ dengan $x_i = ih,i=0,1,..,m$ dan $t_j = jk,j=0,1,..$
+
+Diperoleh:
+
+$$u_t (x_i,t_j) = \frac{u(x_i,t_j + k) - u(x_i,t_j)}{k} + O(k)$$
+
+$$u_{xx} (x_i,t_j) = \frac{u(x_i+h,t_j) - 2u(x_i,t_j) + u(x_i-h,t_j)}{h^2} + O(h^2)$$
+
+dengan $w_{i,j}$ dinotasikan sebagai hampiran untuk $u(x_i,t_j)$ dan $\lambda = \frac{k}{h^2}$ kita dapat tuliskan:
+
+#### Skema Iterasi {-}
+
+$$w_{i,j+1} = \lambda w_{i-1,j} + (1-2 \lambda) w_{i,j} + \lambda w_{i+1,j} $$
+
+#### Skema Iterasi dalam Aljabar {-}
+
+Untuk $j=0$, nilai-nilai $w_{i,0}$ sudah diberikan oleh syarat awal $w_{i,0} = u(x_i,0) = f(x_i), 0 \leq i \leq m$. Sementara pada batas diberikan $w_{0,j} = w_{m,j} = 0$.
+
+Kita tuliskan nilai-nilai $w$ pada waktu $j$ dalam vektor berikut:
+
+$$w^{(j)} =  \left ( \begin{matrix} w_{1,j} \\ w_{2,j} \\ .. \\ w_{m-1,j} \end{matrix} \right )$$
+
+dan matriks tridiagonal berukuran $(m - 1) \times (m - 1)$ berikut:
+
+$$A = \left ( \begin{matrix} 1-2\lambda & \lambda & 0 & .. & 0 \\
+\lambda & 1-2\lambda & \lambda & .. & .. \\
+0 & \lambda & 1-2\lambda & .. & .. \\
+.. & .. & ..& ..& .. \\
+0 & .. & 0 & \lambda & 1-2\lambda
+\end{matrix} \right )$$
+
+sehingga skema iterasi di atas, kita bisa tuliskan dalam bentuk matriks sebagai berikut:
+
+$$w^{(j+1)} = A w^{(j)}, j = 0,1,2,..$$
+
+dengan orde galat $O(k+h^2)$.
+
+\newpage
+
+#### Program Metode Eksplisit {-}
+
+Saya akan menggunakan skema iterasi aljabar untuk membuat programnya. Berikut adalah _codes_ dalam bahasa __R__:
+
+```
+k = Te/Nt
+lambda = k/h^2
+
+x = seq(0,1,by = h)
+
+u_x0 = function(x){tuliskan fungsi soal}
+w = u_x0(x)
+w = w[-1]
+w = w[-length(w)]
+
+A = matrix(0,
+           ncol = length(w),
+           nrow = length(w))
+
+for(i in 1:length(w)){
+  A[i,i] = 1-(2*lambda)
+}
+
+for(i in 1:(length(w)-1)){
+  A[i+1,i] = lambda
+  A[i,i+1] = lambda
+}
+
+# iterasi sesuai dengan NT
+for(i in 1:Nt){
+  w = A %*% w
+}
+```
+
+\newpage
+
+## Contoh Soal
+
+Gunakan $h=0.1$ dan $k=0.0005$ untuk menghampiri _heat equation_ berikut ini:
+
+$$u_t - u_{xx} = 0, \begin{matrix} 0 < x < 1 \\ 0 \leq t \end{matrix}$$
+
+_boundary condition_ berikut:
+
+$$u(0,t) = u(1,t) = 0, 0<t$$
+
+_initial condition_ berikut:
+
+$$u(x,0) = \sin{(\pi x)}, 0 \leq x \leq 1$$
+
+Bandingkan pada $t=0.5$ menggunakan solusi eksak:
+
+$$u(x,t) = e^{-\pi^2 t} \sin{(\pi x)}$$
+
+\newpage
+
+#### Jawab {-}
+
+Saya coba hitung terlebih dahulu solusi eksaknya dan membuat grafiknya pada selang $0 \leq x \leq 1$ berikut:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina=10,fig.align='center'}
+rm(list=ls())
+k = 0.0005
+t = 0.5
+h = 0.1 
+lambda = k/h^2
+x = seq(0,1,by = h)
+ux = function(x){exp(-pi*pi*t)*sin(pi*x)}
+uxt = ux(x)
+
+eksak = 
+  data.frame(x,uxt)
+
+eksak %>% 
+  rename("u(x,t)" = uxt) %>% 
+  knitr::kable(align = "c",caption = "Tabel Solusi Eksak")
+```
+
+\newpage
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina=10,fig.align='center',fig.cap="Grafik Solusi Eksak"}
+eksak %>% 
+  ggplot(aes(x,uxt)) +
+  geom_line(group=1,
+            color = "steelblue") +
+  theme_minimal() +
+  labs(x = "x",
+       y = "u(x,t)",
+       title = "Plot u(x,t) pada t = 0.5",
+       subtitle = "Solusi eksak",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id")
+```
+
+\newpage
+
+Sekarang kita akan hitung solusinya menggunakan program yang kita telah buat sebelumnya:
+
+```{r}
+L = 1
+Nx = 10
+h = L/Nx
+Te = 0.5
+Nt = 100
+k = Te/Nt
+lambda = k/h^2
+
+x = seq(0,1,by = h)
+
+u_x0 = function(x){sin(pi*x)}
+w = u_x0(x)
+w = w[-1]
+w = w[-length(w)]
+
+A = matrix(0,
+           ncol = length(w),
+           nrow = length(w))
+
+for(i in 1:length(w)){
+  A[i,i] = 1-(2*lambda)
+}
+
+for(i in 1:(length(w)-1)){
+  A[i+1,i] = lambda
+  A[i,i+1] = lambda
+}
+
+# iterasi sesuai dengan NT
+for(i in 1:Nt){
+  w = A %*% w
+}
+
+solusi_numerik = data.frame(x,y = c(0,w,0)) 
+```
+
+```{r,echo=FALSE}
+solusi_numerik %>% 
+  merge(eksak) %>% 
+  mutate("|numerik - eksak|" = abs(uxt-y)) %>% 
+  rename("u(x,t) numerik" = y) %>% 
+  rename("u(x,t) eksak" = uxt) %>% 
+  knitr::kable(caption = "Tabel Solusi Numerik")
+```
+
+Kita dapatkan nilai solusi hampiran yang relatif sangat dekat dengan nilai solusi eksaknya.
+
+\newpage
+
+Berikut adalah grafik dari solusi numeriknya:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina=10,fig.align='center',fig.cap="Solusi Numerik dengan Metode Eksplisit"}
+solusi_numerik %>% 
+  ggplot(aes(x,y)) +
+  geom_line(group=1,color = "darkred") +
+  theme_minimal() +
+  labs(x = "x",
+       y = "u(x,t)",
+       title = "Plot u(x,t) pada t = 0.5",
+       subtitle = "Solusi numerik dengan metode eksplisit",
+       caption = "Digambar dengan R\n20921004@mahasiswa.itb.ac.id")
+```
+
+
+# METODE IMPLISIT
+
+Metode implisit menggunakan skema _backward difference_ untuk $u_t(x_i,t_j)$ dan _central difference_ untuk $u_{xx}(x_i,t_j)$.
+
+$$u_t(x_i,t_j) = \frac{u(x_i,t_j) - u(x_i,t_j - k)}{k} + O(k)$$
+
+$$u_{xx}(x_i,t_j) = \frac{u(x_i+h,t_j) - 2u(x_i,t_j) + u(x_i-h,t_j)}{h^2} + O(h^2)$$
+
+#### Skema Iterasi {-} 
+
+dari bentuk di atas adalah:
+
+$$w_{i,j-1} = -\lambda w_{i+1,j} + (1+2 \lambda) w_{i,j} - \lambda w_{i-1,j}$$
+
+dengan $w_{i,j}$ menghampiri $u(x_i,t_j)$ dan $\lambda = \frac{k}{h^2}$.
+
+Perhatikan dari skema iterasi di atas, nilai-nilai $w$ pada saat ke $j$ dikaitkan pada saat waktu ke $j-1$. Sehingga vektor $w^{(j)}$ secara implisit didapatkan dari sistem persamaan linear:
+
+$$A w^{(j)} = w^{(j-1)}, j = 1,2,..,j_{max}$$
+
+dengan nilai-nilai batas $w_{0,j} = w_{m,j} = 0$. Jika matriks $A$ __tidak singular__, maka kita akan dapatkan skema iterasi dalam bentuk aljabar berikut:
+
+#### Skema Iterasi dalam Aljabar {-}
+
+$$w^{(j)} = A^{-1} w^{(j-1)} = .. = (A^{-1})^{(j)} w^{(0)}, j = 1,2,..,j_{max}$$
+
+dengan orde galat $O(k+h^2)$. Persamaan di atas harus selalu diselesaikan setiap waktu $j$. 
+
+dengan:
+
+$$w^{(j)} =  \left ( \begin{matrix} w_{1,j} \\ w_{2,j} \\ .. \\ w_{m-1,j} \end{matrix} \right )$$
+
+dan matriks tridiagonal berukuran $(m - 1) \times (m - 1)$ berikut:
+
+$$A = \left ( \begin{matrix} 1+2\lambda & -\lambda & 0 & .. & 0 \\
+-\lambda & 1+2\lambda & -\lambda & .. & .. \\
+0 & -\lambda & 1+2\lambda & .. & .. \\
+.. & .. & ..& ..& .. \\
+0 & .. & 0 & -\lambda & 1+2\lambda
+\end{matrix} \right )$$
+
+#### Program Metode Implisit {-}
+
+Saya akan menggunakan skema iterasi aljabar untuk membuat programnya. Berikut adalah _codes_ dalam bahasa __R__:
+
+```
+k = Te/Nt
+lambda = k/h^2
+
+x = seq(0,1,by = h)
+
+u_x0 = function(x){tuliskan fungsi soal}
+w = u_x0(x)
+w = w[-1]
+w = w[-length(w)]
+
+A = matrix(0,
+           ncol = length(w),
+           nrow = length(w))
+
+for(i in 1:length(w)){
+  A[i,i] = 1+(2*lambda)
+}
+
+for(i in 1:(length(w)-1)){
+  A[i+1,i] = -lambda
+  A[i,i+1] = -lambda
+}
+
+A_inv = solve(A)
+# iterasi sesuai dengan NT
+for(i in 1:Nt){
+  w = A_inv %*% w
+}
+```
+
+## Contoh Soal
+
+Gunakan $h=0.1$ dan $k=0.01$ untuk menghampiri _heat equation_ berikut ini:
+
+$$u_t - u_{xx} = 0, \begin{matrix} 0 < x < 1 \\ 0 \leq t \end{matrix}$$
+
+_boundary condition_ berikut:
+
+$$u(0,t) = u(1,t) = 0, 0<t$$
+
+_initial condition_ berikut:
+
+$$u(x,0) = \sin{(\pi x)}, 0 \leq x \leq 1$$
+
+Bandingkan pada $t=0.5$ menggunakan solusi eksak:
+
+$$u(x,t) = e^{-\pi^2 t} \sin{(\pi x)}$$
+
+#### Jawab {-}
+
+Soal ini adalah soal yang sama dengan soal pada bagian metode eksplisit. Di sini saya akan memperlihatkan bahwa dengan nilai $h$ dan $k$ yang relatif besar, metode implisit akan menghasilkan nilai yang tetap baik dan stabil.
+
+Saya coba hitung terlebih dahulu solusi eksaknya pada selang $0 \leq x \leq 1$ berikut:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina=10,fig.align='center'}
+rm(list=ls())
+k = 0.01
+t = 0.5
+h = 0.1 
+lambda = k/h^2
+x = seq(0,1,by = h)
+ux = function(x){exp(-pi*pi*t)*sin(pi*x)}
+uxt = ux(x)
+
+eksak = 
+  data.frame(x,uxt)
+
+eksak %>% 
+  rename("u(x,t)" = uxt) %>% 
+  knitr::kable(align = "c",caption = "Tabel Solusi Eksak")
+```
+
+Berikut adalah penyelesaiannya dengan program yang telah dibuat sebelumnya:
+
+```{r}
+L = 1
+Nx = 10
+h = L/Nx
+Te = 0.5
+Nt = 50
+k = Te/Nt
+lambda = k/h^2
+
+x = seq(0,1,by = h)
+
+u_x0 = function(x){sin(pi*x)}
+w = u_x0(x)
+w = w[-1]
+w = w[-length(w)]
+
+A = matrix(0,
+           ncol = length(w),
+           nrow = length(w))
+
+for(i in 1:length(w)){
+  A[i,i] = 1+(2*lambda)
+}
+
+for(i in 1:(length(w)-1)){
+  A[i+1,i] = -lambda
+  A[i,i+1] = -lambda
+}
+
+A_inv = solve(A)
+# iterasi sesuai dengan NT
+for(i in 1:Nt){
+  w = A_inv %*% w
+}
+
+solusi_numerik = data.frame(x,y = c(0,w,0)) 
+```
+
+\newpage
+
+Berikut adalah hasil dan perbandingannya dengan solusi eksak:
+
+```{r,echo=FALSE}
+solusi_numerik %>% 
+  merge(eksak) %>% 
+  mutate("|numerik - eksak|" = y-uxt) %>% 
+  rename("u(x,t) numerik" = y,
+         "u(x,t) eksak" = uxt) %>% 
+  knitr::kable(align = "c",caption = "Hasil Solusi Numerik dari Metode Implisit")
+```
+
+Kita dapatkan solusi numerik yang relatif dekat dengan solusi eksak.
+
+# METODE CRANK-NICOLSON
+
+Metode ini didapatkan dengan merata-ratakan metode eksplisit dan implisit.
+
+#### Skema Iterasi {-} 
+
+Dengan $\lambda = \frac{k}{h^2}$, maka:
+
+$$-\frac{\lambda}{2} w_{i-1,j+1} + (1+\lambda) w_{i,j+1} - \frac{\lambda}{2} w_{i+1,j+1} = \frac{\lambda}{2} w_{i-1,j} + (1-\lambda) w_{i,j} + \frac{\lambda}{2} w_{i+1,j+1}$$
+
+dengan syarat batas $w_{0,j} = w_{m,j} = 0$.
+
+#### Skema Iterasi dalam Aljabar {-} 
+
+Skema di atas bisa kita tuliskan menjadi:
+
+$$A w^{(j+1)} = B w^{(j)}$$
+
+dengan:
+
+$$w^{(j)} =  \left ( \begin{matrix} w_{1,j} \\ w_{2,j} \\ .. \\ w_{m-1,j} \end{matrix} \right )$$
+
+dan matriks tridiagonal berukuran $(m - 1) \times (m - 1)$ berikut:
+
+$$A = \left ( \begin{matrix} 1+\lambda & -\lambda/2 & 0 & .. & 0 \\
+-\lambda/2 & 1+\lambda & -\lambda/2 & .. & .. \\
+0 & -\lambda/2 & 1+\lambda & .. & .. \\
+.. & .. & ..& ..& .. \\
+0 & .. & 0 & -\lambda/2 & 1+\lambda
+\end{matrix} \right )$$
+
+dan
+
+$$B = \left ( \begin{matrix} 1-\lambda & \lambda/2 & 0 & .. & 0 \\
+\lambda/2 & 1-\lambda & \lambda/2 & .. & .. \\
+0 & \lambda/2 & 1-\lambda & .. & .. \\
+.. & .. & ..& ..& .. \\
+0 & .. & 0 & \lambda/2 & 1-\lambda
+\end{matrix} \right )$$
+
+\newpage
+
+#### Program Metode Crank-Nicolson {-} 
+
+
+
