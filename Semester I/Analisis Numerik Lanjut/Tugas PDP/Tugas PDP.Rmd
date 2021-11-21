@@ -446,6 +446,8 @@ Skema di atas bisa kita tuliskan menjadi:
 
 $$A w^{(j+1)} = B w^{(j)}$$
 
+$$w^{(j+1)} = A^{-1} B w^{(j)}$$
+
 dengan:
 
 $$w^{(j)} =  \left ( \begin{matrix} w_{1,j} \\ w_{2,j} \\ .. \\ w_{m-1,j} \end{matrix} \right )$$
@@ -471,6 +473,149 @@ $$B = \left ( \begin{matrix} 1-\lambda & \lambda/2 & 0 & .. & 0 \\
 \newpage
 
 #### Program Metode Crank-Nicolson {-} 
+
+Berikut adalah program yang saya tulis dalam bahasa __R__:
+
+```
+k = Te/Nt
+lambda = k/h^2
+
+x = seq(0,1,by = h)
+
+u_x0 = function(x){tuliskan fungsi soal}
+w = u_x0(x)
+w = w[-1]
+w = w[-length(w)]
+
+# matrix A
+A = matrix(0,ncol = length(w),nrow = length(w))
+for(i in 1:length(w)){
+  A[i,i] = 1+lambda
+}
+for(i in 1:(length(w)-1)){
+  A[i+1,i] = -lambda/2
+  A[i,i+1] = -lambda/2
+}
+
+# matrix B
+B = matrix(0,ncol = length(w),nrow = length(w))
+for(i in 1:length(w)){
+  B[i,i] = 1-lambda
+}
+for(i in 1:(length(w)-1)){
+  B[i+1,i] = lambda/2
+  B[i,i+1] = lambda/2
+}
+
+A_inv = solve(A)
+# iterasi sesuai dengan NT
+for(i in 1:Nt){
+  w = A_inv %*% B %*% w
+}
+```
+
+## Contoh Soal
+
+Gunakan metode Crank-Nicolson dengan $h = 0.1$ dan $k = 0.01$ untuk mengaproksimasi solusi dari masalah:
+
+$$u_t - u_{xx} = 0, \begin{matrix} 0 < x < 1 \\ 0 \leq t \end{matrix}$$
+
+_boundary condition_ berikut:
+
+$$u(0,t) = u(1,t) = 0, 0<t$$
+
+_initial condition_ berikut:
+
+$$u(x,0) = \sin{(\pi x)}, 0 \leq x \leq 1$$
+
+Bandingkan pada $t=0.5$ menggunakan solusi eksak:
+
+$$u(x,t) = e^{-\pi^2 t} \sin{(\pi x)}$$
+
+#### Jawab {-}
+
+Saya coba hitung terlebih dahulu solusi eksaknya pada selang $0 \leq x \leq 1$ berikut:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.retina=10,fig.align='center'}
+rm(list=ls())
+k = 0.01
+t = 0.5
+h = 0.1 
+lambda = k/h^2
+x = seq(0,1,by = h)
+ux = function(x){exp(-pi*pi*t)*sin(pi*x)}
+uxt = ux(x)
+
+eksak = 
+  data.frame(x,uxt)
+
+eksak %>% 
+  rename("u(x,t)" = uxt) %>% 
+  knitr::kable(align = "c",caption = "Tabel Solusi Eksak")
+```
+
+Berikut adalah penyelesaiannya dengan program yang telah dibuat sebelumnya:
+
+```{r}
+L = 1
+Nx = 10
+h = L/Nx
+Te = 0.5
+Nt = 50
+k = Te/Nt
+lambda = k/h^2
+
+x = seq(0,1,by = h)
+
+u_x0 = function(x){sin(pi*x)}
+w = u_x0(x)
+w = w[-1]
+w = w[-length(w)]
+
+# matrix A
+A = matrix(0,ncol = length(w),nrow = length(w))
+for(i in 1:length(w)){
+  A[i,i] = 1+lambda
+}
+for(i in 1:(length(w)-1)){
+  A[i+1,i] = -lambda/2
+  A[i,i+1] = -lambda/2
+}
+
+# matrix B
+B = matrix(0,ncol = length(w),nrow = length(w))
+for(i in 1:length(w)){
+  B[i,i] = 1-lambda
+}
+for(i in 1:(length(w)-1)){
+  B[i+1,i] = lambda/2
+  B[i,i+1] = lambda/2
+}
+
+A_inv = solve(A)
+# iterasi sesuai dengan NT
+for(i in 1:Nt){
+  w = A_inv %*% B %*% w
+}
+solusi_numerik = data.frame(x,y = c(0,w,0)) 
+```
+
+\newpage
+
+Berikut adalah hasil dan perbandingannya dengan solusi eksak:
+
+```{r,echo=FALSE}
+solusi_numerik %>% 
+  merge(eksak) %>% 
+  mutate("|numerik - eksak|" = y-uxt) %>% 
+  rename("u(x,t) numerik" = y,
+         "u(x,t) eksak" = uxt) %>% 
+  knitr::kable(align = "c",caption = "Hasil Solusi Numerik dari Metode Crank-Nicolson")
+```
+
+
+
+
 
 
 
