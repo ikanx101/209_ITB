@@ -25,7 +25,7 @@ plt.plot(x_diff, exact_solution, \
          label = 'Exact solution')
 plt.legend()
 #plt.show()
-plt.savefig('rekap.png',dpi = 450)
+plt.savefig('plot1.png',dpi = 450)
 
 # Compute max error between 
 # numerical derivative and exact solution
