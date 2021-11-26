@@ -1,0 +1,191 @@
+---
+title: "Jaringan dan Pengolahan Data Paralel"
+subtitle: Tugas mpi4py
+author: | 
+    | Mohammad Rizka Fadhli 
+    | Ikang
+    | 20921004@mahasiswa.itb.ac.id
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+dev: png
+output: 
+  pdf_document:
+    number_sections: false
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: breezedark
+linestretch: 1.5
+colorlinks: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 99)
+setwd("~/209_ITB/Semester I/Jaringan dan Pengolahan Data Paralel/Tugas Kuliah")
+library(dplyr)
+library(ggplot2)
+rm(list=ls())
+load("n.rda")
+serial = read.csv("serial.csv")
+paralel = read.csv("paralel.csv")
+```
+
+# SOAL
+
+Buat program serial dan paralel (menggunakan _point to point communication_) untuk integrasi fungsi $f(x) = x^2$ menggunakan metode _trapezoid_, dari interval $x=0$ sampai $x=1$ dengan nilai $n$ bervariasi mulai dari $10^0$ sampai dengan $10^9^ dengan menggunakan 4 _processor core_.  
+
+Buatlah _plot_ grafik antara nilai $n$ terhadap waktu untuk masing-masing nilai $n$ tersebut untuk membandingkan kecepatan perhitungan antara program serial dan program paralel yang  menggunakan komunikasi _point to point_.
+
+# JAWAB
+
+Untuk membandingkannya, saya mencoba _generate_ beberapa nilai _random_ untuk $n$.
+
+\newpage
+
+## Serial
+
+Berikut adalah program yang dibuat:
+
+```
+import time
+import numpy as np
+
+def y(x):
+    return x**2
+
+def trapezoidal(a,b,n):
+    h=(b-a)/n
+    s=(y(a)+y(b))
+    i=1
+    for i in range (1,n):
+          s+=2*y(a+i*h)
+          i+=1
+    return((h/2)*s)
+
+x0 = 0
+xn = 1
+n = [1,7,16,28,36,43,52,62,69,77,93,322,359,
+3620,4374,4513,5575,6680,7455,9334,9533,227373,235875,
+359596,441394,611944,651434,707928,756462,
+914272,947220,1911445,3542919,4448887,33173155,33744249,
+53990692,60063717,60461719,68180038,72434461,
+74711604,76351391,80842245,89589529,90095249,90814922,
+92609483,95720398,96263304,97769854,217967736,314781656,
+356988524,719449697,862513064,1000000000]
+
+n_selang = []
+integral = []
+waktu = []
+
+for i in range(0,len(n)):
+  start=time.time()
+  t_1 = trapezoidal(x0,xn,n[i])
+  end = time.time()
+  t_2 = end - start
+  n_selang.append(n[i])
+  integral.append(t_1)
+  waktu.append(t_2)
+```
+
+\newpage
+
+Berikut adalah plot hasil _runtime_:
+
+```{r,echo=FALSE,fig.align='center',fig.retina=10,fig.cap="Pengolahan Data Serial"}
+serial %>% 
+  ggplot(aes(x = n,
+             y = waktu)) +
+  geom_line(color = "steelblue") +
+  scale_x_continuous(breaks = c(1,250000000,500000000,750000000,1000000000)) +
+  labs(title = "Runtime vs Partisi Metode Trapezoid",
+       subtitle = "Terlihat ada hubungan linear antara berapa banyak partisi dengan runtime",
+       x = "Berapa banyak partisi",
+       y = "Waktu (dalam detik)",
+       caption = "20921004@mahasiswa.itb.ac.id") +
+  theme_minimal()
+```
+
+\newpage
+
+## Paralel
+
+Berikut adalah program yang dibuat:
+
+```
+import timeit
+import numpy as np
+from mpi4py import MPI
+from mpi4py.MPI import ANY_SOURCE
+
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+size = comm.Get_size()
+
+def y(x):
+    return x**2
+
+def trapezoidal(a,b,n):
+    h=(b-a)/n
+    s=(y(a)+y(b))
+    i=1
+    while i<n:
+        s+=2*y(a+i*h)
+        i+=1
+    return((h/2)*s)
+
+a=0
+b=1
+n = [1,7,16,28,36,43,52,62,69,77,93,322,359,3620,4374,
+4513,5575,6680,7455,9334,9533,227373,235875,359596,441394,
+611944,651434,707928,756462,914272,947220,1911445,3542919,
+4448887,33173155,33744249,53990692,60063717,60461719,68180038,
+72434461,74711604,76351391,80842245,89589529,90095249,90814922,
+92609483,95720398,96263304,97769854,217967736,314781656,356988524,
+719449697,862513064,1000000000]
+
+integral = []
+waktu = []
+
+for i in range(0,len(n)):
+  dest=0
+  h=(b-a)/n[i]
+  local_n=n[i]/size
+  local_a=a+rank*local_n*h
+  local_b=local_a+local_n*h
+  t1 = MPI.Wtime()
+  s=trapezoidal(local_a,local_b,local_n)
+  if rank==0:
+      total=s
+      for _ in range(size-1):
+          total2 = comm.recv(source = MPI.ANY_SOURCE)
+          total += total2
+      integral.append(total)
+      waktu.append(MPI.Wtime()-t1)
+  else:
+      comm.send(s,dest=0)
+```
+
+\newpage
+
+Berikut adalah plot hasil _runtime_:
+
+```{r,echo=FALSE,fig.align='center',fig.retina=10,fig.cap="Pengolahan Data Paralel"}
+paralel %>% 
+  ggplot(aes(x = n,
+             y = waktu)) +
+  geom_line(color = "darkgreen") +
+  scale_x_continuous(breaks = c(1,250000000,500000000,750000000,1000000000)) +
+  labs(title = "Runtime vs Partisi Metode Trapezoid",
+       subtitle = "Terlihat ada hubungan linear antara berapa banyak partisi dengan runtime",
+       x = "Berapa banyak partisi",
+       y = "Waktu (dalam detik)",
+       caption = "20921004@mahasiswa.itb.ac.id") +
+  theme_minimal()
+```
+
+# KESIMPULAN
+
+_Paralel processing_ menghemat _runtime_ dengan signifikan. 
