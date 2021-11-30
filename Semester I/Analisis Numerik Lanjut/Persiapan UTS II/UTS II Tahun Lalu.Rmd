@@ -1,0 +1,389 @@
+---
+title: "Persiapan UTS II"
+subtitle: "Mengerjakan Soal UTS II Tahun Lalu"
+author: "Mohammad Rizka Fadhli"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+linestretch: 1.25
+output: 
+  pdf_document:
+   number_section: false
+   toc: false
+   highlight: tango
+   dev: png
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+# Soal 1
+
+Diberikan sistem persamaan tak-linear berikut:
+
+$$f_1(x,y) = x^2 + y^2 - 4 = 0$$
+
+$$f_2(x,y) = xy-1 = 0$$
+
+- Kemungkinan apa yang bisa terjadi jika kita menggunakan metode Newton untuk menyelesaikan sistem persamaan tersebut?
+- Berikanlan deskripsi penyelesaian sistem persamaan tak linear menggunakan metode hibrida, khususnya metode Newton dan metode optimisasi global!
+
+# Jawab
+
+## Jawaban sub soal I
+
+Metode Newton memiliki skema iterasi sebagai berikut:
+
+$$X^{(k+1)} = X^{(k)} - J(X^{(k)})^{-1} F(X^{(k)})$$ 
+
+dengan $X = \begin{bmatrix} x \\ y \end{bmatrix}$ dan $J$ adalah matriks Jacobi yang didefinisikan sebagai berikut:
+
+$$J = \begin{bmatrix}
+\frac{\delta f_1}{\delta  x} (X) & \frac{\delta f_1}{\delta  y} (X) \\
+\frac{\delta f_2}{\delta  x} (X) & \frac{\delta f_2}{\delta  y} (X)
+\end{bmatrix}$$
+
+Dari $f_1,f_2$ yang diketahui, kita bisa tuliskan $J$ sebagai berikut:
+
+$$J = \begin{bmatrix}
+2x & 2y \\
+y & x
+\end{bmatrix}$$
+
+Agar skema iterasi bisa dilakukan, maka $J$ harus __tak singular__. Artinya $det(J) \neq 0$.
+
+$$2x^2 - 2y^2 \neq 0 
+\left\{\begin{matrix}
+2x^2 - 2y^2 < 0 \\ 2x^2 - 2y^2 > 0
+\end{matrix}\right.$$
+
+Kita bisa tuliskan:
+
+$$\begin{matrix}
+2x^2 - 2y^2 < 0 \\ x^2 < y^2 \\ (\frac{x}{y})^2 < 1
+\end{matrix}$$
+
+atau
+
+$$\begin{matrix}
+2x^2 - 2y^2 > 0 \\ x^2 > y^2 \\ (\frac{x}{y})^2 > 1
+\end{matrix}$$
+
+Selain itu, agar iterasi cepat konvergen, maka $\rho (J) < 1$. Kita bisa tuliskan kembali:
+
+$$\max {\lambda_J} < 1$$
+
+Maka pemilihan _initial_ $X = \begin{bmatrix} x \\ y \end{bmatrix}$ menjadi __krusial__.
+
+\newpage
+
+Coba kita gambar $f_1,f_2$ terlebih dahulu:
+
+```{r,fig.align='center',echo=FALSE,fig.cap="Soal SPNL"}
+rm(list=ls())
+f1 = function(x){sqrt(4 - x^2)}
+f2 = function(x){1/x}
+
+df1 = 
+  data.frame(x = seq(-2,2,by = 0.05)) %>% 
+  mutate(y = f1(x))
+
+df2 = 
+  data.frame(x = c(seq(-3,-0.3,by = 0.05),
+                   seq(0.3,3,by = 0.05))) %>% 
+  mutate(y = f2(x))
+
+df2_1 = df2 %>% filter(x<0)
+df2_2 = df2 %>% filter(x>0)
+
+plot_soal_1 = 
+  ggplot() +
+  geom_line(data = df1,aes(x, y),color = "blue") +
+  geom_line(data = df1,aes(x , -y),color = "blue") +
+  geom_line(data = df2_1,aes(x, y)) +
+  geom_line(data = df2_2,aes(x, y)) +
+  coord_equal() +
+  labs(caption = "Digambar dengan R\nikanx101.com") 
+plot_soal_1
+```
+
+\newpage
+
+Terlihat ada `4` buah titik solusi, jika kita jalankan skema iterasinya untuk titik awal:
+
+1. $x = -3, y = -1$
+1. $x = -1, y = -3$
+1. $x = 3, y = 1$
+1. $x = 1, y = 3$
+
+```{r,echo=FALSE}
+rm(list=ls())
+# menghitung norm untuk kriteria penghentian
+# menghitung norm infinity dari vektor v
+norm_vec_inf = function(x)max(abs(x))
+
+# bikin fungsi F(x1,x2)
+F_x_k = function(x){
+  f1 = x[1]^2 + x[2]^2 - 4
+  f2 = x[1]*x[2] - 1
+  xk = c(f1,f2)
+  return(xk)
+}
+
+# bikin matriks jacobi
+jax = function(x){
+  a11 = 2*x[1]
+  a12 = 2*x[2]
+  a21 = x[2]
+  a22 = x[1]
+  J = matrix(c(a11,a12,a21,a22),ncol = 2,byrow = T)
+  J_inv = matlib::inv(J)
+  return(J_inv)
+}
+
+# set toleransi max yang diinginkan
+tol_max = 0.0000000000001
+
+# set max iterasi yang diperbolehkan
+iter_max = 40
+
+# kita mulai iterasinya
+# pertama
+# initial
+x0 = c(1,3)
+x_awal = x0
+iter = 0
+while(norm_vec_inf(F_x_k(x0)) > tol_max && iter <= iter_max){
+  xk_new = x0 - jax(x0) %*% F_x_k(x0)
+  x0 = xk_new
+  iter = iter + 1
+}
+
+list("Initial (x,y)" = x_awal,
+     "Solusi Final: " = x0,
+     "Banyak iterasi: " = iter)
+
+# kedua
+x0 = c(3,1)
+x_awal = x0
+iter = 0
+while(norm_vec_inf(F_x_k(x0)) > tol_max && iter <= iter_max){
+  xk_new = x0 - jax(x0) %*% F_x_k(x0)
+  x0 = xk_new
+  iter = iter + 1
+}
+
+list("Initial (x,y)" = x_awal,
+     "Solusi Final: " = x0,
+     "Banyak iterasi: " = iter)
+
+# ketiga
+x0 = c(-3,-1)
+x_awal = x0
+iter = 0
+while(norm_vec_inf(F_x_k(x0)) > tol_max && iter <= iter_max){
+  xk_new = x0 - jax(x0) %*% F_x_k(x0)
+  x0 = xk_new
+  iter = iter + 1
+}
+
+list("Initial (x,y)" = x_awal,
+     "Solusi Final: " = x0,
+     "Banyak iterasi: " = iter)
+
+# keempat
+x0 = c(-1,-3)
+x_awal = x0
+iter = 0
+while(norm_vec_inf(F_x_k(x0)) > tol_max && iter <= iter_max){
+  xk_new = x0 - jax(x0) %*% F_x_k(x0)
+  x0 = xk_new
+  iter = iter + 1
+}
+
+list("Initial (x,y)" = x_awal,
+     "Solusi Final: " = x0,
+     "Banyak iterasi: " = iter)
+```
+
+## Jawaban sub soal II
+
+Jika kita hendak menggunakan metode optimisasi global, berarti kita harus mengubah bentuk $f_1,f_2$ menjadi suatu $F$ agar __bisa dicari nilai max atau min globalnya__.
+
+Sistem di atas memiliki solusi $x = (x,y)^T$ jika $F(x)$ yang kita definisikan sebagai:
+
+$$F(x) = \frac{1}{1+ \sum_{i=1}^n |f_i(x)|}$$
+
+Terlihat bahwa $F(x)$ memiliki nilai $\max = 1$. Maka penyelesaiannya menjadi penyelesaian masalah optimisasi (maksimasi).
+
+\newpage
+
+Perhatikan grafik $F(x) = 1$ sebagai berikut:
+
+```{r,fig.align='center',echo=FALSE,fig.cap="F baru dari f1 dan f2"}
+rm(list=ls())
+
+x = seq(-3,3,by = .01)
+y = seq(-3,3,by = .01)
+
+f1 = function(x){x[1]^2 + x[2]^2 - 4}
+f2 = function(x){x[1]*x[2] - 1}
+  
+F_hit = function(x_1,x_2){1 / (1 + x_1 + x_2)}
+
+expand.grid(x,y) %>% 
+  rename(x = Var1,
+         y = Var2) %>% 
+  rowwise() %>% 
+  mutate(f1_ = f1(c(x,y)),
+         f2_ = f2(c(x,y))
+         ) %>%
+  ungroup() %>%
+  filter(round(f1_,1) == 0) %>% 
+  filter(round(f2_,1) == 0) %>% 
+  rowwise() %>% 
+  mutate(F = F_hit(f1_,f2_)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x,y)) +
+  geom_point() +
+  coord_equal()
+
+```
+
+Terlihat bahwa $x,y$ yang mengakibatkan $F(x) = 1$ adalah solusi dari SPNL yang dimaksud.
+
+\newpage
+
+# Soal 2
+
+Untuk masalah:
+
+$$\begin{matrix}
+\frac{\delta u}{\delta t} = \frac{\delta ^2 u}{\delta x^2} & 0 < x < L & 0 < t < T \\
+u(x,0) = g(x) & & 0 \leq x \leq L \\
+u(0,t) = a(t) & u(L,t) = b(t) & 0 < t < T
+\end{matrix}$$
+
+- Berikanlah skema beda hingga nya menggunakan metode BTCS!
+- Selidiki kestabilam dari skema yang diperoleh!
+
+
+# Jawab
+
+## Jawaban Sub Soal I
+
+Metode implisit menggunakan skema _backward difference_ untuk $u_t(x_i,t_j)$ dan _central difference_ untuk $u_{xx}(x_i,t_j)$.
+
+$$u_t(x_i,t_j) = \frac{u(x_i,t_j) - u(x_i,t_j - k)}{k} + O(k)$$
+
+$$u_{xx}(x_i,t_j) = \frac{u(x_i+h,t_j) - 2u(x_i,t_j) + u(x_i-h,t_j)}{h^2} + O(h^2)$$
+
+#### Skema Iterasi {-} 
+
+dari bentuk di atas adalah:
+
+$$w_{i,j-1} = -\lambda w_{i+1,j} + (1+2 \lambda) w_{i,j} - \lambda w_{i-1,j}$$
+
+dengan $w_{i,j}$ menghampiri $u(x_i,t_j)$ dan $\lambda = \frac{k}{h^2}$.
+
+Perhatikan dari skema iterasi di atas, nilai-nilai $w$ pada saat ke $j$ dikaitkan pada saat waktu ke $j-1$. Sehingga vektor $w^{(j)}$ secara implisit didapatkan dari sistem persamaan linear:
+
+$$A w^{(j)} = w^{(j-1)}, j = 1,2,..,j_{max}$$
+
+dengan nilai-nilai batas $w_{0,j} = w_{m,j} = 0$. Jika matriks $A$ __tidak singular__, maka kita akan dapatkan skema iterasi dalam bentuk aljabar berikut:
+
+#### Skema Iterasi dalam Aljabar {-}
+
+$$w^{(j)} = A^{-1} w^{(j-1)} = .. = (A^{-1})^{(j)} w^{(0)}, j = 1,2,..,j_{max}$$
+
+dengan orde galat $O(k+h^2)$. Persamaan di atas harus selalu diselesaikan setiap waktu $j$. 
+
+dengan:
+
+$$w^{(j)} =  \left ( \begin{matrix} w_{1,j} \\ w_{2,j} \\ .. \\ w_{m-1,j} \end{matrix} \right )$$
+
+dan matriks tridiagonal berukuran $(m - 1) \times (m - 1)$ berikut:
+
+$$A = \left ( \begin{matrix} 1+2\lambda & -\lambda & 0 & .. & 0 \\
+-\lambda & 1+2\lambda & -\lambda & .. & .. \\
+0 & -\lambda & 1+2\lambda & .. & .. \\
+.. & .. & ..& ..& .. \\
+0 & .. & 0 & -\lambda & 1+2\lambda
+\end{matrix} \right )$$
+
+## Jawaban Sub Soal II
+
+Agar stabil, maka matriks $A$ harus memenuhi $\rho ( A^{-1} ) < 1$. Maka kita akan hitung berapa nilai $\rho ( A^{-1} )$.
+
+$\rho ( A^{-1} )$ dihitung dari $\max \lambda_{A^{-1}}$ dimana $\lambda$ adalah nilai eigen dari matriks $A^{-1}$.
+
+Tuliskan matriks $A$ dalam bentuk berikut:
+
+$$A = I + \lambda G$$
+
+dengan:
+
+$$G = 
+\left ( \begin{matrix} 2 & -1 & 0 & .. & 0 \\
+-1 & 2 & -1 & .. & .. \\
+0 & -1 & 2 & .. & .. \\
+.. & .. & ..& ..& .. \\
+0 & .. & 0 & -1 & 2
+\end{matrix} \right )$$
+
+Kita tahu dalam aljabar:
+
+1. Jika $\mu^G$ adalah nilai eigen dari matriks $G$, maka $1 + \lambda \mu^G$ merupakan nilai eigen dari matriks $I + \lambda G$.
+1. Jika $\mu^A$ adalah nilai eigen dari matriks $A$, maka $\frac{1}{\mu^A}$ adalah nilai eigen dari matriks $A^{-1}$.
+
+Maka kita bisa dapatkan nilai eigen dari $A^{-1}$ adalah:
+
+$$\mu^{A^{-1}} = \frac{1}{1 + \lambda \mu^G}$$
+
+Mari kita cari nilai dari $\mu^G$.
+
+__Lemma__ 
+
+Dengan memanfaatkan lemma berikut ini:
+
+$$G = 
+\left ( \begin{matrix} 
+\alpha & \beta & 0 & .. & 0 \\
+\gamma & \alpha & \beta & .. & .. \\
+0 & \gamma & \alpha & .. & .. \\
+.. & .. & ..& ..& \beta \\
+0 & .. & 0 & \gamma & \alpha
+\end{matrix} \right )$$
+
+Nilai eigen dari $G$ adalah:
+
+$$\mu_k^G = \alpha + 2 \beta \sqrt{\frac{\gamma}{\beta}} \cos \frac{k \pi}{n+1}$$
+
+Dengan mensubstitusi $\alpha, \beta, \gamma, n$ didapatkan:
+
+$$\mu_k^G = 4 \sin^2 \left ( \frac{k \pi}{2 m} \right )$$
+
+Kita substitusikan $\mu^G$ ke dalam $\mu^{A^{-1}}$. Sehingga didapatkan:
+
+
+$$\mu^{A^{-1}} = \frac{1}{1 + \lambda 4 \sin^2 \left ( \frac{k \pi}{2 m} \right )}$$
+
+Kita tahu bahwa:
+
+$$\lambda = \frac{k}{h^2} > 0$$
+
+dan
+
+$$\sin^2 \left ( \frac{k \pi}{2 m} \right ) > 0$$
+
+Sehingga didapatkan $| \mu^{A^{-1}} | < 1$.
+
+Maka terlihat jelas bahwa $\rho ( A^{-1} ) < 1$. 
+
+#### Kesimpulan {-}
+
+Metode BTCS __stabil tanpa syarat__.
+
