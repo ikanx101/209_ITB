@@ -1,0 +1,16 @@
+---
+title: "PENELITIAN MANDIRI DALAM SAINS KOMPUTASI I"
+subtitle: |
+  |Presentasi Akhir
+  |Eksplorasi Metode Optimisasi
+author: |
+  |Mohammad Rizka Fadhli
+  |20921004
+institute: "Dept. Sains Komputasi, Fakultas MIPA, ITB"
+output:
+  beamer_presentation:
+---
+
+```{r,include=FALSE}
+rm(list=ls())
+```
