@@ -1,0 +1,33 @@
+---
+title: "Introduction to Market Research"
+subtitle: Kampus Merdeka
+author: |
+  | Mohamad Rizka Fadhli
+  | ikanx101.com
+date: "`r format(Sys.time(),'%d %B %Y')`"
+fontsize: 12pt
+output:
+  pdf_document:
+    number_section: true
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: breezedark
+linestretch: 1.5
+---
+
+```{r setup, include=FALSE}
+rm(list=ls())
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+# PENDAHULUAN
+
