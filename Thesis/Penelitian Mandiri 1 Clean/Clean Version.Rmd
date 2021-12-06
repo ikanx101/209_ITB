@@ -414,7 +414,6 @@ $$3x_1 + 4x_2 + 2x_3 - M \times z \leq 30$$
 
 $$4x_1 + 6x_2 + 2x_3 + M \times z \leq 40 + M$$
 
-
 # ALGORITMA PENYELESAIAN OPTIMISASI
 
 Pada bagian ini kita akan membahas macam-macam algoritma yang digunakan untuk menyelesaikan masalah optimisasi.
