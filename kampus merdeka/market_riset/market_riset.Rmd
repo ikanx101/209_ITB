@@ -1,8 +1,10 @@
 ---
 title: "Introduction to Market Research"
-subtitle: Kampus Merdeka
+subtitle: |
+  | P2MS-ITB 
+  | TEACHING FACTORY-NETWORK
 author: |
-  | Mohamad Rizka Fadhli
+  | Mohammad Rizka Fadhli
   | ikanx101.com
 date: "`r format(Sys.time(),'%d %B %Y')`"
 fontsize: 12pt
@@ -29,5 +31,82 @@ rm(list=ls())
 \listoftables
 \newpage
 
-# PENDAHULUAN
+# SILABUS UMUM
 
+## Tujuan Perkuliahan
+
+Kuliah ___Basic Market Research___ dirancang untuk:
+
+1. Menambah pengetahuan peserta kuliah terhadap _market research_ dan peranannya dalam dunia bisnis sebagai salah satu _decision support system_. Kelak akan dijelaskan pula berbagai jenis _research_ yang lazim digunakan seperti:
+	1. _Qualitative research_: _focus group discussion_ (FGD), _In-depth Interview_ (IDI), dan _qualitative observation_.
+	1. _Quantitative research_: _surveys_ dan _quantitative observation_.
+1. Mengenalkan beberapa studi _market research_ yang lazim dilakukan di dunia bisnis, seperti:
+	1. _Market Entry Study_.
+	1. _TV Campaign Research_, meliputi _storyline research_, _pre-campaign research_, dan _post-campaign research_.
+	1. _Brand Health Research_, meliputi _satisfaction_, _loyalty_, _usership_, _perception_, dan sebagainya.
+	1. _Media Habit_.
+	1. _Consumer Profile_.
+	1. _Service Audit_.
+	1. _Retail Audit_.
+1. Memberikan pengalaman terhadap mahasiswa untuk merencanakan, menyusun, melakukan, dan membuat laporan suatu _market research_ sederhana. Tahapan-tahapan yang akan dilakukan:
+	1. Formulasi masalah:
+		- Mengubah _management problem_ menjadi _research problem_.
+		- Menggunakan _tools_ seperti _interrelationship diagram_ untuk memisahkan antara `sebab` dan `akibat` dari suatu masalah.
+	1. Menuliskan tujuan _research_.
+	1. Melakukan _sample design_.
+		- Mendefinisikan populasi dan _sample_.
+		- Menghitung _sample size_.
+		- Menentukan teknik _sampling_ yang hendak digunakan.
+	1. Membuat quesioner.
+	1. Mengumpulkan data dan melakukan _quality control_.
+	1. _Data entry_, _data preparation_, dan _data processing_.
+	1. _Analysis_ dan _reporting_.
+	1. _Feedbacks_.
+
+_Case studies_ yang akan digunakan sebagai bahan ajar:
+
+1. _Market Entry Study_: Suatu perusahaan _healthy FnB_ _overseas_ hendak masuk ke Indonesia.
+1. _TV Campaign_: Bagaimana suatu perusahaan popok bayi membuat dan mengevaluasi iklan TV?
+1. _Brand Health_: __Top Brand Index__ dan _customer satisfaction survey_.
+1. _Service Audit_: Pengukuran kualitas layanan bank dengan _mystery shopping_.
+1. _Retail Audit_: _Telco retail audit_.
+
+_Case study_ yang akan dijadikan tugas melakukan _market research_:
+
+___Mencari tren makanan dan minuman pada suatu segmen konsumen tertentu (misalkan: anak muda kelas menengah ke atas, ibu hamil kelas menengah ke bawah, dan orang tua kelas menengah).___
+
+## _Learning Outcomes_
+
+Rujukan _outcomes_:
+
+C1. Analytical thinking
+
+C2. Process understanding
+
+C3. Research skill
+
+C4. Ability to work in team
+
+C5. Conflict skill
+
+C6. Communication skill
+
+C7. Problem Solving
+
+C8. Decision Making
+
+C9. Research skill 
+
+C10. Technical skill
+
+C11. Media skill
+
+C12. Coding skill
+
+C13. Networking skill
+
+Setelah mengambil kuliah ini, peserta diharapkan:
+
+1. Mengetahui perbedaan masing-masing jenis _research_ dan bisa memasangkannya dengan tujuan dari bisnis (C1, C2, C7, dan C8).
+1. Mampu melaksanakan _market research_ dengan tahapan-tahapan yang benar (C3 dan C10).
+1. Mampu melakukan _data preparation_ hingga _data analysis_ untuk dijadikan laporan _market research_ (C10, C12, dan C6).
