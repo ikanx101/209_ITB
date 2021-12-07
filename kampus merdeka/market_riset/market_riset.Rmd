@@ -7,7 +7,7 @@ author: |
   | Mohammad Rizka Fadhli
   | ikanx101.com
 date: "`r format(Sys.time(),'%d %B %Y')`"
-fontsize: 12pt
+fontsize: 10pt
 output:
   pdf_document:
     number_section: true
@@ -112,6 +112,8 @@ Setelah mengambil kuliah ini, peserta diharapkan:
 1. Mampu melaksanakan _market research_ dengan tahapan-tahapan yang benar (C3 dan C10).
 1. Mampu melakukan _data preparation_ hingga _data analysis_ untuk dijadikan laporan _market research_ (C10, C12, dan C6).
 
+\newpage
+
 ## _Blending Teaching Methods and Modes of Delivery_
 
 ```{r,echo=FALSE}
@@ -136,11 +138,11 @@ metode = data.frame(x1 = c("x","","","x","","","",""),
 		    x2 = c("","","x","x","x","","",""),
 		    y2 = met2)
 metode %>%
-  rename("Metode Pengajaran (pilih beberapa)" = y1,
+  rename("Metode Pengajaran" = y1,
 	 " " = x1,
 	 "Cara Penyampaian Materi" = y2,
 	 "  " = x2) %>%
-  knitr::kable("pipe")
+  knitr::kable("pipe",caption = "Metode Pembelajaran")
 ```
 
 ## Silabus dan Jadwal Mingguan
@@ -187,7 +189,7 @@ silabus %>%
 	 "Cara Penyampaian Materi/Kegiatan" = cara,
 	 "Topik" = topik,
 	 "Sub topik" = detail) %>%
-  knitr::kable("pipe")
+  knitr::kable("pipe",caption = "Silabus Detail")
 ```
 
 ## Prasyarat
