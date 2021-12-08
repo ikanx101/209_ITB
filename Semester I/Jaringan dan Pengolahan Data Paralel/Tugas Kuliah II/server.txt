@@ -1,0 +1,19 @@
+scp mpi4py@167.205.41.48:~/m_rizka_f/* ~/
+
+masuk dengan VPN
+ssh -l mpi4py 167.205.41.48
+password: mpi4pySK5004
+
+masuk tanpa VPN
+AMD
+ssh mpi4py@82.64.75.92 -p 54900
+password: mpi4pyUSER
+scp -P 54900 mpi4py@82.64.75.92:~/m_rizka_f ~/
+
+talbet 
+ssh ix@192.168.0.226
+password: suntea
+
+laptop
+ssh ikanx_server@192.168.0.158
+password: ahnaf
