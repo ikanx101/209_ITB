@@ -212,3 +212,11 @@ Penilaian dilakukan berdasarkan tugas yang dilakukan secara berkelompok (2-3 ora
 
 1. E. Chapman, E. M. Feit, _R for Marketing Research and Analytics_, 2nd edition, Springer, 2019.
 1. G. James, D. Witten, T. Hastie, R. Tibshirani, _An introduction to Statistical Learning in R_, 2013 (e-book).
+
+\newpage
+
+# PERTEMUAN I {-}
+
+# PERKENALAN
+
+
