@@ -265,8 +265,8 @@ Berdasarkan sumbernya, data bisa dibagi menjadi dua yakni:
 1. Data primer,
 1. Data sekunder.
 
-```
-insert gambar
+```{r out.width = "60%",echo=FALSE,fig.align = "center"}
+knitr::include_graphics("primer_sekunder.jpg")
 ```
 
 ### Data Primer
@@ -311,7 +311,7 @@ nomnoml::nomnoml("
 		)
 ```
 
-```{r,echo=FALSE}
+```{r out.width = "60%",echo=FALSE,fig.align="center"}
 knitr::include_graphics("ikanx.png")
 ```
 
