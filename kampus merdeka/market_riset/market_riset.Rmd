@@ -255,9 +255,8 @@ nomnoml::nomnoml("#direction: right
 		[Kegunaan terhadap bisnis|
 		 [nice-to-know]
 		 [need-to-know]
-		 ],
-		"ikanx2.png",900,400
-")
+		 ]",
+		"ikanx2.png",900,400)
 ```
 
 ```{r out.width = "75%",echo=FALSE,fig.align="center",fig.cap = "Alur Data ke Insights"}
