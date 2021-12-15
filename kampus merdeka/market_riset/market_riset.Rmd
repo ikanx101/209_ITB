@@ -293,7 +293,7 @@ Satu hal yang sering ditanyakan adalah:
 
 Jika data yang hendak kita cari ada data sekundernya, maka kita akan prioritaskan
 
-```{r,echo=FALSE}
+```{r,include=FALSE}
 nomnoml::nomnoml("
                  [Masalah] -> [Butuh Data]
                  [Butuh Data] -> [Ada data sekunder?]
@@ -306,7 +306,13 @@ nomnoml::nomnoml("
                  [Masih relevan?] -> [Tidak]
                  [Tidak] -> [Cari data primer]
                  [Ya] -> [Pakai data sekunder]
-                 ")
+                 ",
+		 "ikanx.png",900,400
+		)
+```
+
+```{r,echo=FALSE}
+knitr::include_graphics("ikanx.png")
 ```
 
 ## Komponen _Market Research_
