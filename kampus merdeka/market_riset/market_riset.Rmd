@@ -112,8 +112,6 @@ Setelah mengambil kuliah ini, peserta diharapkan:
 1. Mampu melaksanakan _market research_ dengan tahapan-tahapan yang benar (C3 dan C10).
 1. Mampu melakukan _data preparation_ hingga _data analysis_ untuk dijadikan laporan _market research_ (C10, C12, dan C6).
 
-\newpage
-
 ## _Blending Teaching Methods and Modes of Delivery_
 
 ```{r,echo=FALSE}
@@ -223,7 +221,7 @@ Penilaian dilakukan berdasarkan tugas yang dilakukan secara berkelompok (2-3 ora
 
 Di era _industry 4.0_, __data__ menjadi suatu komoditas utama untuk menjadi yang terdepan di bisnisnya. Namun data saja tidak cukup. Dibutuhkan suatu kemampuan untuk mengkonversi data menjadi _insights_ yang berguna bagi bisnis.
 
-> Setiap perusahaan bisa menjual barang dan/atau menawarkan jasa yang sama kepada konsumen. Pembeda satu perusahaan dengan yang lainnya adalah ___analytics___.^[Competing in Analytics]
+> Setiap perusahaan bisa menjual barang dan/atau menawarkan jasa yang sama kepada konsumen. Pembeda satu perusahaan dengan yang lainnya adalah ___analytics___.^[Competing on Analytics: https://hbr.org/2006/01/competing-on-analytics]
 
 _Analytics_ bisa didefinisikan sebagai kemampuan suatu organisasi (perusahaan) untuk mengeksplorasi dan mengeksploitasi data yang ada di internal dan eksternal organisasinya.
 
@@ -245,13 +243,65 @@ Apa itu _consumer behavior_?
 
 Salah satu tantangan besar yang harus dihadapi perusahaan adalah bagaimana memahami _consumer behavior_.
 
+### _From Data to Insights_
+
+```{r,include=FALSE}
+nomnoml::nomnoml("#direction: right
+		[data] -> [berisi informasi]
+		[data] -> [tidak berisi informasi]
+		[berisi informasi] -> [Kegunaan terhadap bisnis]
+		[Kegunaan terhadap bisnis] -> [insights]
+
+		[Kegunaan terhadap bisnis|
+		 [nice-to-know]
+		 [need-to-know]
+		 ],
+		"ikanx2.png",900,400
+")
+```
+
+```{r out.width = "75%",echo=FALSE,fig.align="center",fig.cap = "Alur Data ke Insights"}
+knitr::include_graphics("ikanx2.png")
+```
+
 ## Strategi Perusahaan Terkait _Market Research_
 
 Walaupun banyak pihak berpendapat bahwa _market research_ adalah bagian yang penting dan tak terpisahkan di bisnis. Namun ada beberapa perusahaan yang berpendapat lain. 
 
-Perusahaan seperti __Apple__ pada masa __Steve Jobs__ tidak melakukan _market research_.
+Perusahaan seperti __Apple__ pada masa __Steve Jobs__ tidak melakukan _market research_. Kala itu Steve Jobs berkata:
 
+> "People don't know what they want until you show it to them. That's why I never rely on market research. Our task is to read things that they are not yet on the page."
 
+Sebagai seorang _market researcher_, kita bisa mengambil banyak pelajaran dari perkataan di atas. Steve Jobs merasa _market research_ gagal dalam membaca keinginan konsumen. Perusahaanlah yang harusnya membuat dan menawarkan sesuatu yang baru (sesuatu yang belum ada di pasar) sehingga membuat _trend_ baru.
+
+Hal seperti di atas lazim dilakukan oleh perusahaan yang memiliki orang-orang yang dinilai visioner dan mampu menciptakan tren tersendiri. Namun saat orang-orang tersebut tidak ada, perusahaan tersebut akan kehilangan momennya.
+
+Berbeda dengan __Apple__, perusahaan telekomunikasi asal US bernama __Verizon__ justru mengungkapkan:
+
+> "More than 50% of innovation comes from the voice of the customer."
+
+__Verizon__ bersama dengan banyak perusahaan besar di dunia dan Indonesia tetap menganut pendapat bahwa _market research_ adalah salah satu langkah yang perlu dilakukan agar bisa tetap bersaing di era digital saat ini.
+
+### Cara Pandang Perusahaan Terhadap _Market Research_
+
+Berdasarkan uraian di atas, cara pandang perusahaan bisa berbeda-beda. Sebagian merasa _market research_ sebagai _cost center_ sehingga perusahaan enggan melakukannya. Padahal _market researcher_ yang baik bisa menuntun perusahaan untuk menggunakan metode-metode alternatif yang lebih _cost-friendly_ dan _affordable_.
+
+Sebagian perusahaan lain melihat _market research_ sebagai _cost saver_ dan _investment_. Perusahaan bisa diselamatkan dari __kesalahan dalam mengambil keputusan bisnis__ jika ditopang oleh _insights_ hasil _market research_ yang baik.
+
+Sebuah penelitian yang dipublikasikan oleh _European Society of Market Research_ (ESOMAR) beberapa tahun yang lalu, menyimpulkan bahwa:
+
+> "Tidak ada korelasi antara ___market research budget___ dengan kualitas ___insights___ yang didapatkan."
+
+Oleh karena itu, anggapan bahwa _market research_ adalah sesuatu yang __pasti mahal__ harus dipertimbangkan kembali. 
+
+### _Keeping Market Research Agile_
+
+Berdasarkan uraian di atas, kita bisa membuat _market research_ menjadi _agile_ dan adaptif dengan beberapa tips sebagai berikut:
+
+1. Lakukan _market research_ __jika dan hanya jika__ perusahaan masih ragu dengan keputusan yang akan diambil. Jika perusahaan sudah yakin dan mau menerima konsekuensi dari keputusan yang akan diambil, maka tidak perlu melakukan _market research_.
+1. Lakukan _cost-benefit ratio analysis_ dari _project market research_ yang hendak dilakukan. Ukur dan nilai _insights_ yang mungkin akan didapatkan, kemudian bandingkan dengan semua _cost_ yang mungkin muncul. _Cost_ dalam hal ini bukan berarti berupa uang (_budget_) yang dikeluarkan, tapi juga berupa waktu pelaksanaan dan _man power_ (sumber daya manusia).
+1. _Keep things simple and manage-able_. Perdalam masalah yang hendak dijawab dengan _market research_. Bedakan informasi _need-to-know_ dengan informasi _nice-to-know_. Bagian ini akan dibahas lebih detail pada bab `pembuatan kuesioner`.
+1. Lakukan _desk research_ jika perlu. Di era digital, data bertebaran di mana-mana. Dengan metode pengumpulan data yang tepat, kita bisa melakukan _market research_ yang _insightful_ tanpa harus beranjak dari meja kerja. Bagian ini akan dibahas lebih detail pada bab selanjutnya.
 
 ## Komponen _Market Research_
 
