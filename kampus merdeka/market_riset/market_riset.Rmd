@@ -219,6 +219,16 @@ Penilaian dilakukan berdasarkan tugas yang dilakukan secara berkelompok (2-3 ora
 
 # PENDAHULUAN
 
+## Latar Belakang
+
+Di era _industry 4.0_, __data__ menjadi suatu komoditas utama untuk menjadi yang terdepan di bisnisnya. Namun data saja tidak cukup. Dibutuhkan suatu kemampuan untuk mengkonversi data menjadi _insights_ yang berguna bagi bisnis.
+
+> Setiap perusahaan bisa menjual barang dan/atau menawarkan jasa yang sama kepada konsumen. Pembeda satu perusahaan dengan yang lainnya adalah ___analytics___.^[Competing in Analytics]
+
+_Analytics_ bisa didefinisikan sebagai kemampuan suatu organisasi (perusahaan) untuk mengeksplorasi dan mengeksploitasi data yang ada di internal dan eksternal organisasinya.
+
+Matematika, statistika, dan _engineering_ adalah _tools_ terbaik untuk kita bisa menganalisa data. Sedangkan __market riset__ adalah salah satu metode terpenting bagi organisasi untuk bisa mendapatkan data eksternal, yakni data dari konsumen atau pelanggannya.
+
 ## Tentang Konsumen
 
 ### Definisi Konsumen
@@ -233,14 +243,42 @@ Apa itu _consumer behavior_?
 
 > _The study of the processes involved when individuals/groups: select, purchase, user, or dispose of products, services, ideas, or experiences to satisfy needs and desires_.
 
-### _Consumer's Data_
+Salah satu tantangan besar yang harus dihadapi perusahaan adalah bagaimana memahami _consumer behavior_.
+
+## Strategi Perusahaan Terkait _Market Research_
+
+Walaupun banyak pihak berpendapat bahwa _market research_ adalah bagian yang penting dan tak terpisahkan di bisnis. Namun ada beberapa perusahaan yang berpendapat lain. 
+
+Perusahaan seperti __Apple__ pada masa __Steve Jobs__ tidak melakukan _market research_.
+
+
+
+## Komponen _Market Research_
+
+Saat kita berbicara tentang _market research_, setidaknya ada beberapa komponen yang biasa diteliti, yakni:
+
+1. Konsumen, 
+1. Market (bisnis), dan
+1. Regulator (pemerintah).
+
+_Market research_ erat kaitannya dengan konsumen. Sebelum saya membahas _market research_ lebih jauh, saya akan membahas terlebih dahulu tentang konsumen.
+
+
+
+\newpage
+
+# PERTEMUAN 4 {-}
+
+# JENIS-JENIS DATA DALAM MARKET RESEARCH
+
+## _Consumer's Data_
 
 Jika kita berbicara mengenai data konsumen (data yang berhubungan dengan manusia dan hubungannya dengan _brand_ atau aktivitas _marketing_), setidaknya ada dua jenis data, yakni:
 
 1. Data persepsi,
 1. Data _behaviour_ atau _habit_.
 
-#### Data Persepsi {-}
+### Data Persepsi
 
 Persepsi (dari bahasa latin _perceptio_, _percipio_) adalah tingkatan menyusun, mengenali, dan menafsirkan informasi sensoris guna memberikan gambaran dan pemahaman tentang lingkungan.
 
@@ -248,15 +286,16 @@ Data persepsi merupakan data yang berasal dari pemahaman, ide, atau pendapat pri
 
 __Untuk mendapatkan data ini, cara terbaik yang bisa dilakukan adalah dengan cara survey__ (ditanyakan langsung kepada responden).
 
-#### Data _Habit_ {-}
+### Data _Habit_
 
-__Habit_ atau kebiasaan adalah suatu hal yang lazim, umum, dan yang biasa dilakukan. Menurut Peter Cape (2013):
+_Habit_ atau kebiasaan adalah suatu hal yang lazim, umum, dan yang biasa dilakukan. Menurut Peter Cape (2013):
 
 > ___When you ask people randomly throughout the day what they are doing (behaviour), 30% of the time there will be mismatch between what they are doing and what they are thinking about.___
 
 Oleh karena itu, cara terbaik untuk mendapatkan data ini adalah dengan memanfaatkan sumber data lain seperti jejak digital, data transaksi, dan lainnya.
 
 __Data seperti ini sebaiknya tidak ditanyakan langsung__, jika terpaksa ditanyakan langsung, sebaiknya ada metode untuk melakukan validasi atas jawaban tersebut.
+
 
 ## Jenis Data Berdasarkan Sumbernya
 
@@ -265,7 +304,7 @@ Berdasarkan sumbernya, data bisa dibagi menjadi dua yakni:
 1. Data primer,
 1. Data sekunder.
 
-```{r out.width = "60%",echo=FALSE,fig.align = "center"}
+```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Data Primer dan Sekunder"}
 knitr::include_graphics("primer_sekunder.jpg")
 ```
 
@@ -311,28 +350,6 @@ nomnoml::nomnoml("
 		)
 ```
 
-```{r out.width = "60%",echo=FALSE,fig.align="center"}
+```{r out.width = "75%",echo=FALSE,fig.align="center",fig.cap = "Flow Memilih Data Primer dan Data Sekunder"}
 knitr::include_graphics("ikanx.png")
 ```
-
-## Komponen _Market Research_
-
-Saat kita berbicara tentang _market research_, setidaknya ada beberapa komponen yang biasa diteliti, yakni:
-
-1. Konsumen, 
-1. Market (bisnis), dan
-1. Regulator (pemerintah).
-
-_Market research_ erat kaitannya dengan konsumen. Sebelum saya membahas _market research_ lebih jauh, saya akan membahas terlebih dahulu tentang konsumen.
-
-### Konsumen
-
-
-
-
-## Strategi Perusahaan
-
-
-# PERTEMUAN II {-}
-
-
