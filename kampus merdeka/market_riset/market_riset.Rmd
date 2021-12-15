@@ -217,6 +217,116 @@ Penilaian dilakukan berdasarkan tugas yang dilakukan secara berkelompok (2-3 ora
 
 # PERTEMUAN I {-}
 
-# PERKENALAN
+# PENDAHULUAN
+
+## Tentang Konsumen
+
+### Definisi Konsumen
+
+Apa arti konsumen?
+
+> Konsumen adalah setiap orang __pemakai barang dan/atau jasa__ yang tersedia dalam masyarakat, baik bagi kepentingan __diri sendiri__, __keluarga__, __orang lain__, maupun __mahkluk hidup lain__ dan __tidak untuk diperdagangkan__.^[UU Perlindungan Konsumen tahun 1999]
+
+### _Consumer Behavior_
+
+Apa itu _consumer behavior_?
+
+> _The study of the processes involved when individuals/groups: select, purchase, user, or dispose of products, services, ideas, or experiences to satisfy needs and desires_.
+
+### _Consumer's Data_
+
+Jika kita berbicara mengenai data konsumen (data yang berhubungan dengan manusia dan hubungannya dengan _brand_ atau aktivitas _marketing_), setidaknya ada dua jenis data, yakni:
+
+1. Data persepsi,
+1. Data _behaviour_ atau _habit_.
+
+#### Data Persepsi {-}
+
+Persepsi (dari bahasa latin _perceptio_, _percipio_) adalah tingkatan menyusun, mengenali, dan menafsirkan informasi sensoris guna memberikan gambaran dan pemahaman tentang lingkungan.
+
+Data persepsi merupakan data yang berasal dari pemahaman, ide, atau pendapat pribadi dari konsumen.
+
+__Untuk mendapatkan data ini, cara terbaik yang bisa dilakukan adalah dengan cara survey__ (ditanyakan langsung kepada responden).
+
+#### Data _Habit_ {-}
+
+__Habit_ atau kebiasaan adalah suatu hal yang lazim, umum, dan yang biasa dilakukan. Menurut Peter Cape (2013):
+
+> ___When you ask people randomly throughout the day what they are doing (behaviour), 30% of the time there will be mismatch between what they are doing and what they are thinking about.___
+
+Oleh karena itu, cara terbaik untuk mendapatkan data ini adalah dengan memanfaatkan sumber data lain seperti jejak digital, data transaksi, dan lainnya.
+
+__Data seperti ini sebaiknya tidak ditanyakan langsung__, jika terpaksa ditanyakan langsung, sebaiknya ada metode untuk melakukan validasi atas jawaban tersebut.
+
+## Jenis Data Berdasarkan Sumbernya
+
+Berdasarkan sumbernya, data bisa dibagi menjadi dua yakni:
+
+1. Data primer,
+1. Data sekunder.
+
+```
+insert gambar
+```
+
+### Data Primer
+
+Data primer adalah data yang kita dapatkan dari sumber langsung. Contoh sederhananya adalah:
+
+- Data kuesioner hasil wawancara dari responden.
+- Data absensi karyawan dari mesin absen.
+
+### Data Sekunder
+
+Data sekunder adalah data yang kita dapatkan dari sumber lain yang sudah pernah diolah sebelumnya. Contoh sederhananya adalah:
+
+- Laporan demografi penduduk hasil sensus BPS.
+- Laporan keuangan BUMN tertentu.
+
+### Memilih Data Primer dan Data Sekunder
+
+Satu hal yang sering ditanyakan adalah:
+
+> Kapan kita menggunakan data primer? Kapan kita menggunakan data sekunder?
+
+#### Jawaban {-}
+
+Jika data yang hendak kita cari ada data sekundernya, maka kita akan prioritaskan
+
+```{r,echo=FALSE}
+nomnoml::nomnoml("
+                 [Masalah] -> [Butuh Data]
+                 [Butuh Data] -> [Ada data sekunder?]
+                 [Ada data sekunder?] -> [Ada]
+                 [Ada data sekunder?] -> [Tidak ada]
+                 [Tidak ada] -> [Cari data primer]
+                 [Ada] -> [Cek karakteristik]
+                 [Cek karakteristik] -> [Masih relevan?]
+                 [Masih relevan?] -> [Ya]
+                 [Masih relevan?] -> [Tidak]
+                 [Tidak] -> [Cari data primer]
+                 [Ya] -> [Pakai data sekunder]
+                 ")
+```
+
+## Komponen _Market Research_
+
+Saat kita berbicara tentang _market research_, setidaknya ada beberapa komponen yang biasa diteliti, yakni:
+
+1. Konsumen, 
+1. Market (bisnis), dan
+1. Regulator (pemerintah).
+
+_Market research_ erat kaitannya dengan konsumen. Sebelum saya membahas _market research_ lebih jauh, saya akan membahas terlebih dahulu tentang konsumen.
+
+### Konsumen
+
+
+
+
+## Strategi Perusahaan
+
+
+# PERTEMUAN II {-}
 
 
