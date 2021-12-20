@@ -1,0 +1,8 @@
+Kisi kisi Materi Ujian Akhir Semester:
+1. soal terkait mengubah algoritma menjadi flowchart : Program sederhana terkait seleksi, repitisi (bahan bacaan belajar Chapter 5 dan Chapter 6 Buku Jose M. Garrido)
+2. soal tentang menelaah lebih jauh kemampuan dalam : membuka file berisi data, lalu di plot, lalu diolah diminta menghitung dari rumus yang diberikan (bahan bacaan belajar Chapter 7, 10, 11 dan 16 Buku Jose M. Garrido)
+3. Soal tentang model dinamik (bahan bacaan belajar Chapter 19 Buku Jose M. Garrido) dan beberapa referensi lini dibawah ini
+https://sam-dolan.staff.shef.ac.uk/mas212/notebooks/ODE_Example.html
+https://physics.nyu.edu/pine/pymanual/html/chap9/chap9_scipy.html#solving-odes
+https://pythonnumericalmethods.berkeley.edu/notebooks/chapter00.01-Acknowledgment.html 
+<https://teams.microsoft.com/l/message/19:kvHO3kruUgKPAPZVzSTYos_ecPJDOfuQcQ5cVWG7SXM1@thread.tacv2/1638230590059?tenantId=db6e1183-4c65-405c-82ce-7cd53fa6e9dc&amp;groupId=80d45f74-eff6-4899-8e5a-866f628b2ed2&amp;parentMessageId=1638230590059&amp;teamName=SK5003 Semester 1 2021&amp;channelName=General&amp;createdTime=1638230590059>
