@@ -1,0 +1,50 @@
+---
+title: "JARINGAN DAN PENGOLAHAN DATA PARALEL"
+subtitle: "LAPORAN PRAKTIKUM"
+author: | 
+    | Mohammad Rizka Fadhli 
+    | Ikang
+    | 20921004@mahasiswa.itb.ac.id
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: true
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: breezedark
+bibliography: references.bib
+linestretch: 1.5
+colorlinks: true
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+\newpage
+
+\newpage
+
+lalala [@lieberman]
+
+# _References_
+
