@@ -44,6 +44,15 @@ library(ggplot2)
 
 \newpage
 
+# SOAL I
+
+Integrasi fungsi $f(x)$ dapat didekati dengan persamaan berikut:
+
+$$\int_a^b f(x) dx = \simeq h \sum_{i=0}^{n-1} f(x_i)$$
+
+Dimana $x_i = (a + \frac{h}{2}) + ih$ dan $h = \frac{b-a}{n}$.
+
+
 lalala [@lieberman]
 
 # _References_
