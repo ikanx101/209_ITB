@@ -22,4 +22,249 @@ linestretch: 1.25
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 setwd("~/209_ITB/Semester I/Jaringan dan Pengolahan Data Paralel/Ujian/Laporan")
+library(dplyr)
+library(ggplot2)
 ```
+
+# SOAL 1
+
+## Bagian a
+
+$$\int_a^b \int_c^d f(x,y) dy dx$$
+
+Bisa didekati dengan:
+
+$$h_x h_y \sum_{i=0}^{n_x-1} \sum_{j=0}^{n_y-1} f(a + \frac{h_x}{2} + i h_x,c + \frac{h_y}{2} + j h_y)$$
+
+## Jawab
+
+- $x_i = a + \frac{h_x}{2} + i h_x$
+- $y_j = c + \frac{h_y}{2} + j h_y$
+- $h_x = \frac{b - a}{n_x}$
+- $h_y = \frac{d - c}{n_y}$
+
+\newpage
+## Bagian b
+
+Buat program Python untuk menyelesaikan:
+
+$$\int_2^3 \int_0^2 (2x + y) dx dy$$
+
+Secara numerik menggunakan pendekatan integrasi dengan $n_x = 10^4, n_y = 10^4$.
+
+## Jawab
+
+Programnya terlampir.
+
+## Bagian c
+
+Lengkapilah tabel rekapan _runtime_ dengan berbagai metode _processing_.
+
+## Jawab
+
+```{r,echo=FALSE}
+metode = c("Serial",
+           "P2P",
+           "Broadcast",
+           "Scatter",
+           "Gather",
+           "Reduce",
+           "Broadcast-Gather",
+           "Broadcast-Reduce",
+           "Scatter-Gather",
+           "Scatter-Reduce",
+           "Multiproses")
+run_time = c(66.50181341171265,
+             0.107394956,
+             128.17224788665771,
+             0.11072540283203125,
+             0.16507434844970703,
+             0.10837030410766602,
+             0.014871358871459961,
+             0.03458452224731445,
+             0.01956009864807129,
+             0.016790390014648438,
+             61.30806016921997
+             )
+hasil = c(9.000000000001783,
+          8.99999999999997,
+          9.000000000001783,
+          8.99999999999997,
+          8.99999999999997,
+          8.99999999999997,
+          8.4864,
+          8.4864,
+          8.4864,
+          8.4864,
+          8.99999999999993
+          )
+jml_core = c(1,rep(40,
+                   length(metode)-1)
+             )
+
+rekap = data.frame(metode,jml_core,run_time = round(run_time,7),hasil = round(hasil,7))
+rekap = 
+  rekap %>% 
+  mutate(speed_up = run_time[1] / run_time,
+         speed_up = round(speed_up,3))
+
+rekap %>% 
+  knitr::kable(align = "c",caption = "Rekapan Runtime")
+```
+
+\newpage
+
+## Bagian c
+
+Buatlah grafik yang memperlihatkan pengaruh skema perhitungan terhadap waktu perhitungan!
+
+## Jawab
+
+```{r,echo=FALSE,fig.retina=10,fig.align='center',fig.cap="Rekap Runtime"}
+rekap %>% 
+  filter(speed_up < 5000) %>% 
+  ggplot(aes(x = reorder(metode,run_time),
+             y = run_time)) +
+  geom_col(color = "black",
+           fill = "steelblue") +
+  geom_label(aes(label = round(run_time,3)),
+             size = 2.5) +
+  coord_flip() +
+  ylim(0,133) +
+  labs(y = "Metode Processing",
+       x = "Runtime dalam detik",
+       title = "Perbandingan Runtime dari Berbagai Metode Paralelisasi dan Serial",
+       caption = "Dibuat oleh 20921004") +
+  theme_minimal()
+```
+
+## Bagian e
+
+Kesimpulan apa yang diperoleh dari grafik yang dihasilkan pada nomor d?
+
+## Jawab
+
+Paralelisasi relatif memberikan hasil _run time_ yang lebih cepat dibandingkan perhitungan secara serial.
+
+\newpage
+
+# SOAL 2
+## Bagian a
+
+$$\int_a^b \int_c^d \int_e^f  g(x,y,z) dz dy dx$$
+
+Bisa didekati dengan:
+
+$$h_x h_y h_z \sum_{i=0}^{n_x-1} \sum_{j=0}^{n_y-1} \sum_{k=0}^{n_z-1} g(a + \frac{h_x}{2} + i h_x,c + \frac{h_y}{2} + j h_y, e + \frac{h_z}{2} + k h_z)$$
+
+## Jawab
+
+- $x_i = a + \frac{h_x}{2} + i h_x$
+- $y_j = c + \frac{h_y}{2} + j h_y$
+- $z_k = e + \frac{h_z}{2} + k h_z$
+- $h_x = \frac{b - a}{n_x}$
+- $h_y = \frac{d - c}{n_y}$
+- $h_z = \frac{f - e}{n_z}$
+
+\newpage
+## Bagian b
+
+Buat program Python untuk menyelesaikan:
+
+$$\int_1^2 \int_2^3 \int_0^2 (2x + y - 4z) dx dy dz$$
+
+Secara numerik menggunakan pendekatan integrasi dengan $n_x = 500, n_y = 500, n_z = 500$.
+
+## Jawab
+
+Programnya terlampir.
+
+## Bagian c
+
+Lengkapilah tabel rekapan _runtime_ dengan berbagai metode _processing_.
+
+## Jawab
+
+```{r,echo=FALSE}
+metode = c("Serial",
+           "P2P",
+           "Broadcast",
+           "Scatter",
+           "Gather",
+           "Reduce",
+           "Broadcast-Gather",
+           "Broadcast-Reduce",
+           "Scatter-Gather",
+           "Scatter-Reduce",
+           "Multiproses")
+run_time = c(115.48316383361816,
+             7.479929895,
+             245.63393354415894,
+             30.28079,
+             28.19255,
+             27.38436,
+             7.326474,
+             0.1150408,
+             0.1124816,
+             0.1151413,
+             60.61066937446594
+             )
+hasil = c(-2.9999999999954543,
+          -3,
+          -2.9999999999954543,
+          -2.9999999999954543,
+          -2.9999999999954543,
+          -2.9999999999954543,
+          -3.000000000000228,
+          -3.007744000000066,
+          -3.0077440000000655,
+          -3.007744000000066,
+          -2.9999999999996283
+          )
+jml_core = c(1,rep(40,
+                   length(metode)-1)
+             )
+
+rekap = data.frame(metode,jml_core,run_time = round(run_time,7),hasil = round(hasil,7))
+rekap = 
+  rekap %>% 
+  mutate(speed_up = run_time[1] / run_time,
+         speed_up = round(speed_up,3))
+
+rekap %>% 
+  knitr::kable(align = "c",caption = "Rekapan Runtime")
+```
+
+\newpage
+
+## Bagian c
+
+Buatlah grafik yang memperlihatkan pengaruh skema perhitungan terhadap waktu perhitungan!
+
+## Jawab
+
+```{r,echo=FALSE,fig.retina=10,fig.align='center',fig.cap="Rekap Runtime"}
+rekap %>% 
+  filter(speed_up < 5000) %>% 
+  ggplot(aes(x = reorder(metode,run_time),
+             y = run_time)) +
+  geom_col(color = "black",
+           fill = "steelblue") +
+  geom_label(aes(label = round(run_time,3)),
+             size = 2.5) +
+  coord_flip() +
+  ylim(0,255) +
+  labs(y = "Metode Processing",
+       x = "Runtime dalam detik",
+       title = "Perbandingan Runtime dari Berbagai Metode Paralelisasi dan Serial",
+       caption = "Dibuat oleh 20921004") +
+  theme_minimal()
+```
+
+## Bagian e
+
+Kesimpulan apa yang diperoleh dari grafik yang dihasilkan pada nomor d?
+
+## Jawab
+
+Paralelisasi relatif memberikan hasil _run time_ yang lebih cepat dibandingkan perhitungan secara serial.
