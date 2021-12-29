@@ -1,0 +1,7 @@
+MONTE
+
+Reduce
+
+Nilai integral: 25.130795204732536
+
+Runtime: 9.344260215759277

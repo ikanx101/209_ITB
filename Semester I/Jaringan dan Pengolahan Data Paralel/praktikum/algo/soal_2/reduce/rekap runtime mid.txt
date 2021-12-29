@@ -1,0 +1,7 @@
+MIDPOINT
+
+Reduce
+
+Nilai integral: 3.1415926535901164
+
+Runtime: 10.357647895812988
