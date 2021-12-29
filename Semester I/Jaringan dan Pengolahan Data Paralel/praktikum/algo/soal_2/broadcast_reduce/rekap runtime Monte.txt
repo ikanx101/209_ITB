@@ -1,0 +1,7 @@
+MONTE
+
+Broadcast-Reduce
+
+Nilai integral: 25.13158041365358
+
+Runtime: 9.936588048934937
