@@ -1,0 +1,7 @@
+MIDPOINT
+
+Broadcast-Gather
+
+Nilai integral: 3.141592653590117
+
+Runtime: 10.181049823760986

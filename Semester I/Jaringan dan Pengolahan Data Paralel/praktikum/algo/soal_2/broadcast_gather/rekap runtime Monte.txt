@@ -1,0 +1,7 @@
+MONTE
+
+Broadcast-Gather
+
+Nilai integral: 25.132540181445272
+
+Runtime: 9.693099021911621
