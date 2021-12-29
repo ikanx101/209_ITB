@@ -1,0 +1,7 @@
+MIDPOINT
+
+p2p
+
+Nilai integral: 0.49869484774846845
+
+Runtime: 10.335948376
