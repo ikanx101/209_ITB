@@ -1,0 +1,7 @@
+MONTE
+
+Broadcast
+
+Nilai integral: 3.141587559754934
+
+Runtime: 72.39736461639404
