@@ -1,2 +1,0 @@
-Nilai integral f(x) dx adalah:  0.33333333333333226
-Runtime 3287.2752113342285 s
