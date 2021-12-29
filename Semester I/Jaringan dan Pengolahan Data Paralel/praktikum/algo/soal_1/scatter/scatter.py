@@ -32,7 +32,7 @@ def int_numeric (a,b,n):
 # initial condition
 a = 0
 b = 1
-n = 10**10
+n = 10**8
 h = (b-a) / n
 local_n = n / size
 
