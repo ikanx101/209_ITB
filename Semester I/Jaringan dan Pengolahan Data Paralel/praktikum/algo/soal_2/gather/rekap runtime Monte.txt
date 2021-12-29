@@ -1,0 +1,7 @@
+MONTE
+
+Gather
+
+Nilai integral: 25.131631135260793
+
+Runtime: 9.260202646255493

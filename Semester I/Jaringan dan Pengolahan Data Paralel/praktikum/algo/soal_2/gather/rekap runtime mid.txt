@@ -1,0 +1,7 @@
+MIDPOINT
+
+Gather
+
+Nilai integral: 3.141592653590117
+
+Runtime: 10.22980284690857
