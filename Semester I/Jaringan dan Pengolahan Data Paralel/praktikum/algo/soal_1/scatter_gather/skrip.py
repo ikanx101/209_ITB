@@ -69,7 +69,7 @@ if rank == 0:
   waktu = end - mulai
   print(waktu)
   f = open("rekap runtime.txt","w+")
-  f.write("MIDPOINT\n\nBroadcast-Reduce\n\nNilai integral: ")
+  f.write("MIDPOINT\n\nScatter-Gather\n\nNilai integral: ")
   f.write(str(nilai))
   f.write("\n\nRuntime: ")
   f.write(str(waktu))
