@@ -1,0 +1,7 @@
+MIDPOINT
+
+Broadcast-Reduce
+
+Nilai integral: 0.3333333333333455
+
+Runtime: 7.089271306991577
