@@ -1,0 +1,7 @@
+MIDPOINT
+Nilai integral: 3.1415926535908407
+Runtime selama: 37.09915375709534
+
+MONTE
+Nilai integral: 3.141628338857705
+Runtime selama: 34.31454539299011
