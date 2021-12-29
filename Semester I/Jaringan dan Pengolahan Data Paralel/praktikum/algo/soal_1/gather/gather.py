@@ -5,7 +5,7 @@ import time
 mulai = time.time()
 
 comm = MPI.COMM_WORLD
-rank = comm.Ger_rank()
+rank = comm.Get_rank()
 size = 8
 
 # bikin fungsi f(x)
@@ -34,25 +34,16 @@ a = 0
 b = 1
 n = 10**3
 h = (b-a) / n
-local_n = n / size
 
-i = 1
-local_a = [0 for i in range(size)]
-local_b = [0 for i in range(size)]
-
-if rank == 0:
-  for i in range(size):
-    local_a[i] = a + rank * local_n * h
-    local_a[i] = a + rank * local_n * h
-  data = [(local_a[i], local_b[i]) for i in range(size)]
-else:
-  data = None
-
-data = comm.scatter(data,root = 0)
+local_n = n/size
+local_a = a + rank * local_n * h
+local_b = local_a + local_n * h
 
 # hitung soal
-s = int_numeric(a,b,n)
+s = int_numeric(local_a,local_b,local_n)
 nilai = s
+
+nilai = comm.gather(nilai,root = 0)
 
 if rank == 0:
   print("Nilai integral f(x) dx adalah: ",nilai)
@@ -60,9 +51,8 @@ if rank == 0:
   end = time.time()
   waktu = end - mulai
   print(waktu)
-  # bikin rekap .txt
   f = open("rekap runtime.txt","w+")
-  f.write("MIDPOINT\n\nScatter\n\nNilai integral: ")
+  f.write("MIDPOINT\n\nGather\n\nNilai integral: ")
   f.write(str(nilai))
   f.write("\n\nRuntime: ")
   f.write(str(waktu))
