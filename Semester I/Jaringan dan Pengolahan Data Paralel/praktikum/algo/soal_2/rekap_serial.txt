@@ -1,7 +1,7 @@
 MIDPOINT
 Nilai integral: 1.999999999999748
-Runtime selama: 3616.2687664031982
+Runtime selama: 3598.46084690094
 
 MONTE
-Nilai integral: 2.0000084097550963
-Runtime selama: 2972.21786236763
+Nilai integral: 1.9999919562097523
+Runtime selama: 2990.926943540573
