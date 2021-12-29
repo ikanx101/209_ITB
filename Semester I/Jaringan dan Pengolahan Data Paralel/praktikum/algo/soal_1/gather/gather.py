@@ -32,7 +32,7 @@ def int_numeric (a,b,n):
 # initial condition
 a = 0
 b = 1
-n = 10**3
+n = 10**8
 h = (b-a) / n
 
 local_n = n/size
@@ -46,6 +46,7 @@ nilai = s
 nilai = comm.gather(nilai,root = 0)
 
 if rank == 0:
+  nilai = sum(nilai)
   print("Nilai integral f(x) dx adalah: ",nilai)
   # hitung waktu selesai
   end = time.time()
