@@ -1,7 +1,7 @@
 MIDPOINT
 
-Serial
+Broadcast
 
 Nilai integral: 0.33333333333331167
 
-Runtime: 55.187538385391235
+Runtime: 56.21210050582886

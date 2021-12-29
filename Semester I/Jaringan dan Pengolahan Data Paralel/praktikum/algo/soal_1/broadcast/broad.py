@@ -52,7 +52,7 @@ if rank == 0:
   print(waktu)
   # membuat file rekap .txt
   f = open("rekap runtime.txt","w+")
-  f.write("MIDPOINT\n\nSerial\n\nNilai integral: ")
+  f.write("MIDPOINT\n\nBroadcast\n\nNilai integral: ")
   f.write(str(total))
   f.write("\n\nRuntime: ")
   f.write(str(waktu))
