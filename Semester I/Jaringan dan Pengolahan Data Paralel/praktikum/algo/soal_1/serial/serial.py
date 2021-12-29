@@ -38,5 +38,12 @@ end = time.time()
 waktu = end - mulai
 print(waktu)
 
+f = open("rekap runtime.txt","w+")
+f.write("MIDPOINT\n\nSerial\n\nNilai integral: ")
+f.write(str(nilai))
+f.write("\n\nRuntime: ")
+f.write(str(waktu))
+f.close()
+
 # selesai
 print("DONE")
