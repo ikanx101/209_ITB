@@ -1,0 +1,7 @@
+MONTE
+
+Scatter-Reduce
+
+Nilai integral: 25.132466741650664
+
+Runtime: 9.365896940231323
