@@ -7,17 +7,16 @@ mulai = time.time()
 # ukuran matriks
 n = 50
 
-# membuat matriks 10x10
-a = np.random.randint(n, size = (n,n))
-b = np.random.randint(n, size = (n,n))
-
 # penjumlahan dan perkalian
-def operasi_matrix (a,b):
+def operasi_matrix (n):
+  # membuat matriks 10x10
+  a = np.random.randint(n, size = (n,n))
+  b = np.random.randint(n, size = (n,n))
   c = np.dot(a,b)
   d = np.add(a,b)
   return(c,d)
 
-hitung = operasi_matrix(a,b)
+hitung = operasi_matrix(n)
 
 # hitung waktu selesai
 end = time.time()
