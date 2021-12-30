@@ -1,0 +1,7 @@
+MIDPOINT
+
+Multiprocessing
+
+Nilai integral: 3.1415926535901084
+
+Runtime: 10.83942699432373
