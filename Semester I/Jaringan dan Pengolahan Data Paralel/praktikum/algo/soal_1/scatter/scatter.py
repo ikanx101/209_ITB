@@ -43,7 +43,7 @@ local_b = [0 for i in range(size)]
 if rank == 0:
   for i in range(size):
     local_a[i] = a + rank * local_n * h
-    local_a[i] = a + rank * local_n * h
+    local_b[i] = local_a[i] + local_n * h
   data = [(local_a[i], local_b[i]) for i in range(size)]
 else:
   data = None
