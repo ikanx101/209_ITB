@@ -50,6 +50,16 @@ library(ggplot2)
 
 penjelasan tentang MPI, server google,
 
+
+# PEMBAHASAN SOAL PRAKTIKUM
+## Soal I
+
+## Soal II
+
+Perhitungan $\pi$ menggunakan rumus: $4 \times sqrt{1 - x^2}$
+
+## Soal III
+
 lalala [@lieberman]
 
 # _References_
