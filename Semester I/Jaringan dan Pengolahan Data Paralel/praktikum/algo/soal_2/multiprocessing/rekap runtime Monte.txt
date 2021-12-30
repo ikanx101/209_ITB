@@ -1,0 +1,7 @@
+MONTE
+
+Multiprocessing
+
+Nilai integral: 3.141520140116895
+
+Runtime: 9.118600368499756
