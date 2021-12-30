@@ -20,8 +20,21 @@ def operasi_matrix (n):
 
 # initial condition
 n = 64
+local_n = int(n / size)
+a = 0
+h = 0
+i = 1
+local_a = [0 for i in range(size)]
+local_b = [0 for i in range(size)]
 
-n = comm.scatter(n,root = 0)
+if rank == 0:
+  for i in range(size):
+    local_a[i] = a + rank * local_n * h
+  data = [(local_a[i]) for i in range(size)]
+else:
+  data = None
+
+data = comm.scatter(data,root = 0)
 
 # hitung soal
 s = operasi_matrix(n)
