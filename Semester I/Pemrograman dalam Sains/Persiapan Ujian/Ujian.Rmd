@@ -25,17 +25,15 @@ setwd("~/209_ITB/Semester I/Pemrograman dalam Sains/Persiapan Ujian")
 rm(list=ls())
 library(dplyr)
 library(nomnoml)
+library(ggplot2)
 ```
 
 ```{r,echo=FALSE,fig.align='center',fig.cap="Flowchart"}
-nomnoml("#direction: down
-        [<start> start] -> [<input> input]
-        [<input> input] -> [<choice> pilih] 
-        [<choice> pilih] -> T [process 1]
-        [process 1] -> [<input> print 1]
-        [<input> print 1] -> [<choice> pilih]
-        [<choice> pilih] -> F [<input> print 2]
-        [<input> print 2] -> [<end> end]
-        ")
+x = seq(0,1,0.025)
+y = (4)/(1+x)^2
+
+data.frame(x,y) %>% 
+  ggplot(aes(x,y)) +
+  geom_line()
 ```
 

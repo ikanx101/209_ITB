@@ -44,14 +44,50 @@ library(ggplot2)
 
 \newpage
 
-# PENDAHULUAN
-# DASAR TEORI
-# METODE
+# _INTRODUCTION_
+
+## Definisi
+
+_Parallel processing_ adalah metode komputasi untuk menggunakan dua atau lebih _processors_ untuk menjalankan beberapa tugas secara terpisah atau secara keseluruhan. Setiap komputer yang memiliki lebih dari satu _CPUs_ atau memiliki _processor multi cores_ bisa melakukan _parallel processing_ ^[https://searchdatacenter.techtarget.com/definition/parallel-processing].
+
+## Perbedaan _Serial Processing_ dan _Parallel Processing_
+
+Perbedaan mendasar dari _serial processing_ dan _parallel processing_ adalah dari segi bagaimana komputer melakukan proses komputasi. _Serial processing_ berarti komputer melakukan tugasnya secara sekuensial (berurutan) menggunakan satu _processor_.
+
+```{r out.width="30%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi Perbedaan Serial dan Parallel Processing",fig.retina=10}
+nomnoml::nomnoml("#direction:down
+                 [Serial]
+                 [Parallel]
+                 
+                 [Serial|
+                   [A] -> [B]
+                   [B] -> [C]
+                   [C] -> [D]
+                   ]
+                   
+                 [Parallel|
+                   [A] -> [B]
+                   [A] -> [C]
+                   [B] -> [D]
+                   [C] -> [D]
+                   ]
+                 ")
+```
+
+## Cara Kerja _Parallel Processing_
+
+
+
+## LINUX
+
+
+
+# _METHOD_
 
 penjelasan tentang MPI, server google, midpoint, lalu metode monte carlo yang digunakan.
 
+# _RESULT AND DISCUSSION_
 
-# PEMBAHASAN SOAL PRAKTIKUM
 ## Soal I
 
 ## Soal II
@@ -60,7 +96,10 @@ Perhitungan $\pi$ menggunakan rumus: $4 \times sqrt{1 - x^2}$
 
 ## Soal III
 
+# _CONCLUSION_
+
+
+
 lalala [@lieberman]
 
-# _References_
-
+# _REFERENCES_
