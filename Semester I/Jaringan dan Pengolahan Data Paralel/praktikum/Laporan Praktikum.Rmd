@@ -54,9 +54,13 @@ _Parallel processing_ adalah metode komputasi untuk menggunakan dua atau lebih _
 
 Perbedaan mendasar dari _serial processing_ dan _parallel processing_ adalah dari segi bagaimana komputer melakukan proses komputasi. _Serial processing_ berarti komputer melakukan tugasnya secara sekuensial (berurutan) menggunakan satu _processor_. Akibatnya adalah saat melakukan suatu proses yang kompleks, _runtime_ yang diperlukan lebih lama karena _processor_ harus memproses data satu-persatu.
 
-Berbeda dengan
+Berbeda halnya dengan _parallel processing_. Tugas yang dilakuan komputer didistribusikan kepada sejumlah _processors_ untuk diolah secara bersamaan. Konsekuensinya adalah _runtime_ komputasi lebih singkat. Namun perlu diperhatikan dengan seksama bahwa tidak semua tugas bisa kita buat paralelisasinya dan cara kita menulis algoritma atau _coding_ harus disesuaikan.
 
-```{r out.width="30%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi Perbedaan Serial dan Parallel Processing",fig.retina=10}
+> Kenapa tidak semua tugas bisa diparalelisasi?
+
+Tugas yang tidak
+
+```{r,include=FALSE}
 nomnoml::nomnoml("#direction:down
                  [Serial]
                  [Parallel]
@@ -73,7 +77,11 @@ nomnoml::nomnoml("#direction:down
                    [B] -> [D]
                    [C] -> [D]
                    ]
-                 ")
+                 ","gbr1.png")
+```
+
+```{r out.width="30%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi Perbedaan Serial dan Parallel Processing",fig.retina=10}
+knitr::include_graphics("gbr1.png")
 ```
 
 ## Cara Kerja _Parallel Processing_
