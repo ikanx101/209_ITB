@@ -44,14 +44,11 @@ library(ggplot2)
 
 \newpage
 
-# SOAL I
+# PENDAHULUAN
+# DASAR TEORI
+# METODE
 
-Integrasi fungsi $f(x)$ dapat didekati dengan persamaan berikut:
-
-$$\int_a^b f(x) dx = \simeq h \sum_{i=0}^{n-1} f(x_i)$$
-
-Dimana $x_i = (a + \frac{h}{2}) + ih$ dan $h = \frac{b-a}{n}$.
-
+penjelasan tentang MPI, server google,
 
 lalala [@lieberman]
 
