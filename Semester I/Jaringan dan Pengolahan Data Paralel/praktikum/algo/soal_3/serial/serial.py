@@ -5,7 +5,7 @@ import time
 mulai = time.time()
 
 # ukuran matriks
-n = 50
+n = 64
 
 # penjumlahan dan perkalian
 def operasi_matrix (n):
