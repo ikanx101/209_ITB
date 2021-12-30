@@ -2,6 +2,6 @@ MONTE
 
 Scatter
 
-Nilai integral: 3.1415062820982946
+Nilai integral: 3.1415577413199105
 
-Runtime: 71.38628387451172
+Runtime: 73.13209247589111
