@@ -1,0 +1,7 @@
+MONTE
+
+Scatter-Gather
+
+Nilai integral: 25.132484095298132
+
+Runtime: 9.324422836303711

@@ -1,0 +1,7 @@
+MIDPOINT
+
+Scatter-Gather
+
+Nilai integral: 3.141592653590117
+
+Runtime: 10.334447860717773
