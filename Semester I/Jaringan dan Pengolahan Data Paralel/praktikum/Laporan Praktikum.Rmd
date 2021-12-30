@@ -52,7 +52,9 @@ _Parallel processing_ adalah metode komputasi untuk menggunakan dua atau lebih _
 
 ## Perbedaan _Serial Processing_ dan _Parallel Processing_
 
-Perbedaan mendasar dari _serial processing_ dan _parallel processing_ adalah dari segi bagaimana komputer melakukan proses komputasi. _Serial processing_ berarti komputer melakukan tugasnya secara sekuensial (berurutan) menggunakan satu _processor_.
+Perbedaan mendasar dari _serial processing_ dan _parallel processing_ adalah dari segi bagaimana komputer melakukan proses komputasi. _Serial processing_ berarti komputer melakukan tugasnya secara sekuensial (berurutan) menggunakan satu _processor_. Akibatnya adalah saat melakukan suatu proses yang kompleks, _runtime_ yang diperlukan lebih lama karena _processor_ harus memproses data satu-persatu.
+
+Berbeda dengan
 
 ```{r out.width="30%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi Perbedaan Serial dan Parallel Processing",fig.retina=10}
 nomnoml::nomnoml("#direction:down
