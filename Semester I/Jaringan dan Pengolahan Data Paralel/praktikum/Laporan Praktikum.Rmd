@@ -48,7 +48,7 @@ library(ggplot2)
 # DASAR TEORI
 # METODE
 
-penjelasan tentang MPI, server google,
+penjelasan tentang MPI, server google, midpoint, lalu metode monte carlo yang digunakan.
 
 
 # PEMBAHASAN SOAL PRAKTIKUM
