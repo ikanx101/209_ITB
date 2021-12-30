@@ -19,7 +19,7 @@ def operasi_matrix (n):
   return(c,d)
   
 if rank == 0 :
-  n = 50
+  n = 64
 else:
   n = 0
 
