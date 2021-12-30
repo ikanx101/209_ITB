@@ -7,7 +7,7 @@ mulai = time.time()
 # initial condition
 a = 0
 b = 1
-n = 10**3
+n = 10**8
 h = (b-a) / n
 nthreads = 8
 mt_size = float(n/nthreads)
