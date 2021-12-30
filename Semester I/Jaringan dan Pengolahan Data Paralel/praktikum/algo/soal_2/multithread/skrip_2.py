@@ -1,6 +1,7 @@
 import time
 import threading
 import math
+import random
 
 # hitung waktu mulai
 mulai = time.time()
@@ -18,19 +19,18 @@ threads = []
 def fx (x) :
    return(math.sqrt(1 - x**2) * 4)
 
-# bikin fungsi untuk integral numerik
-def int_numeric (a,b,mt_size):
-   sum = float(0)
-   # mulai iterasi untuk menghitung penjumlahan
+# bikin fungsi untuk monte carlo
+def monte_pi (n):
+   n = int(n)
+   monte = float(0)
    for i in range(n):
-     xi = a + h/2 + i*h
-     sum = sum + fx(xi)
-   # kalikan dengan h untuk menjadi full integral
-   sum = h * sum
-   return(sum) 
+     xi = random.random()
+     yi = fx(xi)
+     monte = monte + yi
+   return(monte/n)
 
 for i in range (nthreads):
-  t = threading.Thread(target = int_numeric,args = (mt_size,n,h))
+  t = threading.Thread(target = monte_pi,args = (mt_size,n))
   threads.append(t)
   t.start()
 
@@ -38,7 +38,7 @@ for t in threads:
   t.join()
   
 # hitung soal
-nilai = int_numeric(a,b,n)
+nilai = monte_pi(n)
 print("Nilai integral f(x) dx adalah: ",nilai)
 
 # hitung waktu selesai
@@ -46,8 +46,8 @@ end = time.time()
 waktu = end - mulai
 print(waktu)
 
-f = open("rekap runtime mid.txt","w+")
-f.write("MIDPOINT\n\nThreading\n\nNilai integral: ")
+f = open("rekap runtime Monte.txt","w+")
+f.write("MONTE\n\nThreading\n\nNilai integral: ")
 f.write(str(nilai))
 f.write("\n\nRuntime: ")
 f.write(str(waktu))

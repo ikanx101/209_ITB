@@ -1,0 +1,7 @@
+MIDPOINT
+
+Threading
+
+Nilai integral: 3.1415926535908407
+
+Runtime: 40.60416913032532

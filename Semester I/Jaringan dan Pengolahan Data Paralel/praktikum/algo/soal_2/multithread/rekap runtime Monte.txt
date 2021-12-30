@@ -1,0 +1,7 @@
+MONTE
+
+Threading
+
+Nilai integral: 3.1414638257166785
+
+Runtime: 33.76176381111145
