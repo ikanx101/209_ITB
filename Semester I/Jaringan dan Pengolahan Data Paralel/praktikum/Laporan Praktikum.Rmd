@@ -375,7 +375,7 @@ rekap = data.frame(metode,
 
 ```{r,echo=FALSE,fig.align='center',fig.cap="Rekap Runtime Soal I",fig.retina=10}
 rekap %>%
-  ggplot(aes(x = reorder(-metode,runtime),
+  ggplot(aes(x = -reorder(metode,runtime),
 	     y = runtime)) +
   geom_col(fill = "steelblue",
 	   width = .7) +
@@ -386,7 +386,7 @@ rekap %>%
 
 ## Soal II
 
-Hitung nilai $\pi$ dengan menyelesaikan: $\int_0^1 4 \sqtr{1 - x^2}$ dengan $n = 10^8$.
+Hitung nilai $\pi$ dengan menyelesaikan: $\int_0^1 4 \sqrt{1 - x^2}$ dengan $n = 10^8$.
 
 ## Soal III
 
