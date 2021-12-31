@@ -177,6 +177,8 @@ Pada praktikum kali ini, saya tidak bisa menggunakan _server_ __HPC__ yang dised
 
 Saya menggunakan _server virtual machine_ milik _Google Cloud_^[https://ikanx101.com/blog/vm-cloud/]. _Server_ ini memiliki _processor_ __Intel Xeon__ __8__ ___cores___. _Hostname_ dari _server_ ini saya beri nama `praktikum`.
 
+_Server_ ini disewa menggunakan _free credit_ yang kita dapatkan saat mengaktifkan layanan _Google Cloud_ menggunakan akun _Google_.
+
 \newpage
 
 Berikut adalah spesifikasinya:
@@ -211,7 +213,7 @@ knitr::include_graphics("htop.jpg")
 
 ## MPI
 
-Secara _default_ `Python` sudah ter-_install_ di _server_ namun tidak untuk `Open MPI`. Oleh karena itu, salah satu langkah yang perlu dilakukan adalah meng-_install_-nya terlebih dahulu. 
+Secara _default_ `Python` sudah ter-_install_ di _server_ namun tidak untuk `Open MPI`. Oleh karena itu, salah satu langkah yang perlu dilakukan adalah meng-_install_-nya terlebih dahulu^[https://rantahar.github.io/introduction-to-mpi/setup.html]. 
 
 Pada `Ubuntu`, proses instalasinya bisa kita lakukan dengan mengetikkan perintah berikut ini di _command line_:
 
@@ -225,6 +227,7 @@ Setelah proses instalasi selesai, kita bisa mengecek versi `Open MPI` yang berja
 knitr::include_graphics("mpi.jpg")
 ```
 
+Oleh karena saya menjalankan program `Python` praktikum di _server_ sendiri (tanpa ada _user_ lain), maka saya tidak melakukan instalasi `SLURM`.
 
 \newpage
 
@@ -248,7 +251,17 @@ Kemudian semua metode _parallel processing_ ini akan dibandingkan _runtime_-nya 
 
 ## Metode Integral Numerik
 
+Ada beberapa metode numerik yang bisa digunakan untuk menghitung suatu integral dari fungsi kontinu. Pada praktikum ini, saya akan menggunakan metode titik tengah dan simulasi Monte Carlo untuk mengerjakan dua soal integral numerik.
+
 ### Metode Titik Tengah (_Midpoint_)
+
+Metode titik tengah merupakan salah satu cara perhitungan integral numerik dari fungsi kontinu melalui dikritisasi fungsi [@libre]. Prinsip yang digunakan adalah penjumlahan deret __Riemann__.
+
+#### Definisi
+
+Misalkan $f(x)$ kontinu di selang $[a,b]$. Jika diambil suatu $n$ bilangan bulat positif, kita bisa membagi selang tersebut menjadi partisi-partisi kecil berikut: $\Delta x = \frac{b-a}{n}$. 
+
+Tuliskan $m_i = x_i + \frac{\Delta}{2}$ sebagai titik tengah di partisi ke- $i$, maka: $\int_a^b f(x) dx$ bisa didekati dengan $n \sum_{i=1}^n f(x_i^*) \Delta x_i$.
 
 ### Simulasi Monte Carlo
 
