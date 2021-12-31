@@ -311,9 +311,13 @@ Pada tugas praktikum ini, kita akan membandingkan _runtime_ antara berbagai meto
 
 Hitung integral $\int_0^1 x^2 dx$ dengan $n = 10^8$.
 
-### Jawab
+### Jawab {-}
 
-Pada soal I ini saya menggunakan $n = 10^8$. Berikut adalah program _serial processing_ yang dibuat:
+Secara analitik, kita bisa hitung bahwa:
+
+$$\int_0^1 x^2 dx = \frac{x^3}{3} |_0^1 = \frac{1}{3} \simeq 0.333333..$$
+
+Berikut adalah program _serial processing_ yang dibuat:
 
 ```
 import time
@@ -355,7 +359,9 @@ print("DONE")
 
 Hasil _runtime_ program di atas adalah `27.43908143043518` detik.
 
-Berikut adalah rekap dan perbandingannya:
+Berikut adalah grafik rekap _runtime_ dari semua _parallel processing_ dan perbandingannya:
+
+\newpage
 
 ```{r,include=FALSE}
 rm(list=ls())
@@ -396,6 +402,33 @@ rekap %>%
 ## Soal II
 
 Hitung nilai $\pi$ dengan menyelesaikan: $\int_0^1 4 \sqrt{1 - x^2}$ dengan $n = 10^8$.
+
+### Jawab {-}
+
+Perhatikan grafik $f(x) = \sqrt{1 - x^2}, x \in [0,1]$ berikut ini:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Grafik 1/4 Lingkaran dengan r=1",fig.retina=10}
+rm(list=ls())
+
+x = seq(0,1,.05)
+y = sqrt(1 - x^2)
+
+data = data.frame(x,y)
+
+data %>%
+  ggplot(aes(x,y)) +
+  geom_point(color = "steelblue",size = .75) +
+  geom_vline(xintercept = 0) +
+  geom_hline(yintercept = 0) +
+  ylim(-1,2) +
+  xlim(-1,2) +
+  labs(title = "1/4 Lingkaran dengan r = 1",
+       subtitle = "Ilustrasi Soal II",
+       caption = "Dibuat oleh 20921004") +
+  theme_minimal() +
+  theme(axis.text = element_blank(),
+	axis.title = element_blank())
+```
 
 ## Soal III
 
