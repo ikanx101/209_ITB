@@ -122,41 +122,46 @@ nomnoml::nomnoml("
 
 ```
 
-```{r out.width="30%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi SISD",fig.retina=10}
+```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi SISD",fig.retina=10}
 knitr::include_graphics("sisd.png")
 ```
 
 ### __SIMD__
 
-Komputer ini memiliki lebih dari satu _processor_ tapi hanya mengeksekusi satu isntruksi secara paralel pada data yang berbeda. Contohnya adalah komputer vektor.
+Komputer ini memiliki lebih dari satu _processor_ tapi hanya mengeksekusi satu instruksi secara paralel pada data yang berbeda pada level _lock-step_. Contohnya adalah komputer vektor.
 
 ```{r,include=FALSE}
 nomnoml::nomnoml("
 		[Input/Output] <-> [Control\nUnit]
-		[Control\nUnit] -> [Proc\nUnit 1]
-		[Control\nUnit] -> [Proc\nUnit 2]
-		[Control\nUnit] -> [Proc\nUnit n]
+		[Control\nUnit] -> [Proc Unit 1]
+		[Control\nUnit] -> [Proc Unit 2]
+		[Control\nUnit] -> [Proc Unit n]
 		
-		[Proc\nUnit 1] <-> [Memory\nModul 1]
-		[Proc\nUnit 2] <-> [Memory\nModul 2]
-		[Proc\nUnit n] <-> [Memory\nModul n]
+		[Proc Unit 1] <-> [Memory Modul 1]
+		[Proc Unit 2] <-> [Memory Modul 2]
+		[Proc Unit n] <-> [Memory Modul n]
+
+		[Memory Modul 1] -> [Control\nUnit]
+		[Memory Modul 2] -> [Control\nUnit]
+		[Memory Modul 3] -> [Control\nUnit]
 		",
 		"simd.png")
 ```
 
-```{r out.width="30%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi SIMD",fig.retina=10}
+```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi SIMD",fig.retina=10}
 knitr::include_graphics("simd.png")
 ```
 
 ### __MISD__
 
-
+Komputer jenis ini belum diciptakan karena secara arsitekturnya tidak mudah dipahami. Secara teori komputer ini memiliki satu _processor_ dan mengeksekusi beberapa instruksi secara paralel.
 
 ### __MIMD__
 
+Komputer berarsitektur ini paling banyak digunakan untuk membangun _super computer_. Komputer ini memiliki lebih dari satu _processors_ dan mengeksekusi lebih dari satu instruksi secara paralel.
 
+## _SERVER_ YANG DIGUNAKAN
 
-## LINUX
 
 
 
