@@ -58,7 +58,14 @@ Berbeda halnya dengan _parallel processing_. Tugas yang dilakuan komputer didist
 
 > Kenapa tidak semua tugas bisa diparalelisasi?
 
-Tugas yang tidak
+Beberapa tugas sekuensial yang tidak bisa dihindari tidak bisa diparalelisasi. 
+
+Sebagai contoh:
+
+1. _Looping_ yang prosesnya tidak saling bergantung bisa diparalelisasi. Misalkan ada suatu fungsi untuk menghitung suatu _array_ bisa diparalelisasi dengan cara memecah _array_ tersebut untuk diproses bersamaan di beberapa _processors_.
+1. _Looping_ yang prosesnya saling bergantung tidak bisa diparalelisasi. Misalkan suatu _looping_ ke $i$ nilainya bergantung pada proses _looping_ ke $i-1$.
+
+Berikut adalah ilustrasi perbedaan serial dan _parallel processing_:
 
 ```{r,include=FALSE}
 nomnoml::nomnoml("#direction:down
@@ -80,6 +87,8 @@ nomnoml::nomnoml("#direction:down
                  ","gbr1.png")
 ```
 
+\newpage
+
 ```{r out.width="30%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi Perbedaan Serial dan Parallel Processing",fig.retina=10}
 knitr::include_graphics("gbr1.png")
 ```
@@ -87,12 +96,27 @@ knitr::include_graphics("gbr1.png")
 ## Cara Kerja _Parallel Processing_
 
 
-
 ## LINUX
 
 
 
 # _METHOD_
+
+Pada praktikum ini, kita akan melakukan _parallel processing_ menggunakan `Python` versi `3.8.10` di komputer berbasis `Linux Ubuntu OS`. Ada beberapa metode _parallel processing_ yang hendak dilakukan, yakni:
+
+1. _Broadcast_,
+   1. _Broadcast-gather_,
+   1. _Broadcast-reduce_,
+1. _Scatter_,
+   1. _Scatter-reduce_,
+   1. _Scatter-gather_,
+1. _Gather_,
+1. _Reduce_,
+1. _Multi-processing_,
+1. _Multi-thread_,
+1. _Point-to-point_.
+
+Kemudian semua metode _parallel processing_ ini akan dibandingkan _runtime_-nya dengan _serial processing_.
 
 penjelasan tentang MPI, server google, midpoint, lalu metode monte carlo yang digunakan.
 
