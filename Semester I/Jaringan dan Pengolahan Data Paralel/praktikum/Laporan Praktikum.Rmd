@@ -381,6 +381,14 @@ rekap = data.frame(metode,
 		   runtime = round(as.numeric(runtime),3))
 ```
 
+```{r,echo=FALSE}
+rekap %>% 
+  rename(Metode = metode,
+	 Nilai = nilai,
+	 Runtime = runtime) %>%
+  knitr::kable(align = "c",caption = "Rekap Runtime dan Hasil Integral")
+```
+
 ```{r,echo=FALSE,fig.align='center',fig.cap="Rekap Runtime Soal I",fig.retina=10}
 rekap %>%
   ggplot(aes(x = reorder(metode,runtime),
@@ -410,7 +418,7 @@ Perhatikan grafik $f(x) = \sqrt{1 - x^2}, x \in [0,1]$ berikut ini:
 ```{r,echo=FALSE,fig.align='center',fig.cap="Grafik 1/4 Lingkaran dengan r=1",fig.retina=10}
 rm(list=ls())
 
-x = seq(0,1,.05)
+x = seq(0,1,.005)
 y = sqrt(1 - x^2)
 
 data = data.frame(x,y)
@@ -427,7 +435,103 @@ data %>%
        caption = "Dibuat oleh 20921004") +
   theme_minimal() +
   theme(axis.text = element_blank(),
-	axis.title = element_blank())
+	axis.title = element_blank()) +
+  coord_equal()
+```
+
+Luas area di bawah kurva dikalikan dengan `4` akan menghasilkan hampiran nilai dari $\pi$. Kali ini saya menghitung hampiran tersebut dengan metode _midpoint_ dan simulasi Monte Carlo.
+
+Berikut adalah program serial yang dibuat di `Python`:
+
+```
+import time
+import random
+import math
+# bikin fungsi f(x)
+def fx (x) :
+   return(math.sqrt(1 - x**2) * 4)
+# bikin fungsi untuk integral numerik
+def int_numeric (a,b,n):
+   # set terlebih dahulu agar tidak error pada tipe variabel
+   n = int(n)
+   a = float(a)
+   b = float(b)
+   sum = float(0)
+   # hitung selang integrasi diksritisasi
+   h = (b-a) / n
+   # mulai iterasi untuk menghitung penjumlahan
+   for i in range(n):
+     xi = a + h/2 + i*h
+     sum = sum + fx(xi)
+   # kalikan dengan h untuk menjadi full integral
+   sum = h * sum
+   return(sum) 
+# bikin fungsi untuk monte carlo
+def monte_pi (n):
+   n = int(n)
+   monte = float(0)
+   for i in range(n):
+     xi = random.random()
+     yi = fx(xi)
+     monte = monte + yi
+   return(monte/n)
+
+# initial condition
+a = 0
+b = 1
+n = 10**8
+
+# hitung soal dengan midpoint
+mulai = time.time()
+nilai_1 = int_numeric(a,b,n)
+print("Nilai integral f(x) dx adalah: ",nilai_1)
+end = time.time()
+waktu_1 = end - mulai
+print("Waktu yang dibutuhkan dengan midpoint: ",waktu_1)
+
+# hitung soal dengan montecarlo
+mulai = time.time()
+nilai_2 =  monte_pi(n)
+print("Nilai integral f(x) dx adalah: ",nilai_2)
+end = time.time()
+waktu_2 = end - mulai
+print("Waktu yang dibutuhkan dengan monte: ",waktu_2)
+```
+
+Dari program serial ini, didapatkan _runtime_ sebagai berikut:
+
+1. Menggunakan metode _midpoint_ selama `37.09915375709534` detik dengan hampiran $\pi \simeq 3.1415926535908407$.
+1. Menggunakan simulasi Monte Carlo selama `34.31454539299011` detik dengan hampiran $\pi \simeq 3.141628338857705$.
+
+Berikut adalah grafik rekapan dari semua perhitungan serial dan paralel untuk metode _midpoint_ dan simulasi Monte Carlo:
+
+```{r,include=FALSE}
+rm(list=ls())
+
+metode = c("Serial","Serial",
+	   "Broadcast","Broadcast",
+	   "Broadcast Gather","Broadcast Gather",
+	   "Broadcast Reduce","Broadcast Reduce",
+	   "Gather","Gather",
+	   "Multi Processing","Multi Threading","P2P",
+	   "Reduce","Scatter","Scatter Gather","Scatter Reduce")
+
+algo = rep(c("Midpoint","Monte Carlo"),12)
+
+nilai = c(3.1415926535908407,3.141628338857705,
+	  3.1415926535908407,3.141587559754934,
+	  3.141592653590117,25.132540181445272/8,
+	  3.1415926535901164,25.13158041365358/8,
+	  3.141592653590117,25.131631135260793/8)
+runtime = c(37.09915375709534,34.31454539299011,
+	    80.7673327922821,72.39736461639404,
+	    10.181049823760986,9.693099021911621,
+	    10.260845422744751,9.936588048934937,
+	    10.22980284690857,9.260202646255493)
+
+rekap = data.frame(metode,
+		   nilai = round(as.numeric(nilai),5),
+		   runtime = round(as.numeric(runtime),3))
 ```
 
 ## Soal III
