@@ -95,6 +95,66 @@ knitr::include_graphics("gbr1.png")
 
 ## Cara Kerja _Parallel Processing_
 
+Untuk melakukan _parallel processing_, dibutuhkan _hardware_ dan _software_ yang mendukung hal tersebut. Secara _hardware_ dibutuhkan komputer dengan _multiple cores processors_ atau dibutuhkan beberapa komputer yang digabung menjadi satu kesatuan. Secara _software_ dibutuhkan tidak hanya `Python` tapi juga _middleware_ bernama `open MPI`. Bagian _hardware_ dan _software_ ini akan dibahas pada bagian `METHOD`.
+
+Pada sistem _parallel processing_ terdiri dari beberapa unit _processors_ dan beberapa unit _memory_. Ada dua teknik berbeda yang digunakan untuk mengakses data di unit _memory_, yaitu: _shared memory address_ dan _message passing_.
+
+Berdasarkan cara mengorganisasikan memori ini komputer bisa dibedakan menjadi _shared memory parallel machine_ dan _distributed memory parallel machine_.
+
+Ada empat model komputasi yang dikenal dalam taksonomi Flynn, yaitu:
+
+1. __SISD__ (_Single Instruction, Single Data_)
+1. __SIMD__ (_Single Instruction, Multiple Data_)
+1. __MISD__ (_Multiple Instruction, Single Data_)
+1. __MIMD__ (_Multiple Instruction, Multiple Data_)
+
+### __SISD__
+
+Komputer ini adalah tipikal komputer konvensional yang hanya memiliki satu _processor_ dan satu instruksi yang dieksekusi secara serial. Komputer jenis ini tidak bisa melakukan _parallel processing_.
+
+```{r,include=FALSE}
+nomnoml::nomnoml("
+		[Input/Output] <-> [Control\nUnit]
+		[Control\nUnit] -> [Proc\nUnit]
+		[Proc\nUnit] <-> [Memory\nModul]
+		[Memory\nModul] -> [Control\nUnit]
+		","sisd.png")
+
+```
+
+```{r out.width="30%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi SISD",fig.retina=10}
+knitr::include_graphics("sisd.png")
+```
+
+### __SIMD__
+
+Komputer ini memiliki lebih dari satu _processor_ tapi hanya mengeksekusi satu isntruksi secara paralel pada data yang berbeda. Contohnya adalah komputer vektor.
+
+```{r,include=FALSE}
+nomnoml::nomnoml("
+		[Input/Output] <-> [Control\nUnit]
+		[Control\nUnit] -> [Proc\nUnit 1]
+		[Control\nUnit] -> [Proc\nUnit 2]
+		[Control\nUnit] -> [Proc\nUnit n]
+		
+		[Proc\nUnit 1] <-> [Memory\nModul 1]
+		[Proc\nUnit 2] <-> [Memory\nModul 2]
+		[Proc\nUnit n] <-> [Memory\nModul n]
+		",
+		"simd.png")
+```
+
+```{r out.width="30%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi SIMD",fig.retina=10}
+knitr::include_graphics("simd.png")
+```
+
+### __MISD__
+
+
+
+### __MIMD__
+
+
 
 ## LINUX
 
