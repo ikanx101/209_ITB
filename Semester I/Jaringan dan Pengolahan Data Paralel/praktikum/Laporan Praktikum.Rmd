@@ -377,7 +377,7 @@ rekap = data.frame(metode,
 
 ```{r,echo=FALSE,fig.align='center',fig.cap="Rekap Runtime Soal I",fig.retina=10}
 rekap %>%
-  ggplot(aes(x = -reorder(metode,runtime),
+  ggplot(aes(x = metode,
 	     y = runtime)) +
   geom_col(fill = "steelblue",
 	   width = .7) +
