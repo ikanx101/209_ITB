@@ -359,11 +359,28 @@ Berikut adalah rekap dan perbandingannya:
 rm(list=ls())
 
 metode = c("Serial","Broadcast","Broadcast Gather","Broadcast Reduce",
-	   "Gather","Multi Processing","Multi Threading","P2P")
+	   "Gather","Multi Processing","Multi Threading","P2P",
+	   "Reduce","Scatter","Scatter Gather","Scatter Reduce")
 nilai = c(0.33333333333331167,0.33333333333331167,0.3333333333333456,0.3333333333333455,
-	  0.3333333333333456,0.33333333333333925,0.33333333333331167,NA)
+	  0.3333333333333456,0.33333333333333925,0.33333333333331167,0.333333333333333,
+	  0.3333333333333455,0.33333333333331167,0.3333333333333456,0.3333333333333455)
 runtime = c(27.43908143043518,56.21210050582886,6.989081621170044,7.089271306991577,
-	   7.081090211868286,7.525770664215088,254.07278299331665,NA)
+	    7.081090211868286,7.525770664215088,254.07278299331665,7.182239143,
+	    7.1590189933776855,54.73514008522034,7.058984279632568,6.8766655921936035)
+
+rekap = data.frame(metode,
+		   nilai = round(nilai,5),
+		   runtime = round(runtime,3))
+```
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Rekap Runtime Soal I",fig.retina=10}
+rekap %>%
+  ggplot(aes(x = reorder(-metode,runtime),
+	     y = runtime)) +
+  geom_col(fill = "steelblue",
+	   width = .7) +
+  geom_label(aes(label = round(runtime,3)),size = 1.25) +
+  coord_flip()
 ```
 
 
