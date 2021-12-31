@@ -265,9 +265,23 @@ Tuliskan $m_i = x_i + \frac{\Delta}{2}$ sebagai titik tengah di partisi ke- $i$,
 
 ### Simulasi Monte Carlo
 
-Berbeda dengan metode titik tengah, ide dasar dari simulasi Monte Carlo adalah dengan melakukan _generating_ sejumlah titik secara _random_ pada selang integral dan menghitung nilai fungsinya. Berikut adalah _flowchart_-nya:
+Berbeda dengan metode titik tengah, ide dasar dari simulasi Monte Carlo adalah dengan melakukan _generating_ sejumlah titik secara _random_ pada selang integral dan menghitung nilai fungsinya^[https://ikanx101.com/blog/integral-tentu/]. Berikut adalah _flowchart_-nya:
 
+```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Flowchart Simulasi Monte Carlo untuk Integral Numerik",fig.retina=10}
+knitr::include_graphics("flow_monte.png")
+```
 
+## Menghitung $\pi$
+
+Untuk menghitung nilai $\pi$ pada soal kedua, saya akan menggunakan fungsi berikut:
+
+$$\int_0^1 4 \sqrt{1 - x^2}$$
+
+## Penjumlahan dan Perkalian Matriks
+
+Pada soal ketiga, saya menggunakan matriks berukuran $n \times n$ dengan $n = numCores^2 = 8^2 = 64$. Dengan isi dari matriks $A$ dan $B$ di-_generate_ secara _random_ melalui `numpy`.
+
+\newpage
 
 # _RESULT AND DISCUSSION_
 
@@ -275,14 +289,12 @@ Berbeda dengan metode titik tengah, ide dasar dari simulasi Monte Carlo adalah d
 
 ## Soal II
 
-Perhitungan $\pi$ menggunakan rumus: $4 \times sqrt{1 - x^2}$
-
 ## Soal III
+
+\newpage
 
 # _CONCLUSION_
 
-
-
-lalala [@lieberman]
+\newpage
 
 # _REFERENCES_
