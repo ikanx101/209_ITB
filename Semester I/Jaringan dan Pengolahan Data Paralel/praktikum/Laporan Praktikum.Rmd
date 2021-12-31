@@ -240,11 +240,11 @@ Oleh karena saya menjalankan program `Python` praktikum di _server_ sendiri (tan
 Pada praktikum ini, kita akan melakukan _parallel processing_ menggunakan `Python` versi `3.8.10` di _server_ berbasis `Linux Ubuntu OS`. Ada beberapa metode _parallel processing_ yang hendak dilakukan, yakni:
 
 1. _Broadcast_,
-   1. _Broadcast-gather_,
-   1. _Broadcast-reduce_,
+   - _Broadcast-gather_,
+   - _Broadcast-reduce_,
 1. _Scatter_,
-   1. _Scatter-reduce_,
-   1. _Scatter-gather_,
+   - _Scatter-reduce_,
+   - _Scatter-gather_,
 1. _Gather_,
 1. _Reduce_,
 1. _Multi-processing_,
@@ -252,6 +252,8 @@ Pada praktikum ini, kita akan melakukan _parallel processing_ menggunakan `Pytho
 1. _Point to point_.
 
 Kemudian semua metode _parallel processing_ ini akan dibandingkan _runtime_-nya dengan _serial processing_.
+
+## Penjelasan Singkat
 
 ### _Broadcast_
 
@@ -369,8 +371,8 @@ runtime = c(27.43908143043518,56.21210050582886,6.989081621170044,7.089271306991
 	    7.1590189933776855,54.73514008522034,7.058984279632568,6.8766655921936035)
 
 rekap = data.frame(metode,
-		   nilai = round(nilai,5),
-		   runtime = round(runtime,3))
+		   nilai = round(as.numeric(nilai),5),
+		   runtime = round(as.numeric(runtime),3))
 ```
 
 ```{r,echo=FALSE,fig.align='center',fig.cap="Rekap Runtime Soal I",fig.retina=10}
@@ -380,7 +382,12 @@ rekap %>%
   geom_col(fill = "steelblue",
 	   width = .7) +
   geom_label(aes(label = round(runtime,3)),size = 1.25) +
-  coord_flip()
+  coord_flip() +
+  labs(title = "Rekap Runtime Serial vs Parallel Processing",
+       subtitle = "Penyelesaian Soal I",
+       caption = "Dibuat oleh 20921004",
+       x = "Metode",
+       y = "Runtime")
 ```
 
 
