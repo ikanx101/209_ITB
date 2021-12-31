@@ -235,8 +235,6 @@ sudo apt install python3-mpi4py
 
 Oleh karena saya menjalankan program `Python` praktikum di _server_ sendiri (tanpa ada _user_ lain), maka saya tidak melakukan instalasi `SLURM`.
 
-\newpage
-
 # _METHOD_
 
 Pada praktikum ini, kita akan melakukan _parallel processing_ menggunakan `Python` versi `3.8.10` di _server_ berbasis `Linux Ubuntu OS`. Ada beberapa metode _parallel processing_ yang hendak dilakukan, yakni:
@@ -251,9 +249,25 @@ Pada praktikum ini, kita akan melakukan _parallel processing_ menggunakan `Pytho
 1. _Reduce_,
 1. _Multi-processing_,
 1. _Multi-thread_,
-1. _Point-to-point_.
+1. _Point to point_.
 
 Kemudian semua metode _parallel processing_ ini akan dibandingkan _runtime_-nya dengan _serial processing_.
+
+### _Broadcast_
+
+Merupakan metode komunikasi kolektif di mana satu proses mengirim data yang sama ke proses lainnya.
+
+### _Scatter_
+
+Secara fungsi, _broadcast_ dan _scatter_ hanya memiliki perbedaan pada perintah yang digunakan. Selain itu _scatter_ dapat mengirim potongan data dalam _array_ ke proses yang berbeda. Perlu diperhatikan bahwa jumlah _tasks_ yang dibagikan tidak boleh melebihi julah _processors_.
+
+### _Gather_
+
+Fungsi ini melakukan kebalikan dari _scatter_, yakni dengan mengumpulkan semua data yang diterima.
+
+### _Point to Point_
+
+Operasi _point to point_ (__P2P__) terdiri dari pertukaran pesan antara dua proses. Setiap operasi pengiriman akan disinkronkan secara sempurna dengan operasi penerimaan (_send - receive_).
 
 ## Metode Integral Numerik
 
@@ -287,15 +301,79 @@ $$\int_0^1 4 \sqrt{1 - x^2}$$
 
 Pada soal ketiga, saya menggunakan matriks berukuran $n \times n$ dengan $n = numCores^2 = 8^2 = 64$. Dengan isi dari matriks $A$ dan $B$ di-_generate_ secara _random_ melalui `numpy`.
 
-\newpage
-
 # _RESULT AND DISCUSSION_
+
+Pada tugas praktikum ini, kita akan membandingkan _runtime_ antara berbagai metode _parallel processing_ dengan _serial processing_. Perlu saya ingatkan kembali bahwa _server_ _Google Cloud_ yang saya pakai memiliki __8__ ___cores___.
 
 ## Soal I
 
+Hitung integral $\int_0^1 x^2 dx$ dengan $n = 10^8$.
+
+### Jawab
+
+Pada soal I ini saya menggunakan $n = 10^8$. Berikut adalah program _serial processing_ yang dibuat:
+
+```
+import time
+# hitung waktu mulai
+mulai = time.time()
+# bikin fungsi f(x)
+def fx (x) :
+   return(x**2)
+# bikin fungsi untuk integral numerik
+def int_numeric (a,b,n):
+   # set terlebih dahulu agar tidak error pada tipe variabel
+   n = int(n)
+   a = float(a)
+   b = float(b)
+   sum = float(0)
+   # hitung selang integrasi diksritisasi
+   h = (b-a) / n
+   # mulai iterasi untuk menghitung penjumlahan
+   for i in range(n):
+     xi = a + h/2 + i*h
+     sum = sum + fx(xi)
+   # kalikan dengan h untuk menjadi full integral
+   sum = h * sum
+   return(sum) 
+# initial condition
+a = 0
+b = 1
+n = 10**8
+# hitung soal
+nilai = int_numeric(a,b,n)
+print("Nilai integral f(x) dx adalah: ",nilai)
+# hitung waktu selesai
+end = time.time()
+waktu = end - mulai
+print(waktu)
+# selesai
+print("DONE")
+```
+
+Hasil _runtime_ program di atas adalah `27.43908143043518` detik.
+
+Berikut adalah rekap dan perbandingannya:
+
+```{r,include=FALSE}
+rm(list=ls())
+
+metode = c("Serial","Broadcast","Broadcast Gather","Broadcast Reduce",
+	   "Gather","Multi Processing","Multi Threading","P2P")
+nilai = c(0.33333333333331167,0.33333333333331167,0.3333333333333456,0.3333333333333455,
+	  0.3333333333333456,0.33333333333333925,0.33333333333331167,NA)
+runtime = c(27.43908143043518,56.21210050582886,6.989081621170044,7.089271306991577,
+	   7.081090211868286,7.525770664215088,254.07278299331665,NA)
+```
+
+
 ## Soal II
 
+Hitung nilai $\pi$ dengan menyelesaikan: $\int_0^1 4 \sqtr{1 - x^2}$ dengan $n = 10^8$.
+
 ## Soal III
+
+Buatlah program `Python` untuk menyelesaikan persoalan terkait dengan penjumlahan dan perkalian matriks.
 
 \newpage
 
