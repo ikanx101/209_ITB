@@ -169,17 +169,27 @@ Saya menggunakan _server virtual machine_ milik _Google Cloud_^[https://ikanx101
 Berikut adalah spesifikasinya:
 
 ```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Spesifikasi Server yang Digunakan",fig.retina=10}
-knitr::include_graphics("spek.png")
+knitr::include_graphics("spek.jpg")
 ```
 
 _Server_ ini bisa diakses menggunakan _command line_ menggunakan `ssh` langsung ke _IP Public_ yang diberikan _Google_.
 
-```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="lscpu dari Server",fig.retina=10}
-knitr::include_graphics("lscpu.png")
+```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Tampilan Awal Setelah Login ssh",fig.retina=10}
+knitr::include_graphics("opening.jpg")
 ```
 
+_Server_ ini berjalan di _operating system_ `Ubuntu Linux 20.04 LTS`.
+
+Berikut adalah tampilan hasil `lscpu`:
+
+```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="lscpu dari Server",fig.retina=10}
+knitr::include_graphics("lscpu.jpg")
+```
+
+Berikut adalah tampilan hasil `htop`:
+
 ```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="htop dari Server",fig.retina=10}
-knitr::include_graphics("htop.png")
+knitr::include_graphics("htop.jpg")
 ```
 
 # _METHOD_
@@ -199,6 +209,13 @@ Pada praktikum ini, kita akan melakukan _parallel processing_ menggunakan `Pytho
 1. _Point-to-point_.
 
 Kemudian semua metode _parallel processing_ ini akan dibandingkan _runtime_-nya dengan _serial processing_.
+
+## MPI
+
+```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Versi MPI yang Digunakan",fig.retina=10}
+knitr::include_graphics("mpi.jpg")
+```
+
 
 penjelasan tentang MPI, server google, midpoint, lalu metode monte carlo yang digunakan.
 
