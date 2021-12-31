@@ -1,7 +1,0 @@
-MIDPOINT
-
-Scatter
-
-Nilai integral: 0.33333333333331167
-
-Runtime: 54.73514008522034

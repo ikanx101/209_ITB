@@ -65,7 +65,6 @@ Sebagai contoh:
 1. _Looping_ yang prosesnya tidak saling bergantung bisa diparalelisasi. Misalkan ada suatu fungsi untuk menghitung suatu _array_ bisa diparalelisasi dengan cara memecah _array_ tersebut untuk diproses bersamaan di beberapa _processors_.
 1. _Looping_ yang prosesnya saling bergantung tidak bisa diparalelisasi. Misalkan suatu _looping_ ke $i$ nilainya bergantung pada proses _looping_ ke $i-1$.
 
-\newpage
 
 Berikut adalah ilustrasi perbedaan serial dan _parallel processing_:
 
@@ -183,7 +182,7 @@ _Server_ ini disewa menggunakan _free credit_ yang kita dapatkan saat mengaktifk
 
 Berikut adalah spesifikasinya:
 
-```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Spesifikasi Server yang Digunakan",fig.retina=10}
+```{r out.width="50%",echo=FALSE,fig.align='center',fig.cap="Spesifikasi Server yang Digunakan",fig.retina=10}
 knitr::include_graphics("spek.jpg")
 ```
 
@@ -191,7 +190,7 @@ knitr::include_graphics("spek.jpg")
 
 _Server_ ini bisa diakses menggunakan _command line_ menggunakan `ssh` langsung ke _IP Public_ yang diberikan _Google_.
 
-```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Tampilan Awal Setelah Login ssh",fig.retina=10}
+```{r out.width="65%",echo=FALSE,fig.align='center',fig.cap="Tampilan Awal Setelah Login ssh",fig.retina=10}
 knitr::include_graphics("opening.jpg")
 ```
 
@@ -199,7 +198,7 @@ _Server_ ini berjalan di _operating system_ `Ubuntu Linux 20.04 LTS`.
 
 Berikut adalah tampilan hasil `lscpu`:
 
-```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="lscpu dari Server",fig.retina=10}
+```{r out.width="65%",echo=FALSE,fig.align='center',fig.cap="lscpu dari Server",fig.retina=10}
 knitr::include_graphics("lscpu.jpg")
 ```
 
@@ -207,7 +206,7 @@ knitr::include_graphics("lscpu.jpg")
 
 Berikut adalah tampilan hasil `htop`:
 
-```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="htop dari Server",fig.retina=10}
+```{r out.width="65%",echo=FALSE,fig.align='center',fig.cap="htop dari Server",fig.retina=10}
 knitr::include_graphics("htop.jpg")
 ```
 
@@ -220,6 +219,8 @@ Pada `Ubuntu`, proses instalasinya bisa kita lakukan dengan mengetikkan perintah
 ```
 sudo apt install openmpi-bin openmpi-dev openmpi-common openmpi-doc libopenmpi-dev
 ```
+
+\newpage
 
 Setelah proses instalasi selesai, kita bisa mengecek versi `Open MPI` yang berjalan di _server_ sebagai berikut:
 
@@ -361,8 +362,6 @@ Hasil _runtime_ program di atas adalah `27.43908143043518` detik.
 
 Berikut adalah grafik rekap _runtime_ dari semua _parallel processing_ dan perbandingannya:
 
-\newpage
-
 ```{r,include=FALSE}
 rm(list=ls())
 
@@ -386,8 +385,10 @@ rekap %>%
   rename(Metode = metode,
 	 Nilai = nilai,
 	 Runtime = runtime) %>%
-  knitr::kable(align = "c",caption = "Rekap Runtime dan Hasil Integral")
+  knitr::kable(align = "c",caption = "Rekap Runtime dan Hasil Integral Soal I")
 ```
+
+\newpage
 
 ```{r,echo=FALSE,fig.align='center',fig.cap="Rekap Runtime Soal I",fig.retina=10}
 rekap %>%
@@ -395,7 +396,7 @@ rekap %>%
 	     y = runtime)) +
   geom_col(fill = "steelblue",
 	   width = .7) +
-  geom_label(aes(label = round(runtime,3)),size = 1.25) +
+  geom_label(aes(label = round(runtime,3)),size = 1.5) +
   coord_flip() +
   labs(title = "Rekap Runtime Serial vs Parallel Processing",
        subtitle = "dalam detik\nPenyelesaian Soal I",
@@ -406,6 +407,7 @@ rekap %>%
   theme(axis.text.x = element_blank())
 ```
 
+\newpage
 
 ## Soal II
 
@@ -517,7 +519,9 @@ metode = c("Serial","Serial",
 	   "Multi Threading","Multi Threading",
 	   "P2P","P2P",
 	   "Reduce","Reduce",
-	   "Scatter","Scatter Gather","Scatter Reduce")
+	   "Scatter","Scatter",
+	   "Scatter Gather","Scatter Gather",
+	   "Scatter Reduce","Scatter Reduce")
 
 algo = rep(c("Midpoint","Monte Carlo"),12)
 
@@ -530,7 +534,9 @@ nilai = c(3.1415926535908407,3.141628338857705,
 	  3.1415926535908407,3.1414638257166785,
 	  3.149869484774846845,3.1414060525250656,
 	  3.1415926535901164,25.130795204732536/8,
-	  )
+	  3.1415926535908407,3.1415577413199105,
+	  3.141592653590117,25.132484095298132/8,
+	  3.1415926535901164,25.132466741650664/8)
 runtime = c(37.09915375709534,34.31454539299011,
 	    80.7673327922821,72.39736461639404,
 	    10.181049823760986,9.693099021911621,
@@ -540,21 +546,135 @@ runtime = c(37.09915375709534,34.31454539299011,
 	    40.60416913032532,33.76176381111145,
 	    10.335948376,9.111383716,
 	    10.357647895812988,9.344260215759277,
-	    )
+	    81.06670069694519,73.13209247589111,
+	    10.334447860717773,9.324422836303711,
+	    10.31100606918335,9.365896940231323)
 
-rekap = data.frame(metode,
+rekap = data.frame(metode,algo,
 		   nilai = round(as.numeric(nilai),5),
 		   runtime = round(as.numeric(runtime),3))
 ```
+
+```{r,echo=FALSE}
+rekap %>% 
+  rename(Metode = metode,
+         Algo = algo,
+         Nilai = nilai,
+	       Runtime = runtime) %>%
+  knitr::kable(align = "c",caption = "Rekap Runtime dan Hasil Integral Soal II")
+```
+
+
+\newpage
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Rekap Runtime Soal II",fig.retina=10}
+rekap %>%
+  ggplot(aes(x = reorder(metode,runtime),
+	     y = runtime)) +
+  geom_col(aes(fill = algo),
+	   width = .7) +
+  geom_label(aes(label = round(runtime,3)),size = 1.5) +
+  coord_flip() +
+  labs(title = "Rekap Runtime Serial vs Parallel Processing",
+       subtitle = "dalam detik\nPenyelesaian Soal II",
+       caption = "Dibuat oleh 20921004",
+       x = "Metode",
+       y = "Runtime") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),
+        legend.position = "none") +
+  facet_wrap(~algo) +
+  scale_fill_manual(values = c("steelblue","darkred"))
+```
+
 
 ## Soal III
 
 Buatlah program `Python` untuk menyelesaikan persoalan terkait dengan penjumlahan dan perkalian matriks.
 
+### Jawab {-}
+
+Program `Python` ini akan dibuat untuk menyelesaikan matriks $64 \times 64$. Isi dari matriks di-_generate_ secara _random_.
+
+Berikut adalah programnya:
+
+```
+import numpy as np
+import time
+
+# hitung waktu mulai
+mulai = time.time()
+
+# ukuran matriks
+n = 64
+
+# penjumlahan dan perkalian
+def operasi_matrix (n):
+  # membuat matriks 10x10
+  a = np.random.randint(n, size = (n,n))
+  b = np.random.randint(n, size = (n,n))
+  c = np.dot(a,b)
+  d = np.add(a,b)
+  return(c,d)
+
+hitung = operasi_matrix(n)
+
+# hitung waktu selesai
+end = time.time()
+waktu = end - mulai
+print(waktu)
+```
+
+Untuk ukuran matriks $64 \times 64$ diperlukan _runtime_ selama `0.000576019287109375` detik.
+
+Berikut adalah grafik rekap _runtime_ dari semua _parallel processing_ dan perbandingannya:
+
+```{r,include=FALSE}
+rm(list=ls())
+
+metode = c("Serial","Broadcast","Broadcast Gather","Broadcast Reduce",
+	   "Gather","Multi Processing","Multi Threading","P2P",
+	   "Reduce","Scatter","Scatter Gather","Scatter Reduce")
+runtime = c(0.000576019287109375,0.002203702926635742,0.01202082633972168,0.033280134201049805,
+            0.014339685440063477,0.025571346282958984,0.012070655822753906,0.010933792,
+            0.005605220794677734,0.0022110939025878906,0.011840343475341797,0.015759706497192383)
+
+rekap = data.frame(metode,
+		               runtime = round(as.numeric(runtime),5))
+```
+
+```{r,echo=FALSE}
+rekap %>% 
+  rename(Metode = metode,
+         Runtime = runtime) %>%
+  knitr::kable(align = "c",caption = "Rekap Runtime dan Hasil Integral Soal III")
+```
+
+\newpage
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Rekap Runtime Soal III",fig.retina=10}
+rekap %>%
+  ggplot(aes(x = reorder(metode,runtime),
+	     y = runtime)) +
+  geom_col(fill = "steelblue",
+	   width = .7) +
+  geom_label(aes(label = round(runtime*10^2,2)),size = 1.5) +
+  coord_flip() +
+  labs(title = "Rekap Runtime Serial vs Parallel Processing",
+       subtitle = "dalam seperseratus detik\nPenyelesaian Soal III",
+       caption = "Dibuat oleh 20921004",
+       x = "Metode",
+       y = "Runtime") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank()) 
+```
+
 \newpage
 
 # _CONCLUSION_
 
-\newpage
+Tidak semua _parallel processing_ menghasilkan _runtime_ yang lebih cepat dibandingkan _serial processing_. Metode seperti _scatter_, _broadcast_, dan _multi threading_ menghasilkan _runtime_ yang relatif lebih lama.
+
+Metode _parallel processing_ yang merupakan gabungan dari dua metode relatif menghasilkan _runtime_ yang sangat cepat.
 
 # _REFERENCES_
