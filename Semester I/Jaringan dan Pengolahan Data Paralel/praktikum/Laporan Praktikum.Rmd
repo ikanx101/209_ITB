@@ -65,6 +65,8 @@ Sebagai contoh:
 1. _Looping_ yang prosesnya tidak saling bergantung bisa diparalelisasi. Misalkan ada suatu fungsi untuk menghitung suatu _array_ bisa diparalelisasi dengan cara memecah _array_ tersebut untuk diproses bersamaan di beberapa _processors_.
 1. _Looping_ yang prosesnya saling bergantung tidak bisa diparalelisasi. Misalkan suatu _looping_ ke $i$ nilainya bergantung pada proses _looping_ ke $i-1$.
 
+\newpage
+
 Berikut adalah ilustrasi perbedaan serial dan _parallel processing_:
 
 ```{r,include=FALSE}
@@ -89,9 +91,11 @@ nomnoml::nomnoml("#direction:down
 
 \newpage
 
-```{r out.width="40%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi Perbedaan Serial dan Parallel Processing",fig.retina=10}
+```{r out.width="50%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi Perbedaan Serial dan Parallel Processing",fig.retina=10}
 knitr::include_graphics("gbr1.png")
 ```
+
+\newpage
 
 ## Cara Kerja _Parallel Processing_
 
