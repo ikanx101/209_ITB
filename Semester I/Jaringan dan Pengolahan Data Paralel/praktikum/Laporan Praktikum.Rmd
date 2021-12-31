@@ -377,17 +377,19 @@ rekap = data.frame(metode,
 
 ```{r,echo=FALSE,fig.align='center',fig.cap="Rekap Runtime Soal I",fig.retina=10}
 rekap %>%
-  ggplot(aes(x = metode,
+  ggplot(aes(x = reorder(metode,runtime),
 	     y = runtime)) +
   geom_col(fill = "steelblue",
 	   width = .7) +
   geom_label(aes(label = round(runtime,3)),size = 1.25) +
   coord_flip() +
   labs(title = "Rekap Runtime Serial vs Parallel Processing",
-       subtitle = "Penyelesaian Soal I",
+       subtitle = "dalam detik\nPenyelesaian Soal I",
        caption = "Dibuat oleh 20921004",
        x = "Metode",
-       y = "Runtime")
+       y = "Runtime") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank())
 ```
 
 
