@@ -4,4 +4,4 @@ p2p
 
 Nilai integral: 0.000651041666666677
 
-Runtime: 7.182239143
+Runtime: 7.018274221

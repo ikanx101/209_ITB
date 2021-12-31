@@ -48,7 +48,7 @@ if rank == 0:
     total2 = comm.recv(source = MPI.ANY_SOURCE)
     total2 += total2
   print("Nilai integral f(x) dx adalah: ",nilai)
-  print(total2)
+  print(2*total2)
   # hitung waktu selesai
   end = MPI.Wtime()
   waktu = end - mulai
