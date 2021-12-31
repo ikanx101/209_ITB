@@ -261,11 +261,13 @@ Metode titik tengah merupakan salah satu cara perhitungan integral numerik dari 
 
 Misalkan $f(x)$ kontinu di selang $[a,b]$. Jika diambil suatu $n$ bilangan bulat positif, kita bisa membagi selang tersebut menjadi partisi-partisi kecil berikut: $\Delta x = \frac{b-a}{n}$. 
 
-Tuliskan $m_i = x_i + \frac{\Delta}{2}$ sebagai titik tengah di partisi ke- $i$, maka: $\int_a^b f(x) dx$ bisa didekati dengan $n \sum_{i=1}^n f(x_i^*) \Delta x_i$.
+Tuliskan $m_i = x_i + \frac{\Delta}{2}$ sebagai titik tengah di partisi ke- $i$, maka: $\int_a^b f(x) dx$ bisa didekati dengan $n \sum_{i=1}^n f(m_i) \Delta x_i$.
 
 ### Simulasi Monte Carlo
 
-Berbeda dengan metode titik tengah, simulasi Monte Carlo digunakan dengan cara men-_generate_ sejumlah titik secara random.
+Berbeda dengan metode titik tengah, ide dasar dari simulasi Monte Carlo adalah dengan melakukan _generating_ sejumlah titik secara _random_ pada selang integral dan menghitung nilai fungsinya. Berikut adalah _flowchart_-nya:
+
+
 
 # _RESULT AND DISCUSSION_
 
