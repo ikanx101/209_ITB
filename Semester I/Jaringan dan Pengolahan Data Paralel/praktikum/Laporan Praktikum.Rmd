@@ -89,7 +89,7 @@ nomnoml::nomnoml("#direction:down
 
 \newpage
 
-```{r out.width="30%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi Perbedaan Serial dan Parallel Processing",fig.retina=10}
+```{r out.width="40%",echo=FALSE,fig.align='center',fig.cap="Ilustrasi Perbedaan Serial dan Parallel Processing",fig.retina=10}
 knitr::include_graphics("gbr1.png")
 ```
 
@@ -162,8 +162,25 @@ Komputer berarsitektur ini paling banyak digunakan untuk membangun _super comput
 
 ## _SERVER_ YANG DIGUNAKAN
 
+Pada praktikum kali ini, saya tidak bisa menggunakan _server_ __HPC__ yang disediakan oleh ITB karena masalah koneksi. Oleh karena itu, saya menggunakan _server_ lain agar bisa menduplikasi apa yang seharusnya dikerjakan di _server_ ITB.
 
+Saya menggunakan _server virtual machine_ milik _Google Cloud_^[https://ikanx101.com/blog/vm-cloud/].
 
+Berikut adalah spesifikasinya:
+
+```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Spesifikasi Server yang Digunakan",fig.retina=10}
+knitr::include_graphics("spek.png")
+```
+
+_Server_ ini bisa diakses menggunakan _command line_ menggunakan `ssh` langsung ke _IP Public_ yang diberikan _Google_.
+
+```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="lscpu dari Server",fig.retina=10}
+knitr::include_graphics("lscpu.png")
+```
+
+```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="htop dari Server",fig.retina=10}
+knitr::include_graphics("htop.png")
+```
 
 # _METHOD_
 
