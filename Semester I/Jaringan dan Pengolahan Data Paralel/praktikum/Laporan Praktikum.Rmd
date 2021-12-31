@@ -265,6 +265,7 @@ Tuliskan $m_i = x_i + \frac{\Delta}{2}$ sebagai titik tengah di partisi ke- $i$,
 
 ### Simulasi Monte Carlo
 
+Berbeda dengan metode titik tengah, simulasi Monte Carlo digunakan dengan cara men-_generate_ sejumlah titik secara random.
 
 # _RESULT AND DISCUSSION_
 
