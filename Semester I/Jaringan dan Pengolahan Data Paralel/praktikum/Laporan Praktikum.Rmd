@@ -162,7 +162,7 @@ Komputer jenis ini belum diciptakan karena secara arsitekturnya tidak mudah dipa
 
 Komputer berarsitektur ini paling banyak digunakan untuk membangun _super computer_. Komputer ini memiliki lebih dari satu _processors_ dan mengeksekusi lebih dari satu instruksi secara paralel.
 
-## TUGAS PRAKTIKUM 
+## Tugas Praktikum 
 
 Pada praktikum ini, saya akan mengerjakan:
 
@@ -171,7 +171,7 @@ Pada praktikum ini, saya akan mengerjakan:
 
 Ketiga tugas tersebut akan diselesaikan menggunakan serial dan _parallel processing_. 
 
-## _SERVER_ YANG DIGUNAKAN
+## _Server_ yang Digunakan
 
 Pada praktikum kali ini, saya tidak bisa menggunakan _server_ __HPC__ yang disediakan oleh ITB karena masalah koneksi. Oleh karena itu, saya menggunakan _server_ lain agar bisa menduplikasi apa yang seharusnya dikerjakan di _server_ ITB.
 
@@ -213,7 +213,7 @@ knitr::include_graphics("htop.jpg")
 
 ## MPI
 
-Secara _default_ `Python` sudah ter-_install_ di _server_ namun tidak untuk `Open MPI`. Oleh karena itu, salah satu langkah yang perlu dilakukan adalah meng-_install_-nya terlebih dahulu^[https://rantahar.github.io/introduction-to-mpi/setup.html]. 
+Secara _default_ `Python` sudah ter-_install_ di _server_ namun tidak untuk `Open MPI`. Oleh karena itu, salah satu langkah yang perlu dilakukan adalah meng-_install_-nya terlebih dahulu [@mpi]. 
 
 Pada `Ubuntu`, proses instalasinya bisa kita lakukan dengan mengetikkan perintah berikut ini di _command line_:
 
@@ -226,6 +226,12 @@ Setelah proses instalasi selesai, kita bisa mengecek versi `Open MPI` yang berja
 ```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Versi MPI yang Digunakan",fig.retina=10}
 knitr::include_graphics("mpi.jpg")
 ```
+
+Pada `Python`, saya perlu meng-_install_ _library_ `mpi4py` dengan perintah:
+
+```
+sudo apt install python3-mpi4py
+``` 
 
 Oleh karena saya menjalankan program `Python` praktikum di _server_ sendiri (tanpa ada _user_ lain), maka saya tidak melakukan instalasi `SLURM`.
 
