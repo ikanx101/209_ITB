@@ -97,7 +97,7 @@ knitr::include_graphics("gbr1.png")
 
 ## Cara Kerja _Parallel Processing_
 
-Untuk melakukan _parallel processing_, dibutuhkan _hardware_ dan _software_ yang mendukung hal tersebut. Secara _hardware_ dibutuhkan komputer dengan _multiple cores processors_ atau dibutuhkan beberapa komputer yang digabung menjadi satu kesatuan. Secara _software_ dibutuhkan tidak hanya `Python` tapi juga _middleware_ bernama `open MPI`. Bagian _hardware_ dan _software_ ini akan dibahas pada bagian `METHOD`.
+Untuk melakukan _parallel processing_, dibutuhkan _hardware_ dan _software_ yang mendukung hal tersebut. Secara _hardware_ dibutuhkan komputer dengan _multiple cores processors_ atau dibutuhkan beberapa komputer yang digabung menjadi satu kesatuan. Secara _software_ dibutuhkan tidak hanya `Python` tapi juga _middleware_ bernama `Open MPI`. Bagian _hardware_ dan _software_ ini akan dibahas pada bagian selanjutnya.
 
 Pada sistem _parallel processing_ terdiri dari beberapa unit _processors_ dan beberapa unit _memory_. Ada dua teknik berbeda yang digunakan untuk mengakses data di unit _memory_, yaitu: _shared memory address_ dan _message passing_.
 
@@ -164,13 +164,18 @@ Komputer berarsitektur ini paling banyak digunakan untuk membangun _super comput
 
 ## TUGAS PRAKTIKUM 
 
-Pada praktikum ini, saya akan mengerjakan tiga buah tugas terkait penyelesaian integral secara numerik memanfaatkan metode dikritisasi nilai tengah (_midpoint_).
+Pada praktikum ini, saya akan mengerjakan:
+
+- Dua buah tugas terkait penyelesaian integral secara numerik memanfaatkan metode dikritisasi nilai tengah (_midpoint_) dan simulasi Monte Carlo.
+- Satu buah tugas terkait penjumlahan dan perkalian matriks $n \times n$.
+
+Ketiga tugas tersebut akan diselesaikan menggunakan serial dan _parallel processing_. 
 
 ## _SERVER_ YANG DIGUNAKAN
 
 Pada praktikum kali ini, saya tidak bisa menggunakan _server_ __HPC__ yang disediakan oleh ITB karena masalah koneksi. Oleh karena itu, saya menggunakan _server_ lain agar bisa menduplikasi apa yang seharusnya dikerjakan di _server_ ITB.
 
-Saya menggunakan _server virtual machine_ milik _Google Cloud_^[https://ikanx101.com/blog/vm-cloud/].
+Saya menggunakan _server virtual machine_ milik _Google Cloud_^[https://ikanx101.com/blog/vm-cloud/]. _Server_ ini memiliki _processor_ __Intel Xeon__ __8__ ___cores___. _Hostname_ dari _server_ ini saya beri nama `praktikum`.
 
 \newpage
 
@@ -204,6 +209,23 @@ Berikut adalah tampilan hasil `htop`:
 knitr::include_graphics("htop.jpg")
 ```
 
+## MPI
+
+Secara _default_ `Python` sudah ter-_install_ di _server_ namun tidak untuk `Open MPI`. Oleh karena itu, salah satu langkah yang perlu dilakukan adalah meng-_install_-nya terlebih dahulu. 
+
+Pada `Ubuntu`, proses instalasinya bisa kita lakukan dengan mengetikkan perintah berikut ini di _command line_:
+
+```
+sudo apt install openmpi-bin openmpi-dev openmpi-common openmpi-doc libopenmpi-dev
+```
+
+Setelah proses instalasi selesai, kita bisa mengecek versi `Open MPI` yang berjalan di _server_ sebagai berikut:
+
+```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Versi MPI yang Digunakan",fig.retina=10}
+knitr::include_graphics("mpi.jpg")
+```
+
+
 \newpage
 
 # _METHOD_
@@ -224,14 +246,12 @@ Pada praktikum ini, kita akan melakukan _parallel processing_ menggunakan `Pytho
 
 Kemudian semua metode _parallel processing_ ini akan dibandingkan _runtime_-nya dengan _serial processing_.
 
-## MPI
+## Metode Integral Numerik
 
-```{r out.width="45%",echo=FALSE,fig.align='center',fig.cap="Versi MPI yang Digunakan",fig.retina=10}
-knitr::include_graphics("mpi.jpg")
-```
+### Metode Titik Tengah (_Midpoint_)
 
+### Simulasi Monte Carlo
 
-penjelasan tentang MPI, server google, midpoint, lalu metode monte carlo yang digunakan.
 
 # _RESULT AND DISCUSSION_
 
