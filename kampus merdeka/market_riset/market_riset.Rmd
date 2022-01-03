@@ -884,6 +884,8 @@ Masalah ini sering muncul pada _online survey_. Bagaimana kita memastikan bahwa 
 
 Buat kuesioner sederhana untuk mencari data terkait konsumsi media massa masyarakat kelompok remaja di kota-kota besar di Indonesia!
 
+\newpage
+
 # PERTEMUAN X {-}
 # TUGAS I
 ## _Discussion_  {.unlisted .unnumbered}
