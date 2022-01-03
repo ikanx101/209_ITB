@@ -280,13 +280,13 @@ _Market research_ erat kaitannya dengan konsumen. Sebelum saya membahas _market 
 
 ### Konsumen
 
-#### Definisi {unlisted}
+#### Definisi {.unlisted .unnumbered}
 
 Konsumen adalah setiap orang __pemakai barang dan atau jasa__ yang tersedia dalam masyarakat, baik bagi kepentingan __diri sendiri, keluarga, orang lain,__ maupun __mahluk hidup lain__ dan __tidak untuk diperdagangkan__.^[Undang-Undang Perlindungan Konsumen tahun 1999]
 
 Berdasarkan definisi di atas, maka setiap kita adalah seorang konsumen. Jika kita berbicara tentang konsumen, maka tidak lepas dari suatu hal bernama _consumer behavior_. Apa itu _consumer behavior_?
 
-#### Definisi {unlisted}
+#### Definisi {.unlisted .unnumbered}
 
 _The study of the processes involved when individuals/groups:_
 
@@ -326,7 +326,7 @@ Komponen terakhir yang tidak kalah penting adalah _regulator_. Sayangnya tidak b
 
 Oleh karena itu, sebaiknya dalam merencanakan suatu _market research project_ kita perlu melakukan proyeksi dan simulasi terhadap regulasi yang berlaku. Jangan sampai saat _market research project_ tersebut berlangsung terjadi perubahan regulasi yang mengakibatkan tujuan utama _project_ tersebut menjadi tidak relevan.
 
-## _Discussion_
+## _Discussion_  {.unlisted .unnumbered}
 
 Coba kalian deskripsikan dan jelaskan komponen-komponen yang ada bagi perusahaan-perusahaan berikut ini:
 
@@ -342,11 +342,22 @@ Coba kalian deskripsikan dan jelaskan komponen-komponen yang ada bagi perusahaan
 
 ## _Research Workflow_
 
+Seperti halnya penelitian ilmiah lainnya, merencanakan dan melaksanakan _market research_ mengikuti _workflow_ berikut ini:
+
+```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Data Primer dan Sekunder"}
+knitr::include_graphics("flow.png")
+```
+
+
+## _Discussion_  {.unlisted .unnumbered}
+
 \newpage
 
 # PERTEMUAN III {-}
 
 # _FORMULATING MARKET RESEARCH PROBLEM_
+
+## _Discussion_  {.unlisted .unnumbered}
 
 \newpage
 
@@ -456,3 +467,4 @@ nomnoml::nomnoml("#direction: right
 knitr::include_graphics("ikanx2.png")
 ```
 
+## _Discussion_  {.unlisted .unnumbered}
