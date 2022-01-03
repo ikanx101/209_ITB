@@ -600,9 +600,25 @@ Jika memenuhi syarat tersebut, kita diperbolehkan untuk memakai daa sekunder. Ta
 
 Saya akan berikan ilustrasi sederhana:
 
-> Misalkan
+> Misalkan pada tahun 2019 lalu saya hendak mencari tahu bagaimana demografi penduduk si kota Bandung. Saya akan gunakan data sensus penduduk dari BPS kota Bandung untuk kemudian saya analisa. 
+
+Perlu diketahui, bahwa sensus terakhir sebelum tahun 2019 adalah tahun 2010 silam. Lantas apakah saya masih boleh menggunakan data yang sudah berusia 9 tahun tersebut?
+
+Jawabannya: __boleh__. Kenapa?
+
+Secara teori, demografi penduduk suatu daerah cenderung stabil perubahannya. Demografi baru akan berubah signifikan jika terjadi:
+
+1. Wabah mematikan,
+1. Bencana alam global,
+1. Migrasi besar-besaran,
+ 
+Oleh karena tidak ada kejadian seperti di atas, maka kita masih boleh memakai data yang berusia 9 tahun tersebut.
+
+Berbeda kondisinya jika data yang hendak kita cari adalah data yang berkarakteristikk dinamis (cepat berubah). Kita tidak bisa mengandalkan data sekunder.
 
 ### _From Data to Insights_
+
+Tujuan utama dari _market research_ adalah untuk mendapatkan _insights_.
 
 ```{r,include=FALSE}
 nomnoml::nomnoml("#direction: right
@@ -621,6 +637,45 @@ nomnoml::nomnoml("#direction: right
 ```{r out.width = "75%",echo=FALSE,fig.align="center",fig.cap = "Alur Data ke Insights"}
 knitr::include_graphics("ikanx2.png")
 ```
+
+Data bisa jadi memiliki atau tidak memiliki informasi apapun. Dari informasi tersebut, kita bisa memilah-milah mana informasi yang:
+
+1. __Need-to-know__, yakni informasi yang diperlukan untuk menyelesaikan masalah.
+1. __Nice-to-know__, yakni informasi pendukung (_supporting_) yang didapatkan dari survey.
+
+Keduanya harus kita pahami dan bisa bedakan pada saat membuat kuesioner kelak.
+
+Dari informasi ini, kelak akan diekstrak _insight_.
+
+#### Definisi _Insights_  {.unlisted .unnumbered}
+
+Menurut Laughlin (2015):
+
+> _A non-obvious understanding about your consumers, which if acted upon, has the potential to change their behavior for mutual benefit._
+
+### Dimensi _Insight_
+
+Ada empat dimensi dari _insight_, yakni:
+
+- Such insight is non-obvious, so it does not normally come from just one source of information.
+   - Menurut saya, ini adalah hal yang menarik. Suatu *insight* harus memiliki **wow-momen**, suatu temuan yang tidak biasa atau tidak terbaca sama sekali pada saat perumusan masalah riset. Di zaman sekarang ini, di mana data dapat diambil dari berbagai macam sumber dapat memperkaya *point of view* untuk mengekstraksi *consumer insight*.
+- True insights need to be action-able.
+   - *Insight* yang baik haruslah�__membumi__, dalam artian harus dapat dibuat *action plan*.
+- Consumer insights should be powerful enough that when they are acted upon customers can be persuaded to “change their behavior”.
+- To be sustainable, the goal of such customer change must be for mutual benefit.
+   - *Mutual benefit* dalam artian memiliki nilai tambah dan keuntungan bagi konsumen dan *brand*.
+
+### Kegunaan _Insight_
+
+Setidaknya ada tiga kegunaan dari _consumer insight_, yakni:
+
+- *Communicate differently*.
+      - *Consumer insight* dapat digunakan untuk mengubah cara *brand*
+berkomunikasi kepada target konsumennya. Contoh konkretnya, suatu *brand* susu kalsium yang identik dengan usia tua mengubah cara berkomunikasinya agar dapat diterima oleh usia muda setelah mendapatkan *insight* bahwa usia muda juga memerlukan kalsium yang sama.
+- *New product invention*.
+      - Tak dapat dipungkiri, di pasar sekarang ini (jika kita perhatikan dan pikirkan dengan seksama) beberapa produk baru lahir akibat dari *consumer insight*.
+- *New target market*.
+      - Ini salah satu kegunaan *consumer insight* yang cukup *powerful* jika *insight* yang diambil dengan sangat baik sekali. *Expanding target market* atau bahkan menangkap *target market* yang sebelumnya tak pernah ada dan potensial akan sangat menguntungkan.
 
 ## _Discussion_  {.unlisted .unnumbered}
 
@@ -662,6 +717,8 @@ Kali ini saya hendak membahas tentang bagaimana kita bisa membuat kuesioner surv
 Kuesioner yang baik adalah kuesioner yang sejalan dengan tujuan survey dan tidak menimbulkan bias pada saat pengisiannya.
 
 Ingat kembali bahwa __masalah__, __tujuan__ dan __data__ dalam _market research_ harus __harmonis__. Ingat kembali bahwa dua jenis informasi dalam _market research_: _nice-to-know_ dan _need-to-know_. Maka dari itu kuesioner yang baik harus bisa mengekstrak informasi _need-to-know_ dari responden.
+
+Biasanya pada saat membuat kuesioner, kita terdorong untuk memasukkan sebanyak-banyaknya pertanyaan ke dalamnya. Namun perlu diperhatikan bahwa tidak semua pertanyaan harus kita masukkan. Sebaiknya kita pilah terlebih dahulu mana saja yang memang diperlukan untuk menjawab tujuan _market research_ dan menyelesaikan masalah yang dihadapi.
 
 ## Merancang Kuesioner
 
@@ -763,7 +820,7 @@ Masalah ini sering muncul pada _online survey_. Bagaimana kita memastikan bahwa 
 
 ## _Discussion_  {.unlisted .unnumbered}
 
-
+Buat kuesioner sederhana untuk mencari data terkait konsumsi media massa masyarakat kelompok remaja di kota-kota besar di Indonesia!
 
 # PERTEMUAN X {-}
 # TUGAS I
