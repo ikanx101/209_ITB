@@ -280,13 +280,13 @@ _Market research_ erat kaitannya dengan konsumen. Sebelum saya membahas _market 
 
 ### Konsumen
 
-#### Definisi {.unlisted .unnumbered}
+#### Definisi Konsumen {.unlisted .unnumbered}
 
 Konsumen adalah setiap orang __pemakai barang dan atau jasa__ yang tersedia dalam masyarakat, baik bagi kepentingan __diri sendiri, keluarga, orang lain,__ maupun __mahluk hidup lain__ dan __tidak untuk diperdagangkan__.^[Undang-Undang Perlindungan Konsumen tahun 1999]
 
 Berdasarkan definisi di atas, maka setiap kita adalah seorang konsumen. Jika kita berbicara tentang konsumen, maka tidak lepas dari suatu hal bernama _consumer behavior_. Apa itu _consumer behavior_?
 
-#### Definisi {.unlisted .unnumbered}
+#### Definisi _Consumer Behavior_ {.unlisted .unnumbered}
 
 _The study of the processes involved when individuals/groups:_
 
@@ -326,7 +326,33 @@ Komponen terakhir yang tidak kalah penting adalah _regulator_. Sayangnya tidak b
 
 Oleh karena itu, sebaiknya dalam merencanakan suatu _market research project_ kita perlu melakukan proyeksi dan simulasi terhadap regulasi yang berlaku. Jangan sampai saat _market research project_ tersebut berlangsung terjadi perubahan regulasi yang mengakibatkan tujuan utama _project_ tersebut menjadi tidak relevan.
 
-## _Discussion_  {.unlisted .unnumbered}
+## Bias, Limitasi dan Asumsi
+
+### Bias
+
+Bayangkan jika suatu waktu saya melakukan survey terkait __makanan favorit orang Indonesia__. Caranya adalah dengan menanyakannya kepada orang-orang yang __sedang makan di restoran Padang__. Kira-kira makanan apa saja yang menjadi favorit?
+
+Contoh di atas adalah contoh pelaksanaan survey yang __bias__. Akibatnya jawaban responden akan condong ke makanan Padang saja.
+
+Hal seperti ini harus kita hindari dalam _market research_.
+
+Selain pemilihan area riset, bias juga bisa terjadi akibat urutan pertanyaan yang ditanyakan kepada responden. Hal ini akan dibahas pada pertemuan berikutnya terkait `pembuatan kuesioner`.
+
+### Limitasi
+
+Kita telah pelajari bahwa ada tiga komponen _market research_ dan masing-masing komponen bisa jadi memiliki cakupan yang sangat luas. 
+
+Sebagai contoh, suatu perusahaan minuman teh hendak melakukan _market research_ seputar _usership_ dari konsumen. Mereka menyadari bahwa persaingan tidak hanya berasal dari kompetitor __minuman teh saja__ tapi juga bisa berasal dari minuman jenis lain seperti: minuman soda, minuman buah, susu cair, kopi cair, minuman isotonik, dan lain sebagainya. Akibatnya cakupan riset bisa menjadi sangat luas.
+
+Jika tujuan risetnya memang sudah jelas untuk mendapatkan gambaran yang holistik, maka perusahaan tersebut bisa memutuskan untuk mengevaluasi semua kategori minuman yang mungkin terkait tersebut. Tapi biasanya perusahaan tidak memiliki banyak biaya, waktu, dan tenaga sehingga harus dilakukan __pembatasan__ (limitasi). Alih-alih menanyakan semua kategori minuman, perusahaan tersebut hanya memfokuskan pada kategori teh saja. Limitasi seperti ini lumrah dilakukan oleh perusahaan dengan catatan __setiap limitasi yang dilakukan wajib diinformasikan secara jelas pada saat penulisan metodologi riset di laporan__.
+
+### Asumsi
+
+Sama halnya dengan limitasi, _market research project_ juga tidak bisa lepas dari yang namanya __asumsi__. Kita boleh menambahkan beberapa asumsi pada saat melakukan _market research_ namun ada baiknya asumsi yang dipakai sudah berdasarkan _preliminary analysis_ dari data-data yang sudah dimiliki.
+
+Jangan lupa untuk mencantumkan asumsi apa saja yang dipakai pada __metodologi penelitian di laporan__ _market research_.
+
+## _Discussion_ {.unlisted .unnumbered}
 
 Coba kalian deskripsikan dan jelaskan komponen-komponen yang ada bagi perusahaan-perusahaan berikut ini:
 
@@ -344,10 +370,69 @@ Coba kalian deskripsikan dan jelaskan komponen-komponen yang ada bagi perusahaan
 
 Seperti halnya penelitian ilmiah lainnya, merencanakan dan melaksanakan _market research_ mengikuti _workflow_ berikut ini:
 
-```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Workflow Market Research"}
+```{r out.width = "75%",echo=FALSE,fig.align = "center",fig.cap = "Workflow Market Research"}
 knitr::include_graphics("proses riset.png")
 ```
 
+Dari _workflow_ di atas, setidaknya ada __tiga titik kritis__ yang perlu diperhatikan. Yakni:
+
+1. Formulasi masalah,
+1. _Design research_ dan _collect data_
+1. Analisa data dan _reporting_.
+
+### Formulasi Masalah
+
+Orang bijak berkata:
+
+> Gagal dalam merencanakan berarti merencanakan kegagalan.
+
+Hal yang sama berlaku di _market research_. Formulasi masalah menjadi hal yang penting karena merupakan titik awal dalam pelaksanaan _market research project_. Saking pentingnya saya membuat satu bagian khusus penjelasan pada pertemuan selanjutnya.
+
+### _Design Research_ dan _Collect Data_
+
+Tujuan utama dari _market research_ adalah menyelesaikan masalah dan menjawab tujuan dari riset. Ada satu _guidance_ penting yang perlu dipahami, yakni:
+
+
+```{r,include=FALSE}
+nomnoml::nomnoml("
+                 [Masalah] -> [Tujuan]
+		 [Tujuan] -> [Data]
+		 [Data] -> [Analisa]
+		 [Analisa] --> [Masalah]
+                 ",
+		 "masalah tujuan.png",900,400
+		)
+```
+
+```{r out.width = "75%",echo=FALSE,fig.align="center",fig.cap = "Flow Memilih Data Primer dan Data Sekunder"}
+knitr::include_graphics("masalah tujuan.png")
+```
+
+Masalah harus seiring dengan tujuan. Data yang diambil juga harus seiring dengan tujuan. Harmoni ini perlu dijaga saat melakukan _market research_.
+
+Proses kritis _design research_ meliputi:
+
+1. Penentuan jenis riset yang dilakukan,
+1. Penentuan target responden dan banyak responden,
+1. Menentukan teknik sampling,
+1. Membuat kuesioner.
+
+Proses kritis _collect data_ meliputi:
+
+1. Proses survey (memilih area pelaksanaan),
+1. Cara bertanya,
+1. Cara mendokumentasikan (_entry data_).
+
+Jika proses kritis pertama (formulasi masalah) sudah benar tapi proses kritis yang ini salah, kita wajib memperbaiki _design research_ dan mengulang pelaksanaan _collect data_! Oleh karena itu perhatikan baik-baik semua bagian yang ada pada proses ini.
+
+Secara detail bagian-bagian ini akan dibahas pada pertemuan-pertemuan selanjutnya.
+
+### Analisa Data dan _Reporting_
+
+Jika:
+
+- Proses kritis pertama (formulasi masalah) sudah benar, dan 
+- Proses kritis kedua (_design research_ dan _collect data_) sudah benar,
 
 ## _Discussion_  {.unlisted .unnumbered}
 
@@ -357,7 +442,59 @@ knitr::include_graphics("proses riset.png")
 
 # _FORMULATING MARKET RESEARCH PROBLEM_
 
+Sebagaimana yang telah dijelaskan pada pertemuan sebelumnya, formulasi masalah menjadi salah satu titik kritis yang penting di _market research_. Sebagai titik awal pada _workflow_, jika ada kesalahan pada tahap ini otomatis keseluruhan _workflow_ tidak akan bermanfaat sama sekali bagi perusahaan.
+
+## Jenis-Jenis Permasalahan
+
+Dalam dunia _market research_, ada dua jenis permasalahan. Yakni:
+
+1. _Management Problem_ dan
+1. _Research Problem_
+
+### _Management Problem_
+
+_Management problem_ berisi _problem statement_ yang bersifat umum (_general_). _Problem statement_ ini biasanya berasal dari pertanyaan atau kendala yang dihadapi oleh _decision maker_ di perusahaan.
+
+Salah satu contoh sederhana dari _management problem_ adalah:
+
+> ___Kenapa sales produk X di area Y pada tahun ini menurun?___
+
+### _Research Problem_
+
+Jika _management problem_ berisi _statement_ yang bersifat _general_, maka _research problem_ berisi _statement_ yang lebih spesifik dan bersifat hipotesis (dugaan). Oleh karena itu dari satu _management problem_ biasanya dihasilkan banyak _research problems_.
+
+Kelak hipotesis tersebut akan menjadi tujuan dilaksanakannya _market research_ untuk kemudian dibuktikan.
+
+Sebagai contoh, dari _management problem_ sebelumnya, kita bisa turunkan _research problem_-nya menjadi sebagai berikut:
+
+1. Mungkin karena harga produk X terlalu mahal.
+   - Dari _research problem_ ini kita bisa melakukan _market research_ terkait _pricing analysis and strategy_.
+1. Mungkin karena produk X tidak tersedia di toko / warung dekat rumah konsumen.
+   - Dari _research problem_ ini kita bisa melakukan _market research_ terkait _distribution: availability and visibility analysis_.
+1. Mungkin karena iklannya tidak disukai atau tidak dilihat oleh konsumen.
+   - Dari _research problem_ ini kita bisa melakukan _market research_ terkait _media habit_.
+1. Mungkin karena produk X tidak disukai atau dipersepsikan tidak baik oleh konsumen.
+   - Dari _research problem_ ini kita bisa melakukan _market research_ terkait _consumer usage, habit, perception, and attitude_.
+1. Mungkin karena produk X tidak relevan dengan kondisi konsumen saat ini.
+   - Dari _research problem_ ini kita bisa melakukan _market research_ terkait _brand health and competitor analysis_.
+
+## Menggali Masalah
+
+Dari uraian sebelumnya, formulasi masalah adalah proses yang sangat amat penting. Oleh karena itu Saya selalu menyarankan agar kita sebagai _market researcher_ menggunakan waktu lebih lama untuk menggali lebih dalam apa masalah yang sebenarnya dihadapi oleh perusahaan. Jangan ragu untuk banyak bertanya ke berbagai _stakeholder_ yang ada. Jangan ragu juga untuk mulai mencari, mengumpulkan, bahwa sampai menganalisa data yang sudah ada untuk kepentingan _preliminary research_.
+
+Kegunaannya adalah untuk menentukan _research problem_ mana yang sebaiknya dilakukan.
+
+> Kita tahu bahwa dari satu _management problem_ bisa menghasilkan banyak _research problem_. Jika kita memiliki __banyak waktu, tenaga, dan biaya__, kita bisa memutuskan untuk melakukan semua _research problem_. Namun pada kenyataannya sumber daya perusahaan terbatas untuk melakukan itu. Akibatnya __minimal satu__ _research problem_ harus dipilih.
+
+Pemilihan tersebut harus berdasarkan _preliminary analysis_ sehingga _market research_ yang dilakukan __benar-benar bisa menjawab__ dengan _firm management problem_.
+
 ## _Discussion_  {.unlisted .unnumbered}
+
+Misalkan suatu perusahaan yang bergerak di bidang logistik (_delivery_: mengantarkan paket toko _online_ kepada pelanggan) memiliki _management problem_:
+
+> Bagaimana cara agar menjadi _market leader_ di industri?
+
+Tuliskan sebanyak-banyaknya _research problems_ yang mungkin bisa menjawab _management problem_ tersebut!
 
 \newpage
 
@@ -447,6 +584,7 @@ nomnoml::nomnoml("
 ```{r out.width = "75%",echo=FALSE,fig.align="center",fig.cap = "Flow Memilih Data Primer dan Data Sekunder"}
 knitr::include_graphics("ikanx.png")
 ```
+
 ### _From Data to Insights_
 
 ```{r,include=FALSE}
