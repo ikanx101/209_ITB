@@ -227,42 +227,6 @@ _Analytics_ bisa didefinisikan sebagai kemampuan suatu organisasi (perusahaan) u
 
 Matematika, statistika, dan _engineering_ adalah _tools_ terbaik untuk kita bisa menganalisa data. Sedangkan __market riset__ adalah salah satu metode terpenting bagi organisasi untuk bisa mendapatkan data eksternal, yakni data dari konsumen atau pelanggannya.
 
-## Tentang Konsumen
-
-### Definisi Konsumen
-
-Apa arti konsumen?
-
-> Konsumen adalah setiap orang __pemakai barang dan/atau jasa__ yang tersedia dalam masyarakat, baik bagi kepentingan __diri sendiri__, __keluarga__, __orang lain__, maupun __mahkluk hidup lain__ dan __tidak untuk diperdagangkan__.^[UU Perlindungan Konsumen tahun 1999]
-
-### _Consumer Behavior_
-
-Apa itu _consumer behavior_?
-
-> _The study of the processes involved when individuals/groups: select, purchase, user, or dispose of products, services, ideas, or experiences to satisfy needs and desires_.
-
-Salah satu tantangan besar yang harus dihadapi perusahaan adalah bagaimana memahami _consumer behavior_.
-
-### _From Data to Insights_
-
-```{r,include=FALSE}
-nomnoml::nomnoml("#direction: right
-		[data] -> [berisi informasi]
-		[data] -> [tidak berisi informasi]
-		[berisi informasi] -> [Kegunaan terhadap bisnis]
-		[Kegunaan terhadap bisnis] -> [insights]
-
-		[Kegunaan terhadap bisnis|
-		 [nice-to-know]
-		 [need-to-know]
-		 ]",
-		"ikanx2.png",900,400)
-```
-
-```{r out.width = "75%",echo=FALSE,fig.align="center",fig.cap = "Alur Data ke Insights"}
-knitr::include_graphics("ikanx2.png")
-```
-
 ## Strategi Perusahaan Terkait _Market Research_
 
 Walaupun banyak pihak berpendapat bahwa _market research_ adalah bagian yang penting dan tak terpisahkan di bisnis. Namun ada beberapa perusahaan yang berpendapat lain. 
@@ -316,13 +280,13 @@ _Market research_ erat kaitannya dengan konsumen. Sebelum saya membahas _market 
 
 ### Konsumen
 
-#### Definisi {-}
+#### Definisi {unlisted}
 
 Konsumen adalah setiap orang __pemakai barang dan atau jasa__ yang tersedia dalam masyarakat, baik bagi kepentingan __diri sendiri, keluarga, orang lain,__ maupun __mahluk hidup lain__ dan __tidak untuk diperdagangkan__.^[Undang-Undang Perlindungan Konsumen tahun 1999]
 
 Berdasarkan definisi di atas, maka setiap kita adalah seorang konsumen. Jika kita berbicara tentang konsumen, maka tidak lepas dari suatu hal bernama _consumer behavior_. Apa itu _consumer behavior_?
 
-#### Definisi {-}
+#### Definisi {unlisted}
 
 _The study of the processes involved when individuals/groups:_
 
@@ -372,7 +336,7 @@ Coba kalian deskripsikan dan jelaskan komponen-komponen yang ada bagi perusahaan
 
 \newpage
 
-# PERTEMUAN 2 {-}
+# PERTEMUAN II {-}
 
 # LANGKAH-LANGKAH MELAKSANAKAN _MARKET RESEARCH_
 
@@ -380,13 +344,13 @@ Coba kalian deskripsikan dan jelaskan komponen-komponen yang ada bagi perusahaan
 
 \newpage
 
-# PERTEMUAN 3 {-}
+# PERTEMUAN III {-}
 
 # _FORMULATING MARKET RESEARCH PROBLEM_
 
 \newpage
 
-# PERTEMUAN 4 {-}
+# PERTEMUAN IV {-}
 
 # JENIS-JENIS DATA DALAM MARKET RESEARCH
 
@@ -472,3 +436,23 @@ nomnoml::nomnoml("
 ```{r out.width = "75%",echo=FALSE,fig.align="center",fig.cap = "Flow Memilih Data Primer dan Data Sekunder"}
 knitr::include_graphics("ikanx.png")
 ```
+### _From Data to Insights_
+
+```{r,include=FALSE}
+nomnoml::nomnoml("#direction: right
+		[data] -> [berisi informasi]
+		[data] -> [tidak berisi informasi]
+		[berisi informasi] -> [Kegunaan terhadap bisnis]
+		[Kegunaan terhadap bisnis] -> [insights]
+
+		[Kegunaan terhadap bisnis|
+		 [nice-to-know]
+		 [need-to-know]
+		 ]",
+		"ikanx2.png",900,400)
+```
+
+```{r out.width = "75%",echo=FALSE,fig.align="center",fig.cap = "Alur Data ke Insights"}
+knitr::include_graphics("ikanx2.png")
+```
+
