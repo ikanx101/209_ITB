@@ -434,9 +434,13 @@ Jika:
 - Proses kritis pertama (formulasi masalah) sudah benar, dan 
 - Proses kritis kedua (_design research_ dan _collect data_) sudah benar,
 
-__NAMUN__ pada saat melakukan proses kritis ketiga (analisa data dan _reporting_) salah
+__NAMUN__ pada saat melakukan proses kritis ketiga (analisa data dan _reporting_) salah, kita hanya perlu mengulang analisa tersebut saja.
+
+Pada pertemuan selanjutnya, saya akan jelaskan bagaimana suatu __analisa memiliki__ ___point of view___ yang bisa mengubah alur kesimpulan pada laporan _market research_.
 
 ## _Discussion_  {.unlisted .unnumbered}
+
+Jelaskan dengan singkat apa yang perlu dilakukan jika pada saat pertengahan proses _fieldwork survey_ kita baru sadar ada satu pertanyaan yang sebenarnya tidak perlu ditanyakan kepada responden!
 
 \newpage
 
