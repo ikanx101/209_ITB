@@ -285,7 +285,7 @@ __Verizon__ bersama dengan banyak perusahaan besar di dunia dan Indonesia tetap 
 
 Berdasarkan uraian di atas, cara pandang perusahaan bisa berbeda-beda. Sebagian merasa _market research_ sebagai _cost center_ sehingga perusahaan enggan melakukannya. Padahal _market researcher_ yang baik bisa menuntun perusahaan untuk menggunakan metode-metode alternatif yang lebih _cost-friendly_ dan _affordable_.
 
-Sebagian perusahaan lain melihat _market research_ sebagai _cost saver_ dan _investment_. Perusahaan bisa diselamatkan dari __kesalahan dalam mengambil keputusan bisnis__ jika ditopang oleh _insights_ hasil _market research_ yang baik.
+Sebagian perusahaan lain melihat _market research_ sebagai _cost saver_ dan _investment_. Perusahaan bisa diselamatkan dari __kesalahan dalam mengambil keputusan bisnis__ jika ditopang oleh _insights_ hasil _market research_ yang baik. Oleh karena itu perusahaan-perusahaan tersebut menjadikan _market research_ sebagai bagian penting dalam _cycle_ bisnisnya.
 
 Sebuah penelitian yang dipublikasikan oleh _European Society of Market Research_ (ESOMAR) beberapa tahun yang lalu, menyimpulkan bahwa:
 
@@ -293,9 +293,11 @@ Sebuah penelitian yang dipublikasikan oleh _European Society of Market Research_
 
 Oleh karena itu, anggapan bahwa _market research_ adalah sesuatu yang __pasti mahal__ harus dipertimbangkan kembali. 
 
+Dengan _budget_ yang _affordable_, perusahaan tetap bisa mendapatkan _insights_ yang berguna bagi bisnisnya. Oleh karena itu, kita akan membahas bagaimana menajamkan tujuan dan rumusan _market research_ agar tepat pada bagian-bagian selanjutnya. 
+
 ### _Keeping Market Research Agile_
 
-Berdasarkan uraian di atas, kita bisa membuat _market research_ menjadi _agile_ dan adaptif dengan beberapa tips sebagai berikut:
+Berdasarkan uraian-uraian di atas, kita bisa membuat _market research_ menjadi _agile_ dan adaptif dengan beberapa tips sebagai berikut:
 
 1. Lakukan _market research_ __jika dan hanya jika__ perusahaan masih ragu dengan keputusan yang akan diambil. Jika perusahaan sudah yakin dan mau menerima konsekuensi dari keputusan yang akan diambil, maka tidak perlu melakukan _market research_.
 1. Lakukan _cost-benefit ratio analysis_ dari _project market research_ yang hendak dilakukan. Ukur dan nilai _insights_ yang mungkin akan didapatkan, kemudian bandingkan dengan semua _cost_ yang mungkin muncul. _Cost_ dalam hal ini bukan berarti berupa uang (_budget_) yang dikeluarkan, tapi juga berupa waktu pelaksanaan dan _man power_ (sumber daya manusia).
@@ -307,12 +309,80 @@ Berdasarkan uraian di atas, kita bisa membuat _market research_ menjadi _agile_ 
 Saat kita berbicara tentang _market research_, setidaknya ada beberapa komponen yang biasa diteliti, yakni:
 
 1. Konsumen, 
-1. Market (bisnis), dan
-1. Regulator (pemerintah).
+1. _Market_ (pasar atau _business to business_), dan
+1. _Regulator_ (pemerintah).
 
 _Market research_ erat kaitannya dengan konsumen. Sebelum saya membahas _market research_ lebih jauh, saya akan membahas terlebih dahulu tentang konsumen.
 
+### Konsumen
 
+#### Definisi {-}
+
+Konsumen adalah setiap orang __pemakai barang dan atau jasa__ yang tersedia dalam masyarakat, baik bagi kepentingan __diri sendiri, keluarga, orang lain,__ maupun __mahluk hidup lain__ dan __tidak untuk diperdagangkan__.^[Undang-Undang Perlindungan Konsumen tahun 1999]
+
+Berdasarkan definisi di atas, maka setiap kita adalah seorang konsumen. Jika kita berbicara tentang konsumen, maka tidak lepas dari suatu hal bernama _consumer behavior_. Apa itu _consumer behavior_?
+
+#### Definisi {-}
+
+_The study of the processes involved when individuals/groups:_
+
+1. _Select_,
+1. _Purchase_,
+1. _Use_, or
+1. _Dispose_
+
+_of products, services, ideas, or experiences to satisfy needs and desires_.
+
+Salah satu _challenge_ terbesar yang dihadapi perusahaan adalah bagaimana bisa memahami _consumer behavior_ agar perusahaannya tetap bisa bersaing di _market_. _Market research_ adalah salah satu _tools_ yang bisa dipertimbangkan untuk bisa mendapatkan data-data _consumer behavior_.
+
+Pembahasan lebih lanjut terkait data terkait konsumen akan dibahas pada bagian - bagian selanjutnya.
+
+### _Market_
+
+Bisnis dari suatu perusahaan bisa dibagi menjadi dua berdasarkan jenis konsumennya:
+
+1. Perusahaan yang bergerak di _business to business_, yakni perusahaan yang memiliki konsumen perusahaan lainnya. Sebagai contoh suatu manufaktur yang menjadi _supplier_ produk atau jasa bagi perusahaan lain.
+1. Perusahaan yang bergerak di _business to end customer / consumer_, yakni perusahaan yang memiliki konsumen langsung masyarakat luas.
+
+Oleh karena itu cara perusahaan __bermain__ di _market_ berbeda-beda.
+
+Mengetahui apa yang terjadi di _market_ dan akan ke mana _market_ bergerak menjadi salah satu poin penting bagi strategi perusahaan untuk tetap bersaing. _Market research_ bisa juga digunakan untuk melihat bagaimana kondisi _market_. Biasanya metode _market research_ yang dipakai untuk memahami _market_ adalah:
+
+1. _Desk research_ dengan menganalisa data-data publik yang ada di pasar. Contohnya adalah dengan:
+   - Melihat dan menganalisa laporan keuangan perusahaan-perusahaan kompetitor (jika perusahaan tersebut termasuk perusahaan __.tbk__)
+   - Melihat aktivitas di bursa saham.
+   - Melihat dan menganalisa aktivitas di pasar atau _retail_.
+   - Melihat dan menganalisa aktivitas di media massa.
+1. Wawancara dengan _key person(s)_ dalam _market_ tersebut secara berkala.
+   - Jika memungkinkan, kita bisa berdiskusi secara kualitatif kepada orang-orang yang merupakan _key person_ dalam suatu _market_ agar mendapatkan gambaran dan _point of view_ lain dari para ahli tersebut.
+
+### _Regulator_
+
+Komponen terakhir yang tidak kalah penting adalah _regulator_. Sayangnya tidak banyak _market research_ yang _concern_ terhadap komponen ini (cenderung abai). Padahal segala aktivitas di _market_ akan sangat bergantung pada kebijakan-kebijakan yang diambil oleh _regulator_ (dalam hal ini pemerintah / kementrian / lembaga terkait). Tidak jarang suatu hasil temuan _market research_ menjadi sia-sia (tidak _applicable_) karena perubahan regulasi di _market_.
+
+Oleh karena itu, sebaiknya dalam merencanakan suatu _market research project_ kita perlu melakukan proyeksi dan simulasi terhadap regulasi yang berlaku. Jangan sampai saat _market research project_ tersebut berlangsung terjadi perubahan regulasi yang mengakibatkan tujuan utama _project_ tersebut menjadi tidak relevan.
+
+## _Discussion_
+
+Coba kalian deskripsikan dan jelaskan komponen-komponen yang ada bagi perusahaan-perusahaan berikut ini:
+
+1. Perusahaan hotel,
+1. Perusahaan _marketplace_,
+1. Perusahaan _retail minimarket_.
+
+\newpage
+
+# PERTEMUAN 2 {-}
+
+# LANGKAH-LANGKAH MELAKSANAKAN _MARKET RESEARCH_
+
+## _Research Workflow_
+
+\newpage
+
+# PERTEMUAN 3 {-}
+
+# _FORMULATING MARKET RESEARCH PROBLEM_
 
 \newpage
 
