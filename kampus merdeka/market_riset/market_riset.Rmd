@@ -344,8 +344,10 @@ Coba kalian deskripsikan dan jelaskan komponen-komponen yang ada bagi perusahaan
 
 Seperti halnya penelitian ilmiah lainnya, merencanakan dan melaksanakan _market research_ mengikuti _workflow_ berikut ini:
 
-```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Data Primer dan Sekunder"}
-knitr::include_graphics("flow.png")
+![](https://raw.githubusercontent.com/ikanx101/belajaR/master/Bukan%20Infografis/puzzles/Timeline%20Survey/proses%20riset.png 'gbr')
+
+```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Workflow Market Research"}
+knitr::include_graphics("proses riset.png")
 ```
 
 
