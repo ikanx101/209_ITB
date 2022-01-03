@@ -614,7 +614,24 @@ Secara teori, demografi penduduk suatu daerah cenderung stabil perubahannya. Dem
  
 Oleh karena tidak ada kejadian seperti di atas, maka kita masih boleh memakai data yang berusia 9 tahun tersebut.
 
-Berbeda kondisinya jika data yang hendak kita cari adalah data yang berkarakteristikk dinamis (cepat berubah). Kita tidak bisa mengandalkan data sekunder.
+Berbeda kondisinya jika data yang hendak kita cari adalah data yang berkarakteristik dinamis (cepat berubah). Kita tidak bisa mengandalkan data sekunder.
+
+## Jenis Data Berdasarkan Statistika
+
+Secara statistika, kita bisa mengelompokan data berdasarkan tipenya:
+
+1.  Data kualitatif: adalah data yang tidak bisa dilakukan operasi aritmatika (penjumlahan, pengurangan, pembagian, dan perkalian). Data seperti ini bisa juga disebut sebagai **data kategorik**.
+  - **Nominal**; Representasi dari sesuatu. Contoh: data seperti `gender`. Misalkan angka `1` saya tulis sebagai representasi dari `pria` dan `2` sebagai `wanita`.
+  - **Ordinal**; Urutan dari data menjadi penting. Contoh: skala *likert*, misalkan angka `1 - 6` sebagai representasi dari tingkat kesukaan atau kesetujuan (sangat suka sampai sangat tidak suka).
+1.  Data kuantitatif: adalah data yang bisa dilakukan operasi aritmatika (penjumlahan, pengurangan, pembagian, dan perkalian). Data seperti ini, kita akan sebut sebagai **data numerik**.
+  - **Diskrit**; bilangan bulat (*integer*). Contoh: banyaknya anak,
+    banyaknya karyawan, dll.
+  - **Kontinu**; bilangan *real* (mengandung koma). Contoh: tinggi
+    badan, berat badan, dll.
+
+Apa sih gunanya kita mengetahui suatu data termasuk ke dalam kualitatif atau kuantitatif?
+
+> Dengan mengetahui tipe data yang kita miliki, kita bisa dengan lebih baik memahami dan memilih analisa yang tepat bagi data tersebut.
 
 ### _From Data to Insights_
 
@@ -669,18 +686,62 @@ Ada empat dimensi dari _insight_, yakni:
 
 Setidaknya ada tiga kegunaan dari _consumer insight_, yakni:
 
-- *Communicate differently*.
-      - *Consumer insight* dapat digunakan untuk mengubah cara *brand*
+- *Communicate differently*
+   - *Consumer insight* dapat digunakan untuk mengubah cara *brand*
 berkomunikasi kepada target konsumennya. Contoh konkretnya, suatu *brand* susu kalsium yang identik dengan usia tua mengubah cara berkomunikasinya agar dapat diterima oleh usia muda setelah mendapatkan *insight* bahwa usia muda juga memerlukan kalsium yang sama.
-- *New product invention*.
-      - Tak dapat dipungkiri, di pasar sekarang ini (jika kita perhatikan dan pikirkan dengan seksama) beberapa produk baru lahir akibat dari *consumer insight*.
-- *New target market*.
-      - Ini salah satu kegunaan *consumer insight* yang cukup *powerful* jika *insight* yang diambil dengan sangat baik sekali. *Expanding target market* atau bahkan menangkap *target market* yang sebelumnya tak pernah ada dan potensial akan sangat menguntungkan.
+- *New product invention*
+   - Tak dapat dipungkiri, di pasar sekarang ini (jika kita perhatikan dan pikirkan dengan seksama) beberapa produk baru lahir akibat dari *consumer insight*.
+- *New target market*
+   - Ini salah satu kegunaan *consumer insight* yang cukup *powerful* jika *insight* yang diambil dengan sangat baik sekali. *Expanding target market* atau bahkan menangkap *target market* yang sebelumnya tak pernah ada dan potensial akan sangat menguntungkan.
 
 ## _Discussion_  {.unlisted .unnumbered}
 
+Perhatikan produk-produk konsumen sehari-hari. Ambil satu _brand_ produk lalu tuliskan contoh kegunaan suatu _insights_ bagi _brand_ tersebut!
+
 # PERTEMUAN V {-}
 # JENIS-JENIS RISET
+
+_Market research_ yang biasa dilakukan untuk kepentingan bisnis biasanya bisa dibagi menjadi dua kelompok, yakni:
+
+1. Riset Kualitatif, dan
+1. Riset Kuantitatif.
+
+## Perbedaan Mendasar
+
+```{r,echo=FALSE}
+faktor = c("Cara melakukan analisa","Tipikal pertanyaan","Jumlah sampel responden",
+	"Metode analisa","Syarat menjadi interviewer","Output yang dihasilkan")
+kualitatif = c("Eksploration: leave the 'how many'","Terbuka","Kecil (n<20)",
+	"Non statistical","Special skill required",
+	"Kaya insight tapi tidak untuk mengambil keputusan")
+kuantitatif = c("Descriptive & hypothesis testing","Tertutup","Besar (n>100)",
+	"Statistical","Less need for special skill required",
+	"Insight tidak terlalu banyak tapi reasonable dan bisa untuk mengambil keputusan")
+
+beda = data.frame(faktor,kualitatif,kuantitatif)
+
+beda %>% knitr::kable("pipe",caption = "Perbedaan Riset Kualitatif dan Kuantitatif")
+```
+
+Riset kualitatif mengutamakan penggalian informasi sebanyak-banyaknya dari responden. Oleh karena itu tidak ada kuesioner yang ketat. Banyaknya responden juga dibatasi karena informasi dari seorang responden saja bisa banyak sekali. _Interviewer_ juga harus seseorang yang pintar dalam bertanya dan menggali hingga mendapatkan jawaban yang sesuai (mendapatkan motivasi sesungguhnya dari responden dalam bertindak atau memilih).
+
+Riset kuantitatif mengutamakan jumlah responden yang banyak karena bersifat statistik (ada pengujian hipotesis atau analisa statistik lain yang digunakan). Oleh karena itu pertanyaan yang ditanyakan harus tertutup (berupa pilihan) agar mempermudah _interviewer_ dalam bertanya.
+
+## Memilih Riset yang Tepat
+
+Jika perusahaan memiliki keluangan dalam hal waktu, tenaga, dan biaya maka mereka bisa mempertimbangkan untuk melakukan riset secara holistik (kualitatif dan kuantitatif secara bersamaan). Adapun langkah-langkah yang biasa dilakukan antara lain:
+
+1. Melakukan _desk research_ terlebih dahulu untuk mengenal kondisi _market_ (kompetitor dan konsumen) serta _regulator_ terkait.
+1. Merancang dan melakukan riset kualitatif (bisa berupa __FGD__ atau _indepth-interview_). Kegunaannya adalah untuk menemukan:
+   - Parameter-parameter yang hendak dikuantifikasi,
+   - Hipotesis yang akan diuji.
+1. Hasil riset kualitatif akan dijadikan patokan dasar untuk membuat kuesioner riset kuantitatif (survey).
+1. Merancang dan melakukan riset kuantitatif berdasarkan temuan riset kualitatif.
+
+Dengan demikian proses _market research_ yang dilakukan akan _robust_ (kokoh) karena saling menopang satu sama lain.
+
+Namun demikian, tidak semua perusahaan memiliki keluangan tersebut. Oleh karena itu biasanya mereka hanya memilih salah satu di antara riset kualitatif atau kuantitatif tergantung tujuan yang hendak dijawab. Namun demikian, ada baiknya proses _preliminary research_ jangan ditinggalkan sama sekali karena akan sangat berguna untuk menajamkan proses formulasi permasalahan.
+
 ## _Discussion_  {.unlisted .unnumbered}
 
 # PERTEMUAN VI {-}
@@ -695,8 +756,9 @@ berkomunikasi kepada target konsumennya. Contoh konkretnya, suatu *brand* susu k
 # _SAMPLE DESIGN_
 ## _Discussion_  {.unlisted .unnumbered}
 
-# PERTEMUAN IX {-}
+\newpage
 
+# PERTEMUAN IX {-}
 # _DESIGNING QUESTIONNAIRE_
 
 Apakah kamu pernah mendengar istilah:
