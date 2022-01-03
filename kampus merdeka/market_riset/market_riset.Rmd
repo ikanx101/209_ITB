@@ -660,7 +660,7 @@ Ada empat dimensi dari _insight_, yakni:
 - Such insight is non-obvious, so it does not normally come from just one source of information.
    - Menurut saya, ini adalah hal yang menarik. Suatu *insight* harus memiliki **wow-momen**, suatu temuan yang tidak biasa atau tidak terbaca sama sekali pada saat perumusan masalah riset. Di zaman sekarang ini, di mana data dapat diambil dari berbagai macam sumber dapat memperkaya *point of view* untuk mengekstraksi *consumer insight*.
 - True insights need to be action-able.
-   - *Insight* yang baik haruslah�__membumi__, dalam artian harus dapat dibuat *action plan*.
+   - *Insight* yang baik haruslah __membumi__, dalam artian harus dapat dibuat *action plan*.
 - Consumer insights should be powerful enough that when they are acted upon customers can be persuaded to “change their behavior”.
 - To be sustainable, the goal of such customer change must be for mutual benefit.
    - *Mutual benefit* dalam artian memiliki nilai tambah dan keuntungan bagi konsumen dan *brand*.
