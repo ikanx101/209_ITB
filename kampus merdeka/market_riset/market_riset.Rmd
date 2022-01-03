@@ -392,6 +392,7 @@ Hal yang sama berlaku di _market research_. Formulasi masalah menjadi hal yang p
 
 Tujuan utama dari _market research_ adalah menyelesaikan masalah dan menjawab tujuan dari riset. Ada satu _guidance_ penting yang perlu dipahami, yakni:
 
+\newpage
 
 ```{r,include=FALSE}
 nomnoml::nomnoml("
@@ -565,9 +566,9 @@ Satu hal yang sering ditanyakan adalah:
 
 > Kapan kita menggunakan data primer? Kapan kita menggunakan data sekunder?
 
-#### Jawaban {-}
+#### Jawaban  {.unlisted .unnumbered}
 
-Jika data yang hendak kita cari ada data sekundernya, maka kita akan prioritaskan
+Berikut adalah panduan sederhana dalam memilih data primer atau sekunder:
 
 ```{r,include=FALSE}
 nomnoml::nomnoml("
@@ -583,13 +584,23 @@ nomnoml::nomnoml("
                  [Tidak] -> [Cari data primer]
                  [Ya] -> [Pakai data sekunder]
                  ",
-		 "ikanx.png",900,400
+		 "primer sekunder.png",900,400
 		)
 ```
 
 ```{r out.width = "75%",echo=FALSE,fig.align="center",fig.cap = "Flow Memilih Data Primer dan Data Sekunder"}
-knitr::include_graphics("ikanx.png")
+knitr::include_graphics("primer sekunder.png")
 ```
+
+Jika data yang hendak kita cari ada data sekundernya, maka kita akan prioritaskan data sekunder tersebut dengan syarat:
+
+> __Karakteristik data tidak berubah, baik secara waktu dan area__.
+
+Jika memenuhi syarat tersebut, kita diperbolehkan untuk memakai daa sekunder. Tapi jika tidak, mau tidak mau kita harus mencari data primer.
+
+Saya akan berikan ilustrasi sederhana:
+
+> Misalkan
 
 ### _From Data to Insights_
 
@@ -612,3 +623,165 @@ knitr::include_graphics("ikanx2.png")
 ```
 
 ## _Discussion_  {.unlisted .unnumbered}
+
+# PERTEMUAN V {-}
+# JENIS-JENIS RISET
+## _Discussion_  {.unlisted .unnumbered}
+
+# PERTEMUAN VI {-}
+# METODE RISET KUALITATIF
+## _Discussion_  {.unlisted .unnumbered}
+
+# PERTEMUAN VII {-}
+# METODE RISET KUANTITATIF
+## _Discussion_  {.unlisted .unnumbered}
+
+# PERTEMUAN VIII {-}
+# _SAMPLE DESIGN_
+## _Discussion_  {.unlisted .unnumbered}
+
+# PERTEMUAN IX {-}
+
+# _DESIGNING QUESTIONNAIRE_
+
+Apakah kamu pernah mendengar istilah:
+
+> ___Garbage in, garbage out!___
+
+Perlu saya ingatkan kembali bahwa tujuan utama dari _market research_ adalah mencari dan mendapatkan _insights_ yang berguna bagi bisnis. Bagaimana kita bisa mendapatkan informasi yang _reliable_ jika data yang didapatkan __kotor__?
+
+Setidaknya ada dua hal yang menyebabkan data yang kita dapatkan __kotor__, yakni:
+
+1. Kuesioner yang buruk,
+1. Pelaksanaan _fieldwork_ survey yang buruk.
+
+Kali ini saya hendak membahas tentang bagaimana kita bisa membuat kuesioner survey yang lebih baik. Pembahasan terkait pelaksanaan _fieldwork_ akan saya bahas di kemudian hari. Oke saya mulai ya.
+
+## Kuesioner yang Baik
+
+Kuesioner yang baik adalah kuesioner yang sejalan dengan tujuan survey dan tidak menimbulkan bias pada saat pengisiannya.
+
+Ingat kembali bahwa __masalah__, __tujuan__ dan __data__ dalam _market research_ harus __harmonis__. Ingat kembali bahwa dua jenis informasi dalam _market research_: _nice-to-know_ dan _need-to-know_. Maka dari itu kuesioner yang baik harus bisa mengekstrak informasi _need-to-know_ dari responden.
+
+## Merancang Kuesioner
+
+Berikut adalah beberapa panduan dasar yang bisa digunakan untuk membuat kuesioner:
+
+### _Identity Bias_
+
+Ada kalanya kita melakukan survey untuk kepentingan _sales marketing_ sehingga harus menanyakan seputar _brand_ tertentu. Ada baiknya kita memperkenalkan diri kita sebagai _independen researcher_ kepada responden. Kalaupun survey dilakukan secara _online_, kita tetap harus memperkenal diri pada bagian depan kuesioner _online_.
+
+Kenapa harus _independen researcher_? Tujuannya adalah untuk menghindari _bias_ yang mungkin muncul akibat identitas. Sebagai contoh:
+
+Anda sedang mewawancarai seorang responden. Di awal wawancara, Anda memperkenalkan diri sebagai orang yang berafiliasi dengan _brand_ tertentu. 
+
+Saat tiba pertanyaan terkait _brand_ tersebut, sebagian responden akan merasa canggung untuk memberikan jawaban atau penilaian yang __jujur__ jika memang dinilai __buruk__.
+
+### Tipe Pertanyaan dan Jawaban
+
+Dalam kuesioner, ada berbagai tipe pertanyaan yang sering digunakan seperti:
+
+- _Single answer_: responden hanya boleh memilih __satu__ jawaban.
+- _Multiple answer_: responden boleh memilih __lebih dari satu__ jawaban.
+- _Open question_: responden bisa menjawab dengan bebas (tanpa ada pilihan jawaban).
+- _Ranking_ atau _order_: responden disuruh untuk mengurukan atau membuat _ranking_ dari pilihan yang ada.
+
+Masing-masing tipe pertanyaan memiliki tujuan dan cara analisa yang berbeda-beda. Pastikan bahwa __informasi yang kita butuhkan sudah sesuai dengan tipe pertanyaan__ yang ditanyakan.
+
+Khusus survey yang dilakukan _online_, ada baiknya beberapa pertanyaan sudah dibuatkan pilihan jawabannya. Contohnya: Saya sering menemukan pertanyaan `kota` asal responden (atau `kabupaten` bahkan sampai level `kecamatan`) dibuat dalam bentuk _open question_. Konsekuensinya adalah __inkonsistensi penulisan jawaban__ yang bermuara pada rumitnya menganalisa karena dibutuhkan _data preparation_ yang lebih lama.
+
+### _Sensitive industry_
+
+Apa yang dimaksud dengan _sensitive industry_? 
+
+Biasanya, kita berharap agar responden yang kita survey adalah masyarakat umum (orang awam) bukan seorang _expert_. Oleh karena itu, kita perlu memastikan tidak ada _expert_ yang diwawancarai.
+
+Contoh paling mudah adalah saat saya hendak melakukan survey terkait _media habit_, saya perlu mem-_filter_ beberapa profesi berikut ini:
+
+- Orang yang bekerja di media massa (TV, radio, media _online_, koran, dll).
+- _Selebgram_, _Youtubers_, _TikTokers_, dll.
+
+Contoh lainnya adalah saat saya hendak melakukan survey terkait habit hidup sehat, saya perlu mem-_filter_ beberapa profesi berikut ini:
+
+- Ahli gizi.
+- Tenaga kesehatan, seperti dokter, perawat, bidan, dll.
+- Atlit, _gym instructor_, dll.
+
+### Pertanyaan Normatif
+
+__Hindari pertanyaan normatif!__
+
+Kita tentu ingin mendapatkan jawaban yang jujur dari responden sehingga bisa mendapatkan gambaran _real_ yang ada di _market_. Oleh karena itu, kita perlu menghindari pertanyaan yang bersifat baik-buruk atau benar-salah.
+
+### Alur Pertanyaan
+
+Mulailah bertanya dari pertanyaan umum untuk menghindari bias akibat _brand_ (sama seperti poin pertama). Kita bisa memulainya dengan pertanyaan terkait kategori dari _brand_ tersebut. Sebagai contoh:
+        
+- Saat saya hendak melakukan survey terkait _brand_ __Aqua__, saya tidak langsung bertanya terkait _brand_ tersebut.
+- Saya akan mulai dengan pertanyaan seputar kategori __air minum dalam kemasan__ atau __air mineral bermerek__.
+- Setelah itu baru kita masuk ke pertanyaan _brand_.
+
+Selain itu, _question route_ juga bagian yang penting dalam menyusun pertanyaan di kuesioner. Kita harus pastikan bahwa __responden mendapatkan pertanyaan yang tepat sesuai dengan jawaban yang ia berikan sebelumnya__. Sebagai contoh, saya sering mendapatkan kuesioner dimana semua responden mendapatkan pertanyaan yang serupa padahal jawaban yang diberikan berbeda-beda. Misalkan:
+
+Ada pertanyaan sebagai berikut:
+
+1. Apakah Anda pernah mengkonsumsi produk X?
+     - Ya
+     - Tidak
+1. Bagaimana pendapat anda terhadap produk X?
+     - ______________________________________ (_open question_)
+
+
+Seharusnya responden yang menjawab __tidak__ pada pertanyaan pertama, tidak perlu ditanyakan pertanyaan kedua karena responden tidak pernah mengkonsumsi produk X tersebut. Tapi pada kenyataannya, saya sering mendapatkan survey yang tidak memiliki _routing_ seperti itu.
+
+### Tingkat Kesulitan Pertanyaan
+
+Perhatikan bahwa __kita hanya menanyakan pertanyaan yang bisa dijawab oleh responden__. Kita harus hindari penggunaan istilah-istilah yang tidak dipahami oleh responden. Sebisa mungkin, gunakan istilah dalam Bahasa Indonesia. Jika tidak memungkinkan, siapkan definisi yang bisa mudah dipahami oleh responden.
+
+### Durasi survey
+
+___Siapa sih yang mau diwawancarai lama-lama?___
+
+Oleh karena itu, kita harus pastikan bahwa lamanya wawancara (atau panjangnya kuesioner) tidak terlalu lama. 
+
+Caranya adalah dengan menelaah kembali pertanyaan mana saja yang masuk ke dalam:
+    - ___Must-know question___: merupakan pertanyaan inti yang diharapkan bisa menjawab tujuan survey dan permasalahan _real_ yang dihadapi.
+    - ___Nice-to-know question___: merupakan pertanyaan pendukung yang bisa memperkaya analisa dari survey.
+
+Kita harus pastikan bahwa semua pertanyaan _must-know_ sudah ter-_cover_. Lalu silakan _pilot_ wawancara terlebih dahulu. Jika masih cukup waktu, silakan tambahkan pertanyaan _nice-to-know_.
+
+Sebenarnya tidak ada limitasi durasi survey yang baku. Semua disesuaikan dengan kebiasaan dan pengalaman. Menurut pengalaman saya, durasi maksimal survey berbeda-beda tergantung cara wawancaranya. Misalkan:
+    - Wawancara tatap muka, maksimal 30 - 45 menit.
+    - Wawancara _by phone_, maksimal 10 menit.
+    - _Online survey_, maksimal 5 menit.
+
+Jika melewati durasi tersebut, saya sering menemukan responden jenuh dan cenderung menjawab _ngasal_ agar cepat selesai.
+
+### Duplikasi responden
+
+Masalah ini sering muncul pada _online survey_. Bagaimana kita memastikan bahwa seorang responden __hanya mengisi satu kuesioner saja__ (tidak mengisi berulang-ulang). Beberapa _online survey tools_ memiliki fitur yang bisa mendeteksi hal ini dengan cara mengaktifkan _cookies to prevent duplicate responses_. Namun cara ini hanya bisa mencegah responden mengisi berulang kali dengan _gadget_ yang sama. Masih ada kemungkinan responden mengisi berulang kali dengan _gadget_ yang berbeda-beda.
+
+## _Discussion_  {.unlisted .unnumbered}
+
+
+
+# PERTEMUAN X {-}
+# TUGAS I
+## _Discussion_  {.unlisted .unnumbered}
+
+# PERTEMUAN XI {-}
+# _DATA PROCESSING_
+## _Discussion_  {.unlisted .unnumbered}
+
+# PERTEMUAN XII {-}
+# ANALISA DATA
+## _Discussion_  {.unlisted .unnumbered}
+
+# PERTEMUAN XIII {-}
+# MELAKSANAKAN _DESK RESEARCH_
+## _Discussion_  {.unlisted .unnumbered}
+
+# PERTEMUAN XIV {-}
+# CONTOH _MARKET RESEARCH PROJECTS_
+## _Discussion_  {.unlisted .unnumbered}
+
