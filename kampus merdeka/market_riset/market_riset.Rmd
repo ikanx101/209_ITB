@@ -16,7 +16,7 @@ output:
     fig_height: 4
     fig_caption: true
     highlight: breezedark
-linestretch: 1.5
+linestretch: 1.25
 ---
 
 ```{r setup, include=FALSE}
@@ -439,6 +439,54 @@ __NAMUN__ pada saat melakukan proses kritis ketiga (analisa data dan _reporting_
 
 Pada pertemuan selanjutnya, saya akan jelaskan bagaimana suatu __analisa memiliki__ ___point of view___ yang bisa mengubah alur kesimpulan pada laporan _market research_.
 
+## Perlengkapan _Market Research_
+
+Untuk melakukan _market research_ diperlukan setidaknya dua perlengkapan atau dokumen, seperti:
+
+1. Proposal, dan
+1. Kuesioner.
+
+Penjelasan lebih lanjut terkait kuesioner akan di bahas pada pertemuan selanjutnya. 
+
+Pada pertemuan ini saya akan membahas terkait proposal _market research_.
+
+### Membuat Proposal
+
+Sesuai dengan namanya, _proposal_ berarti perencanaan. Salah satu kegunaan _proposal_ yang menurut saya paling penting adalah sebagai _guidelines_ bagi _researchers_ dan _client_ dalam melaksanakan _market research_.
+
+Apa saja isi proposalnya? Setidaknya ada beberapa bagian berikut ini:
+
+1. Latar belakang masalah.
+    - Mungkin bagian ini terkesan formalitas saja tapi menurut saya justru ini adalah bagian yang terpenting. Seorang _researcher_ yang baik harus bisa menemukan dan menuliskan masalah yang dihadapinya dengan jelas dan runut.
+    - _Market research_ harus bisa menyelesaikan permasalahan yang ada. Oleh karena itu, titik kritis pertama yang harus diselesaikan dengan baik adalah memformulasikan masalah.
+1. Tujuan riset.
+    - Dari masalah di atas, kita harus menurunkannya menjadi tujuan riset. Kelak kuesioner atau pertanyaan-pertanyaan yang ada harus bisa menjawab tujuan dari riset ini.
+1. Metode penelitian.
+    - Metode penelitian adalah bagian yang paling seru. 
+    - Pada bagian ini, kita harus menentukan metode apa yang hendak kita pakai. 
+        - Apakah riset kualitatif? 
+        - Ataukah riset kuantitatif? 
+    - Sumber data apa yang hendak kita akan gunakan?
+        - Apakah data primer?
+        - Apakah data sekunder?
+    - Siapa target responden kita? Apa saja kriteria responden tersebut?
+    - Berapa banyak responden yang dibutuhkan?
+    - Mana saja _coverage_ atau area riset?
+1. Dasar teori.
+    - Pada bagian ini, kita sebaiknya menjelaskan dasar teori dan rencana analisa yang hendak dilakukan dengan data hasil riset tersebut.
+    - Biasanya saya menambahkan:
+        - Data sekunder yang bisa menunjang masalah riset. Data sekunder ini bisa berasal dari _previous research_ atau data publik lainnya yang terkait.
+        - Teori-teori yang berkaitan dengan riset. Contoh seerhana adalah jika kita hendak melakukan suatu pengukuran tertentu, kita bisa memberikan penjelasan terkait definisi dan cara pengukuran tersebut.
+        - _Mock up_ analisa yang hendak dilakukan.
+1. _Timeline_.
+    - _Timeline_ pelaksanaan riset juga biasa merupakan bagian yang diremehkan padahal ini adalah bagian yang penting juga.
+    - Kita harus bisa menjaga agar pelaksanaan riset dilakukan tepat waktu sehingga momen tetap terjaga.
+1. _Budget_.
+    - Bagian ini biasanya wajib ada pada proposal profesional.
+1. _Research team_
+    - Bagian ini biasanya wajib ada pada proposal profesional.
+    - Di bagian ini perlu dijelaskan siapa saja tenaga ahli yang turut serta dalam _project market research_ tersebut.
+
 ## _Discussion_  {.unlisted .unnumbered}
 
 Jelaskan dengan singkat apa yang perlu dilakukan jika pada saat pertengahan proses _fieldwork survey_ kita baru sadar ada satu pertanyaan yang sebenarnya tidak perlu ditanyakan kepada responden!
@@ -620,14 +668,12 @@ Berbeda kondisinya jika data yang hendak kita cari adalah data yang berkarakteri
 
 Secara statistika, kita bisa mengelompokan data berdasarkan tipenya:
 
-1.  Data kualitatif: adalah data yang tidak bisa dilakukan operasi aritmatika (penjumlahan, pengurangan, pembagian, dan perkalian). Data seperti ini bisa juga disebut sebagai **data kategorik**.
+- Data kualitatif: adalah data yang tidak bisa dilakukan operasi aritmatika (penjumlahan, pengurangan, pembagian, dan perkalian). Data seperti ini bisa juga disebut sebagai **data kategorik**.
   - **Nominal**; Representasi dari sesuatu. Contoh: data seperti `gender`. Misalkan angka `1` saya tulis sebagai representasi dari `pria` dan `2` sebagai `wanita`.
   - **Ordinal**; Urutan dari data menjadi penting. Contoh: skala *likert*, misalkan angka `1 - 6` sebagai representasi dari tingkat kesukaan atau kesetujuan (sangat suka sampai sangat tidak suka).
-1.  Data kuantitatif: adalah data yang bisa dilakukan operasi aritmatika (penjumlahan, pengurangan, pembagian, dan perkalian). Data seperti ini, kita akan sebut sebagai **data numerik**.
-  - **Diskrit**; bilangan bulat (*integer*). Contoh: banyaknya anak,
-    banyaknya karyawan, dll.
-  - **Kontinu**; bilangan *real* (mengandung koma). Contoh: tinggi
-    badan, berat badan, dll.
+- Data kuantitatif: adalah data yang bisa dilakukan operasi aritmatika (penjumlahan, pengurangan, pembagian, dan perkalian). Data seperti ini, kita akan sebut sebagai **data numerik**.
+  - **Diskrit**; bilangan bulat (*integer*). Contoh: banyaknya anak, banyaknya karyawan, dll.
+  - **Kontinu**; bilangan *real* (mengandung koma). Contoh: tinggi badan, berat badan, dll.
 
 Apa sih gunanya kita mengetahui suatu data termasuk ke dalam kualitatif atau kuantitatif?
 
@@ -674,12 +720,12 @@ Menurut Laughlin (2015):
 
 Ada empat dimensi dari _insight_, yakni:
 
-- Such insight is non-obvious, so it does not normally come from just one source of information.
+- _Such insight is non-obvious, so it does not normally come from just one source of information_.
    - Menurut saya, ini adalah hal yang menarik. Suatu *insight* harus memiliki **wow-momen**, suatu temuan yang tidak biasa atau tidak terbaca sama sekali pada saat perumusan masalah riset. Di zaman sekarang ini, di mana data dapat diambil dari berbagai macam sumber dapat memperkaya *point of view* untuk mengekstraksi *consumer insight*.
-- True insights need to be action-able.
+- _True insights need to be action-able_.
    - *Insight* yang baik haruslah __membumi__, dalam artian harus dapat dibuat *action plan*.
-- Consumer insights should be powerful enough that when they are acted upon customers can be persuaded to “change their behavior”.
-- To be sustainable, the goal of such customer change must be for mutual benefit.
+- _Consumer insights should be powerful enough that when they are acted upon customers can be persuaded to “change their behavior”_.
+- _To be sustainable, the goal of such customer change must be for mutual benefit_.
    - *Mutual benefit* dalam artian memiliki nilai tambah dan keuntungan bagi konsumen dan *brand*.
 
 ### Kegunaan _Insight_
