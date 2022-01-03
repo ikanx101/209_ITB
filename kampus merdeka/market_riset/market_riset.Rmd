@@ -434,6 +434,8 @@ Jika:
 - Proses kritis pertama (formulasi masalah) sudah benar, dan 
 - Proses kritis kedua (_design research_ dan _collect data_) sudah benar,
 
+__NAMUN__ pada saat melakukan proses kritis ketiga (analisa data dan _reporting_) salah
+
 ## _Discussion_  {.unlisted .unnumbered}
 
 \newpage
