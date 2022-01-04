@@ -797,7 +797,9 @@ Suatu perusahaan hendak melakukan _market research_ seputar _brand_-nya. Mereka 
 
 Sebagaimana telah dijelaskan pada bagian sebelumnya, tipe riset kualitatif bersifat eksplorasi. Oleh karena itu diperlukan kemampuan khusus bagi _interviewer_ dalam menggali jawaban responden. Untuk melakukan itu, _interviewer_ tidak dibekali dengan kuesioner yang rumit. Biasanya mereka hanya menggunakan _discussion guide_ (DG) berupa beberapa pertanyaan inti yang wajib ditanyakan. Cara bertanya dan cara berkomunikasi dengan responden tentu akan _unique_ di setiap sesi wawancara.
 
-Setidaknya ada tiga contoh riset kualitatif yang sering dilakukan, yakni:
+Jumlah sampel responden pada riset ini relatif sedikit $<30$ orang mengingat sifatnya yang eksplorasi. Semakin banyak responden, maka akan semakin banyak juga informasi yang didapatkan.
+
+Setidaknya ada tiga metode riset kualitatif yang sering dilakukan, yakni:
 
 1. _Indepth Interview_,
 1. _Focus Group Discussion_, dan
@@ -817,6 +819,10 @@ Berikut adalah ilustrasinya:
 
 #### Ilustrasi IDI  {.unlisted .unnumbered}
 
+```{r out.width = "75%",echo=FALSE,fig.align = "center",fig.cap = "Ilustrasi Indepth Interview"}
+knitr::include_graphics("idi.jpg")
+```
+
 Seorang wanita berusia 35 tahun dengan status menikah sedang mengkonsumsi produk diet tertentu. _Interviewer_ bertujuan untuk mencari tahu motivasi diet wanita tersebut. Jawaban pertama dari wanita tersebut adalah:
 
 > _Saya melakukan diet untuk mendapatkan bentuk tubuh yang ideal kembali_.
@@ -834,7 +840,7 @@ _Indepth interview_ adalah salah satu riset kualitatif yang tepat dilakukan jika
 
 Namun demikian karena proses IDI untuk seorang responden biasanya memakan waktu lama, maka __waktu pelaksanaan__ dan __biaya__ menjadi kelemahan dari IDI.
 
-Biasanya dalam satu _market research project_ IDI dibutuhkan 10 - 20 orang untuk diwawancari.
+Biasanya dalam satu _market research project_ IDI dibutuhkan 10 - 20 orang untuk diwawancarai.
 
 ## _Focus Group Discussion_ (FGD)
 
@@ -868,7 +874,7 @@ Observasi berarti mengamati. Dari arti tersebut kita bisa mengartikan bahwa rise
 
 Pada _qualitative observation_, hal yang biasa diamati biasanya adalah _habit_ responden dalam area dan rentang waktu tertentu. Setiap rentetan _event_ tersebut dicatat untuk kemudian di-agregat dengan data dari responden lainnnya lalu dianalisa apakah ada pola (kesamaan) atau perbedaan.
 
-```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Ilustrasi Qualitative Observation"}
+```{r out.width = "75%",echo=FALSE,fig.align = "center",fig.cap = "Ilustrasi Qualitative Observation"}
 knitr::include_graphics("sby.jpg")
 ```
 
@@ -881,10 +887,28 @@ Keuntungan dari observasi ini adalah:
 
 Namun kelemahan utamanya adalah di __waktu pelaksanaan__ dan __biaya__ yang dikeluarkan.
 
+Biasanya dalam satu _market research projects_ dibutuhkan sebanyak minimal 10-20 orang responden.
+
 ## _Discussion_  {.unlisted .unnumbered}
+
+Suatu perusahaan hendak mencari ide untuk pengembangan produk baru dari nol. Kira-kira dari tiga metode riset kualitatif yang sudah dijelaskan di atas, mana yang lebih tepat digunakan? Jelaskan dengan singkat!
 
 # PERTEMUAN VII {-}
 # METODE RISET KUANTITATIF
+
+Sebagaimana yang telah dijelaskan pada bagian sebelumnya, riset kuantitatif lebih menekankan pada analisa statistik. Oleh karena itu dibutuhkan sampel responden yang banyak (kelak akan dibahas bagaimana cara menghitung banyak sampel pada pertemuan selanjutnya). Kuesioner yang digunakan juga harus berstruktur rapi dengan tipe pertanyaan tertutup agar mudah dalam menganalisanya.
+
+Biasanya tujuan dan tipe analisa statistika yang digunakan sudah sangat jelas.
+
+Setidaknya ada tiga metode riset kuantitatif yang sering digunakan:
+
+1. _Interview_ (survey).
+  - _Phone survey_.
+  - _Face to face interview_.
+  - _Online survey_.
+1. _Quantitative Observation_.
+1. _Desk Research_.
+
 ## _Discussion_  {.unlisted .unnumbered}
 
 # PERTEMUAN VIII {-}
