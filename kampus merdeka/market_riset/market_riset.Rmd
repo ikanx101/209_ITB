@@ -1044,7 +1044,7 @@ Secara praktis, jumlah sampel minimal untuk pengolahan data adalah `30` baris da
 Namun, untuk lebih tepat kita dapat menggunakan _sample size calculator online_. Salah satunya adalah _calculator_ pada situs berikut ini^[https://www.calculator.net/sample-size-calculator.html] :
 
 ```{r out.width = "75%",echo=FALSE,fig.align = "center",fig.cap = "Sample Size Calculator Online"}
-knitr::include_graphics("kalkulator.jpg")
+knitr::include_graphics("calculator.jpg")
 ```
 
 Minimal ada tiga informasi yang harus diketahui untuk menghitung berapa banyak _sample_ yang dibutuhkan, apa saja itu?
