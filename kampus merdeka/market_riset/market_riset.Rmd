@@ -790,8 +790,93 @@ Namun demikian, tidak semua perusahaan memiliki keluangan tersebut. Oleh karena 
 
 ## _Discussion_  {.unlisted .unnumbered}
 
+Suatu perusahaan hendak melakukan _market research_ seputar _brand_-nya. Mereka ingin mencari ide jalan cerita untuk iklan TV dari _brand_ tersebut. Menurut Anda, tipe riset apa yang cocok untuk tujuan seperti itu? Jelaskan dengan singkat!
+
 # PERTEMUAN VI {-}
 # METODE RISET KUALITATIF
+
+Sebagaimana telah dijelaskan pada bagian sebelumnya, tipe riset kualitatif bersifat eksplorasi. Oleh karena itu diperlukan kemampuan khusus bagi _interviewer_ dalam menggali jawaban responden. Untuk melakukan itu, _interviewer_ tidak dibekali dengan kuesioner yang rumit. Biasanya mereka hanya menggunakan _discussion guide_ (DG) berupa beberapa pertanyaan inti yang wajib ditanyakan. Cara bertanya dan cara berkomunikasi dengan responden tentu akan _unique_ di setiap sesi wawancara.
+
+Setidaknya ada tiga contoh riset kualitatif yang sering dilakukan, yakni:
+
+1. _Indepth Interview_,
+1. _Focus Group Discussion_, dan
+1. _Qualitative Observation_.
+
+## _Indepth Interview_ (IDI)
+
+Sesuai dengan namanya, _indepth interview_ berarti wawancara mendalam. Pada praktiknya, seorang _interviewer_ akan mewawancarai seorang responden dalam durasi waktu tertentu. _Interviewer_ dibekali dengan _discussion guide_ dan harus terus menggali jawaban responden.
+
+> _Kapan seorang _interviewer_ harus stop menggali?_
+
+Sampai jawaban berupa motivasi terdalam responden sudah didapatkan.
+
+Berikut adalah ilustrasinya:
+
+---
+
+#### Ilustrasi IDI  {.unlisted .unnumbered}
+
+Seorang wanita berusia 35 tahun dengan status menikah sedang mengkonsumsi produk diet tertentu. _Interviewer_ bertujuan untuk mencari tahu motivasi diet wanita tersebut. Jawaban pertama dari wanita tersebut adalah:
+
+> _Saya melakukan diet untuk mendapatkan bentuk tubuh yang ideal kembali_.
+
+_Interviewer_ terus menggali bentuk tubuh seperti apa yang dimaksud dan kenapa harus seperti itu. Setelah bertanya lebih lanjut didapatkan informasi bahwa:
+
+> _Wanita tersebut ingin menyelamatkan rumah tangganya karena suami tertarik dengan wanita lain._
+
+---
+
+_Indepth interview_ adalah salah satu riset kualitatif yang tepat dilakukan jika kita ingin mencari _root of the causes_. IDI memiliki beberapa keuntungan sebagai berikut:
+
+- _Allow freedom to dig deeper_.
+- _More private, personal feeling and thoughts_.
+
+Namun demikian karena proses IDI untuk seorang responden biasanya memakan waktu lama, maka __waktu pelaksanaan__ dan __biaya__ menjadi kelemahan dari IDI.
+
+Biasanya dalam satu _market research project_ IDI dibutuhkan 10 - 20 orang untuk diwawancari.
+
+## _Focus Group Discussion_ (FGD)
+
+Apa itu FGD?
+
+FGD berarti mengumpulkan sekumpulan orang yang _homogen_ (antara 7 - 10 orang) dalam suatu waktu untuk mendiskusikan beberapa topik yang dipandu oleh seorang _moderator_. Berbeda dengan IDI yang bersifat _one on one_, FGD lebih dinamis karena akan ada interaksi dari banyak orang sekaligus.
+
+Oleh karena itu tugas seorang _moderator_ cukup menantang, yakni:
+
+> Membuat setiap orang punya kesempatan yang sama untuk mengutarakan jawaban dan pendapatnya.
+
+Biasanya dalam satu grup akan selalu ada orang yang dominan dan kebalikannya. Maka dari itu jangan sampai __suara si dominan__ menjadi __suara dari grup tersebut__.
+
+FGD memiliki beberapa keuntungan sebagai berikut:
+
+- _Group interaction and dynamics_.
+- _Visual records helps researchers to explain interacions_.
+
+Namun keuntungan tersebut juga bisa mengakibatkan beberapa kelemahan seperti:
+
+- _More complex to analyze because of group interactions_.
+- _Harder to dig deeper about private issues_.
+
+Biasanya dalam satu _market research projects_ dibutukan FGD sebanyak minimal 2 - 3 grup.
+
+## _Qualitative Observation_
+
+Satu metode lagi yang sering digunakan pada riset kualitatif adalah observasi. Dalam beberapa kesempatan, observasi bisa juga dikategorikan dalam riset kuantitatif tergantung dari data apa yang diambil, cara mengumpulkan datanya, dan seberapa banyak sampel yang diambil.
+
+Observasi berarti mengamati. Dari arti tersebut kita bisa mengartikan bahwa riset tipe ini tidak memperbolehkan adanya interaksi antara _interviewer_ dengan responden. _Interviewer_ hanya mengamati dan mencatat apa saja yang terjadi di sekitar responden ada rentang waktu tertentu.
+
+Pada _qualitative observation_, hal yang biasa diamati biasanya adalah _habit_ responden dalam area dan rentang waktu tertentu. Setiap rentetan _event_ tersebut dicatat untuk kemudian di-agregat dengan data dari responden lainnnya lalu dianalisa apakah ada pola (kesamaan) atau perbedaan.
+
+Secara teknis pelaksanaan, _qualitative observation_ memakan waktu yang sangat lama untuk dilakukan per satu orang responden. Karena biasanya pada pengambilan data pertama, responden belum bertindak _natural_ (masih _jaim_) sehingga diperlukan beberapa iterasi hingga responden merasa nyaman tindak-tanduknya diamati.
+
+Keuntungan dari observasi ini adalah:
+
+- Bisa mendapatkan data habit secara utuh.
+- Kita bisa melihat bagaimana cara responden mengkonsumsi dan berinteraksi dengan produk-produk tertentu.
+
+Namun kelemahan utamanya adalah di __waktu pelaksanaan__ dan __biaya__ yang dikeluarkan.
+
 ## _Discussion_  {.unlisted .unnumbered}
 
 # PERTEMUAN VII {-}
