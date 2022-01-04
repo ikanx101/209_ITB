@@ -744,6 +744,8 @@ berkomunikasi kepada target konsumennya. Contoh konkretnya, suatu *brand* susu k
 
 Perhatikan produk-produk konsumen sehari-hari. Ambil satu _brand_ produk lalu tuliskan contoh kegunaan suatu _insights_ bagi _brand_ tersebut!
 
+\newpage
+
 # PERTEMUAN V {-}
 # JENIS-JENIS RISET
 
@@ -792,6 +794,8 @@ Namun demikian, tidak semua perusahaan memiliki keluangan tersebut. Oleh karena 
 
 Suatu perusahaan hendak melakukan _market research_ seputar _brand_-nya. Mereka ingin mencari ide jalan cerita untuk iklan TV dari _brand_ tersebut. Menurut Anda, tipe riset apa yang cocok untuk tujuan seperti itu? Jelaskan dengan singkat!
 
+\newpage
+
 # PERTEMUAN VI {-}
 # METODE RISET KUALITATIF
 
@@ -817,9 +821,9 @@ Berikut adalah ilustrasinya:
 
 ---
 
-#### Ilustrasi IDI  {.unlisted .unnumbered}
+### Ilustrasi IDI  {.unlisted .unnumbered}
 
-```{r out.width = "75%",echo=FALSE,fig.align = "center",fig.cap = "Ilustrasi Indepth Interview"}
+```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Ilustrasi Indepth Interview"}
 knitr::include_graphics("idi.jpg")
 ```
 
@@ -874,7 +878,7 @@ Observasi berarti mengamati. Dari arti tersebut kita bisa mengartikan bahwa rise
 
 Pada _qualitative observation_, hal yang biasa diamati biasanya adalah _habit_ responden dalam area dan rentang waktu tertentu. Setiap rentetan _event_ tersebut dicatat untuk kemudian di-agregat dengan data dari responden lainnnya lalu dianalisa apakah ada pola (kesamaan) atau perbedaan.
 
-```{r out.width = "75%",echo=FALSE,fig.align = "center",fig.cap = "Ilustrasi Qualitative Observation"}
+```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Ilustrasi Qualitative Observation"}
 knitr::include_graphics("sby.jpg")
 ```
 
@@ -893,6 +897,8 @@ Biasanya dalam satu _market research projects_ dibutuhkan sebanyak minimal 10-20
 
 Suatu perusahaan hendak mencari ide untuk pengembangan produk baru dari nol. Kira-kira dari tiga metode riset kualitatif yang sudah dijelaskan di atas, mana yang lebih tepat digunakan? Jelaskan dengan singkat!
 
+\newpage
+
 # PERTEMUAN VII {-}
 # METODE RISET KUANTITATIF
 
@@ -903,13 +909,37 @@ Biasanya tujuan dan tipe analisa statistika yang digunakan sudah sangat jelas.
 Setidaknya ada tiga metode riset kuantitatif yang sering digunakan:
 
 1. _Interview_ (survey).
-  - _Phone survey_.
-  - _Face to face interview_.
-  - _Online survey_.
+    - _Phone survey_.
+    - _Face to face interview_.
+    - _Online survey_.
 1. _Quantitative Observation_.
 1. _Desk Research_.
 
+## _Interview_
+
+Secara bahasa, _interview_ berarti wawancara. Dalam riset kuantitatif, _interview_ yang dimaksud adalah _survey_ yakni mencari sejumlah banyak orang sebagai responden untuk diwawancarai dengan panduan kuesioner yang terstruktur. 
+
+Secara teknis, pelaksanaannya bisa secara langsung (tatap muka - _face to face interview_), melalui telepon (_phone survey_), atau melalui _online survey_. 
+
+Masing-masing memiliki keuntungan dan kekurangannya sendiri. Berikut adalah detailnya:
+
+```{r,echo=FALSE}
+interview = c("Phone survey","Face to face","Online survey")
+advantages = c("Waktu pelaksanaan relatif cepat.",
+	       "Ekspresi dan kejujuran responden bisa terlihat dengan jelas.",
+	       "Waktu pelaksanaan sangat cepat.")
+disadvantages = c("Peluang kegagalan saat telepon tinggi. Lama interview tidak bisa terlalu lama (maks 5 menit). Ekspresi responden tidak terlihat.",
+		  "Waktu pelaksanaan relatif lebih lama.",
+		  "Tidak ada jaminan responden yang mengisi sudah sesuai target responden yang diinginkan.")
+
+int_rekap = data.frame(interview,advantages,disadvantages)
+
+int_rekap %>% knitr::kable("pipe",caption = "Perbedaan Metode Interview")
+```
+
 ## _Discussion_  {.unlisted .unnumbered}
+
+\newpage
 
 # PERTEMUAN VIII {-}
 # _SAMPLE DESIGN_
