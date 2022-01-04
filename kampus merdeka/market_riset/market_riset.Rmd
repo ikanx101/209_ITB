@@ -981,15 +981,78 @@ Perlu kita ingatkan kembali bahwa selalu akan ada limitasi dalam hal waktu, tena
 
 > Wawancara yang dilakukan kepada seluruh orang di populasi disebut dengan __sensus__.
 
-Oleh karena itu daripada melakukan sensus, kita cukup melakukan survey dengan cara mewawancarai sebagian orang dari populasi. Diharapkan hasil survey sangat representatif kepada hasil sensus. Ekspektasinya adalah _sample_ bisa mewakili populasi.
+Oleh karena itu daripada melakukan sensus, kita cukup melakukan survey dengan cara mewawancarai sebagian orang dari populasi. Diharapkan hasil survey sangat representatif kepada hasil sensus. 
+
+> Ekspektasinya adalah _sample_ bisa mewakili populasi.
 
 ## Teknik _Sampling_
 
+Ada dua teknik _sampling_ yang biasa dikenal, yakni:
 
+1. _Non probability sampling_, dan
+1. _Probability sampling_.
 
-## Teknik _Sampling_
+### _Non Probability Sampling_
+
+_Non probability sampling_ berarti teknik _sampling_ tanpa ada pengacakan pada saat pemilihan responden.
+
+Beberapa contohnya adalah:
+
+- _Convenience sampling_
+    - Adalah teknik _sampling_ dengan cara memilih responden berdasarkan kedekatannya dan kemudahannya dari _interviewer_.
+- _Judgment sampling_
+    - Adalah teknik _sampling_ dengan cara memilih responden yang dinilai mampu untuk menjawab pertanyaan _interviewer_.
+- _Snowball sampling_
+    - Adalah teknik _sampling_ dengan cara _responden get responden_, yakni sistem rekomendasi dari satu responden ke responden lainnya.
+
+### _Probability Sampling_
+
+_Probability sampling_ berarti teknik _sampling_ dengan ada pengacakan pada saat pemilihan responden. Artinya setiap orang di populasi punya peluang yang sama untuk dipilih menjadi responden.
+
+Beberapa contohnya adalah:
+
+- _Simple random sampling_
+    - Adalah teknik _sampling_ dengan cara memilih responden dengan cara acak murni.
+    - Contoh sederhana adalah memilih 5 orang responden dari 20 orang di populasi dengan cara undian seperti arisan.
+- _Systematic sampling_
+    - Adalah teknik _sampling_ dengan cara memilih responden dengan cara acak dengan aturan tertentu yang disepakati bersama.
+- _Stratified sampling_
+    - Adalah teknik _sampling_ dengan cara memilih responden dengan cara acak namun proporsi dalam strata-strata yang ada di dalam _sample_ harus menyerupai proporsi dalam strata-strata di dalam populasi.
+    - Contohnya di dalam populasi ada strata-strata seperti:
+        - `gender`, dengan proporsi = pria : wanita = 50 : 50.
+        - `usia`, dengan proporsi = anak : muda : tua = 30 : 40 : 30.
+        - `area domisili`, dengan proporsi = Jakarta : non Jakarta = 70 : 30.
+        - `social economy status`, dengan proporsi = midlow : midhigh = 50 : 50. 
+    - Jadi pada _sample_, proporsi setiap strata tersebut harus dibuat sama. Namun pada pemilihan respondennya tetap dilakukan secara acak.
+- _Cluster sampling_
+    - Adalah teknik _sampling_ dengan cara memecah populasi menjadi kelompok-kelompok kecil kemudian secara acak dipilih satu atau beberapa kelompok untuk dijadikan responden.
+
+## Teknik _Sampling_ yang Dipilih
+
+Dalam banyak kasus, _sample_ yang representatif terhadap populasi berasal dari _probability sampling_. Namun ada kalanya kita tidak mungkin mencari _sample_ dengan cara acak. Sebagai contoh beberapa kasus _market research_ memiliki target responden dengan kriteria yang sulit. Oleh karena itu dibutuhkan teknik _sampling_ yang tidak acak.
+
+Sebagai contoh:
+
+> Misalkan suatu _market research project_ memiliki target responden: orang yang keturunan diabetes.
+
+Alih-alih mencari responden secara acak, kita bisa mencari responden dengan cara menemukan komunitas diabetes dan mendapatkan rekomendasi dari komunitas tersebut (_snowball_).
 
 ## Jumlah _Sample_
+
+Secara praktis, jumlah sampel minimal untuk pengolahan data adalah `30` baris data.
+
+Namun, untuk lebih tepat kita dapat menggunakan _sample size calculator online_. Salah satunya adalah _calculator_ pada situs berikut ini^[https://www.calculator.net/sample-size-calculator.html] :
+
+```{r out.width = "75%",echo=FALSE,fig.align = "center",fig.cap = "Sample Size Calculator Online"}
+knitr::include_graphics("kalkulator.jpg")
+```
+
+Minimal ada tiga informasi yang harus diketahui untuk menghitung berapa banyak _sample_ yang dibutuhkan, apa saja itu?
+
+1. _Population size_; Apakah kita tahu berapa banyak populasi dari target penelitian kita?
+2. _Margin of error_; Rentang kesalahan yang bisa diterima (_sample_ vs populasi = survey vs sensus).
+3. _Confidence level_; Seberapa yakin survey kita akan menghasilkan hasil yang relatif sama jika dilakukan berulang kali.
+]
 
 ## _Discussion_  {.unlisted .unnumbered}
 
