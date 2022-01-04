@@ -874,7 +874,7 @@ Biasanya dalam satu _market research projects_ dibutukan FGD sebanyak minimal 2 
 
 Satu metode lagi yang sering digunakan pada riset kualitatif adalah observasi. Dalam beberapa kesempatan, observasi bisa juga dikategorikan dalam riset kuantitatif tergantung dari data apa yang diambil, cara mengumpulkan datanya, dan seberapa banyak sampel yang diambil.
 
-Observasi berarti mengamati. Dari arti tersebut kita bisa mengartikan bahwa riset tipe ini tidak memperbolehkan adanya interaksi antara _interviewer_ dengan responden. _Interviewer_ hanya mengamati dan mencatat apa saja yang terjadi di sekitar responden ada rentang waktu tertentu.
+Observasi berarti mengamati. Dari arti tersebut kita bisa mengartikan bahwa riset tipe ini tidak memperbolehkan adanya interaksi antara _observer_ dengan responden. _Observer_ hanya mengamati dan mencatat apa saja yang terjadi di sekitar responden ada rentang waktu tertentu.
 
 Pada _qualitative observation_, hal yang biasa diamati biasanya adalah _habit_ responden dalam area dan rentang waktu tertentu. Setiap rentetan _event_ tersebut dicatat untuk kemudian di-agregat dengan data dari responden lainnnya lalu dianalisa apakah ada pola (kesamaan) atau perbedaan.
 
@@ -937,12 +937,60 @@ int_rekap = data.frame(interview,advantages,disadvantages)
 int_rekap %>% knitr::kable("pipe",caption = "Perbedaan Metode Interview")
 ```
 
+## _Quantitative Observation_
+
+Metode observasi juga bisa dimasukkan ke dalam riset kuantitatif jika data yang dikumpulkan banyak dan dibantu dengan kuesioner terstruktur. 
+
+Pada prinsipnya, dalam observasi tidak boleh ada interaksi antara _observer_ dengan responden. Maka pada _quantitative observation_, _observer_ hanya bisa mencatat kejadian saja. Sebagai contoh kita bisa _stay_ di suatu restoran pada saat jam makan siang dan mencatat:
+
+1. Berapa orang yang datang (termasuk waktu kedatangan),
+1. Pilihan menu: _dine in_ atau _take away_,
+1. Cara pembayaran: _cash_ atau _debit / credit_, dan
+1. Menu dipesan.
+
+Dari contoh di atas terlihat bahwa data yang dikumpulkan berbeda dengan data pada _qualitative observation_.
+
 ## _Discussion_  {.unlisted .unnumbered}
+
+Di era pandemi seperti sekarang ini, menurut Anda metode _interview_ seperti apa yang paling sesuai dilakukan?
 
 \newpage
 
 # PERTEMUAN VIII {-}
 # _SAMPLE DESIGN_
+
+Salah satu titik kritis dalam melakukan _market research_ adalah pada saat _design research_. Salah satu tahapannya adalah pada saat perencanaan _sample_. Pada pertemuan ini kita akan bahas dua materi terkait _sample_, yakni:
+
+1. Kenapa harus melakukan _sampling_?
+1. Teknik _sampling_, dan
+1. Jumlah _sample_.
+
+## Alasan Melakukan _Sampling_
+
+Kenapa saya harus melakukan _sampling_?
+
+Dalam _market research_ dan statistika, ada konsep yang disebut dengan __populasi__ dan ___sample___.
+
+```{r out.width = "75%",echo=FALSE,fig.align = "center",fig.cap = "Populasi vs Sampling"}
+knitr::include_graphics("sampling.PNG")
+```
+
+__Populasi__ adalah keseluruhan orang target responden yang hendak dirisetkan. Sedangkan ___sample___ adalah sebagian kecil dari __populasi__. 
+
+Perlu kita ingatkan kembali bahwa selalu akan ada limitasi dalam hal waktu, tenaga, dan biaya. Oleh karena itu, tidak mungkin bagi kita untuk melakukan wawancara kepada seluruh orang di populasi. 
+
+> Wawancara yang dilakukan kepada seluruh orang di populasi disebut dengan __sensus__.
+
+Oleh karena itu daripada melakukan sensus, kita cukup melakukan survey dengan cara mewawancarai sebagian orang dari populasi. Diharapkan hasil survey sangat representatif kepada hasil sensus. Ekspektasinya adalah _sample_ bisa mewakili populasi.
+
+## Teknik _Sampling_
+
+
+
+## Teknik _Sampling_
+
+## Jumlah _Sample_
+
 ## _Discussion_  {.unlisted .unnumbered}
 
 \newpage
