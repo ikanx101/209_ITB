@@ -868,6 +868,10 @@ Observasi berarti mengamati. Dari arti tersebut kita bisa mengartikan bahwa rise
 
 Pada _qualitative observation_, hal yang biasa diamati biasanya adalah _habit_ responden dalam area dan rentang waktu tertentu. Setiap rentetan _event_ tersebut dicatat untuk kemudian di-agregat dengan data dari responden lainnnya lalu dianalisa apakah ada pola (kesamaan) atau perbedaan.
 
+```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Ilustrasi Qualitative Observation"}
+knitr::include_graphics("sby.jpg")
+```
+
 Secara teknis pelaksanaan, _qualitative observation_ memakan waktu yang sangat lama untuk dilakukan per satu orang responden. Karena biasanya pada pengambilan data pertama, responden belum bertindak _natural_ (masih _jaim_) sehingga diperlukan beberapa iterasi hingga responden merasa nyaman tindak-tanduknya diamati.
 
 Keuntungan dari observasi ini adalah:
