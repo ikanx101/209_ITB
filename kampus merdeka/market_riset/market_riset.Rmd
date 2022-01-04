@@ -1043,18 +1043,42 @@ Secara praktis, jumlah sampel minimal untuk pengolahan data adalah `30` baris da
 
 Namun, untuk lebih tepat kita dapat menggunakan _sample size calculator online_. Salah satunya adalah _calculator_ pada situs berikut ini^[https://www.calculator.net/sample-size-calculator.html] :
 
-```{r out.width = "75%",echo=FALSE,fig.align = "center",fig.cap = "Sample Size Calculator Online"}
+\newpage
+
+```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Sample Size Calculator Online"}
 knitr::include_graphics("calculator.jpg")
 ```
 
-Minimal ada tiga informasi yang harus diketahui untuk menghitung berapa banyak _sample_ yang dibutuhkan, apa saja itu?
+Dari _calculator_ di atas, ada tiga informasi yang harus diketahui dan dimasukkan untuk menghitung berapa banyak _sample_ yang dibutuhkan, apa saja itu?
 
-1. _Population size_; Apakah kita tahu berapa banyak populasi dari target penelitian kita?
+1. _Population size_; Apakah kita tahu berapa banyak populasi dari target penelitian kita? Bisa jadi kita berhadapan dengan dua kondisi:
+    - _Known population_ artinya berapa banyak populasi diketahui dengan pasti dari data sekunder (data publik).
+    - _Unknown population_ artinya kita tidak bisa mengetahui dengan pasti berapa banyak populasi dari target responden. Jika kita berhadapan dengan hal seperti ini, ___leave blank___ saja di bagian tersebut. Secara rumus sudah ada perhitungannya sendiri.
 2. _Margin of error_; Rentang kesalahan yang bisa diterima (_sample_ vs populasi = survey vs sensus).
 3. _Confidence level_; Seberapa yakin survey kita akan menghasilkan hasil yang relatif sama jika dilakukan berulang kali.
-]
+
+Sedangkan bagian __population proportion__ dibiarkan saja tetap berisi `50%`.
+
+---
+
+### Cara Mengartikan CL dan MOE
+
+Misalkan saya telah melakukan penelitian kepada `300` orang diabetes dengan _margin of error_ sebesar `3%` dan _confidence level_ sebesar `80%`. Kemudian saya mendapatkan hasil sebagai berikut:
+
+> `75%` dari responden suka dengan makanan manis.
+
+Bagaimana cara mengartikan _margin of error_ dan _confidence level_?
+
+Jika hasil survey saya __dikembalikan__ ke populasi orang diabetes, maka:
+
+- $75 \pm 3$ % orang diabetes suka dengan makanan manis.
+- Jika survey saya diulang `10` kali, maka `8` dari `10` pengulangan tersebut akan menghasilkan $75 \pm 3$ % orang diabetes suka dengan makanan manis.
+
+---
 
 ## _Discussion_  {.unlisted .unnumbered}
+
+Misalkan suatu _market research project_ berhadapan dengan _unknown population size_. Kemudia dari hasil perhitungan _sample size calculator_ dibutuhkan `200` orang responden, namun sepanjang perjalanan _fieldwork_ hingga berakhir hanya didapatkan `120` orang responden saja. Berikan penjelasan singkat langkah apa saja yang harus dilakukan?
 
 \newpage
 
