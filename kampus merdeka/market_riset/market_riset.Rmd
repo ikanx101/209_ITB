@@ -1217,6 +1217,26 @@ Buat kuesioner sederhana untuk mencari data terkait konsumsi media massa masyara
 # PERTEMUAN X {-}
 # TUGAS I
 
+Pada pertemuan ini, Anda akan mendapatkan tugas untuk:
+
+1. Membuat _market research proposal_,
+1. Membuat kuesioner.
+
+Dari persoalan sebagai berikut:
+
+## _Case Study_
+
+> Misalkan Anda bekerja di perusahaan yang bergerak di bidang makanan dan minuman. Saat pandemi ini, perusahaan Anda sedang mencari tahu tren makanan atau minuman untuk anak muda dengan kelas ekonomi menengah ke atas di kota-kota besar di Indonesia. Oleh karena itu, diperlukan suatu _market research_.
+
+## Pengumpulan Tugas
+
+Baik proposal dan kuesioner dibuat dalam format `.pdf` dengan syarat:
+
+1. Proposal dalam bentuk _slides_ presentasi mencakup semua hal yang perlu dimasukkan di dalamnya (kecuali bagian _budget_ dan _tim research_). Perhatikan kembali materi terkait _proposal_.
+1. Kuesioner terstruktur dalam dokumen biasa.
+
+\newpage
+
 # PERTEMUAN XI {-}
 # _DATA PROCESSING_
 
