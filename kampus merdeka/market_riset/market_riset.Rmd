@@ -932,7 +932,8 @@ Setidaknya ada tiga metode riset kuantitatif yang sering digunakan:
 
 ## _Interview_
 
-Secara bahasa, _interview_ berarti wawancara. Dalam riset kuantitatif, _interview_ yang dimaksud adalah _survey_ yakni mencari sejumlah banyak orang sebagai responden untuk diwawancarai dengan panduan kuesioner yang terstruktur. 
+Secara bahasa, _interview_ berarti wawancara. Dalam riset kuantitatif, _interview_ yang dimaksud adalah _survey_ yakni mencari sejumlah banyak orang sebagai responden untuk diwawancarai dengan panduan 
+kuesioner yang terstruktur. 
 
 Secara teknis, pelaksanaannya bisa secara langsung (tatap muka - _face to face interview_), melalui telepon (_phone survey_), atau melalui _online survey_. 
 
@@ -1058,9 +1059,19 @@ Alih-alih mencari responden secara acak, kita bisa mencari responden dengan cara
 
 ## Jumlah _Sample_
 
-Secara praktis, jumlah sampel minimal untuk pengolahan data adalah `30` baris data.
+Secara praktis, jumlah sampel minimal untuk pengolahan data adalah `30` baris data. 
 
-Namun, untuk lebih tepat kita dapat menggunakan _sample size calculator online_. Salah satunya adalah _calculator_ pada situs berikut ini^[https://www.calculator.net/sample-size-calculator.html] :
+---
+
+Bagaimana jika data yang kita miliki tidak mencapai 30 baris data?
+
+> Jika suatu riset tidak memiliki jumlah baris data yang cukup ($n<30$), maka sebaiknya jangan mengambil kesimpulan dan keputusan berdasarkan data tersebut. Data tersebut tetap bisa diolah dengan catatan sebagai __indikasi__ saja.
+
+Alternatif lainnya adalah dengan menggunakan analisa statistika _non parametric_ dengan beberapa catatan tertentu.
+
+---
+
+Untuk lebih tepat kita dapat menggunakan _sample size calculator online_. Salah satunya adalah _calculator_ pada situs berikut ini^[https://www.calculator.net/sample-size-calculator.html] :
 
 \newpage
 
@@ -1223,6 +1234,12 @@ Jika melewati durasi tersebut, saya sering menemukan responden jenuh dan cenderu
 
 Masalah ini sering muncul pada _online survey_. Bagaimana kita memastikan bahwa seorang responden __hanya mengisi satu kuesioner saja__ (tidak mengisi berulang-ulang). Beberapa _online survey tools_ memiliki fitur yang bisa mendeteksi hal ini dengan cara mengaktifkan _cookies to prevent duplicate responses_. Namun cara ini hanya bisa mencegah responden mengisi berulang kali dengan _gadget_ yang sama. Masih ada kemungkinan responden mengisi berulang kali dengan _gadget_ yang berbeda-beda.
 
+## Lakukan _Pilot Interview_
+
+Salah satu _best practice_ yang bisa dilakukan setelah kita selesai membuat kuesioner adalah dengan melakukan _pilot wawancara_. Minimal kita lakukan sebanyak 5-10 kali untuk melihat durasi _interview_, _flow interview_, dan bagaimana respon dari calon responden. Jika kita menemukan durasi terlalu lama, _flow pertanyaan_ membingungkan, atau responden tidak mengerti dengan pertanyaan yang diajukan, maka segera kita revisi kuesioner tersebut.
+
+Lakukan _pilot interview_ berulang-ulang hingga kita dapatkan kuesioner yang sempurna.
+
 ## _Discussion_  {.unlisted .unnumbered}
 
 Buat kuesioner sederhana untuk mencari data terkait konsumsi media massa masyarakat kelompok remaja di kota-kota besar di Indonesia!
@@ -1360,24 +1377,39 @@ Perhatikan bahwa:
     - Penggunaan `.` dan `,` tidak seragam.
     - Penulisan unit `kilogram` tidak seragam.
 
-Walaupun terkesan biasa saja xxxxxx
+Walaupun terkesan hal yang remeh tapi standarisasi penulisan pada saat _data entry_ bisa membantu kita untuk menganaisa data dengan tepat dan cepat. Salah satu _best practice_ yang bisa dilakukan adalah dengan melakukan _recode_, yakni:
 
-> jangan lupa tambahin strategi perusahaan inhose vs non in house. satu lagi kasih au bahwa setiap minggu baru akan release materi minggu depannya. selesaikan discussion erlebih dahulu
+1. Mengubah __semua jawaban berupa teks__ menjadi angka,
+1. Hanya meng-_entry_ kode angka dari jawaban, atau
+1. Hanya meng-_entry_ angka saja tanpa unit.
+
+Sehingga semua data yang dimasukkan ke dalam tabel __Ms. Excel__ adalah berupa angka. Hal ini akan sangat membantu saat melakukan perhitungan seperti: _frequency_, _mean_, _modus_, atau bahkan saat uji hipotesis `dua proporsi`.
 
 ## _Data Cleaning_
 
-Proses _data cleaning_ mencakup:
+Dalam suatu _market research_, ada kemungkinan kita akan menemui beberapa pertanyaan pada kuesioner tidak terisi. Bisa jadi karena memang alur pertanyaannya mengharuskan demikian atau karena faktor ketidaksengajaan. Selain itu bisa jadi kita temukan jawaban yang tidak saling konsisten antar pertanyaan. Hal lain yang bisa ditemukan juga adalah jawaban pencilan (_extreme values_).
 
-- Ada kemungkinan kita menemui data yang kosong (bolong-bolong) __atau__ nilai pencilan (_extreme values_). Bagaimana menghadapi masalah ini?
-  - Tidak ada jawaban baku untuk kasus ini!
-  - Jangan terburu-buru untuk menghapus baris data tersebut! 
-  - Kita bisa mengisi kekosongan data yang ada dengan nilai `mean`, `median`, atau `modus` tergantung dari tipe data yang kita miliki.
+> Lantas bagaimana kita menghadapi permasalahan seperti ini?
 
+__Jawabannya tidak ada yang baku!__
+
+Kita harus melihat _case by case_ terlebih dahulu. Namun ada beberapa _guidance_ yang bisa dijadikan acuan:
+
+1. Jika data kosong (bolong) atau jawaban responden tidak konsisten diakibatkan oleh alur pertanyaan pada kuesioner, maka kita harus dengan segera merevisi kuesioner tersebut.
+1. Jika ada data kosong (bolong), jangan terburu-buru untuk menghapus baris data tersebut! Lakukan beberapa hal berikut ini:
+	- Segera konfirmasi ulang terhadap data kosong tersebut. Lakukan pengambilan data ulang jika memungkinkan.
+	- Jika tidak bisa, maka kita diperkenankan mengisi kekosongan data yang ada dengan nilai `mean`, `median`, atau `modus` tergantung dari tipe data yang kita miliki.
+	- Alternatif lainnya adalah tetap membiarkan data tersebut kosong. Kelak pada saat analisa terkait pertanyaan tersebut, baris data ini tidak diikutsertakan. 
 
 ## _Discussion_  {.unlisted .unnumbered}
 
+
 # PERTEMUAN XII {-}
 # ANALISA DATA
+## Tabulasi Frekuensi
+## Mean Median Modus
+## Tambahin Pengujian Dua Proporsi
+
 ## _Discussion_  {.unlisted .unnumbered}
 
 # PERTEMUAN XIII {-}
