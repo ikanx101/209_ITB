@@ -1327,7 +1327,7 @@ Hal yang perlu dilakukan adalah melihat konsistensi _content_ dari suatu kolom d
 
 Sebagai contoh perhatikan tabel data di bawah ini:
 
-```{r,echo=FALSE}
+```{r,echo = FALSE,message = FALSE,warning = FALSE}
 nama = randomNames::randomNames(7,gender = "male",which.names = "first")
 nama = sample(nama,8,replace = T)
 rand_1 = sample(8,3)
@@ -1345,6 +1345,15 @@ berat_badan = paste0(bb_1,bb_2,bb_3,bb_4)
 data_frame(nama,berat_badan) %>%
   knitr::kable("pipe",caption = "Tabel Hasil Data Entry")
 ```
+
+Perhatikan bahwa:
+
+1. Tata cara penulisan `nama` tidak seragam. Kemudian dengan ditemukannya beberapa nama sama membuat validitas data tersebut menjadi dipertanyakan.
+1. Tata cara penulisan `berat_badan` juga membingungkan.
+    - Penggunaan `.` dan `,` tidak seragam.
+    - Penulisan unit `kilogram` tidak seragam.
+
+Walaupun terkesan biasa saja xxxxxx
 
 ## _Data Cleaning_
 
