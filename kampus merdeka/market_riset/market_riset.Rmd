@@ -1219,22 +1219,35 @@ Buat kuesioner sederhana untuk mencari data terkait konsumsi media massa masyara
 
 # PERTEMUAN XI {-}
 # _DATA PROCESSING_
+
+Perlu kita ingat kembali bahwa riset kuantitatif adalah riset yang memerlukan analisa statistik dan memiliki data yang relatif besar. Oleh karena itu, pada pertemuan ini kita akan fokuskan pembahasan terhadap _data processing_ untuk riset kuantitatif (survey). Analisa dan pengolahan data pada riset kualitatif tidak akan dibahas pada perkuliahan ini karena memerlukan pembahasan yang lebih intens dan _case specific_.
+
+Biasanya data yang telah kita kumpulkan dari _market research_ berupa kuesioner yang sudah terisi tidak bisa langsung dianalisa. Butuh beberapa tahapan sampai data menjadi bersih dan siap dianalisa secara statistika.
+
 ## Kualitas dari Suatu Data
 
-Ada beberapa parameter yang bisa digunakan untuk menjawab pertanyaan tersebut:
+> ___Apakah data yang saya sudah bagus?___
+
+Saya sering menemui pertanyaan di atas. Orang yang bisa menjawabnya adalah si _market researcher_-nya sendiri, bukan orang lain!
+
+Ada beberapa parameter yang bisa digunakan untuk membantu menjawab pertanyaan tersebut:
 
 1. Kualitas dari suatu data diukur dari __seberapa bisa data tersebut memenuhi kebutuhan analisis__.
-    - Setelah itu baru dicek secara statistik: _blank_ data atau _extreme values_.
-2. Data yang bagus biasanya berasal dari _random sampling_.
-3. Untuk data yang diambil secara berulang-ulang (harian, mingguan, bulanan, tahunan, atau lainnya), pastikan bahwa cara pengambilan data harus sama.
+    - Sebagaimana yang telah kita bahas pada pertemuan-pertemuan awal, _market research_ bertujuan untuk menyelesaikan _management problem_. Artinya data yang dikumpulkan harus bisa digunakan untuk mendapatkan _insight(s)_ yang bisa menjawab kebutuhan bisnis.
+    - Setelah itu baru dicek secara statistik: apakah ada baris atau pertanyaan yang _blank_ (kosong) atau _extreme values_ (pencilan - khusus data numerik).
+1. Data yang bagus biasanya berasal dari _random sampling_.
+    - Kecuali untuk target responden yang sulit didapatkan. 
+    - Maka diperbolehkan untuk menggunakan teknik _sampling_ yang _non probability_.
+1. Untuk data yang diambil secara berulang-ulang (harian, mingguan, bulanan, tahunan, atau lainnya), pastikan bahwa cara pengambilan data dan alat ukur harus sama.
+    - Sebagai contoh, jika kita ingin membandingkan _awareness_ beberapa _brands_, pastikan cara pengukurannya sama.
 
 ## Tahapan _Data Processing_
-
 
 Berikut adalah proses yang _proper_ dalam melakukan analisa data:
 
 ```{r,include=FALSE,echo=FALSE}
-nomnoml::nomnoml("[Raw Data] -> [Data Preparation|Consistency Check|Structured dan Format Checked]
+nomnoml::nomnoml("[Raw Data] -> [Entry Data]
+                 [Entry Data] -> [Data Preparation|Consistency Check|Structured dan Format Checked]
                  [Data Preparation] -> [Data Cleaning|Empty Cell(s)|Extreme value(s)]
                  [Data Cleaning] -> [Data Analysis]
                  [Data Analysis] -> [Data Visualization|Information|Insights]",
@@ -1243,7 +1256,7 @@ nomnoml::nomnoml("[Raw Data] -> [Data Preparation|Consistency Check|Structured d
                  350)
 ```
 
-```{r out.width = '80%',echo=FALSE}
+```{r out.width = "60%",echo=FALSE,fig.align = "center",fig.cap = "Tahapan Data Processing"}
 knitr::include_graphics("getting.png")
 ```
 
