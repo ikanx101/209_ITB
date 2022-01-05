@@ -465,11 +465,19 @@ Apa saja isi proposalnya? Setidaknya ada beberapa bagian berikut ini:
     - Metode penelitian adalah bagian yang paling seru. 
     - Pada bagian ini, kita harus menentukan metode apa yang hendak kita pakai. 
         - Apakah riset kualitatif? 
-        - Ataukah riset kuantitatif? 
+        - Ataukah riset kuantitatif?
+	- Apa alasan pemilihan metode tersebut. 
     - Sumber data apa yang hendak kita akan gunakan?
         - Apakah data primer?
         - Apakah data sekunder?
     - Siapa target responden kita? Apa saja kriteria responden tersebut?
+	- _Gender_,
+	- Usia,
+	- _Sosial economy status_,
+	- dan lainnya.
+    - Apa teknik _sampling_ yang digunakan?
+	- Apakah secara _random_?
+	- Apakah secara _non random_?
     - Berapa banyak responden yang dibutuhkan?
     - Mana saja _coverage_ atau area riset?
 1. Dasar teori.
@@ -1220,7 +1228,10 @@ Buat kuesioner sederhana untuk mencari data terkait konsumsi media massa masyara
 Pada pertemuan ini, Anda akan mendapatkan tugas untuk:
 
 1. Membuat _market research proposal_,
-1. Membuat kuesioner.
+1. Membuat kuesioner,
+1. Melakukan survey (pengumpulan data),
+1. Melakukan analisa data hasil survey,
+1. Membuat laporan _market research_.
 
 Dari persoalan sebagai berikut:
 
@@ -1230,10 +1241,18 @@ Dari persoalan sebagai berikut:
 
 ## Pengumpulan Tugas
 
-Baik proposal dan kuesioner dibuat dalam format `.pdf` dengan syarat:
+Pengumpulan tugas ini akan dilakukan pada dua waktu.
+
+### Waktu I
+
+Baik proposal dan kuesioner akan dikumpulkan segera pada pertemuan minggu ini. Keduanya dibuat dalam format `.pdf` dengan syarat:
 
 1. Proposal dalam bentuk _slides_ presentasi mencakup semua hal yang perlu dimasukkan di dalamnya (kecuali bagian _budget_ dan _tim research_). Perhatikan kembali materi terkait _proposal_.
 1. Kuesioner terstruktur dalam dokumen biasa.
+
+### Waktu II
+
+Laporan _market research_ akan kemudian dipresentasikan pada akhir perkuliahan ini. Waktu _live session_ tersebut akan diinfokan kemudian.
 
 \newpage
 
@@ -1280,15 +1299,52 @@ nomnoml::nomnoml("[Raw Data] -> [Entry Data]
 knitr::include_graphics("getting.png")
 ```
 
+## _Data Entry_
+
+Pada _survey_ tradisional yang menggunakan kuesioner kertas, diperlukan tahapan _data entry_. Pada tahapan ini diperlukan suatu sistem untuk menjaga kualitas data dari kesalahan _entry_ seperti:
+
+1. _Double entry_,
+1. Salah _entry_.
+
+Namun pada _online survey_ atau _paperless survey_ (survey menggunakan bantuan _gadget_ sebagai kuesioner), otomatis tidak lagi ada tahapan ini. Kita bisa langsung masuk ke tahapan berikutnya.
+
+Biasanya data survey di-_entry_ ke dalam bentuk tabel __Ms. Excel__ untuk kemudian diolah. Satu kuesioner dari satu orang responden biasanya di-_entry_ ke dalam satu baris data. Sedangkan setiap respon (jawaban dari pertanyaan) di-_entry_ sebagai satu kolom. 
+
+> Misalkan kita memiliki 10 orang responden yang mengisi survey dengan 7 pertanyaan di kuesioner, maka akan ada tabel data sebanyak 10 baris x 7 kolom.
+
+Beberapa _market research software_ lain juga bisa berguna untuk _data entry_ tapi pada kuliah ini saya akan membatasinya pada penggunaan __Ms. Excel__ yang sudah secara umum digunakan.
+
 ## _Data Preparation_
 
-Sebelum mulai melakukan analisa dan memahami data, kita harus melakukan proses _data preparation_ yang mencakup:
+Sebelum mulai melakukan analisa dan memahami data, kita harus melakukan proses _data preparation_ yang mencakup _consistency check_.
 
-- _Consistency check_; yakni melihat konsistensi _content_ dari suatu _cells_ yang ada di __Ms. Excel__. Hal yang biasa dicek adalah:
-  - Konsistensi antara `character` atau `number`.
-  - Penggunaan tanda baca tertentu seperti: `,` atau `.`.
-  - Standarisasi penulisan `character` di dalam _cell_.
-  - _Structured_ dan _format checked_. 
+Hal yang perlu dilakukan adalah melihat konsistensi _content_ dari suatu kolom data yang ada di __Ms. Excel__. Hal yang biasa dicek adalah:
+
+- Konsistensi antara `character` atau `number`.
+- Penggunaan tanda baca tertentu seperti: `,` atau `.`.
+- Standarisasi penulisan `character` di dalam _cell_.
+- _Structured_ dan _format checked_. 
+
+Sebagai contoh perhatikan tabel data di bawah ini:
+
+```{r,echo=FALSE}
+nama = randomNames::randomNames(7,gender = "male",which.names = "first")
+nama = sample(nama,8,replace = T)
+rand_1 = sample(8,3)
+rand_2 = c(1:8)[-rand_1]
+
+nama[rand_1] = tolower(nama[rand_1])
+nama[rand_2] = toupper(nama[rand_2])
+
+bb_1 = sample(40:80,8)
+bb_2 = sample(c(".",","),8,replace = T)
+bb_3 = sample(9,8,replace = T)
+bb_4 = sample(c("kg"," kg","kilo"," kilogram"," kilo gram"),8,replace = T)
+berat_badan = paste0(bb_1,bb_2,bb_3,bb_4)
+
+data_frame(nama,berat_badan) %>%
+  knitr::kable("pipe",caption = "Tabel Hasil Data Entry")
+```
 
 ## _Data Cleaning_
 
