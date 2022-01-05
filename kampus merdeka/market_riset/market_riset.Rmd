@@ -1366,7 +1366,7 @@ bb_3 = sample(9,8,replace = T)
 bb_4 = sample(c("kg"," kg","kilo"," kilogram"," kilo gram"),8,replace = T)
 berat_badan = paste0(bb_1,bb_2,bb_3,bb_4)
 
-data_frame(nama,berat_badan) %>%
+data.frame(nama,berat_badan) %>%
   knitr::kable("pipe",caption = "Tabel Hasil Data Entry")
 ```
 
