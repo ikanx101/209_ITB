@@ -268,6 +268,13 @@ Berdasarkan uraian-uraian di atas, kita bisa membuat _market research_ menjadi _
 1. _Keep things simple and manage-able_. Perdalam masalah yang hendak dijawab dengan _market research_. Bedakan informasi _need-to-know_ dengan informasi _nice-to-know_. Bagian ini akan dibahas lebih detail pada bab `pembuatan kuesioner`.
 1. Lakukan _desk research_ jika perlu. Di era digital, data bertebaran di mana-mana. Dengan metode pengumpulan data yang tepat, kita bisa melakukan _market research_ yang _insightful_ tanpa harus beranjak dari meja kerja. Bagian ini akan dibahas lebih detail pada bab selanjutnya.
 
+### _Market Research_ dalam Struktur Suatu Perusahaan
+
+Bagi perusahaan-perusahaan yang mengandalkan _market research_, secara struktur dan posisi _market research_ dalam perusahaan, suatu perusahaan bisa dikategorikan menjadi dua:
+
+1. _In House Market Research_, yakni perusahaan yang memiliki tim atau bagian khusus yang mengerjakan _market research_ baik secara utuh atau parsial.
+1. _Outsource Market Research_, yakni perusahaan yang tidak memiliki tim atau bagian khusus yang mengerjakan _market research_. Oleh karena itu mereka mengandalkan _market research agency_ untuk melakukan _market research_.
+
 ## Komponen _Market Research_
 
 Saat kita berbicara tentang _market research_, setidaknya ada beberapa komponen yang biasa diteliti, yakni:
@@ -1354,6 +1361,8 @@ Perhatikan bahwa:
     - Penulisan unit `kilogram` tidak seragam.
 
 Walaupun terkesan biasa saja xxxxxx
+
+> jangan lupa tambahin strategi perusahaan inhose vs non in house. satu lagi kasih au bahwa setiap minggu baru akan release materi minggu depannya. selesaikan discussion erlebih dahulu
 
 ## _Data Cleaning_
 
