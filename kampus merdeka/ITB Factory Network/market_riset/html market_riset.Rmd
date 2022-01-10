@@ -1,0 +1,23 @@
+---
+title: "Introduction to Market Research"
+subtitle: |
+  | P2MS-ITB 
+  | TEACHING FACTORY-NETWORK
+author: |
+  | Mohammad Rizka Fadhli
+  | ikanx101.com
+date: "`r format(Sys.time(),'%d %B %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+rm(list=ls())
+library(dplyr)
+```
+
+### _Market Research_ dalam Struktur Suatu Perusahaan
+
+Bagi perusahaan-perusahaan yang mengandalkan _market research_, secara struktur dan posisi _market research_ dalam perusahaan, suatu perusahaan bisa dikategorikan menjadi dua:
+
+1. _In House Market Research_, yakni perusahaan yang memiliki tim atau bagian khusus yang mengerjakan _market research_ baik secara utuh atau parsial.
+1. _Outsource Market Research_, yakni perusahaan yang tidak memiliki tim atau bagian khusus yang mengerjakan _market research_. Oleh karena itu mereka mengandalkan _market research agency_ untuk melakukan _market research_.

@@ -1,0 +1,105 @@
+---
+title: "PROPOSAL PENELITIAN"
+subtitle: "MODEL BINARY LINEAR PROGRAMMING UNTUK MENGOPTIMALKAN PORTOFOLIO DISKON PRODUK PADA TOKO ONLINE"
+author: |
+  | Ikang Fadhli
+  | ikanx101.com
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  pdf_document:
+    number_sections: no
+    toc: no
+    fig_width: 7
+    fig_height: 4
+    fig_caption: yes
+    highlight: espresso
+fontsize: 12pt
+bibliography: references.bib
+linestretch: 1.5
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/kampus merdeka/UIN Jakarta")
+library(dplyr)
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+# Kata Kunci {.unlisted .unnumbered}
+
+Optimisasi, _e-commerce_, _binary linear programming_, model matematika.
+
+# _Summary_
+
+Pertumbuhan ekonomi digital semakin meningkat seiring dengan munculnya berbagai _marketplaces_. Untuk tetap berada di depan, toko _online_ perlu melakukan berbagai strategi _marketing_. Salah satunya adalah _pricing strategy_ melalui pemberian diskon kepada pembeli.
+
+Suatu toko _online_ yang memiliki banyak produk (_listed SKU_) perlu memikirkan cara bagaimana agar _budget_ diskon yang mereka punya menjadi optimal. Oleh karena itu dibuatlah sebuah model _binary linear programming_ sehingga portofolio diskon produk menjadi optimal.
+
+\newpage
+
+# Latar Belakang Masalah
+
+Suatu toko _online_ yang menjual produk-produknya di _marketplace_ bisa menawarkan potongan diskon secara mandiri. Potongan diskon ini bertujuan untuk menarik konsumen agar tertarik membeli produk dari toko tersebut. Terutama produk-produk yang memiliki elastisitas harga tinggi.
+
+
+> Tujuan utama _marketplace_ tersebut memberikan diskon tambahan adalah untuk menaikkan _traffic_ transaksi sehingga omset toko dan _marketplace_ naik secara bersamaan. 
+
+\pagebreak 
+
+# Perumusan Masalah
+
+# Tujuan Penelitian
+
+# Manfaat dan Kegunaan Penelitian
+
+# Signifikansi dan _Novelty_
+
+# _Output_ Penelitian
+
+# _Literature Review_
+
+# Metodologi Penelitian
+
+# Jadwal Pelaksanaan
+
+# Rencana Anggaran Biaya
+
+# Pelaksana
+
+# Pre-Analisis
+
+Untuk mengetahui produk mana saja yang diharapkan memiliki penjualan yang baik setelah diberikan potongan diskon, _marketplace_ tersebut melakukan pre-analisa dengan cara membuat _price elasticity model_ dari masing-masing produk sehingga didapatkan _summary_ data sebagai berikut:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+tes = data.frame(
+  No = c(1:10),
+  Produk = paste0("Produk ",1:10),
+  disc = paste0(sample(100:900,10),"ribu"),
+  exp = paste0(sample(100:500,10),"ribu")
+) %>% 
+  rename("Besaran diskon" = disc,
+         "Ekspektasi net profit" = exp)
+
+#tes %>% knitr::kable("simple",caption = "Contoh 10 Data Produk Hasil Perhitungan")
+library(pander)
+pander(tes)
+```
+
+# Masalah
+
+Data di atas adalah contoh dari `10`  produk saja. Nyatanya ada ribuan produk yang harus dipilih. Tentunya dengan _constraints budget_ yang dimiliki oleh _marketplace_.
+
+# Tujuan
+
+Mmebuat model optimisasi yang bisa memilih produk mana saja yang bisa memaksimalkan profit _marketplace_.
+
+[@lieberman]
+
+# REFERENCES
