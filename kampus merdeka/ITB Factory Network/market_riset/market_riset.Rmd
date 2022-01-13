@@ -1319,7 +1319,7 @@ nomnoml::nomnoml("[Raw Data] -> [Entry Data]
                  350)
 ```
 
-```{r out.width = "60%",echo=FALSE,fig.align = "center",fig.cap = "Tahapan Data Processing"}
+```{r out.width = "80%",echo=FALSE,fig.align = "center",fig.cap = "Tahapan Data Processing"}
 knitr::include_graphics("getting.png")
 ```
 
@@ -1352,7 +1352,7 @@ Hal yang perlu dilakukan adalah melihat konsistensi _content_ dari suatu kolom d
 Sebagai contoh perhatikan tabel data di bawah ini:
 
 ```{r,echo = FALSE,message = FALSE,warning = FALSE}
-nama = randomNames::randomNames(7,gender = "male",which.names = "first")
+nama = randomNames::randomNames(10,gender = "male",which.names = "first")
 nama = sample(nama,8,replace = T)
 rand_1 = sample(8,3)
 rand_2 = c(1:8)[-rand_1]
@@ -1403,18 +1403,349 @@ Kita harus melihat _case by case_ terlebih dahulu. Namun ada beberapa _guidance_
 
 ## _Discussion_  {.unlisted .unnumbered}
 
+Misalkan saya memiliki data sebagai berikut ini:
+
+```{r,echo=FALSE}
+rm(list=ls())
+options(knitr.kable.NA = '')
+
+n = 50
+hapus = sample(n,3)
+nama = randomNames::randomNames(n,which.names = "first")
+gender = sample(c("male","female"),n,replace = T)
+berat_badan = runif(n,40,80) %>% round(0)
+berat_badan[hapus] = NA
+alamat = sample(c("Jakarta","Non Jakarta"),n,replace = T,prob = c(.8,.2))
+alamat[hapus] = NA
+
+data.frame(id = 1:n,nama,gender,alamat,berat_badan) %>% 
+  knitr::kable("pipe",caption = "Tabel Data Berat Badan")
+```
+
+Jawab pertanyaan berikut ini:
+
+1. Apakah yang perlu kita lakukan untuk menghadapi data kosong di atas? 
+1. Berapa rata-rata berat badan orang-orang dari data di atas? 
+1. Dari mana domisili terbanyak orang-orang tersebut?
+
+\newpage
 
 # PERTEMUAN XII {-}
 # ANALISA DATA
+
+Analisa data yang sering digunakan pada _market research_ adalah analisa-analisa sederhana yang ada pada __analisa desriptif__, seperti:
+
+1. Tabulasi frekuensi dan _Cross_ tabulasi frekuensi,
+1. Pemusatan data, 
+1. Korelasi, dan
+1. Uji hipotesis.
+
+_Advance analysis_ lainnya seperti regresi, _factor analysis_, atau _k-means clustering analysis_ tidak akan dibahas secara detail pada perkuliahan ini.
+
 ## Tabulasi Frekuensi
-## Mean Median Modus
-## Tambahin Pengujian Dua Proporsi
+
+Tabulasi frekuensi berarti mencacah atau menghitung atau melakukan _tally_ dari suatu data menurut satu atau beberapa variabel sekaligus. 
+
+Tabulasi frekuensi kemudian bisa disajikan dalam bentuk tabel atau grafik sesuai dengan kebutuhan. Sebagai contoh, perhatikan data sebagai berikut ini:
+
+```{r,echo=FALSE}
+rm(list=ls())
+options(knitr.kable.NA = '')
+
+n = 60
+nama = randomNames::randomNames(n,which.names = "first")
+gender = sample(c("male","female"),n,replace = T)
+alamat = sample(c("Jakarta","Non Jakarta"),n,replace = T,prob = c(.8,.2))
+berat_badan = runif(n,40,80) %>% round(1)
+tinggi_badan = runif(n,140,190) %>% round(1)
+tingkat_kesukaan = sample(c("Sangat suka","Suka","Tidak suka","Sangat tidak suka"),
+                          n,
+                          prob = c(.4,.25,.2,.15),
+                          replace = T)
+
+df = data.frame(id = 1:n,nama,gender,alamat,berat_badan,tinggi_badan,
+                tingkat_kesukaan = factor(tingkat_kesukaan,levels = c("Sangat suka",
+                                                                      "Suka",
+                                                                      "Tidak suka",
+                                                                      "Sangat tidak suka")
+                                          )
+                ) 
+
+df %>% knitr::kable("pipe",caption = "Tabel Data Hasil Survey")
+```
+
+Kita bisa membuat tabulasi frekuensi sebagai berikut:
+
+```{r,echo=FALSE}
+df %>% 
+  group_by(gender) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  mutate(persen = 100 * n / sum(n),
+         persen = round(persen,1),
+         persen = paste0(persen,"%")) %>% 
+  add_row(gender = "TOTAL",
+          n = n,
+          persen = "100%") %>% 
+  knitr::kable("pipe",caption = "Tabulasi Frekuensi Berdasarkan Gender")
+
+df %>% 
+  group_by(alamat) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  mutate(persen = 100 * n / sum(n),
+         persen = round(persen,1),
+         persen = paste0(persen,"%")) %>% 
+  add_row(alamat = "TOTAL",
+          n = n,
+          persen = "100%") %>% 
+  knitr::kable("pipe",caption = "Tabulasi Frekuensi Berdasarkan Alamat")
+
+df %>% 
+  group_by(tingkat_kesukaan) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  mutate(persen = 100 * n / sum(n),
+         persen = round(persen,1),
+         persen = paste0(persen,"%")) %>% 
+  add_row(tingkat_kesukaan = "TOTAL",
+          n = n,
+          persen = "100%") %>% 
+  knitr::kable("pipe",caption = "Tabulasi Frekuensi Berdasarkan Tingkat Kesukaan")
+
+df %>% 
+  mutate(kelompok_berat = case_when(
+    berat_badan <= 60 ~ "Under 60 kg",
+    berat_badan > 60 & berat_badan <= 70 ~ "60 - 70 kg",
+    berat_badan > 70 ~ "Above 70 kg"
+  ),
+         kelompok_berat = factor(kelompok_berat,
+                                 levels = c("Under 60 kg","60 - 70 kg","Above 70 kg")
+                                 )
+         ) %>% 
+  group_by(kelompok_berat) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  mutate(persen = 100 * n / sum(n),
+         persen = round(persen,1),
+         persen = paste0(persen,"%")) %>% 
+  add_row(kelompok_berat = "TOTAL",
+          n = n,
+          persen = "100%") %>% 
+  knitr::kable("pipe",caption = "Tabulasi Frekuensi Berdasarkan Kelompok Berat Badan")
+
+df %>% 
+  mutate(kelompok_tinggi = case_when(
+    tinggi_badan <= 160 ~ "Under 160 cm",
+    tinggi_badan > 160 & tinggi_badan <= 170 ~ "160 - 170 cm",
+    tinggi_badan > 170 ~ "Above 170 cm"
+  ),
+         kelompok_tinggi = factor(kelompok_tinggi,
+                                 levels = c("Under 160 cm","160 - 170 cm","Above 170 cm")
+                                 )
+         ) %>% 
+  group_by(kelompok_tinggi) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  mutate(persen = 100 * n / sum(n),
+         persen = round(persen,1),
+         persen = paste0(persen,"%")) %>% 
+  add_row(kelompok_tinggi = "TOTAL",
+          n = n,
+          persen = "100%") %>% 
+  knitr::kable("pipe",caption = "Tabulasi Frekuensi Berdasarkan Kelompok Tinggi Badan Badan")
+```
+
+Selain mencacah, kita bisa menghitung nilai _mean_ dan _median_ dari data numerik yang ada.
+
+```{r,echo=FALSE}
+df %>% 
+  select(berat_badan,tinggi_badan) %>% 
+  summarise_all(mean) %>% 
+  ungroup() %>% 
+  mutate_all(round) %>% 
+  knitr::kable("pipe",caption = "Tabulasi Mean Berat dan Tinggi Badan Badan")
+
+df %>% 
+  select(berat_badan,tinggi_badan) %>% 
+  summarise_all(median) %>% 
+  ungroup() %>% 
+  mutate_all(round) %>% 
+  knitr::kable("pipe",caption = "Tabulasi Median Berat dan Tinggi Badan Badan")
+```
+
+## _Cross_ Tabulasi Frekuensi
+
+_Cross_ tabulasi frekuensi berarti membuat tabulasi frekuensi dari dua variabel atau lebih. Analisa berguna untuk menganalisa silang antara dua variabel. Contohnya sebagai berikut:
+
+```{r,echo=FALSE}
+df %>% 
+  group_by(gender,alamat) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  reshape2::dcast(gender~alamat,
+                  value.var = "n",
+                  mean) %>% 
+  knitr::kable("pipe",caption = "Cross Tabulasi Frekuensi Berdasarkan Gender dan Alamat")
+
+df %>% 
+  group_by(gender,tingkat_kesukaan) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  reshape2::dcast(tingkat_kesukaan~gender,
+                  value.var = "n",
+                  mean) %>% 
+  knitr::kable("pipe",caption = "Cross Tabulasi Frekuensi Berdasarkan Gender dan TIngkat Kesukaan")
+```
+
+## Pemusatan Data
+
+Kenapa kita perlu menghitung pemusatan data? 
+
+> __Karena pemusatan data adalah satu nilai yang bisa mewakili keseluruhan data.__
+
+Setidaknya ada tiga ukuran pemusatan data, yakni: _mean_, _median_, dan modus. Masing-masing 
+
+- _Mean_, biasa dikenal dengan rata-rata.
+  - Kelebihan: _Useful for other statistical analysis, such as: Annova, T-Test, Z-Test_.
+  - Kekurangan: Sangat mudah terpengaruh oleh nilai pencilan.
+  
+- _Median_, biasa dikenal dengan nilai tengah.
+  - Kelebihan: Tidak mudah terpengaruh oleh nilai pencilan.
+  - Kekurangan: _Very limited statistical use_.
+  
+- _Modus_, biasa dikenal dengan nilai yang paling sering muncul.
+  - Kelebihan: Tidak mudah terpengaruh oleh nilai pencilan.
+  - Kekurangan: _Very limited statistical use_.
+  
+Perhatikan contoh berikut ini:
+
+__Siapa yang terbaik di antara keduanya?__
+
+```{r out.width = "70%",echo=FALSE,fig.align = "center",fig.cap = "Messi vs Ronaldo"}
+knitr::include_graphics("messironaldo.png")
+```
+
+__Bagaimana interpretasi mean, median, dan modus dari kasus di atas?__
+
+### Mean
+
+_Mean_ atau rata-rata berarti berapa banyak gol yang dicetak permusimnya. Jika kita hitung, nilai rata-rata untuk Messi dan Ronaldo sama-sama `10` gol.
+
+Sehingga dengan menggunakan _mean_, kita tidak bisa menyimpulkan siapa yang terbaik antara keduanya.
+
+### Modus
+
+Modus berarti `data` yang sering muncul. Dari data di atas, kita dapatkan:
+
+- Ronaldo = 10
+- Messi = 0
+
+Kesimpulan: Ronaldo lebih baik daripada Messi.
+
+Apa artinya?
+
+> Interpretasi dari modus pada kasus ini adalah __konsistensi__ permainan. Sehingga bisa disimpulkan Ronaldo lebih konsisten dibandingkan Messi.
+
+### Median
+
+Media berarti nilai tengah setelah datanya diurutkan. Dari data di atas, kita dapatkan:
+
+- Ronaldo = 10
+- Messi = 12
+
+Kesimpulan: Messi lebih baik daripada Ronaldo.
+
+> Interpretasi dari median pada kasus ini adalah __akselerasi__ atau __ketajaman__.
+
+_Nah_, _median_ cenderung lebih sulit dipahami dibandingkan analisa _mean_ dan modus.
+
+Untuk membantu saya menjelaskan apa “bahasa bola” dari _median_, saya akan berikan analogi cara perhitungan _median_ sebagai suatu lomba balap. Pada saat data diurutkan dari terkecil ke terbesar, bayangkan posisi terkecil sebagai garis _start_ awal balapan dan posisi tengah (median) sebagai garis _finish_.
+
+1. Pada posisi awal:
+    - Messi = 0
+    - Ronaldo = 8
+1. Pada posisi selanjutnya:
+    - Messi = 0
+    - Ronaldo = 8
+1. Di garis finish (median):
+    - Messi = 12
+    - Ronaldo = 10
+
+Perhatikan animasi berikut ini:
+
+```
+kasih animasi
+```
+
+## Korelasi
+
+Secara definisi statistika, korelasi adalah:
+
+> __Linear strength and direction__ of a relationship between two variables.
+
+Ada tiga _keywords_ yang penting pada definisi tersebut, yakni:
+
+1. _Variables_, yakni dua variabel yang ingin dicek hubungannya.
+2. _Linear Strengh_, menandakan seberapa kuat kedua variabel tersebut secara linear.
+3. _Direction_, menandakan arah dari hubungan kedua variabel tersebut.
+
+Ada hal penting yang perlu diperhatikan saat kita hendak melakukan analisa korelasi. Apa itu?
+
+1. Pastikan kedua variabel yang akan kita uji secara logis dapat dihubungkan.
+2. Kedua variabel tersebut harus berupa numerik.
+
+Masih ingat dengan tipe-tipe data?
+
+---
+
+- Data kualitatif: adalah data yang tidak bisa dilakukan operasi aritmatika (penjumlahan, pengurangan, pembagian, dan perkalian). Data seperti ini bisa juga disebut sebagai **data kategorik**.
+  - **Nominal**; Representasi dari sesuatu. Contoh: data seperti `gender`. Misalkan angka `1` saya tulis sebagai representasi dari `pria` dan `2` sebagai `wanita`.
+  - **Ordinal**; Urutan dari data menjadi penting. Contoh: skala *likert*, misalkan angka `1 - 6` sebagai representasi dari tingkat kesukaan atau kesetujuan (sangat suka sampai sangat tidak suka).
+- Data kuantitatif: adalah data yang bisa dilakukan operasi aritmatika (penjumlahan, pengurangan, pembagian, dan perkalian). Data seperti ini, kita akan sebut sebagai **data numerik**.
+  - **Diskrit**; bilangan bulat (*integer*). Contoh: banyaknya anak, banyaknya karyawan, dll.
+  - **Kontinu**; bilangan *real* (mengandung koma). Contoh: tinggi badan, berat badan, dll.
+
+---
+
+Jadi, hanya data kuantitatif saja yang bisa dihitung korelasinya.
+
+Lantas jika saya memiliki data kualitatif, apakah tidak bisa dihitung korelasinya?
+
+> Jawabannya: tetap bisa
+
+Namun tidak menggunakan metode yang selama ini umum digunakan. Karena saat kita berbicara mengenai korelasi, sebenarnya kita hanya membicarakan hubungan dari dua data kuantitatif saja.
+
+Sebagaimana kita ketahui, perhitungan statistik itu ada dua macam. 
+
+Hal ini juga mempengaruhi cara kita menghitung korelasi.
+
+- Pearson, menggunakan parametrik.
+- Spearman, menggunakan non parametrik.
+
+Secara _default_, __Ms. Excel__ menggunakan cara perhitungan parametrik (__Pearson__). Oleh karena itu harap kita perhatikan saat kita hendak menghitung korelasi di __Ms. Excel__.
+
+```{r out.width = "70%",echo=FALSE,fig.align = "center",fig.cap = "Statistika Parametrik vs Non Parametrik"}
+knitr::include_graphics("paramnon.png")
+```
+
+### Korelasi Bukan Kausalitas
+
+```{r out.width = "70%",echo=FALSE,fig.align = "center",fig.cap = "Korelasi Bukan Kausalitas"}
+knitr::include_graphics("kausalitas")
+```
+
+## Uji Hipotesis
 
 ## _Discussion_  {.unlisted .unnumbered}
+
+\newpage
 
 # PERTEMUAN XIII {-}
 # MELAKSANAKAN _DESK RESEARCH_
 ## _Discussion_  {.unlisted .unnumbered}
+
+\newpage
 
 # PERTEMUAN XIV {-}
 # CONTOH _MARKET RESEARCH PROJECTS_
