@@ -22,6 +22,8 @@ linestretch: 1.25
 ```{r setup, include=FALSE}
 rm(list=ls())
 library(dplyr)
+library(ggplot2)
+library(reshape2)
 ```
 
 \newpage
@@ -1459,7 +1461,8 @@ nama = randomNames::randomNames(n,which.names = "first")
 gender = sample(c("male","female"),n,replace = T)
 alamat = sample(c("Jakarta","Non Jakarta"),n,replace = T,prob = c(.8,.2))
 berat_badan = runif(n,40,80) %>% round(1)
-tinggi_badan = runif(n,140,190) %>% round(1)
+tinggi_badan = runif(n,80,100) %>% round(1)
+tinggi_badan = tinggi_badan + berat_badan
 tingkat_kesukaan = sample(c("Sangat suka","Suka","Tidak suka","Sangat tidak suka"),
                           n,
                           prob = c(.4,.25,.2,.15),
@@ -1731,18 +1734,329 @@ Secara _default_, __Ms. Excel__ menggunakan cara perhitungan parametrik (__Pears
 knitr::include_graphics("paramnon.png")
 ```
 
-### Pengujian Korelasi Menggunakan __R__
 
+\newpage
+
+### Interpretasi Geometris dari Korelasi
+
+Secara geometris, korelasi bisa digambarkan sebagai seberapa bisa pasangan titik data $(x,y)$ pada _scatterplot_ bisa digambarkan sebagai garis lurus.
+
+Sebagai contoh, dari data `berat_badan` dan `tinggi_badan` pada data yang lalu, kita bisa membuat grafik sebagai berikut:
+
+```{r,echo=FALSE,fig.cap = "Scatterplot berat_badan dan tinggi_badan"}
+plt1 = 
+  df %>% 
+  ggplot(aes(berat_badan,tinggi_badan)) +
+  geom_point(color = "steelblue") +
+  theme_minimal() +
+  labs(title = "Scatterplot berat_badan dan tinggi_badan",
+       subtitle = "Data contoh pada pertemuan sebelumnya",
+       caption = "ikanx101.com")
+plt1
+```
+
+
+Jika kita lihat:
+
+1. Titik-titik tersebut memiliki pola tertentu berupa __garis lurus__, maka nilai korelasinya bisa dikatakan kuat. 
+1. Lalu ada hubungan lurus antara `berat_badan` dan `tinggi_badan`, maka nilai korelasinya positif.
+
+Bagaimana cara menghitung nilai korelasinya?
+
+### Menghitung Korelasi Menggunakan __R__
+
+Langkah yang _proper_ dalam menghitung korelasi adalah sebagai berikut:
+
+```
+LANGKAH I
+  Hipotesis nol: korelasi = 0
+  Hipotesis tandingan: korelasi tidak sama dengan 0
+LANGKAH II
+  Hitung nilai p-value dari korelasi
+  Tolak hipotesis nol jika p-value < 0.05
+LANGKAH III
+  Saat hipotesis nol ditolak, hitung korelasi
+```
+
+Berikut adalah cara perhitungannya dengan menggunakan __R__:
+
+```{r}
+cor.test(tinggi_badan,berat_badan)
+```
+
+
+```{r,include=FALSE}
+test = cor.test(tinggi_badan,berat_badan)
+```
+
+Kita dapatkan bahwa $p.value$ sebesar `r test$p.value` $\simeq 0$. Artinya korelasi yang ada antara kedua variabel tidak sama dengan nol (tidak bisa diabaikan). 
+
+Nilai kolerasinya adalah sebesar: `r test$estimate`. Artinya:
+
+1. Korelasinya kuat,
+1. Korelasinya positif.
+
+Sehingga __ada kecenderungan saat__ `berat_badan` __meningkat,__ `tinggi_badan` __juga meningkat__.
+
+\newpage
 
 ### Korelasi Bukan Kausalitas
 
+Tapi perlu diperhatikan bahwa korelasi tidak berujung pada kausalitas (sebab-akibat). Korelasi hanya mengatakan __kecenderungan__ saja. Jika kita hendak melakukan analisa kausalitas, secara statistik perlu dilakukan analisa regresi.
+
+Perhatikan contoh berikut:
+
 ```{r out.width = "70%",echo=FALSE,fig.align = "center",fig.cap = "Korelasi Bukan Kausalitas"}
-knitr::include_graphics("kausalitas")
+knitr::include_graphics("kausalitas.png")
 ```
+
+Jika kita lihat data di atas, ada kesamaan pola tahunan antara kedua variabel. Jika dihitung, maka bisa dipastikan korelasi antara `usia miss america` dan `kematian akibat panas` memiliki nilai kuat positif.
+
+Apakah bisa dibilang bahwa kenaikan atau penurunan `usia miss america` menyebabkan kenaikan atau penurunan angka `kematian akibat panas`?
+
+__Tentu tidak__.
+
+Kedua kejadian ini hanya __kebetulan__ semata. Oleh karena itu, perlu diperhatikan bahwa:
+
+> __Lakukan analisa korelasi hanya kepada dua variabel yang secara logis bisa dihubungkan!__
+
+\newpage
 
 ## Uji Hipotesis
 
-## _Discussion_  {.unlisted .unnumbered}
+Bagi rekan-rekan yang pernah mendapatkan mata kuliah analisis data atau statistika dasar, pasti _familiar_ dengan istilah statistika inferensi. Saya mendefinisikannya secara simpel adalah:
+
+> Statistika inferensi adalah sekumpulan metode statistik yang digunakan untuk menganalisa data sample untuk kemudian diambil kesimpulannya secara _general_ ke populasinya.
+
+Dari uraian di atas, setidaknya saya _highlight_ ada tiga _keywords_ mendasar, yakni:
+
+1. Sample,
+1. Populasi, dan
+1. Mengambil kesimpulan.
+
+Apa itu _sample_? Apa itu populasi? Kita sudah membahasnya pada saat pertemuan sebelumnya.
+
+Statistika inferensi mengambil peranan sebagai alat untuk mengambil keputusan dari data _sample_ untuk di-generalisasi ke level populasi. Statistika inferensi ada banyak jenisnya, mulai dari uji dua proporsi, uji _mean_ satu sample, uji _mean_ dua sample, dan uji _mean_ tiga atau lebih _sample_. Statistika inferensi juga bisa dibedakan menjadi dua, yakni: parametrik dan non parametrik tergantung dari karakteristik data yang kita miliki.
+
+\newpage
+
+```{r out.width = "50%",echo=FALSE,fig.align = "center",fig.cap = "Statistika Inferensi"}
+knitr::include_graphics("para non.png")
+```
+
+Kita bisa melakukan uji hipotesis untuk mengecek apakah ada perbedaan yang signifikan dari nilai rata-rata tersebut. Langkah-langkah dalam uji hipotesis adalah:
+
+1. Tentukan hipotesis nol dan hipotesis tandingan.
+    - Notasi: $H_0$ dan $H_1$.
+    - Hipotesis nol adalah hipotesis yang mengandung unsur sama dengan.
+1. Hitung statistik uji atau p-value.
+    - Kesimpulan: Tolak $H_0$ jika $p.value < 0.05$.
+1. Tuliskan kesimpulan dengan kalimat non matematis.
+
+Dalam statistika inferensi, ada dua pendekatan yang bisa ditempuh, yakni:
+
+1. Statistika parametrik. Syarat: data harus berdistribusi normal.
+1. Statistika non parametrik. Syarat: data tidak harus berdistribusi normal.
+
+\newpage
+
+### Contoh Uji Rata-Rata Dua _Sample_
+
+Tim _sales_ di kota A sedang melakukan suatu penelitian. Mereka hendak membandingkan jualan harian dari dua produk minuman:
+
+1. Minuman A: rasa pepaya,
+1. Minuman B: rasa jambu.
+
+Kedua minuman tersebut memiliki harga, bentuk kemasan (_sachet_), dan gramasi yang sama. 
+
+Untuk itu, mereka mengumpulkan data total sachet terjual dalam sehari selama 60 hari berturut-turut.
+
+Berikut adalah datanya:
+
+```{r,echo=FALSE}
+rm(list=ls())
+data = data.frame(hari_ke = 1:60,
+                  minuman_a = sample(10:20,60,replace = T),
+                  minuman_b = sample(15:25,60,replace = T))
+
+knitr::kable(data,align = "c",caption = "Data Rekapan: Total Sachet Terjual Harian")
+```
+
+\newpage
+
+Berikut adalah _density plot_ (persebaran data) yang ada:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.cap="Sebaran Data"}
+library(ggridges)
+data %>% 
+  reshape2::melt(id.vars = "hari_ke") %>% 
+  ggplot(aes(x = value,
+             y = variable,
+             fill = variable)) +
+  geom_density_ridges() +
+  scale_fill_brewer() +
+  labs(x = "Banyak sachet terjual dalam sehari",
+       y = "Produk minuman",
+       title = "Persebaran Data Sachet Terjual Harian\nDari Dua Minuman Buah",
+       subtitle = "Apakah ada perbedaan rata-rata sachet terjual dari dua minuman tersebut?",
+       caption = "Contoh Ilustrasi\nDibuat menggunakan R") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = .5,
+                                  face = "bold", 
+                                  size = 15),
+        plot.subtitle = element_text(hjust = .5,
+                                     face = "italic",
+                                     size = 10),
+        plot.caption = element_text(hjust = .5))
+```
+
+```{r,include=FALSE}
+hasil = t.test(data$minuman_a,data$minuman_b)
+```
+
+Perlu saya ingatkan kembali bahwa __uji mean 2 sample__ ada dua jenis, yakni:
+
+1. Uji untuk dua data berpasangan: dilakukan jika __subjek penelitian sama dan ingin melihat apakah perlakuan yang ada memberikan dampak terhadap perubahan mean data atau tidak__. Contoh: peneliti hendak menguji apakah ada perbedaan nilai _pre test_ dan _post test_ dari suatu kelompok murid dalam mengikuti suatu pelatihan. Pada uji ini, kedua _sample_ wajib memiliki jumlah baris yang sama.
+1. Uji untuk data independen: dilakukan jika __dua kelompok sample yang diuji tidak saling berkaitan sama sekali__. Pada uji ini, tidak ada keharusan jumlah baris data dari kedua _sample_ harus sama (bisa berbeda).
+
+Pada kasus ini, kita akan melakukan __uji mean 2 sample__ yang independen.
+
+Untuk melakukannya, ada dua pendekatan:
+
+1. Menggunakan __z-test__: digunakan jika kita mengetahui parameter variansi dari populasi.
+1. Menggunakan __t-test__: digunakan jika kita tidak mengetahui parameter variansi dari populasi sehingga variansi populasi akan kita dekati dengan variansi dari _sample_.
+
+Pada kasus ini, kita akan melakukan __uji mean 2 sample__ yang independen menggunakan __t-test__.
+
+Berikut adalah langkah-langkah uji hipotesis:
+
+- Tentukan hipotesis nol dan hipotesis tandingan.
+    - Notasi: $H_0$ dan $H_1$
+    - Hipotesis nol adalah hipotesis yang mengandung unsur sama dengan.
+- Hitung statistik uji atau p-value.
+- Kesimpulan: Tolak $H_0$ jika $p_{value} < 0.05$.
+    - Kenapa dipilih nilai `0.05`?
+    - Nilai tersebut sebenarnya bisa kita ganti tergantung seberapa besar atau kecil akurasi pengujian yang kita lakukan.
+    - Nilai `0.05` yang digunakan biasanya lazim dipakai pada banyak kasus.
+    - Penjelasan terkait nilai `0.05` atau $\alpha$ atau yang biasa disebut sebagai ___significance level___ bisa rekan-rekan cari di berbagai sumber.
+- Tuliskan kesimpulan dengan kalimat non matematis.
+
+Pertama-tama kita tentukan hipotesis nol dan hipotesis tandingan.
+
+- Hipotesis nol pada kasus ini adalah: rata-rata _sachet_ terjual dari minuman A dan minuman B sama (tidak ada perbedaan). Notasi: $\mu_A = \mu_B$.
+- Hipotesis tandingan pada kasus ini adalah: rata-rata _sachet_ terjual dari minuman A dan minuman B berbeda. Notasi: $\mu_A \neq \mu_B$.
+    
+Selanjutnya kita akan hitung _p-value_. Untuk melakukannya, saya akan menggunakan __R__ dengan perintah mudah sebagai berikut:
+
+```{r}
+t.test(data$minuman_a,data$minuman_b)
+```
+
+Kita dapatkan _p-value_ sebesar `r hasil$p.value`.
+
+Rata-rata _sachet_ terjual dari minuman A adalah: `r round(mean(data$minuman_a),2)`. Sedangkan rata-rata _sachet_ terjual dari minuman B adalah: `r round(mean(data$minuman_b),2)`
+
+Jika dibandingkan dengan nilai `0.05`, maka didapatkan bahwa $p_{value} < 0.05$ sehingga kita __menolak__ $H_0$.
+
+Kesimpulannya:
+
+> Rata-rata sachet terjual dari kedua minuman tersebut berbeda. Minuman B terjual lebih banyak dibandingkan minuman A.
+
+### Uji Beda Dua Proporsi
+
+Contoh di atas adalah contoh pengujian hipotesis untuk data bertipe numerik.
+
+> Bagaimana jika data yang kita miliki adalah data kategorik (kualitatif)?
+
+Sebenarnya ada satu metode statistik yang jarang banget dibicarakan terkait data kategorik, yaitu __uji beda dua proporsi__. Contohnya:
+
+Suatu perusahaan FMCG hendak mengiklankan produknya di TV. Untuk mengetahui di stasiun TV mana mereka harus beriklan, mereka melakukan survey kepada _target market_-nya. Didapatkan data sebagai berikut:
+
+- 45 orang dari 100 orang _target market_ menonton stasiun TV ABC.
+- 60 orang dari 125 orang _target market_ menonton stasiun TV XYZ.
+
+Di manakah perusahaan tersebut harus beriklan?
+
+Data di atas sejatinya adalah data berbentuk kategorik (berisi hanya jawaban `YA` atau `TIDAK`) untuk masing-masing stasiun TV. Berikut adalah datanya jika saya tuliskan dalam bentuk tabel.
+
+```{r,echo=FALSE}
+dbase = data.frame(stasiun = c(rep("ABC",2),rep("XYZ",2)),
+	           nonton = c(rep(c("Ya","Tidak"),2)),
+	           n = c(45,100-45,60,125-60)
+         	   )
+
+dbase %>% 
+  dcast(stasiun~nonton,
+        value.var = "n") %>% 
+  rename("Stasiun TV" = stasiun) %>% 
+  knitr::kable(align = "c")
+```
+
+Jika kita hitung dalam bentuk persentase, kita bisa dapatkan grafik sebagai berikut:
+
+```{r,echo=FALSE,fig.align='center',fig.retina=8}
+dbase %>% 
+  group_by(stasiun) %>% 
+  mutate(persen = n/sum(n) * 100,
+         persen = round(persen,2),
+         label = paste0(persen,"%")) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = stasiun,
+             y = persen,
+             fill = nonton)) +
+  geom_col(position = position_dodge(),
+           color = "black",
+           width = .7) +
+  scale_fill_manual(values = c("darkred","darkgreen")) +
+  geom_label(aes(label = label),
+             position = position_dodge(width = .6),
+             color = "white") +
+  labs(title = "Proporsi Nonton vs Tidak per Stasiun Televisi",
+       subtitle = "Berdasarkan data yang ada",
+       caption = "Grafik dengan R\nikanx101.com",
+       fill = "Keterangan",
+       x = "Stasiun",
+       y = "Persen") +
+  theme_minimal() +
+  theme(axis.text.y = element_blank())
+```
+
+Secara persentase, stasiun `XYZ` ditonton oleh `48%` sedangkan stasiun ABC ditonton oleh `45%`. Sekilas kita bisa saja mengambil keputusan bahwa __perusahaan boleh memasang iklan di stasiun XYZ__. Namun apakah benar proses pengambilan keputusan tersebut secara statistik?
+
+> Persentase yang tinggi __belum cukup__ untuk mengambil kesimpulan. Kita harus cek terlebih dahulu apakah persentase tinggi tersebut __signifikan__ atau tidak.
+
+Untuk melakukannya, kita akan gunakan __uji beda dua proporsi__ dengan langkah-langkah sebagai berikut:
+
+__STEP 1__ Tentukan $H_0$ dan $H_1$.
+
+$H_0$ : proporsi orang yang menonton stasiun TV ABC dan XYZ sama. $P_{ABC} = P_{XYZ}$.
+
+$H_1$ : proporsi orang yang menonton stasiun TV ABC dan XYZ berbeda. $P_{ABC} \neq P_{XYZ}$.
+
+__STEP 2__ Hitung statistik uji. 
+
+Saya akan menghitung $p_{value}$ menggunakan _script_ __R__ sebagai berikut:
+
+```{r}
+nonton = c(45,60)
+all_resp = c(100,125)
+prop.test(nonton,all_resp)
+```
+
+Saya dapatkan nilai $p_{value} = 0.7537$.
+
+__STEP 3__ Bandingkan $p_{value}$ dengan nilai $\alpha = 0.05$. 
+
+> Tolak $H_0$ jika $p_{value} < \alpha$.
+
+Karena kita pada kasus ini $p_{value} > \alpha$, maka $H_0$ __tidak ditolak__.
+
+__STEP 4__ Kesimpulan:
+
+> Proporsi responden yang menonton stasiun TV ABC dan XYZ __sama__ (tidak berbeda signifikan).
+
+Artinya kita tidak bisa menyimpulkan stasiun TV mana yang lebih banyak ditonton oleh _target market_.
 
 \newpage
 
