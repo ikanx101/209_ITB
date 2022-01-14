@@ -1442,6 +1442,8 @@ Analisa data yang sering digunakan pada _market research_ adalah analisa-analisa
 
 _Advance analysis_ lainnya seperti regresi, _factor analysis_, atau _k-means clustering analysis_ tidak akan dibahas secara detail pada perkuliahan ini.
 
+Pada pertemuan kali ini, saya akan menggunakan _software_ __R__ untuk melakukan analisa pengujian hipotesis. Sedangkan untuk tabulasi dan korelasi, rekan-rekan bisa menggunakan _software_ _spreadsheet_ seperti __Ms. Excel__.
+
 ## Tabulasi Frekuensi
 
 Tabulasi frekuensi berarti mencacah atau menghitung atau melakukan _tally_ dari suatu data menurut satu atau beberapa variabel sekaligus. 
@@ -1728,6 +1730,9 @@ Secara _default_, __Ms. Excel__ menggunakan cara perhitungan parametrik (__Pears
 ```{r out.width = "70%",echo=FALSE,fig.align = "center",fig.cap = "Statistika Parametrik vs Non Parametrik"}
 knitr::include_graphics("paramnon.png")
 ```
+
+### Pengujian Korelasi Menggunakan __R__
+
 
 ### Korelasi Bukan Kausalitas
 
