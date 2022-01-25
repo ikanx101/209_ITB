@@ -55,9 +55,9 @@ Penelitian kali ini menawarkan suatu model komputasi yang bisa digunakan untuk m
 
 ### Topik Permasalahan
 
-__PT. Nutrifood Indonesia__ adalah salah satu perusahaan _fast moving consumer goods_ (_FMCG_) di Indonesia yang bergerak di bidang makanan dan minuman. Sejak 40 tahun, __Nutrifood__ menawarkan berbagai jenis produk makanan dan minuman sehat kepada masyarakat Indonesia.
+__PT. NFI__ adalah salah satu perusahaan _fast moving consumer goods_ (_FMCG_) di Indonesia yang bergerak di bidang makanan dan minuman. Sejak 40 tahun, __NFI__ menawarkan berbagai jenis produk makanan dan minuman sehat kepada masyarakat Indonesia.
 
-Untuk menjalankan produksinya, __Nutrifood__ memiliki tiga _plants_ yang memproduksi produk-produk yang sama (tidak ada perbedaan produk antar _plant_).
+Untuk menjalankan produksinya, __NFI__ memiliki tiga _plants_ yang memproduksi produk-produk yang sama (tidak ada perbedaan produk antar _plant_).
 
 Salah satu jenis produk yang menjadi _backbone_ adalah minuman serbuk.
 
@@ -103,7 +103,7 @@ Di antara ketiga kemungkinan tersebut, kemungkinan pertama seharusnya __berada p
 
 Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada beberapa komponen _raw material_ digunakan oleh __keseluruhan produk__.
 
-Nutrifood juga menerapkan prinsip ___multi supplier___ untuk menjaga keamanan pasokan dan ketersediaan _raw material_. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal:
+NFI juga menerapkan prinsip ___multi supplier___ untuk menjaga keamanan pasokan dan ketersediaan _raw material_. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal:
 
 1. Harga,
 1. Minimum order,
@@ -123,13 +123,21 @@ Kuantitas _raw material_ yang hendak dibeli harus disesuaikan dengan:
 - Stok existing (sedang dipakai dan belum dipakai),
 - Demand produk,
 - Faktor _supplier_ (harga, _min order_, dan durasi pengiriman).
+- Kualitas _raw material_.
 
 Secara _bussiness value_, masalah ini perlu diselesaikan dengan baik.
 
-__Catatan:__ Proses _review_ tersebut akan menjadi pembahasan tersendiri pada __Penelitian Mandiri II__.
-
 ### Rencana Judul Thesis
 
-__Optimisasi Pembelian Raw Material Minuman Serbuk Menggunakan Metode XXX: Studi Kasus PT. Nutrifood Indonesia.__
+__Optimisasi Pembelian Raw Material dan Supplier Selection Minuman Serbuk Menggunakan Metode XXX: Studi Kasus PT. NFI Indonesia.__
+
+# RENCANA KERJA
+
+## _Output_
+
+### _Planned Output_
+
+- Penelitian Mandiri II: _Data collection_ dan dokumentasi _production system_.
+- Penelitian Mandiri III: Model optimisasi yang telah disempurnakan.
 
 # _REFERENCES_ {.allowframebreaks}
