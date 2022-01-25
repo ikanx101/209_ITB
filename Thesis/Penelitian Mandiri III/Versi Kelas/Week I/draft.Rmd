@@ -51,6 +51,8 @@ Penelitian kali ini menawarkan suatu model komputasi yang bisa digunakan untuk m
 1. Komposisi _raw material_ yang dibutuhkan untuk memproduksi satu unit SKU produk jadi.
 1. Data spesifikasi _supplier_ (terkait harga, minimal kuantitas pembelian, kualitas _raw material_, dan waktu pengiriman).
 
+# LATAR BELAKANG
+
 ## Latar Belakang
 
 ### Topik Permasalahan

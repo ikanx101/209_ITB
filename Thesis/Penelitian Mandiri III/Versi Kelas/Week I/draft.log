@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  25 JAN 2022 11:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  25 JAN 2022 11:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1023,19 +1023,19 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
 
 ] [11
 
+] [12
+
 ]
-<draft_files/figure-beamer/unnamed-chunk-1-1.pdf, id=430, 2461.195pt x 1300.86p
+<draft_files/figure-beamer/unnamed-chunk-1-1.pdf, id=492, 2461.195pt x 1300.86p
 t>
 File: draft_files/figure-beamer/unnamed-chunk-1-1.pdf Graphic file (type pdf)
 <use draft_files/figure-beamer/unnamed-chunk-1-1.pdf>
 Package pdftex.def Info: draft_files/figure-beamer/unnamed-chunk-1-1.pdf  used 
-on input line 250.
+on input line 253.
 (pdftex.def)             Requested size: 318.67209pt x 168.423pt.
-[12
+[13
 
- <./draft_files/figure-beamer/unnamed-chunk-1-1.pdf>] [13
-
-] [14
+ <./draft_files/figure-beamer/unnamed-chunk-1-1.pdf>] [14
 
 ] [15
 
@@ -1043,26 +1043,28 @@ on input line 250.
 
 ] [17
 
+] [18
+
 ]
 LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <12> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 335.
-
-[18
-
-]
-LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <14.4> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 347.
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 338.
 
 [19
 
-] [20
+]
+LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <14.4> not available
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 350.
+
+[20
 
 ] [21
 
 ] [22
 
-
 ] [23
+
+
+] [24
 
 
 ]
@@ -1077,13 +1079,13 @@ LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <14.4> not available
 
 (./draft.aux)
 Package rerunfilecheck Info: File `draft.out' has not changed.
-(rerunfilecheck)             Checksum: EE2095871E97EE2E41DB34E8881CA7B3;632.
+(rerunfilecheck)             Checksum: 7FE28BF6198604902A48911402859D65;749.
  ) 
 Here is how much of TeX's memory you used:
- 22839 strings out of 480559
- 428539 string characters out of 5902712
- 770365 words of memory out of 5000000
- 39788 multiletter control sequences out of 15000+600000
+ 22848 strings out of 480559
+ 428622 string characters out of 5902712
+ 772466 words of memory out of 5000000
+ 39794 multiletter control sequences out of 15000+600000
  466406 words of font info for 116 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  101i,19n,108p,1002b,831s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1096,10 +1098,10 @@ f-dist/fonts/type1/public/lm/lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-di
 st/fonts/type1/public/lm/lmssbx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/f
 onts/type1/public/lm/lmsso10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/
 type1/public/amsfonts/symbols/msam10.pfb>
-Output written on draft.pdf (23 pages, 371913 bytes).
+Output written on draft.pdf (24 pages, 375878 bytes).
 PDF statistics:
- 874 PDF objects out of 1000 (max. 8388607)
- 793 compressed objects within 8 object streams
- 70 named destinations out of 1000 (max. 500000)
- 39008 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 962 PDF objects out of 1000 (max. 8388607)
+ 877 compressed objects within 9 object streams
+ 73 named destinations out of 1000 (max. 500000)
+ 39016 words of extra memory for PDF output out of 42996 (max. 10000000)
 
