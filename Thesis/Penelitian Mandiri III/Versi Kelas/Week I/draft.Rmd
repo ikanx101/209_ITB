@@ -1,5 +1,5 @@
 ---
-title: "INTRODUCTION"
+title: "WEEKLY UPDATE"
 subtitle: "PENELITIAN MANDIRI DALAM SAINS KOMPUTASI III - IV"
 author: "Mohammad Rizka Fadhli 20921004"
 institute: "Sains Komputasi ITB"
@@ -139,7 +139,7 @@ __Optimisasi Pembelian Raw Material dan Supplier Selection Minuman Serbuk Menggu
 
 ### _Planned Output_
 
-- Penelitian Mandiri II: _Data collection_ dan dokumentasi _production system_.
-- Penelitian Mandiri III: Model optimisasi yang telah disempurnakan.
+- Penelitian Mandiri III: _Data collection_ dan dokumentasi _production system_.
+- Penelitian Mandiri IV: Model optimisasi yang telah disempurnakan.
 
 # _REFERENCES_ {.allowframebreaks}

@@ -2058,6 +2058,49 @@ __STEP 4__ Kesimpulan:
 
 Artinya kita tidak bisa menyimpulkan stasiun TV mana yang lebih banyak ditonton oleh _target market_.
 
+#### Contoh Lain Uji Beda Dua Proporsi
+
+Misalkan dalam suatu survey, 300 orang responden ditanyakan pertanyaan berikut ini:
+
+---
+
+Seberapa puaskah Anda dengan layanan provider telepon seluler Anda?
+
+1. Sangat Tidak Puas
+1. Tidak Puas
+1. Puas
+1. Sangat Puas
+
+---
+
+Setelah data di-_entry_, kita mendapatkan informasi bahwa:
+
+- 50 orang menjawab `sangat tidak puas`.
+- 90 orang menjawab `tidak puas`.
+- 60 orang menjawab `puas`.
+- 100 orang menjawab `sangat puas`.
+
+Uji beda dua proporsi bisa digunakan dalam kasus ini untuk menentukan apakah responden secara keseluruhan puas atau tidak terhadap layanan provider telepon seluler yang digunakannya. Bagaimana caranya?
+
+Salah satu analisa yang sering dipakai dalam pertanyaan yang bersifat urutan atau skala adalah ___top2boxes vs bottom2boxes___. Jadi kita akan kelompokkan `4` pilihan skala menjadi ___top2___ (`sangat puas` dan `puas`) vs ___bottom2___ (`sangat tidak puas` dan `tidak puas`).
+
+Maka kita dapatkan hasil:
+
+- 140 orang menjawab ___bottom2___.
+- 160 orang menjawab ___top2___.
+
+Kita langsung saja menguji perbedaan dari dua proporsi di atas:
+
+```{r}
+answer = c(140,160)
+all_resp = c(300,300)
+prop.test(answer,all_resp)
+```
+
+Saya dapatkan nilai $p_{value} = 0.1208$.
+
+Oleh karena $p_{value} > \alpha$, maka $H_0$ __tidak ditolak__. Artinya kedua proporsi responden ini tidak berbeda signifikan.
+
 \newpage
 
 # PERTEMUAN XIII {-}
