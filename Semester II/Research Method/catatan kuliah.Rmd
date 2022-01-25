@@ -1,0 +1,122 @@
+---
+title: "RESEARCH METHOD"
+subtitle: | 
+    | Catatan Kuliah
+author: | 
+    | Ikang FADHLI
+    | ikanx101.com
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: true
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: tango
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}  
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Semester II/Research Method")
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+# _ROLES OF SCIENCE_
+
+Making choices:
+
+- Ask question, make observations, form conclusions.
+- Applied in more formal, quantitative way equals science.
+
+```{r,echo=FALSE,fig.retina=10,fig.align='center'}
+nomnoml::nomnoml("
+                 [science 1.0] -> [science 2.0]
+                 [science 2.0] -> [science 3.0]
+                 [science 3.0] -> [science 4.0]
+                 
+                 [science 1.0|observasi]
+                 [science 2.0|observasi|teori]
+                 [science 3.0|observasi|teori|eksperimen]
+                 [science 4.0|observasi|teori|eksperimen|komputasi]
+                 ")
+```
+
+# _TYPES OF RESEARCH_
+
+Jenis penelitian antara lain:
+
+## _Descriptive vs Analytical_
+
+_Descriptive research_ meliputi survey dan _fact-finding enquiries of different kinds_, tujuannya untuk mendeskripsikan masalah yang dihadapi. Peneliti tidak memiliki kontrol pada variabel jadi hanya bisa melaporkan data yang ada. Sedangkan _analytical research_, peneliti harus menggunakan fakta atau informasi yang sudah tersedia dan menganalisanya secara kritis.
+
+
+# RUMUSAN MASALAH
+
+## Pengertian Rumusan Masalah
+
+Rumusan masalah secara umum merupakan kesulitan yang dialami peneliti dalam konteks baik situasi teoritis atau praktis dan ingin mendapatkan solusi untuk hal yang sama.
+
+## Komponen Rumusan Masalah
+
+Komponen-komponen yang membangun rumusan masalah, antara lain:
+
+1. Adanya individu atau kelompok yang mengalami kesulitan atau masalah.
+1. Adanya beberapa tujuan yang ingin dicapai. Jika seseorang tidak menginginkan apa-apa, ia tidak dapat memiliki masalah.
+1. Terdapat cara alternatif (atau tindakan) ntuk mencapai tujuan seseorang ingin mencapainya. Ini berarti bahwa setidaknya harus ada dua cara yang tersebua untuk peneliti karena jika dia tidak memiliki pilihan cara, dia tidak dapat memiliki masalah.
+1. Harus ada keragian di benak seorang peneliti sehubungan dengan pemilihan alternatif. Ini berarti bahwa penelitian harus menjawab pertanyaan tentang efisisensi alternatif yang mungkin.
+1. Hasus ada beberapa lingkungan yang terkait dengan kesulitan tersebut.
+
+## Pemilihan Rumusan Masalah
+
+1. Subjek yang sudah dilakukan tidak perlu dipilih karena akan menyulitka peneliti.
+1. Subjek kontroversial tidak boleh dijadikan alternatif.
+1. Hindari masalah yang terlalu sempit atau terlalu kabur.
+1. Subjek yang dipilih untuk penelitian sebaiknya yang familiar dengan peneliti dan layak sehingga mempermudah mencari literatur.
+1. Harus mempertimbangkan kualifikasi peneliti, biaya, waktu yang diperlukan, dan faktor lainnya.
+
+## Pentingnya Mendefinisikan Rumusan Masalah
+
+Cukup sering kita semua mendengar bahwa masalah yang dinyatakan jelas adalah masalah yang hampir terpecahkan $\rightarrow$ sangat penting mendefinisikan rumusan masalah.
+
+Masalah yang akan diselidiki harus didefinisikan dengan jelas supaya membantu peneliti pada saat membedakan data yang relevan dari yang tidak relevan.
+
+Jika rumusan masalah sudah disusun, maka akan muncul pertanyaan di benak peneliti seperti:
+
+- Data apa yang harus dikumpulkan?
+- Karakteristik data seperti apa yang relevan dan perlu dipelajari?
+- Hubungan apa yang harus dieksplorasi.
+- Teknik apa yang harus digunakan untuk tujuan tersebut?
+- dan pertanyaan serupa lainnya.
+
+## Beberapa Teknik yang Digunakan Dalam Merumuskan Masalah
+
+Contoh perumusan masalah:
+
+> Mengapa produktivitas di Jepang lebih tinggi dibandingkan dengan di India.
+
+Contoh tersebut adalah rumusan yang __ambigu__ karena:
+
+1. Produktivitas yang dimaksdu ini mengacu pada apa?
+1. Industri manakah yang terkait?
+1. Kapan femomena tersebut terjadi.
+
+Oleh karena itu harus diubah menjadi:
+
+> Faktor apa yang menyebabkan produktivitas tenaga kerja dari industri manufaktyr di Jepang pada periode 1971 sampai 1980 lebih tinggi relatif terhadap India?
+
+# Tugas Pertama
+
+Bikin resume max 10 jurnal terkait dengan topik penelitian.
