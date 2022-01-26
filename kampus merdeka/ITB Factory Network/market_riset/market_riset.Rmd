@@ -2109,7 +2109,7 @@ Contohnya sebagai berikut:
 
 Dalam suatu survey yang dilakukan di 4 kota: Jakarta, Bandung, Surabaya, dan Makassar, didapatkan data durasi menonton televisi dalam sehari sebagai berikut:
 
-```{r,echo=false}
+```{r,echo=FALSE}
 rm(list=ls())
 
 jkt = data.frame(id = paste0("j",1:30), durasi = runif(30,0,7))
