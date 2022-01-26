@@ -2181,12 +2181,13 @@ Saya akan berikan beberapa contoh _desk research_ sederhana yang bisa kita lakuk
 
 ## _Google Trend_ Omicron
 
-## _Open Data_ Penyebab Kebakaran di Jakarta
+## Indeks Pembangunan Manusia di Jawa Barat
 
-Beberapa pemerintah daerah memiliki situs _open data_ yang bisa kita jadikan rujukan. Salah satunya adalah situs _open data_ Jakarta berikut ini: https://data.jakarta.go.id/
+Salah satu indikator yang biasa digunakan perusahaan untuk memetakan potensi suatu kota / kabupaten adalah `indeks pembangunan manusia`. Kita bisa dengan mudah mendapatkannya di situs resmi BPS Nasional / Provinsi / Kota terkait. Sebagai contoh, saya akan ambil data IPM dari kabupaten dan kota di Jawa Barat pada rentang waktu 2019 hingga 2021 sebagai berikut:
 
-Saya akan mengambil `data frekuensi kebakaran, obyek terbakar, korban, dan taksiran kerugian di Prov. DKI Jakarta` yang di-_update_ terakhir pada `17 Juni 2021`.
+```{r}
 
+```
 
 ## _Discussion_  {.unlisted .unnumbered}
 
