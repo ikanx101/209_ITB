@@ -20,7 +20,6 @@ bibliography: references.bib
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 rm(list=ls())
-setwd("~/209_ITB/Thesis/Penelitian Mandiri III/Versi Kelas/Week I")
 ```
 
 # PENDAHULUAN
@@ -65,7 +64,7 @@ Salah satu jenis produk yang menjadi _backbone_ adalah minuman serbuk.
 
 ### Topik Permasalahan (lanjutan)
 
-Saat ini, ada $>130$ SKU minuman serbuk yang diproduksi. Beberapa SKU masuk ke dalam kategori _high demand_ sedangkan beberapa lainnya masuk ke dalam kategori _medium demand_ dan _low demand_.
+Saat ini, ada 130 SKU minuman serbuk yang diproduksi. Beberapa SKU masuk ke dalam kategori _high demand_ sedangkan beberapa lainnya masuk ke dalam kategori _medium demand_ dan _low demand_.
 
 Salah satu strategi perencanaan yang baik adalah menyelaraskan antara _production_ dan _demand_.
 
@@ -73,7 +72,7 @@ Topik yang diangkat dalam penelitian ini adalah upaya pencegahan ___loss sales__
 
 ### Topik Permasalahan (lanjutan)
 
-```{r out.width="80%",echo=FALSE}
+```{r out.width="75%",echo=FALSE,fig.align='center'}
 nomnoml::nomnoml("#direction: down,
                  [Plan] -> [Realita]
                  
@@ -99,7 +98,7 @@ Ada beberapa kemungkinan:
 1. _Production downtime_.
 1. Perubahan _demand_ mendadak.
 
-Di antara ketiga kemungkinan tersebut, kemungkinan pertama seharusnya __berada pada kontrol kita__ jika direncanakan dengan baik.
+Di antara ketiga kemungkinan tersebut, kemungkinan pertama __berada pada kontrol kita__ jika direncanakan dengan baik.
 
 ### Topik Permasalahan (lanjutan)
 
@@ -110,7 +109,7 @@ NFI juga menerapkan prinsip ___multi supplier___ untuk menjaga keamanan pasokan 
 1. Harga,
 1. Minimum order,
 1. Durasi pengiriman.
-1. Kualitas _raw material_ per _supplier_.
+1. Kualitas _raw material_.
 
 ### Topik Permasalahan (lanjutan)
 
@@ -123,7 +122,9 @@ Kenapa?
 Kuantitas _raw material_ yang hendak dibeli harus disesuaikan dengan:
 
 - Stok existing (sedang dipakai dan belum dipakai),
+- Kapasitas gudang bahan baku,
 - Demand produk,
+- Kapasitas produksi harian,
 - Faktor _supplier_ (harga, _min order_, dan durasi pengiriman).
 - Kualitas _raw material_.
 
@@ -131,7 +132,7 @@ Secara _bussiness value_, masalah ini perlu diselesaikan dengan baik.
 
 ### Rencana Judul Thesis
 
-__Optimisasi Pembelian Raw Material dan Supplier Selection Minuman Serbuk Menggunakan Metode XXX: Studi Kasus PT. NFI Indonesia.__
+__Optimisasi Pembelian Raw Material dan Supplier Selection Minuman Serbuk Menggunakan Metode XXX: Studi Kasus pada PT. NFI.__
 
 # RENCANA KERJA
 
