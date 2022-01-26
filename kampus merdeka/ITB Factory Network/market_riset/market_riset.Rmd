@@ -2101,10 +2101,93 @@ Saya dapatkan nilai $p_{value} = 0.1208$.
 
 Oleh karena $p_{value} > \alpha$, maka $H_0$ __tidak ditolak__. Artinya kedua proporsi responden ini tidak berbeda signifikan.
 
+### Uji Rata-Rata Tiga atau Lebih Kelompok
+
+Jika pada dua materi sebelumnya, kita berhadapan dengan dua kelompok data yang hendak dibandingkan, sekarang kita akan mencari tahu bagaimana membandingkan rata-rata dari tiga atau lebih kelompok data. Perlu diingatkan lagi, karena kita akan membandingkan nilai rata-rata, maka data yang terlibat harus berupa __numerik__.
+
+Contohnya sebagai berikut:
+
+Dalam suatu survey yang dilakukan di 4 kota: Jakarta, Bandung, Surabaya, dan Makassar, didapatkan data durasi menonton televisi dalam sehari sebagai berikut:
+
+```{r,echo=false}
+rm(list=ls())
+
+jkt = data.frame(id = paste0("j",1:30), durasi = runif(30,0,7))
+bdg = data.frame(id = paste0("b",1:30), durasi = runif(30,1,4))
+sby = data.frame(id = paste0("s",1:30), durasi = runif(30,0,5))
+mks = data.frame(id = paste0("m",1:30), durasi = runif(30,3,9))
+
+jkt %>% knitr::kable(caption="Data Survey Jakarta")
+bdg %>% knitr::kable(caption="Data Survey Bandung")
+sby %>% knitr::kable(caption="Data Survey Surabaya")
+mks %>% knitr::kable(caption="Data Survey Makassar")
+
+```
+
+Misalkan _researcher_ ingin mengetahui apakah ada perbedaan durasi menonton responden dari keempat kota tersebut?
+
+Untuk melakukan ini, kita bisa menggunakan analisa statistika Annova (untuk parametrik) atau analisa Kruskal Wallis (untuk non parametrik).
+
+Untuk melakukan Annova, setidaknya ada beberapa asumsi yang harus dipenuhi seperti kenormalan dari data dan variansi antar kelompok harus sama. Sedangkan untuk Kruskal Wallis cenderung lebih _loose_ dari prasyarat.
+
+Kali ini saya akan menghitung menggunakan analisa Kruskal Wallis menggunakan __R__ sebagai berikut:
+
+Kita buat terlebih dahulu hipotesis nol dan hipotesis tandingannya:
+
+- $H_0$ tidak ada perbedaan rata-rata durasi menonton televisi di semua kota survey.
+- $H_1$ setidaknya ada satu kota yang memiliki rata-rata durasi menonton televisi yang berbeda dengan kota lainnya.
+
+Lalu kita akan ubah tabel di atas menjadi bentuk seperti ini:
+
+```{r,echo=FALSE}
+df = data.frame(
+	kota = c(rep("jkt",30),rep("bdg",30),rep("sby",30),rep("mks",30)),
+	durasi = c(jkt$durasi,bdg$durasi,sby$durasi,mks$durasi)
+	)
+
+df %>% knitr::kable(caption = "Data Survey Gabungan")
+test = kruskal.test(durasi ~ kota, data = df)
+p_val = test$p.value
+
+kesimpulan = ifelse(p_val<0.05,
+		    "Tolak H0","H0 tidak ditolak")
+```
+
+```{r}
+kruskal.test(durasi ~ kota, data = df)
+```
+
+Kita temukan nilai $p_{value}$ sebesar `r test$p.value %>% round(4)`. Jika kita bandingkan dengan $\alpha = 0.05$, kita bisa simpulkan: `r kesimpulan`.
+
+
 \newpage
 
 # PERTEMUAN XIII {-}
 # MELAKSANAKAN _DESK RESEARCH_
+
+Pada materi-materi awal, _desk research_ merupakan salah sau metode _market research_ yang mengandalkan data sekunder. Kita bisa mengambil data dari sumber-sumber terpercaya dan melakukan analisa langsung tanpa harus melakukan survey terlebih dahulu.
+
+Beberapa hal kritis yang perlu diperhatikan dalam melakukan _desk research_ masih sama dengan __tiga titik kritis__ dalam melakukan _market research_, yakni:
+
+1. Formulasi masalah.
+1. Pengumpulan data.
+1. Analisa data.
+
+Namun karena pada _desk research_ kita tidak menyebarkan kuesioner, maka titik berat dari _desk research_ adalah pada saat pengumpulan data. Kita perlu memperhatikan sumber data dan reliabilitas data.
+
+Saya akan berikan beberapa contoh _desk research_ sederhana yang bisa kita lakukan dengan mudah.
+
+## _Price Analysis_ Mobil Bekas
+
+## _Google Trend_ Omicron
+
+## _Open Data_ Penyebab Kebakaran di Jakarta
+
+Beberapa pemerintah daerah memiliki situs _open data_ yang bisa kita jadikan rujukan. Salah satunya adalah situs _open data_ Jakarta berikut ini: https://data.jakarta.go.id/
+
+Saya akan mengambil `data frekuensi kebakaran, obyek terbakar, korban, dan taksiran kerugian di Prov. DKI Jakarta` yang di-_update_ terakhir pada `17 Juni 2021`.
+
+
 ## _Discussion_  {.unlisted .unnumbered}
 
 \newpage
