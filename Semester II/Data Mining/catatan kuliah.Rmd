@@ -1,0 +1,64 @@
+---
+title: "DATA MINING"
+subtitle: | 
+    | Catatan Kuliah
+author: | 
+    | Ikang FADHLI
+    | ikanx101.com
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: true
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: tango
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}  
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Semester II/Data Mining")
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+# CHAPTER II {-}
+
+# _CONCEPTS AND TECHNIQUES_
+
+## _Types of Datasets_
+
+- Record
+    - Relational records
+    - Data matrix
+    - Transaction data
+- Graph and network
+    - World wide web
+    - Spcial or information networks
+- Ordered
+- Spatial, image and multimedia
+
+## Important Characteristics of Structured Data
+
+- Dimensionality
+    - Curse of dimensionality
+- Sparsity
+    - Only presence counts
+- Resolution
+    - Patterns depend on the scale
+- Distribution
+    - Centrality and dispersion
+
+
