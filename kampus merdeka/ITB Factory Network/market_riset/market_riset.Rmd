@@ -2181,7 +2181,17 @@ Saya akan berikan beberapa contoh _desk research_ sederhana yang bisa kita lakuk
 
 Salah satu _market research project_ yang bisa kita lakukan tanpa harus keluar dari rumah adalah _market analysis_. Salah satu aspek yag bisa dilakukan dalam _market analysis_ adalah analisa harga dari barang-barang yang ada di _market_. 
 
-Salah satu
+Salah satu contohnya adalah _proce analysis_ dari pasar mobil bekas di area Jabodetabek. Sebagaimana yang telah kita ketahui bersama, ada berbagai portal _online_ dalam jual-beli mobil bekas. Salah satu yang terkenal adalah situs [Carmudi](https://www.carmudi.co.id/en).
+
+Kali ini kita akan lakukan _web scraping_, yakni mengambil data publik yang tersedia di _web_ dengan menggunakan algoritma yang ditulis menggunakan bahasa pemrograman __R__. Kita akan ambil data-data sebagai berikut:
+
+1. _Brand_,
+1. Harga,
+1. Tipe transmisi,
+1. Kota asal, dan
+1. Jarak tempuh.
+
+Berikut adalah data
 
 \newpage
 
