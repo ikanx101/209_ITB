@@ -2355,9 +2355,50 @@ Salah satu contoh _market research project_ yg erat kaitannya dengan _sales rese
 1. Waktu transaksi dan
 1. SKU yang terjual.
 
-Menjadi data yang krusial. Beberapa analisa yang bisa dilakukan antara lain:
+Menjadi data yang krusial. Sebagai contoh, biasanya data yang didapatkan adalah sebagai berikut:
+
+```{r,echo=FALSE}
+rm(list=ls())
+n_trans = sample(1:4,7,replace=T)
+id = 1:7
+prod = paste0("Product ",1:10)
+harga = sample(10:25,10) * 1000
+
+df = data.frame(id_transaksi = id,product = NA,qty = NA,price = NA)
+
+for(i in 1:7){
+  id_prod = sample(1:10,n_trans[i])
+  prod_s = prod[id_prod]
+  harga_s = harga[id_prod]
+  qty_s = sample(1:3,n_trans[i],replace = T)
+  df$product[i] = paste(prod_s,collapse = ",")
+  df$qty[i] = paste(qty_s,collapse = ",")
+  df$price[i] = paste(harga_s,collapse = ",")
+}
+
+df = df %>% separate_rows(product,qty,price,sep = ","
+
+df %>% knitr::kable(align  = "c", caption = "Data Transaksi yang Dikumpulkan")
+```
+
+Beberapa analisa yang bisa dilakukan antara lain:
 
 ### _Market Share_
+
+Inti dari analisa _market share_ adalah mencari tahu seberapa besar proporsi _sales value_ per produk, merek, atau kategori tertentu dari data. Sebagai contoh, dari data di atas saya akan menghitung _market share_ untuk semua produk yang terlibat.
+
+Langkah pengerjaannya cukup mudah, yakni dengan menjumlahkan terlebih dahulu total _sales value_ per produk lalu menghitung proporsi (persentase).
+
+```{r}
+omset =
+  df %>%
+  mutate(omset = qty * price) %>%
+  group_by(product) %>%
+  summarise(total_sales_value = sum(omset)) %>%
+  ungroup()
+
+omset %>% knitr::kable(align="c")
+```
 
 ### _Market Size_
 
