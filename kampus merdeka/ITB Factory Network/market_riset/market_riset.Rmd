@@ -2191,7 +2191,11 @@ Kali ini kita akan lakukan _web scraping_, yakni mengambil data publik yang ters
 1. Kota asal, dan
 1. Jarak tempuh.
 
-Berikut adalah data
+Berikut adalah data yang bisa kita dapatkan dari situs tersebut:
+
+### Analisa Harga per _Brand_
+
+### Analisa Harga per Jarak Tempuh
 
 \newpage
 
@@ -2335,12 +2339,23 @@ ipm_jabar %>%
   knitr::kable(caption = "Top 7 Kota Kabupaten dengan Gain Tertinggi")
 ```
 
-
 ## _Discussion_  {.unlisted .unnumbered}
 
 \newpage
 
 # PERTEMUAN XIV {-}
 # CONTOH _MARKET RESEARCH PROJECTS_
-## _Discussion_  {.unlisted .unnumbered}
 
+Pada pertemuan ini, saya akan memberitahukan beberapa contoh _market research projects_ yang biasa dilakukan oleh industri:
+
+## _Media Habit_
+
+## _TV Advertising Research_
+
+## _Brand Health_
+
+## _Market Entry Research_
+
+## _Mistery Shopping_
+
+## _Discussion_  {.unlisted .unnumbered}
