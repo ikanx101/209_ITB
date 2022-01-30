@@ -2348,14 +2348,27 @@ ipm_jabar %>%
 
 Pada pertemuan ini, saya akan memberitahukan beberapa contoh _market research projects_ yang biasa dilakukan oleh industri:
 
-## _Media Habit_
+## _Retail Audit_
 
-## _TV Advertising Research_
+Salah satu contoh _market research project_ yg erat kaitannya dengan _sales research_ adalah _retail audit_. _Retail audit_ berarti mengumpulkan data transaksi pembukuan toko _retail_ untuk kemudian dianalisa. Jadi berbeda dengan survey atau tipe riset yang mengumpulkan data _end-consumer_, _retail audit_ mengumpulkan data dari toko. Semua transaksi dari toko kepada konsumen seperti:
+
+1. Waktu transaksi dan
+1. SKU yang terjual.
+
+Menjadi data yang krusial. Beberapa analisa yang bisa dilakukan antara lain:
+
+### _Market Share_
+
+### _Market Size_
+
+### _Market Trend_
+
+## _TV Campaign Research_
 
 ## _Brand Health_
 
 ## _Market Entry Research_
 
-## _Mistery Shopping_
+## _Service Audit: Mistery Shopping_
 
 ## _Discussion_  {.unlisted .unnumbered}
