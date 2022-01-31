@@ -2350,12 +2350,20 @@ Pada pertemuan ini, saya akan memberitahukan beberapa contoh _market research pr
 
 ## _Retail Audit_
 
-Salah satu contoh _market research project_ yg erat kaitannya dengan _sales research_ adalah _retail audit_. _Retail audit_ berarti mengumpulkan data transaksi pembukuan toko _retail_ untuk kemudian dianalisa. Jadi berbeda dengan survey atau tipe riset yang mengumpulkan data _end-consumer_, _retail audit_ mengumpulkan data dari toko. Semua transaksi dari toko kepada konsumen seperti:
+Salah satu contoh _market research project_ yang erat kaitannya dengan dunia _sales_ adalah _retail audit_. _Retail audit_ berarti mengumpulkan data transaksi pembukuan toko _retail_ untuk kemudian dianalisa. Jadi berbeda dengan survey atau tipe riset yang mengumpulkan data _end-consumer_ melalui metode wawancara (_interview_), _retail audit_ mengumpulkan data dari langsung dari pembukuan toko (baik toko modern atau tradisional). Biasanya pihak _researcher_ bekerja sama dan membuat perjanjian dengan toko terpilih untuk bisa mendapat data tersebut selama periode waktu tertentu. Ada dua cara pengumpulan data yang lazim dilakukan saat _retail audit_:
 
-1. Waktu transaksi dan
-1. SKU yang terjual.
+1. _Researcher_ memberikan buku atau _worksheet_ yang harus diisi selama periode waktu tertentu oleh pihak toko. Hal ini bisa dilakukan untuk toko tradisional yang belum memiliki pembukuan transaksi. Salah satu keuntungan yang bisa didapatkan oleh pihak toko adalah bisa mempelajari pembukuan yang baik untuk usahanya.
+1. _Researcher_ mencatat data transaksi dari pembukuan toko. Biasanya hal ini dilakukan untuk toko modern atau toko besar.
 
-Menjadi data yang krusial. Sebagai contoh, biasanya data yang didapatkan adalah sebagai berikut:
+Semua transaksi dari toko kepada konsumen seperti:
+
+1. Waktu transaksi,
+1. SKU yang terjual, dan
+1. Harga per SKU.
+
+Menjadi data yang krusial. Namun tidak menutup kemungkinan ada data lain yang perlu diambil untuk menyelesaikan _research problem_.
+
+Sebagai contoh, biasanya data yang didapatkan adalah sebagai berikut:
 
 ```{r,echo=FALSE}
 rm(list=ls())
@@ -2378,7 +2386,7 @@ for(i in 1:7){
 
 df = df %>% separate_rows(product,qty,price,sep = ","
 
-df %>% knitr::kable(align  = "c", caption = "Data Transaksi yang Dikumpulkan")
+df %>% knitr::kable(align  = "c", caption = "Contoh Data Transaksi yang Dikumpulkan")
 ```
 
 Beberapa analisa yang bisa dilakukan antara lain:
