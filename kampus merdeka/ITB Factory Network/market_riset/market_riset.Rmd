@@ -2193,9 +2193,16 @@ Kali ini kita akan lakukan _web scraping_, yakni mengambil data publik yang ters
 
 Berikut adalah data yang bisa kita dapatkan dari situs tersebut:
 
+```{r,include=FALSE}
+rm(list=ls())
+load("data_carmudi.rda")
+```
+
 ### Analisa Harga per _Brand_
 
 ### Analisa Harga per Jarak Tempuh
+
+### Analisa Harga per Tahun
 
 \newpage
 
@@ -2366,15 +2373,17 @@ Menjadi data yang krusial. Namun tidak menutup kemungkinan ada data lain yang pe
 Sebagai contoh, biasanya data yang didapatkan adalah sebagai berikut:
 
 ```{r,echo=FALSE}
+library(tidyr)
 rm(list=ls())
-n_trans = sample(1:4,7,replace=T)
-id = 1:7
+n_data = 15
+n_trans = sample(1:4,n_data,replace=T)
+id = 1:n_data
 prod = paste0("Product ",1:10)
-harga = sample(10:25,10) * 1000
+harga = sample(10:25,10) * 100000
 
 df = data.frame(id_transaksi = id,product = NA,qty = NA,price = NA)
 
-for(i in 1:7){
+for(i in 1:n_data){
   id_prod = sample(1:10,n_trans[i])
   prod_s = prod[id_prod]
   harga_s = harga[id_prod]
@@ -2384,7 +2393,11 @@ for(i in 1:7){
   df$price[i] = paste(harga_s,collapse = ",")
 }
 
-df = df %>% separate_rows(product,qty,price,sep = ","
+df = 
+  df %>% 
+  separate_rows(product,qty,price,sep = ",") %>% 
+  mutate(qty = as.numeric(qty),
+         price = as.numeric(price))
 
 df %>% knitr::kable(align  = "c", caption = "Contoh Data Transaksi yang Dikumpulkan")
 ```
@@ -2397,20 +2410,29 @@ Inti dari analisa _market share_ adalah mencari tahu seberapa besar proporsi _sa
 
 Langkah pengerjaannya cukup mudah, yakni dengan menjumlahkan terlebih dahulu total _sales value_ per produk lalu menghitung proporsi (persentase).
 
-```{r}
+```{r,echo=FALSE}
 omset =
   df %>%
   mutate(omset = qty * price) %>%
   group_by(product) %>%
   summarise(total_sales_value = sum(omset)) %>%
-  ungroup()
+  ungroup() %>% 
+  mutate(market_share = total_sales_value / sum(total_sales_value) * 100,
+         market_share = round(market_share,2),
+         market_share = paste0(market_share,"%")) %>% 
+  arrange(desc(total_sales_value))
+
+total = omset$total_sales_value %>% sum() / 1000000 
+total = total %>% round(2)
 
 omset %>% knitr::kable(align="c")
 ```
 
 ### _Market Size_
 
-### _Market Trend_
+Sedangkan _market size_ adalah menghitung seberapa besar pasar yang bisa diraih oleh suatu produk atau kategori produk tertentu. 
+
+Sebagai contoh, jika semua produk yang ada di atas berada pada kategori yang sama (misalkan: minuman ringan), maka kita bisa hitung _market size_-nya adalah sebesar `r paste0("Rp ",total," jt")`
 
 ## _TV Campaign Research_
 
