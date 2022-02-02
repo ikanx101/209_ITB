@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  26 JAN 2022 10:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  1 FEB 2022 07:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -720,12 +720,17 @@ Package: inputenc 2021/02/14 v1.3d Input encoding file
 \inpenc@posthook=\toks46
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
-) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/beamer/beamerthemeSzeged.st
+)
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/beamer/beamerthemeAnnArbor.st
 y
-(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/beamer/beamerouterthememinifr
-ames.sty))
-(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/beamer/beamercolorthemealbatr
-oss.sty)
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/beamer/beamerinnerthemerounde
+d.sty)
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/beamer/beamerouterthemeinfoli
+nes.sty)
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/beamer/beamercolorthemewolver
+ine.sty))
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/beamer/beamercolorthemebeaver
+.sty)
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/beamer/beamerfontthemestructu
 rebold.sty) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/upquote/upquote.s
 ty
@@ -754,36 +759,106 @@ LaTeX Info: Redefining \lslig on input line 897.
 Package microtype Info: Loading configuration file microtype.cfg.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
 File: microtype.cfg 2021/12/10 v3.0b microtype main configuration file (RS)
+)) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
+\LTleft=\skip68
+\LTright=\skip69
+\LTpre=\skip70
+\LTpost=\skip71
+\LTchunksize=\count337
+\LTcapwidth=\dimen289
+\LT@head=\box77
+\LT@firsthead=\box78
+\LT@foot=\box79
+\LT@lastfoot=\box80
+\LT@gbox=\box81
+\LT@cols=\count338
+\LT@rows=\count339
+\c@LT@tables=\count340
+\c@LT@chunks=\count341
+\LT@p@ftn=\toks48
+) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen290
+\lightrulewidth=\dimen291
+\cmidrulewidth=\dimen292
+\belowrulesep=\dimen293
+\belowbottomsep=\dimen294
+\aboverulesep=\dimen295
+\abovetopsep=\dimen296
+\cmidrulesep=\dimen297
+\cmidrulekern=\dimen298
+\defaultaddspace=\dimen299
+\@cmidla=\count342
+\@cmidlb=\count343
+\@aboverulesep=\dimen300
+\@belowrulesep=\dimen301
+\@thisruleclass=\count344
+\@lastruleclass=\count345
+\@thisrulewidth=\dimen302
+) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen303
+\ar@mcellbox=\box82
+\extrarowheight=\dimen304
+\NC@list=\toks49
+\extratabsurround=\skip72
+\backup@length=\skip73
+\ar@cellbox=\box83
+) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen305
+\captionmargin@=\dimen306
+\captionwidth=\dimen307
+\caption@tempdima=\dimen308
+\caption@indent=\dimen309
+\caption@parindent=\dimen310
+\caption@hangindent=\dimen311
+Package caption Info: beamer document class detected.
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/caption/caption-beamer.sto
+File: caption-beamer.sto 2020/08/22 v2.0 Adaption of the caption package to the
+ beamer document classes (AR)
 ))
-\cslhangindent=\skip68
-\csllabelwidth=\skip69
+\c@caption@flags=\count346
+\c@continuedfloat=\count347
+Package caption Info: hyperref package is loaded.
+Package caption Info: Hyperref support is turned off
+(caption)             because hyperref has stopped early.
+Package caption Info: longtable package is loaded.
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
+))
+\cslhangindent=\skip74
+\csllabelwidth=\skip75
 
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.de
 f
 File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count337
-\l__pdf_internal_box=\box77
+\l__color_backend_stack_int=\count348
+\l__pdf_internal_box=\box84
 ) (./draft.aux)
 \openout1 = `draft.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 128.
+LaTeX Font Info:    ... okay on input line 128.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -792,14 +867,14 @@ LaTeX Font Info:    ... okay on input line 121.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: includehead includefoot 
-* h-part:(L,W,R)=(28.45274pt, 398.3386pt, 28.45274pt)
+* h-part:(L,W,R)=(10.95pt, 433.34409pt, 10.95pt)
 * v-part:(T,H,B)=(0.0pt, 256.0748pt, 0.0pt)
 * \paperwidth=455.24408pt
 * \paperheight=256.0748pt
-* \textwidth=398.3386pt
+* \textwidth=433.34409pt
 * \textheight=227.62207pt
-* \oddsidemargin=-43.81725pt
-* \evensidemargin=-43.81725pt
+* \oddsidemargin=-61.31999pt
+* \evensidemargin=-61.31999pt
 * \topmargin=-72.26999pt
 * \headheight=14.22636pt
 * \headsep=0.0pt
@@ -828,7 +903,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 121.
+Package hyperref Info: Link coloring OFF on input line 128.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -838,61 +913,61 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ng.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count338
+\c@section@level=\count349
 )
-LaTeX Info: Redefining \ref on input line 121.
-LaTeX Info: Redefining \pageref on input line 121.
-LaTeX Info: Redefining \nameref on input line 121.
+LaTeX Info: Redefining \ref on input line 128.
+LaTeX Info: Redefining \pageref on input line 128.
+LaTeX Info: Redefining \nameref on input line 128.
 (./draft.out) (./draft.out)
 \@outlinefile=\write5
 \openout5 = `draft.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 121.
+(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 128.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> OT1/cmss/b/n on input line 121.
+(Font)                  OT1/lmr/bx/n --> OT1/cmss/b/n on input line 128.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 121.
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 128.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 121.
+(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 128.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 121.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 121.
+(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 128.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 121.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 121.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 121.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 128.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 121.
+(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 121.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 121.
+(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 128.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 121.
+(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 121.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 121.
+(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 128.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 121.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 121.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 128.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 121.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 128.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 121.
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/lmss/b/n --> T1/lmr/b/n on input line 121.
+(Font)                  OT1/lmss/b/n --> T1/lmr/b/n on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 121.
+(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 121.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 121.
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 128.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 121.
+(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 128.
 
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/translator/translator-basic-d
 ictionary-English.dict
@@ -918,12 +993,12 @@ Dictionary: translator-numbers-dictionary, Language: English
 -dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \microtypecontext on input line 121.
-Package microtype Info: Applying patch `item' on input line 121.
-Package microtype Info: Applying patch `toc' on input line 121.
-Package microtype Info: Applying patch `eqnum' on input line 121.
+LaTeX Info: Redefining \microtypecontext on input line 128.
+Package microtype Info: Applying patch `item' on input line 128.
+Package microtype Info: Applying patch `toc' on input line 128.
+Package microtype Info: Applying patch `eqnum' on input line 128.
 
-Package microtype Warning: Unable to apply patch `footnote' on input line 121.
+Package microtype Warning: Unable to apply patch `footnote' on input line 128.
 
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
@@ -931,7 +1006,7 @@ Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 121.
+LaTeX Info: Redefining \showhyphens on input line 128.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -939,24 +1014,47 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 (./draft.nav)
-LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 121.
+Overfull \hbox (11.89462pt too wide) in paragraph at lines 128--128
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
 
-[1{/home/ikanx_server/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
 
-] [3
+[1
+
+{/home/ikanx_server/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[2
 
 ]
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 214.
-LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 214.
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
 
+[3
+
+]
+\openout4 = `draft.vrb'.
+
+(./draft.vrb
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
+.
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 4.
 LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
-214.
+7.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -964,111 +1062,263 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-14.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 7
+.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-214.
+7.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-214.
+7.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 214.
+(Font)              <10.95> on input line 7.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 214.
+(Font)              <8> on input line 7.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 214.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 214
-.
+(Font)              <6> on input line 7.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 7.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 214
-.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 7.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <8> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 214.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 7.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 214.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 7.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 7.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 7.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <9> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 7.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 7.
+<mckinsey.png, id=104, 656.4525pt x 495.8525pt>
+File: mckinsey.png Graphic file (type png)
+<use mckinsey.png>
+Package pdftex.def Info: mckinsey.png  used on input line 11.
+(pdftex.def)             Requested size: 130.00455pt x 98.20027pt.
+)
+LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <14.4> not available
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 153.
+
+
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
 [4
 
-] [5
+ <./mckinsey.png>]
+<statista.png, id=122, 858.20625pt x 405.515pt>
+File: statista.png Graphic file (type png)
+<use statista.png>
+Package pdftex.def Info: statista.png  used on input line 167.
+(pdftex.def)             Requested size: 260.0091pt x 122.85583pt.
 
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
 
-] [6
+[5
 
+ <./statista.png>]
+\openout4 = `draft.vrb'.
 
-] [7
+(./draft.vrb)
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
 
-
-] [8
-
-
-] [9
-
-] [10
-
-] [11
-
-] [12
+[6
 
 ]
-<draft_files/figure-beamer/unnamed-chunk-1-1.pdf, id=491, 2461.195pt x 1300.86p
-t>
-File: draft_files/figure-beamer/unnamed-chunk-1-1.pdf Graphic file (type pdf)
-<use draft_files/figure-beamer/unnamed-chunk-1-1.pdf>
-Package pdftex.def Info: draft_files/figure-beamer/unnamed-chunk-1-1.pdf  used 
-on input line 253.
-(pdftex.def)             Requested size: 298.75394pt x 157.90277pt.
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[7
+
+]
+<pe.png, id=157, 1505.625pt x 1003.75pt>
+File: pe.png Graphic file (type png)
+<use pe.png>
+Package pdftex.def Info: pe.png  used on input line 215.
+(pdftex.def)             Requested size: 173.33498pt x 115.54369pt.
+
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[8
+
+ <./pe.png>]
+<ilustrasi_pe.png, id=171, 505.89pt x 361.35pt>
+File: ilustrasi_pe.png Graphic file (type png)
+<use ilustrasi_pe.png>
+Package pdftex.def Info: ilustrasi_pe.png  used on input line 229.
+(pdftex.def)             Requested size: 173.33498pt x 123.81125pt.
+
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[9
+
+ <./ilustrasi_pe.png (PNG copy)>]
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[10
+
+]
+<minx2.png, id=194, 505.89pt x 361.35pt>
+File: minx2.png Graphic file (type png)
+<use minx2.png>
+Package pdftex.def Info: minx2.png  used on input line 253.
+(pdftex.def)             Requested size: 173.33498pt x 123.81125pt.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 253.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 253.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 253.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 253.
+
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[11
+
+ <./minx2.png>]
+\openout4 = `draft.vrb'.
+
+(./draft.vrb)
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[12
+
+]
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
 [13
 
- <./draft_files/figure-beamer/unnamed-chunk-1-1.pdf>] [14
+]
+\openout4 = `draft.vrb'.
 
-] [15
+(./draft.vrb)
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[14
 
 ]
-Overfull \vbox (1.48595pt too high) detected at line 330
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[15
+
+]
+LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <10.95> not available
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 350.
+
+
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
  []
 
 [16
 
-] [17
+]
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
 
-] [18
+[17
+
 
 ]
-LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <12> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 342.
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[18
+
+]
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
 
 [19
 
 ]
-LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <14.4> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 354.
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
 
 [20
 
-] [21
+]
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
 
-] [22
+[21
 
-] [23
+]
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[22
+
+]
+LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 417.
 
 
-] [24
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[23
+
+]
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[24
+
+]
+Overfull \hbox (11.89462pt too wide) has occurred while \output is active
+ [][]  \T1/lmss/bx/n/6 (-20) ([])  
+ []
+
+[25
 
 
 ]
@@ -1083,29 +1333,33 @@ LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <14.4> not available
 
 (./draft.aux)
 Package rerunfilecheck Info: File `draft.out' has not changed.
-(rerunfilecheck)             Checksum: 7FE28BF6198604902A48911402859D65;749.
+(rerunfilecheck)             Checksum: 496F7AA28FED9D1B447DAED8D50B9E74;775.
  ) 
 Here is how much of TeX's memory you used:
- 22846 strings out of 480559
- 428594 string characters out of 5902712
- 772484 words of memory out of 5000000
- 39794 multiletter control sequences out of 15000+600000
- 466305 words of font info for 115 fonts, out of 8000000 for 9000
+ 24796 strings out of 480559
+ 465936 string characters out of 5902712
+ 771054 words of memory out of 5000000
+ 41632 multiletter control sequences out of 15000+600000
+ 512364 words of font info for 170 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 101i,19n,108p,1002b,831s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 101i,15n,108p,1002b,692s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/ho
-me/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_s
-erver/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/ikanx_server/
-.TinyTeX/texmf-dist/fonts/type1/public/lm/lmss10.pfb></home/ikanx_server/.TinyT
-eX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></home/ikanx_server/.TinyTeX/texm
-f-dist/fonts/type1/public/lm/lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-di
-st/fonts/type1/public/lm/lmssbx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/f
-onts/type1/public/lm/lmsso10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/
-type1/public/amsfonts/symbols/msam10.pfb>
-Output written on draft.pdf (24 pages, 376344 bytes).
+me/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ika
+nx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/
+.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_server/.TinyTeX/t
+exmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/ikanx_server/.TinyTeX/texmf-d
+ist/fonts/type1/public/lm/lmss10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fo
+nts/type1/public/lm/lmss12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/ty
+pe1/public/lm/lmss8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/pub
+lic/lm/lmss9.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/
+lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmss
+bx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso10.
+pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></
+home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
+Output written on draft.pdf (25 pages, 406603 bytes).
 PDF statistics:
- 962 PDF objects out of 1000 (max. 8388607)
- 877 compressed objects within 9 object streams
- 73 named destinations out of 1000 (max. 500000)
- 39016 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 456 PDF objects out of 1000 (max. 8388607)
+ 348 compressed objects within 4 object streams
+ 84 named destinations out of 1000 (max. 500000)
+ 67940 words of extra memory for PDF output out of 74296 (max. 10000000)
 

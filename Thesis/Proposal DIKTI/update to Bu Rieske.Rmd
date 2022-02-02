@@ -1,0 +1,144 @@
+---
+title: "UPDATE PENELITIAN"
+subtitle: "Optimization Model for Supplier Selection and Raw-Material Composition"
+author: "Mohammad Rizka Fadhli 20921004"
+institute: "Sains Komputasi ITB"
+output:
+  beamer_presentation:
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    slide_level: 3
+    theme: "Szeged"
+    colortheme: "albatross"
+    fonttheme: "structurebold"
+classoption: "aspectratio=169"
+toc: false
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+rm(list=ls())
+```
+
+# PENDAHULUAN
+
+## Pendahuluan
+
+### Pendahuluan {.allowframebreaks}
+
+Semenjak diperkenalkan pertama kali pada tahun 1982, _Supply Chain Management_ memegang peranan penting dalam manufaktur sebagai suatu sistem produksi terintegrasi [@webber]. Di dalam SCM, bahan baku dibeli perusahaan dari berbagai _supplier_, dibuat ke dalam suatu produk yang kemudian akan dijual ke pelanggan melalui berbagai _channel_ distribusi.
+
+Dalam mengarungi kompetisi, perusahaan perlu memahami dua faktor kunci, yakni _cost reduction_ dan _product quality_ [@masood]. Kedua faktor ini sangat bergantung pada pemilihan _supplier_ yang tepat. Sehingga proses _supplier selection_ menjadi proses yang krusial dalam setiap perusahaan.
+
+Perusahaan bisa menggunakan dua strategi terkait _supplier selection_, yakni: _single sourcing_ dan _multiple sourcing_. _Single sourcing_ berarti perusahaan hanya membeli bahan baku dari _supplier_ tunggal. Sedangkan _multiple sourcing_ berarti perusahaan bisa membeli bahan baku dari beberapa _supplier_. Strategi _single sourcing_ bisa menaikkan level risiko dari perusahaan sedangkan strategi _multiple sourcing_ menyebabkan _initial cost_ dan _ongoing cost_ yang lebih besar [@sourcing].
+
+Bagi perusahaan yang menerapkan strategi _multiple sourcing_, banyak faktor yang akan membuat kompleks pengambilan keputusan. Misalnya harga, perjanjian transaksi, kualitas, kuantitas, jarak dan biaya pengantaran [@masood].
+
+Ada berbagai penelitian yang dilakukan terkait SCM dan optimisasi dalam hal _supplier selection_. Hasan, Shohag, Azeem, dan Paul (2015) melakukan pendekatan _fuzzy model_ menggunakan 10 _input variables_ berupa kriteria-kriteria penilaian _supplier_ kemudian menggunakan _tools_ __MATLAB__ ___fuzzy tool box___ untuk mengevaluasi kinerja _supplier_ agar _profitability_ perusahaan tetap terjaga [@hasan]. 
+
+Pada penelitian ini, kita akan menggunakan studi kasus dari suatu perusahaan manufaktur yang bergerak di bidang makanan dan minuman. Tujuan penelitian ini adalah untuk membuat model optimisasi untuk menyelesaikan tidak hanya _supplier selection_ namun juga sampai level _raw material selection_ dalam setiap periode waktu tertentu. Beberapa penelitian yang terkait dengan topik ini antara lain: 
+
+- Penelitian __TU Delft__ yang dilakukan pada studi kasus perusahaan minyak di China menggunakan _framework Best-Worst Model_ (BWM) untuk menentukan indikator penting untuk memilih _raw material_ dan _supplier_ terbaik [@nispelling].
+- Model _supplier selection and order allocation_ berbasis _fuzzy extended analytic hierarchy process_ yang dikombinasikan dengan _multiobjective dynamic linear programming_ dibuat untuk mencari nilai yang optimal untuk pembelian _raw material_ [@zhi].
+- Bani dan Jafari (2016) menawarkan suatu model optimisasi untuk menyelesaikan _supplier selection_ dengan kondisi _multiple sourcing_, _multiple criteria_, dan batasan kapasitas. Model ini memiliki cakupan luas karena sudah mempertimbangkan kriteria-kriteria kunci per _raw material_ dan _supplier_. Kemudian model tersebut diselesaikan dengan dua pendekatan, yakni algoritma genetika dan _invasive weed optimization_ [@bani].
+
+Penelitian kali ini menawarkan suatu model komputasi yang bisa digunakan untuk menyelesaikan permasalahan optimisasi pemilihan _raw material_ dan _supplier selection_ dengan _input_ berupa:
+
+1. _Demand_ dari 130 SKU produk jadi dan dalam periode waktu tertentu.
+1. Komposisi _raw material_ yang dibutuhkan untuk memproduksi satu unit SKU produk jadi.
+1. Data spesifikasi _supplier_ (terkait harga, minimal kuantitas pembelian, kualitas _raw material_, dan waktu pengiriman).
+
+# LATAR BELAKANG
+
+## Latar Belakang
+
+### Topik Permasalahan
+
+__PT. NFI__ adalah salah satu perusahaan _fast moving consumer goods_ (_FMCG_) di Indonesia yang bergerak di bidang makanan dan minuman. Sejak 40 tahun, __NFI__ menawarkan berbagai jenis produk makanan dan minuman sehat kepada masyarakat Indonesia.
+
+Untuk menjalankan produksinya, __NFI__ memiliki tiga _plants_ yang memproduksi produk-produk yang sama (tidak ada perbedaan produk antar _plant_).
+
+Salah satu jenis produk yang menjadi _backbone_ adalah minuman serbuk.
+
+### Topik Permasalahan (lanjutan)
+
+Saat ini, ada 130 SKU minuman serbuk yang diproduksi. Beberapa SKU masuk ke dalam kategori _high demand_ sedangkan beberapa lainnya masuk ke dalam kategori _medium demand_ dan _low demand_.
+
+Salah satu strategi perencanaan yang baik adalah menyelaraskan antara _production_ dan _demand_.
+
+Topik yang diangkat dalam penelitian ini adalah upaya pencegahan ___loss sales___.
+
+### Topik Permasalahan (lanjutan)
+
+```{r out.width="75%",echo=FALSE,fig.align='center'}
+nomnoml::nomnoml("#direction: down,
+                 [Plan] -> [Realita]
+                 
+                 [Plan|
+                    [Production vs Demand]
+                    ]
+                    
+                 [Realita|
+                    [Prod > Demand] -> [Overstock]
+                    [Prod = Demand] -> [Ideal]
+                    [Prod < Demand] -> [Loss Sales]
+                    ]
+                 ")
+```
+
+### Topik Permasalahan (lanjutan)
+
+Apa penyebab $production < demand$ ?
+
+Ada beberapa kemungkinan:
+
+1. Ketiadaan _raw material_.
+1. _Production downtime_.
+1. Perubahan _demand_ mendadak.
+
+Di antara ketiga kemungkinan tersebut, kemungkinan pertama __berada pada kontrol kita__ jika direncanakan dengan baik.
+
+### Topik Permasalahan (lanjutan)
+
+Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada beberapa komponen _raw material_ digunakan oleh __keseluruhan produk__.
+
+NFI juga menerapkan prinsip ___multi supplier___ untuk menjaga keamanan pasokan dan ketersediaan _raw material_. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal:
+
+1. Harga,
+1. Minimum order,
+1. Durasi pengiriman.
+1. Kualitas _raw material_.
+
+### Topik Permasalahan (lanjutan)
+
+__Masalah Optimisasi__
+
+Setelah dilakukan _review_ menyeluruh terhadap prosedur dan tata cara perhitungan serta pemesanan _raw material_, disimpulkan bahwa __ada masalah optimisasi__ yang dihadapi.
+
+Kenapa?
+
+Kuantitas _raw material_ yang hendak dibeli harus disesuaikan dengan:
+
+- Stok existing (sedang dipakai dan belum dipakai),
+- Kapasitas gudang bahan baku,
+- Demand produk,
+- Kapasitas produksi harian,
+- Faktor _supplier_ (harga, _min order_, dan durasi pengiriman).
+- Kualitas _raw material_.
+
+Secara _bussiness value_, masalah ini perlu diselesaikan dengan baik.
+
+### Kondisi yang Ada Saat Ini
+
+Saat ini pemilihan _supplier_ dan penentuan kuantitas pembelian _raw material_ dilakukan secara manual dengan mempertimbangkan data-data terkait secara mingguan oleh departemen PPIC (_Production Planning and Inventory Control_). Namun jika ada perubahan _demand_ secara mendadak, proses terseut harus dihitung ulang.
+
+Proses perhitungan ini memerlukan waktu yang cukup lama karena banyak faktor yang mempengaruhi.
+
+### Rencana Kerja 
+
+Model optimisasi ini kelak akan diimplementasikan pada departemen PPIC sehingga proses pemilihan supplier dan penentuan kuantitas pembelian _raw material_ bisa dilakukan secara cepat dan tepat. Diharapkan proses bisnis menjadi menjadi lebih efisien dan _cost_ yang ada bisa ditekan lebih baik lagi.
+
+
+# _REFERENCES_ {.allowframebreaks}
