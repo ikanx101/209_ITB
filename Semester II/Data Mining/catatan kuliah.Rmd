@@ -61,4 +61,22 @@ setwd("~/209_ITB/Semester II/Data Mining")
 - Distribution
     - Centrality and dispersion
 
+## Standarisasi Data Numerik
 
+Menggunakan formula $Z-score$, yakni $z = \frac{x - \mu}{\sigma}$.
+
+Metode lainnya adalah dengan menghitung _mean absolute deviation_.
+
+```{r}
+tes = runif(10,0,10)
+tes
+
+mean_abs_dev = function(tes){
+    m = sum(tes) / length(tes)
+    s = sum(abs(tes - m)) / length(tes)
+    z = (tes - m)/s
+    return(round(z,3))
+}
+
+mean_abs_dev(tes)
+```

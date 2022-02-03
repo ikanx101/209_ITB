@@ -1,0 +1,82 @@
+---
+title: <b>TUGAS KULIAH PENAMBANGAN DATA DALAM SAINS</b>
+subtitle: Simmilarity dan Dissimilarity
+author: 
+  - name: Mohammad Rizka Fadhli - 20921004
+    affiliation: Sains Komputasi ITB
+date: "`r format(Sys.time(), '%d %B %Y')`"
+dev: png
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: 
+        collapsed: false
+        smooth_scroll: true
+    number_sections: false
+    theme: cerulean
+    highlight: espresso
+    fig_caption: yes
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Semester II/Data Mining/Tugas/Tugas I")
+
+rm(list=ls())
+
+library(dplyr)
+```
+
+# SOAL
+
+Diberikan data pelanggan telepon seluler dengan empat atribut campuran sebagai berikut:
+
+1. `Nominal`: pekerjaan dan lokasi rumah.
+1. `Biner`: _gender_, kartu, rumah, dan status pernikahan.
+1. `Numerik`: pulsa dan internet.
+1. `Ordinal`: jumlah anak dan kategori pelanggan.
+
+<br>
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+df = data.frame(
+  nama = c("Andi","Budi","Citra","Dedi","Evan"),
+  lokasi_rumah = c("A","A","B","A","C"),
+  gender = c("Pria","Pria","Wanita","Pria","Pria"),
+  kartu = c("prabayar","pascabayar","prabayar","prabayar","pascabayar"),
+  rumah = c("kontrak","pribadi","kontrak","kontrak","pribadi"),
+  menikah = c("tidak","ya","tidak","ya","ya"),
+  pulsa = c(100,500,100,150,700),
+  internet = c(150,300,100,200,400),
+  jml_anak = c(0,2,0,3,4),
+  kategori = c("Silver","Platinum","Silver","Gold","Platinum")
+)
+
+df %>% knitr::kable(caption = "Data Pelanggan Seluler",align = "c")
+```
+
+<br>
+
+Buat matriks jarak antar _object_ data di atas!
+
+# JAWAB
+
+## Membuat _Function_
+
+### Hitung $z$
+
+Function 
+
+### Jarak
+
+```{r}
+jarak_nominal = function(a,b){
+  jarak = ifelse(a == b,  # cek apakah a sama dengan b
+                 0,       # beri nilai 0 jika sama
+                 1)       # beri nilai 1 jika berbeda
+  return(jarak)           # output function
+}
+```
+
