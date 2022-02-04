@@ -63,13 +63,44 @@ Buat matriks jarak antar _object_ data di atas!
 
 # JAWAB
 
+Sebelum menjawab pertanyaan di atas, ada beberapa _function_ yang harus dibuat terlebi dahulu, yakni:
+
+1. _Function_ untuk menghitung standarisasi untuk data numerik dan ordinal.
+1. _Function_ untuk menghitung jarak untuk data nominal dan data numerik - ordinal (yang telah distandarisasi).
+
+Untuk membuatnya, saya menggunakan __R__. _Function_ saya buat menggunakan _base function_ dari __R__ sedangkan saat melakukan _data carpentry_ selanjutnya saya akan gunakan `library(dplyr)`.
+
 ## Membuat _Function_
 
 ### Hitung $z$
 
-Function 
+_Function_ untuk standarisasi data __numerik__ menggunakan metode _mean absolute deviation_:
+
+```{r}
+z_numeric = function(var){
+  n = length(var)           # menghitung n: berapa banyak data
+  m = sum(var) / n          # hitung variabel m
+  s = sum(abs(var - m))/n   # hitung variabel s
+  z = (var - m)/s           # hitung z
+  return(z)                 # output nilai z
+}
+```
+
+_Function_ untuk standarisasi data __ordinal__:
+
+
+```{r}
+z_ordinal = function(var){
+  var = as.factor(var)      # mengubah var menjadi factor
+  var = as.numeric(var)     # mengubah jadi angka numerik
+  M = max(var)              # cari nilai max dari var
+  z = (var - 1) / (M - 1)   # hitung z
+  return(z)                 # output nilai z
+}
+```
 
 ### Jarak
+
 
 ```{r}
 jarak_nominal = function(a,b){
@@ -79,4 +110,5 @@ jarak_nominal = function(a,b){
   return(jarak)           # output function
 }
 ```
+
 
