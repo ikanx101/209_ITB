@@ -74,6 +74,8 @@ Untuk membuatnya, saya menggunakan __R__. _Function_ saya buat menggunakan _base
 
 ### Hitung $z$
 
+#### Data Numerik
+
 _Function_ untuk standarisasi data __numerik__ menggunakan metode _mean absolute deviation_:
 
 ```{r}
@@ -86,29 +88,140 @@ z_numeric = function(var){
 }
 ```
 
-_Function_ untuk standarisasi data __ordinal__:
+<br>
 
+#### Data Ordinal
+
+_Function_ untuk standarisasi data __ordinal__:
 
 ```{r}
 z_ordinal = function(var){
-  var = as.factor(var)      # mengubah var menjadi factor
-  var = as.numeric(var)     # mengubah jadi angka numerik
-  M = max(var)              # cari nilai max dari var
-  z = (var - 1) / (M - 1)   # hitung z
-  return(z)                 # output nilai z
+  var = as.factor(sort(var))  # mengubah var menjadi factor
+  var = as.numeric(var)       # mengubah jadi angka numerik
+  M = max(var)                # cari nilai max dari var
+  z = (var - 1) / (M - 1)     # hitung z
+  return(z)                   # output nilai z
 }
 ```
 
+<br>
+
 ### Jarak
 
+#### Data Nominal
+
+Berikut adalah _function_ untuk menghitung jarak pada data bertipe nominal. Aturan dasarnya adalah:
+
+$$d(i,j) = \left\{\begin{matrix}
+0, x_{if} = x_{jf} \\ 1, \text{lainnya}
+\end{matrix}\right.$$
+
+sangat _strict_ di mana jika sama persis, maka akan bernilai `0`.
 
 ```{r}
-jarak_nominal = function(a,b){
-  jarak = ifelse(a == b,  # cek apakah a sama dengan b
-                 0,       # beri nilai 0 jika sama
-                 1)       # beri nilai 1 jika berbeda
+dist_nominal = function(a,b){
+  jarak = sum(a != b)     # beri nilai 1 jika berbeda lalu dijumlahkan
   return(jarak)           # output function
 }
 ```
 
+<br>
 
+#### Data Numerik - Ordinal
+
+Perhitungan jarak untuk data bertipe numerik dan ordinal mengharuskan datanya tersebut harus distandarisasi terlebih dahulu dengan _function_ pada bagian sebelumnya. Kemudian saya akan buat tiga _functions_ dari ___Minkowski Distance___, yakni:
+
+__Manhattan Distance__
+
+$$d(i,j) = |x_{i1} - x_{j1}| + |x_{i2} - x_{j2}| + .. + |x_{ip} - x_{jp}|$$
+
+```{r}
+dist_manhattan = function(a,b){
+  d = abs(a-b)
+  sum(d)
+}
+```
+
+<br>
+
+__Euclidean Distance__
+
+$$d(i,j) = \sqrt{|x_{i1} - x_{j1}|^2 + |x_{i2} - x_{j2}|^2 + .. + |x_{ip} - x_{jp}|^2}$$
+
+```{r}
+dist_euclid = function(a,b){
+  d = abs(a-b)
+  d = sum(d^2)
+  d = sqrt(d)
+  d = round(d,3)
+}
+```
+
+<br>
+
+__Supremum Distance__
+
+$$d(i,j) = \max_f^p{|x_{if} - x_{jf}|}$$
+
+```{r}
+dist_sup = function(a,b){
+  d = abs(a-b)
+  max(d)
+}
+```
+
+<br>
+
+### Menghitung Jarak dari _Mixed Attributes_
+
+Dalam suatu _database_ bisa saja isinya ada bermacam-macam tipe atribut. Oleh karena itu, perhitungannya menjadi sebagai berikut:
+
+$$d(i,j) = \frac{\sum_{f=1}^p \delta_{ij} ^{(f)} d_{ij} ^{(f)}}{\sum_{f=1}^p \delta_{ij} ^{(f)}}$$
+
+
+## Menjawab Soal
+
+Pertama-tama hal yang perlu dilakukan adalah menghitung $z$ untuk data numerik dan ordinal dari data soal. Kemudian kita _transpose_ untuk dijadikan matriks.
+
+```{r}
+# pre-processing data
+mat = 
+  df %>%                                         # memanggil data
+  mutate(pulsa = z_numeric(pulsa),               # menghitung z_numeric dari atribut pulsa
+         internet = z_numeric(internet),         # menghitung z_numeric dari atribut internet
+         jml_anak = z_ordinal(jml_anak),         # menghitung z_ordinal dari atribut jumlah anak
+         kategori = z_ordinal(kategori)) %>%     # menghitung z_ordinal dari atribut kategori
+  select(-nama)                                  # menghapus nama dari data
+
+mat_1 = mat %>% select(where(is.numeric)) %>% as.matrix() %>% t()    # mengambil hanya variabel numerik
+mat_2 = mat %>% select(where(is.character)) %>% as.matrix() %>% t()  # mengambil hanya variabel non numerik
+
+# menghitung matriks jarak untuk semua atribut numerik
+# jarak yang saya gunakan adalah euclidean distance
+n1 = ncol(mat_1)
+mat_1_jar = matrix(NA,nrow = n1,ncol = n1)              # bikin matriks template berukuran n1 x n1
+
+for(i in 1:n1){                                         
+  for(j in 1:n1){
+    mat_1_jar[i,j] = dist_euclid(mat_1[,i],mat_1[,j])   # menghitung jarak pasangan per baris data object
+  }
+}
+
+# menghitung matriks jarak untuk semua atribut nominal
+n2 = ncol(mat_2)
+mat_2_jar = matrix(NA,nrow = n2,ncol = n2)              # bikin matriks template berukuran n2 x n2
+
+for(i in 1:n2){
+  for(j in 1:n2){
+    mat_2_jar[i,j] = dist_nominal(mat_2[,i],mat_2[,j])  # menghitung jarak pasangan per baris data object
+  }
+}
+
+# menghitung matriks jarak final
+matriks = (mat_1_jar + mat_2_jar) / (n1+n2)    # delta yang saya gunakan per atribut adalah 1
+colnames(matriks) = df$nama                    # kasih column names
+rownames(matriks) = df$nama                    # kasih row names
+
+# print hasil akhir
+matriks
+```
