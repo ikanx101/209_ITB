@@ -1,6 +1,6 @@
 ---
 title: "TUGAS KULIAH"
-subtitle: "RESEARCH METHOD"
+subtitle: "METODOLOGI PENELITIAN"
 author: "Mohammad Rizka Fadhli 20921004"
 institute: "Sains Komputasi ITB"
 output:
@@ -9,8 +9,8 @@ output:
     fig_height: 6
     fig_caption: true
     slide_level: 3
-    theme: "AnnArbor"
-    colortheme: "beaver"
+    theme: "JuanLesPins"
+    colortheme: "seagull"
     fonttheme: "structurebold"
 classoption: "aspectratio=169"
 toc: false
@@ -32,17 +32,18 @@ library(ggplot2)
 
 ### Perkembangan Transaksi _Online_
 
-Sebanyak `30 juta` orang Indonesia kini bertransaksi secara _online_, menciptakan _market_ sebesar `Rp 8 triliun`. _Market_ ini bisa terus berkembang hingga `Rp 40 triliun` dalam `5 tahun` ke depan. ^[https://www.mckinsey.com/spContent/digital_archipelago/index.html]
+Sebanyak `30 juta` orang Indonesia kini bertransaksi secara _online_, menciptakan _market_ sebesar `Rp 8 triliun`. _Market_ ini bisa terus berkembang hingga `Rp 40 triliun` dalam `5 tahun` ke depan^[https://www.mckinsey.com/spContent/digital_archipelago/index.html].
 
-```{r out.width="30%",echo=FALSE,fig.align='center',fig.retina=10,fig.cap="www.mckinsey.com"}
+```{r out.width="30%",echo=FALSE,fig.align='center',fig.retina=10,fig.cap="www.mckinsey.com", fig.show="hold"}
+knitr::include_graphics("ecom.png")
 knitr::include_graphics("mckinsey.png")
 ```
 
 ### _E-Commerce Revenue_
 
-Statista _market forecast_^[https://www.statista.com/outlook/dmo/ecommerce/indonesia#revenue].
+Statista _e-commerce revenue forecast_^[https://www.statista.com/outlook/dmo/ecommerce/indonesia#revenue].
 
-```{r out.width="60%",echo=FALSE,fig.align='center',fig.retina=10,fig.cap="www.statista.com"}
+```{r out.width="75%",echo=FALSE,fig.align='center',fig.retina=10,fig.cap="www.statista.com"}
 knitr::include_graphics("statista.png")
 ```
 
@@ -59,11 +60,40 @@ Ada dua skema pemberian diskon yang biasa ada di _e-commerce_, yakni:
 
 Potongan diskon ini bertujuan untuk menarik konsumen agar tertarik membeli produk di _e-commerce_ tersebut __pada periode tertentu__. 
 
+### _Literature Review_: Studi Tentang Diskon
+
 Suatu studi di _online retailer di China_ menunjukkan ada pengaruh antara diskon produk dengan _consumer purchase behavior_ seperti _purchase incident_, _purchase quantity_, dan _spending_. Terutama pada rentang persentase diskon tertentu [@cny].
 
-### _Price Elasticity_
+Dalam jurnal ini, didefinisikan dua jenis diskon:
 
-Strategi pemberian harga produk adalah salah satu strategi penting bagi setiap perusahaan. Untuk melakukannya, kita bisa membuat model antara _demand - price_ yang disebut dengan _price elasticity_ [@kennethko].
+1. _Product-Specific Discount_ (PD).
+    - PD memiliki _impact_ negatif terhadap _spending_ pada rentang $<19 \%$ tapi mulai memiliki _impact_ positif setelah batas tersebut.
+1. _Order Coupons_ (OD).
+    - Sementara OD selalu memiliki _impact_ positif terhadap _spending_. Tapi semakin tinggi OD bisa menggerus _profit margin_ per _customer basket_.
+    
+_Insights_: _retailer_ perlu menawarkan _low_ OD ditambah _high_ PD.
+
+### Strategi _Pricing_
+
+#### _Set_ Harga Produk
+
+Setiap _listed products_ di masing-masing toko memiliki harga yang didefinisikan oleh toko tersebut.
+
+#### Intervensi Tak Langsung
+
+_E-commerce_ tidak bisa melakukan intervensi langsung terhadap penetapan harga tersebut, namun mereka bisa __menyuntik__ sejumlah _budget_ diskon agar harga yang dibayarkan konsumen lebih rendah dibandingkan harga yang diberikan toko.
+
+### _Literature Review_: Studi tentang _Price Elasticity_ I
+
+Strategi pemberian harga produk adalah salah satu strategi penting bagi setiap perusahaan. Untuk melakukannya, kita bisa membuat model antara _demand - price_ yang disebut dengan _price elasticity_ dan memaksimalkan _profit_.
+
+Ada beberapa model yang bisa dibuat, salah satunya dengan _decision analysis_ yang mengandalkan ketidakpastian untuk memaksimalkan suatu _objective_ tertentu [@kennethko]. Namun pada studi ini, contoh kasus yang digunakan adalah penentuan harga untuk suatu produk mobil dari _brand_ tertentu.
+
+Sehingga ada faktor ketidakpastian dalam makro ekonomi yang dijadikan asumsi dasarnya.
+
+### _Literature Review_: Studi tentang _Price Elasticity_ II
+
+Studi lain membandingkan model _price elasticity_ dengan basis model linear antara _demand_ dan harga dengan berbagai bentuk lainnya (seperti polinom dan eksponensial - termasuk _inverse_ fungsinya). Namun disebutkan bahwa model linear merupakan model yang umum digunakan pada analisa _supply demand_ secara teoritis [@linear_reg].
 
 ```{r out.width="40%",echo=FALSE,fig.align='center',fig.retina=10,fig.cap="ilustrasi price elasticity"}
 knitr::include_graphics("pe.png")
@@ -157,13 +187,30 @@ Solusi yang dihasilkan merupakan bilangan _real_ atau kontinu. Agar bisa menyele
 
 Selain metode _simplex_, dewasa ini ada berbagai algoritma _meta heuristic_ yang bisa digunakan untuk menyelesaikan _binary LP_. 
 
-- Pada studi tahun 2016, _spiral optimization algorithm_ terbukti bisa digunakan untuk menyelesaikan masalah _binary LP_ dengan cara memodifikasi _objective function_ dan _constraints_ yang ada [@kun].
-- Pada studi tahun 2021, _artificial bee colony algorithm_ juga bisa digunakan untuk menyelesaikan _vehicle routing problem_ dengan komplikasi _time windows_ [@ilhan]. Masalah VRP merupakan salah satu contoh _real_ dari _binary LP_.
+### _Literature Review_: _Spiral Optimization Algorithm_
+
+Pada studi tahun 2016, _spiral optimization algorithm_ terbukti bisa digunakan untuk menyelesaikan masalah _binary LP_ dengan cara memodifikasi _objective function_ dan _constraints_ yang ada [@kun].
+
+Ide dasarnya adalah mengubah _constrained problem_ menjadi _unconstrained problem_ dengan membuat _penalty function_. Setelah itu, SOA digunakan untuk menyelesaikan _unconstrained problem_ tersebut.
+
+Pada jurnal ini, _decision variables_ yang terlibat relatif belum banyak.
+
+### _Literature Review_: _Particle Swarm Optimization_
+
+Pada studi tahun 2013, _discrete particle swarm optimization_ digunakan untuk menyelesaikan masalah _integer programming_ pada kasus _academic libraries_. Pada jurnal ini juga disebutkan bahwa diperlukan transformasi dari _constrained problem_ menjadi _unconstrained problem_ [@pso_1].
+
+Salah satu hal yang menjadi kebaruan pada jurnal ini adalah penggunaan _scout particles_ untuk menghindari konvergensi yang terlalu dini (prematur).
+
+Jadi jika iterasi telah konvergen, _scout particles_ akan dibuat secara acak untuk melakukan eksplorasi kembali.
+
+### _Literature Review_: _Artificial Bee Colony Algorithm_
+
+Pada studi tahun 2021, _artificial bee colony algorithm_ juga bisa digunakan untuk menyelesaikan _vehicle routing problem_ dengan komplikasi _time windows_ [@ilhan]. Masalah VRP merupakan salah satu contoh _real_ dari _binary LP_.
 
 ## Rencana Kerja
 
 ### Rencana Penelitian
 
-Membuat model optimisasi portofolio diskon produk _e-commerce_ dan membandingkan solusi metode eksak (_simplex_) dengan metode _meta heuristic_ (_ABC_ dan _SOA_).
+Perbandingan Metode Eksak dan Metode Meta Heuristic Model optimisasi portofolio diskon produk _e-commerce_ dan membandingkan solusi metode eksak (_simplex_) dengan metode _meta heuristic_ (_ABC_ dan _SOA_).
 
 # _REFERENCES_ {.allowframebreaks}
