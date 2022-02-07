@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  4 FEB 2022 17:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  7 FEB 2022 15:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1209,18 +1209,22 @@ Package pdftex.def Info: minx2.png  used on input line 323.
 
 ] [28
 
-]
-LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 516.
-
-[29
+] [29
 
 ] [30
 
-] [31
+]
+LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 543.
 
+[31
 
 ] [32
+
+] [33
+
+
+] [34
 
 
 ]
@@ -1235,14 +1239,14 @@ LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
 
 (./draft.aux)
 Package rerunfilecheck Info: File `draft.out' has not changed.
-(rerunfilecheck)             Checksum: B7C3947E2FC8942722C2487573C3BF0C;775.
+(rerunfilecheck)             Checksum: BAD41EDA03537DA921679E387EBF6DE1;775.
  ) 
 Here is how much of TeX's memory you used:
- 24939 strings out of 480559
- 469507 string characters out of 5902712
- 771786 words of memory out of 5000000
- 41736 multiletter control sequences out of 15000+600000
- 512971 words of font info for 176 fonts, out of 8000000 for 9000
+ 24953 strings out of 480559
+ 469731 string characters out of 5902712
+ 772786 words of memory out of 5000000
+ 41740 multiletter control sequences out of 15000+600000
+ 513072 words of font info for 177 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  101i,15n,108p,1002b,674s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/ho
@@ -1258,10 +1262,10 @@ lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmss
 bx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso10.
 pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></
 home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on draft.pdf (32 pages, 441794 bytes).
+Output written on draft.pdf (34 pages, 445464 bytes).
 PDF statistics:
- 570 PDF objects out of 1000 (max. 8388607)
- 433 compressed objects within 5 object streams
- 108 named destinations out of 1000 (max. 500000)
+ 596 PDF objects out of 1000 (max. 8388607)
+ 457 compressed objects within 5 object streams
+ 116 named destinations out of 1000 (max. 500000)
  68059 words of extra memory for PDF output out of 74296 (max. 10000000)
 

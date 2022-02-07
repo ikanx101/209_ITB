@@ -1,0 +1,412 @@
+---
+title: <b>METAHEURISTIC OPTIMIZATION ALGORITHM SERIES</b>
+subtitle: Mixed Integer Programming using Spiral Optimization Algorithm
+author: 
+  - name: Ikang Fadhli
+    affiliation: "ikanx101.com"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+dev: png
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: 
+        collapsed: false
+        smooth_scroll: true
+    number_sections: false
+    theme: journal
+    highlight: haddock
+    fig_caption: yes
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+```
+
+# PENDAHULUAN
+
+Pada tulisan sebelumnya, saya telah membahas _introduction_ terhadap _spiral optimization optimization_ (SOA) dan bagaimana cara kerjanya untuk menyelesaikan permasalahan pencarian minimasi, maksimasi, dan pencarian akar.
+
+Sekarang saya akan mengangkat topik bagaimana menyelesaikan _mixed integer programming_ (baik _linear_ dan _non linear_) menggunakan SOA.
+
+## Mengubah _Constrained Optimization_
+
+Salah satu trik yang bisa dilakukan agar SOA bisa menyelesaikan _mixed integer programming_ adalah dengan mengubah _constrained optimization problem_ menjadi _unconstrained optimization problem_ kemudian memanfaatkan _penalty constant_.
+
+Misal suatu permasalahan MILP atau MINLP bisa ditulis secara umum sebagai berikut:
+
+$$\min_{x \in \mathbb{R}^n} f(x)$$
+
+$$\text{subject to: } g_i(x) = 0, i = 1,2,..,M$$
+
+$$\text{and } h_j(x) \leq 0,i = 1,2,..,N$$
+
+$$x = (x_1,x_2,...,x_n)^T \in \mathbb{N}$$
+
+Bentuk di atas bisa kita ubah menjadi:
+
+$$F(x,\alpha,\beta) = f(x) + \sum_{i=1}^M \alpha_i g_i^2(x) + \sum_{j = 1}^N \beta_j (\max{(h_i(x),0)})^2$$
+
+dimana $\alpha,\beta$ merupakan _penalty constant_ yang bisa dibuat sangat besar.
+
+## Matriks Rotasi untuk n-Dimensi
+
+SOA relatif mudah untuk dituliskan dalam bentuk algoritma bahasa pemrograman manapun. Tapi ada satu hal yang bisa menjadi batu ganjalan dalam menuliskan algoritmanya. Apa itu? Yaitu pendefinisian matriks rotasi untuk masalah dengan n-dimensi.
+
+Bentuk umum dari matriks rotasi adalah sebagai berikut:
+
+$$R^{(n)} (\theta_{1,2},\theta_{1,3},..,\theta_{n,n-1}) = \prod_{i=1}^{n-1} \left ( \prod_{j=1}^i R^{(n)}_{n-i,n+1-j} (\theta_{n-i,n+1-j}) \right )$$
+
+Perhatikan bahwa perkalian matriks rotasi yang dilakukan adalah _cross product_.
+
+Alasan: Rotasi tidak mengubah _norm_ suatu vektor.
+
+### _Function_ Matriks Rotasi
+
+Berikut adalah _function_ yang digunakan untuk membuat rotation matrix:
+
+```{r}
+buat_rot_mat = function(theta,n){
+  # buat template sebuah matriks identitas
+  temp_mat = matrix(0,ncol = n,nrow = n)
+  diag(temp_mat) = 1
+  
+  # buat matriks identitas terlebih dahulu
+  mat_rot = temp_mat
+
+  for(i in 1:(n-1)){
+    for(j in 1:i){
+      temp = temp_mat
+      idx = n-i
+      idy = n+1-j
+      # print(paste0("Matriks rotasi untuk ",idx," - ",idy,": DONE"))
+      temp[idx,idx] = cos(theta)
+      temp[idx,idy] = -sin(theta)
+      temp[idy,idx] = sin(theta)
+      temp[idy,idy] = cos(theta)
+      # assign(paste0("M",idx,idy),temp)
+      mat_rot = mat_rot %*% temp
+      mat_rot = mat_rot 
+    }
+  }
+  
+  return(mat_rot)
+}
+```
+
+# _INTEGER PROGRAMMING_
+
+## Contoh Soal
+
+Oke, untuk contoh kasus pertama saya akan gunakan persoalan yang pernah saya tulis di [blog sebelumnya](https://ikanx101.com/blog/linear-r/).
+
+Cari $(x,y)$ yang memaksimalkan $7000 x + 12000 y$ dengan _constraints_ sebagai berikut:
+
+$$4x + 20y \leq 1960 \\ x + y \leq 250 \\ x,y \geq 0 \\ x,y \in \mathbb{Z}^+$$
+
+### Pencarian Solusi dengan SOA {-}
+
+Langkah pertama yang harus dilakukan adalah mengubah _constrained problem_ menjadi _unconstrained problem_.
+
+```{r,message=FALSE,warning=FALSE}
+rm(list=ls())
+
+f1 = function(x,y){-7000*x - 12000*y}
+h1 = function(x,y){4*x + 20*y - 1960}
+h2 = function(x,y){x + y - 250}
+
+beta = 10^25
+
+f = function(x,y){
+  el_1 = f1(x,y) 
+  el_2 = beta * (max(h1(x,y),0))^2
+  el_3 = beta * (max(h2(x,y),0))^2
+  return(el_1 + el_2 + el_3)
+}
+```
+
+<br>
+
+Fungsi $f$ adalah bentuk _unconstrained problem_ dari bentuk awalnya.
+
+Berikut ini adalah _function_ SOA yang dipakai untuk menyelesaikan masalah ini:
+
+```{r,message=FALSE,warning=FALSE}
+soa_mrf_ip = function(
+  N,	    # banyak titik
+  x1_d,  # batas bawah x1  
+  x1_u,  # batas atas x1
+  x2_d,  # batas bawah x2
+  x2_u,  # batas atas x2
+  rot,	  # berapa banyak rotasi
+  k_max, # iterasi maks
+  r){	  # berapa rate konstraksi
+  
+  # N pasang titik random di selang [a,b] di R2
+  x1 = runif(N,x1_d,x1_u)
+  x2 = runif(N,x2_d,x2_u)
+  #x2 = 250 - x1
+  # hitung theta
+  theta = 2*pi / rot
+  # definisi matriks rotasi
+  A = matrix(c(cos(theta),-sin(theta),
+               sin(theta),cos(theta)),
+             ncol = 2,byrow = T)
+  
+  # bikin data frame
+  temp = 
+    data.frame(x1,x2) %>% 
+    rowwise() %>% 
+    mutate(f = f(round(x1,0),round(x2,0))) %>% 
+    ungroup()
+  # proses iterasi
+  for(i in 1:k_max){
+    # mencari titik x* dengan max(f)
+    f_min = 
+      temp %>% 
+      # memastikan titik ada di D
+      filter(x1 >= x1_d & x1 <= x1_u) %>% 
+      filter(x2 >= x2_d & x2 <= x2_u) %>% 
+      # mencari titik min fungsi
+      filter(f == min(f))
+    # definisi pusat rotasi
+    pusat = c(f_min$x1[1],f_min$x2[1])
+    for(j in 1:N){
+      # kita akan ambil titiknya satu persatu
+      x0 = c(temp$x1[j],temp$x2[j])
+      # proses rotasi dan konstraksi terhadap pusat x*
+      xk = A %*% (x0-pusat) # diputar dengan x_bin sebagai pusat
+      xk = pusat + (r * xk)
+      # proses mengembalikan nilai ke temp
+      temp$x1[j] = xk[1]
+      temp$x2[j] = xk[2]
+    }
+    # hitung kembali nilai f(x1,x2)
+    temp = 
+      temp %>% 
+      rowwise() %>% 
+      mutate(f = f(round(x1,0),round(x2,0))) %>% 
+      ungroup()
+  }
+  # proses output hasil
+  output = 
+    temp[N,] %>% 
+    filter(f == min(f)) %>% 
+    mutate(x1 = round(x1,0),x2 = round(x2,0),f = f(x1,x2))
+  return(output)
+}
+```
+
+<br>
+
+Sekarang kita akan selesaikan dengan beberapa parameter berikut:
+
+```{r,message=FALSE,warning=FALSE}
+soa_mrf_ip(100,	   # banyak titik
+           0,      # batas bawah x1
+           250,    # batas atas x1
+           0,      # batas bawah x2
+           250,    # batas atas x2
+           20,  	 # berapa banyak rotasi
+           900,    # iterasi maks
+           0.8)
+
+```
+
+# _MIXED INTEGER PROGRAMMING_
+
+## Contoh Soal
+
+Cari $x_1,x_2,x_3$ yang memaksimalkan $7x_1 + 3x_2 + x_3$, dengan _constraints_ sebagai berikut:
+
+$$6x_1 + 4x_2 + 5x_3 \leq 60 \\ 8x_1 + x_2 + 2x_3 \leq 80 \\ 9x_1 + x_2 + 7x_3 \leq 70 \\ x_3 \geq 0 \\ x_1,x_2 \in \mathbb{Z}^+$$
+
+### Penyelesaian dengan SOA
+
+Masalah di atas termasuk ke dalam _mixed integer linear programming_ karena ada dua variabel _integer_ dan satu kontinu.
+
+Berikut adalah modifikasi menjadi _unconstrained optimization problem_:
+
+```{r}
+rm(list=ls())
+
+f1 = function(x1,x2,x3){
+  7*x1 + 3*x2 + x3
+}
+
+h1 = function(x1,x2,x3){6*x1 + 4*x2 + 5*x3 - 60}
+h2 = function(x1,x2,x3){8*x1 + x2 + 2*x3 - 80}
+h3 = function(x1,x2,x3){9*x1 + x2 + 7*x3 - 70}
+
+beta = 10^15
+
+f = function(x1,x2,x3){
+  el_1 = - f1(x1,x2,x3) 
+  el_2 = beta * (max(h1(x1,x2,x3),0))^2
+  el_3 = beta * (max(h2(x1,x2,x3),0))^2
+  el_4 = beta * (max(h3(x1,x2,x3),0))^2
+  return(el_1 + el_2 + el_3 + el_4)
+}
+
+```
+
+<br>
+
+Berikut adalah _function_ yang digunakan:
+
+```{r,message=FALSE,warning=FALSE}
+soa_mrf_ip_3_var = function(
+  N,	    # banyak titik
+  x1_d,  # batas bawah x1  
+  x1_u,  # batas atas x1
+  x2_d,  # batas bawah x2
+  x2_u,  # batas atas x2
+  x3_d,  # batas bawah x3
+  x3_u,  # batas atas x3
+  rot,	 # berapa banyak rotasi
+  k_max, # iterasi maks
+  r){	   # berapa rate konstraksi
+  
+  # N pasang titik random di selang [a,b] di R3
+  x1 = runif(N,x1_d,x1_u)
+  x2 = runif(N,x2_d,x2_u)
+  x3 = runif(N,x3_d,x3_u)
+  
+  # hitung theta
+  theta = 2*pi / rot
+  # definisi matriks rotasi
+  R12 = matrix(c(cos(theta),-sin(theta),0,
+                 sin(theta),cos(theta),0,
+                 0,0,1),
+               ncol = 3,byrow = T)
+  R13 = matrix(c(cos(theta),0,-sin(theta),
+                 0,1,0,
+                 sin(theta),0,cos(theta)),
+               ncol = 3,byrow = T)
+  R23 = matrix(c(1,0,0,
+                 0,cos(theta),-sin(theta),
+                 0,sin(theta),cos(theta)),
+               ncol = 3,byrow = T)
+  
+  
+  # bikin data frame
+  temp = 
+    data.frame(x1,x2,x3) %>% 
+    rowwise() %>% 
+    mutate(f = f(round(x1,0),
+                 round(x2,0),
+                 x3)) %>% 
+    ungroup()
+  
+  # proses iterasi
+  for(i in 1:k_max){
+    # mencari titik x* dengan max(f)
+    f_min = 
+      temp %>% 
+      # memastikan titik ada di D
+      filter(x1 >= x1_d & x1 <= x1_u) %>% 
+      filter(x2 >= x2_d & x2 <= x2_u) %>% 
+      filter(x3 >= x3_d & x3 <= x3_u) %>% 
+      # mencari titik max fungsi
+      filter(f == min(f))
+    # definisi pusat rotasi
+    pusat = c(f_min$x1[1],f_min$x2[1],f_min$x3[1])
+    for(j in 1:N){
+      # kita akan ambil titiknya satu persatu
+      x0 = c(temp$x1[j],temp$x2[j],temp$x3[j])
+      # proses rotasi dan konstraksi terhadap pusat x*
+      # diputar dengan x_bin sebagai pusat
+      xk = (R23 %*% (R13 %*% R12)) %*% (x0-pusat)
+      xk = pusat + (r * xk)
+      # proses mengembalikan nilai ke temp
+      temp$x1[j] = xk[1]
+      temp$x2[j] = xk[2]
+      temp$x3[j] = xk[3]
+    }
+    # hitung kembali nilai f(x1,x2,x3)
+    temp = 
+      temp %>% 
+      rowwise() %>% 
+      mutate(f = f(round(x1,0),round(x2,0),x3)) %>% 
+      ungroup()
+  }
+  # proses output hasil
+  output = 
+    temp[N,] %>% 
+    filter(f == max(f)) %>% 
+    mutate(x1 = round(x1,0),x2 = round(x2,0),x3 = x3,
+           f = f1(x1,x2,x3))
+  return(output)
+}
+```
+
+<br>
+
+Berikut solusinya:
+
+```{r,message=FALSE,warning=FALSE}
+soa_mrf_ip_3_var(
+  20,	    # banyak titik
+  0,  # batas bawah x1  
+  20,  # batas atas x1
+  0,  # batas bawah x2
+  20,  # batas atas x2
+  0,  # batas bawah x3
+  20,  # batas atas x3
+  10,	  # berapa banyak rotasi
+  100, # iterasi maks
+  .9
+)
+```
+
+
+# _BINARY PROGRAMMING_
+
+## Contoh Soal
+
+Cari $x_{j} \in [0,1]$ yang 
+
+$$\min{\sum x_j, j\in (1,2,..,8)}$$
+
+dengan _constraints_:
+
+1.  $x_1 + x_2 \geq 1$ 
+2.  $x_2 + x_3 \geq 1$ 
+3.  $x_1 + x_6 \geq 1$ 
+4.  $x_2 + x_6 \geq 1$
+5.  $x_2 + x_4 \geq 1$ 
+6.  $x_4 + x_7 \geq 1$ 
+7.  $x_4 + x_5 \geq 1$ 
+8.  $x_7 + x_8 \geq 1$
+9.  $x_3 + x_5 \geq 1$ 
+10. $x_6 + x_7 \geq 1$ 
+11. $x_5 + x_8 \geq 1$ 
+
+### Penyelesaian dengan SOA
+
+```{r}
+rm(list=ls())
+
+f1 = function(x1,x2,x3,x4,x5,x6,x7,x8){
+  sum(x1,x2,x3,x4,x5,x6,x7,x8)
+}
+
+h1 = function(x1,x2){x1 + x2 - 1}
+h2 = function(x1,x2,x3){8*x1 + x2 + 2*x3 - 80}
+h3 = function(x1,x2,x3){9*x1 + x2 + 7*x3 - 70}
+
+beta = 10^15
+
+f = function(x1,x2,x3){
+  el_1 = - f1(x1,x2,x3) 
+  el_2 = beta * (max(h1(x1,x2,x3),0))^2
+  el_3 = beta * (max(h2(x1,x2,x3),0))^2
+  el_4 = beta * (max(h3(x1,x2,x3),0))^2
+  return(el_1 + el_2 + el_3 + el_4)
+}
+
+```
+
+

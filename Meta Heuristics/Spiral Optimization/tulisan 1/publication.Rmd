@@ -1,22 +1,29 @@
 ---
-title: SPIRAL OPTIMIZATION ALGORITHM
-subtitle: |
-  | Tugas Kuliah
-  | SK5001 Analisis Numerik Lanjut
-author: |
-  | Mohammad Rizka Fadhli
-  | NIM: 20921004
+title: <b>METAHEURISTIC OPTIMIZATION ALGORITHM SERIES</b>
+subtitle: Spiral Optimization Algorithm
+author: 
+  - name: Ikang Fadhli
+    affiliation: "ikanx101.com"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-fotsize: 12pt
+dev: png
 output:
-  pdf_document:
-   number_section: false
-   toc: false
-   highlight: tango
-   dev: png
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: 
+        collapsed: false
+        smooth_scroll: true
+    number_sections: false
+    theme: journal
+    highlight: haddock
+    fig_caption: yes
+    code_folding: show
 ---
 
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Meta Heuristics/Spiral Optimization")
+
 rm(list=ls())
 options(digits = 6)
 set.seed(20921004)
@@ -163,7 +170,7 @@ rotasi_kan = function(x0,rot){
   }
 ```
 
-\newpage
+<br>
 
 Berikut adalah uji coba dengan titik sembarang berikut ini:
 
@@ -175,7 +182,7 @@ x0 = rand_titik(0,10) # generate random titik
 rotasi_kan(x0,rot)
 ```
 
-\newpage
+<br>
 
 Uji coba kembali dengan titik sembarang lainnya berikut ini:
 
@@ -187,7 +194,7 @@ x0 = rand_titik(0,10) # generate random titik
 rotasi_kan(x0,rot)
 ```
 
-\newpage
+<br>
 
 ### Operasi Matriks Rotasi dan Kontraksi
 
@@ -267,7 +274,7 @@ rotasi_konstraksi_kan = function(x0,rot,r){
 
 Berikutnya saya akan tunjukkan ilustrasi dari program ini.
 
-\newpage
+<br>
 
 Saya akan uji coba untuk sembarang titik berikut ini:
 
@@ -279,7 +286,7 @@ r = .9
 rotasi_konstraksi_kan(x0,rot,r)
 ```
 
-\newpage
+<br>
 
 Saya akan uji coba kembali untuk sembarang titik lainnya berikut ini:
 
@@ -295,7 +302,7 @@ __Catatan penting:__
 
 Terlihat bahwa semakin banyak rotasi dan konstraksi yang dilakukan akan membuat titik _initial_ __menuju pusat__ $(0,0)$.
 
-\newpage
+<br>
 
 ### Operasi Matriks Rotasi dan Kontraksi dengan Titik $x^*$ Sebagai Pusatnya
 
@@ -382,7 +389,7 @@ rotasi_konstraksi_pusat_kan = function(x0,rot,r,x_bin){
 Berikutnya saya akan tunjukkan ilustrasi dari program ini.
 
 
-\newpage
+<br>
 
 Saya akan coba dengan sembarang titik berikut:
 
@@ -395,7 +402,7 @@ r = .6
 rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
 ```
 
-\newpage
+<br>
 
 Saya akan coba kembali dengan sembarang titik lainnya:
 
@@ -408,7 +415,7 @@ r = .87
 rotasi_konstraksi_pusat_kan(x0,rot,r,x_bintang)
 ```
 
-\newpage
+<br>
 
 ## Program _Spiral Optimization Algorithm_
 
@@ -502,7 +509,7 @@ __Catatan__
 
 Pada algoritma ini, penentuan $\theta, r, x$ menjadi penentu hasil perhitungan.
 
-\newpage
+<br>
 
 ### Mengubah Optimisasi Menjadi Pencarian Akar
 
@@ -592,7 +599,7 @@ return(output)
 ```
 
 
-\newpage
+<br>
 
 ```{r,include=FALSE}
 # fungsi plot
@@ -652,7 +659,7 @@ f1 = function(x1,x2){cos(2* x1) - cos(2*x2) - 0.4}
 ikanx(f1,-10,10) + labs(title = "Contour Plot f1(x1,x2)")
 ```
 
-\newpage
+<br>
 
 Selanjutnya, saya akan buat _contour plot_ dari $f_2 (x_1,x_2)$ sebagai berikut:
 
@@ -661,7 +668,7 @@ f2 = function(x1,x2){2*(x2 - x1) + sin(x2) - sin(x1) - 1.2}
 ikanx(f2,-10,10) + labs(title = "Contour Plot f2(x1,x2)")
 ```
 
-\newpage
+<br>
 
 ## Grafik Sistem Persamaan
 
@@ -682,7 +689,7 @@ ggplot() +
 
 Terlihat bahwa ada beberapa titik solusi (persinggungan antara $f_1(x_1,x_2)$ dengan $f_2(x_1,x_2)$.
 
-\newpage
+<br>
 
 ## Mencari Akar Sistem Persamaan
 
@@ -721,7 +728,7 @@ soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 ```
 
-\newpage
+<br>
 
 Berikutnya saya coba _run_ sebanyak __100 kali__, berikut adalah rekap semua akar yang saya dapatkan:
 
@@ -741,7 +748,7 @@ ceisya %>%
   arrange(x1,x2)
 ```
 
-\newpage
+<br>
 
 # SOAL 2
 
@@ -762,7 +769,7 @@ f1 = function(x1,x2){sin(x1)*cos(x2) + 2*cos(x1)*sin(x2)}
 ikanx(f1,0,2*pi) + labs(title = "Contour Plot f1(x1,x2)")
 ```
 
-\newpage
+<br>
 
 Berikutnya adalah _contour plot_ dari $f_2 (x_1,x_2)$ sebagai berikut:
 
@@ -771,7 +778,7 @@ f2 = function(x1,x2){cos(x1)*sin(x2) + 2*sin(x1)*cos(x2)}
 ikanx(f2,0,2*pi) + labs(title = "Contour Plot f2(x1,x2)")
 ```
 
-\newpage
+<br>
 
 ## Grafik Sistem Persamaan
 
@@ -791,7 +798,7 @@ ggplot() +
 ```
 
 
-\newpage
+<br>
 
 ## Mencari Akar Sistem Persamaan
 
@@ -830,7 +837,7 @@ soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 soa_mrf_2(N,a,b,a,b,rot,k_max,r)
 ```
 
-\newpage
+<br>
 
 Berikutnya saya coba _run_ sebanyak __100 kali__, berikut adalah rekap semua akar yang saya dapatkan:
 
@@ -851,7 +858,7 @@ ceisya %>%
 ```
 
 
-\newpage
+<br>
 
 # SOAL 3
 
@@ -872,7 +879,7 @@ f1 = function(x,y){0.5*sin(x*y) - 0.25*(y)/(pi) - 0.5*x}
 ikanx(f1,-20,5) + labs(title = "Contour Plot g1(x,y)")
 ```
 
-\newpage
+<br>
 
 Berikutnya adalah _contour plot_ dari $g_2 (x,y)$ sebagai berikut:
 
@@ -881,7 +888,7 @@ f2 = function(x,y){(1 - .25/pi)*(exp(2*x)-exp(1)) + exp(1)*(y/pi) - 2*exp(1)*x}
 ikanx(f2,-20,5) + labs(title = "Contour Plot g2(x,y)")
 ```
 
-\newpage
+<br>
 
 ## Grafik Sistem Persamaan
 
@@ -901,7 +908,7 @@ ggplot() +
 ```
 
 
-\newpage
+<br>
 
 ## Mencari Akar Sistem Persamaan
 
@@ -942,7 +949,7 @@ soa_mrf_2(N,x1_lower,x1_upper,x2_lower,x2_upper,rot,k_max,r)
 soa_mrf_2(N,x1_lower,x1_upper,x2_lower,x2_upper,rot,k_max,r)
 ```
 
-\newpage
+<br>
 
 Berikutnya saya coba _run_ sebanyak __100 kali__, berikut adalah rekap semua akar yang saya dapatkan:
 
@@ -962,6 +969,387 @@ ceisya %>%
   arrange(x1,x2)
 ```
 
-\center
+<br>
 
-# == END == {-}
+# SOA PADA INTEGER PROGRAMMING
+
+## _Integer Programming_
+
+### Dua Peubah
+
+Pada tugas ini, saya akan memodifikasi fungsi di atas untuk menyelesaikan permasalahan _integer programming_, yakni dengan melakukan pembulatan terhadap peubah yang memiliki nilai $f(x_1,x_2)$ yang paling minimum.
+
+```{r}
+soa_mrf_ip = function(
+       N,	    # banyak titik
+		   x1_d,  # batas bawah x1  
+		   x1_u,  # batas atas x1
+		   x2_d,  # batas bawah x2
+		   x2_u,  # batas atas x2
+		   rot,	  # berapa banyak rotasi
+		   k_max, # iterasi maks
+		   r){	  # berapa rate konstraksi
+		   
+# N pasang titik random di selang [a,b] di R2
+x1 = runif(N,x1_d,x1_u)
+x2 = runif(N,x2_d,x2_u)
+# hitung theta
+theta = 2*pi / rot
+# definisi matriks rotasi
+A = matrix(c(cos(theta),-sin(theta),
+             sin(theta),cos(theta)),
+           ncol = 2,byrow = T)
+
+# bikin data frame
+temp = data.frame(x1,x2) %>% mutate(f = f(round(x1,0),round(x2,0)))
+# proses iterasi
+for(i in 1:k_max){
+  # mencari titik x* dengan max(f)
+  f_min = 
+	  temp %>% 
+    # memastikan titik ada di D
+    filter(x1 >= x1_d & x1 <= x1_u) %>% 
+    filter(x2 >= x2_d & x2 <= x2_u) %>% 
+	  # mencari titik max fungsi
+    filter(f == max(f))
+  # definisi pusat rotasi
+  pusat = c(f_min$x1[1],f_min$x2[1])
+  for(j in 1:N){
+	  # kita akan ambil titiknya satu persatu
+	  x0 = c(temp$x1[j],temp$x2[j])
+	  # proses rotasi dan konstraksi terhadap pusat x*
+	  xk = A %*% (x0-pusat) # diputar dengan x_bin sebagai pusat
+    xk = pusat + (r * xk)
+	  # proses mengembalikan nilai ke temp
+	  temp$x1[j] = xk[1]
+	  temp$x2[j] = xk[2]
+	}
+    # hitung kembali nilai f(x1,x2)
+    temp = temp %>% mutate(f = f(round(x1,0),round(x2,0)))
+    }
+# proses output hasil
+output = 
+  temp[N,] %>% 
+  filter(f == max(f)) %>% 
+  mutate(x1 = round(x1,0),x2 = round(x2,0),
+         g = g(x1,x2),f = f(x1,x2))
+return(output)
+}
+```
+
+### Tiga Peubah
+
+Berikut adalah program untuk SOA tiga peubah:
+
+```{r}
+soa_mrf_ip_3_var = function(
+  N,	    # banyak titik
+  x1_d,  # batas bawah x1  
+  x1_u,  # batas atas x1
+  x2_d,  # batas bawah x2
+  x2_u,  # batas atas x2
+  x3_d,  # batas bawah x3
+  x3_u,  # batas atas x3
+  rot,	  # berapa banyak rotasi
+  k_max, # iterasi maks
+  r){	  # berapa rate konstraksi
+  
+  # N pasang titik random di selang [a,b] di R3
+  x1 = runif(N,x1_d,x1_u)
+  x2 = runif(N,x2_d,x2_u)
+  x3 = runif(N,x3_d,x3_u)
+  
+  # hitung theta
+  theta = 2*pi / rot
+  # definisi matriks rotasi
+  R12 = matrix(c(cos(theta),-sin(theta),0,
+                 sin(theta),cos(theta),0,
+                 0,0,1),
+               ncol = 3,byrow = T)
+  R13 = matrix(c(cos(theta),0,-sin(theta),
+                 0,1,0,
+                 sin(theta),0,cos(theta)),
+               ncol = 3,byrow = T)
+  R23 = matrix(c(1,0,0,
+                 0,cos(theta),-sin(theta),
+                 0,sin(theta),cos(theta)),
+               ncol = 3,byrow = T)
+  
+  
+  # bikin data frame
+  temp = data.frame(x1,x2,x3) %>% 
+    mutate(f = f(round(x1,0),
+                 round(x2,0),
+                 round(x3,0)
+                 )
+           )
+  # proses iterasi
+  for(i in 1:k_max){
+    # mencari titik x* dengan max(f)
+    f_min = 
+      temp %>% 
+      # memastikan titik ada di D
+      filter(x1 >= x1_d & x1 <= x1_u) %>% 
+      filter(x2 >= x2_d & x2 <= x2_u) %>% 
+      filter(x3 >= x3_d & x3 <= x3_u) %>% 
+      # mencari titik max fungsi
+      filter(f == max(f))
+    # definisi pusat rotasi
+    pusat = c(f_min$x1[1],f_min$x2[1],f_min$x3[1])
+    for(j in 1:N){
+      # kita akan ambil titiknya satu persatu
+      x0 = c(temp$x1[j],temp$x2[j],temp$x3[j])
+      # proses rotasi dan konstraksi terhadap pusat x*
+      # diputar dengan x_bin sebagai pusat
+      xk = (R23 %*% (R13 * R12)) %*% (x0-pusat)
+      xk = pusat + (r * xk)
+      # proses mengembalikan nilai ke temp
+      temp$x1[j] = xk[1]
+      temp$x2[j] = xk[2]
+      temp$x3[j] = xk[3]
+    }
+    # hitung kembali nilai f(x1,x2)
+    temp = temp %>% mutate(f = f(round(x1,0),round(x2,0),round(x3,0)))
+  }
+  # proses output hasil
+  output = 
+    temp[N,] %>% 
+    filter(f == max(f)) %>% 
+    mutate(x1 = round(x1,0),x2 = round(x2,0),x3 = round(x3,0),
+           g = g(x1,x2,x3),f = f(x1,x2,x3))
+  return(output)
+}
+```
+
+## Mengubah Optimisasi Menjadi Pencarian Akar
+
+_Spiral optimization algorithm_ adalah suatu metode untuk mencari solusi minimum global. Jika kita hendak memakainya untuk mencari suatu akar persamaan (atau sistem persamaan), kita bisa melakukan modifikasi pada fungsi-fungsi yang terlibat (membuat fungsi _merit_).
+
+Misalkan suatu sistem persamaan non linear:
+
+$$g_1 (x_1,x_2,..,x_n) = 0$$
+
+$$g_2 (x_1,x_2,..,x_n) = 0$$
+
+$$g_n (x_1,x_2,..,x_n) = 0$$
+
+dengan $(x_1,x_2,..,x_n)^T \in D$
+
+$$D = a_1,b_1 \times a_2,b_2 \times .. \times a_n,b_n \subset \mathbb{R}^n$$
+
+
+## Pencarian Akar
+
+Sistem di atas memiliki solusi $x = (x_1,x_2,..,x_n)^T$ jika $F(x)$ yang kita definisikan sebagai:
+
+$$F(x) = \frac{1}{1+ \sum_{i=1}^n |g_i(x)|}$$
+
+
+memiliki nilai maksimum sama dengan 1. __Akibatnya algoritma yang sebelumnya adalah mencari $\min{F(x)}$ diubah menjadi__ $\max{F(x)}$. Kenapa demikian?
+
+> Karena jika $F(x) = 1$ artinya $\sum_{i=1}^n |g_i(x)| = 0$ yang merupakan akar dari $g_i,i = 1,2,..,n$.
+
+__Kelak__ $F(x)$ __akan digunakan untuk menjawab soal-soal yang ada dalam tugas ini.__
+
+# SOAL
+
+Tentukanlah solusi-solusi persamaan _diophantine_ berikut dengan algoritma optimisasi spiral:
+
+1. $x^2 + y^2 = 625, 0 \leq x,y \leq 25$.
+1. $x^3 + y^3 = 1008, 0 \leq x,y \leq 50$.
+1. $x^3 - 3xy^2 - y^3 = 1, -10 \leq x,y \leq 10$.
+1. $x^2 + y^2 + z^2 = 2445, 0 \leq x,y,z \leq 50$.
+
+<br>
+
+# JAWAB
+
+## Persamaan _Diophantine_ 1
+
+Persamaan pada soal bisa dituliskan sebagai berikut:
+
+$$g(x,y) = x^2 + y^2 - 625 = 0, 0 \leq x,y \leq 25$$
+
+Untuk menyelesaikannya dengan __SOA__, saya akan ubah $g(x,y)$ menjadi fungsi merit sebagai berikut:
+
+$$F(x,y) = \frac{1}{1 + |g(x,y)|}, 0 \leq x,y \leq 25$$
+
+Oleh karena itu, tugas saya sekarang adalah mencari $(x,y) \in D$ yang membuat $\max F(x,y)$. Saya akan coba _run_ programnya berulang kali agar mendapatkan sebanyak-banyaknya solusi yang tepat. 
+
+Berikut adalah penyelesaiannya di __R__:
+
+```{r}
+# solving
+N = 100
+a = 0  # x dan y punya batas yang sama
+b = 25 # x dan y punya batas yang sama
+rot = 30
+k_max = 50
+r = .65
+# membuat fungsi g dan f
+g = function(x,y){x^2 + y^2 - 625}
+f = function(x,y){1 / (1 + g(x,y))}
+# iterasi berulang kali agar mendapatkan hasil yang tepat
+solusi = data.frame()
+for(num in 1:70){
+  temporary = soa_mrf_ip(N,a,b,a,b,rot,k_max,r)
+  solusi = rbind(solusi,temporary)
+}
+```
+
+<br>
+
+Berikut adalah tabel solusi yang didapatkan:
+
+```{r,echo=FALSE}
+solusi %>% 
+  distinct() %>% 
+  arrange(x1) %>% 
+  filter(g == 0) %>% 
+  rename(x = x1,
+         y = x2,
+         "F(x,y)" = f,
+         "g(x,y)" = g) %>% 
+  knitr::kable(caption = "Solusi Soal I",align = "c")
+```
+
+## Persamaan _Diophantine_ 2
+
+Persamaan pada soal bisa dituliskan sebagai berikut:
+
+$$g(x,y) = x^3 + y^3 - 1008 = 0, 0 \leq x,y \leq 50$$
+
+Untuk menyelesaikannya dengan __SOA__, saya akan ubah $g(x,y)$ menjadi fungsi merit sebagai berikut:
+
+$$F(x,y) = \frac{1}{1 + |g(x,y)|}, 0 \leq x,y \leq 50$$
+
+Oleh karena itu, tugas saya sekarang adalah mencari $(x,y) \in D$ yang membuat $\max F(x,y)$. Saya akan coba _run_ programnya berulang kali agar mendapatkan sebanyak-banyaknya solusi yang tepat. 
+
+Berikut adalah penyelesaiannya di __R__:
+
+```{r}
+# solving
+N = 200
+a = 0  # x dan y punya batas yang sama
+b = 50 # x dan y punya batas yang sama
+rot = 30
+k_max = 50
+r = .65
+# membuat fungsi g dan f
+g = function(x,y){x^3 + y^3 - 1008}
+f = function(x,y){1 / (1 + g(x,y))}
+# iterasi berulang kali agar mendapatkan hasil yang tepat
+solusi = data.frame()
+for(num in 1:80){
+  temporary = soa_mrf_ip(N,a,b,a,b,rot,k_max,r)
+  solusi = rbind(solusi,temporary)
+}
+```
+
+Berikut adalah tabel solusi yang didapatkan:
+
+```{r,echo=FALSE}
+solusi %>% 
+  distinct() %>% 
+  arrange(x1) %>% 
+  filter(g == 0) %>% 
+  rename(x = x1,
+         y = x2,
+         "F(x,y)" = f,
+         "g(x,y)" = g) %>% 
+  knitr::kable(caption = "Solusi Soal II",align = "c")
+```
+
+
+## Persamaan _Diophantine_ 3
+
+Persamaan pada soal bisa dituliskan sebagai berikut:
+
+$$g(x,y) = x^3 - 3xy^2 - y^3 - 1 = 0, -10 \leq x,y \leq 10$$
+
+Untuk menyelesaikannya dengan __SOA__, saya akan ubah $g(x,y)$ menjadi fungsi merit sebagai berikut:
+
+$$F(x,y) = \frac{1}{1 + |g(x,y)|}, -10 \leq x,y \leq 10$$
+
+Oleh karena itu, tugas saya sekarang adalah mencari $(x,y) \in D$ yang membuat $\max F(x,y)$. Saya akan coba _run_ programnya berulang kali agar mendapatkan sebanyak-banyaknya solusi yang tepat. 
+
+Berikut adalah penyelesaiannya di __R__:
+
+```{r}
+# solving
+N = 100
+a = -10  # x dan y punya batas yang sama
+b = 10   # x dan y punya batas yang sama
+rot = 50
+k_max = 80
+r = .75
+# membuat fungsi g dan f
+g = function(x,y){x^3 - 3*x*y^2 - y^3 - 1}
+f = function(x,y){1 / (1 + abs(g(x,y)))}
+# iterasi berulang kali agar mendapatkan hasil yang tepat
+solusi = data.frame()
+for(num in 1:80){
+  temporary = soa_mrf_ip(N,a,b,a,b,rot,k_max,r)
+  solusi = rbind(solusi,temporary)
+}
+```
+
+Berikut adalah tabel solusi yang didapatkan:
+
+```{r,echo=FALSE}
+solusi %>% 
+  distinct() %>% 
+  arrange(x1) %>% 
+  filter(g == 0) %>% 
+  rename(x = x1,
+         y = x2,
+         "F(x,y)" = f,
+         "g(x,y)" = g) %>% 
+  knitr::kable(caption = "Solusi Soal III",align = "c")
+```
+
+## Persamaan _Diophantine_ 4
+
+Persamaan pada soal bisa dituliskan sebagai berikut:
+
+$$g(x,y,z) = x^2 + y^2 + z^2 - 2445 = 0, 0 \leq x,y,z \leq 50$$
+
+Untuk menyelesaikannya dengan __SOA__, saya akan ubah $g(x,y,z)$ menjadi fungsi merit sebagai berikut:
+
+$$F(x,y,z) = \frac{1}{1 + |g(x,y,z)|}, 0 \leq x,y,z \leq 50$$
+
+Berikut adalah penyelesaiannya di __R__:
+
+```{r}
+# solving
+N = 200
+a = 0  # x dan y punya batas yang sama
+b = 50   # x dan y punya batas yang sama
+rot = 70
+k_max = 90
+r = .85
+# membuat fungsi g dan f
+g = function(x,y,z){x^2 + y^2 + z^2 - 2445}
+f = function(x,y,z){1 / (1 + abs(g(x,y,z)))}
+# iterasi berulang kali agar mendapatkan hasil yang tepat
+solusi = data.frame()
+for(num in 1:70){
+  temporary = soa_mrf_ip_3_var(N,a,b,a,b,a,b,rot,k_max,r)
+  solusi = rbind(solusi,temporary)
+}
+```
+
+Berikut adalah tabel solusi yang didapatkan:
+
+```{r,echo=FALSE}
+solusi %>% 
+  distinct() %>% 
+  arrange(x1) %>% 
+  filter(g == 0) %>% 
+  rename(x = x1,
+         y = x2,
+         z = x3,
+         "F(x,y,z)" = f,
+         "g(x,y,z)" = g) %>% 
+  knitr::kable(caption = "Solusi Soal IV",align = "c")
+```

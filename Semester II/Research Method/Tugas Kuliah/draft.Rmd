@@ -175,13 +175,19 @@ Masalah optimisasi yang dihadapi termasuk ke dalam _binary linear programming_.
 
 _Binary programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan biner (0,1). Biasanya metode ini dipakai dalam masalah-masalah yang memerlukan prinsip _matching_ antar kondisi (indeks) yang ada.
 
-### Metode Penyelesaian _Binary LP_ {.allowframebreaks}
+### _Literature Review_: Metode Penyelesaian _Binary LP_ 
 
 Metode _simplex_ adalah salah satu metode yang paling umum digunakan dalam menyelesaikan permasalahan _linear programming_. Metode ini dikembangkan oleh seorang profesor matematika bernama George Dantzig^[https://en.wikipedia.org/wiki/George_Dantzig] pada 1947 pasca perang dunia II. Sedangkan nama _simplex_ diusulkan oleh Theodore Motzkin^[https://en.wikipedia.org/wiki/Theodore_Motzkin].
 
 Metode _simplex_ adalah __metode eksak__ yang digunakan untuk menyelesaikan _linear programming_. Metode _simplex_ menggunakan prosedur aljabar[@lieberman]. Namun _underlying concept_ dari metode ini adalah _geometric_. 
 
 Solusi yang dihasilkan merupakan bilangan _real_ atau kontinu. Agar bisa menyelesaikan _binary LP_, membulatkan bilangan solusi _linear programming_ untuk mendapatkan solusi _binary_ dari suatu masalah _MILP_ belum tentu menjamin keoptimalan tercapai. Oleh karena itu, kita akan melakukan pendekatan _constraint relaxation_ [@benoit].
+
+### _Literature Review_: Penggunaan _Binary Programming_
+
+Salah satu studi pada 2019 membuat model _binary programming_ untuk mengoptimalkan pemilihan _100 marketing channel and activites_ terhadap jutaan _customers_ [@ieee]. Tujuannya adalah agar pesan _marketing_ yang diberikan tersampaikan dengan baik sehingga _sales_ bisa meningkat. 
+
+ ___Masalah optimisasi terkait bisnis dan konsumen - sentris belum banyak dituliskan dalam jurnal.___
 
 ### Metode _Meta Heuristic_
 
@@ -194,6 +200,12 @@ Pada studi tahun 2016, _spiral optimization algorithm_ terbukti bisa digunakan u
 Ide dasarnya adalah mengubah _constrained problem_ menjadi _unconstrained problem_ dengan membuat _penalty function_. Setelah itu, SOA digunakan untuk menyelesaikan _unconstrained problem_ tersebut.
 
 Pada jurnal ini, _decision variables_ yang terlibat relatif belum banyak.
+
+### _Literature Review_: _Spiral Optimization Algorithm_
+
+SOA merupakan salah satu algoritma yang mudah dituliskan ke dalam bahasa pemrograman. Namun salah satu kendala yang dihadapi adalah pendefinisian matriks rotasi. Jika dikembalikan ke penelitian awal terkait SOA, tidak disebutkan dengan jelas apakah matriks rotasi merupakan hasil dari _cross product_ atau _dot product_ [@tamura].
+
+Namun, pada aljabar linear kita mengetahui bahwa rotasi tidak mengubah _norm_ dari suatu vektor.
 
 ### _Literature Review_: _Particle Swarm Optimization_
 
@@ -211,6 +223,6 @@ Pada studi tahun 2021, _artificial bee colony algorithm_ juga bisa digunakan unt
 
 ### Rencana Penelitian
 
-Perbandingan Metode Eksak dan Metode Meta Heuristic Model optimisasi portofolio diskon produk _e-commerce_ dan membandingkan solusi metode eksak (_simplex_) dengan metode _meta heuristic_ (_ABC_ dan _SOA_).
+Pemodelan optimisasi portofolio diskon produk _e-commerce_ dan penyelesaiannya menggunakan pendekatan _meta heuristic_ (_ABC_ dan _SOA_).
 
 # _REFERENCES_ {.allowframebreaks}
