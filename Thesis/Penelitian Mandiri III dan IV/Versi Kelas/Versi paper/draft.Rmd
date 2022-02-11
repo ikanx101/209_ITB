@@ -1,0 +1,88 @@
+---
+title: "Penelitian Mandiri Sains Komputasi III & IV"
+subtitle: _Weekly Update_
+author: | 
+    | Mohammad Rizka Fadhli 
+    | Ikang
+    | 20921004@mahasiswa.itb.ac.id
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: false
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: breezedark
+bibliography: references.bib
+csl: 2d-materials.csl
+linestretch: 2
+colorlinks: true
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+\newpage
+
+# PENDAHULUAN
+
+Semenjak diperkenalkan pertama kali pada tahun 1982, _Supply Chain Management_ memegang peranan penting dalam manufaktur sebagai suatu sistem produksi terintegrasi [@webber]. Di dalam SCM, bahan baku dibeli perusahaan dari berbagai _supplier_, dibuat ke dalam suatu produk yang kemudian akan dijual ke pelanggan melalui berbagai _channel_ distribusi.
+
+Dalam mengarungi kompetisi, perusahaan perlu memahami dua faktor kunci, yakni _cost reduction_ dan _product quality_ [@masood]. Kedua faktor ini sangat bergantung pada pemilihan _supplier_ yang tepat. Sehingga proses _supplier selection_ menjadi proses yang krusial dalam setiap perusahaan.
+
+Perusahaan bisa menggunakan dua strategi terkait _supplier selection_, yakni: _single sourcing_ dan _multiple sourcing_. _Single sourcing_ berarti perusahaan hanya membeli bahan baku dari _supplier_ tunggal. Sedangkan _multiple sourcing_ berarti perusahaan bisa membeli bahan baku dari beberapa _supplier_. Strategi _single sourcing_ bisa menaikkan level risiko dari perusahaan sedangkan strategi _multiple sourcing_ menyebabkan _initial cost_ dan _ongoing cost_ yang lebih besar [@sourcing].
+
+Bagi perusahaan yang menerapkan strategi _multiple sourcing_, banyak faktor yang akan membuat kompleks pengambilan keputusan. Misalnya harga, perjanjian transaksi, kualitas, kuantitas, jarak dan biaya pengantaran [@masood].
+
+Penelitian yang dilakukan terkait SCM dan optimisasi dalam hal _supplier selection_ menggunakan basis kriteria penilaian skala makro pernah dilakukan pada tahun 2015. Yakni dengan memanfaatkan pendekatan _fuzzy model_ menggunakan sepuluh _input variables_ berupa kriteria-kriteria penilaian _supplier_ kemudian menggunakan _tools_ __MATLAB__ ___fuzzy tool box___ untuk mengevaluasi kinerja _supplier_ agar _profitability_ perusahaan tetap terjaga [@hasan]. 
+
+Pada penelitian ini, _supplier selection_ akan disandingkan langsung dengan _raw material selection_ pada variabel-variabel mikro pada rentang waktu tertentu. Studi kasus yang digunakan berasal dari satu perusahaan manufaktur yang bergerak di bidang makanan dan minuman. Beberapa penelitian terkait dengan topik ini antara lain: 
+
+- Penelitian __TU Delft__ yang dilakukan pada studi kasus perusahaan minyak di China menggunakan _framework Best-Worst Model_ (BWM) untuk menentukan indikator penting untuk memilih _raw material_ dan _supplier_ terbaik [@nispelling].
+- Model _supplier selection and order allocation_ berbasis _fuzzy extended analytic hierarchy process_ yang dikombinasikan dengan _multiobjective dynamic linear programming_ dibuat untuk mencari nilai yang optimal untuk pembelian _raw material_ [@zhi].
+- Bani dan Jafari (2016) menawarkan suatu model optimisasi untuk menyelesaikan _supplier selection_ dengan kondisi _multiple sourcing_, _multiple criteria_, dan batasan kapasitas. Model ini memiliki cakupan luas karena sudah mempertimbangkan kriteria-kriteria kunci per _raw material_ dan _supplier_. Kemudian model tersebut diselesaikan dengan dua pendekatan, yakni algoritma genetika dan _invasive weed optimization_ [@bani].
+
+Luaran dari penelitian ini adalah suatu model komputasi yang digunakan untuk menyelesaikan permasalahan optimisasi pemilihan _raw material_ dan _supplier selection_ dengan _input_ berupa:
+
+1. _Demand_ dari 130 varian produk jadi dan dalam periode waktu tertentu.
+1. Komposisi _raw material_ yang dibutuhkan untuk memproduksi satu unit varian produk jadi.
+1. Data spesifikasi _supplier_ (terkait harga, minimal kuantitas pembelian, kualitas _raw material_, dan waktu pengiriman).
+
+# LATAR BELAKANG
+
+PT. NFI adalah salah satu perusahaan manufaktur makanan dan minuman di Indonesia memiliki 130 varian produk jadi yang diproduksi setiap periode tertentu. Masing-masing varian produk memiliki komposisi _raw material_ yang berbeda-beda. Namun ada beberapa jenis _raw material_ yang digunakan sebagai bahan baku utama di semua varian produk tersebut.
+
+Untuk memastikan kelancaran _supply chain management_, tim _Production Planning and Inventory Control_ (PPIC) perlu memastikan ketersediaan _raw material_ selalu pada level yang aman. Oleh karena itu, PT. NFI menerapkan prinsip ___multi supplier___. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal: harga dan minimum order. Hal-hal seperti durasi pengiriman dan kualitas _raw material_ sudah dipastikan sama untuk setiap _supplier_.
+
+Proses pemilihan _supplier_ dan penentuan kuantitas _raw material_ yang akan dibeli sangat bergantung pada:
+
+- Stok _raw material_ saat ini di gudang (baik yang sedang dipakai dan yang belum dipakai),
+- Kapasitas gudang bahan baku,
+- _Demand_ per varian produk,
+- Kapasitas produksi harian, 
+- Faktor waktu pemenuhan _demand_, dan
+- Faktor _supplier_ (harga dan minimum order).
+
+
+
+# _REFERENCES_

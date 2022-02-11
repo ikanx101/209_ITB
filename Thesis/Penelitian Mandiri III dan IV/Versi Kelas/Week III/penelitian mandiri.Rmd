@@ -1,5 +1,5 @@
 ---
-title: "UPDATE WEEK II"
+title: "WEEKLY UPDATE"
 subtitle: "PENELITIAN MANDIRI DALAM SAINS KOMPUTASI III - IV"
 author: "Mohammad Rizka Fadhli 20921004"
 institute: "Sains Komputasi ITB"

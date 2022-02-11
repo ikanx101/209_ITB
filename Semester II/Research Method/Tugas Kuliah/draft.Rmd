@@ -28,6 +28,12 @@ library(ggplot2)
 
 # PENDAHULUAN
 
+### Catatan Terkait Alur Presentasi
+
+Masalah yang akan dijadikan topik permasalahan ini berasal dari masalah _real_ di industri _e-commerce_ yang ditemui pada tahun 2020 lalu di salah satu _marketplace_ di Indonesia pada rentang waktu tertentu.
+
+Alur yang dilakukan adalah mencari jurnal dan literatur terkait permasalahan tersebut.
+
 ## Latar Belakang Masalah
 
 ### Perkembangan Transaksi _Online_
@@ -137,6 +143,16 @@ data %>%
   knitr::kable(caption = "Sample 7 Baris Data")
 ```
 
+### _Summary_ Latar Belakang
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+nomnoml::nomnoml("#direction: right
+                 [data transaksi] -> [price elasticity model]
+                 [price elasticity model] -> [data|produk|budget diskon|expected profit]
+                 [data] -> [optimisasi portofolio diskon produk]
+                 ")
+```
+
 ## Masalah yang Dihadapi
 
 ### Penentuan Produk
@@ -175,9 +191,15 @@ Masalah optimisasi yang dihadapi termasuk ke dalam _binary linear programming_.
 
 _Binary programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan biner (0,1). Biasanya metode ini dipakai dalam masalah-masalah yang memerlukan prinsip _matching_ antar kondisi (indeks) yang ada.
 
+### _Literature Review_: Aplikasi Penggunaan _Binary LP_ 
+
+Salah satu studi terkait aplikasi penggunaan _binary linear programming_ yang dilakukan pada 2014 adalah penentuan penempatan _phasor measuring unit_ dalam suatu _power system_ [@suresh]. Dalam penelitian ini dibuat model _binary_ kompleks dengan memperhatikan _constraints_ penempatan PMU.
+
+Peneliti menggunakan MATLAB dan CPLEX untuk mencari solusi yang optimal.
+
 ### _Literature Review_: Metode Penyelesaian _Binary LP_ 
 
-Metode _simplex_ adalah salah satu metode yang paling umum digunakan dalam menyelesaikan permasalahan _linear programming_. Metode ini dikembangkan oleh seorang profesor matematika bernama George Dantzig^[https://en.wikipedia.org/wiki/George_Dantzig] pada 1947 pasca perang dunia II. Sedangkan nama _simplex_ diusulkan oleh Theodore Motzkin^[https://en.wikipedia.org/wiki/Theodore_Motzkin].
+Metode _simplex_ adalah salah satu metode yang paling umum digunakan dalam menyelesaikan permasalahan _linear programming_. Metode ini dikembangkan oleh seorang profesor matematika bernama George Dantzig pada 1947 pasca perang dunia II. Sedangkan nama _simplex_ diusulkan oleh Theodore Motzkin.
 
 Metode _simplex_ adalah __metode eksak__ yang digunakan untuk menyelesaikan _linear programming_. Metode _simplex_ menggunakan prosedur aljabar[@lieberman]. Namun _underlying concept_ dari metode ini adalah _geometric_. 
 
@@ -223,6 +245,14 @@ Pada studi tahun 2021, _artificial bee colony algorithm_ juga bisa digunakan unt
 
 ### Rencana Penelitian
 
-Pemodelan optimisasi portofolio diskon produk _e-commerce_ dan penyelesaiannya menggunakan pendekatan _meta heuristic_ (_ABC_ dan _SOA_).
+Pemodelan optimisasi portofolio diskon produk _e-commerce_ dan penyelesaiannya menggunakan pendekatan _meta heuristic_ (_Artificial Bee Colony Algorithm_ dan _Spiral Optimization Algorithm_).
+
+Catatan: penelitian ini akan bertujuan untuk membuat model optimisasi dan membuat algoritma penyelesaian berbasis pendekatan _meta heuristic_.
+
+### Kebaruan Penelitian
+
+1. Penelitian terhadap optimisasi portofolio diskon produk di _e-commerce_ belum pernah dituliskan dalam jurnal penelitian.
+1. Penggunaan algoritma _meta heuristic_ untuk menyelesaikan _binary programming_ dengan banyak variabel keputusan belum banyak dilakukan.
+1. Membandingkan hasil solusi pendekatan _meta heuristic_ dengan solusi hasil perhitungan secara eksak (metode simplex) yang selama ini dilakukan pada _e-commerce_ tersebut.
 
 # _REFERENCES_ {.allowframebreaks}

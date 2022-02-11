@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  8 FEB 2022 10:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  9 FEB 2022 16:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -755,9 +755,6 @@ Package microtype Info: Loading configuration file microtype.cfg.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
 File: microtype.cfg 2021/12/10 v3.0b microtype main configuration file (RS)
 ))
-\cslhangindent=\skip68
-\csllabelwidth=\skip69
-
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.de
 f
 File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
@@ -766,24 +763,24 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 ) (./penelitian-mandiri.aux)
 \openout1 = `penelitian-mandiri.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -828,7 +825,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 121.
+Package hyperref Info: Link coloring OFF on input line 101.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -840,59 +837,59 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count338
 )
-LaTeX Info: Redefining \ref on input line 121.
-LaTeX Info: Redefining \pageref on input line 121.
-LaTeX Info: Redefining \nameref on input line 121.
+LaTeX Info: Redefining \ref on input line 101.
+LaTeX Info: Redefining \pageref on input line 101.
+LaTeX Info: Redefining \nameref on input line 101.
 (./penelitian-mandiri.out) (./penelitian-mandiri.out)
 \@outlinefile=\write5
 \openout5 = `penelitian-mandiri.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 121.
+(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 101.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> OT1/cmss/b/n on input line 121.
+(Font)                  OT1/lmr/bx/n --> OT1/cmss/b/n on input line 101.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 121.
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 101.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 121.
+(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 101.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 121.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 121.
+(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 101.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 121.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 121.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 121.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 101.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 121.
+(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 121.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 121.
+(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 101.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 121.
+(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 121.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 121.
+(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 101.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 121.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 121.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 101.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 121.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 101.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 121.
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/lmss/b/n --> T1/lmr/b/n on input line 121.
+(Font)                  OT1/lmss/b/n --> T1/lmr/b/n on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 121.
+(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 121.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 121.
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 121.
+(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 101.
 
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/translator/translator-basic-d
 ictionary-English.dict
@@ -918,12 +915,12 @@ Dictionary: translator-numbers-dictionary, Language: English
 -dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \microtypecontext on input line 121.
-Package microtype Info: Applying patch `item' on input line 121.
-Package microtype Info: Applying patch `toc' on input line 121.
-Package microtype Info: Applying patch `eqnum' on input line 121.
+LaTeX Info: Redefining \microtypecontext on input line 101.
+Package microtype Info: Applying patch `item' on input line 101.
+Package microtype Info: Applying patch `toc' on input line 101.
+Package microtype Info: Applying patch `eqnum' on input line 101.
 
-Package microtype Warning: Unable to apply patch `footnote' on input line 121.
+Package microtype Warning: Unable to apply patch `footnote' on input line 101.
 
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
@@ -931,7 +928,7 @@ Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 121.
+LaTeX Info: Redefining \showhyphens on input line 101.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -941,38 +938,47 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 (./penelitian-mandiri.nav)
 LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 121.
-
-
-Overfull \hbox (9.0157pt too wide) detected at line 121
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 101.
 
 [1{/home/ikanx_server/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
+] [2
 
-[2
+] [3
+
+]
+LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <10.95> not available
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 114.
+
+[4
+
+]
+LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <12> not available
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 118.
+
+[5
 
 ]
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 211.
-LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 211.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 131.
+LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <14.4> not available
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 131.
 
+[6
+
+] [7
+
+] [8
+
+] [9
+
+] [10
+
+] [11
+
+]
 LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
-211.
+183.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -980,35 +986,35 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-11.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+83.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-211.
+183.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-211.
+183.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 211.
+(Font)              <10.95> on input line 183.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 211.
+(Font)              <8> on input line 183.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 211.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 211
+(Font)              <6> on input line 183.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 183
 .
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 211
+LaTeX Font Info:    Trying to load font information for U+msb on input line 183
 .
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1016,491 +1022,50 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <8> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 211.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 183.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 211.
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[3
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[4
-
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[5
-
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[6
-
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[7
-
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[8
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[9
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[10
-
-]
-<penelitian-mandiri_files/figure-beamer/unnamed-chunk-1-1.pdf, id=821, 2461.195
-pt x 1300.86pt>
-File: penelitian-mandiri_files/figure-beamer/unnamed-chunk-1-1.pdf Graphic file
- (type pdf)
-<use penelitian-mandiri_files/figure-beamer/unnamed-chunk-1-1.pdf>
-Package pdftex.def Info: penelitian-mandiri_files/figure-beamer/unnamed-chunk-1
--1.pdf  used on input line 247.
-(pdftex.def)             Requested size: 298.75394pt x 157.90277pt.
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[11
-
- <./penelitian-mandiri_files/figure-beamer/unnamed-chunk-1-1.pdf>]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 183.
 [12
 
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
+] [13
 
-[13
+] [14
+
+] [15
 
 ]
-Overfull \vbox (8.88396pt too high) detected at line 324
- []
-
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[14
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[15
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 260.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 260.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 260.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 260.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 260.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 260.
 [16
 
 ]
-LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <14.4> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 346.
-
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[17
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[18
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[19
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[20
-
-]
-<literatur 1.png, id=1483, 1272.755pt x 609.27625pt>
-File: literatur 1.png Graphic file (type png)
-<use literatur 1.png>
-Package pdftex.def Info: literatur 1.png  used on input line 385.
-(pdftex.def)             Requested size: 199.1693pt x 95.33862pt.
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[21
-
- <./literatur 1.png>]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[22
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[23
-
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[24
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[25
-
-]
-<literatur 2.png, id=1823, 887.315pt x 344.28625pt>
-File: literatur 2.png Graphic file (type png)
-<use literatur 2.png>
-Package pdftex.def Info: literatur 2.png  used on input line 435.
-(pdftex.def)             Requested size: 199.1693pt x 77.27719pt.
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[26
-
- <./literatur 2.png>]
-<persamaan 7.png, id=1891, 654.445pt x 269.005pt>
-File: persamaan 7.png Graphic file (type png)
-<use persamaan 7.png>
-Package pdftex.def Info: persamaan 7.png  used on input line 442.
-(pdftex.def)             Requested size: 199.1693pt x 81.86784pt.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 442.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 442.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 442.
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <14.4> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 442.
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 442.
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 442.
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[27
-
- <./persamaan 7.png>]
-<rotasi 2d.png, id=1959, 264.99pt x 322.20375pt>
-File: rotasi 2d.png Graphic file (type png)
-<use rotasi 2d.png>
-Package pdftex.def Info: rotasi 2d.png  used on input line 449.
-(pdftex.def)             Requested size: 119.50279pt x 145.305pt.
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[28
-
- <./rotasi 2d.png>]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[29
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[30
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[31
-
-]
-<literatur 3.png, id=2225, 1466.47874pt x 541.02126pt>
-File: literatur 3.png Graphic file (type png)
-<use literatur 3.png>
-Package pdftex.def Info: literatur 3.png  used on input line 478.
-(pdftex.def)             Requested size: 199.1693pt x 73.47224pt.
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[32
-
- <./literatur 3.png>]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[33
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[34
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[35
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[36
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[37
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[38
-
-]
-LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <12> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 534.
-
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[39
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[40
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[41
-
-]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 607.
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 607.
-
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[42
-
-]
-<ilustrasi.png, id=2949, 1084.05pt x 505.89pt>
+<ilustrasi.png, id=620, 1084.05pt x 505.89pt>
 File: ilustrasi.png Graphic file (type png)
 <use ilustrasi.png>
-Package pdftex.def Info: ilustrasi.png  used on input line 614.
+Package pdftex.def Info: ilustrasi.png  used on input line 267.
 (pdftex.def)             Requested size: 298.75394pt x 139.41736pt.
+[17
 
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
+ <./ilustrasi.png (PNG copy)>] [18
 
-[43
+] [19
 
- <./ilustrasi.png (PNG copy)>]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
+] [20
 
-[44
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[45
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[46
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[47
+] [21
 
 
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[48
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[49
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[50
-
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[51
-
-
-]
-Overfull \hbox (9.0157pt too wide) has occurred while \output is active
-  [] [][][][][][][] [][][][][][][][][] [][][] [][][][][][][][][][][][][][][][] 
-[][][][][][][][][][][][] [][][][][] [][][][][][]  
- []
-
-[52
-
+] [22
 
 ]
 \tf@nav=\write6
@@ -1514,38 +1079,32 @@ Overfull \hbox (9.0157pt too wide) has occurred while \output is active
 
 (./penelitian-mandiri.aux)
 Package rerunfilecheck Info: File `penelitian-mandiri.out' has not changed.
-(rerunfilecheck)             Checksum: 2C5AA0E6AD4B1D73DEBFB0DE6F97D214;1670.
+(rerunfilecheck)             Checksum: FB5EC77140CAAA53699EC2553CE6619E;1305.
  ) 
 Here is how much of TeX's memory you used:
- 23296 strings out of 480559
- 436224 string characters out of 5902712
- 814190 words of memory out of 5000000
- 40077 multiletter control sequences out of 15000+600000
- 510146 words of font info for 175 fonts, out of 8000000 for 9000
+ 22985 strings out of 480559
+ 431689 string characters out of 5902712
+ 766756 words of memory out of 5000000
+ 39919 multiletter control sequences out of 15000+600000
+ 497938 words of font info for 144 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  101i,19n,108p,1015b,831s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/i
-kanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/ikanx_s
-erver/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/.Tin
-yTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/ikanx_server/.TinyTeX/t
-exmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</home/ikanx_server/.TinyTeX/texmf-d
-ist/fonts/type1/public/lm/lmex10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fo
-nts/type1/public/lm/lmmi10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/ty
-pe1/public/lm/lmmi8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/pub
-lic/lm/lmss10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm
-/lmss8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbo
-10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.p
-fb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso10.pfb></
-home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso12.pfb></home/
-ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso8.pfb></home/ikanx_
-server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/ikanx_server
-/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></home/ikanx_server/.TinyT
-eX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></home/ikanx_serve
-r/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on penelitian-mandiri.pdf (52 pages, 1022680 bytes).
+{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/ho
+me/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ika
+nx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_server/
+.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/ikanx_server/.TinyT
+eX/texmf-dist/fonts/type1/public/lm/lmss10.pfb></home/ikanx_server/.TinyTeX/tex
+mf-dist/fonts/type1/public/lm/lmss8.pfb></home/ikanx_server/.TinyTeX/texmf-dist
+/fonts/type1/public/lm/lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fon
+ts/type1/public/lm/lmssbx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/t
+ype1/public/lm/lmsso10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/
+public/lm/lmsso8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public
+/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfo
+nts/symbols/msam10.pfb>
+Output written on penelitian-mandiri.pdf (22 pages, 426899 bytes).
 PDF statistics:
- 3734 PDF objects out of 4296 (max. 8388607)
- 3535 compressed objects within 36 object streams
- 162 named destinations out of 1000 (max. 500000)
- 65718 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 877 PDF objects out of 1000 (max. 8388607)
+ 794 compressed objects within 8 object streams
+ 68 named destinations out of 1000 (max. 500000)
+ 59512 words of extra memory for PDF output out of 61914 (max. 10000000)
 
