@@ -56,13 +56,13 @@ Bagi perusahaan yang menerapkan strategi _multiple sourcing_, banyak faktor yang
 
 Penelitian yang dilakukan terkait SCM dan optimisasi dalam hal _supplier selection_ menggunakan basis kriteria penilaian skala makro pernah dilakukan pada tahun 2015. Yakni dengan memanfaatkan pendekatan _fuzzy model_ menggunakan sepuluh _input variables_ berupa kriteria-kriteria penilaian _supplier_ kemudian menggunakan _tools_ __MATLAB__ ___fuzzy tool box___ untuk mengevaluasi kinerja _supplier_ agar _profitability_ perusahaan tetap terjaga [@hasan]. 
 
-Pada penelitian ini, _supplier selection_ akan disandingkan langsung dengan _raw material selection_ pada variabel-variabel mikro pada rentang waktu tertentu. Studi kasus yang digunakan berasal dari satu perusahaan manufaktur yang bergerak di bidang makanan dan minuman. Beberapa penelitian terkait dengan topik ini antara lain: 
+Pada penelitian ini, _supplier selection_ akan disandingkan langsung dengan _raw material selection_ pada variabel-variabel penentuan yang bersifat mikro pada rentang waktu tertentu. Beberapa penelitian terkait dengan topik ini antara lain: 
 
-- Penelitian __TU Delft__ yang dilakukan pada studi kasus perusahaan minyak di China menggunakan _framework Best-Worst Model_ (BWM) untuk menentukan indikator penting untuk memilih _raw material_ dan _supplier_ terbaik [@nispelling].
-- Model _supplier selection and order allocation_ berbasis _fuzzy extended analytic hierarchy process_ yang dikombinasikan dengan _multiobjective dynamic linear programming_ dibuat untuk mencari nilai yang optimal untuk pembelian _raw material_ [@zhi].
+- Penelitian __TU Delft__ yang dilakukan pada studi kasus perusahaan minyak di China menggunakan _framework Best-Worst Model_ (BWM) untuk menentukan variabel penting untuk memilih _raw material_ dan _supplier_ terbaik [@nispelling].
+- Model _supplier selection and order allocation_ berbasis _fuzzy extended analytic hierarchy process_ yang dikombinasikan dengan _multiobjective dynamic linear programming_ dibuat untuk mencari nilai kuantitas yang optimal untuk pembelian _raw material_ [@zhi].
 - Bani dan Jafari (2016) menawarkan suatu model optimisasi untuk menyelesaikan _supplier selection_ dengan kondisi _multiple sourcing_, _multiple criteria_, dan batasan kapasitas. Model ini memiliki cakupan luas karena sudah mempertimbangkan kriteria-kriteria kunci per _raw material_ dan _supplier_. Kemudian model tersebut diselesaikan dengan dua pendekatan, yakni algoritma genetika dan _invasive weed optimization_ [@bani].
 
-Luaran dari penelitian ini adalah suatu model komputasi yang digunakan untuk menyelesaikan permasalahan optimisasi pemilihan _raw material_ dan _supplier selection_ dengan _input_ berupa:
+Studi kasus yang digunakan pada penelitian ini berasal dari perusahaan manufaktur bidang makanan dan minuman di Indonesia. Luaran dari penelitian ini adalah suatu model komputasi yang digunakan untuk menyelesaikan permasalahan optimisasi pemilihan _raw material_ dan _supplier selection_ dengan _input_ berupa:
 
 1. _Demand_ dari 130 varian produk jadi dan dalam periode waktu tertentu.
 1. Komposisi _raw material_ yang dibutuhkan untuk memproduksi satu unit varian produk jadi.
