@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  8 FEB 2022 09:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  15 FEB 2022 07:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1228,18 +1228,20 @@ on input line 380.
 
 ] [33
 
+] [34
+
 ]
 LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
-(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 594.
+(Font)              Font shape `T1/lmss/bx/sl' tried instead on input line 601.
 
-[34
-
-] [35
+[35
 
 ] [36
 
-
 ] [37
+
+
+] [38
 
 
 ]
@@ -1254,13 +1256,13 @@ LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
 
 (./draft.aux)
 Package rerunfilecheck Info: File `draft.out' has not changed.
-(rerunfilecheck)             Checksum: C4F363933BE7C4675B8D3328A0402885;775.
+(rerunfilecheck)             Checksum: EBB2C8C1E492934FE3C8B82C605E5B6F;775.
  ) 
 Here is how much of TeX's memory you used:
- 24985 strings out of 480559
- 470391 string characters out of 5902712
- 771818 words of memory out of 5000000
- 41755 multiletter control sequences out of 15000+600000
+ 24991 strings out of 480559
+ 470483 string characters out of 5902712
+ 771817 words of memory out of 5000000
+ 41757 multiletter control sequences out of 15000+600000
  513480 words of font info for 180 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  101i,15n,108p,1002b,674s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1277,10 +1279,10 @@ lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmss
 bx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso10.
 pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></
 home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on draft.pdf (37 pages, 605113 bytes).
+Output written on draft.pdf (38 pages, 606067 bytes).
 PDF statistics:
- 617 PDF objects out of 1000 (max. 8388607)
- 472 compressed objects within 5 object streams
- 125 named destinations out of 1000 (max. 500000)
+ 628 PDF objects out of 1000 (max. 8388607)
+ 482 compressed objects within 5 object streams
+ 129 named destinations out of 1000 (max. 500000)
  68064 words of extra memory for PDF output out of 74296 (max. 10000000)
 

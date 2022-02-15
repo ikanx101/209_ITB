@@ -245,9 +245,8 @@ Pada studi tahun 2021, _artificial bee colony algorithm_ juga bisa digunakan unt
 
 ### Rencana Penelitian
 
-Pemodelan optimisasi portofolio diskon produk _e-commerce_ dan penyelesaiannya menggunakan pendekatan _meta heuristic_ (_Artificial Bee Colony Algorithm_ dan _Spiral Optimization Algorithm_).
+Pemodelan optimisasi portofolio diskon produk _e-commerce_ dan penyelesaiannya menggunakan pendekatan _meta heuristic_ (_Spiral Optimization Algorithm_).
 
-Catatan: penelitian ini akan bertujuan untuk membuat model optimisasi dan membuat algoritma penyelesaian berbasis pendekatan _meta heuristic_.
 
 ### Kebaruan Penelitian
 

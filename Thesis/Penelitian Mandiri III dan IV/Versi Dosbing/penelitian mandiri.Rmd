@@ -10,7 +10,7 @@ output:
     fig_caption: true
     slide_level: 3
     theme: "Szeged"
-    colortheme: "albatross"
+    colortheme: "beaver"
     fonttheme: "structurebold"
 classoption: "aspectratio=169"
 toc: false

@@ -1,0 +1,268 @@
+---
+title: <b>TUGAS KULIAH PENAMBANGAN DATA DALAM SAINS</b>
+subtitle: Simmilarity dan Dissimilarity
+author: 
+  - name: Mohammad Rizka Fadhli - 20921004
+    affiliation: Magister Sains Komputasi ITB
+date: "`r format(Sys.time(), '%d %B %Y')`"
+dev: png
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: 
+        collapsed: false
+        smooth_scroll: true
+    number_sections: false
+    theme: cerulean
+    highlight: espresso
+    fig_caption: yes
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Semester II/Data Mining/Tugas/Tugas II")
+rm(list=ls())
+library(dplyr)
+library(tidyr)
+data = 
+  read.csv("train.csv")
+
+data = 
+  data %>% 
+  mutate(id = 1:nrow(data)) %>% 
+  relocate(id,.before = "battery_power")
+```
+
+# PENDAHULUAN
+## Penulisan Tugas
+
+Di dalam tugas ini disertakan juga _source code_ yang diperlukan untuk menjawab soal yang ada.
+
+## Bahasa Pemrograman yang Dipakai
+
+Bahasa pemrograman yang digunakan pada tugas ini adalah __R__ dengan versi __R__ yang digunakan adalah `4.1.1`. _Library_ yang digunakan adalah `dplyr`.
+
+## _Program Code_
+
+Untuk menghitung jarak, khusus data numerik dan ordinal harus distandarisasi terlebih dahulu. Berikut adalah program untuk melakukan standarisasi tersebut:
+
+### Hitung $z$ untuk Data Numerik
+
+Program untuk standarisasi data __numerik__ menggunakan metode _mean absolute deviation_:
+
+```{r}
+z_numeric = function(var){
+  n = length(var)           # menghitung n: berapa banyak data
+  m = sum(var) / n          # hitung variabel m
+  s = sum(abs(var - m))/n   # hitung variabel s
+  z = (var - m)/s           # hitung z
+  return(z)                 # output nilai z
+}
+```
+
+<br>
+
+### Hitung $z$ untuk Data Ordinal
+
+Program untuk standarisasi data __ordinal__:
+
+```{r}
+z_ordinal = function(var){
+  var = as.factor(sort(var))  # mengubah var menjadi factor
+  var = as.numeric(var)       # mengubah jadi angka numerik
+  M = max(var)                # cari nilai max dari var
+  z = (var - 1) / (M - 1)     # hitung z
+  return(z)                   # output nilai z
+}
+```
+
+<br>
+
+Sedangkan berikut adalah program untuk menghitung jarak dari $z$ yang telah didapat:
+
+### Menghitung Jarak untuk Data Nominal
+
+Berikut adalah program untuk menghitung jarak pada data bertipe nominal. Aturan dasarnya adalah:
+
+$$d(i,j) = \left\{\begin{matrix}
+0, x_{if} = x_{jf} \\ 1, \text{lainnya}
+\end{matrix}\right.$$
+
+sangat _strict_ di mana jika sama persis, maka akan bernilai `0`.
+
+```{r}
+dist_nominal = function(a,b){
+  jarak = sum(a != b)     # beri nilai 1 jika berbeda lalu dijumlahkan
+  return(jarak)           # output function
+}
+```
+
+<br>
+
+### Menghitung Jarak untuk Data Numerik - Ordinal
+
+Perhitungan jarak untuk data bertipe numerik dan ordinal mengharuskan datanya tersebut harus distandarisasi terlebih dahulu dengan program pada bagian sebelumnya. Kemudian saya akan buat tiga _functions_ dari ___Minkowski Distance___, yakni:
+
+__Manhattan Distance__
+
+$$d(i,j) = |x_{i1} - x_{j1}| + |x_{i2} - x_{j2}| + .. + |x_{ip} - x_{jp}|$$
+
+```{r}
+dist_manhattan = function(a,b){
+  d = abs(a-b)
+  sum(d)
+}
+```
+
+<br>
+
+__Euclidean Distance__
+
+$$d(i,j) = \sqrt{|x_{i1} - x_{j1}|^2 + |x_{i2} - x_{j2}|^2 + .. + |x_{ip} - x_{jp}|^2}$$
+
+```{r}
+dist_euclid = function(a,b){
+  d = abs(a-b)
+  d = sum(d^2)
+  d = sqrt(d)
+  d = round(d,3)
+}
+```
+
+<br>
+
+__Supremum Distance__
+
+$$d(i,j) = \max_f^p{|x_{if} - x_{jf}|}$$
+
+```{r}
+dist_sup = function(a,b){
+  d = abs(a-b)
+  max(d)
+}
+```
+
+<br>
+
+### Menghitung Jarak untuk _Mixed Attributes_
+
+Dalam suatu _database_ bisa saja isinya ada bermacam-macam tipe atribut. Oleh karena itu, perhitungannya menjadi sebagai berikut:
+
+$$d(i,j) = \frac{\sum_{f=1}^p \delta_{ij} ^{(f)} d_{ij} ^{(f)}}{\sum_{f=1}^p \delta_{ij} ^{(f)}}$$
+
+
+# SOAL
+## Atribut dari Data yang Digunakan
+
+Diberikan data spesifikasi telepon seluler dengan beberapa atribut sebagai berikut:
+
+1. `id`: ID
+1. `battery_power`: _Total energy a battery can store in one time measured in mAh_
+1. `blue`: _Has bluetooth or not_
+1. `clock_speed`: _speed at which microprocessor executes instructions_
+1. `dual_sim`: _Has dual sim support or not_
+1. `fc`: Front _Camera mega pixels_
+1. `four_g`: _Has 4G or not_
+1. `int_memory`: _Internal Memory in Gigabytes_
+1. `m_dep`: _Mobile Depth in cm_
+1. `mobile_wt`: _Weight of mobile phone_
+1. `n_cores`: _Number of cores of processor_
+1. `pc`: _Primary Camera mega pixels_
+1. `px_height`: _Pixel Resolution Height_
+1. `px_width`: _Pixel Resolution Width_
+1. `ram`: _Random Access Memory in Megabytes_
+1. `sc_h`: _Screen Height of mobile in cm_
+1. `sc_w`: _Screen Width of mobile in cm_
+1. `talk_time`: _longest time that a single battery charge will last when you are_
+1. `three_g`: _Has 3G or not_
+1. `touch_screen`: _Has touch screen or not_
+1. `wifi`: _Has wifi or not_
+
+## Data yang Digunakan
+
+<br>
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+df = data.frame(
+  nama = c("Andi","Budi","Citra","Dedi","Evan"),
+  lokasi_rumah = c("A","A","B","A","C"),
+  gender = c("Pria","Pria","Wanita","Pria","Pria"),
+  kartu = c("prabayar","pascabayar","prabayar","prabayar","pascabayar"),
+  rumah = c("kontrak","pribadi","kontrak","kontrak","pribadi"),
+  menikah = c("tidak","ya","tidak","ya","ya"),
+  pulsa = c(100,500,100,150,700),
+  internet = c(150,300,100,200,400),
+  jml_anak = c(0,2,0,3,4),
+  kategori = c("Silver","Platinum","Silver","Gold","Platinum")
+)
+
+df %>% knitr::kable(caption = "Data Pelanggan Seluler",align = "c")
+```
+
+<br>
+
+Buat matriks jarak antar _object_ data di atas!
+
+# JAWAB
+
+Sebelum menjawab pertanyaan di atas, ada beberapa _function_ yang harus dibuat terlebi dahulu, yakni:
+
+1. _Function_ untuk menghitung standarisasi untuk data numerik dan ordinal.
+1. _Function_ untuk menghitung jarak untuk data nominal dan data numerik - ordinal (yang telah distandarisasi).
+
+Untuk membuatnya, saya menggunakan __R__. _Function_ saya buat menggunakan _base function_ dari __R__ sedangkan saat melakukan _data carpentry_ selanjutnya saya akan gunakan `library(dplyr)`.
+
+## Membuat _Function_
+
+
+
+
+
+## Menjawab Soal
+
+Pertama-tama hal yang perlu dilakukan adalah menghitung $z$ untuk data numerik dan ordinal dari data soal. Kemudian kita _transpose_ untuk dijadikan matriks.
+
+```{r}
+# pre-processing data
+mat = 
+  df %>%                                         # memanggil data
+  mutate(pulsa = z_numeric(pulsa),               # menghitung z_numeric dari atribut pulsa
+         internet = z_numeric(internet),         # menghitung z_numeric dari atribut internet
+         jml_anak = z_ordinal(jml_anak),         # menghitung z_ordinal dari atribut jumlah anak
+         kategori = z_ordinal(kategori)) %>%     # menghitung z_ordinal dari atribut kategori
+  select(-nama)                                  # menghapus nama dari data
+
+mat_1 = mat %>% select(where(is.numeric)) %>% as.matrix() %>% t()    # mengambil hanya variabel numerik
+mat_2 = mat %>% select(where(is.character)) %>% as.matrix() %>% t()  # mengambil hanya variabel non numerik
+
+# menghitung matriks jarak untuk semua atribut numerik
+# jarak yang saya gunakan adalah euclidean distance
+n1 = ncol(mat_1)
+mat_1_jar = matrix(NA,nrow = n1,ncol = n1)              # bikin matriks template berukuran n1 x n1
+
+for(i in 1:n1){                                         
+  for(j in 1:n1){
+    mat_1_jar[i,j] = dist_euclid(mat_1[,i],mat_1[,j])   # menghitung jarak pasangan per baris data object
+  }
+}
+
+# menghitung matriks jarak untuk semua atribut nominal
+n2 = ncol(mat_2)
+mat_2_jar = matrix(NA,nrow = n2,ncol = n2)              # bikin matriks template berukuran n2 x n2
+
+for(i in 1:n2){
+  for(j in 1:n2){
+    mat_2_jar[i,j] = dist_nominal(mat_2[,i],mat_2[,j])  # menghitung jarak pasangan per baris data object
+  }
+}
+
+# menghitung matriks jarak final
+matriks = (mat_1_jar + mat_2_jar) / (n1+n2)    # delta yang saya gunakan per atribut adalah 1
+colnames(matriks) = df$nama                    # kasih column names
+rownames(matriks) = df$nama                    # kasih row names
+
+# print hasil akhir
+matriks
+```

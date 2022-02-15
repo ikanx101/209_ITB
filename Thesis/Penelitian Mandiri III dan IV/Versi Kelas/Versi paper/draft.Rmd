@@ -1,11 +1,11 @@
 ---
 title: "Optimization and Computational Model for Supplier Selection and Raw-Material Composition: Case Study PT. NFI."
-subtitle: _Draft_
-author: | 
-    | Mohammad Rizka Fadhli 
-    | Ikang
-    | 20921004@mahasiswa.itb.ac.id
-date: "`r format(Sys.time(), '%d %B %Y')`"
+subtitle: |
+  | Mohammad Rizka Fadhli, Rieske Hadianti, Saladin Uttunggadewa, 
+  | Sri Redjeki
+author: 
+  - Magister Sains Komputasi, FMIPA, Institut Teknologi Bandung.
+institute: ITB
 fontsize: 12pt
 output: 
   pdf_document:
@@ -17,7 +17,7 @@ output:
     highlight: breezedark
 bibliography: references.bib
 csl: 2d-materials.csl
-linestretch: 2
+linestretch: 1.5
 colorlinks: true
 header-includes:
 - \usepackage{fancyhdr}
@@ -35,18 +35,9 @@ library(dplyr)
 library(ggplot2)
 ```
 
-\newpage
-\tableofcontents
-\newpage
-\listoffigures
-\newpage
-\listoftables
-
-\newpage
-
 # PENDAHULUAN
 
-Semenjak diperkenalkan pertama kali pada tahun 1982, _Supply Chain Management_ memegang peranan penting dalam manufaktur sebagai suatu sistem produksi terintegrasi [@webber]. Di dalam SCM, bahan baku dibeli perusahaan dari berbagai _supplier_, dibuat ke dalam suatu produk yang kemudian akan dijual ke pelanggan melalui berbagai _channel_ distribusi.
+Semenjak diperkenalkan pertama kali pada tahun 1982, _Supply Chain Management_ (SCM) memegang peranan penting dalam manufaktur sebagai suatu sistem produksi terintegrasi [@webber]. Di dalam SCM, bahan baku dibeli perusahaan dari berbagai _supplier_, dibuat ke dalam suatu produk yang kemudian akan dijual ke pelanggan melalui berbagai _channel_ distribusi.
 
 Dalam mengarungi kompetisi, perusahaan perlu memahami dua faktor kunci, yakni _cost reduction_ dan _product quality_ [@masood]. Kedua faktor ini sangat bergantung pada pemilihan _supplier_ yang tepat. Sehingga proses _supplier selection_ menjadi proses yang krusial dalam setiap perusahaan.
 
@@ -56,35 +47,44 @@ Bagi perusahaan yang menerapkan strategi _multiple sourcing_, banyak faktor yang
 
 Penelitian yang dilakukan terkait SCM dan optimisasi dalam hal _supplier selection_ menggunakan basis kriteria penilaian skala makro pernah dilakukan pada tahun 2015. Yakni dengan memanfaatkan pendekatan _fuzzy model_ menggunakan sepuluh _input variables_ berupa kriteria-kriteria penilaian _supplier_ kemudian menggunakan _tools_ __MATLAB__ ___fuzzy tool box___ untuk mengevaluasi kinerja _supplier_ agar _profitability_ perusahaan tetap terjaga [@hasan]. 
 
-Pada penelitian ini, _supplier selection_ akan disandingkan langsung dengan _raw material selection_ pada variabel-variabel penentuan yang bersifat mikro pada rentang waktu tertentu. Beberapa penelitian terkait dengan topik ini antara lain: 
+Beberapa penelitian lain terkait dengan topik ini antara lain: 
 
 - Penelitian __TU Delft__ yang dilakukan pada studi kasus perusahaan minyak di China menggunakan _framework Best-Worst Model_ (BWM) untuk menentukan variabel penting untuk memilih _raw material_ dan _supplier_ terbaik [@nispelling].
 - Model _supplier selection and order allocation_ berbasis _fuzzy extended analytic hierarchy process_ yang dikombinasikan dengan _multiobjective dynamic linear programming_ dibuat untuk mencari nilai kuantitas yang optimal untuk pembelian _raw material_ [@zhi].
 - Bani dan Jafari (2016) menawarkan suatu model optimisasi untuk menyelesaikan _supplier selection_ dengan kondisi _multiple sourcing_, _multiple criteria_, dan batasan kapasitas. Model ini memiliki cakupan luas karena sudah mempertimbangkan kriteria-kriteria kunci per _raw material_ dan _supplier_. Kemudian model tersebut diselesaikan dengan dua pendekatan, yakni algoritma genetika dan _invasive weed optimization_ [@bani].
 
-Studi kasus yang digunakan pada penelitian ini berasal dari perusahaan manufaktur bidang makanan dan minuman di Indonesia. Luaran dari penelitian ini adalah suatu model komputasi yang digunakan untuk menyelesaikan permasalahan optimisasi pemilihan _raw material_ dan _supplier selection_ dengan _input_ berupa:
+Salah satu model komputasi _meta heuristic_ yang bisa digunakan untuk menyelesaikan permasalahan optimisasi adalah _Spiral Dynamic Optimization Algorithm_ (SDOA). Penelitian yang dilakukan pada 2016 menunjukkan SDOA mampu menghasilkan solusi dari permasalahan _binary programming_ memanfaatkan modifikasi _constrained optimization_ menjadi _unconstrained optimization_ dengan jumlah _constraints_ yang sedikit [@kun].
 
-1. _Demand_ dari 130 varian produk jadi dan dalam periode waktu tertentu.
+Pada penelitian ini, _supplier selection_ akan disandingkan langsung dengan _raw material selection_ pada variabel-variabel penentuan yang lebih teknis pada rentang waktu tertentu. Akibatnya banyak _constraints_ yang dilibatkan dalam model optimisasinya. Studi kasus yang digunakan pada penelitian ini berasal dari perusahaan manufaktur bidang makanan dan minuman di Indonesia. Luaran dari penelitian ini adalah suatu model komputasi yang digunakan untuk menyelesaikan permasalahan optimisasi pemilihan _raw material_ dan _supplier selection_ dengan _input_ berupa:
+
+1. _Demand_ dari sejumlah varian produk jadi dan dalam periode waktu tertentu.
 1. Komposisi _raw material_ yang dibutuhkan untuk memproduksi satu unit varian produk jadi.
 1. Data spesifikasi _supplier_ (terkait harga, minimal kuantitas pembelian, kualitas _raw material_, dan waktu pengiriman).
 
+Kelak solusi dari model komputasi ini akan dibandingkan dengan solusi manual yang selama ini dilakukan.
+
 \newpage
 
-# LATAR BELAKANG
+# MODEL OPTIMISASI
 
-PT. NFI adalah salah satu perusahaan manufaktur makanan dan minuman di Indonesia memiliki 130 varian produk jadi yang diproduksi setiap periode tertentu. Masing-masing varian produk memiliki komposisi _raw material_ yang berbeda-beda. Namun ada beberapa jenis _raw material_ yang digunakan sebagai bahan baku utama di semua varian produk tersebut.
+Suatu perusahaan manufaktur makanan dan minuman di Indonesia memproduksi sejumlah jenis minuman. Untuk pemenuhan bahan baku ini, perusahaan memiliki perjanjian untuk memasoknya dari enam _supplier_. Setiap _supplier_ menawarkan bahan baku yang sama. Spesifikasi bahan baku dan harga perton bahan baku berbeda-beda antar _supplier_.
 
-Untuk memastikan kelancaran _supply chain management_, departemen _Production Planning and Inventory Control_ (PPIC) perlu memastikan ketersediaan _raw material_ selalu pada level yang aman. Oleh karena itu, PT. NFI menerapkan prinsip ___multi supplier___. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal: harga dan minimum order. Hal-hal seperti durasi pengiriman dan kualitas _raw material_ sudah dipastikan sama untuk setiap _supplier_.
+Adapun kendala yang harus dipenuhi ketika memproduksi semua jenis minuman dan pembelian bahan baku adalah sebagai berikut:
 
-Proses pemilihan _supplier_ dan penentuan kuantitas _raw material_ yang akan dibeli sangat bergantung pada:
+- Setiap produk minuman memerlukan komposisi bahan baku tertentu (resep yang digunakan _unique_). Namun ada beberapa bahan baku yang digunakan utuk hampir semua produk minuman tersebut. 
+- Bahan baku dari _supplier_ tertentu bisa disubstitusi dengan bahan baku dari _supplier_ yang lain.
+- Untuk menjaga keamanan pasokan suatu bahan baku, pembelian harus dilakukan paling sedikit dari dua _supplier_ yang berbeda.
+- Bahan baku dipesan tiap bulan, dengan pengiriman dari _supplier_ ke produsen dilakukan selama empat kali yaitu seminggu setelah pemesanan, dua minggu setelah pemesanan, tiga minggu setelah pemesanan, dan empat minggu setelah pemesanan.
+- Kuantitas pengiriman pertama bahan baku bisa disesuaikan nilainya tapi pengiriman bahan baku kedua hingga keempat harus dibuat proporsional. 
+- _Demand_ untuk tiap produk minuman tiap minggu berbeda. 
+- _Demand_ untuk empat minggu ke depan sudah diketahui.
+- Untuk memastikan kualitas bahan baku, perusahaan melakukan proses inspeksi (_quality control_). Proses ini memerlukan waktu 17 hari sejak bahan baku diterima produsen.
+- Perusahaan memiliki tempat penyimpanan bahan baku yang terbatas.
 
-- Stok _raw material_ saat ini di gudang (baik yang sedang dipakai dan yang belum dipakai),
-- Kapasitas gudang bahan baku,
-- _Demand_ per varian produk,
-- Kapasitas produksi harian, 
-- Faktor waktu pemenuhan _demand_, dan
-- Faktor _supplier_ (harga dan minimum order).
+Masalah yang dihadapi adalah penentuan keputusan strategis dalam memilih pemasok bahan mentah dan menentukan banyaknya bahan mentah yang harus dibeli dari suatu pemasok agar total biaya pembelian seminim mungkin tetapi memenuhi kebutuhan yang ada.
 
+# DASAR TEORI
 
+# MODEL OPTIMISASI
 
 # _REFERENCES_

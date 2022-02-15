@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  14 FEB 2022 16:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  15 FEB 2022 12:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -313,7 +313,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip53
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 48.
+Package hyperref Info: Option `colorlinks' set `true' on input line 49.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
@@ -359,11 +359,11 @@ rs
 )
 
 Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 70.
+less on input line 71.
 
 
 Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 71.
+less on input line 72.
 
 \cslhangindent=\skip63
 \csllabelwidth=\skip64
@@ -388,36 +388,36 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 ) (./draft.aux)
 \openout1 = `draft.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 110.
-LaTeX Font Info:    ... okay on input line 110.
-LaTeX Info: Redefining \microtypecontext on input line 110.
-Package microtype Info: Applying patch `item' on input line 110.
-Package microtype Info: Applying patch `toc' on input line 110.
-Package microtype Info: Applying patch `eqnum' on input line 110.
-Package microtype Info: Applying patch `footnote' on input line 110.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Info: Redefining \microtypecontext on input line 111.
+Package microtype Info: Applying patch `item' on input line 111.
+Package microtype Info: Applying patch `toc' on input line 111.
+Package microtype Info: Applying patch `eqnum' on input line 111.
+Package microtype Info: Applying patch `footnote' on input line 111.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 110.
+LaTeX Info: Redefining \showhyphens on input line 111.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -434,7 +434,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 110.
+Package hyperref Info: Link coloring ON on input line 111.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -446,9 +446,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count288
 )
-LaTeX Info: Redefining \ref on input line 110.
-LaTeX Info: Redefining \pageref on input line 110.
-LaTeX Info: Redefining \nameref on input line 110.
+LaTeX Info: Redefining \ref on input line 111.
+LaTeX Info: Redefining \pageref on input line 111.
+LaTeX Info: Redefining \nameref on input line 111.
 (./draft.out) (./draft.out)
 \@outlinefile=\write3
 \openout3 = `draft.out'.
@@ -488,39 +488,39 @@ LaTeX Info: Redefining \nameref on input line 110.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-12.
+13.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-12.
+13.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-112.
+113.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-112.
+113.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 112.
+(Font)              <14.4> on input line 113.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 112.
+(Font)              <10> on input line 113.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 112.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 112
+(Font)              <7> on input line 113.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 113
 .
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 112
+LaTeX Font Info:    Trying to load font information for U+msb on input line 113
 .
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -528,55 +528,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
-{/home/ikanx_server/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./
-draft.toc)
-\tf@toc=\write4
-\openout4 = `draft.toc'.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[2] (./draft.lof)
-\tf@lof=\write5
-\openout5 = `draft.lof'.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[3] (./draft.lot)
-\tf@lot=\write6
-\openout6 = `draft.lot'.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[4]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[5]
+{/home/ikanx_server/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-70.
+59.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -588,7 +542,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[6]
+[2]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -597,13 +551,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[7]
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 256--260
+[3]
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 277--281
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 256--260
+Underfull \hbox (badness 10000) in paragraph at lines 277--281
 
  []
 
@@ -615,63 +569,73 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[8]
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 261--266
+[4]
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 282--287
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--266
+Underfull \hbox (badness 10000) in paragraph at lines 282--287
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 267--272
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 288--293
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 267--272
+Underfull \hbox (badness 10000) in paragraph at lines 288--293
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 273--278
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 294--299
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--278
+Underfull \hbox (badness 10000) in paragraph at lines 294--299
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 279--284
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 300--305
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 279--284
+Underfull \hbox (badness 10000) in paragraph at lines 300--305
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 285--291
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 306--312
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 285--291
+Underfull \hbox (badness 10000) in paragraph at lines 306--312
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 292--297
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 313--318
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 292--297
+Underfull \hbox (badness 10000) in paragraph at lines 313--318
+
+ []
+
+
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 319--324
+[][][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 319--324
 
  []
 
@@ -683,18 +647,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[9] (./draft.aux)
+[5] (./draft.aux)
 Package rerunfilecheck Info: File `draft.out' has not changed.
-(rerunfilecheck)             Checksum: A19475EF7FA2000BB5541ED3C9E42AB2;310.
+(rerunfilecheck)             Checksum: E4201C480D977CAE64B51C8C337C756A;549.
  ) 
 Here is how much of TeX's memory you used:
- 12558 strings out of 480559
- 189139 string characters out of 5902712
- 545600 words of memory out of 5000000
- 29815 multiletter control sequences out of 15000+600000
- 460918 words of font info for 116 fonts, out of 8000000 for 9000
+ 12532 strings out of 480559
+ 188883 string characters out of 5902712
+ 548085 words of memory out of 5000000
+ 29808 multiletter control sequences out of 15000+600000
+ 456102 words of font info for 111 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,12n,66p,1002b,442s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,12n,66p,1002b,374s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/home/
 ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_serv
 er/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/ikanx_server/.Ti
@@ -703,10 +667,10 @@ nyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></home/ikanx_server/.TinyTeX
 dist/fonts/type1/public/lm/lmr17.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fo
 nts/type1/public/lm/lmri12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/ty
 pe1/public/lm/lmro12.pfb>
-Output written on draft.pdf (9 pages, 163702 bytes).
+Output written on draft.pdf (5 pages, 158415 bytes).
 PDF statistics:
- 121 PDF objects out of 1000 (max. 8388607)
- 96 compressed objects within 1 object stream
- 30 named destinations out of 1000 (max. 500000)
- 30745 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 107 PDF objects out of 1000 (max. 8388607)
+ 86 compressed objects within 1 object stream
+ 28 named destinations out of 1000 (max. 500000)
+ 28713 words of extra memory for PDF output out of 29859 (max. 10000000)
 
