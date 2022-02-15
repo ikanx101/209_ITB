@@ -1,6 +1,6 @@
 ---
-title: "Penelitian Mandiri Sains Komputasi III & IV"
-subtitle: _Weekly Update_
+title: "Optimization and Computational Model for Supplier Selection and Raw-Material Composition: Case Study PT. NFI."
+subtitle: _Draft_
 author: | 
     | Mohammad Rizka Fadhli 
     | Ikang
@@ -68,11 +68,13 @@ Studi kasus yang digunakan pada penelitian ini berasal dari perusahaan manufaktu
 1. Komposisi _raw material_ yang dibutuhkan untuk memproduksi satu unit varian produk jadi.
 1. Data spesifikasi _supplier_ (terkait harga, minimal kuantitas pembelian, kualitas _raw material_, dan waktu pengiriman).
 
+\newpage
+
 # LATAR BELAKANG
 
 PT. NFI adalah salah satu perusahaan manufaktur makanan dan minuman di Indonesia memiliki 130 varian produk jadi yang diproduksi setiap periode tertentu. Masing-masing varian produk memiliki komposisi _raw material_ yang berbeda-beda. Namun ada beberapa jenis _raw material_ yang digunakan sebagai bahan baku utama di semua varian produk tersebut.
 
-Untuk memastikan kelancaran _supply chain management_, tim _Production Planning and Inventory Control_ (PPIC) perlu memastikan ketersediaan _raw material_ selalu pada level yang aman. Oleh karena itu, PT. NFI menerapkan prinsip ___multi supplier___. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal: harga dan minimum order. Hal-hal seperti durasi pengiriman dan kualitas _raw material_ sudah dipastikan sama untuk setiap _supplier_.
+Untuk memastikan kelancaran _supply chain management_, departemen _Production Planning and Inventory Control_ (PPIC) perlu memastikan ketersediaan _raw material_ selalu pada level yang aman. Oleh karena itu, PT. NFI menerapkan prinsip ___multi supplier___. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal: harga dan minimum order. Hal-hal seperti durasi pengiriman dan kualitas _raw material_ sudah dipastikan sama untuk setiap _supplier_.
 
 Proses pemilihan _supplier_ dan penentuan kuantitas _raw material_ yang akan dibeli sangat bergantung pada:
 

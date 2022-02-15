@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  9 FEB 2022 16:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  14 FEB 2022 17:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1035,37 +1035,65 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 260.
+(Font)              <10> on input line 268.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 260.
+(Font)              <7> on input line 268.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 260.
+(Font)              <5> on input line 268.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 260.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 268.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 260.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 268.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 260.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 268.
 [16
 
 ]
-<ilustrasi.png, id=620, 1084.05pt x 505.89pt>
+<ilustrasi.png, id=728, 1084.05pt x 505.89pt>
 File: ilustrasi.png Graphic file (type png)
 <use ilustrasi.png>
-Package pdftex.def Info: ilustrasi.png  used on input line 267.
+Package pdftex.def Info: ilustrasi.png  used on input line 275.
 (pdftex.def)             Requested size: 298.75394pt x 139.41736pt.
 [17
 
- <./ilustrasi.png (PNG copy)>] [18
+ <./ilustrasi.png (PNG copy)>]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 334.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <9> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 334.
+[18
 
 ] [19
 
-] [20
 
-] [21
+]
+<ilustrasi_2.png, id=847, 1084.05pt x 578.16pt>
+File: ilustrasi_2.png Graphic file (type png)
+<use ilustrasi_2.png>
+Package pdftex.def Info: ilustrasi_2.png  used on input line 344.
+(pdftex.def)             Requested size: 298.75394pt x 159.33414pt.
 
+Overfull \vbox (32.46346pt too high) detected at line 344
+ []
+
+[20
+
+ <./ilustrasi_2.png (PNG copy)>] [21
 
 ] [22
+
+] [23
+
+] [24
+
+] [25
+
+] [26
+
+] [27
+
+
+] [28
 
 ]
 \tf@nav=\write6
@@ -1079,32 +1107,33 @@ Package pdftex.def Info: ilustrasi.png  used on input line 267.
 
 (./penelitian-mandiri.aux)
 Package rerunfilecheck Info: File `penelitian-mandiri.out' has not changed.
-(rerunfilecheck)             Checksum: FB5EC77140CAAA53699EC2553CE6619E;1305.
+(rerunfilecheck)             Checksum: 5D676F479C76BDFE233E0DCB974041D2;1305.
  ) 
 Here is how much of TeX's memory you used:
- 22985 strings out of 480559
- 431689 string characters out of 5902712
- 766756 words of memory out of 5000000
- 39919 multiletter control sequences out of 15000+600000
- 497938 words of font info for 144 fonts, out of 8000000 for 9000
+ 23106 strings out of 480559
+ 434090 string characters out of 5902712
+ 776790 words of memory out of 5000000
+ 39988 multiletter control sequences out of 15000+600000
+ 511519 words of font info for 165 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  101i,19n,108p,1015b,831s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/ho
-me/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ika
-nx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_server/
+me/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/ikanx_s
+erver/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</home/ikanx_server/
 .TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/ikanx_server/.TinyT
 eX/texmf-dist/fonts/type1/public/lm/lmss10.pfb></home/ikanx_server/.TinyTeX/tex
 mf-dist/fonts/type1/public/lm/lmss8.pfb></home/ikanx_server/.TinyTeX/texmf-dist
-/fonts/type1/public/lm/lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fon
-ts/type1/public/lm/lmssbx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/t
-ype1/public/lm/lmsso10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/
-public/lm/lmsso8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public
-/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfo
-nts/symbols/msam10.pfb>
-Output written on penelitian-mandiri.pdf (22 pages, 426899 bytes).
+/fonts/type1/public/lm/lmss9.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/
+type1/public/lm/lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type
+1/public/lm/lmssbx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/pu
+blic/lm/lmsso10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/
+lm/lmsso8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lms
+y10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/sym
+bols/msam10.pfb>
+Output written on penelitian-mandiri.pdf (28 pages, 834431 bytes).
 PDF statistics:
- 877 PDF objects out of 1000 (max. 8388607)
- 794 compressed objects within 8 object streams
- 68 named destinations out of 1000 (max. 500000)
- 59512 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 1267 PDF objects out of 1440 (max. 8388607)
+ 1165 compressed objects within 12 object streams
+ 89 named destinations out of 1000 (max. 500000)
+ 67709 words of extra memory for PDF output out of 74296 (max. 10000000)
 

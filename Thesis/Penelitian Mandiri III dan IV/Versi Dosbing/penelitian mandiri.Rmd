@@ -81,12 +81,15 @@ Selama ini __NFI__ memesan bahan-bahan baku tersebut secara __langsung tiap bula
 1. _Existing stock_ bahan baku yang ada di gudang bahan baku.
 1. _Minimum order_ per jenis bahan baku yang ditetapkan _supplier_.
 
-### Informasi Terkait Pengiriman Bahan Baku {.allowframebreaks}
+### Informasi Terkait Pengiriman Bahan Baku 
 
 Pengiriman bahan baku oleh para _supplier_ dilakukan sebanyak __4__ kali dalam sebulan dengan jumlah  sesuai dengan aturan berikut:
 
 - Banyaknya bahan baku pada __pengiriman pertama__ disesuaikan dengan __stok__ ___existing___ dan ___demand___ produk terkait bahan baku tersebut pada minggu I.
 - Sedangkan bahan baku gula pada __pengiriman kedua hingga keempat__ dibuat proporsional.
+- __Waktu pengiriman dan inspeksi__ adalah selama __17__ hari setelah pemesanan gula sampai akhirnya gula tersebut dapat digunakan untuk produksi. 
+
+__Oleh karena itu, perencanaan pembelian gula dilakukan setidaknya sebulan sebelum gula tersebut akan digunakan.__
 
 ### Ilustrasi Pengiriman Bahan Baku
 
@@ -98,14 +101,84 @@ Contoh pada suatu bulan tertentu:
 - Pengiriman dilakukan __4 kali__.
     - Pada minggu I, diperkirakan kebutuhan bahan baku ada sebesar __100 ton__. Oleh karena itu, __pengiriman pertama__ adalah sebesar __50 ton__ saja.
     - Pada minggu II, III, dan IV pengiriman gula adalah proporsional sebesar __100 ton__.
+- 
 
 Oleh karena itu, kelak pada model matematika perlu ada _constraints_ terkait hal ini.
 
-### Ilustrasi Pengiriman Bahan Baku: Gula
+### Ilustrasi Pengiriman Bahan Baku: Misalkan - Gula
 
 ```{r out.width="75%",echo=FALSE,fig.cap="Simplifikasi dari Penggunaan Bahan Baku"}
 knitr::include_graphics("ilustrasi.png")
 ```
+
+### Informasi Terkait Jenis Bahan Baku {.allowframebreaks}
+
+Saat ini, ada __6__ jenis bahan baku yang bisa dipesan ke __6__ _supplier_ yang berbeda. Masing-masing bahan baku digunakan untuk membuat produk tertentu. Informasi lain yang perlu diketahui adalah:
+
+- __Tidak ada kewajiban__ bagi NFI untuk membeli semua jenis bahan baku tersebut. 
+- Terkait penggunaan bahan baku:
+    - Sebagian kecil dari produk hanya bisa diproduksi dengan __satu jenis bahan baku saja__.
+    - Sebagian besar lainnya memungkinkan untuk diproduksi dengan __dua atau lebih jenis bahan baku__.
+        - Unit per jenis bahan baku yang digunakan untuk membuat produk adalah sama walau berbeda jenis bahan baku.
+- Setidaknya minimal ada __2 jenis bahan baku__ yang dibeli NFI sebagai _back up_ substitusi bahan baku.
+- Pembelian bahan baku harus memenuhi _minimum order_ yang ditetapkan oleh _supplier_ __tapi__ jika pembelian di atas _minimum order_ harus dilakukan __pembulatan__. Misalkan:
+    - _Minimum order_ adalah __10 ton__, maka:
+        - Boleh membeli __11 ton__.
+        - Tidak boleh membeli __10.5 ton__.
+- Harga masing-masing jenis bahan baku berbeda. Namun untuk lama pengiriman, pada kasus ini semua gula memiliki lama pengiriman yang sama.
+
+### Ilustrasi Alur Pengadaan Bahan Baku: Misal - Gula
+
+Berikut adalah _summary_ alur pengadaan bahan baku gula yang dilakukan Nutrifood:
+
+```{r out.width="75%",echo=FALSE,fig.cap="Simplifikasi dari Penggunaan Bahan Baku"}
+knitr::include_graphics("ilustrasi_2.png")
+```
+
+### Informasi Terkait Substitusi Bahan Baku
+
+#### Case I: Minimal __2 jenis__ bahan baku sebagai _back up_
+
+Dalam suatu bulan tertentu, untuk memproduksi produk __A__, __B__, dan __C__ dibutuhkan bahan baku $x_1$, $x_2$, __atau__ $x_3$.
+
+Untuk memastikan tidak ada masalah di kemudian hari (sebagai _back up_), maka minimal harus ada __2__ jenis bahan baku yang harus dibeli. Alternatifnya:
+
+1. Membeli $x_1$ dan $x_2$,
+1. Membeli $x_1$ dan $x_3$,
+1. Membeli $x_2$ dan $x_3$, atau
+1. Membeli $x_1$, $x_2$, dan $x_3$.
+
+### Informasi Terkait Substitusi Bahan Baku 
+
+#### Case II: Unit bahan baku yang digunakan __sama__
+
+Dalam suatu bulan tertentu, untuk membuat produk __A__, kita bisa menggunakan:
+
+1. 100 unit $x_1$ atau,
+1. 100 unit $x_2$.
+
+Sedangkan untuk membuat produk __B__, kita bisa menggunakan:
+
+1. 100 unit $x_2$ atau,
+1. 100 unit $x_3$.
+
+### Informasi Terkait Substitusi Bahan Baku 
+
+#### Case II: Unit bahan baku yang digunakan __sama__
+
+Dari kasus di atas, kita bisa menuliskan bahwa:
+
+1. Kebutuhan bahan baku 1 ada sebesar $x_1 \leq 100$.
+1. Kebutuhan bahan baku 2 ada sebesar $x_2 \leq 200$.
+1. Kebutuhan bahan baku 3 ada sebesar $x_3 \leq 100$.
+
+Karena minimal harus ada __2 bahan baku yang dipilih__, maka alternatif solusi yang ada adalah:
+
+1. 100 unit $x_1$ dan 100 unit $x_2$.
+1. 100 unit $x_1$ dan 100 unit $x_3$.
+1. 100 unit $x_2$ dan 100 unit $x_3$.
+1. 100 unit $x_1$, 100 unit $x_2$ dan 100 unit $x_3$.
+
 
 # PENELITIAN MANDIRI IV
 
