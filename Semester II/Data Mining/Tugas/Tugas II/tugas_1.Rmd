@@ -304,10 +304,10 @@ matriks[lower.tri(matriks)] = NA
 
 <br>
 
-Oleh karena matriks yang dihasilkan berukuran $2000 \times 2000$, maka saya akan coba _print_ _sample_ matriks $15 \times 15$ saja:
+Oleh karena matriks yang dihasilkan berukuran $2000 \times 2000$, maka saya akan coba _print_ _sample_ matriks $10 \times 10$ saja:
 
 ```{r,echo=FALSE}
-matriks[1:15,1:15] %>% round(3)
+matriks[1:10,1:10] %>% round(3)
 ```
 
 __SELESAI__
