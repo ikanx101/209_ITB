@@ -15,7 +15,7 @@ output:
         smooth_scroll: true
     number_sections: false
     theme: cerulean
-    highlight: espresso
+    highlight: zenburn
     fig_caption: yes
     code_folding: show
 ---
@@ -52,6 +52,12 @@ Untuk menghitung jarak, khusus data numerik dan ordinal harus distandarisasi ter
 
 Program untuk standarisasi data __numerik__ menggunakan metode _mean absolute deviation_:
 
+$$z_{if} = \frac{x_{if} - m_f}{s_f}$$
+
+Di mana:
+
+$$m_f = \frac{1}{n} (x_{1f} + x_{2f} + .. + x_{nf}) \\ s_f = \frac{1}{n} (|x_{1f} - m_f| + |x_{2f} - m_f| + .. + |x_{nf} - m_f|)$$
+
 ```{r}
 z_numeric = function(var){
   n = length(var)           # menghitung n: berapa banyak data
@@ -67,6 +73,9 @@ z_numeric = function(var){
 ### Hitung $z$ untuk Data Ordinal
 
 Program untuk standarisasi data __ordinal__:
+
+$$\text{mengganti } x_{if} \text{ dengan rank } r_{if} \in {1,..,M_f} \\
+z_{if} = \frac{r_{if} - 1}{M_f - 1}$$
 
 ```{r}
 z_ordinal = function(var){
@@ -152,8 +161,14 @@ Dalam suatu _database_ bisa saja isinya ada bermacam-macam tipe atribut. Oleh ka
 
 $$d(i,j) = \frac{\sum_{f=1}^p \delta_{ij} ^{(f)} d_{ij} ^{(f)}}{\sum_{f=1}^p \delta_{ij} ^{(f)}}$$
 
+Kelak matriks jarak dari soal akan dihitung berdasarkan formula di atas dengan pemilihan $\delta = 1$ untuk setiap atribut.
+
+---
 
 # SOAL
+
+Buatlah matriks jarak $N \times N$ dari data yang diberikan!
+
 ## Atribut dari Data yang Digunakan
 
 Diberikan data spesifikasi telepon seluler dengan beberapa atribut sebagai berikut:
@@ -182,87 +197,117 @@ Diberikan data spesifikasi telepon seluler dengan beberapa atribut sebagai berik
 
 ## Data yang Digunakan
 
-<br>
+Berikut adalah data yang digunakan:
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
-df = data.frame(
-  nama = c("Andi","Budi","Citra","Dedi","Evan"),
-  lokasi_rumah = c("A","A","B","A","C"),
-  gender = c("Pria","Pria","Wanita","Pria","Pria"),
-  kartu = c("prabayar","pascabayar","prabayar","prabayar","pascabayar"),
-  rumah = c("kontrak","pribadi","kontrak","kontrak","pribadi"),
-  menikah = c("tidak","ya","tidak","ya","ya"),
-  pulsa = c(100,500,100,150,700),
-  internet = c(150,300,100,200,400),
-  jml_anak = c(0,2,0,3,4),
-  kategori = c("Silver","Platinum","Silver","Gold","Platinum")
-)
-
-df %>% knitr::kable(caption = "Data Pelanggan Seluler",align = "c")
+data %>% DT::datatable(rownames = F,options = list(pageLength = 20))
 ```
 
 <br>
 
-Buat matriks jarak antar _object_ data di atas!
-
 # JAWAB
 
-Sebelum menjawab pertanyaan di atas, ada beberapa _function_ yang harus dibuat terlebi dahulu, yakni:
-
-1. _Function_ untuk menghitung standarisasi untuk data numerik dan ordinal.
-1. _Function_ untuk menghitung jarak untuk data nominal dan data numerik - ordinal (yang telah distandarisasi).
-
-Untuk membuatnya, saya menggunakan __R__. _Function_ saya buat menggunakan _base function_ dari __R__ sedangkan saat melakukan _data carpentry_ selanjutnya saya akan gunakan `library(dplyr)`.
-
-## Membuat _Function_
-
-
-
-
-
-## Menjawab Soal
-
-Pertama-tama hal yang perlu dilakukan adalah menghitung $z$ untuk data numerik dan ordinal dari data soal. Kemudian kita _transpose_ untuk dijadikan matriks.
+Sebelum memulai, kita perhatikan kembali statstika deskriptif dari data berikut:
 
 ```{r}
+str(data)
+```
+
+Jika diperhatikan kembali, berikut adalah tipe-tipe atribut yang terlibat dalam data:
+
+1. _Binary_
+    - `blue`
+    - `dual_sim`
+    - `four_g`
+    - `three_g`
+    - `touch_screen`
+    - `wifi`
+1. Numerik
+    - `battery_power`
+    - `clock_speed`
+    - `fc`
+    - `int_memory`
+    - `m_dep`
+    - `mobile_wt`
+    - `n_cores`
+    - `pc`
+    - `px_height`
+    - `px_width`
+    - `ram`
+    - `sc_h`
+    - `sc_w`
+    - `talk_time`
+1. Ordinal
+    - `price_range`
+
+Berikut adalah program untuk menghitung jarak antar `id` pada data:
+
+```{r,message=FALSE,warning=FALSE}
 # pre-processing data
-mat = 
-  df %>%                                         # memanggil data
-  mutate(pulsa = z_numeric(pulsa),               # menghitung z_numeric dari atribut pulsa
-         internet = z_numeric(internet),         # menghitung z_numeric dari atribut internet
-         jml_anak = z_ordinal(jml_anak),         # menghitung z_ordinal dari atribut jumlah anak
-         kategori = z_ordinal(kategori)) %>%     # menghitung z_ordinal dari atribut kategori
-  select(-nama)                                  # menghapus nama dari data
+df = 
+  data %>%                                              # memanggil data
+  mutate(price_range = z_ordinal(price_range),          # menghitung z ordinal dari price_range
+         battery_power = z_numeric(battery_power),      # menghitung z numerik dari battery_power
+         clock_speed = z_numeric(clock_speed),          # menghitung z numerik dari clock_speed
+         fc = z_numeric(fc),                            # menghitung z numerik dari fc
+         int_memory = z_numeric(int_memory),            # menghitung z numerik dari int_memory
+         m_dep = z_numeric(m_dep),                      # menghitung z numerik dari m_dep
+         mobile_wt = z_numeric(mobile_wt),              # menghitung z numerik dari mobile_wt
+         n_cores = z_numeric(n_cores),                  # menghitung z numerik dari n_cores
+         pc = z_numeric(pc),                            # menghitung z numerik dari pc
+         px_height = z_numeric(px_height),              # menghitung z numerik dari px_height
+         px_width = z_numeric(px_width),                # menghitung z numerik dari px_width
+         ram = z_numeric(ram),                          # menghitung z numerik dari ram
+         sc_h = z_numeric(sc_h),                        # menghitung z numerik dari sc_h
+         sc_w = z_numeric(sc_w),                        # menghitung z numerik dari sc_w
+         talk_time = z_numeric(talk_time)) %>%          # menghitung z numerik dari talk_time
+  select(-id)
 
-mat_1 = mat %>% select(where(is.numeric)) %>% as.matrix() %>% t()    # mengambil hanya variabel numerik
-mat_2 = mat %>% select(where(is.character)) %>% as.matrix() %>% t()  # mengambil hanya variabel non numerik
+# save dulu atribut binary
+att_binary = c("blue","dual_sim","four_g","three_g","touch_screen","wifi")
 
-# menghitung matriks jarak untuk semua atribut numerik
-# jarak yang saya gunakan adalah euclidean distance
-n1 = ncol(mat_1)
-mat_1_jar = matrix(NA,nrow = n1,ncol = n1)              # bikin matriks template berukuran n1 x n1
+# mengubah menjadi matriks dan transpose
+  # matriks pertama untuk variabel binary
+  mat_1 = df %>% select(att_binary) %>% as.matrix() %>% t()   
+  # matriks kedua untuk variabel numerik
+  mat_2 = df %>% select(-att_binary) %>% as.matrix() %>% t()   
+  
 
-for(i in 1:n1){                                         
-  for(j in 1:n1){
-    mat_1_jar[i,j] = dist_euclid(mat_1[,i],mat_1[,j])   # menghitung jarak pasangan per baris data object
+# menghitung matriks jarak 
+  # membuat matriks N x N
+  N = ncol(mat_1)
+  mat_dist_1 = matrix(NA,nrow = N,ncol = N)
+  mat_dist_2 = matrix(NA,nrow = N,ncol = N)
+
+# menghitung matriks jarak dari atribut binary
+for(i in 1:N){                                         
+  for(j in 1:N){
+    mat_dist_1[i,j] = dist_nominal(mat_1[,i],mat_1[,j])   # menghitung jarak pasangan per baris data object
   }
 }
 
-# menghitung matriks jarak untuk semua atribut nominal
-n2 = ncol(mat_2)
-mat_2_jar = matrix(NA,nrow = n2,ncol = n2)              # bikin matriks template berukuran n2 x n2
-
-for(i in 1:n2){
-  for(j in 1:n2){
-    mat_2_jar[i,j] = dist_nominal(mat_2[,i],mat_2[,j])  # menghitung jarak pasangan per baris data object
+# menghitung matriks jarak dari atribut numerik -- jarak yang saya pakai adalah euclid
+for(i in 1:N){
+  for(j in 1:N){
+    mat_dist_2[i,j] = dist_euclid(mat_2[,i],mat_2[,j])  # menghitung jarak pasangan per baris data object
   }
 }
 
 # menghitung matriks jarak final
-matriks = (mat_1_jar + mat_2_jar) / (n1+n2)    # delta yang saya gunakan per atribut adalah 1
-colnames(matriks) = df$nama                    # kasih column names
-rownames(matriks) = df$nama                    # kasih row names
+matriks = (mat_dist_1 + mat_dist_2) / (nrow(mat_1) + nrow(mat_2))    # delta yang saya gunakan per atribut adalah 1
+colnames(matriks) = data$id             # kasih column names
+rownames(matriks) = data$id             # kasih row names
 
-# print hasil akhir
-matriks
+# hasil akhir
+matriks[lower.tri(matriks)] = NA
 ```
+
+<br>
+
+Oleh karena matriks yang dihasilkan berukuran $2000 \times 2000$, maka saya akan coba _print_ _sample_ matriks $15 \times 15$ saja:
+
+```{r,echo=FALSE}
+matriks[1:15,1:15] %>% round(3)
+```
+
+__SELESAI__
