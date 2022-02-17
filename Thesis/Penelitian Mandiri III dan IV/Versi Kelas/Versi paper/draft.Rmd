@@ -19,6 +19,7 @@ bibliography: references.bib
 csl: 2d-materials.csl
 linestretch: 1.5
 colorlinks: true
+abstract: to be filled
 header-includes:
 - \usepackage{fancyhdr}
 - \pagestyle{fancy}
@@ -53,9 +54,9 @@ Beberapa penelitian lain terkait dengan topik ini antara lain:
 - Model _supplier selection and order allocation_ berbasis _fuzzy extended analytic hierarchy process_ yang dikombinasikan dengan _multiobjective dynamic linear programming_ dibuat untuk mencari nilai kuantitas yang optimal untuk pembelian _raw material_ [@zhi].
 - Bani dan Jafari (2016) menawarkan suatu model optimisasi untuk menyelesaikan _supplier selection_ dengan kondisi _multiple sourcing_, _multiple criteria_, dan batasan kapasitas. Model ini memiliki cakupan luas karena sudah mempertimbangkan kriteria-kriteria kunci per _raw material_ dan _supplier_. Kemudian model tersebut diselesaikan dengan dua pendekatan, yakni algoritma genetika dan _invasive weed optimization_ [@bani].
 
-Salah satu model komputasi _meta heuristic_ yang bisa digunakan untuk menyelesaikan permasalahan optimisasi adalah _Spiral Dynamic Optimization Algorithm_ (SDOA). Penelitian yang dilakukan pada 2016 menunjukkan SDOA mampu menghasilkan solusi dari permasalahan _binary programming_ memanfaatkan modifikasi _constrained optimization_ menjadi _unconstrained optimization_ dengan jumlah _constraints_ yang sedikit [@kun].
+Dewasa ini, penyelesaian masalah optimisasi menggunakan pendekatan _meta heuristic_ sedang berkembang dengan pesat. Salah satunya adalah _Spiral Dynamic Optimization Algorithm_ (SDOA). Penelitian yang dilakukan pada 2016 menunjukkan SDOA mampu menghasilkan solusi dari permasalahan _binary programming_ memanfaatkan modifikasi _constrained optimization_ menjadi _unconstrained optimization_ dengan jumlah _constraints_ yang sedikit [@kun]. Namun ada penelitian yang mengaplikasikan SDOA untuk permasalahan di bidang SCM dengan _constraints_ yang banyak.
 
-Pada penelitian ini, _supplier selection_ akan disandingkan langsung dengan _raw material selection_ pada variabel-variabel penentuan yang lebih teknis pada rentang waktu tertentu. Akibatnya banyak _constraints_ yang dilibatkan dalam model optimisasinya. Studi kasus yang digunakan pada penelitian ini berasal dari perusahaan manufaktur bidang makanan dan minuman di Indonesia. Luaran dari penelitian ini adalah suatu model komputasi yang digunakan untuk menyelesaikan permasalahan optimisasi pemilihan _raw material_ dan _supplier selection_ dengan _input_ berupa:
+Pada penelitian ini, _supplier selection_ akan disandingkan langsung dengan _raw material selection_ pada variabel-variabel penentuan yang lebih teknis pada rentang waktu tertentu. Studi kasus yang digunakan pada penelitian ini berasal dari perusahaan manufaktur bidang makanan dan minuman di Indonesia. Luaran dari penelitian ini adalah suatu model komputasi yang digunakan untuk menyelesaikan permasalahan optimisasi pemilihan _raw material_ dan _supplier selection_ dengan _input_ berupa:
 
 1. _Demand_ dari sejumlah varian produk jadi dan dalam periode waktu tertentu.
 1. Komposisi _raw material_ yang dibutuhkan untuk memproduksi satu unit varian produk jadi.

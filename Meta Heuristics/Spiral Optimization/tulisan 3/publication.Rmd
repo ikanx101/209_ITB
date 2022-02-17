@@ -1,0 +1,217 @@
+---
+title: "Feature Selection for Linear Regression Using Spiral Dynamic Optimization Algorithm"
+subtitle: "Study Case Crime Level Database"
+author: "Ikang Fadhli"
+date: "17 Februari 2022"
+output: 
+  rmdformats::robobook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+setwd("~/209_ITB/Meta Heuristics/Spiral Optimization/tulisan 3")
+
+library(dplyr)
+library(ggplot2)
+
+data = read.csv("crime.csv") %>% janitor::clean_names()
+colnames(data) = c("id","percent_m", "is_south", "mean_education", "police_exp60", 
+                   "police_exp59", "labour_participation", "m_per1000f", "state_pop", 
+                   "nonwhites_per1000", "unemploy_m24", "unemploy_m39", "gdp", "inequality", 
+                   "prob_prison", "time_prison", "crime_rate")
+```
+
+# _Spiral Dynamic Optimization Algorithm_
+
+Melanjutkan beberapa tulisan terkait SDOA, kali ini saya akan menunjukkan penggunaannya untuk membantu kita melakukan _feature selection_ model _machine learning_.
+
+Sebagai contoh, saya akan gunakan kasus regresi linear dari data `crime`.
+
+Saya akan bertujuan membuat model regresi linear yang memprediksi `inequality` dari semua variabel lain yang ada pada data tersebut.
+
+# Model Regresi Linear
+
+## Data yang Digunakan
+
+Berikut adalah data yang digunakan dalam contoh ini:
+
+```{r,echo=FALSE}
+knitr::kable(data,caption = "Data Crime")
+```
+
+## Tujuan
+
+Saya akan membuat model regresi linear terbaik yang bisa memprediksi nilai `inequality` dari prediktor-prediktor yang ada di data `crime`. Untuk itu, saya akan menjadikan nilai $R^2$ sebagai parameter _goodness of fit_ yang akan saya __maksimalkan__.
+
+Bagaimana saya bisa mendapatkan nilai $R^2$ tertinggi?
+
+> Saya perlu memilih dan memilah prediktor mana saja yang terbaik.
+
+Oleh karena itu saya menggunakan SDOA untuk melakukannya.
+
+## Catatan Penting 
+
+Metode eksak yang bisa digunakan untuk melakukan _feature selection_ pada metode regresi linear adalah _backward_ atau _forward stepwise_. Metode eksak menjadi solusi yang diberikan adalah yang terbaik.
+
+Namun pendekatan _meta heuristic_ seperti SDOA tidak menjamin solusi yang diberikan adalah yang terbaik tapi dari segi pengerjaannya relatif mudah diaplikasikan ke berbagai model _machine learning_ termasuk klasifikasi. Agar solusi yang diberikan optimal, kita cukup memperluas area jelajah _meta heuristic_ atau memperbanyak percobaan saja.
+
+## _Flowchart_ Pengerjaan
+
+Berikut ini adalah _flowchart_ pengerjaan ini:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+nomnoml::nomnoml("#direction: down
+                 [<start> start] -> [define|initial random]
+                 [define] -> [SDOA|feature selection]
+                 [SDOA] -> [<choice> best R^2?]
+                 [<choice> best R^2?] -> T [save model]
+                 [<choice> best R^2?] -> F [SDOA]
+                 [save model] -> [<end>end]
+                 ")
+```
+
+# Pengerjaan
+
+## Tahap I
+
+Pertama-tama saya akan lakukan beberapa _pre-processing_ seperti berikut:
+
+```{r}
+target = data$inequality                  # save variabel target
+data = data %>% select(-id,-inequality)   # menghapus variabel target agar semua data berisi murni predictors
+nama_var = colnames(data)                 # save variabel dulu untuk kepentingan SDOA
+```
+
+## Tahap II
+
+Membuat dua _functions_, yakni _objective function_ dan _matriks rotasi_.
+
+```{r}
+# set obj function
+obj_funct = function(list){
+  bound = round(list,0)
+  predictor = nama_var[bound == 1]
+  df_reg = data[predictor]
+  df_reg$target = target
+  
+  model = lm(target ~ .,df_reg)
+  hasil = summary(model)
+  r_sq = hasil$adj.r.squared
+  return(r_sq)
+}
+
+# set constraint 1
+batas1 = function(list){
+  bound = round(list,0)
+  sqrt(sum(bound^2)) - sqrt(15)
+}
+
+# set constraint 2
+batas2 = function(list){
+  bound = round(list,0)
+  1 - sqrt(sum(bound^2))
+}
+
+beta = 9999999
+
+# obj function keseluruhan
+f_tot = function(list){
+  - obj_funct(list) + max((beta * batas1(list)),0) + max((beta * batas2(list)),0)
+}
+
+# function matriks rotasi
+buat_rot_mat = function(theta,n){
+  # buat template sebuah matriks identitas
+  temp_mat = matrix(0,ncol = n,nrow = n)
+  diag(temp_mat) = 1
+  
+  # buat matriks identitas terlebih dahulu
+  mat_rot = temp_mat
+  
+  for(i in 1:(n-1)){
+    for(j in 1:i){
+      temp = temp_mat
+      idx = n-i
+      idy = n+1-j
+      # print(paste0("Matriks rotasi untuk ",idx," - ",idy,": DONE"))
+      temp[idx,idx] = cos(theta)
+      temp[idx,idy] = -sin(theta)
+      temp[idy,idx] = sin(theta)
+      temp[idy,idy] = cos(theta)
+      # assign(paste0("M",idx,idy),temp)
+      mat_rot = mat_rot %*% temp
+      mat_rot = mat_rot 
+    }
+  }
+  return(mat_rot)
+}
+```
+
+## Tahap III
+
+_Set_ semua _initial conditions_:
+
+```{r,message=FALSE,warning=FALSE}
+# random calon solusi
+N = 450                      # berapa banyak calon yang akan digenerate
+star = vector("list",N)     # template utk calon
+f_hit = c()                 # template utk nilai obj function
+
+# looping utk menghitung generate sekaligus menghitung obj function
+for(i in 1:N){
+  calon = runif(15,0,1)
+  star[[i]] = calon
+  f_hit[i] = f_tot(calon)
+}
+
+# set matriks rotasi
+mat_rotasi = buat_rot_mat(2*pi / 10,15)
+```
+
+## Tahap IV
+
+Mulai melakukan SDOA:
+
+```{r,message=FALSE,warning=FALSE}
+for(ikanx in 1:60){              # melakukan SDOA sebanyak 80 kali rotasi dan konstraksi
+  # penentuan calon dengan nilai paling minimum
+  n_bhole = which.min(f_hit)
+  bhole = star[[n_bhole]]
+  
+  # melakukan rotasi dan konstraksi
+  for(i in 1:N){
+    Xt = star[[i]]
+    X = mat_rotasi %*% (Xt - bhole)
+    X = bhole + (.8 * X)
+    star[[i]] = X
+  }
+  
+  # perhitungan obj function kembali
+  for (i in 1:N){
+    temp = f_tot(star[[i]])
+    f_hit[i] = temp
+  }
+}
+```
+
+## Tahap V
+
+Mengeluarkan hasil akhir:
+
+```{r,message=FALSE,warning=FALSE}
+hasil = which.min(f_hit)
+pilihan = star[[hasil]] %>% round()
+
+# nilai R squared terbaik
+obj_funct(pilihan)
+
+# prediktor yang dipilih
+nama_var[pilihan == 1]
+```
+
+# Kesimpulan
+
+Bisa dilihat bahwa SDOA bisa dijadikan salah satu algoritma untuk melakukan _feature selection_.
+
+Keuntungan yang bisa kita dapatkan dari pendekatan ini adalah kita bisa membatasi berapa banyak _predictor_ yang diperlukan.

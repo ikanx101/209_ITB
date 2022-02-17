@@ -20,7 +20,7 @@ nama_var = colnames(data)
 
 # =================================================================
 # star randomizer
-N = 50
+N = 800
 star = vector("list",N)
 
 for(i in 1:N){
@@ -102,7 +102,7 @@ for (i in 1:N){
 
 
 # mulai part serunya
-for(ikanx in 1:80){
+for(ikanx in 1:60){
   # penentuan black hole
   n_bhole = which.min(f_hit)
   bhole = star[[n_bhole]]
@@ -110,7 +110,7 @@ for(ikanx in 1:80){
   for(i in 1:N){
     Xt = star[[i]]
     X = mat_rotasi %*% (Xt - bhole)
-    X = bhole + (.95 * X)
+    X = bhole + (.7 * X)
     star[[i]] = X
   }
   

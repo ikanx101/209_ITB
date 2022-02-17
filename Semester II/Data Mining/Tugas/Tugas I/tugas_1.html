@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2022-02-04" />
+<meta name="date" content="2022-02-16" />
 
 <title>TUGAS KULIAH PENAMBANGAN DATA DALAM SAINS</title>
 
@@ -353,7 +353,7 @@ div.tocify {
 <h3 class="subtitle">Simmilarity dan Dissimilarity</h3>
 <h4 class="author">Mohammad Rizka Fadhli - 20921004</h4>
 <address class="author_afil">
-Sains Komputasi ITB<br><h4 class="date">04 February 2022</h4>
+Sains Komputasi ITB<br><h4 class="date">16 February 2022</h4>
 
 </div>
 
@@ -573,18 +573,18 @@ Sains Komputasi ITB<br><h4 class="date">04 February 2022</h4>
 <span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co"># menghitung matriks jarak final</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>matriks <span class="ot">=</span> (mat_1_jar <span class="sc">+</span> mat_2_jar) <span class="sc">/</span> (n1<span class="sc">+</span>n2)    <span class="co"># delta yang saya gunakan per atribut adalah 1</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>matriks <span class="ot">=</span> (mat_1_jar <span class="sc">+</span> mat_2_jar) <span class="sc">/</span> (<span class="fu">nrow</span>(mat_1) <span class="sc">+</span> <span class="fu">nrow</span>(mat_2))    <span class="co"># delta yang saya gunakan per atribut adalah 1 sehingga dibagi 9 atribut</span></span>
 <span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(matriks) <span class="ot">=</span> df<span class="sc">$</span>nama                    <span class="co"># kasih column names</span></span>
 <span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(matriks) <span class="ot">=</span> df<span class="sc">$</span>nama                    <span class="co"># kasih row names</span></span>
 <span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="co"># print hasil akhir</span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>matriks</span></code></pre></div>
-<pre><code>##         Andi   Budi  Citra   Dedi   Evan
-## Andi  0.0000 0.5380 0.2795 0.2327 0.7933
-## Budi  0.5380 0.0000 0.7725 0.4014 0.2754
-## Citra 0.2795 0.7725 0.0000 0.4222 0.9141
-## Dedi  0.2327 0.4014 0.4222 0.0000 0.6174
-## Evan  0.7933 0.2754 0.9141 0.6174 0.0000</code></pre>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>matriks <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##        Andi  Budi Citra  Dedi  Evan
+## Andi  0.000 0.598 0.311 0.259 0.881
+## Budi  0.598 0.000 0.858 0.446 0.306
+## Citra 0.311 0.858 0.000 0.469 1.016
+## Dedi  0.259 0.446 0.469 0.000 0.686
+## Evan  0.881 0.306 1.016 0.686 0.000</code></pre>
 </div>
 </div>
 

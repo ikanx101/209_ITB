@@ -218,10 +218,10 @@ for(i in 1:n2){
 }
 
 # menghitung matriks jarak final
-matriks = (mat_1_jar + mat_2_jar) / (n1+n2)    # delta yang saya gunakan per atribut adalah 1
+matriks = (mat_1_jar + mat_2_jar) / (nrow(mat_1) + nrow(mat_2))    # delta yang saya gunakan per atribut adalah 1 sehingga dibagi 9 atribut
 colnames(matriks) = df$nama                    # kasih column names
 rownames(matriks) = df$nama                    # kasih row names
 
 # print hasil akhir
-matriks
+matriks %>% round(3)
 ```

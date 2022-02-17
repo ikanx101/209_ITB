@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  15 FEB 2022 12:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  16 FEB 2022 11:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -530,7 +530,7 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 {/home/ikanx_server/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-59.
+62.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -552,12 +552,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [3]
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 277--281
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 281--285
 [][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 277--281
+Underfull \hbox (badness 10000) in paragraph at lines 281--285
 
  []
 
@@ -570,72 +570,72 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [4]
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 282--287
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 286--291
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 282--287
+Underfull \hbox (badness 10000) in paragraph at lines 286--291
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 288--293
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 292--297
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 288--293
+Underfull \hbox (badness 10000) in paragraph at lines 292--297
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 294--299
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 298--303
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 294--299
+Underfull \hbox (badness 10000) in paragraph at lines 298--303
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 300--305
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 304--309
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 300--305
+Underfull \hbox (badness 10000) in paragraph at lines 304--309
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 306--312
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 310--316
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 306--312
+Underfull \hbox (badness 10000) in paragraph at lines 310--316
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 313--318
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 317--322
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 313--318
+Underfull \hbox (badness 10000) in paragraph at lines 317--322
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 319--324
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 323--328
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 319--324
+Underfull \hbox (badness 10000) in paragraph at lines 323--328
 
  []
 
@@ -652,25 +652,27 @@ Package rerunfilecheck Info: File `draft.out' has not changed.
 (rerunfilecheck)             Checksum: E4201C480D977CAE64B51C8C337C756A;549.
  ) 
 Here is how much of TeX's memory you used:
- 12532 strings out of 480559
- 188883 string characters out of 5902712
+ 12556 strings out of 480559
+ 189186 string characters out of 5902712
  548085 words of memory out of 5000000
- 29808 multiletter control sequences out of 15000+600000
- 456102 words of font info for 111 fonts, out of 8000000 for 9000
+ 29812 multiletter control sequences out of 15000+600000
+ 462972 words of font info for 122 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,12n,66p,1002b,374s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/home/
 ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_serv
-er/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/ikanx_server/.Ti
-nyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></home/ikanx_server/.TinyTeX
-/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/ikanx_server/.TinyTeX/texmf-
-dist/fonts/type1/public/lm/lmr17.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fo
-nts/type1/public/lm/lmri12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/ty
-pe1/public/lm/lmro12.pfb>
-Output written on draft.pdf (5 pages, 158415 bytes).
+er/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></home/ikanx_server/.Ti
+nyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/ikanx_server/.TinyTeX/
+texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></home/ikanx_server/.TinyTeX/texmf
+-dist/fonts/type1/public/lm/lmr10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/f
+onts/type1/public/lm/lmr12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/ty
+pe1/public/lm/lmr17.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/pub
+lic/lm/lmri12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm
+/lmro12.pfb>
+Output written on draft.pdf (5 pages, 204916 bytes).
 PDF statistics:
- 107 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
+ 117 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
  28 named destinations out of 1000 (max. 500000)
- 28713 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 32809 words of extra memory for PDF output out of 35830 (max. 10000000)
 
