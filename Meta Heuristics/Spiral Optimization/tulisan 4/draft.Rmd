@@ -1,0 +1,231 @@
+---
+title: "Clustering Binary Dataset dengan Menggunakan Pendekatan Meta Heuristic"
+subtitle: "Travelling Salesperson Problem dan Spiral Optimization Algorithm"
+author: "Ikang Fadhli"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  rmdformats::readthedown
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Meta Heuristics/Spiral Optimization/tulisan 4")
+rm(list=ls())
+
+library(dplyr)
+library(TSP)
+
+set.seed(10104074)
+
+load("data.rda")
+```
+
+# Pendahuluan
+
+Pada tulisan kali ini saya akan menggunakan dua algoritma _meta heuristic_, yakni TSP dan SDOA untuk _clustering_ suatu data tertentu.
+
+Biasanya untuk melakukan _clustering_, saya mengandalkan _unsupervised learning_ seperti _k-means clustering_. Namun untuk suatu data yang semuanya berisi _binary_, saya rasa kurang tepat jika menggunakan _k-means clustering_.
+
+Saya akan mencoba cara baru dalam melakukan _clustering_ dengan memanfaatkan perhitungan jarak, prinsip TSP, dan optimisasi dengan SDOA.
+
+## Data yang Digunakan
+
+Saya memiliki data berisi profil 50 orang sebagai berikut: 
+
+```{r,echo=FALSE}
+DT::datatable(df)
+```
+
+Ada `12` atribut yang masing-masing merupakan data bertipe _binary_.
+
+## Tujuan
+
+Melakukan _clustering_ dari data _binary_ yang diberikan menggunakan prinsip TSP dan SDOA.
+
+# Metode dan Tahapan Pengerjaan
+
+Saya akan coba jelaskan metode pengerjaan _clustering_ dengan TSP dan SDOA.
+
+## _Flowchart_
+
+Berikut adalah _flowchart_ yang akan dikerjakan:
+
+```{r,echo=FALSE}
+nomnoml::nomnoml("#direction: down
+                 [data] -> [hitung jarak]
+                 [hitung jarak] -> [matriks jarak]
+                 [matriks jarak] -> [SDOA|n cluster]
+                 [SDOA] -> [<choice>TSP|shortest path?]
+                 [<choice>TSP] -> T [<end>end]
+                 [<choice>TSP] -> F [SDOA]
+                 ")
+```
+
+
+## Perhitungan Jarak
+
+Jarak didefinisikan sebagai ukuran yang mengindikasikan persamaan atau pertaksamaan dari dua `id` data. Sepasang data dikatakan sama jika jarak antar keduanya adalah nol. Sedangkan sepasang data dikatakan tidak sama jika ada jarak antara keduanya.
+
+Perhitungan jarak untuk data bertipe _binary_ saya akan definisikan sebagai:
+
+$$d(i,j) = \left\{\begin{matrix}
+0, x_{if} = x_{jf} \\ 1, \text{lainnya}
+\end{matrix}\right.$$
+
+Dalam __R__ berikut _function_-nya:
+
+```{r}
+jarak_biner = function(a,b){
+  jarak = sum(a != b)     # beri nilai 1 jika berbeda lalu dijumlahkan
+  return(jarak)           # output function
+}
+```
+
+_Output_ dari tahapan ini adalah matriks jarak antar `id`.
+
+Berikut adalah proses perhitungannya:
+
+```{r,message=FALSE,warning=FALSE}
+# bikin matriks dulu
+N = nrow(df)
+mat_final = matrix(0,ncol = N,nrow = N)
+
+# proses menghitung matriks
+df_t = df %>% as.matrix() %>% t()
+
+# proses perhitungan matriks jarak
+for(i in 1:N){
+  for(j in 1:N){
+    mat_final[i,j] = jarak_biner(df_t[,i],df_t[,j])
+  }
+}
+```
+
+## TSP
+
+Algoritma TSP memiliki _input_ berupa matriks jarak kemudian menghitung dan menentukan rute terpendek dari matriks tersebut sehingga semua titik terlewati. Atas prinsip tersebut, kita akan melakukan _clustering_ dengan cara mengelompokkan `id` mana saja yang menghasilkan rute-rute terpendek.
+
+Misalkan saya hendak membuat `4` _clusters_, artinya saya akan mencari `4` kelompok `id` yang menghasilkan total rute terpendek dari matriks jarak masing-masing.
+
+
+Saya definisikan _objective function_ sebagai berikut:
+
+```{r}
+id = 1:nrow(df)
+
+# bikin objective function untuk 4 clusters
+obj_func = function(tes){
+  tes = round(tes)
+  if(min(tes) < 1 | max(tes) > 4){
+    ztot = 999999
+  }
+  else{
+    id_1 = id[which(tes == 1)]
+    id_2 = id[which(tes == 2)]
+    id_3 = id[which(tes == 3)]
+    id_4 = id[which(tes == 4)]
+    
+    temp_1 = mat_final[id_1,id_1]
+    temp_2 = mat_final[id_2,id_2]
+    temp_3 = mat_final[id_3,id_3]
+    temp_4 = mat_final[id_4,id_4]
+    
+    problem_1 = as.TSP(temp_1)
+    hasil_1 = solve_TSP(problem_1)
+    z1 = tour_length(hasil_1)
+    
+    problem_2 = as.TSP(temp_2)
+    hasil_2 = solve_TSP(problem_2)
+    z2 = tour_length(hasil_2)
+    
+    problem_3 = as.TSP(temp_3)
+    hasil_3 = solve_TSP(problem_3)
+    z3 = tour_length(hasil_3)
+    
+    problem_4 = as.TSP(temp_4)
+    hasil_4 = solve_TSP(problem_4)
+    z4 = tour_length(hasil_4)
+    
+    ztot = (z1 + z2 + z3 + z4)
+  }
+  return(ztot)
+}
+```
+
+## SDOA
+
+Salah satu function yang penting pada SDOA adalah pendefinisian matriks rotasi. Berikut adalah _script_ dan pendefinisiannya:
+
+```{r}
+# function matriks rotasi
+buat_rot_mat = function(theta,n){
+  # buat template sebuah matriks identitas
+  temp_mat = matrix(0,ncol = n,nrow = n)
+  diag(temp_mat) = 1
+  
+  # buat matriks identitas terlebih dahulu
+  mat_rot = temp_mat
+  
+  for(i in 1:(n-1)){
+    for(j in 1:i){
+      temp = temp_mat
+      idx = n-i
+      idy = n+1-j
+      # print(paste0("Matriks rotasi untuk ",idx," - ",idy,": DONE"))
+      temp[idx,idx] = cos(theta)
+      temp[idx,idy] = -sin(theta)
+      temp[idy,idx] = sin(theta)
+      temp[idy,idy] = cos(theta)
+      # assign(paste0("M",idx,idy),temp)
+      mat_rot = mat_rot %*% temp
+      mat_rot = mat_rot 
+    }
+  }
+  return(mat_rot)
+}
+
+# bikin matriks rotasinya
+A_rot = buat_rot_mat(2*pi/30,50)
+```
+
+Sekarang saya akan mulai proses SDOA untuk menemukan _cluster_ yang terbaik:
+
+```{r,message=FALSE,warning=FALSE}
+# kita mulai spiralnya
+N_spiral = 900
+id_calon = 1:N_spiral
+calon = vector("list",N_spiral)
+f_hit = c()
+for(i in 1:N_spiral){
+  calon[[i]] = runif(50,.55,4.45)
+  f_hit[i] = obj_func(calon[[i]])
+}
+
+for(ikanx in 1:30){
+  # penentuan calon paling minimum
+  id_min = id_calon[which(f_hit == min(f_hit))] %>% min()
+  pusat = calon[[id_min]]
+
+  # proses rotasi semua calon
+  for(i in 1:N_spiral){
+    Xt = calon[[i]]
+    X = A_rot %*% (Xt - pusat)
+    X = pusat + (.5 * X)
+    calon[[i]] = X
+    f_hit[i] = obj_func(calon[[i]])
+  }
+}
+```
+
+## Hasil Perhitungan
+
+Berikut adalah hasil teroptimal yang didapatkan:
+
+```{r}
+id_min = id_calon[which(f_hit == min(f_hit))] %>% min()
+cluster = calon[[id_min]] %>% round()
+# tabulasi berapa banyak id per cluster
+table(cluster)
+# totak jarak yang dihasilkan
+min(f_hit)
+```
