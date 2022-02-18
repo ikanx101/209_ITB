@@ -3,6 +3,7 @@ title: "WEEKLY UPDATE"
 subtitle: "PENELITIAN MANDIRI DALAM SAINS KOMPUTASI III - IV"
 author: "Mohammad Rizka Fadhli 20921004"
 institute: "Sains Komputasi ITB"
+date: "13 Februari 2022"
 output:
   beamer_presentation:
     fig_width: 7
@@ -105,7 +106,7 @@ Contoh pada suatu bulan tertentu:
 
 Oleh karena itu, kelak pada model matematika perlu ada _constraints_ terkait hal ini.
 
-### Ilustrasi Pengiriman Bahan Baku: Misalkan - Gula
+### Ilustrasi Pengiriman Bahan Baku
 
 ```{r out.width="75%",echo=FALSE,fig.cap="Simplifikasi dari Penggunaan Bahan Baku"}
 knitr::include_graphics("ilustrasi.png")
@@ -188,19 +189,13 @@ Karena minimal harus ada __2 bahan baku yang dipilih__, maka alternatif solusi y
 
 Langkah pertama yang bisa dilakukan untuk membuat model optimisasi adalah menghitung dan mencari parameter-parameter terkait. Dari _update_ pada penelitian mandiri di atas, kita bisa lihat:
 
-- $I$ sebagai himpunan semua jenis bahan baku.
-
-- $K$ sebagai himpunan semua minggu yang ada dalam rentang masalah.
-
-- $J$ sebagai himpunan semua produk yang menggunakan bahan baku.
-
-- _Existing stock_ per bahan baku $i$ pada awal minggu ke 1. Misalkan saya tulis sebagai berikut:
-
-$$S_{i} \geq 0, \text{untuk } i \in I$$
-
-- _Demand_ bahan baku $i$ pada awal minggu ke 1. Misalkan saya tulis sebagai berikut:
-
-$$D_{i} \geq 0, \text{ untuk } i \in I$$
-
-
+- $M$ sebagai himpunan semua minggu. 
+    - $\hat{M} \setminus \{1,6\}$
+- $P = P_1 \bigcup P_2 \bigcup P_3 \bigcup P_4 \bigcup P_5 \bigcup P_6$ sebagai himpunan produk di semua minggu.
+    - $\hat{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan minimal dua jenis BB.
+    - $\dot{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan satu jenis BB saja.
+- $G = \{1,2,3,4,5,6\}$ sebagai himpunan BB.
+- $D$ sebagai kebutuhan BB di bulan perencanaan, yaitu: _week_ 3 - 4.
+- $maxcap$ sebagai kapasitas gudang BB.
+    
 # _REFERENCES_ {.allowframebreaks}

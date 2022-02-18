@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  15 FEB 2022 16:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  18 FEB 2022 15:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1049,7 +1049,7 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
 [16
 
 ]
-<ilustrasi.png, id=728, 1084.05pt x 505.89pt>
+<ilustrasi.png, id=711, 1084.05pt x 505.89pt>
 File: ilustrasi.png Graphic file (type png)
 <use ilustrasi.png>
 Package pdftex.def Info: ilustrasi.png  used on input line 275.
@@ -1067,7 +1067,7 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <9> not available
 
 
 ]
-<ilustrasi_2.png, id=847, 1084.05pt x 578.16pt>
+<ilustrasi_2.png, id=827, 1084.05pt x 578.16pt>
 File: ilustrasi_2.png Graphic file (type png)
 <use ilustrasi_2.png>
 Package pdftex.def Info: ilustrasi_2.png  used on input line 344.
@@ -1092,9 +1092,6 @@ Overfull \vbox (39.99936pt too high) detected at line 344
 
 ] [27
 
-
-] [28
-
 ]
 \tf@nav=\write6
 \openout6 = `penelitian-mandiri.nav'.
@@ -1110,30 +1107,31 @@ Package rerunfilecheck Info: File `penelitian-mandiri.out' has not changed.
 (rerunfilecheck)             Checksum: 5D676F479C76BDFE233E0DCB974041D2;1305.
  ) 
 Here is how much of TeX's memory you used:
- 23104 strings out of 480559
- 434045 string characters out of 5902712
- 773669 words of memory out of 5000000
- 39986 multiletter control sequences out of 15000+600000
- 511519 words of font info for 165 fonts, out of 8000000 for 9000
+ 23087 strings out of 480559
+ 433640 string characters out of 5902712
+ 772886 words of memory out of 5000000
+ 39975 multiletter control sequences out of 15000+600000
+ 511282 words of font info for 163 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  101i,19n,108p,1015b,812s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/ho
-me/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/ikanx_s
-erver/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</home/ikanx_server/
-.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/ikanx_server/.TinyT
-eX/texmf-dist/fonts/type1/public/lm/lmss10.pfb></home/ikanx_server/.TinyTeX/tex
-mf-dist/fonts/type1/public/lm/lmss8.pfb></home/ikanx_server/.TinyTeX/texmf-dist
-/fonts/type1/public/lm/lmss9.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/
-type1/public/lm/lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type
-1/public/lm/lmssbx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/pu
-blic/lm/lmsso10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/
-lm/lmsso8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lms
-y10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/sym
-bols/msam10.pfb>
-Output written on penelitian-mandiri.pdf (28 pages, 834430 bytes).
+{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/ho
+me/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/ika
+nx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/
+.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ikanx_server/.TinyT
+eX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_server/.TinyTeX/texmf-d
+ist/fonts/type1/public/lm/lmex10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fo
+nts/type1/public/lm/lmmi10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/ty
+pe1/public/lm/lmss10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/pu
+blic/lm/lmss8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm
+/lmss9.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbo
+10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.p
+fb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso10.pfb></
+home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/i
+kanx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on penelitian-mandiri.pdf (27 pages, 1047163 bytes).
 PDF statistics:
- 1267 PDF objects out of 1440 (max. 8388607)
- 1165 compressed objects within 12 object streams
- 89 named destinations out of 1000 (max. 500000)
+ 1206 PDF objects out of 1440 (max. 8388607)
+ 1105 compressed objects within 12 object streams
+ 87 named destinations out of 1000 (max. 500000)
  67709 words of extra memory for PDF output out of 74296 (max. 10000000)
 
