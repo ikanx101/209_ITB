@@ -1,5 +1,5 @@
 ---
-title: "WEEKLY UPDATE"
+title: "PROGRESS UPDATE"
 subtitle: "PENELITIAN MANDIRI DALAM SAINS KOMPUTASI III - IV"
 author: "Mohammad Rizka Fadhli 20921004"
 institute: "Sains Komputasi ITB"
@@ -21,6 +21,7 @@ bibliography: references.bib
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 rm(list=ls())
+library(dplyr)
 ```
 
 # RENCANA KERJA
@@ -180,6 +181,59 @@ Karena minimal harus ada __2 bahan baku yang dipilih__, maka alternatif solusi y
 1. 100 unit $x_2$ dan 100 unit $x_3$.
 1. 100 unit $x_1$, 100 unit $x_2$ dan 100 unit $x_3$.
 
+## Data yang Digunakan
+
+### Data yang Dijadikan _Input_
+
+Ada beberapa data yang dijadikan _input_ dalam permasalahan ini, yakni:
+
+1. Data spek bahan baku, meliputi: harga (Rupiah per $kg$), _minimum order quantity_ (MOQ dalam $kg$), _leadtime_ pengiriman hingga siap guna (dalam hari), stok terkini (dalam $kg$) untuk masing-masing jenis bahan baku.
+1. Data komposisi bahan baku per produk yang diproduksi.
+1. Data _demand_ mingguan untuk masing-masing produk (dalam unit _batch_ produksi) termasuk kebutuhan bahan baku per _batch_.
+
+### Contoh Data I: Spek Bahan Baku
+
+```{r,echo=FALSE}
+data.frame(bahan_baku = paste0("bb_",1:6),
+           stok = round(runif(6,0,1) * 100,
+                        2),
+           min_order = round(runif(6,0,3) * 100,
+                        1),
+           leadtime = 17,
+           harga = round(runif(6,120000,250000),
+                        0)) %>% 
+  knitr::kable(caption = "Data Bahan Baku")
+```
+
+### Contoh Data II: Komposisi Bahan Baku per Produk
+
+```{r,echo=FALSE}
+data.frame(produk = paste0("fg_",1:8),
+           bb_1 = sample(c(0,1),8,replace = T),
+           bb_2 = sample(c(0,1),8,replace = T),
+           bb_3 = sample(c(0,1),8,replace = T),
+           bb_4 = sample(c(0,1),8,replace = T),
+           bb_5 = sample(c(0,1),8,replace = T),
+           bb_6 = sample(c(0,1),8,replace = T)
+           ) %>% 
+  rowwise() %>% 
+  mutate(bb_bisa_digunakan = sum(bb_1,bb_2,bb_3,bb_4,bb_5,bb_6)) %>%
+  ungroup() %>% 
+  knitr::kable(caption = "Contoh Sample Data Komposisi Bahan Baku")
+```
+
+### Contoh Data III: Data _Demand_ Mingguan per Produk
+
+```{r,echo=FALSE}
+data.frame(produk = paste0("fg_",1:8),
+           demand_w1 = sample(c(0:10),8,replace = T),
+           demand_w2 = sample(c(0:10),8,replace = T),
+           demand_w3 = sample(c(0:10),8,replace = T),
+           demand_w4 = sample(c(0:10),8,replace = T),
+           bb_per_batch = sample(c(40,500,550,341,330,600,700,1000,640),8,replace = T)
+           ) %>% 
+  knitr::kable(caption = "Contoh Sample Data Demand Mingguan")
+```
 
 # PENELITIAN MANDIRI IV
 
@@ -195,7 +249,41 @@ Langkah pertama yang bisa dilakukan untuk membuat model optimisasi adalah menghi
     - $\hat{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan minimal dua jenis BB.
     - $\dot{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan satu jenis BB saja.
 - $G = \{1,2,3,4,5,6\}$ sebagai himpunan BB.
-- $D$ sebagai kebutuhan BB di bulan perencanaan, yaitu: _week_ 3 - 4.
+- $D$ sebagai kebutuhan BB di bulan perencanaan, yaitu: _week_ 3 - 6.
 - $maxcap$ sebagai kapasitas gudang BB.
-    
-# _REFERENCES_ {.allowframebreaks}
+- $\forall i \in P_j, \space g_{ijk}$ adalah kebutuhan BB (dalam ton) dari produk $i$ pada _week_ $k$.
+- $\forall k \in G, \space c_k$ adalah harga BB $k$ per ton.
+- $\forall k \in G, \space \epsilon_k$ adalah _minimum order quantity_ dari BB $k$.
+- $\forall k \in G, \space \hat{d}_{2k}$ adalah total BB $k$ yang dibutuhkan pada _week_ 2.
+- $\forall k \in G, \space Z_{ik}$ adalah stok level BB $k$ di gudang pada akhir _week_ 1.    
+
+### _Decision Variable_ {.allowframebreaks}
+
+Definisikan $\forall k \in G, \space x_k$ adalah banyaknya BB $k$ yang dibeli.
+
+Berdasarkan informasi sebelumnya, kita ketahui bahwa $x_k$ bernilai bulat positif dan harus lebih besar atau sama dengan nilai $\epsilon_k$. Kemudian tidak ada kewajiban untuk membeli BB dari seluruh _supplier_. 
+
+Maka kita bisa tuliskan: $x_k = 0$ atau $\epsilon_k \leq x_k \leq maxcap$. Untuk menghindari nilai diskontinu dari $x_k$ ini, definisikan:
+
+$$y_k = \left\{\begin{matrix}
+1, & x_k = 0 \\ 0, & \epsilon_k \leq x_k \leq maxcap
+\end{matrix}\right.$$
+
+$\forall j \in M  \setminus \{1,6\}, \forall i \in P_j, \forall k \in G$,
+
+Definisikan: $\hat{x}_{jk}$ sebagai banyaknya pengiriman BB jenis $k$ di awal _week_ $j$.
+
+$$a_{ijk} = \left\{\begin{matrix}
+1, & \text{produk ke } i \text{ di week } j \text{ menggunakan BB } k \\ 
+0, & \text{lainnya}
+\end{matrix}\right.$$
+
+Definisikan: $b_{ijk}$ sebagai proporsi penggunaan BB $k$ dari seluruh kebutuhan BB untuk produk $i$ di _week_ $j$, $\forall j \in M \setminus \{ 1 \}, \forall k \in G$.
+
+Definisikan: $z_{jk}$ sebagai stok level BB $k$ di akhir _week_ $j$.
+
+## _To be continued_
+
+### _To be continued_
+
+Saya akan _update_ dan tuliskan _constraints_ dan _objective function_ dalam waktu dekat.
