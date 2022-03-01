@@ -1,0 +1,209 @@
+---
+title: "Penelitian Mandiri Sains Komputasi III dan IV"
+subtitle: _Update Progress_
+author: | 
+    | Mohammad Rizka Fadhli 
+    | Magister Sains Komputasi, FMIPA, ITB
+    | 20921004@mahasiswa.itb.ac.id
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: false
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: breezedark
+bibliography: references.bib
+linestretch: 1.5
+colorlinks: true
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+\newpage
+
+# RENCANA KERJA
+
+## Rencana Judul Thesis
+
+_Optimization and Computational Model for Supplier Selection and Raw-Material Composition: Case Study PT. NFI._
+
+## Target Luaran
+
+### Penelitian Mandiri III
+
+_Data collection_ dan dokumentasi _production system_.
+
+### Penelitian Mandiri IV
+
+Model optimisasi yang telah disempurnakan.
+
+\newpage
+
+# PENELITIAN MANDIRI III
+
+\newpage
+
+# PENELITIAN MANDIRI IV 
+
+# MODEL OPTIMISASI 
+
+Berdasarkan informasi-informasi yang telah didapatkan dari `Penelitian Mandiri III`, berikut adalah model optimisasi dari permasalahan _supplier selection_ dan _raw material selection_.
+
+## Parameter yang Diketahui
+
+Notasikan:
+
+- $M$ sebagai himpunan semua minggu. 
+    - $\hat{M} \setminus \{1,6\}$
+- $P = P_1 \bigcup P_2 \bigcup P_3 \bigcup P_4 \bigcup P_5 \bigcup P_6$ sebagai himpunan produk di semua minggu.
+    - $\hat{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan minimal dua jenis BB.
+    - $\dot{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan satu jenis BB saja.
+- $G = \{1,2,3,4,5,6\}$ sebagai himpunan BB.
+- $D$ sebagai kebutuhan BB di bulan perencanaan, yaitu: _week_ 3 - 6.
+- $maxcap$ sebagai kapasitas gudang BB.
+- $\forall i \in P_j, \space g_{ijk}$ adalah kebutuhan BB (dalam ton) dari produk $i$ pada _week_ $k$.
+- $\forall k \in G, \space c_k$ adalah harga BB $k$ per ton.
+- $\forall k \in G, \space \epsilon_k$ adalah _minimum order quantity_ dari BB $k$.
+- $\forall k \in G, \space \hat{d}_{2k}$ adalah total BB $k$ yang dibutuhkan pada _week_ 2.
+- $\forall k \in G, \space Z_{ik}$ adalah stok level BB $k$ di gudang pada akhir _week_ 1.    
+
+## Variabel Keputusan
+
+### Variabel I {.unnumbered .unlisted}
+
+Definisikan $\forall k \in G, \space x_k$ adalah banyaknya BB $k$ yang dibeli.
+
+Berdasarkan informasi sebelumnya, kita ketahui bahwa $x_k$ bernilai bulat positif dan harus lebih besar atau sama dengan nilai $\epsilon_k$. Kemudian tidak ada kewajiban untuk membeli BB dari seluruh _supplier_. 
+
+Maka kita bisa tuliskan: $x_k = 0$ atau $\epsilon_k \leq x_k \leq maxcap$. Untuk menghindari nilai diskontinu dari $x_k$ ini, definisikan:
+
+$$y_k = \left\{\begin{matrix}
+1, & x_k = 0 \\ 0, & \epsilon_k \leq x_k \leq maxcap
+\end{matrix}\right.$$
+
+$\forall j \in M  \setminus \{1,6\}, \forall i \in P_j, \forall k \in G$,
+
+### Variabel II {.unnumbered .unlisted}
+
+Definisikan: $\hat{x}_{jk}$ sebagai banyaknya pengiriman BB jenis $k$ di awal _week_ $j$.
+
+$$a_{ijk} = \left\{\begin{matrix}
+1, & \text{produk ke } i \text{ di week } j \text{ menggunakan BB } k \\ 
+0, & \text{lainnya}
+\end{matrix}\right.$$
+
+### Variabel III {.unnumbered .unlisted}
+
+Definisikan: $b_{ijk}$ sebagai proporsi penggunaan BB $k$ dari seluruh kebutuhan BB untuk produk $i$ di _week_ $j$, $\forall j \in M \setminus \{ 1 \}, \forall k \in G$.
+
+### Variabel IV {.unnumbered .unlisted}
+
+Definisikan: $z_{jk}$ sebagai stok level BB $k$ di akhir _week_ $j$.
+
+## Kendala Optimisasi
+
+### Kendala I {.unnumbered .unlisted}
+
+Kendala I adalah penghubung yang benar antara variabel keputusan biner, integer, atau kontinu yang berkaitan:
+
+$$\begin{matrix}
+\forall k \in G, &  \\
+ & x_k \leq Dy_k \\
+ & x_k \geq \epsilon y_k \\
+\forall j \in M \setminus \{ 1,2 \}, \forall i \in P_j, \forall k \in G, & \\
+ & b_{ijk} \leq a_{ijk} \\
+ & b_{ijk} \geq \mu a_{ijk}
+\end{matrix}$$
+
+untuk suatu nilai $\mu$ yang kecil.
+
+### Kendala II {.unnumbered .unlisted}
+
+Kendala II dibuat agar total BB yang dipesan tidak kurang dari total _demand_ di bulan perencanaan.
+
+$$\sum_{k \in G} x_k \geq D$$
+
+### Kendala III {.unnumbered .unlisted}
+
+Kendala III mengatur hubungan antara total pembelian BB dan pengiriman setiap minggu.
+
+$$\begin{matrix}
+\forall k \in G, & \\
+ & x_k = \sum_{j \in \hat{M}} \hat{x}_{jk}
+\end{matrix}$$
+
+\newpage
+
+### Kendala IV {.unnumbered .unlisted}
+
+Kendala IV menjaga volume pengiriman gula pada _week_ 2, 3, dan 4 selalu sama.
+
+$$\begin{matrix}
+\forall k \in G, & \\
+ & \hat{x}_{3k} = \hat{x}_{4k} \\
+ & \hat{x}_{4k} = \hat{x}_{5k} 
+\end{matrix}$$
+
+### Kendala V {.unnumbered .unlisted}
+
+Kendala V berfungsi untuk menjaga komposisi gula yang diinginkan.
+
+$$\begin{matrix}
+\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \hat{P}_j, & \\
+ & \sum_{k \in G} a_{ijk} \geq 2 \\
+ & \sum_{k \in G} b_{ijk} = 1 \\
+\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \dot{P}_j, & \\ 
+ & \sum_{k \in G} a_{ijk} = 1 \\
+ & \sum_{k \in G} b_{ijk} = 1
+\end{matrix}$$
+
+### Kendala VI {.unnumbered .unlisted}
+
+Kendala VI berfungsi untuk menjaga stok level sesaat setelah pengiriman BB agar tidak melebihi kapasitas gudang.
+
+$$\begin{matrix}
+ & \sum_{k \in G} (Z_{1k} + \hat{x}_{1k} - \hat{d}_{2k} + z_{jk}) = maxcap \\
+\forall j \in M \setminus \{ 1,2 \} & \\
+ & \sum_{k \in G} (z_{(j-1)k} + \hat{x}_{(j-1)k}) - \sum_{i \in P_j} b_{ijk} g_{ijk} + z_{jk} = maxcap
+\end{matrix}$$
+
+
+\newpage
+
+## Fungsi Objektif
+
+Permasalahan yang dihadapi adalah pemilihan _supplier_ dan BB sebagai berikut:
+
+$$\min \sum_{k \in G} c_k x_k$$
+
+terhadap kendala I sampai VI.
+
+$$\begin{matrix}
+x_k = 0 \text{ atau } \epsilon_k \leq x_k \leq maxcap, \space x_k \in \mathbb{Z}^+ \\
+y_k \in \{ 0,1 \}, \hat{x}_{jk} \geq 0, a_{ijk} \in \{ 0,1 \} \\
+0 \leq b_{ijk} \leq 1 \\
+0 \leq z_{jk} \leq maxcap \\
+\end{matrix}$$
+
+
+
+
+
+

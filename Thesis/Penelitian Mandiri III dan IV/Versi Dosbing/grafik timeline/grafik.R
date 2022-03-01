@@ -39,7 +39,6 @@ plt =
   theme_void() +
   
   theme(legend.position = "none",
-        plot.background = element_rect(fill = "#e1f7e7", color = NA),
         plot.title = element_text(hjust = 0.5, face = "bold", size = 25, family = "Patua"),
         plot.subtitle = element_text(hjust = 0.5, face = "italic", size = 22),
         plot.caption = element_text(hjust = 0.5, face = "bold", size = 10, color = "grey50", family = "Lato")) +

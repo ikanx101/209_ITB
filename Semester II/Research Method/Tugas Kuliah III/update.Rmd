@@ -1,0 +1,131 @@
+---
+title: "Model Optimisasi dan Komputasi Portofolio Diskon Produk E-Commerce dengan Pendekatan Meta Heuristic: SDOA"
+subtitle: "Update Penelitian"
+author: "Ikang Fadhli"
+date: "1 Maret 2022"
+output: 
+  rmdformats::robobook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Semester II/Research Method/Tugas Kuliah III")
+
+library(dplyr)
+library(ggplot2)
+
+rm(list=ls())
+```
+
+# Tujuan Penelitian
+
+Adapun tujuan penelitian ini adalah:
+
+1. Memodelkan masalah optimisasi portofolio produk.
+1. Menyelesaikan masalah optimisasi dengan pendekatan _meta heuristic_.
+1. Membuat model komputasi dengan 
+    - Masukan:
+        - Data _budget_ diskon dan _expected profit_ dari _listed product_.
+    - Luaran:
+        - Portofolio produk dan _total expected profit_.
+
+# _Update_ Terkait Model Optimisasi
+
+## Data yang Digunakan
+
+```{r,echo=FALSE}
+library(readxl)
+library(dplyr)
+
+data = read_excel("~/209_ITB/Semester II/Research Method/Tugas Kuliah I/20201207 Product list.xlsx") %>% janitor::clean_names() %>% filter(cost_benefit > 0)
+data %>% 
+  select(product_code,brand,burn_3m,cost_benefit) %>% 
+  head(20) %>% 
+  rename(budget_disc = burn_3m,
+         exp_profit = cost_benefit) %>% 
+  knitr::kable(caption = "Sample 20 Baris Data")
+```
+
+<br>
+
+Secara total, ada $1.953$ baris data produk yang dimiliki.
+
+<br>
+
+## Model Optimisasi
+
+Berikut adalah model _binary linear programming_ dari masalah optimisasi portofolio diskon produk:
+
+$$\begin{matrix}
+\text{cari } Xi \in [0,1] \text{ sehingga } \max{(X_i  Pr_i)} , i \in \{ 1,2,3,..,n\} \\
+\text{terhadap } \sum_{i = 1}^n X_i Bg_i \leq 200.000.000
+\end{matrix}$$
+ 
+ <br>
+ 
+## _Meta Heuristic Algorithm_
+
+Salah satu trik yang bisa dilakukan agar algoritma optimisasi _meta heuristic_ bisa digunakan untuk menyelesaikan _mixed integer programming_ adalah dengan mengubah _constrained optimization problem_ menjadi _unconstrained optimization problem_ kemudian memanfaatkan _penalty constant_.
+
+Misal suatu permasalahan MILP atau MINLP bisa ditulis secara umum sebagai berikut:
+
+$$\min_{x \in \mathbb{R}^n} f(x)$$
+
+$$\text{subject to: } g_i(x) = 0, i = 1,2,..,M$$
+
+$$\text{and } h_j(x) \leq 0,i = 1,2,..,N$$
+
+$$x = (x_1,x_2,...,x_n)^T \in \mathbb{N}$$
+
+Bentuk di atas bisa kita ubah menjadi:
+
+$$F(x,\alpha,\beta) = f(x) + \sum_{i=1}^M \alpha_i g_i^2(x) + \sum_{j = 1}^N \beta_j (\max{(h_i(x),0)})^2$$
+
+dimana $\alpha,\beta$ merupakan _penalty constant_ yang bisa dibuat sangat besar.
+
+<br>
+
+### _Spiral Dynamic Optimization Algorithm_
+
+Salah satu permasalahan yang ditemui saat mengembangkan SDOA adalah membuat matriks rotasi. Bentuk umum dari matriks rotasi adalah sebagai berikut:
+
+$$R^{(n)} (\theta_{1,2},\theta_{1,3},..,\theta_{n,n-1}) = \prod_{i=1}^{n-1} \left ( \prod_{j=1}^i R^{(n)}_{n-i,n+1-j} (\theta_{n-i,n+1-j}) \right )$$
+
+Perhatikan bahwa perkalian matriks rotasi yang dilakukan adalah _cross product_ karena rotasi tidak mengubah _norm_ suatu vektor.
+
+Berikut adalah _function_ yang digunakan untuk membuat _rotation matrix_:
+
+```{r}
+buat_rot_mat = function(theta,n){
+  # buat template sebuah matriks identitas
+  temp_mat = matrix(0,ncol = n,nrow = n)
+  diag(temp_mat) = 1
+  
+  # buat matriks identitas terlebih dahulu
+  mat_rot = temp_mat
+
+  for(i in 1:(n-1)){
+    for(j in 1:i){
+      temp = temp_mat
+      idx = n-i
+      idy = n+1-j
+      # print(paste0("Matriks rotasi untuk ",idx," - ",idy,": DONE"))
+      temp[idx,idx] = cos(theta)
+      temp[idx,idy] = -sin(theta)
+      temp[idy,idx] = sin(theta)
+      temp[idy,idy] = cos(theta)
+      # assign(paste0("M",idx,idy),temp)
+      mat_rot = mat_rot %*% temp
+      mat_rot = mat_rot 
+    }
+  }
+  
+  return(mat_rot)
+}
+```
+
+Masalah yang akan ditemui adalah bagaimana membuat matriks rotasi berdimensi $n \times n$ dengan $n > 300$? Proses operasi matriks dengan ukuran $n > 120$ sudah sangat memberatkan komputer.
+
+Oleh karena itu akan dicoba penyelesaian dengan memodifikasi _objective function_ menjadi bentuk _multiple objective function_ sehingga variabel yang terlibat bisa terpecah menjadi ukuran yang lebih kecil.
+
+Kelak hasil dari SDOA ini akan dibandingkan dengan penyelesaian metode eksak, yaitu metode _simplex_.
