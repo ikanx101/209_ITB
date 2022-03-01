@@ -1,0 +1,102 @@
+---
+title: "Untitled"
+author: "Mohammad Rizka Fadhli"
+date: "3/1/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/kampus merdeka/ITB Factory Network/market_riset")
+library(dplyr)
+library(ggplot2)
+library(reshape2)
+rm(list=ls())
+load("data_jabar.rda")
+```
+
+## Indeks Pembangunan Manusia di Jawa Barat
+
+Salah satu indikator yang biasa digunakan perusahaan untuk memetakan potensi suatu kota / kabupaten adalah `indeks pembangunan manusia`. Kita bisa dengan mudah mendapatkannya di situs resmi BPS Nasional / Provinsi / Kota terkait. Sebagai contoh, saya akan ambil data IPM dari kabupaten dan kota di Jawa Barat pada rentang waktu 2019 hingga 2021 dari sumber berikut ini: https://jabar.bps.go.id/indicator/26/123/1/indeks-pembangunan-manusia.html.
+
+Berikut adalah data yang digunakan:
+
+```{r,echo=FALSE}
+ipm_jabar %>% knitr::kable(align = "c")
+```
+
+<br>
+
+Kita bisa lakukan analisa sederhana sebagai berikut:
+
+<br>
+
+### IPM 2021
+
+Berikut adalah IPM per kota dan kabupaten di Jawa Barat. Kemudian kita akan bandingkan dengan nilai IPM Jawa Barat sebagai berikut:
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.cap="IPM Jawa Barat"}
+ipm_jabar %>% 
+  mutate(color = ifelse(grepl("jawa barat",kota_kab,ignore.case = T),1,0)) %>% 
+  ggplot(aes(x = reorder(kota_kab,th_2021),
+             y = th_2021,
+             fill = factor(color))) +
+  geom_col(color = "black",width = .7) +
+  geom_label(aes(label = th_2021),size = 1.25) +
+  scale_fill_manual(values = c("steelblue","darkgreen")) +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Indeks Pembangunan Manusia",
+       subtitle = "Kota dan Kabupaten di Jawa Barat") +
+  theme(axis.text.x = element_blank(),
+        legend.position = "none",
+        axis.title = element_blank())
+```
+
+Terlihat ada beberapa kota dan kabupaten yang memiliki nilai IPM lebih dari nilai IPM provinsi.
+
+Sekarang kita akan ambil 5 kota dan kabupaten dengan nilai IPM tertinggi dan kita akan lihat _tracking_-nya dari 3 tahun terakhir.
+
+<br>
+
+### _Tracking_ TOP 5 Kota dan Kabupaten
+
+Berikut adalah _tracking_ 5 kota dengan IPM tertinggi pada 2021 selama 3 tahun terakhir.
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.cap="Tracking IPM Jawa Barat"}
+top_5 = ipm_jabar %>% arrange(desc(th_2021)) %>% head(5)
+top_5 = top_5$kota_kab
+top_5
+
+ipm_jabar %>% 
+  filter(kota_kab %in% top_5) %>% 
+  melt(id.vars = "kota_kab") %>% 
+  mutate(variable = as.character(variable),
+         variable = gsub("th_","",variable),
+         variable = as.factor(variable)) %>% 
+  ggplot(aes(x = variable,y = value,group = kota_kab,color = kota_kab)) +
+  geom_line() +
+  ggrepel::geom_label_repel(aes(label = value),size = 1.5) +
+  theme_minimal() +
+  labs(title = "Tracking IPM Top 5 Kota dengan IPM Tertinggi",
+       subtitle = "Sumber data BPS Jawa Barat",
+       color = "Kota") +
+  theme(axis.text.y = element_blank(),
+        axis.title = element_blank())
+```
+
+<br>
+
+### _Top Gainer_
+
+Berikutnya kita bisa menghitung `gain`, yakni berapa persen kenaikan nilai IPM dari tahun 2020 ke tahun 2021. Berikut adalah 7 kabupaten dan kota dengan nilai `gain` tertinggi.
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.retina=10,fig.cap="Top Gainer IPM"}
+ipm_jabar %>% 
+  mutate(gainer = th_2021 - th_2020) %>% 
+  arrange(desc(gainer)) %>% 
+  head(7) %>%
+  select(-th_2019) %>% 
+  rename("peningkatan" = gainer) %>% 
+  knitr::kable(caption = "Top 7 Kota Kabupaten dengan Gain Tertinggi")
+```

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  23 FEB 2022 11:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  1 MAR 2022 09:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -639,7 +639,7 @@ hanged.
 Here is how much of TeX's memory you used:
  12588 strings out of 480559
  190494 string characters out of 5902712
- 548073 words of memory out of 5000000
+ 548070 words of memory out of 5000000
  29846 multiletter control sequences out of 15000+600000
  471135 words of font info for 114 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -663,7 +663,7 @@ mf-dist/fonts/type1/public/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dis
 t/fonts/type1/public/lm/lmsy8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts
 /type1/public/lm/lmtt12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1
 /public/amsfonts/symbols/msbm10.pfb>
-Output written on Penelitian-Mandiri-III-dan-IV.pdf (11 pages, 229402 bytes).
+Output written on Penelitian-Mandiri-III-dan-IV.pdf (11 pages, 229388 bytes).
 PDF statistics:
  248 PDF objects out of 1000 (max. 8388607)
  202 compressed objects within 3 object streams

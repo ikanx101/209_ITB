@@ -193,9 +193,8 @@ Permasalahan yang dihadapi adalah pemilihan _supplier_ dan BB sebagai berikut:
 
 $$\min \sum_{k \in G} c_k x_k$$
 
-terhadap kendala I sampai VI.
-
 $$\begin{matrix}
+\text{terhadap kendala I sampai VI dan } \\
 x_k = 0 \text{ atau } \epsilon_k \leq x_k \leq maxcap, \space x_k \in \mathbb{Z}^+ \\
 y_k \in \{ 0,1 \}, \hat{x}_{jk} \geq 0, a_{ijk} \in \{ 0,1 \} \\
 0 \leq b_{ijk} \leq 1 \\

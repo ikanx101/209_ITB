@@ -2165,7 +2165,7 @@ Kita temukan nilai $p_{value}$ sebesar `r test$p.value %>% round(4)`. Jika kita 
 # PERTEMUAN XIII {-}
 # MELAKSANAKAN _DESK RESEARCH_
 
-Pada materi-materi awal, _desk research_ merupakan salah sau metode _market research_ yang mengandalkan data sekunder. Kita bisa mengambil data dari sumber-sumber terpercaya dan melakukan analisa langsung tanpa harus melakukan survey terlebih dahulu.
+Pada materi-materi awal, _desk research_ merupakan salah satu metode _market research_ yang mengandalkan data sekunder. Kita bisa mengambil data dari sumber-sumber terpercaya dan melakukan analisa langsung tanpa harus melakukan survey terlebih dahulu.
 
 Beberapa hal kritis yang perlu diperhatikan dalam melakukan _desk research_ masih sama dengan __tiga titik kritis__ dalam melakukan _market research_, yakni:
 
@@ -2196,13 +2196,107 @@ Berikut adalah data yang bisa kita dapatkan dari situs tersebut:
 ```{r,include=FALSE}
 rm(list=ls())
 load("data_carmudi.rda")
+data_all %>% knitr::kable(align = "c")
 ```
 
 ### Analisa Harga per _Brand_
 
-### Analisa Harga per Jarak Tempuh
+Kita bisa melakukan analisa harga mobil per _brand_ sebagai berikut:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+data_clean = 
+  data_all %>% 
+  mutate(brand = case_when(
+    grepl("suzuki",nama,ignore.case = T) ~ "Suzuki",
+    grepl("honda",nama,ignore.case = T) ~ "Honda",
+    grepl("daihatsu",nama,ignore.case = T) ~ "Daihatsu",
+    grepl("isuzu",nama,ignore.case = T) ~ "Isuzu",
+    grepl("toyota",nama,ignore.case = T) ~ "Toyota",
+    grepl("mercedes",nama,ignore.case = T) ~ "Mercedes",
+    grepl("bmw",nama,ignore.case = T) ~ "BMW",
+    grepl("Mazda",nama,ignore.case = T) ~ "Mazda",
+    grepl("Mitsubishi",nama,ignore.case = T) ~ "Mitsubishi",
+    grepl("Ford",nama,ignore.case = T) ~ "Ford",
+    grepl("Nissan",nama,ignore.case = T) ~ "Nissan",
+    grepl("Porsche",nama,ignore.case = T) ~ "Porsche",
+    grepl("Hyundai",nama,ignore.case = T) ~ "Hyundai",
+    grepl("Lexus",nama,ignore.case = T) ~ "Lexus",
+    grepl("Subaru",nama,ignore.case = T) ~ "Subaru",
+    grepl("Volkswagen",nama,ignore.case = T) ~ "Volkswagen"
+  )) 
+
+data_clean %>% 
+  group_by(brand) %>% 
+  summarise(max = max(harga)/1000000,
+            med = median(harga)/1000000,
+            min = min(harga)/1000000) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = brand)) +
+  geom_errorbar(aes(ymin = min,
+                    ymax = max),
+                width = .3) +
+  geom_point(aes(y = med)) +
+  labs(title = "Sebaran Harga Mobil Bekas dari Situs Carmudi per Brand",
+       subtitle = "sumber: situs Carmudi Pada Januari 2022",
+       x = "Merek Mobil",
+       y = "Harga (dalam juta rupiah)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(face = "bold",angle = 90),
+        axis.text.y = element_text(face = "bold",size = 10)
+        )
+```
 
 ### Analisa Harga per Tahun
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+data_clean %>% 
+  group_by(tahun) %>% 
+  summarise(max = max(harga)/1000000,
+            med = median(harga)/1000000,
+            min = min(harga)/1000000) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = factor(tahun))) +
+  geom_errorbar(aes(ymin = min,
+                    ymax = max),
+                width = .3) +
+  geom_point(aes(y = med)) +
+  labs(title = "Sebaran Harga Mobil Bekas dari Situs Carmudi per Tahun",
+       subtitle = "sumber: situs Carmudi Pada Januari 2022",
+       x = "Tahun Mobil",
+       y = "Harga (dalam juta rupiah)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(face = "bold",angle = 90),
+        axis.text.y = element_text(face = "bold",size = 10)
+        )
+```
+
+### Cross Analisa _Brand_ dan Tahun
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.height=15}
+data_clean %>% 
+  group_by(brand,tahun,) %>% 
+  summarise(max = max(harga)/1000000,
+            med = median(harga)/1000000,
+            min = min(harga)/1000000) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = factor(tahun))) +
+  geom_errorbar(aes(ymin = min,
+                    ymax = max),
+                width = .3) +
+  geom_point(aes(y = med)) +
+  labs(title = "Sebaran Harga Mobil Bekas dari Situs Carmudi per Brand per Tahun",
+       subtitle = "sumber: situs Carmudi Pada Januari 2022",
+       x = "Tahun Mobil",
+       y = "Harga (dalam juta rupiah)") +
+  theme_minimal() +
+  facet_wrap(~brand,scales = "free",ncol = 3) +
+  theme(axis.text.x = element_text(face = "bold",angle = 90),
+        axis.text.y = element_text(face = "bold",size = 10),
+        strip.background = element_rect(color = "black"),
+        strip.text = element_text(face = "bold",size = 14)
+        )
+  
+```
 
 \newpage
 

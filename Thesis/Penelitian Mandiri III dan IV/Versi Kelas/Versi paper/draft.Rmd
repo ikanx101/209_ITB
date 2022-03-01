@@ -54,7 +54,7 @@ Beberapa penelitian lain terkait dengan topik ini antara lain:
 - Model _supplier selection and order allocation_ berbasis _fuzzy extended analytic hierarchy process_ yang dikombinasikan dengan _multiobjective dynamic linear programming_ dibuat untuk mencari nilai kuantitas yang optimal untuk pembelian _raw material_ [@zhi].
 - Bani dan Jafari (2016) menawarkan suatu model optimisasi untuk menyelesaikan _supplier selection_ dengan kondisi _multiple sourcing_, _multiple criteria_, dan batasan kapasitas. Model ini memiliki cakupan luas karena sudah mempertimbangkan kriteria-kriteria kunci per _raw material_ dan _supplier_. Kemudian model tersebut diselesaikan dengan dua pendekatan, yakni algoritma genetika dan _invasive weed optimization_ [@bani].
 
-Dewasa ini, penyelesaian masalah optimisasi menggunakan pendekatan _meta heuristic_ sedang berkembang dengan pesat. Salah satunya adalah _Spiral Dynamic Optimization Algorithm_ (SDOA). Penelitian yang dilakukan pada 2016 menunjukkan SDOA mampu menghasilkan solusi dari permasalahan _binary programming_ memanfaatkan modifikasi _constrained optimization_ menjadi _unconstrained optimization_ dengan jumlah _constraints_ yang sedikit [@kun]. Namun ada penelitian yang mengaplikasikan SDOA untuk permasalahan di bidang SCM dengan _constraints_ yang banyak.
+Dewasa ini, penyelesaian masalah optimisasi menggunakan pendekatan _meta heuristic_ sedang berkembang dengan pesat. Salah satunya adalah _Spiral Dynamic Optimization Algorithm_ (SDOA). Penelitian yang dilakukan pada 2016 menunjukkan SDOA mampu menghasilkan solusi dari permasalahan _binary programming_ memanfaatkan modifikasi _constrained optimization_ menjadi _unconstrained optimization_ dengan jumlah _constraints_ yang sedikit [@kun]. Penelitian lain pada 2022 menunjukkan modifikasi pada bentuk spiral bisa membuat algoritma menjadi lebih efisien dan akurat [@mdpi].
 
 Pada penelitian ini, _supplier selection_ akan disandingkan langsung dengan _raw material selection_ pada variabel-variabel penentuan yang lebih teknis pada rentang waktu tertentu. Studi kasus yang digunakan pada penelitian ini berasal dari perusahaan manufaktur bidang makanan dan minuman di Indonesia. Luaran dari penelitian ini adalah suatu model komputasi yang digunakan untuk menyelesaikan permasalahan optimisasi pemilihan _raw material_ dan _supplier selection_ dengan _input_ berupa:
 
@@ -66,7 +66,7 @@ Kelak solusi dari model komputasi ini akan dibandingkan dengan solusi manual yan
 
 \newpage
 
-# MODEL OPTIMISASI
+# MASALAH OPTIMISASI
 
 Suatu perusahaan manufaktur makanan dan minuman di Indonesia memproduksi sejumlah jenis minuman. Untuk pemenuhan bahan baku ini, perusahaan memiliki perjanjian untuk memasoknya dari enam _supplier_. Setiap _supplier_ menawarkan bahan baku yang sama. Spesifikasi bahan baku dan harga perton bahan baku berbeda-beda antar _supplier_.
 
@@ -84,8 +84,141 @@ Adapun kendala yang harus dipenuhi ketika memproduksi semua jenis minuman dan pe
 
 Masalah yang dihadapi adalah penentuan keputusan strategis dalam memilih pemasok bahan mentah dan menentukan banyaknya bahan mentah yang harus dibeli dari suatu pemasok agar total biaya pembelian seminim mungkin tetapi memenuhi kebutuhan yang ada.
 
-# DASAR TEORI
-
 # MODEL OPTIMISASI
+
+## Parameter yang Diketahui
+
+Notasikan:
+
+- $M$ sebagai himpunan semua minggu. 
+    - $\hat{M} \setminus \{1,6\}$
+- $P = P_1 \bigcup P_2 \bigcup P_3 \bigcup P_4 \bigcup P_5 \bigcup P_6$ sebagai himpunan produk di semua minggu.
+    - $\hat{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan minimal dua jenis BB.
+    - $\dot{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan satu jenis BB saja.
+- $G = \{1,2,3,4,5,6\}$ sebagai himpunan BB.
+- $D$ sebagai kebutuhan BB di bulan perencanaan, yaitu: _week_ 3 - 6.
+- $maxcap$ sebagai kapasitas gudang BB.
+- $\forall i \in P_j, \space g_{ijk}$ adalah kebutuhan BB (dalam ton) dari produk $i$ pada _week_ $k$.
+- $\forall k \in G, \space c_k$ adalah harga BB $k$ per ton.
+- $\forall k \in G, \space \epsilon_k$ adalah _minimum order quantity_ dari BB $k$.
+- $\forall k \in G, \space \hat{d}_{2k}$ adalah total BB $k$ yang dibutuhkan pada _week_ 2.
+- $\forall k \in G, \space Z_{ik}$ adalah stok level BB $k$ di gudang pada akhir _week_ 1.    
+
+## Variabel Keputusan
+
+### Variabel I {.unnumbered .unlisted}
+
+Definisikan $\forall k \in G, \space x_k$ adalah banyaknya BB $k$ yang dibeli.
+
+Berdasarkan informasi sebelumnya, kita ketahui bahwa $x_k$ bernilai bulat positif dan harus lebih besar atau sama dengan nilai $\epsilon_k$. Kemudian tidak ada kewajiban untuk membeli BB dari seluruh _supplier_. 
+
+Maka kita bisa tuliskan: $x_k = 0$ atau $\epsilon_k \leq x_k \leq maxcap$. Untuk menghindari nilai diskontinu dari $x_k$ ini, definisikan:
+
+$$y_k = \left\{\begin{matrix}
+1, & x_k = 0 \\ 0, & \epsilon_k \leq x_k \leq maxcap
+\end{matrix}\right.$$
+
+$\forall j \in M  \setminus \{1,6\}, \forall i \in P_j, \forall k \in G$,
+
+### Variabel II {.unnumbered .unlisted}
+
+Definisikan: $\hat{x}_{jk}$ sebagai banyaknya pengiriman BB jenis $k$ di awal _week_ $j$.
+
+$$a_{ijk} = \left\{\begin{matrix}
+1, & \text{produk ke } i \text{ di week } j \text{ menggunakan BB } k \\ 
+0, & \text{lainnya}
+\end{matrix}\right.$$
+
+### Variabel III {.unnumbered .unlisted}
+
+Definisikan: $b_{ijk}$ sebagai proporsi penggunaan BB $k$ dari seluruh kebutuhan BB untuk produk $i$ di _week_ $j$, $\forall j \in M \setminus \{ 1 \}, \forall k \in G$.
+
+### Variabel IV {.unnumbered .unlisted}
+
+Definisikan: $z_{jk}$ sebagai stok level BB $k$ di akhir _week_ $j$.
+
+## Kendala Optimisasi
+
+### Kendala I {.unnumbered .unlisted}
+
+Kendala I adalah penghubung yang benar antara variabel keputusan biner, integer, atau kontinu yang berkaitan:
+
+$$\begin{matrix}
+\forall k \in G, &  \\
+ & x_k \leq Dy_k \\
+ & x_k \geq \epsilon y_k \\
+\forall j \in M \setminus \{ 1,2 \}, \forall i \in P_j, \forall k \in G, & \\
+ & b_{ijk} \leq a_{ijk} \\
+ & b_{ijk} \geq \mu a_{ijk}
+\end{matrix}$$
+
+untuk suatu nilai $\mu$ yang kecil.
+
+### Kendala II {.unnumbered .unlisted}
+
+Kendala II dibuat agar total BB yang dipesan tidak kurang dari total _demand_ di bulan perencanaan.
+
+$$\sum_{k \in G} x_k \geq D$$
+
+### Kendala III {.unnumbered .unlisted}
+
+Kendala III mengatur hubungan antara total pembelian BB dan pengiriman setiap minggu.
+
+$$\begin{matrix}
+\forall k \in G, & \\
+ & x_k = \sum_{j \in \hat{M}} \hat{x}_{jk}
+\end{matrix}$$
+
+\newpage
+
+### Kendala IV {.unnumbered .unlisted}
+
+Kendala IV menjaga volume pengiriman gula pada _week_ 2, 3, dan 4 selalu sama.
+
+$$\begin{matrix}
+\forall k \in G, & \\
+ & \hat{x}_{3k} = \hat{x}_{4k} \\
+ & \hat{x}_{4k} = \hat{x}_{5k} 
+\end{matrix}$$
+
+### Kendala V {.unnumbered .unlisted}
+
+Kendala V berfungsi untuk menjaga komposisi gula yang diinginkan.
+
+$$\begin{matrix}
+\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \hat{P}_j, & \\
+ & \sum_{k \in G} a_{ijk} \geq 2 \\
+ & \sum_{k \in G} b_{ijk} = 1 \\
+\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \dot{P}_j, & \\ 
+ & \sum_{k \in G} a_{ijk} = 1 \\
+ & \sum_{k \in G} b_{ijk} = 1
+\end{matrix}$$
+
+### Kendala VI {.unnumbered .unlisted}
+
+Kendala VI berfungsi untuk menjaga stok level sesaat setelah pengiriman BB agar tidak melebihi kapasitas gudang.
+
+$$\begin{matrix}
+ & \sum_{k \in G} (Z_{1k} + \hat{x}_{1k} - \hat{d}_{2k} + z_{jk}) = maxcap \\
+\forall j \in M \setminus \{ 1,2 \} & \\
+ & \sum_{k \in G} (z_{(j-1)k} + \hat{x}_{(j-1)k}) - \sum_{i \in P_j} b_{ijk} g_{ijk} + z_{jk} = maxcap
+\end{matrix}$$
+
+
+\newpage
+
+## Fungsi Objektif
+
+Permasalahan yang dihadapi adalah pemilihan _supplier_ dan BB sebagai berikut:
+
+$$\min \sum_{k \in G} c_k x_k$$
+
+$$\begin{matrix}
+\text{terhadap kendala I sampai VI dan } \\
+x_k = 0 \text{ atau } \epsilon_k \leq x_k \leq maxcap, \space x_k \in \mathbb{Z}^+ \\
+y_k \in \{ 0,1 \}, \hat{x}_{jk} \geq 0, a_{ijk} \in \{ 0,1 \} \\
+0 \leq b_{ijk} \leq 1 \\
+0 \leq z_{jk} \leq maxcap \\
+\end{matrix}$$
 
 # _REFERENCES_

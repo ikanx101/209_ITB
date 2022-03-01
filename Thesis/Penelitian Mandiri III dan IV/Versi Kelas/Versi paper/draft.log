@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  16 FEB 2022 11:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  1 MAR 2022 11:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -123,7 +123,7 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
 Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2020/03/06 v1.0d TeX engine tests
+Package: iftex 2022/02/03 v1.0f TeX engine tests
 )) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/generic/iftex/ifluatex.sty
 Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
@@ -382,7 +382,7 @@ LaTeX Info: Redefining \addtolength on input line 81.
 )
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.de
 f
-File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count287
 \l__pdf_internal_box=\box53
 ) (./draft.aux)
@@ -552,15 +552,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [3]
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 281--285
-[][] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 281--285
-
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -570,72 +561,104 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [4]
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 286--291
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 280.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 280.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 280.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[5]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[6]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[7]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[8]
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 474--478
+[][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 474--478
+
+ []
+
+
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 479--484
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 286--291
+Underfull \hbox (badness 10000) in paragraph at lines 479--484
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 292--297
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 485--490
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 292--297
+Underfull \hbox (badness 10000) in paragraph at lines 485--490
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 298--303
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 491--496
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 298--303
+Underfull \hbox (badness 10000) in paragraph at lines 491--496
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 304--309
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 497--502
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 304--309
+Underfull \hbox (badness 10000) in paragraph at lines 497--502
 
  []
 
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 310--316
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 503--509
 [][][] []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 310--316
-
- []
-
-
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 317--322
-[][][] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 317--322
-
- []
-
-
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 323--328
-[][][] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 323--328
+Underfull \hbox (badness 10000) in paragraph at lines 503--509
 
  []
 
@@ -647,32 +670,81 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[5] (./draft.aux)
+[9]
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 510--515
+[][][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 510--515
+
+ []
+
+
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 516--521
+[][][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 516--521
+
+ []
+
+
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 522--527
+[][][] []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 522--527
+
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10] (./draft.aux)
 Package rerunfilecheck Info: File `draft.out' has not changed.
-(rerunfilecheck)             Checksum: E4201C480D977CAE64B51C8C337C756A;549.
+(rerunfilecheck)             Checksum: 0995D67DCAE5AFA108A4F1568C2EC4AB;1066.
  ) 
 Here is how much of TeX's memory you used:
- 12556 strings out of 480559
- 189186 string characters out of 5902712
- 548085 words of memory out of 5000000
- 29812 multiletter control sequences out of 15000+600000
- 462972 words of font info for 122 fonts, out of 8000000 for 9000
+ 12682 strings out of 480559
+ 190845 string characters out of 5902712
+ 550593 words of memory out of 5000000
+ 29878 multiletter control sequences out of 15000+600000
+ 484768 words of font info for 150 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,12n,66p,1002b,374s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/home/
-ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_serv
-er/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></home/ikanx_server/.Ti
-nyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/ikanx_server/.TinyTeX/
-texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></home/ikanx_server/.TinyTeX/texmf
--dist/fonts/type1/public/lm/lmr10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/f
-onts/type1/public/lm/lmr12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/ty
-pe1/public/lm/lmr17.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/pub
-lic/lm/lmri12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm
-/lmro12.pfb>
-Output written on draft.pdf (5 pages, 204916 bytes).
+ 60i,12n,66p,1002b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/ho
+me/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ika
+nx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/ikanx_ser
+ver/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/.TinyT
+eX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/home/ikanx_server/.TinyTeX/texmf-
+dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_server/.TinyTeX/texmf-dist/fonts
+/type1/public/lm/lmbx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1
+/public/lm/lmbx12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/publi
+c/lm/lmbxi10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/
+lmex10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12
+.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></
+home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></home/ik
+anx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/ikanx_ser
+ver/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/ikanx_server/.Ti
+nyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/ikanx_server/.TinyTeX/t
+exmf-dist/fonts/type1/public/lm/lmr8.pfb></home/ikanx_server/.TinyTeX/texmf-dis
+t/fonts/type1/public/lm/lmri12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/font
+s/type1/public/lm/lmro12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type
+1/public/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/publ
+ic/lm/lmsy8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsf
+onts/symbols/msbm10.pfb>
+Output written on draft.pdf (10 pages, 281293 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
- 28 named destinations out of 1000 (max. 500000)
- 32809 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 230 PDF objects out of 1000 (max. 8388607)
+ 182 compressed objects within 2 object streams
+ 60 named destinations out of 1000 (max. 500000)
+ 45121 words of extra memory for PDF output out of 51595 (max. 10000000)
 
