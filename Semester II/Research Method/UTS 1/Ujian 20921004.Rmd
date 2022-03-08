@@ -1,0 +1,266 @@
+---
+title: "PROPOSAL PENELITIAN"
+subtitle: "Pemodelan Komputasi dan Optimisasi Portofolio Diskon Produk E-Commerce Menggunakan Pendekatan Meta Heuristic (Spiral Dynamic Optimization Algorithm)"
+author: |
+  | Mohammad Rizka Fadhli
+  | NIM: 20921004
+  | Magister Sains Komputasi
+  | Institut Teknologi Bandung.
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: false
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: breezedark
+bibliography: references.bib
+csl: 2d-materials.csl
+linestretch: 1.25
+colorlinks: true
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+
+# RINGKASAN
+
+Perkembangan _e-commerce_ yang semakin pesat dewasa ini membuat para _start up marketplace_ harus bersaing satu sama lain memperebutkan konsumen. Salah satu strategi yang bisa dilakukan adalah memberikan diskon tambahan terhadap beberapa _listed products_ yang ada. Permasalahan ini bisa dipandang sebagai masalah optimisasi berupa _binary linear programming_ (BLP) dengan variabel keputusan berupa bilangan biner yang menyatakan apakah suatu _listed product_ perlu diberikan diskon atau tidak. Beberapa metode eksak bisa digunakan untuk menyelesaikan permasalahan ini. Namun dengan banyaknya variabel keputusan yang terlibat, pendekatan penyelesaian secara _meta heuristic_ bisa dipertimbangkan untuk digunakan. _Spiral dynamic optimization algorithm_ (SDOA) merupakan salah satu algoritma _meta heuristic_ telah terbukti bisa digunakan untuk menyelesaikan permasalahan BLP dengan variabel keputusan yang sedikit. Pada penelitian ini, SDOA akan dikembangkan untuk menyelesaikan permasalahan optimisasi portofolio diskon produk dengan variabel keputusan yang banyak.
+
+___Keywords___: _E-Commerce_, _market place_, diskon, optimisasi, _meta heuristic_, _spiral dynamic optimization algorithm_.
+
+\newpage
+
+# LATAR BELAKANG
+
+Saat ini 30 juta orang Indonesia terbiasa bertransaksi jual-beli secara _online_ sehingga menciptakan pasar sebesar 8 triliun rupiah. Pasar ini bisa terus berkembang hingga 40 triliun dalam 5 tahun ke depan^[https://www.mckinsey.com/spContent/digital_archipelago/index.html]. Transaksi _online_ bisa dibedakan menjadi dua jenis, yakni _social commerce_ (perdagangan via _platform_ media sosial) dan _e-commerce_ (perdagangan via _platform marketplace_). Pada tahun 2022, diproyeksikan pendapatan dari pasar _e-commerce_ akan melebihi 62 juta dollar AS^[https://www.statista.com/outlook/dmo/ecommerce/indonesia#revenue]. Penambahan ini disumbang oleh semakin banyaknya UMKM yang memasarkan produknya di _e-commerce_. Total UMKM yang memasarkan produknya di _e-commerce_ saat ini ada sebanyak 14.5 juta UMKM. Jumlahnya belum mencapai setengah dari target yang ditetapkan pada 2023 mendatang, yakni 30 juta UMKM^[https://www.cnnindonesia.com/ekonomi/20210807160341-92-677709/umkm-masuk-e-commerce-di-ri-tambah-65-juta].
+
+Setiap produk yang dipasarkan di _marketplace_ (_listed products_) memiliki harga yang didefinisikan oleh toko atau penjual. Pihak _marketplace_ tidak bisa melakukan intervensi langsung terhadap penetapan harga tersebut, namun mereka bisa melakukan intervensi tak langsung dengan cara memberikan sejumlah _budget_ diskon agar harga yang dibayarkan konsumen lebih rendah dibandingkan harga yang diberikan toko. Potongan diskon ini bertujuan untuk menarik konsumen agar tertarik membeli produk di _marketplace_ tersebut pada periode tertentu.
+
+Masalah yang kemudian dihadapi oleh _marketplace_ adalah menentukan produk mana saja yang perlu diberikan _budget_ diskon tambahan. Masalah ini bisa dipandang sebagai masalah optimisasi _binary linear programming_, yakni memilih protofolio diskon produk yang tepat untuk memaksimalkan _sales_ dengan _constraint_ berupa _budget_ diskon yang terbatas.
+
+Salah satu pendekatan yang bisa dipakai untuk menyelesaikan masalah optimisasi adalah dengan menggunakan algoritma _meta heuristic_. Salah satunya adalah _spiral dynamic optimization algorithm_. Pada penelitian ini, kelak akan dikembangkan suatu model komputasi yang berguna untuk memodelkan masalah optimisasi portofolio diskon produk dan menyelesaikannya menggunakan SDOA. Hasil dari komputasi ini akan dibandingkan dengan portofolio produk yang telah digunakan oleh _marketplace_ pada periode waktu tersebut untuk menguji kelayakannya.
+
+# TINJAUAN PUSTAKA
+
+### Studi Tentang Diskon dan Strategi Harga
+
+Suatu studi di _online retailer di China_ menunjukkan ada pengaruh antara diskon produk dengan _consumer purchase behavior_ seperti _purchase incident_, _purchase quantity_, dan _spending_. Terutama pada rentang persentase diskon tertentu [@cny]. Dalam jurnal ini, didefinisikan dua jenis diskon, yakni: _product-specific discount_ (PD) dan _order coupons_ (OD). Salah satu temuan penelitian ini adalah toko _online_ perlu menawarkan OD yang rendah ditambah dengan PD yang tinggi.
+
+Strategi pemberian harga produk adalah salah satu strategi penting bagi setiap perusahaan. Untuk melakukannya, kita bisa membuat model antara _demand - price_ yang disebut dengan _price elasticity_ dan memaksimalkan _profit_.
+
+Ada beberapa model yang bisa dibuat, salah satunya dengan _decision analysis_ yang mengandalkan ketidakpastian untuk memaksimalkan suatu _objective_ tertentu [@kennethko]. Namun pada studi ini, contoh kasus yang digunakan adalah penentuan harga untuk suatu produk mobil dari _brand_ tertentu. Sehingga ada faktor ketidakpastian dalam makro ekonomi yang dijadikan asumsi dasarnya.
+
+Studi lain membandingkan model _price elasticity_ dengan basis model linear antara _demand_ dan harga dengan berbagai bentuk lainnya (seperti polinom dan eksponensial - termasuk _inverse_ fungsinya). Namun disebutkan bahwa model linear merupakan model yang umum digunakan pada analisa _supply demand_ secara teoritis [@linear_reg].
+
+### Studi Tentang Optimisasi
+
+Ada beberapa hal yang perlu diketahui terkait pemodelan dari masalah optimisasi, yakni:
+
+1. Variabel adalah suatu simbol yang memiliki banyak nilai dan nilainya ingin kita ketahui. Setiap nilai yang mungkin dari suatu variabel muncul akibat suatu kondisi tertentu di sistem.
+1. Parameter di suatu model matematika adalah suatu konstanta yang menggambarkan suatu karakteristik dari sistem yang sedang diteliti. Parameter bersifat _fixed_ atau _given_.
+1. _Constraints_ (atau kendala) adalah kondisi atau batasan yang harus dipenuhi. Kendala-kendala ini dapat dituliskan menjadi suatu persamaan atau pertaksamaan. Suatu masalah optimisasi dapat memiliki hanya satu kendala atau banyak kendala.
+1. _Objective function_ adalah satu fungsi (pemetaan dari variabel-variabel keputusan ke suatu nilai di daerah _feasible_) yang nilainya akan kita minimumkan atau kita maksimumkan.
+
+Ekspresi matematika dari model optimisasi adalah sebagai berikut:
+
+> Cari $x$ yang meminimumkan $f(x)$ dengan kendala $g(x) = 0, h(x) \leq 0$ dan $x \in D$.
+
+Dari ekspresi tersebut, kita bisa membagi-bagi masalah optimisasi tergantung dari:
+
+1. Tipe variabel yang terlibat.
+1. Jenis fungsi yang ada (baik _objective function_ ataupun _constraints_).
+
+Metode _simplex_ adalah salah satu metode yang paling umum digunakan dalam menyelesaikan permasalahan _linear programming_. Metode _simplex_ merupakan __metode eksak__ yang menggunakan prosedur aljabar tapi _underlying concept_ dari metode ini adalah geometrik[@lieberman]. Untuk menyelesaikan masalah BLP perlu ada modifikasi berupa _constraint relaxation_.
+
+### Studi Tentang _Binary Linear Programming_
+
+Masalah optimisasi yang dihadapi termasuk ke dalam _binary linear programming_. _Binary programming_ adalah bentuk metode optimisasi di mana variabel yang terlibat merupakan bilangan biner (0,1). Biasanya metode ini dipakai dalam masalah-masalah yang memerlukan prinsip _matching_ antar kondisi (indeks) yang ada [@lieberman].
+
+Salah satu studi terkait aplikasi penggunaan _binary linear programming_ yang dilakukan pada 2014 adalah penentuan penempatan _phasor measuring unit_ dalam suatu _power system_ (penggunaan prinsip _matching_)[@suresh]. Dalam penelitian ini dibuat model _binary_ kompleks dengan memperhatikan _constraints_ penempatan PMU. Peneliti menggunakan MATLAB dan CPLEX untuk mencari solusi yang optimal.
+
+Salah satu studi pada 2019 membuat model _binary programming_ untuk mengoptimalkan pemilihan _100 marketing channel and activites_ terhadap jutaan _customers_ [@ieee]. Tujuannya adalah agar pesan _marketing_ yang diberikan tersampaikan dengan baik sehingga _sales_ bisa meningkat. Masalah optimisasi terkait bisnis dan konsumen - sentris belum banyak dituliskan dalam jurnal.
+
+### Studi Tentang Metode _Meta Heuristic_ (SDOA)
+
+SDOA merupakan salah satu algoritma yang terinspirasi oleh gerakan spiral pada _natural events_. Prinsip aljabar yang erat kaitannya dengan SDOA ini adalah matriks rotasi [@tamura].
+
+Pada studi tahun 2016, _spiral optimization algorithm_ terbukti bisa digunakan untuk menyelesaikan masalah _binary LP_ dengan cara memodifikasi _objective function_ dan _constraints_ yang ada [@kun]. Ide dasarnya adalah mengubah _constrained problem_ menjadi _unconstrained problem_ dengan membuat _penalty function_. Pada studi lain di tahun 2016, peneliti membuat _adaptive linear_ SDOA dengan mengubah nilai konstanta konstraksi menjadi suatu fungsi tertentu yang bergantung pada nilai fungsi masing-masing calon solusi[@sdoa2]. 
+
+Studi terbaru pada tahun 2022 melakukan review menyeluruh termasuk melakukan beberapa improvement dari SDOA[@sdoa3]. Seperti:
+
+1. Mengubah nilai konstanta konstraksi agar menghasilkan dua tipe spiral: konvensional dan _hypotrochoid_.
+2. Menyempurnakan _adaptive_ SDOA dengan memanfaatkan 4 fungsi: linear, _quadratic_, _fuzzy_, dan eksponensial.
+3. Melakukan persilangan antara SDOA dengan PSO menjadi PSO dengan pergerakan spiral.
+
+\newpage
+
+# METODE PENELITIAN
+
+Penelitian ini bertujuan untuk membuat suatu model komputasi dari input berupa data _listed products_, _budget_ diskon per produk, dan _expected profit_ per produk. Data ini bersumber dari salah satu _marketplace_ di Indonesia dalam kurun waktu periode diskon tertentu berdasarkan perhitungan _price elasticity_.
+
+```{r,echo=FALSE}
+library(readxl)
+library(dplyr)
+
+data = read_excel("20201207 Product list.xlsx") %>% janitor::clean_names() %>% filter(cost_benefit > 0)
+data %>% 
+  select(product_code,brand,burn_3m,cost_benefit) %>% 
+  tail(20) %>% 
+  rename(budget_disc = burn_3m,
+         exp_profit = cost_benefit) %>% 
+  knitr::kable(caption = "Sampel 20 Baris Data")
+```
+
+Secara total ada $1.000$ baris data calon _listed products_ dengan total _budget_ yang disediakan oleh _marketplace_ sebesar $Rp 200.000.000$.
+
+\newpage
+
+Alur penelitian ini adalah sebagai berikut:
+
+```{r out.width="60%",echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Alur Penelitian"}
+nomnoml::nomnoml("#direction:down,
+                 [<start>start] -> [Membuat model optimisasi\nBLP]
+                 [Membuat model optimisasi\nBLP] -> [<input>data listed product]
+                 [<input>data listed product] -> [Portofolio existing\n(sebagai pembanding)]
+                 
+                 [Portofolio existing\n(sebagai pembanding)] -> [Profit_e]
+                 
+                 [<input>data listed product] -> [Metode SDOA]
+                 [Metode SDOA] -> [Solusi*\nProfit_*]
+                 
+                 [Solusi*] -> [<choice>Profit_* >= Profit_e]
+                 
+                 [<choice>Profit_* >= Profit_e] -> T [Portofolio produk]
+                 
+                 [Portofolio produk] -> [<end>end]
+                 
+                 [<choice>Profit_* >= Profit_e] -> F [Improving algorithm|Reselecting: theta, r\nModifying: obj_function]
+                 [Improving algorithm] -> [Metode SDOA]
+                 
+                 ")
+```
+
+Dari masalah yang ada, akan dibuat model optimisasinya (BLP) yang kemudian akan dijadikan model komputasi berbasis SDOA untuk mencari solusi yang lebih baik daripada solusi _existing_ yang dimiliki oleh _marketplace_ tersebut. Beberapa _improvement_ yang bisa dilakukan adalah:
+
+1. Memodifikasi _objective function_ agar bisa mengakomodir operasi matriks rotasi berdimensi sebanyak variabel keputusan yang terlibat ($1000 \times 1000$).
+1. Memilih bentuk spiral yang terbaik dengan mengubah nilai konstanta konstraksi ($r$) dan berapa banyak rotasi ($\theta$).
+
+\newpage
+
+# JADWAL PENELITIAN 
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',fig.cap="Timeline Penelitian"}
+library(ggplot2)
+library(dplyr)
+library(reshape2)
+
+rm(list=ls())
+
+gant = data.frame(
+    activity = c("Pembuatan proposal",
+                 "Proposal submission",
+                 "Pengambilan data",
+                 "Preprocessing data",
+                 "Pembuatan model optimisasi",
+                 "Pembuatan model komputasi SDOA",
+                 "Validasi hasil komputasi",
+                 "Pembuatan report",
+                 "Report submission",
+                 "Presentasi report"),
+    state = c("Project Preparation",
+              "Project Preparation",
+              "Data Preparation",
+              "Data Preparation",
+              "Modelling",
+              "Modelling",
+              "Modelling",
+              "Reporting",
+              "Reporting",
+              "Reporting"),
+    start = c("2022-03-08", # Pembuatan proposal
+              "2022-03-08", # Proposal submission
+              "2022-03-09", # Pengambilan data
+              "2022-03-16", # Preprocessing data
+              "2022-03-21", # Pembuatan model optimisasi
+              "2022-03-26", # Pembuatan model komputasi SDOA
+              "2022-04-09", # Validasi hasil komputasi
+              "2022-04-21", # Pembuatan report
+              "2022-04-28", # Report submission
+              "2022-05-04"),# Presentasi report
+    end = c("2022-03-08",  # Pembuatan proposal
+            "2022-03-08",  # Proposal submission
+            "2022-03-15",  # Pengambilan data
+            "2022-03-21",  # Preprocessing data
+            "2022-03-25",  # Pembuatan model optimisasi
+            "2022-04-13",  # Pembuatan model komputasi SDOA
+            "2022-04-20",  # Validasi hasil komputasi
+            "2022-04-27",  # Pembuatan report
+            "2022-05-05",  # Report submission
+            "2022-05-11")  # Presentasi report
+)
+
+gant %>% 
+  relocate(state,.before = activity) %>% 
+  rename(Keterangan = state,
+         "Uraian Kegiatan" = activity,
+         "Rencana mulai" = start,
+         "Rencana selesai" = end) %>% 
+  knitr::kable(align = "c",caption = "Jadwal Penelitian")
+
+gant$activity = factor(gant$activity,levels = gant$activity)
+gant$start = lubridate::date(gant$start)
+gant$end = lubridate::date(gant$end)
+
+gant_2 = 
+  gant %>% 
+  melt(id.vars = c("activity","state")) %>% 
+  rename(keterangan = variable,
+         date = value) 
+        
+title_gant = "Gantt Chart Timeline Penelitian"
+min = min(gant_2$date)
+max = max(gant_2$date)
+        
+        gant_2 %>% 
+            ggplot(aes(date,activity,color = state)) +
+            geom_line(aes(group = activity),size = 8) +
+            theme_minimal() +
+            labs(title = title_gant,
+                 x = "Tanggal",
+                 y = "Aktivitas",
+                 color = "Keterangan") +
+            theme(plot.title = element_text(face = "bold",size = 12),
+                  legend.position = "none") +
+            geom_vline(xintercept = min) +
+            geom_vline(xintercept = max) +
+            annotate("label",
+                     x = min+1, 
+                     y = max(length(unique(gant_2$activity))-1), 
+                     label = paste0("Start:\n",min),
+                     size = 2.5) +
+            annotate("label",
+                     x = max-1, 
+                     y = 2, 
+                     label = paste0("End:\n",max),
+                     size = 2.5) +
+          scale_colour_brewer(palette = "Pastel1")
+
+```
+
+# DAFTAR PUSTAKA
+
+<div id="refs"></div>

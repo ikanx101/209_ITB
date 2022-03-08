@@ -1,0 +1,83 @@
+---
+title: "Clustering Binary Dataset dengan Menggunakan Pendekatan Meta Heuristic"
+subtitle: "Travelling Salesperson Problem dan Spiral Optimization Algorithm"
+author: "Ikang Fadhli"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  rmdformats::readthedown
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Meta Heuristics/Spiral Optimization/tulisan 5")
+rm(list=ls())
+
+library(dplyr)
+library(TSP)
+library(leaflet)
+
+set.seed(10104074)
+
+data = read.csv("bank.csv")
+
+
+```
+
+```{r}
+leaflet() %>% 
+  addTiles() %>% 
+  addCircleMarkers(lng = data$lng,
+                   lat = data$lat)
+```
+
+```{r,fig.height=10}
+data$id = 1:nrow(data)
+
+load("hasil_spiral.rda")
+
+rekap = data.frame()
+counter = hasil_final$id_cluster %>% length()
+for(i in 1:counter){
+  id = hasil_final$id_cluster[[i]]
+  cl = rep(i,length(id))
+  temp = data.frame(id,cl)
+  rekap = rbind(temp,rekap)
+}
+
+rekap
+
+library(ggplot2)
+
+data_final = merge(data,rekap)
+data_final %>% 
+  ggplot(aes(y = lat,
+             x = lng,
+             color = factor(cl))
+         ) +
+  geom_point() +
+  facet_wrap(~cl) +
+  theme(legend.position = "none")
+```
+
+
+```{r}
+leaflet() %>% 
+  addTiles() %>% 
+  addCircleMarkers(lng = data_final$lng[which(data_final$cl == 1)],
+                   lat = data_final$lat[which(data_final$cl == 1)],
+                   color = "red") %>% 
+  addCircleMarkers(lng = data_final$lng[which(data_final$cl == 2)],
+                   lat = data_final$lat[which(data_final$cl == 2)],
+                   color = "blue") %>% 
+  addCircleMarkers(lng = data_final$lng[which(data_final$cl == 3)],
+                   lat = data_final$lat[which(data_final$cl == 3)],
+                   color = "green") %>% 
+  addCircleMarkers(lng = data_final$lng[which(data_final$cl == 4)],
+                   lat = data_final$lat[which(data_final$cl == 4)],
+                   color = "black") %>% 
+  addCircleMarkers(lng = data_final$lng[which(data_final$cl == 5)],
+                   lat = data_final$lat[which(data_final$cl == 5)],
+                   color = "yellow") 
+
+
+```

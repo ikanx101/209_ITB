@@ -1,23 +1,26 @@
 ---
-title: <b>METAHEURISTIC OPTIMIZATION ALGORITHM SERIES</b>
-subtitle: Mixed Integer Programming using Spiral Optimization Algorithm
-author: 
-  - name: Ikang Fadhli
-    affiliation: "ikanx101.com"
+title: "<b>METAHEURISTIC OPTIMIZATION ALGORITHM SERIES</b>"
+author:
+- name: Ikang Fadhli
+  affiliation: ikanx101.com
 date: "`r format(Sys.time(), '%d %B %Y')`"
-dev: png
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: '4'
   html_document:
-    toc: true
+    toc: yes
     toc_depth: 4
-    toc_float: 
-        collapsed: false
-        smooth_scroll: true
-    number_sections: false
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+    number_sections: no
     theme: journal
     highlight: haddock
     fig_caption: yes
     code_folding: show
+dev: png
+subtitle: Mixed Integer Programming using Spiral Optimization Algorithm
 ---
 
 ```{r setup, include=FALSE}
