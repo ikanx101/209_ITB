@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  1 MAR 2022 09:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.9.1)  10 MAR 2022 10:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -331,6 +331,68 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layouthoffset=\dimen159
 \Gm@layoutvoffset=\dimen160
 \Gm@dimlist=\toks25
+) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count284
+\LTcapwidth=\dimen161
+\LT@head=\box53
+\LT@firsthead=\box54
+\LT@foot=\box55
+\LT@lastfoot=\box56
+\LT@gbox=\box57
+\LT@cols=\count285
+\LT@rows=\count286
+\c@LT@tables=\count287
+\c@LT@chunks=\count288
+\LT@p@ftn=\toks26
+) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen162
+\lightrulewidth=\dimen163
+\cmidrulewidth=\dimen164
+\belowrulesep=\dimen165
+\belowbottomsep=\dimen166
+\aboverulesep=\dimen167
+\abovetopsep=\dimen168
+\cmidrulesep=\dimen169
+\cmidrulekern=\dimen170
+\defaultaddspace=\dimen171
+\@cmidla=\count289
+\@cmidlb=\count290
+\@aboverulesep=\dimen172
+\@belowrulesep=\dimen173
+\@thisruleclass=\count291
+\@lastruleclass=\count292
+\@thisrulewidth=\dimen174
+) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen175
+\ar@mcellbox=\box58
+\extrarowheight=\dimen176
+\NC@list=\toks27
+\extratabsurround=\skip58
+\backup@length=\skip59
+\ar@cellbox=\box59
+) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count293
+\calc@Bcount=\count294
+\calc@Adimen=\dimen177
+\calc@Bdimen=\dimen178
+\calc@Askip=\skip60
+\calc@Bskip=\skip61
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count295
+\calc@Cskip=\skip62
+) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box60
+\fn@width=\dimen179
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
@@ -342,68 +404,68 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 )
-\Gin@req@height=\dimen161
-\Gin@req@width=\dimen162
+\Gin@req@height=\dimen180
+\Gin@req@width=\dimen181
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
 rs
-\f@nch@headwidth=\skip54
-\f@nch@O@elh=\skip55
-\f@nch@O@erh=\skip56
-\f@nch@O@olh=\skip57
-\f@nch@O@orh=\skip58
-\f@nch@O@elf=\skip59
-\f@nch@O@erf=\skip60
-\f@nch@O@olf=\skip61
-\f@nch@O@orf=\skip62
+\f@nch@headwidth=\skip63
+\f@nch@O@elh=\skip64
+\f@nch@O@erh=\skip65
+\f@nch@O@olh=\skip66
+\f@nch@O@orh=\skip67
+\f@nch@O@elf=\skip68
+\f@nch@O@erf=\skip69
+\f@nch@O@olf=\skip70
+\f@nch@O@orf=\skip71
 )
 
 Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 70.
+less on input line 80.
 
 
 Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is use
-less on input line 71.
+less on input line 81.
 
 
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.de
 f
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count284
-\l__pdf_internal_box=\box53
+\l__color_backend_stack_int=\count296
+\l__pdf_internal_box=\box61
 ) (./Penelitian-Mandiri-III-dan-IV.aux)
 \openout1 = `Penelitian-Mandiri-III-dan-IV.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Info: Redefining \microtypecontext on input line 89.
-Package microtype Info: Applying patch `item' on input line 89.
-Package microtype Info: Applying patch `toc' on input line 89.
-Package microtype Info: Applying patch `eqnum' on input line 89.
-Package microtype Info: Applying patch `footnote' on input line 89.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Info: Redefining \microtypecontext on input line 99.
+Package microtype Info: Applying patch `item' on input line 99.
+Package microtype Info: Applying patch `toc' on input line 99.
+Package microtype Info: Applying patch `eqnum' on input line 99.
+Package microtype Info: Applying patch `footnote' on input line 99.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 89.
+LaTeX Info: Redefining \showhyphens on input line 99.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -420,7 +482,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 89.
+Package hyperref Info: Link coloring ON on input line 99.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -430,11 +492,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ng.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count285
+\c@section@level=\count297
 )
-LaTeX Info: Redefining \ref on input line 89.
-LaTeX Info: Redefining \pageref on input line 89.
-LaTeX Info: Redefining \nameref on input line 89.
+LaTeX Info: Redefining \ref on input line 99.
+LaTeX Info: Redefining \pageref on input line 99.
+LaTeX Info: Redefining \nameref on input line 99.
 (./Penelitian-Mandiri-III-dan-IV.out) (./Penelitian-Mandiri-III-dan-IV.out)
 \@outlinefile=\write3
 \openout3 = `Penelitian-Mandiri-III-dan-IV.out'.
@@ -473,41 +535,41 @@ LaTeX Info: Redefining \nameref on input line 89.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 9
-1.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+01.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 9
-1.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+01.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-91.
+101.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-91.
+101.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 91.
+(Font)              <14.4> on input line 101.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 91.
+(Font)              <10> on input line 101.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 91.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 91.
-
+(Font)              <7> on input line 101.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 101
+.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 91.
-
+LaTeX Font Info:    Trying to load font information for U+msb on input line 101
+.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -522,7 +584,15 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 2.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 2.
-)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[2])
 \tf@toc=\write4
 \openout4 = `Penelitian-Mandiri-III-dan-IV.toc'.
 
@@ -534,7 +604,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[2] (./Penelitian-Mandiri-III-dan-IV.lof)
+[3] (./Penelitian-Mandiri-III-dan-IV.lof)
 \tf@lof=\write5
 \openout5 = `Penelitian-Mandiri-III-dan-IV.lof'.
 
@@ -546,19 +616,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[3] (./Penelitian-Mandiri-III-dan-IV.lot)
+[4] (./Penelitian-Mandiri-III-dan-IV.lot)
 \tf@lot=\write6
 \openout6 = `Penelitian-Mandiri-III-dan-IV.lot'.
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[4]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -577,13 +638,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [6]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-38.
-(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-50.
+51.
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -605,6 +661,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [8]
+<ilustrasi.png, id=231, 1084.05pt x 505.89pt>
+File: ilustrasi.png Graphic file (type png)
+<use ilustrasi.png>
+Package pdftex.def Info: ilustrasi.png  used on input line 282.
+(pdftex.def)             Requested size: 422.7778pt x 197.2963pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -613,7 +674,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[9]
+[9 <./ilustrasi.png (PNG copy)>]
+<ilustrasi_2.png, id=239, 1084.05pt x 578.16pt>
+File: ilustrasi_2.png Graphic file (type png)
+<use ilustrasi_2.png>
+Package pdftex.def Info: ilustrasi_2.png  used on input line 358.
+(pdftex.def)             Requested size: 422.7778pt x 225.48149pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -631,42 +697,129 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[11] (./Penelitian-Mandiri-III-dan-IV.aux)
+[11 <./ilustrasi_2.png (PNG copy)>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[12]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[13]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[14]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 5
+85.
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[15]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[16]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[17]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[18]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[19]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[20] (./Penelitian-Mandiri-III-dan-IV.aux)
 Package rerunfilecheck Info: File `Penelitian-Mandiri-III-dan-IV.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: AC6411EE49F9B305B3CA9B9BD38DFBBA;1790.
+(rerunfilecheck)             Checksum: 18F36AB5E692896E978764F2BEBCD220;6056.
  ) 
 Here is how much of TeX's memory you used:
- 12588 strings out of 480559
- 190494 string characters out of 5902712
- 548070 words of memory out of 5000000
- 29846 multiletter control sequences out of 15000+600000
- 471135 words of font info for 114 fonts, out of 8000000 for 9000
+ 13126 strings out of 480559
+ 198597 string characters out of 5902712
+ 563967 words of memory out of 5000000
+ 30238 multiletter control sequences out of 15000+600000
+ 478016 words of font info for 139 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,12n,66p,1026b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,12n,66p,1026b,449s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/ho
 me/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ika
 nx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/ikanx_ser
-ver/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/.TinyT
-eX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/home/ikanx_server/.TinyTeX/texmf-
-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_server/.TinyTeX/texmf-dist/fonts
+ver/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/ikanx_server/.TinyT
+eX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/.TinyTeX/texmf-d
+ist/fonts/enc/dvips/lm/lm-ts1.enc}</home/ikanx_server/.TinyTeX/texmf-dist/fonts
 /type1/public/lm/lmbx12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1
-/public/lm/lmex10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/publi
-c/lm/lmmi12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/l
-mmi6.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pf
-b></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></hom
-e/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/ikanx
-_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/ikanx_server/
-.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></home/ikanx_server/.TinyT
-eX/texmf-dist/fonts/type1/public/lm/lmro12.pfb></home/ikanx_server/.TinyTeX/tex
-mf-dist/fonts/type1/public/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dis
-t/fonts/type1/public/lm/lmsy8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts
-/type1/public/lm/lmtt12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1
-/public/amsfonts/symbols/msbm10.pfb>
-Output written on Penelitian-Mandiri-III-dan-IV.pdf (11 pages, 229388 bytes).
+/public/lm/lmbxi10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/publ
+ic/lm/lmex10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/
+lmmi12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.
+pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></h
+ome/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/ika
+nx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/ikanx_serv
+er/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/ikanx_server/.Tiny
+TeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></home/ikanx_server/.TinyTeX/te
+xmf-dist/fonts/type1/public/lm/lmro12.pfb></home/ikanx_server/.TinyTeX/texmf-di
+st/fonts/type1/public/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fon
+ts/type1/public/lm/lmsy8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type
+1/public/lm/lmtt12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/publ
+ic/amsfonts/symbols/msbm10.pfb>
+Output written on Penelitian-Mandiri-III-dan-IV.pdf (20 pages, 1070409 bytes).
 PDF statistics:
- 248 PDF objects out of 1000 (max. 8388607)
- 202 compressed objects within 3 object streams
- 59 named destinations out of 1000 (max. 500000)
- 39009 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 460 PDF objects out of 1000 (max. 8388607)
+ 400 compressed objects within 4 object streams
+ 138 named destinations out of 1000 (max. 500000)
+ 41219 words of extra memory for PDF output out of 42996 (max. 10000000)
 
