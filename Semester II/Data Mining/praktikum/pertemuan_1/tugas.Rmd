@@ -1,0 +1,43 @@
+---
+title: "PRAKTIKUM PENAMBANGAN DATA"
+subtitle: "Tugas Praktikum I"
+author: "Mohammad Rizka Fadhli 20921004"
+institute: "Magister Sains Komputasi, ITB"
+date: "17 Maret 2021"
+output: 
+  html_document:
+   toc: true
+   numer: true
+---
+
+```{r, include=FALSE}
+rm(list=ls())
+```
+
+# KETERANGAN
+
+## Bahasa yang Digunakan
+
+Pada praktikum ini, saya menggunakan bahasa __R__ versi `4`.
+
+Beberapa _libraries_ yang digunakan antara lain:
+
+1. `dplyr` untuk melakukan _data carpentry_.
+1. `janitor` untuk merapikan penamaan atribut (kolom).
+1. `caret` untuk melakukan _one hot encoding_ dan beberapa _scaling data_.
+
+Selain itu, akan dibuat beberapa _custom function_ untuk memudahkan menjawab soal.
+
+### Cek Apakah Libraries Sudah Installed
+
+```{r}
+paket = c("dplyr","janitor","caret")
+setdiff(paket,rownames(installed.packages()))
+```
+
+## _Notebook_ atau _Markdown_
+
+_Notebook_ atau _Markdown_ ini ditulis memanfaatkan `library(rmarkdown)` dan di-_export_ ke dalam format `.html`.
+
+# SOAL
+# JAWABAN DAN PEMBAHASAN
