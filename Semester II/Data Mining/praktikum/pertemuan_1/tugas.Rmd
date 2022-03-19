@@ -22,7 +22,7 @@ Pada praktikum ini, saya menggunakan bahasa __R__ versi `4`.
 
 Beberapa _libraries_ yang digunakan antara lain:
 
-1. `dplyr` untuk melakukan _data carpentry_.
+1. `dplyr` untuk melakukan _data carpentry_. Saya akan menggunakan prinsip _tidy_ dengan memanfaatkan _pipe operator_ `%>%`.
 1. `janitor` untuk merapikan penamaan atribut (kolom).
 1. `caret` untuk melakukan _one hot encoding_ dan beberapa _scaling data_.
 
@@ -30,9 +30,19 @@ Selain itu, akan dibuat beberapa _custom function_ untuk memudahkan menjawab soa
 
 ### Cek Apakah Libraries Sudah Installed
 
+Pertama-tama saya akan coba cek terlebih dahulu apakah _libraries_ yang dibutuhkan sudah ter-_install_ atau tidak. Jika tidak, saya akan buat agar __R__ meng-_install_-nya terlebih dahulu.
+
 ```{r}
 paket = c("dplyr","janitor","caret")
 setdiff(paket,rownames(installed.packages()))
+```
+
+### Memanggil _Libraries_
+
+```{r,message = FALSE, warning = FALSE}
+library(dplyr)
+library(janitor)
+library(caret)
 ```
 
 ## _Notebook_ atau _Markdown_
@@ -40,4 +50,29 @@ setdiff(paket,rownames(installed.packages()))
 _Notebook_ atau _Markdown_ ini ditulis memanfaatkan `library(rmarkdown)` dan di-_export_ ke dalam format `.html`.
 
 # SOAL
+
 # JAWABAN DAN PEMBAHASAN
+
+## Memanggil Data
+
+Kita akan _import_ data `melb.csv` ke dalam _environment_ lalu mengubah nama atribut agar lebih rapi dengan cara:
+
+```{r}
+data =
+   read.csv("melb.csv") %>%	# import data
+   janitor::clean_names()	# merapikan nama atribut
+```
+
+Kita akan cek terlebih dahulu struktur data dan _summary_ singkatnya sebagai berikut:
+
+```{r}
+data %>% str()
+data %>% summary()
+```
+
+Beberapa temuan yang kita dapatkan:
+
+### Tipe Data
+
+### Data `NA`
+
