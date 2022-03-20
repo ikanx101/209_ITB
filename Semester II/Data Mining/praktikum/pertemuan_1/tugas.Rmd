@@ -51,6 +51,20 @@ _Notebook_ atau _Markdown_ ini ditulis memanfaatkan `library(rmarkdown)` dan di-
 
 # SOAL
 
+## _Import_ Data dan _Preprocessing_
+
+Muatlah data `melb.csv` dan lakukan _preprocessing_ berikut:
+
+1. _Imputation_
+2. _One hot encoding_
+3. _Thresholding_ dan _binarizing_
+4. _Scalling_ dan _normalizing_
+5. _Oversampling_ atau _undersampling_
+
+## _Dimension Reduction_ - PCA
+
+Ekstrak dua _principal component_ dari `melb.csv` yang telah di-_preprocessing_. Lakukan _machine learning_ regresi untuk memprediksi `proce` dan amati perbandingan _loss value_ sebelum dan setelah diekstrak menjadi komponen utama.
+
 # JAWABAN DAN PEMBAHASAN
 
 ## Memanggil Data
@@ -72,7 +86,4 @@ data %>% summary()
 
 Beberapa temuan yang kita dapatkan:
 
-### Tipe Data
-
-### Data `NA`
 
