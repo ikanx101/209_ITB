@@ -7,7 +7,12 @@ date: "17 Maret 2021"
 output: 
   html_document:
    toc: true
-   numer: true
+   number_sections: true
+   theme: readable
+   highlight: espresso
+   toc_float:
+     collapse: false
+   fig_caption: true
 ---
 
 ```{r, include=FALSE}
@@ -34,7 +39,7 @@ Pertama-tama saya akan coba cek terlebih dahulu apakah _libraries_ yang dibutuhk
 
 ```{r}
 paket = c("dplyr","janitor","caret")
-setdiff(paket,rownames(installed.packages()))
+install.packages(setdiff(paket,rownames(installed.packages())))
 ```
 
 ### Memanggil _Libraries_
@@ -84,6 +89,33 @@ data %>% str()
 data %>% summary()
 ```
 
+<br>
+
 Beberapa temuan yang kita dapatkan:
 
+### Tipe Data
 
+Kita lihat bahwa beberapa atribut memiliki tipe data yang berbeda-beda. Mulai dari `character` hingga `numeric`.
+
+Untuk beberapa atribut bertipe `character` yang __penting__, saya akan ubah menjadi tipe numerik dengan melakukan _one hot encoding_, yakni atribut:
+
+1. `type`
+1. `method`
+1. `seller`
+1. `council_area`
+1. `regionname`
+
+Sedangkan untuk data bertipe numerik, saya akan lakukan normalisasi dengan cara berikut:
+
+$$\hat{x} = \frac{x - \bar{x}}{\sigma}$$
+
+### Data _Blank_ atau `NA`
+
+Khusus data yang memiliki nilai _blank_, baik pada tipe `numeric` dan `character`, saya akan lakukan _imputation_ dengan me-_replace_ data _blank_ tersebut dengan:
+
+1. Median untuk data numerik.
+1. Modus untuk data _character_.
+
+## _Pre-Processing_
+
+Pertama-tama lakukan terlebih dahulu _imputation_
