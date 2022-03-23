@@ -35,7 +35,7 @@ Selain itu, akan dibuat beberapa _custom function_ untuk memudahkan menjawab soa
 
 ### Cek Apakah Libraries Sudah Installed
 
-Pertama-tama saya akan coba cek terlebih dahulu apakah _libraries_ yang dibutuhkan sudah ter-_install_ atau tidak. Jika tidak, saya akan buat agar __R__ meng-_install_-nya terlebih dahulu.
+Pertama-tama saya akan coba cek terlebih dahulu apakah _libraries_ yang dibutuhkan sudah ter-_install_ atau tidak. Jika tidak, saya akan buat perintah agar __R__ meng-_install_-nya terlebih dahulu.
 
 ```{r}
 paket = c("dplyr","janitor","caret")
@@ -52,7 +52,7 @@ library(caret)
 
 ## _Notebook_ atau _Markdown_
 
-_Notebook_ atau _Markdown_ ini ditulis memanfaatkan `library(rmarkdown)` dan di-_export_ ke dalam format `.html`.
+_Notebook_ atau _markdown_ ini ditulis memanfaatkan `library(rmarkdown)` dan di-_export_ ke dalam format `.html`.
 
 # SOAL
 
@@ -105,17 +105,57 @@ Untuk beberapa atribut bertipe `character` yang __penting__, saya akan ubah menj
 1. `council_area`
 1. `regionname`
 
-Sedangkan untuk data bertipe numerik, saya akan lakukan normalisasi dengan cara berikut:
+Sedangkan untuk data bertipe numerik, saya akan lakukan normalisasi dengan metode _mean absolute deviation_. 
 
-$$\hat{x} = \frac{x - \bar{x}}{\sigma}$$
+$$\begin{matrix}
+z = \frac{x - m}{s}, \text{ dengan:} \\
+m = \frac{\sum{x}}{n} \\
+s = \frac{|x - m|}{n}
+\end{matrix}$$
+
+Berikut adalah _function_-nya:
+
+```{r}
+z_numeric = function(var){
+  n = length(var)           # menghitung n: berapa banyak data
+  m = sum(var) / n          # hitung variabel m
+  s = sum(abs(var - m))/n   # hitung variabel s
+  z = (var - m)/s           # hitung z
+  return(z)                 # output nilai z
+}
+```
+
+<br>
 
 ### Data _Blank_ atau `NA`
 
-Khusus data yang memiliki nilai _blank_, baik pada tipe `numeric` dan `character`, saya akan lakukan _imputation_ dengan me-_replace_ data _blank_ tersebut dengan:
+Khusus data yang memiliki nilai _blank_, saya akan lakukan _imputation_ dengan me-_replace_ data _blank_ tersebut dengan:
 
-1. Median untuk data numerik.
-1. Modus untuk data _character_.
+1. Median untuk atribut `car` dan `building_area`.
+1. Modus untuk atribut `year_built`.
 
 ## _Pre-Processing_
 
-Pertama-tama lakukan terlebih dahulu _imputation_
+Pertama-tama saya akan melakukan _imputation_ terlebih dahulu untuk beberapa atribut yang memiliki nilai _blank_.
+
+Untuk variabel bertipe _character_, berikut adalah _function_ untuk me-_replace_ nilai _blank_ dengan nilai modusnya:
+
+```{r}
+hitung_modus = function(var){
+  tabulasi = data %>% group_by(var) %>% tally() %>% arrange(desc = T)  # membuat tabulasi
+  modus = tabulasi[1,1] %>% as.numeric()                               # mencari nilai modus
+  return(modus)							       # output nilai modus
+}
+
+```
+
+Sedangkan berikut ini adalah _function_ untuk me-_replace_ nilai _blank_ dengan nilai _mean_ khusus data bertipe numerik:
+
+```{r}
+hitung_mean = function(var){median = median(var,na.rm = T)}
+```
+
+### _Imputation_
+
+Berikut ini adalah _imputation_ untuk data yang kita miliki:
+
