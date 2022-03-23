@@ -23,7 +23,7 @@ rm(list=ls())
 
 ## Bahasa yang Digunakan
 
-Pada praktikum ini, saya menggunakan bahasa __R__ versi `4`.
+Pada praktikum ini, saya menggunakan bahasa __R__ versi `4.1.2`.
 
 Beberapa _libraries_ yang digunakan antara lain:
 
@@ -95,13 +95,14 @@ Beberapa temuan yang kita dapatkan:
 
 ### Tipe Data
 
-Kita lihat bahwa beberapa atribut memiliki tipe data yang berbeda-beda. Mulai dari `character` hingga `numeric`.
+Kita lihat bahwa beberapa atribut memiliki tipe data yang berbeda-beda. Mulai dari _character_ hingga numerik.
 
 Untuk beberapa atribut bertipe `character` yang __penting__, saya akan ubah menjadi tipe numerik dengan melakukan _one hot encoding_, yakni atribut:
 
+1. `suburb`
 1. `type`
 1. `method`
-1. `seller`
+1. `seller_g`
 1. `council_area`
 1. `regionname`
 
@@ -116,7 +117,7 @@ s = \frac{|x - m|}{n}
 Berikut adalah _function_-nya:
 
 ```{r}
-z_numeric = function(var){
+normalize = function(var){
   n = length(var)           # menghitung n: berapa banyak data
   m = sum(var) / n          # hitung variabel m
   s = sum(abs(var - m))/n   # hitung variabel s
@@ -129,33 +130,82 @@ z_numeric = function(var){
 
 ### Data _Blank_ atau `NA`
 
-Khusus data yang memiliki nilai _blank_, saya akan lakukan _imputation_ dengan me-_replace_ data _blank_ tersebut dengan:
+Dari informasi di atas, ada tiga atribut yang memiliki nilai _blank_ atau `NA`, yakni:
 
-1. Median untuk atribut `car` dan `building_area`.
-1. Modus untuk atribut `year_built`.
+1. Atribut `car` dengan `62` baris data `NA`. Pada atribut ini, saya akan _replace_ `NA` dengan nilai median dari atribut tersebut.
+1. Atribut `building area` dengan `6450` baris data `NA`. Ini setara dengan $47.9 \%$ baris data kosong. Oleh karena itu, saya akan _drop_ atribut ini dari perhitungan regresi kelak.
+1. Atribut `year_built` dengan `5375` baris data `NA`. Ini setara dengan $39.58 \%$ baris data kosong. Oleh karena itu, saya akan _drop_ atribut ini dari perhitungan regresi kelak.
 
 ## _Pre-Processing_
 
-Pertama-tama saya akan melakukan _imputation_ terlebih dahulu untuk beberapa atribut yang memiliki nilai _blank_.
-
-Untuk variabel bertipe _character_, berikut adalah _function_ untuk me-_replace_ nilai _blank_ dengan nilai modusnya:
+Pertama-tama saya akan melakukan _imputation_ terlebih dahulu untuk atribut `car` dengan _function_ berikut:
 
 ```{r}
-hitung_modus = function(var){
-  tabulasi = data %>% group_by(var) %>% tally() %>% arrange(desc = T)  # membuat tabulasi
-  modus = tabulasi[1,1] %>% as.numeric()                               # mencari nilai modus
-  return(modus)							       # output nilai modus
-}
-
+median_car = median(data$car,na.rm = T)
 ```
 
-Sedangkan berikut ini adalah _function_ untuk me-_replace_ nilai _blank_ dengan nilai _mean_ khusus data bertipe numerik:
-
-```{r}
-hitung_mean = function(var){median = median(var,na.rm = T)}
-```
-
-### _Imputation_
+### _Imputation_ `car`
 
 Berikut ini adalah _imputation_ untuk data yang kita miliki:
+
+```{r,message=FALSE,warning=FALSE}
+data_clean =
+  data %>% # memanggil data
+  rowwise %>% 
+  mutate(car = ifelse(is.na(car),median_car,car)) %>% # mengganti NA dg median
+  ungroup() %>% 
+  select(-year_built,-building_area) # menghapus dua atribut
+```
+
+Sekarang kita akan cek apakah masih ada nilai _blank_ atau `NA` pada data:
+
+```{r}
+data_clean %>% anyNA()
+```
+
+### Pemilihan Atribut
+
+Saya juga akan _drop_ beberapa atribut yang dinilai tidak berpengaruh terhadap model regresi `price` kelak, yakni:
+
+1. `address`
+1. `date`
+1. `postcode`
+1. `lattitude`
+1. `longtitude`
+
+```{r}
+data_clean = 
+  data_clean %>% 
+  select(-address,
+         -date,
+         -postcode,
+         -lattitude,
+         -longtitude)
+```
+
+### _One Hot Encoding_ Atribut _Character_
+
+Selanjutnya kita akan ubah atribut _character_ menjadi numerik dengan mengubahnya menjadi bilangan biner setelah kita pecah terlebih dahulu menjadi banyak sesuai dengan isinya.
+
+```{r,message=FALSE,warning=FALSE}
+dummy = dummyVars("~.", data = data_clean)
+data_clean_2 = data.frame(predict(dummy, newdata = data_clean))
+```
+
+### _Normalizing_ Atribut Numerik
+
+Sekarang saya akan _normalize_ semua atribut numerik yang ada dengan _function_ yang sudah dibuat pada bagian sebelumnya.
+
+```{r,message=FALSE,warning=FALSE}
+data_clean_2 = 
+  data_clean_2 %>%
+  mutate(rooms = normalize(rooms),
+         price = normalize(price),
+         bedroom2 = normalize(bedroom2),
+         bathroom =  normalize(bathroom),
+         car = normalize(car),
+         landsize = normalize(landsize),
+         propertycount = normalize(propertycount))
+
+```
 
