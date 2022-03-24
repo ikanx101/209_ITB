@@ -30,6 +30,7 @@ Beberapa _libraries_ yang digunakan antara lain:
 1. `dplyr` untuk melakukan _data carpentry_. Saya akan menggunakan prinsip _tidy_ dengan memanfaatkan _pipe operator_ `%>%`.
 1. `janitor` untuk merapikan penamaan atribut (kolom).
 1. `caret` untuk melakukan _one hot encoding_ dan beberapa _scaling data_.
+1. `pls` untuk melakukan regresi linear dengan PCA.
 
 Selain itu, akan dibuat beberapa _custom function_ untuk memudahkan menjawab soal.
 
@@ -38,7 +39,7 @@ Selain itu, akan dibuat beberapa _custom function_ untuk memudahkan menjawab soa
 Pertama-tama saya akan coba cek terlebih dahulu apakah _libraries_ yang dibutuhkan sudah ter-_install_ atau tidak. Jika tidak, saya akan buat perintah agar __R__ meng-_install_-nya terlebih dahulu.
 
 ```{r}
-paket = c("dplyr","janitor","caret")
+paket = c("dplyr","janitor","caret","pls")
 install.packages(setdiff(paket,rownames(installed.packages())))
 ```
 
@@ -48,6 +49,7 @@ install.packages(setdiff(paket,rownames(installed.packages())))
 library(dplyr)
 library(janitor)
 library(caret)
+library(pls)
 ```
 
 ## _Notebook_ atau _Markdown_
@@ -68,7 +70,7 @@ Muatlah data `melb.csv` dan lakukan _preprocessing_ berikut:
 
 ## _Dimension Reduction_ - PCA
 
-Ekstrak dua _principal component_ dari `melb.csv` yang telah di-_preprocessing_. Lakukan _machine learning_ regresi untuk memprediksi `proce` dan amati perbandingan _loss value_ sebelum dan setelah diekstrak menjadi komponen utama.
+Ekstrak dua _principal component_ dari `melb.csv` yang telah di-_preprocessing_. Lakukan _machine learning_ regresi untuk memprediksi `price` dan amati perbandingan _loss value_ sebelum dan setelah diekstrak menjadi komponen utama.
 
 # JAWABAN DAN PEMBAHASAN
 
@@ -81,6 +83,16 @@ data =
    read.csv("melb.csv") %>%	# import data
    janitor::clean_names()	# merapikan nama atribut
 ```
+
+Berikut adalah sampel 10 data teratas dari `melb.csv`:
+
+```{r,echo=FALSE}
+data %>% 
+  head(10) %>% 
+  DT::datatable()
+```
+
+<br>
 
 Kita akan cek terlebih dahulu struktur data dan _summary_ singkatnya sebagai berikut:
 
@@ -207,5 +219,102 @@ data_clean_2 =
          landsize = normalize(landsize),
          propertycount = normalize(propertycount))
 
+```
+
+## Membuat Model Regresi
+
+Sekarang saya akan membuat model regresi dari `data_clean_2`. Pertama-tama saya akan pisah keseluruhan data menjadi `train_data` dan `test_data` secara random dengan proporsi `80-20`.
+
+```{r}
+# menyimpan price menjadi variabel baru bernama target
+target = data_clean_2$price
+# menghapus price dari data
+data_clean_2$price = NULL
+
+# set seed
+set.seed(20921004)
+
+# define proporsi untuk train dataset
+proporsi = 80/100
+train_p = nrow(data_clean_2) * proporsi
+
+# random id untuk kebutuhan train dan test
+id_train = sample(1:nrow(data_clean_2),
+                  train_p,
+                  replace = F)
+
+# train dataset
+target_train = target[id_train]
+train_data = data_clean_2[id_train,]
+
+# test dataset
+target_test = target[-id_train]
+test_data = data_clean_2[-id_train,]
+```
+
+### Model Regresi Linear Tanpa PCA
+
+Sekarang kita akan membuat model regresi linear untuk memprediksi `price` dari `train_data`. Kemudian hasilnya akan kita hitung akurasinya dengan `test_data`. Saya akan gunakan _Mean Absolute Error_ (MAE) sebagai parameter _goodness of fit_ dari model.
+
+```{r,message=FALSE,warning=FALSE}
+# mempersiapkan data
+reg_lin_data = cbind(train_data,target_train)
+# membuat model regresi linear
+model = lm(target_train ~ .,
+           data = reg_lin_data)
+```
+
+<br>
+
+Berikut adalah _summary_ dari model di atas:
+
+```{r,message=FALSE,warning=FALSE}
+summary(model)
+```
+
+<br>
+
+Kita akan hitung MAE dari hasil model menggunakan `test_data` berikut ini:
+
+```{r,message=FALSE,warning=FALSE}
+# menghitung hasil prediksi dari test data
+hasil_prediksi = predict(model,test_data)
+# menghitung MAE hasil prediksi vs price pada test_data
+mae = MAE(hasil_prediksi,target_test)
+mae
+```
+
+<br>
+
+Kita dapatkan MAE sebesar `r mae`.
+
+### Model Regresi Linear dengan PCA
+
+Sekarang saya akan membuat model regresi dengan menggunakan PCA.
+
+```{r,message=FALSE,warning=FALSE}
+model_2 = pcr(target_train ~ .,
+              data = reg_lin_data,
+              scale = F,
+              validation = "CV")
+model_2
+```
+
+Sekarang kita akan memilih berapa _principal components_ yang sebaiknya digunakan.
+
+```{r}
+model_2 %>% summary()
+```
+
+Terlihat bahwa semakin banyak _principal components_ yang dimasukkan, semakin tinggi nilai _variance explained_ tapi nilai yang paling optimal adalah saat _principal components_ $=2$ (menghasilkan nilai `RMSEP` tertinggi).
+
+Oleh karena itu, saya akan membuat model hanya dengan 2 PC saja. Kita akan hitung MAE dari hasil model menggunakan `test_data` berikut ini: 
+
+```{r,message=FALSE,warning=FALSE}
+# menghitung hasil prediksi dari test data
+hasil_prediksi_pca = predict(model_2,test_data,ncomp = 2)
+# menghitung MAE hasil prediksi vs price pada test_data
+mae_2 = MAE(hasil_prediksi_pca,target_test)
+mae_2
 ```
 
