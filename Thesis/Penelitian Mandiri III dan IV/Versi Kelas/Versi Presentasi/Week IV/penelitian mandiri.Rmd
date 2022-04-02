@@ -1,0 +1,421 @@
+---
+title: "WEEKLY UPDATE"
+subtitle: "PENELITIAN MANDIRI DALAM SAINS KOMPUTASI III - IV"
+author: "Mohammad Rizka Fadhli 20921004"
+institute: "Sains Komputasi ITB"
+output:
+  beamer_presentation:
+    fig_width: 7
+    fig_height: 6
+    fig_caption: true
+    slide_level: 3
+    theme: "Montpellier"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+classoption: "aspectratio=169"
+toc: false
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+rm(list=ls())
+library(dplyr)
+```
+
+# RENCANA KERJA
+
+### Rencana Judul Thesis
+
+___Optimization and Computational Model for Supplier Selection, Order Allocation, and Incorporating Raw-Material Characteristic: Case Study Beverages Manufacture___
+
+### _Planned Output_
+
+#### Penelitian Mandiri III
+
+_Data collection_ dan dokumentasi _production system_.
+
+#### Penelitian Mandiri IV
+
+Model optimisasi yang telah disempurnakan.
+
+# PENELITIAN MANDIRI III
+
+## Masalah Optimisasi
+
+### Masalah Optimisasi
+
+Penentuan keputusan strategis dalam:
+
+1. Memilih _supplier_ bahan baku (BB).
+1. Menentukan banyaknya BB yang harus dibeli.
+1. Membuat alokasi antara BB dengan produk yang akan diproduksi sesuai dengan resep.
+
+dalam periode waktu tertentu agar total biaya pembelian BB seminim mungkin.
+
+### Kondisi yang Ada Saat Ini
+
+Saat ini pemilihan _supplier_ dan penentuan kuantitas pembelian BB dilakukan secara manual dengan mempertimbangkan data-data terkait secara mingguan oleh departemen PPIC (_Production Planning and Inventory Control_). Perhitungan yang ada saat ini belum sampai ke dalam pengambilan keputusan alokasi antara BB dengan produk sehingga menimbulkan _loss sales_ akibat ketiadaan BB saat produksi.
+
+Selain itu proses perhitungan ini memerlukan waktu yang cukup lama karena banyak faktor yang mempengaruhi.
+
+### Tujuan
+
+Model optimisasi ini kelak akan diimplementasikan pada departemen PPIC sehingga proses pemilihan _supplier_, penentuan kuantitas pembelian BB, dan rencana produksi bisa dilakukan secara cepat dan tepat. 
+
+Diharapkan proses bisnis menjadi menjadi lebih efisien dan _cost_ yang ada bisa ditekan lebih baik lagi.
+
+### _Output_ dari Model Optimisasi
+
+Bahasan dalam optimisasi dapat dikategorikan menjadi:
+
+- Pemodelan masalah nyata menjadi masalah optimisasi.
+- Pembahasan karakteristik dari masalah optimisasi dan keberadaan solusi dari masalah optimisasi tersebut.
+- Pengembangan dan penggunaan algoritma serta analisis numerik untuk mencari solusi dari masalah tersebut.
+
+## Dokumentasi _Production System_
+
+### Rangkaian Produksi
+
+```{r out.width="75%",echo=FALSE,warning=FALSE,message=FALSE,fig.align='center',fig.cap="Simplifikasi Rangkaian Produksi"}
+nomnoml::nomnoml("#direction: right
+                 [Pra Produksi] -> [Produksi]
+                 [Produksi] -> [Paska Produksi]
+                 
+                 [Pra Produksi|
+                    [Planning] -> [Forecast Sales]
+                    [Planning] -> [Kapasitas Produksi]
+                    [Planning] -> [Labour]
+                    [Planning] -> [etc]
+                    ]
+                 
+                 [Produksi]
+                 
+                 [Paska Produksi|
+                    [Activity] -> [Sales]
+                    [Activity] -> [Marketing]
+                    ]
+                 ")
+```
+
+### Rangkaian Produksi
+
+Dalam rangkaian produksi, __NFI__ menggunakan banyak sekali BB. Namun ada satu jenis BB utama yang paling sering digunakan. 
+
+Selama ini __NFI__ memesan BB tersebut secara __langsung tiap bulannya__ dengan besarnya pemesanan disesuaikan dengan:
+
+1. Angka _demand_ atau _forecast_ masing-masing produk yang menggunakan bahan-bahan baku tersebut.
+1. _Existing stock_ bahan baku yang ada di gudang bahan baku.
+1. _Minimum order_ per jenis bahan baku yang ditetapkan _supplier_.
+
+### Rangkaian Produksi
+
+Pemesanan ini juga harus disesuaikan dengan _policy_ yang ada pada __SCM__, seperti:
+
+1. Pembelian bahan baku harus berasal dari minimal 2 _suppliers_ untuk menjaga keamanan pasokan.
+1. Pembelian bahan baku dari _supplier_ harus memenuhi persentase portofolio yang ditetapkan di awal tahun oleh __NFI__.
+
+### Informasi Terkait Pengiriman BB 
+
+Pengiriman BB oleh para _supplier_ dilakukan sebanyak __4__ kali dalam sebulan dengan jumlah  sesuai dengan aturan berikut:
+
+Banyaknya bahan baku pada setiap pengiriman adalah fleksibel disesuaikan dengan __stok__ ___existing___ dan ___demand___ produk pada minggu tersebut.
+
+### Ilustrasi Pengiriman BB
+
+Contoh pada suatu bulan tertentu:
+
+- Kebutuhan BB diperkirakan sebesar __400 ton__.
+- Stok _existing_ BB di gudang bahan baku ada __50 ton__.
+- Maka __NFI__ perlu memesan BB sebesar __350 ton__.
+- Pengiriman dilakukan __4 kali__.
+    - Pada minggu I, diperkirakan kebutuhan BB ada sebesar __100 ton__. Oleh karena itu, __pengiriman pertama__ adalah sebesar __50 ton__ saja.
+    - Pada minggu II, III, dan IV pengiriman BB akan disesuaikan dengan kebutuhan masing-masing (misalkan proporsional __100 ton__).
+
+Oleh karena itu, kelak pada model matematika perlu ada _constraints_ terkait hal ini.
+
+### Ilustrasi Pengiriman Bahan Baku: Gula
+
+```{r out.width="75%",echo=FALSE,fig.cap="Simplifikasi dari Penggunaan Bahan Baku"}
+knitr::include_graphics("ilustrasi.png")
+```
+
+### Rangkaian Produksi (Komplikasi Masalah)
+
+Salah satu komplikasi masalah optimisasi ini adalah:
+
+__Waktu pengiriman dan inspeksi__ adalah selama 17 hari setelah pemesanan BB sampai akhirnya BB tersebut dapat digunakan untuk produksi.
+
+Oleh karena itu, perencanaan pembelian BB dilakukan setidaknya sebulan sebelum BB tersebut akan digunakan.
+
+### Informasi Terkait Jenis BB {.allowframebreaks}
+
+Saat ini, ada __6__ jenis BB utama yang bisa dipesan ke __6__ _suppliers_ yang berbeda. Masing-masing BB digunakan untuk membuat produk tertentu. Informasi yang perlu diketahui adalah:
+
+- __Tidak ada kewajiban__ bagi NFI untuk membeli semua jenis bahan baku tersebut. Tapi setidaknya minimal ada __2 jenis bahan baku__ yang dibeli NFI sebagai _back up_ substitusi bahan baku.
+- Terkait penggunaan BB:
+    - Sebagian kecil dari produk hanya bisa diproduksi dengan __satu jenis bahan baku saja__.
+    - Sebagian besar lainnya memungkinkan untuk diproduksi dengan __dua atau lebih jenis BB__.
+        - Unit per jenis BB yang digunakan untuk membuat produk adalah sama walau berbeda jenis BB.
+- Pembelian BB harus memenuhi _minimum order_ yang ditetapkan oleh _supplier_ __tapi__ jika pembelian di atas _minimum order_ harus dilakukan __pembulatan__. Misalkan:
+    - _Minimum order_ adalah __10 ton__, maka:
+        - Boleh membeli __11 ton__.
+        - Tidak boleh membeli __10.5 ton__.
+- Harga masing-masing BB per _supplier_ berbeda-beda (harganya fluktuatif berbeda setiap bulannya karena merupakan salah satu komoditas). Namun untuk lama pengiriman, pada kasus ini semua BB memiliki lama pengiriman yang sama.
+
+### Ilustrasi Alur Pengadaan Bahan Baku: Misal - Gula
+
+Berikut adalah _summary_ alur pengadaan bahan baku gula yang dilakukan Nutrifood:
+
+```{r out.width="80%",echo=FALSE,fig.cap="Simplifikasi dari Penggunaan Bahan Baku",fig.align='center'}
+knitr::include_graphics("ilustrasi_2.png")
+```
+
+## Contoh Substitusi BB
+
+### Apa yang Dimaksud BB Substitusi?
+
+Menurut informasi dari _RnD_, beberapa BB bisa menjadi substitusi bagi BB yang lain. Hal ini diperbolehkan karena kesamaan karakteristik yang ada pada beberapa BB tersebut.
+
+Perbedaan mendasar yang ada adalah pada warna BB. Sedangkan derajat rasa dan ukuran partikel sudah disesuaikan dengan standar baku pangan yang ada.
+
+### Informasi Terkait Substitusi BB {.allowframebreaks}
+
+#### Case I: Minimal __2 jenis__ bahan baku sebagai _back up_
+
+Dalam suatu bulan tertentu, untuk memproduksi produk __A__, __B__, dan __C__ dibutuhkan bahan baku $x_1$, $x_2$, __atau__ $x_3$.
+
+Untuk memastikan tidak ada masalah di kemudian hari (sebagai _back up_), maka minimal harus ada __2__ jenis bahan baku yang harus dibeli. Alternatifnya:
+
+1. Membeli $x_1$ dan $x_2$,
+1. Membeli $x_1$ dan $x_3$,
+1. Membeli $x_2$ dan $x_3$, atau
+1. Membeli $x_1$, $x_2$, dan $x_3$.
+
+### Informasi Terkait Substitusi Bahan Baku {.allowframebreaks}
+
+#### Case II: Unit bahan baku yang digunakan __sama__
+
+Dalam suatu bulan tertentu, untuk membuat produk __A__, kita bisa menggunakan:
+
+1. 100 unit $x_1$ atau,
+1. 100 unit $x_2$.
+
+Sedangkan untuk membuat produk __B__, kita bisa menggunakan:
+
+1. 100 unit $x_2$ atau,
+1. 100 unit $x_3$.
+
+### Informasi Terkait Substitusi Bahan Baku {.allowframebreaks}
+
+#### Case II: Unit bahan baku yang digunakan __sama__
+
+Dari kasus di atas, kita bisa menuliskan bahwa:
+
+1. Kebutuhan bahan baku 1 ada sebesar $x_1 \leq 100$.
+1. Kebutuhan bahan baku 2 ada sebesar $x_2 \leq 200$.
+1. Kebutuhan bahan baku 3 ada sebesar $x_3 \leq 100$.
+
+Karena minimal harus ada __2 bahan baku yang dipilih__, maka alternatif solusi yang ada adalah:
+
+1. 100 unit $x_1$ dan 100 unit $x_2$.
+1. 100 unit $x_1$ dan 100 unit $x_3$.
+1. 100 unit $x_2$ dan 100 unit $x_3$.
+1. 100 unit $x_1$, 100 unit $x_2$ dan 100 unit $x_3$.
+
+## Data yang Digunakan
+
+### Data yang Dijadikan _Input_
+
+Ada beberapa data yang dijadikan _input_ dalam permasalahan ini, yakni:
+
+1. Data spek bahan baku, meliputi: harga (Rupiah per $kg$), _minimum order quantity_ (MOQ dalam $kg$), _leadtime_ pengiriman hingga siap guna (dalam hari), stok terkini (dalam $kg$) untuk masing-masing jenis bahan baku.
+1. Data komposisi bahan baku per produk yang diproduksi.
+1. Data _demand_ mingguan untuk masing-masing produk (dalam unit _batch_ produksi) termasuk kebutuhan bahan baku per _batch_.
+
+### Contoh Data I: Spek Bahan Baku
+
+```{r,echo=FALSE}
+data.frame(bahan_baku = paste0("bb_",1:6),
+           stok = round(runif(6,0,1) * 100,
+                        2),
+           min_order = round(runif(6,0,3) * 100,
+                        0),
+           leadtime = 17,
+           harga = round(runif(6,120000,250000),
+                        0)) %>% 
+  knitr::kable(caption = "Data Bahan Baku")
+```
+
+### Contoh Data II: Komposisi Bahan Baku per Produk
+
+```{r,echo=FALSE}
+data.frame(produk = paste0("fg_",1:8),
+           bb_1 = sample(c(0,1),8,replace = T),
+           bb_2 = sample(c(0,1),8,replace = T),
+           bb_3 = sample(c(0,1),8,replace = T),
+           bb_4 = sample(c(0,1),8,replace = T),
+           bb_5 = sample(c(0,1),8,replace = T),
+           bb_6 = sample(c(0,1),8,replace = T)
+           ) %>% 
+  rowwise() %>% 
+  mutate(bb_bisa_digunakan = sum(bb_1,bb_2,bb_3,bb_4,bb_5,bb_6)) %>%
+  ungroup() %>% 
+  mutate(bb_bisa_digunakan = ifelse(bb_bisa_digunakan == 0,1,bb_bisa_digunakan),
+         bb_1 = ifelse(bb_bisa_digunakan == 0,1,bb_bisa_digunakan)) %>% 
+  knitr::kable(caption = "Contoh Sample Data Komposisi Bahan Baku")
+```
+
+### Contoh Data III: Data _Demand_ Mingguan per Produk
+
+```{r,echo=FALSE}
+data.frame(produk = paste0("fg_",1:8),
+           demand_w1 = sample(c(0:10),8,replace = T),
+           demand_w2 = sample(c(0:10),8,replace = T),
+           demand_w3 = sample(c(0:10),8,replace = T),
+           demand_w4 = sample(c(0:10),8,replace = T),
+           bb_per_batch = sample(c(40,500,550,341,330,600,700,1000,640),8,replace = T)
+           ) %>% 
+  knitr::kable(caption = "Contoh Sample Data Demand Mingguan")
+```
+
+# PENELITIAN MANDIRI IV
+
+## Model Optimisasi
+
+### Masalah Optimisasi
+
+Masalah _supplier selection_ and _raw material composition_ yang dipertimbangkan adalah masalah dengan satu kriteria, yaitu total harga pengadaan tetapi ukuran masalahnya lebih besar karena penentuan _supplier_ mana yang akan dipilih dan berapa _quantity_ yang akan dipesan hanya sebagian dari variabel keputusan. Variabel keputusan lainnya adalah bagaimana distribusi pengiriman dari tiap _supplier_ dan komposisi dari tiap varian bubuk minuman.  Karena itu, masalah krusial pertama dari penyelesaian masalah ini adalah menurunkan masalah optimisasi yang tepat yang dapat menjadi model dari masalah ini.
+
+Berdasarkan informasi-informasi yang telah didapatkan dari `Penelitian Mandiri III`, berikut adalah model optimisasi dari permasalahan _supplier selection_, _order allocation_ dan alokasi BB ke produk.
+
+## Parameter Model Optimisasi
+
+### Parameter yang Diketahui {.allowframebreaks}
+
+Notasikan:
+
+- $M$ sebagai himpunan semua minggu. 
+    - $\hat{M} \setminus \{1,6\}$
+- $P = P_1 \bigcup P_2 \bigcup P_3 \bigcup P_4 \bigcup P_5 \bigcup P_6$ sebagai himpunan produk di semua minggu.
+    - $\hat{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan minimal dua jenis BB.
+    - $\dot{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan satu jenis BB saja.
+- $G = \{1,2,3,4,5,6\}$ sebagai himpunan BB.
+- $D$ sebagai kebutuhan BB di bulan perencanaan, yaitu: _week_ 3 - 6.
+- $maxcap$ sebagai kapasitas gudang BB.
+- $\forall i \in P_j, \space g_{ijk}$ adalah kebutuhan BB (dalam ton) dari produk $i$ pada _week_ $k$.
+- $\forall k \in G, \space c_k$ adalah harga BB $k$ per ton.
+- $\forall k \in G, \space \epsilon_k$ adalah _minimum order quantity_ dari BB $k$.
+- $\forall k \in G, \space \hat{d}_{2k}$ adalah total BB $k$ yang dibutuhkan pada _week_ 2.
+- $\forall k \in G, \space Z_{ik}$ adalah stok level BB $k$ di gudang pada akhir _week_ 1.
+
+
+## Variabel Keputusan
+
+### Variabel I 
+
+Definisikan $\forall k \in G, \space x_k$ adalah banyaknya BB $k$ yang dibeli.
+
+Berdasarkan informasi sebelumnya, kita ketahui bahwa $x_k$ bernilai bulat positif dan harus lebih besar atau sama dengan nilai $\epsilon_k$. Kemudian tidak ada kewajiban untuk membeli BB dari seluruh _supplier_. 
+
+Maka kita bisa tuliskan: $x_k = 0$ atau $\epsilon_k \leq x_k \leq maxcap$. Untuk menghindari nilai diskontinu dari $x_k$ ini, definisikan:
+
+$$y_k = \left\{\begin{matrix}
+1, & x_k = 0 \\ 0, & \epsilon_k \leq x_k \leq maxcap
+\end{matrix}\right.$$
+
+$\forall j \in M  \setminus \{1,6\}, \forall i \in P_j, \forall k \in G$,
+
+### Variabel II 
+
+Definisikan: $\hat{x}_{jk}$ sebagai banyaknya pengiriman BB jenis $k$ di awal _week_ $j$.
+
+$$a_{ijk} = \left\{\begin{matrix}
+1, & \text{produk ke } i \text{ di week } j \text{ menggunakan BB } k \\ 
+0, & \text{lainnya}
+\end{matrix}\right.$$
+
+### Variabel III
+
+Definisikan: $b_{ijk}$ sebagai proporsi penggunaan BB $k$ dari seluruh kebutuhan BB untuk produk $i$ di _week_ $j$, $\forall j \in M \setminus \{ 1 \}, \forall k \in G$.
+
+### Variabel IV 
+
+Definisikan: $z_{jk}$ sebagai stok level BB $k$ di akhir _week_ $j$.
+
+
+## Kendala Optimisasi
+
+### Kendala I 
+
+Kendala I adalah penghubung yang benar antara variabel keputusan biner, integer, atau kontinu yang berkaitan:
+
+$$\begin{matrix}
+\forall k \in G, &  \\
+ & x_k \leq Dy_k \\
+ & x_k \geq \epsilon y_k \\
+\forall j \in M \setminus \{ 1,2 \}, \forall i \in P_j, \forall k \in G, & \\
+ & b_{ijk} \leq a_{ijk} \\
+ & b_{ijk} \geq \mu a_{ijk}
+\end{matrix}$$
+
+untuk suatu nilai $\mu$ yang kecil.
+
+### Kendala II 
+
+Kendala II dibuat agar total BB yang dipesan tidak kurang dari total _demand_ di bulan perencanaan.
+
+$$\sum_{k \in G} x_k \geq D$$
+
+### Kendala III
+
+Kendala III mengatur hubungan antara total pembelian BB dan pengiriman setiap minggu.
+
+$$\begin{matrix}
+\forall k \in G, & \\
+ & x_k = \sum_{j \in \hat{M}} \hat{x}_{jk}
+\end{matrix}$$
+
+### Kendala IV 
+
+Kendala IV berfungsi untuk menjaga komposisi gula yang diinginkan.
+
+$$\begin{matrix}
+\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \hat{P}_j, & \\
+ & \sum_{k \in G} a_{ijk} \geq 2 \\
+ & \sum_{k \in G} b_{ijk} = 1 \\
+\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \dot{P}_j, & \\ 
+ & \sum_{k \in G} a_{ijk} = 1 \\
+ & \sum_{k \in G} b_{ijk} = 1
+\end{matrix}$$
+
+### Kendala V 
+
+Kendala V berfungsi untuk menjaga stok level sesaat setelah pengiriman BB agar tidak melebihi kapasitas gudang.
+
+$$\begin{matrix}
+ & \sum_{k \in G} (Z_{1k} + \hat{x}_{1k} - \hat{d}_{2k} + z_{jk}) = maxcap \\
+\forall j \in M \setminus \{ 1,2 \} & \\
+ & \sum_{k \in G} (z_{(j-1)k} + \hat{x}_{(j-1)k}) - \sum_{i \in P_j} b_{ijk} g_{ijk} + z_{jk} = maxcap
+\end{matrix}$$
+
+
+## Fungsi Objektif
+
+### Fungsi Objektif
+
+Permasalahan yang dihadapi adalah pemilihan _supplier_ dan BB sebagai berikut:
+
+$$\min \sum_{k \in G} c_k x_k$$
+
+$$\begin{matrix}
+\text{terhadap kendala I sampai VI dan } \\
+x_k = 0 \text{ atau } \epsilon_k \leq x_k \leq maxcap, \space x_k \in \mathbb{Z}^+ \\
+y_k \in \{ 0,1 \}, \hat{x}_{jk} \geq 0, a_{ijk} \in \{ 0,1 \} \\
+0 \leq b_{ijk} \leq 1 \\
+0 \leq z_{jk} \leq maxcap \\
+\end{matrix}$$
+
+
+
+# _REFERENCES_ {.allowframebreaks}

@@ -154,6 +154,7 @@ dist_euclid = function(a,b){
   d = sum(d^2)
   d = sqrt(d)
   d = round(d,3)
+  return(d)
 }
 ```
 

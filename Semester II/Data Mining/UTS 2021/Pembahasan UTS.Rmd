@@ -1,0 +1,450 @@
+---
+title: "UTS I"
+subtitle: "Penambangan Data dalam Sains"
+author: "Mohammad Rizka Fadhli - 20921004"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: false
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyr)
+library(caret)
+```
+
+\newpage
+
+# SOAL 1 a
+
+Andaikan anda bekerja dalam sebuah lembaga riset yang fokusnya dalam bidang Sains Fisika atau Kimia. Jelaskan bagaimana data mining (Klasifikasi, Clustering dan Asosiasi) dapat membantu anda dalam riset di bidang Fisika atau Kimia? Pilih bidang riset sesuai keahlian anda!
+
+## Jawab
+
+Pada bidang saya di _marketing riset_, aplikasi data mining sangat banyak sekali. Sebagai contoh:
+
+1. Klasifikasi dapat digunakan untuk memprediksi apakah seorang pelanggan akan membeli produk kita atau tidak berdasarkan data prediktor yang ada.
+1. _Clustering_ dapat digunakan untuk mengelompokkan pelanggan berdasarkan beberapa atribut yang ada. 
+1. Asosiasi dapat digunakan untuk membuat analisa _consumer basket_, yakni mengelompokkan barang-barang apa yang dibeli secara bersamaan oleh pelanggan. Bisa juga dijadikan acuan untuk membuat produk _bundling_ atau kumpulan produk yang dijual bersamaan oleh _retailer_.
+
+\newpage
+
+
+# SOAL 1 b
+
+Jelaskan tentang berbagai jenis atribut dalam Data Mining dan metode normalisasi berbagai jenis atribut tersebut?
+
+## Jawab
+
+Beberapa jenis atribut antara lain:
+
+1. Tipe nominal atau kategorik, yakni berupa representasi dari pengamatan. Misalkan _gender_, warna, nama hari, dll.
+1. _Binary_, yakni berupa pilihan biner [0,1].
+1. Numerik, yakni berupa angka. Bisa dalam diskrit (bilangan bulat) atau bilangan interval / ratio atau bilangan _real_.
+1. _Ordinal_, yakni data berupa rentang yang memiliki urutan tertentu.
+1. _String_ atau _character_, yakni berupa teks saja.
+
+Beberapa metode normalisasi antara lain:
+
+__Data Numerik__
+
+_Min-max normalization_
+
+$$v' = \frac{v - min}{max - min}$$
+
+_Z-score normalization_
+
+$$v' = \frac{v - \mu}{\sigma}$$
+
+__Data Ordinal__
+
+$$z = \frac{v - 1}{M - 1}$$
+
+dimana $v$ diurutkan dan dijadikan angka dan $M$ adalah elemen dari $v$ yang terbesar.
+
+\newpage
+
+# SOAL 1 c
+
+Diberikan data:
+
+```{r,echo=FALSE}
+df = data.frame(id = 1:10,
+                A = c(0,1,1,2,1,2,0,0,2,1),
+                B = c(2,2,1,0,1,2,1,0,1,0),
+                C = c(1,2,0,2,1,2,0,1,0,0),
+                class = c(rep("Y",5),rep("N",5)))
+knitr::kable(df)
+```
+
+Hitung _dissimilarity_ untuk:
+
+- Objek 1 dan 6
+- Objek 3 dan 8
+
+## Jawab
+
+Untuk memudahkan, kita akan ubah atribut `class` menjadi _binary_ sebagai berikut:
+
+```{r,echo=FALSE}
+df = data.frame(id = 1:10,
+                A = c(0,1,1,2,1,2,0,0,2,1),
+                B = c(2,2,1,0,1,2,1,0,1,0),
+                C = c(1,2,0,2,1,2,0,1,0,0),
+                class_Y = c(rep("1",5),rep("0",5)),
+                class_N = c(rep("0",5),rep("1",5))
+                )
+knitr::kable(df,align = "c")
+```
+
+_Euclidean Distance_ didefinisikan sebagai:
+
+$$d(X,Y) = \sqrt{\sum{(x_i - y_i)^2}}$$
+
+_Minkowski Distance_ didefinisikan sebagai:
+
+$$d(X,Y) = (\sum |x_i - y_i|^p)^{\frac{1}{p}}$$
+
+Untuk soal ini, saya akan gunakan $p=1$.
+
+```{r,include=FALSE}
+dist_euclid = function(a,b){
+  d = abs(a-b)
+  d = sum(d^2)
+  d = sqrt(d)
+  d = round(d,3)
+  return(d)
+}
+
+dist_manhattan = function(a,b){
+  d = abs(a-b)
+  sum(d)
+}
+
+
+x1 = c(0,2,1,1,0)
+x6 = c(2,2,2,0,1)
+x3 = c(1,1,0,1,0)
+x8 = c(0,0,1,0,1)
+
+dist_manhattan(x3,x8)
+```
+
+
+### Jarak objek 1 dan 6 adalah:
+
+Objek 1 = 0,2,1,1,0
+
+Objek 6 = 2,2,2,0,1
+
+_Euclidean Distance_
+
+$$d(id_1,id_6) = \sqrt{(0-2)^2 + (2-2)^2 + (1-2)^2 + (1-0)^2 + (0-1)^2} = \sqrt{7} \approx 2.646$$
+
+_Minskowski Distance_ saat $p=1$
+
+$$d(id_1,id_6) = |0-2| + |2-2| + |1-2| + |1-0| + |0-1| = 5$$
+
+### Jarak objek 3 dan 8 adalah:
+
+Objek 3 = 1,1,0,1,0
+
+Objek 8 = 0,0,1,0,1
+
+_Euclidean Distance_
+
+$$d(id_3,id_8) = \sqrt{(1-0)^2 + (1-0)^2 + (0-1)^2 + (1-0)^2 + (0-1)^2} = \sqrt{5} \approx  2.236$$
+
+_Minskowski Distance_ saat $p=1$
+
+$$d(id_3,id_8) = |1-0| + |1-0| + |0-1| + |1-0| + |0-1| = 5$$
+
+\newpage
+
+# SOAL 2 a
+
+Mengapa kita perlu melakukan permrosesan awal data?
+
+## Jawab
+
+Data yang pertama kali kita terima belum tentu siap untuk dianalisa. Beberapa analisa tidak memperbolehkan data kosong dan data numerik yang terlalu lebar _range_-nya. Oleh karena itu perlu ada tahapan _pre-processing_ terlebih dahulu. Hal yang biasa dilakukan antara lain:
+
+1. Melihat konsistensi format penulisan data.
+1. Melakukan normalisasi untuk data numerik.
+1. Melihat adanya data yang kosong atau bolong.
+1. Melihat keberadaan nilai pencilan pada data numerik.
+
+```{r,fig.cap="Tahapan Data Processing",echo=FALSE}
+nomnoml::nomnoml("[Raw Data] -> [Data Preparation|Consistency Check|Structured dan Format Checked|Normalization]
+                 [Data Preparation] -> [Data Cleaning|Empty Cell(s)|Extreme value(s)]
+                 [Data Cleaning] -> [Data Analysis]
+                 [Data Analysis] -> [Data Visualization|Information|Insights]"
+)
+```
+
+\newpage
+
+# SOAL 2 b
+
+Diberikan data sebagai berikut:
+
+```{r,echo=FALSE}
+rm(list = ls())
+df = data.frame(id = 1:10,
+                body_temp = c(rep("warm",4),rep("cold",4),"warm","cold"),
+                birth = c(rep("Y",4),rep("N",5),"Y"),
+                four_leg = c("Y","Y","N","N","Y","Y",rep("N",4)),
+                hibernate = c("Y","N","Y","N","Y","N","Y","N","N","N"),
+                class = c(rep("Y",2),rep("N",8))
+                ) 
+
+df %>% knitr::kable(align = "c")
+```
+
+Di bawah ini diberikan 10 buah data dengan masing-masing 6 atribut. Buat algoritma reduksi dimensi menggunakan PCA jika kita ingin mereduksi dimensi data di atas. Bagaimana kita memilih atribut yang berisi informasi 90% dari data di atas?
+
+## Jawab
+
+Untuk membuat PCA-nya, data yang ada perlu kita ubah menjadi _binary_ terlebih dahulu. Dari bentuk berikut ini:
+
+```{r,echo=FALSE}
+df_n = 
+  df %>% 
+  select(-id,-class)
+df_n %>% knitr::kable(align = "c")
+```
+
+menjadi berikut ini:
+
+```{r,echo=FALSE}
+library(caret)
+dmy <- dummyVars(" ~ .", data = df_n)
+trsf <- data.frame(predict(dmy, newdata = df_n))
+trsf %>% knitr::kable(align = "c")
+```
+
+Untuk menghitung PCA, berikut algoritmanya:
+
+```
+STEP 1
+  Menghitung covariance matrix dari data
+    misal C
+STEP 2
+  Mencari eigen values dan eigen vectors dari C
+STEP 3
+  Eigen value merepresentasikan varians yang bisa di-"explained" oleh PC
+  Penjumlahan k eigen values pertama adalah varians explained dari k-dimensi
+```
+
+Berikut adalah matriks kovariansi dari data yang ada:
+
+```{r,echo=FALSE}
+wdbc.data = as.matrix(trsf)
+cov_mat <- cov(wdbc.data)
+cov_mat
+```
+
+Berikut adalah nilai eigen:
+
+```{r,echo=FALSE}
+hasil = eigen(cov_mat)
+hasil$values %>% round(3)
+```
+
+dan vektor eigennya:
+
+```{r,echo=FALSE}
+hasil$vectors
+```
+
+Untuk memilih atribut yang berisi 90% informasi di atas, kita cukup mengambil __2__ dimensi karena penjumlahan dua vektor eigen pertama sudah $>90 \%$.
+
+\newpage
+
+# SOAL 3
+
+Diberikan data sebagai berikut:
+
+```{r,echo=FALSE}
+rm(list=ls())
+df = data.frame(id = 1:10,
+                A = c(0,1,1,2,1,2,0,0,2,1),
+                B = c(2,2,1,0,1,2,1,0,1,0),
+                C = c(1,2,0,2,1,2,0,1,0,0),
+                class = c(rep("Y",5),rep("N",5)))
+knitr::kable(df)
+```
+
+Buat klasifikasi dengan _Naive Bayes_!
+
+## Jawab
+
+_Naive Bayes Classifier_ berlandaskan peluang bersyarat. Berikut adalah langkah perhitungannya:
+
+### STEP 1
+
+Menghitung peluang class `Y` dan `N`.
+
+$P(class = Y) = \frac{5}{10} = 0.5$
+
+$P(class = N) = \frac{5}{10} = 0.5$
+
+### STEP II
+
+Menghitung peluang bersyarat untuk atribut $A$.
+
+```{r,echo=FALSE}
+PA = 
+  df %>% 
+  group_by(A,class) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  group_by(class) %>% 
+  mutate(pi = n / sum(n)) %>% 
+  ungroup() %>% 
+  arrange(class) %>% 
+  mutate(Peluang = paste0("P(A = ",A,"| ",class,") = ",pi)) %>% 
+  select(Peluang) %>% 
+  rename(Peluang_A = Peluang)
+
+PA %>% knitr::kable()
+```
+
+### STEP III
+
+Menghitung peluang bersyarat untuk atribut $B$.
+
+```{r,echo=FALSE}
+PB = 
+  df %>% 
+  group_by(B,class) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  group_by(class) %>% 
+  mutate(pi = n / sum(n)) %>% 
+  ungroup() %>% 
+  arrange(class) %>% 
+  mutate(Peluang = paste0("P(B = ",B,"| ",class,") = ",pi)) %>% 
+  select(Peluang) %>% 
+  rename(Peluang_B = Peluang)
+
+PB %>% knitr::kable()
+```
+
+
+### STEP IV
+
+Menghitung peluang bersyarat untuk atribut $C$.
+
+```{r,echo=FALSE}
+PC = 
+  df %>% 
+  group_by(C,class) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  group_by(class) %>% 
+  mutate(pi = n / sum(n)) %>% 
+  ungroup() %>% 
+  arrange(class) %>% 
+  mutate(Peluang = paste0("P(C = ",C,"| ",class,") = ",pi)) %>% 
+  select(Peluang) %>% 
+  rename(Peluang_C = Peluang)
+
+PC %>% knitr::kable()
+```
+
+
+### STEP V
+
+Berikut adalah _summary_ peluang yang ada:
+
+$P(class = Y) = \frac{5}{10} = 0.5$
+
+$P(class = N) = \frac{5}{10} = 0.5$
+
+dan 
+
+```{r,echo=FALSE}
+tabel_peluang = cbind(PA,PB,PC)
+tabel_peluang %>% knitr::kable(caption = "Tabel Peluang NB")
+```
+
+\newpage
+
+# SOAL 3 b
+
+Buat matriks/tabel klasifikasi/misklasifikasi dan hitung nilai akurasi, presisi, dan _recall_!
+
+## Jawab
+
+Sekarang dari data yang ada berikut ini:
+
+```{r,echo=FALSE}
+df %>% knitr::kable()
+```
+
+Saya akan lakukan prediksi berdasarkan `Tabel Peluang NB` pada jawaban sebelumnya.
+
+Saya akan berikan gambaran untuk `id = 1`
+
+$X = (A = 0, B = 2, C = 1)$
+
+$P(X | N) = 0.4 \times 0.2 \times 0.2 \times 0.5 = 0.008$
+
+$P(X | Y) = 0.2 \times 0.4 \times 0.4 \times 0.5 = 0.016$
+
+$P(X | Y) > P(X | N)$
+
+Kesimpulan: Maka pada `id = 1` diprediksi nilainya adalah `Y`.
+
+\break 
+
+Kita lakukan hal serupa untuk baris yang lain.
+
+```{r,echo=FALSE}
+hasil = 
+  df %>% 
+  mutate(AN = case_when(A == 0 ~ 0.4, A == 1 ~ 0.2, A == 2 ~ 0.4),
+         AY = case_when(A == 0 ~ 0.2, A == 1 ~ 0.6, A == 2 ~ 0.2),
+         
+         BN = case_when(B == 0 ~ 0.4, B == 1 ~ 0.4, B == 2 ~ 0.2),
+         BY = case_when(B == 0 ~ 0.2, B == 1 ~ 0.4, B == 2 ~ 0.4),
+         
+         CN = case_when(C == 0 ~ 0.6, C == 1 ~ 0.2, C == 2 ~ 0.2),
+         CY = case_when(C == 0 ~ 0.2, C == 1 ~ 0.4, C == 2 ~ 0.4)
+         ) %>% 
+  mutate(PN = .5 * AN * BN * CN,
+         PY = .5 * AY * BY * CY) %>% 
+  mutate(class_predict = ifelse(PN > PY, "N","Y")) %>% 
+  select(id,class,PN,PY,class_predict) %>% 
+  rename("P(X|N)" = PN,
+         "P(X|Y)" = PY)
+
+hasil %>% knitr::kable(align = "c")
+```
+
+
+Sekarang kita buat _confusion matrix_ dari hasil di atas:
+
+```{r,echo=FALSE}
+table(hasil$class,hasil$class_predict)
+```
+
+Sumbu Y - Prediksi
+
+Sumbu X - _Actual_
+
+
+Akurasi = $\frac{4+3}{10} = 0.7$
+
+Presisi = $\frac{3}{3+1} = 0.75$
+
+_Recall_ = $\frac{3}{3+2} = 0.6$

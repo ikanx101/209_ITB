@@ -34,32 +34,55 @@ setwd("~/209_ITB/Semester II/Data Mining")
 \listoffigures
 \newpage
 
-# CHAPTER II {-}
+# Week 1 Key Take Points
 
-# _CONCEPTS AND TECHNIQUES_
+Systems: physical process of interest.
 
-## _Types of Datasets_
+Model: mathematical representation of the system.
 
-- Record
-    - Relational records
-    - Data matrix
-    - Transaction data
-- Graph and network
-    - World wide web
-    - Spcial or information networks
-- Ordered
-- Spatial, image and multimedia
+Simulation: a type of model where computer is used to imitate the behavior of the system.
 
-## Important Characteristics of Structured Data
+5 Tipe Data Mining:
 
-- Dimensionality
-    - Curse of dimensionality
-- Sparsity
-    - Only presence counts
-- Resolution
-    - Patterns depend on the scale
-- Distribution
-    - Centrality and dispersion
+1. Estimasi
+1. Prediksi
+1. Klasifikasi
+1. Clustering
+1. Asosiasi
+
+Istilah Standar yang Perlu Dipahami:
+
+1. Atribut; biasanya disebut dengan variabel atau satu kolom dalam dataframe.
+1. Class atau label;  biasanya disebut dengan isi (label) dari suatu atribut.
+1. Data object; biasa disebut dengan respons atau baris data.
+
+# Week 2 Key Take Points
+
+Tipe-tipe data:
+
+1. Nominal.
+1. Binary ada dua: 
+    - Symmetric binary (equally important) dan 
+    - Asymmetric binary (unequally important).
+
+## _Simmilarity_ dan _Dissimilarity_
+
+_Simmilarity_ menunjukkan seberapa mirip kedua _data object_. Biasanya nilainya antara $0 \leq x \leq 1$. Semakin tinggi nilainya, semakin mirip pasangan _data object_ tersebut.
+
+_Dissimilarity_ menunjukkan kedua _data object_ tidak sama. Nilai _dissimilarity_ terkecil adalah $0$.
+
+## Perhitungan _Similarity_ untuk Data Nominal
+
+### Metode 1: _Simple Matching_
+
+$$d(i,j) = \frac{p - m}{p}$$
+
+Dimana $m$ adalah banyak kesamaan dan $p$ adalah banyaknya variabel.
+
+### Metode 2: _Binary Matching_
+
+Pertama-tama kita buat dulu _contingency matrix_ sebagai berikut:
+
 
 ## Standarisasi Data Numerik
 
@@ -80,3 +103,6 @@ mean_abs_dev = function(tes){
 
 mean_abs_dev(tes)
 ```
+
+
+
