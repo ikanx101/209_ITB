@@ -45,10 +45,11 @@ The problem is determining which products need to be given an additional discoun
 
 The metaheuristic algorithm such as SDOA can solve BLP in a small number of decision variables involved. SDOA is an algorithm inspired by spiral motion in natural events. The rotation matrix is​an algebraic principle closely related to SDOA [@tamura]. SDOA is proven to be used to solve BLP problems by modifying the existing objective function and constraints [@kun]. The basic idea is to turn a constrained problem into an unconstrained problem by creating a penalty function.
 
-In another study, researchers made an adaptive linear SDOA by changing the value of the contraction constant into a specific function that depends on the function value of each candidate solution [@sdoa2]. The latest study in 2022 conducted a thorough review, including making several improvements to SDOA, such as
+In another study, researchers made an adaptive linear SDOA by changing the value of the contraction constant into a specific function that depends on the function value of each candidate solution [@sdoa2]. The latest study in 2022 conducted a thorough review, including making several improvements to SDOA  [@sdoa3], such as:
+
 - Changing the value of the contraction constant,
 - Utilizing alternative functions (linear, quadratic, fuzzy, and exponential), and
-- Crossing between SDOA and PSO into PSO with a spiral movement [@sdoa3].
+- Crossing between SDOA and PSO into PSO with a spiral movement.
 
 In this research, we develop a computational model based on SDOA to solve the discount product portfolio optimization problem. Then we will compare the solution with the existing product portfolio.
 
