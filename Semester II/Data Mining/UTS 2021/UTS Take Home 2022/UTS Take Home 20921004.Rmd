@@ -1,0 +1,247 @@
+---
+title: "UTS I: TAKE HOME"
+subtitle: "Penambangan Data dalam Sains"
+author: "Mohammad Rizka Fadhli - 20921004"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: false
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+# SOAL
+
+Anda diberikan klasifikasi `Iris-Setosa` dalam _file_ `csv`. Gunakan materi yang telah diberikan dalam kuliah dan praktikum untuk membuat model pembelajaran dengan metode __pilih salah satu__: _Naive Bayes_, _KNN_, _decision tree_ dan _neural network_! 
+
+# JAWAB
+
+## Catatan
+
+Pada UTS _take home_ ini, saya akan menggunakan metode _decision tree_. Untuk melakukannya, saya menggunakan __R__ dengan `library(caret)`.
+
+## _Decision Tree_
+
+### Pengertian
+
+Proses pada _decision tree_ adalah mengubah bentuk data berupa tabel menjadi bentuk _tree_ yang berisi _rules_ yang lebih sederhana. Ada berbagai macam algoritma yang bisa digunakan untuk membuatnya, seperti: `CART`, `ID3`, `C4.5`, `CHAID`, dan sebagainya.
+
+### Algoritma `C4.5`
+
+Berikut adalah algoritma `C4.5` yang bisa digunakan untuk membuat _decision tree_:
+
+1. Memilih atribut sebagai akar.
+1. Membuat cabang dari setiap nilai yang muncul.
+1. Membagi kasus per cabang.
+1. Proses di atas diulang hingga semua cabang selesai.
+
+Perhitungan _entropy_ adalah sebagai berikut:
+
+$$entropy = \sum_{i = 1}^n {-P_i \space log_2{P_i}}$$
+
+di mana:
+
+$$\begin{matrix}
+S: \text{himpunan kasus} \\
+n: \text{jumlah partisi } S \\
+P_i: \text{proporsi dari } S_i \space {terhadap} \space S
+\end{matrix}$$
+
+
+Perhitungan _gain_ untuk masing-masing atribut:
+
+
+$$gain(S,A) = entropy(S) - \sum_{i=1}^n \frac{|S_i|}{S} \space entropy(S_i)$$
+
+di mana:
+
+
+$$\begin{matrix}
+S: \text{himpunan kasus} \\
+A: \text{atribut} \\
+n: \text{jumlah partisi } S \\
+|S_i|: \text{jumlah kasus pada partisi ke } \space i \\
+S_i: \text{jumlah kasus dalam} \space S
+\end{matrix}$$
+
+## Jawaban
+
+Berikut adalah proses yang dilakukan untuk membuat _decision tree_.
+
+### _Import Data_
+
+Langkah pertama yang harus dilakukan adalah _import_ data `iris.csv`. Berikut adalah _sample_ 10 data dari `iris.csv`:
+
+```{r}
+data = read.csv("iris.csv")
+data %>% head(10) %>% knitr::kable(caption = "Sample 10 Data Teratas")
+```
+
+Berikut adalah struktur data yang ada:
+
+```{r}
+data %>% str()
+```
+
+Dari informasi di atas, kita temukan ada `4` atribut numerik yakni:
+
+1. `sepallength`
+1. `sepalwidth`
+1. `petallength`
+1. `petalwidth`
+
+yang akan digunakan untuk memprediksi (klasifikasi) atribut `class`.
+
+### Analisa Deskriptif Data Iris
+
+Sebelum kita membuat model _decision tree_, mari kita lihat terlebih dahulu analisa deskriptif dari data yang ada:
+
+```{r}
+data %>% summary()
+```
+
+Ada `150` baris data.
+
+#### Berikut adalah proporsi dari `class`
+
+```{r,echo=FALSE}
+data %>% 
+  group_by(class) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  knitr::kable(caption = "Proporsi dari class")
+```
+
+Dapat dilihat bahwa semua `class` tersebar proporsional.
+
+\newpage
+
+### Sebaran Data
+
+Berikut adalah sebaran data dari masing-masing atribut numerik terhadap `class`:
+
+```{r out.width="90%",echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Sebaran Data sepallength Pada Setiap class"}
+data %>% 
+  ggplot(aes(x = sepallength)) +
+  geom_density() +
+  facet_wrap(~class) +
+  theme_minimal() +
+  labs(title = "Density Plot") +
+  theme(strip.background = element_rect(color = "black"))
+```
+
+```{r out.width="90%",echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Sebaran Data sepalwidth Pada Setiap class"}
+data %>% 
+  ggplot(aes(x = sepalwidth)) +
+  geom_density() +
+  facet_wrap(~class) +
+  theme_minimal() +
+  labs(title = "Density Plot") +
+  theme(strip.background = element_rect(color = "black"))
+```
+
+```{r out.width="90%",echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Sebaran Data petallength Pada Setiap class"}
+data %>% 
+  ggplot(aes(x = petallength)) +
+  geom_density() +
+  facet_wrap(~class) +
+  theme_minimal() +
+  labs(title = "Density Plot") +
+  theme(strip.background = element_rect(color = "black"))
+```
+
+```{r out.width="90%",echo=FALSE,message=FALSE,warning=FALSE,fig.cap="Sebaran Data petalwidth Pada Setiap class"}
+data %>% 
+  ggplot(aes(x = petalwidth)) +
+  geom_density() +
+  facet_wrap(~class) +
+  theme_minimal() +
+  labs(title = "Density Plot") +
+  theme(strip.background = element_rect(color = "black"))
+```
+
+
+\newpage
+
+### _Pre-Processing_
+
+_Pre-processing_ yang akan dilakukan adalah memecah data menjadi dua _datasets_, yakni:
+
+1. _Train dataset_
+1. _Test dataset_
+
+dengan proporsi `80-20`. Pembagian ini akan dilakukan secara acak:
+
+```{r}
+set.seed(20921)
+# random id train
+id_train = sample(150,120,replace = F)
+# membuat train dataset
+train_df = data[id_train,]
+# membuat test dataset
+test_df = data[-id_train,]
+```
+
+Berikut adalah proporsi `class` pada _train_ dan _test dataset_.
+
+```{r,echo=FALSE}
+train_df %>% 
+  group_by(class) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  knitr::kable(caption = "Proporsi dari class pada Train Dataset")
+test_df %>% 
+  group_by(class) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  knitr::kable(caption = "Proporsi dari class pada Test Dataset")
+```
+
+### Klasifikasi _Decision Tree_
+
+Berikut adalah proses pembuatan _decision tree_:
+
+```{r,message=FALSE,warning=FALSE}
+model_dt = caret::train(factor(class) ~ ., data = train_df, method="J48")
+model_dt$finalModel
+```
+
+Berikut adalah _plot_ dari modelnya:
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+library(partykit)
+plot(model_dt$finalModel)
+```
+
+### _Confusion Matrix_
+
+Selanjutnya kita akan cek _confusion matrix_ menggunakan _test dataset_:
+
+```{r,message=FALSE,warning=FALSE}
+# melakukan prediksi dari test dataset
+pred = predict(model_dt,newdata = test_df) %>% as.character()
+
+# membuat confusion matrix
+table(test_df$class,pred)
+```
+
+\newpage
+
+## Kesimpulan
+
+Terlihat bahwa hanya ada kesalahan misklasifikasi sebanyak `2` kasus saja dari total `30` baris data pada _test dataset_. Sehingga bisa dihitung akurasi dari model _decision tree_ ini adalah sebesar:
+
+```{r}
+mean(test_df$class == pred)
+```
