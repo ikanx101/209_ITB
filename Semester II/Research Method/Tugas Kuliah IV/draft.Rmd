@@ -1,0 +1,52 @@
+---
+title: "Optimization of E-Commerce Product Discount Portfolio Using Dynamic Spiral Optimization Algorithm"
+author: "Mohammad Rizka Fadhli"
+date: |
+  | Magister Sains Komputasi, Institut Teknologi Bandung
+  | Corresponding author's email: ikanx101@gmail.com
+affiliation: ITB
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: true
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: breezedark
+bibliography: references.bib
+csl: springer-basic-brackets-no-et-al-alphabetical.csl
+linestretch: 1.25
+colorlinks: true
+abstract: The development of the digital economy market in Indonesia is growing every year. As a result, market players have to compete with each other to get consumers. One strategy is to provide additional discounts on listed products. This product discount portfolio problem is a Binary Linear Programming (BLP) problem with a decision variable in the form of a binary number that states whether a product is eligible for a discount or not. With many decision variables involved, we can develop metaheuristic approaches such as Spiral Dynamic Optimization Algorithm (SDOA) to solve the optimization problem. The SDOA solution is proven to be more optimal than the existing solution.
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+# INTRODUCTION
+
+Currently, 30 million Indonesians are used to buying and selling online, creating a market of 8 trillion rupiahs. This market can continue to grow to 40 trillion in the next five years^[https://www.mckinsey.com/spContent/digital_archipelago/index.html]. Online transactions are divided into two types: social commerce (trading via social media platforms) and e-commerce (trading via marketplace platforms). By 2022, the revenue projection from the e-commerce market will exceed US$62 million^[https://www.statista.com/outlook/dmo/ecommerce/indonesia#revenue]. It was highly contributed by the increasing number of MSMEs that listed their products in e-commerce. The total number of MSMEs that market their products in e-commerce is currently 14.5 million MSMEs. The number has not reached half of the target set in 2023, which is 30 million MSMEs^[https://www.cnnindonesia.com/ekonomi/20210807160341-92-677709/umkm-masuk-e-commerce-di-ri-tambah-65-juta].
+
+Each listed product on the marketplace has an initial price defined by the seller. The marketplace can intervene in its price indirectly by providing discounts so consumers paid lower than the initial price. A study at an online retailer in China shows that there is an influence between product discounts and consumer purchase behavior such as purchase incident, purchase quantity, and spending. Especially in certain discount percentage ranges [@cny].  The pricing and discount aims to attract consumers to buy products in the marketplace for a certain period. One of the mathematical models that can be used to determine prices is Price Elasticity Model, which is a causality model between price and demand. A study comparing the price elasticity model with linear, polynomial, and exponential bases found that the linear model is the most commonly used model and it is easier to interpret [@linear_reg].
+
+The problem is determining which products need to be given an additional discount. This problem is one of the BLP problem forms: choosing the right product to maximize sales with a constraint limited discount budget in a certain period. Binary programming is a form of an optimization method in which the variables involved are binary numbers. The main characteristic of BLP is the matching process between indexes [@lieberman]. One of the studies related to BLP is the matching process to determine the placement of phasor measuring units in a power system [@suresh]. Another study used BLP to optimize the selection of 100 marketing channels and activities against millions of customers [@ieee]. The goal is to optimize the marketing messages delivery so that sales increase. Business-related and consumer-centric optimization problems have not been widely published in journals.
+
+The metaheuristic algorithm such as SDOA is capable to solve BLP in a small number of decision variables involved. SDOA is an algorithm inspired by spiral motion in natural events. The rotation matrix is​an algebraic principle that is closely related to SDOA [@tamura]. SDOA is proven to be used to solve BLP problems by modifying the existing objective function and constraints [@kun]. The basic idea is to turn a constrained problem into an unconstrained problem by creating a penalty function.
+
+In another study, researchers made an adaptive linear SDOA by changing the value of the contraction constant into a certain function that depends on the function value of each candidate solution [@sdoa2]. The latest study in 2022 conducted a thorough review including making several improvements from SDOA, such as: changing the value of the contraction constant, utilizing alternative functions (linear, quadratic, fuzzy, and exponential), and crossing between SDOA and PSO into PSO with a spiral movement [@sdoa3].
+
+In this research, we develop a computational model based on SDOA to solve the discount product portfolio optimization problem. Then we will compare the solution with the existing product portfolio.
+
+# _REFERENCES_
