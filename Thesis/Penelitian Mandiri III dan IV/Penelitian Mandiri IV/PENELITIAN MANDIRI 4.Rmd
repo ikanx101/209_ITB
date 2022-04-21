@@ -200,7 +200,6 @@ y_k \in \{ 0,1 \}, \hat{x}_{jk} \geq 0, a_{ijk} \in \{ 0,1 \} \\
 \end{matrix}$$
 
 
-
-
+\newpage
 
 # REFERENSI

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.11)  21 APR 2022 17:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.11)  21 APR 2022 17:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -594,23 +594,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[11] (./PENELITIAN-MANDIRI-4.aux)
+[11]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[12] (./PENELITIAN-MANDIRI-4.aux)
 Package rerunfilecheck Info: File `PENELITIAN-MANDIRI-4.out' has not changed.
 (rerunfilecheck)             Checksum: 4BBC4E93C91598A307179B72DF448236;950.
  ) 
 Here is how much of TeX's memory you used:
- 13177 strings out of 480228
- 210372 string characters out of 5895464
+ 13178 strings out of 480228
+ 210379 string characters out of 5895464
  548344 words of memory out of 5000000
  30725 multiletter control sequences out of 15000+600000
  534788 words of font info for 134 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,12n,63p,1017b,461s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmro12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on PENELITIAN-MANDIRI-4.pdf (11 pages, 235070 bytes).
+Output written on PENELITIAN-MANDIRI-4.pdf (12 pages, 235428 bytes).
 PDF statistics:
- 220 PDF objects out of 1000 (max. 8388607)
- 175 compressed objects within 2 object streams
- 53 named destinations out of 1000 (max. 500000)
+ 224 PDF objects out of 1000 (max. 8388607)
+ 178 compressed objects within 2 object streams
+ 54 named destinations out of 1000 (max. 500000)
  36921 words of extra memory for PDF output out of 42996 (max. 10000000)
 
