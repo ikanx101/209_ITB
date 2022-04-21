@@ -159,6 +159,8 @@ Berikut adalah _summary_ alur pengadaan bahan baku gula yang dilakukan __NFI__:
 knitr::include_graphics("ilustrasi_2.png")
 ```
 
+Kelak alur ini akan dijadikan basis pembuatan model optimisasi.
+
 ## Informasi Terkait Substitusi Bahan Baku
 
 Menurut informasi dari _product research and development_, beberapa bahan baku bisa dijadikan substitusi bagi bahan baku yang lain. Hal ini diperbolehkan karena kesamaan karakteristik yang ada pada beberapa bahan baku tersebut. Satu-satunya perbedaan mendasar antar bahan baku adalah warna. Sedangkan derajat rasa dan ukuran partikel sudah disesuaikan dengan standar baku pangan yang ada.
@@ -207,7 +209,9 @@ Ada beberapa data yang dijadikan _input_ dalam permasalahan ini, yakni:
 1. Data komposisi bahan baku per produk yang diproduksi.
 1. Data _demand_ mingguan untuk masing-masing produk (dalam unit _batch_ produksi) termasuk kebutuhan bahan baku per _batch_.
 
-## Contoh Data I: Spek Bahan Baku
+## Contoh Data I
+
+## Spek Bahan Baku {.unlisted .unnumbered}
 
 Berikut ini adalah data spek bahan baku yang digunakan.
 
@@ -226,7 +230,9 @@ data.frame(bahan_baku = paste0("bb_",1:6),
   knitr::kable(caption = "Data Bahan Baku")
 ```
 
-## Contoh Data II: Komposisi Bahan Baku per Produk
+## Contoh Data II
+
+## Komposisi Bahan Baku per Produk {.unlisted .unnumbered}
 
 Berikut ini adalah sampel data yang berisi informasi produk apa bisa dibuat menggunakan bahan baku mana saja.
 
@@ -247,7 +253,9 @@ data.frame(produk = paste0("fg_",1:8),
   knitr::kable(caption = "Contoh Sample Data Komposisi Bahan Baku")
 ```
 
-## Contoh Data III: Data _Demand_ Mingguan per Produk
+## Contoh Data III
+
+## Data _Demand_ Mingguan per Produk {.unlisted .unnumbered}
 
 Berikut adalah data _demand_ produk mingguan yang dijadikan basis pengiriman bahan baku.
 
@@ -262,5 +270,6 @@ data.frame(produk = paste0("fg_",1:8),
   knitr::kable(caption = "Contoh Sample Data Demand Mingguan")
 ```
 
+\newpage
 
 # REFERENSI
