@@ -2,8 +2,8 @@
 title: "Optimization of E-Commerce Product Discount Portfolio Using Dynamic Spiral Optimization Algorithm"
 author: "Mohammad Rizka Fadhli"
 date: |
-  | Magister Sains Komputasi, Institut Teknologi Bandung
-  | Corresponding author's email: ikanx101@gmail.com
+  | Department of Computational Science, Natural Sciences Faculty, Institut Teknologi Bandung
+  | Corresponding author's email: 20921004@mahasiswa.itb.ac.id
 affiliation: ITB
 fontsize: 12pt
 output: 
@@ -18,7 +18,7 @@ bibliography: references.bib
 csl: springer-basic-brackets-no-et-al-alphabetical.csl
 linestretch: 1.25
 colorlinks: true
-abstract: The development of the digital economy market in Indonesia is growing every year. As a result, market players have to compete with each other to get consumers. One strategy is to provide additional discounts on listed products. This product discount portfolio problem is a Binary Linear Programming (BLP) problem with a decision variable in the form of a binary number that states whether a product is eligible for a discount or not. With many decision variables involved, we can develop metaheuristic approaches such as Spiral Dynamic Optimization Algorithm (SDOA) to solve the optimization problem. The SDOA solution is proven to be more optimal than the existing solution.
+abstract: The development of the digital economy market in Indonesia is growing every year. As a result, market players have to compete with each other to get consumers. One strategy is to provide additional discounts on listed products. Product discount portfolio problem is a Binary Linear Programming (BLP) problem with a decision variable in the form of a binary number that states whether a product is eligible for a discount or not. With many decision variables involved, we developed metaheuristic approaches Spiral Dynamic Optimization Algorithm (SDOA) to solve the optimization problem. The SDOA solution is proven to be more optimal than the existing solution by average $xx \%$.
 header-includes:
 - \usepackage{fancyhdr}
 - \pagestyle{fancy}
@@ -37,7 +37,7 @@ library(ggplot2)
 
 # INTRODUCTION
 
-Currently, 30 million Indonesians are used to buying and selling online, creating a market of 8 trillion rupiahs. This market can continue to grow to 40 trillion in the next five years^[https://www.mckinsey.com/spContent/digital_archipelago/index.html]. Online transactions are divided into social commerce (trading via social media platforms) and e-commerce (trading via marketplace platforms). By 2022, the revenue projection from the e-commerce market will exceed US$62 million^[https://www.statista.com/outlook/dmo/ecommerce/indonesia#revenue]. It was highly contributed by the increasing number of MSMEs that listed their products in e-commerce. The total number of MSMEs that market their products in e-commerce is currently 14.5 million MSMEs. The number has not reached half of the target set in 2023, which is 30 million MSMEs^[https://www.cnnindonesia.com/ekonomi/20210807160341-92-677709/umkm-masuk-e-commerce-di-ri-tambah-65-juta].
+Currently, 30 million Indonesians are used to buying and selling online, creating a market of 8 trillion rupiahs. This market can continue to grow to 40 trillion in the next five years^[https://www.mckinsey.com/spContent/digital_archipelago/index.html]. Online transactions are divided into social commerce (trading via social media platforms) and e-commerce (trading via marketplace platforms). By 2022, the revenue projection from the e-commerce market will exceed US$62 million^[https://www.statista.com/outlook/dmo/ecommerce/indonesia#revenue]. It was highly contributed by the increasing number of MSMEs that listed their products in e-commerce. The total number of MSMEs that market their products in e-commerce is currently 14.5 million MSMEs. The number has not reached half of the target set in 2023, which is 30 million MSMEs^[https://www.cnnindonesia.com/ekonomi/20210807160341-92-677709/umkm-masuk-e-commerce-di-ri-tambah-65-juta]. BliBli.com is one of the top marketplace in Indonesia.
 
 Each listed product on the marketplace has an initial price defined by the seller. The marketplace can intervene in its price indirectly by providing discounts, so consumers pay lower than the initial price. A study at an online retailer in China shows an influence between product discounts and consumer purchase behavior such as purchase incident, purchase quantity, and spending. Especially in specific discount percentage ranges [@cny]. The pricing and discount aim to attract consumers to buy products in the marketplace for a certain period. One of the mathematical models that can be used to determine prices is the Price Elasticity Model, a causality model between price and demand. A study comparing the price elasticity model with linear, polynomial, and exponential bases found that the linear model is the most commonly used, and it is easier to interpret [@linear_reg].
 

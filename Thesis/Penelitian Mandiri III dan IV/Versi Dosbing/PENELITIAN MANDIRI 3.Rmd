@@ -1,6 +1,6 @@
 ---
-title: "Penelitian Mandiri dalam Sains Komputasi III dan IV"
-subtitle: "Draft Laporan Akhir"
+title: "Laporan Akhir Penelitian Mandiri dalam Sains Komputasi III"
+subtitle: _Data Collection_ dan Dokumentasi _Production System_
 author: | 
     | Mohammad Rizka Fadhli 
     | Program Studi Magister Sains Komputasi
@@ -18,6 +18,7 @@ output:
     fig_caption: true
     highlight: breezedark
 bibliography: references.bib
+csl: academic-psychiatry.csl
 linestretch: 1.75
 colorlinks: true
 header-includes:
@@ -42,39 +43,28 @@ library(dplyr)
 
 \newpage
 
-# TOPIK PENELITIAN MANDIRI
+# LATAR BELAKANG
 
-Laporan akhir penelitian mandiri III dan IV ditulis dalam satu laporan yang berisi masing-masing luaran dari rencana kerja yang berdasarkan judul thesis.
+Semenjak diperkenalkan pertama kali pada tahun 1982, _Supply Chain Management_ (SCM) memegang peranan penting dalam manufaktur sebagai suatu sistem produksi terintegrasi [@webber]. Di dalam SCM, bahan baku dibeli perusahaan dari berbagai _supplier_, dibuat ke dalam suatu produk yang kemudian akan dijual ke pelanggan melalui berbagai _channel_ distribusi.
 
-## Rencana Judul Thesis
+Dalam mengarungi kompetisi, perusahaan perlu memahami dua faktor kunci, yakni _cost reduction_ dan _product quality_ [@masood]. Kedua faktor ini sangat bergantung pada pemilihan _supplier_ yang tepat. Sehingga proses _supplier selection_ menjadi proses yang krusial dalam setiap perusahaan.
 
-_Optimization Method for Supplier Selection, Order Allocation, and Incorporating Raw-Material Characteristic: Case Study Beverages Manufacture_
+Dalam prakteknya, perusahaan bisa menggunakan dua strategi terkait _supplier selection_, yakni: _single sourcing_ dan _multiple sourcing_. _Single sourcing_ berarti perusahaan hanya membeli bahan baku dari _supplier_ tunggal. Sedangkan _multiple sourcing_ berarti perusahaan bisa membeli bahan baku dari beberapa _supplier_. Strategi _single sourcing_ bisa menaikkan level risiko dari perusahaan sedangkan strategi _multiple sourcing_ menyebabkan _initial cost_ dan _ongoing cost_ yang lebih besar [@sourcing]. Bagi perusahaan yang menerapkan strategi _multiple sourcing_, banyak faktor yang akan membuat kompleks pengambilan keputusan. Misalnya harga, perjanjian transaksi, kualitas, kuantitas, jarak dan biaya pengantaran [@masood].
 
-## Target Luaran
+PT. NFI adalah salah satu perusahaan manufaktur di Indonesia yang memproduksi 130 jenis minuman. Salah satu bahan baku yang paling sering digunakan untuk semua produk minuman tersebut adalah gula. Untuk pemenuhan bahan baku gula, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_. Spesifikasi bahan baku gula dan harga perton berbeda-beda antar _supplier_.
 
-### Penelitian Mandiri III
-
-_Data collection_ dan dokumentasi _production system_.
-
-### Penelitian Mandiri IV
-
-Model optimisasi yang telah disempurnakan.
-
-\newpage
-
-# PENELITIAN MANDIRI III {.unnumbered}
-
-# DOKUMENTASI SISTEM PRODUKSI
-
-## Masalah Optimisasi
-
-Penentuan keputusan strategis dalam hal:
+Pada penelitian ini, ada tiga masalah utama yang hendak diselesaikan, yakni:
 
 - Memilih _supplier_ bahan baku.
 - Menentukan banyaknya bahan baku yang harus dibeli dari suatu _supplier_.
 - Menentukan bahan baku mana yang harus digunakan untuk memproduksi setiap produk.
 
-dengan tujuan total biaya pembelian seminim mungkin tetapi memenuhi kebutuhan yang ada pada periode tertentu.
+dengan tujuan total biaya pembelian seminim mungkin tetapi memenuhi kebutuhan yang ada pada periode tertentu. Luaran dari penelitian ini adalah suatu model optimisasi yang bisa menyelesaikan permasalahan di atas.
+
+Laporan akhir penelitian mandiri dalam sains komputasi III ini adalah: _data collection_ dan dokumentasi _production system_ untuk penelitian berjudul _Optimization Method for Supplier Selection, Order Allocation, and Incorporating Raw-Material Characteristic: Case Study Beverages Manufacture_.
+
+
+# DOKUMENTASI SISTEM PRODUKSI
 
 ## Kondisi yang Ada Saat Ini
 
@@ -84,9 +74,7 @@ Saat ini pemilihan _supplier_ dan penentuan kuantitas pembelian bahan baku dilak
 
 Permasalahan dalam penentuan _supplier_ dan bahan baku ini bisa dipandang sebagai masalah optimisasi dan dapat dibuat menjadi suatu model optimisasi. Model optimisasi ini kelak akan diimplementasikan pada departemen PPIC sehingga tiga proses utama dalam pemilihan _supplier_ dan bahan baku bisa dilakukan secara cepat dan tepat. Diharapkan proses bisnis menjadi menjadi lebih efisien dan _cost_ yang ada bisa ditekan lebih baik lagi.
 
-## Dokumentasi Sistem Produksi
-
-### Rangkaian Produksi
+## Rangkaian Produksi
 
 ```{r out.width="75%",echo=FALSE,warning=FALSE,message=FALSE,fig.align='center',fig.cap="Simplifikasi Rangkaian Produksi"}
 nomnoml::nomnoml("#direction: right
@@ -120,7 +108,7 @@ Pemesanan ini juga harus disesuaikan dengan _policy_ yang ada pada __SCM__, sepe
 1. Pembelian bahan baku harus berasal dari minimal 2 _suppliers_ untuk menjaga keamanan pasokan.
 1. Pembelian bahan baku dari _supplier_ harus memenuhi proporsi portofolio yang ditetapkan di awal tahun oleh __NFI__.
 
-### Informasi Terkait Pengiriman Bahan Baku 
+## Informasi Terkait Pengiriman Bahan Baku 
 
 Pengiriman bahan baku oleh para _supplier_ dilakukan sebanyak 4 kali dalam sebulan dengan jumlah sesuai dengan aturan berikut:
 
@@ -146,9 +134,8 @@ Oleh karena itu, kelak pada model optimisasi perlu ada _constraints_ terkait hal
 knitr::include_graphics("ilustrasi.png")
 ```
 
-\newpage
 
-### Informasi Terkait Jenis Bahan Baku 
+## Informasi Terkait Jenis Bahan Baku 
 
 Saat ini, ada __6__ jenis bahan baku yang bisa dipesan ke __6__ _supplier_ yang berbeda. Masing-masing bahan baku digunakan untuk membuat produk tertentu. Informasi lain yang perlu diketahui adalah:
 
@@ -164,8 +151,6 @@ Saat ini, ada __6__ jenis bahan baku yang bisa dipesan ke __6__ _supplier_ yang 
         - Tidak boleh membeli __10.5 ton__.
 - Harga masing-masing jenis bahan baku berbeda. Namun untuk lama pengiriman, pada kasus ini semua gula memiliki lama pengiriman yang sama.
 
-\newpage
-
 ### Ilustrasi Alur Pengadaan Bahan Baku: Gula
 
 Berikut adalah _summary_ alur pengadaan bahan baku gula yang dilakukan __NFI__:
@@ -174,13 +159,11 @@ Berikut adalah _summary_ alur pengadaan bahan baku gula yang dilakukan __NFI__:
 knitr::include_graphics("ilustrasi_2.png")
 ```
 
-\newpage
-
-### Informasi Terkait Substitusi Bahan Baku
+## Informasi Terkait Substitusi Bahan Baku
 
 Menurut informasi dari _product research and development_, beberapa bahan baku bisa dijadikan substitusi bagi bahan baku yang lain. Hal ini diperbolehkan karena kesamaan karakteristik yang ada pada beberapa bahan baku tersebut. Satu-satunya perbedaan mendasar antar bahan baku adalah warna. Sedangkan derajat rasa dan ukuran partikel sudah disesuaikan dengan standar baku pangan yang ada.
 
-#### Case I: Minimal __2 jenis__ bahan baku sebagai _back up_ {.unnumbered .unlisted}
+### Case I: Minimal __2 jenis__ bahan baku sebagai _back up_ {.unnumbered .unlisted}
 
 Dalam suatu bulan tertentu, untuk memproduksi produk __A__, __B__, dan __C__ dibutuhkan bahan baku $x_1$, $x_2$, __atau__ $x_3$.
 
@@ -191,7 +174,7 @@ Untuk memastikan tidak ada masalah di kemudian hari (sebagai _back up_), maka mi
 1. Membeli $x_2$ dan $x_3$, atau
 1. Membeli $x_1$, $x_2$, dan $x_3$.
 
-#### Case II: Unit bahan baku yang digunakan __sama__ {.unnumbered .unlisted}
+### Case II: Unit bahan baku yang digunakan __sama__ {.unnumbered .unlisted}
 
 Dalam suatu bulan tertentu, untuk membuat produk __A__, kita bisa menggunakan:
 
@@ -216,33 +199,34 @@ Karena minimal harus ada __2 bahan baku yang dipilih__, maka alternatif solusi y
 1. 100 unit $x_2$ dan 100 unit $x_3$.
 1. 100 unit $x_1$, 100 unit $x_2$ dan 100 unit $x_3$.
 
-## Data yang Digunakan
-
-### Data yang Dijadikan _Input_
+# DATA YANG DIGUNAKAN
 
 Ada beberapa data yang dijadikan _input_ dalam permasalahan ini, yakni:
 
-1. Data spek bahan baku, meliputi: harga (Rupiah per $kg$), _minimum order quantity_ (MOQ dalam $kg$), _leadtime_ pengiriman hingga siap guna (dalam hari), stok terkini (dalam $kg$) untuk masing-masing jenis bahan baku.
+1. Data spek bahan baku, meliputi: harga (Rupiah per $kg$), _minimum order quantity_ (MOQ dalam $kg$), _leadtime_ pengiriman hingga siap guna (dalam hari), stok terkini (dalam $kg$) untuk masing-masing jenis bahan baku, dan proporsi order tahunan.
 1. Data komposisi bahan baku per produk yang diproduksi.
 1. Data _demand_ mingguan untuk masing-masing produk (dalam unit _batch_ produksi) termasuk kebutuhan bahan baku per _batch_.
 
-### Contoh Data I: Spek Bahan Baku
+## Contoh Data I: Spek Bahan Baku
 
 Berikut ini adalah data spek bahan baku yang digunakan.
 
 ```{r,echo=FALSE}
+prop = runif(6,.5,1)
+prop = prop / sum(prop) * 100
 data.frame(bahan_baku = paste0("bb_",1:6),
            stok = round(runif(6,0,1) * 100,
-                        2),
-           min_order = round(runif(6,0,3) * 100,
+                        1),
+           min_order = round(runif(6,.5,3) * 1000,
                         0),
            leadtime = 17,
-           harga = round(runif(6,120000,250000),
-                        0)) %>% 
+           harga = round(runif(6,100,230),
+                        0) * 1000,
+           proporsi = round(prop,1)) %>% 
   knitr::kable(caption = "Data Bahan Baku")
 ```
 
-### Contoh Data II: Komposisi Bahan Baku per Produk
+## Contoh Data II: Komposisi Bahan Baku per Produk
 
 Berikut ini adalah sampel data yang berisi informasi produk apa bisa dibuat menggunakan bahan baku mana saja.
 
@@ -263,7 +247,7 @@ data.frame(produk = paste0("fg_",1:8),
   knitr::kable(caption = "Contoh Sample Data Komposisi Bahan Baku")
 ```
 
-### Contoh Data III: Data _Demand_ Mingguan per Produk
+## Contoh Data III: Data _Demand_ Mingguan per Produk
 
 Berikut adalah data _demand_ produk mingguan yang dijadikan basis pengiriman bahan baku.
 
@@ -279,148 +263,4 @@ data.frame(produk = paste0("fg_",1:8),
 ```
 
 
-\newpage
-
-# PENELITIAN MANDIRI IV {.unnumbered}
-
-# MODEL OPTIMISASI 
-
-Masalah _supplier selection_ dan _order allocation_ adalah masalah dengan satu kriteria, yaitu total harga pengadaan (pembelian) tetapi ukuran masalahnya lebih besar karena kedua masalah di atas hanya sebagian dari variabel keputusan. 
-
-Variabel keputusan lainnya adalah bagaimana distribusi pengiriman dari tiap _supplier_ per minggu dan , dan penentuan bahan baku untuk setiap produk. Oleh karena itu, masalah krusial pertama dari penyelesaian masalah ini adalah menurunkan masalah optimisasi yang tepat yang dapat menjadi model dari masalah ini.
-
-Berdasarkan informasi-informasi yang telah didapatkan dari `Penelitian Mandiri III`, berikut adalah model optimisasi dari permasalahan _supplier selection_ dan _raw material composition_.
-
-## Parameter yang Diketahui
-
-Notasikan:
-
-- $M$ sebagai himpunan semua minggu. 
-    - $\hat{M} \setminus \{1,6\}$
-- $P = P_1 \bigcup P_2 \bigcup P_3 \bigcup P_4 \bigcup P_5 \bigcup P_6$ sebagai himpunan produk di semua minggu.
-    - $\hat{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan minimal dua jenis bahan baku.
-    - $\dot{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan satu jenis bahan baku saja.
-- $G = \{1,2,3,4,5,6\}$ sebagai himpunan bahan baku.
-- $D$ sebagai kebutuhan bahan baku di bulan perencanaan, yaitu: _week_ 3 - 6.
-- $maxcap$ sebagai kapasitas gudang bahan baku.
-- $\forall k \in G, Pr_k$ adalah total proporsi portofolio bahan baku yang ditetapkan dalam setahun (dalam ton).
-- $\forall i \in P_j, \space g_{ijk}$ adalah kebutuhan bahan baku (dalam ton) dari produk $i$ pada _week_ $k$.
-- $\forall k \in G, \space c_k$ adalah harga bahan baku $k$ per ton.
-- $\forall k \in G, \space \epsilon_k$ adalah _minimum order quantity_ dari bahan baku $k$.
-- $\forall k \in G, \space \hat{d}_{2k}$ adalah total bahan baku $k$ yang dibutuhkan pada _week_ 2.
-- $\forall k \in G, \space Z_{ik}$ adalah stok level bahan baku $k$ di gudang pada akhir _week_ 1.
-
-## Variabel Keputusan
-
-### Variabel I {.unnumbered .unlisted}
-
-Definisikan $\forall k \in G, \space x_k$ adalah banyaknya bahan baku $k$ yang dibeli.
-
-Berdasarkan informasi sebelumnya, kita ketahui bahwa $x_k$ bernilai bulat positif dan harus lebih besar atau sama dengan nilai $\epsilon_k$. Kemudian tidak ada kewajiban untuk membeli bahan baku dari seluruh _supplier_. 
-
-Maka kita bisa tuliskan: $x_k = 0$ atau $\epsilon_k \leq x_k \leq maxcap$. Untuk menghindari nilai diskontinu dari $x_k$ ini, definisikan:
-
-$$y_k = \left\{\begin{matrix}
-1, & x_k = 0 \\ 0, & \epsilon_k \leq x_k \leq maxcap
-\end{matrix}\right.$$
-
-$\forall j \in M  \setminus \{1,6\}, \forall i \in P_j, \forall k \in G$,
-
-### Variabel II {.unnumbered .unlisted}
-
-Definisikan: $\hat{x}_{jk}$ sebagai banyaknya pengiriman bahan baku jenis $k$ di awal _week_ $j$.
-
-$$a_{ijk} = \left\{\begin{matrix}
-1, & \text{produk ke } i \text{ di week } j \text{ menggunakan BB } k \\ 
-0, & \text{lainnya}
-\end{matrix}\right.$$
-
-### Variabel III {.unnumbered .unlisted}
-
-Definisikan: $b_{ijk}$ sebagai proporsi penggunaan bahan baku $k$ dari seluruh kebutuhan bahan baku untuk produk $i$ di _week_ $j$, $\forall j \in M \setminus \{ 1 \}, \forall k \in G$.
-
-### Variabel IV {.unnumbered .unlisted}
-
-Definisikan: $z_{jk}$ sebagai stok level bahan baku $k$ di akhir _week_ $j$.
-
-
-## Kendala Optimisasi
-
-### Kendala I {.unnumbered .unlisted}
-
-Kendala I adalah penghubung yang benar antara variabel keputusan biner, integer, atau kontinu yang berkaitan:
-
-$$\begin{matrix}
-\forall k \in G, &  \\
- & x_k \leq Dy_k \\
- & x_k \geq \epsilon y_k \\
-\forall j \in M \setminus \{ 1,2 \}, \forall i \in P_j, \forall k \in G, & \\
- & b_{ijk} \leq a_{ijk} \\
- & b_{ijk} \geq \mu a_{ijk}
-\end{matrix}$$
-
-untuk suatu nilai $\mu$ yang kecil.
-
-### Kendala II {.unnumbered .unlisted}
-
-Kendala II dibuat agar total bahan baku yang dipesan tidak kurang dari total _demand_ di bulan perencanaan.
-
-$$\sum_{k \in G} x_k \geq D$$
-
-### Kendala III {.unnumbered .unlisted}
-
-Kendala III mengatur hubungan antara total pembelian bahan baku dan pengiriman setiap minggu.
-
-$$\begin{matrix}
-\forall k \in G, & \\
- & x_k = \sum_{j \in \hat{M}} \hat{x}_{jk}
-\end{matrix}$$
-
-### Kendala IV {.unnumbered .unlisted}
-
-Kendala IV berfungsi untuk menjaga komposisi bahan baku yang diinginkan.
-
-$$\begin{matrix}
-\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \hat{P}_j, & \\
- & \sum_{k \in G} a_{ijk} \geq 2 \\
- & \sum_{k \in G} b_{ijk} = 1 \\
-\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \dot{P}_j, & \\ 
- & \sum_{k \in G} a_{ijk} = 1 \\
- & \sum_{k \in G} b_{ijk} = 1
-\end{matrix}$$
-
-### Kendala V {.unnumbered .unlisted}
-
-Kendala V berfungsi untuk menjaga stok level sesaat setelah pengiriman bahan baku agar tidak melebihi kapasitas gudang.
-
-$$\begin{matrix}
- & \sum_{k \in G} (Z_{1k} + \hat{x}_{1k} - \hat{d}_{2k} + z_{jk}) = maxcap \\
-\forall j \in M \setminus \{ 1,2 \} & \\
- & \sum_{k \in G} (z_{(j-1)k} + \hat{x}_{(j-1)k}) - \sum_{i \in P_j} b_{ijk} g_{ijk} + z_{jk} = maxcap
-\end{matrix}$$
-
-### Kendala VI {.unnumbered .unlisted}
-
-Kendala VI menjaga agar pembelian bahan baku tidak melebihi proporsi portofolio yang sudah ditetapkan dalam setahun.
-
-$$\sum_{k \in G} x_k \leq Pr_k$$
-
-
-## Fungsi Objektif
-
-Permasalahan yang dihadapi adalah pemilihan _supplier_ dan bahan baku sebagai berikut:
-
-$$\min \sum_{k \in G} c_k x_k$$
-
-$$\begin{matrix}
-\text{terhadap kendala I sampai VI dan } \\
-x_k = 0 \text{ atau } \epsilon_k \leq x_k \leq maxcap, \space x_k \in \mathbb{Z}^+ \\
-y_k \in \{ 0,1 \}, \hat{x}_{jk} \geq 0, a_{ijk} \in \{ 0,1 \} \\
-0 \leq b_{ijk} \leq 1 \\
-0 \leq z_{jk} \leq maxcap \\
-\end{matrix}$$
-
-
-
-
-
+# REFERENSI
