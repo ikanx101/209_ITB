@@ -27,23 +27,24 @@ plt =
              color = "white") +
   
   geom_mark_circle(aes(y = 0, label = NA, description = label, fill = event), 
-                   con.cap = -1, fill = NA, color = NA, label.fontsize = 9, label.hjust = 0,
+                   con.cap = -1, fill = NA, color = NA, label.fontsize = 10, label.hjust = 0,
                    label.fill = NA,
-                   con.size = 0.5, con.border = "one",
+                   con.size = .5, con.border = "one",
                    con.type = "elbow") +
 
   labs(title = "Timeline Pengadaan Bahan Baku",
-       subtitle = "Garis horizontal menandakan minggu",
-       caption = "Produksi sebenarnya dimulai pada saat minggu III. Namun, sejak BB mulai dikirim pada minggu I, kita harus mulai memperhitungkan kapasitas gudang.\nDemikian juga saat pengiriman BB di minggu II. Oleh karena itu pemakaian pada minggu I dan II akan dijadikan parameter dalam model matematika.")+
+       subtitle = "Garis vertikal menandakan minggu",
+       caption = "Produksi sebenarnya dimulai pada saat minggu III.\nNamun, sejak BB mulai dikirim pada minggu I, kita harus mulai memperhitungkan kapasitas gudang.\nDemikian juga saat pengiriman BB di minggu II.\nOleh karena itu pemakaian pada minggu I dan II akan dijadikan parameter dalam model.")+
   
   theme_void() +
   
   theme(legend.position = "none",
         plot.title = element_text(hjust = 0.5, face = "bold", size = 25, family = "Patua"),
         plot.subtitle = element_text(hjust = 0.5, face = "italic", size = 22),
-        plot.caption = element_text(hjust = 0.5, face = "bold", size = 10, color = "grey50", family = "Lato")) +
-  xlim(0,7)+ ylim(-35,35)
+        plot.caption = element_text(hjust = 0.5, size = 10, color = "black", family = "Lato")) +
+  xlim(0,7)+ ylim(-200,200) +
+  coord_flip()
 
-png("timeline.png", width = 15, height = 8, units = "in",res = 450)
+png("timeline.png", width = 10, height = 15, units = "in",res = 650)
 print(plt)
 dev.off()

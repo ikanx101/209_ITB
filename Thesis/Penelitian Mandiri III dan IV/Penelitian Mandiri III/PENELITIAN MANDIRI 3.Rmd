@@ -51,7 +51,12 @@ Dalam mengarungi kompetisi, perusahaan perlu memahami dua faktor kunci, yakni _c
 
 Dalam prakteknya, perusahaan bisa menggunakan dua strategi terkait _supplier selection_, yakni: _single sourcing_ dan _multiple sourcing_. _Single sourcing_ berarti perusahaan hanya membeli bahan baku dari _supplier_ tunggal. Sedangkan _multiple sourcing_ berarti perusahaan bisa membeli bahan baku dari beberapa _supplier_. Strategi _single sourcing_ bisa menaikkan level risiko dari perusahaan sedangkan strategi _multiple sourcing_ menyebabkan _initial cost_ dan _ongoing cost_ yang lebih besar [@sourcing]. Bagi perusahaan yang menerapkan strategi _multiple sourcing_, banyak faktor yang akan membuat kompleks pengambilan keputusan. Misalnya harga, perjanjian transaksi, kualitas, kuantitas, jarak dan biaya pengantaran [@masood].
 
-PT. NFI adalah salah satu perusahaan manufaktur di Indonesia yang memproduksi 130 jenis minuman. Salah satu bahan baku yang paling sering digunakan untuk semua produk minuman tersebut adalah gula. Untuk pemenuhan bahan baku gula, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_. Spesifikasi bahan baku gula dan harga perton berbeda-beda antar _supplier_.
+PT. NFI adalah salah satu perusahaan manufaktur di Indonesia yang memproduksi 130 jenis minuman. Salah satu bahan baku yang paling sering digunakan untuk semua produk minuman tersebut adalah gula. Masing-masing produk minuman tersebut bisa dibagi menjadi dua kelompok, yakni:
+
+1. Minuman yang hanya bisa diproduksi oleh satu jenis bahan baku gula.
+1. Minuman yang bisa diproduksi menggunakan dua atau lebih jenis bahan baku gula.
+
+Untuk pemenuhan bahan baku gula, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_. Spesifikasi bahan baku gula dan harga perton berbeda-beda antar _supplier_.
 
 Pada penelitian ini, ada tiga masalah utama yang hendak diselesaikan, yakni:
 
@@ -68,11 +73,11 @@ Laporan akhir penelitian mandiri dalam sains komputasi III ini adalah: _data col
 
 ## Kondisi yang Ada Saat Ini
 
-Saat ini pemilihan _supplier_ dan penentuan kuantitas pembelian bahan baku dilakukan secara manual dengan mempertimbangkan data-data terkait secara mingguan oleh departemen PPIC (_Production Planning and Inventory Control_). Perhitungan yang ada saat ini belum sampai ke dalam pengambilan keputusan alokasi antara bahan baku dengan produk sehingga berpotensi menimbulkan _loss sales_ akibat ketiadaan bahan baku saat produksi. Selain itu, proses perhitungan ini memerlukan waktu yang cukup lama.
+Saat ini pemilihan _supplier_ dan penentuan kuantitas pembelian bahan baku dilakukan secara manual dengan mempertimbangkan data-data terkait secara mingguan oleh departemen PPIC (_Production Planning and Inventory Control_). Namun belum sampai ke dalam tahap pemasangan alokasi bahan baku dengan produk sehingga berpotensi menimbulkan _loss sales_ akibat ketiadaan bahan baku saat produksi. Selain itu, proses perhitungan ini memerlukan waktu yang cukup lama.
 
 ## Rencana Kerja 
 
-Permasalahan dalam penentuan _supplier_ dan bahan baku ini bisa dipandang sebagai masalah optimisasi dan dapat dibuat menjadi suatu model optimisasi. Model optimisasi ini kelak akan diimplementasikan pada departemen PPIC sehingga tiga proses utama dalam pemilihan _supplier_ dan bahan baku bisa dilakukan secara cepat dan tepat. Diharapkan proses bisnis menjadi menjadi lebih efisien dan _cost_ yang ada bisa ditekan lebih baik lagi.
+Permasalahan ini bisa dipandang sebagai masalah optimisasi dan dapat dibuat menjadi suatu model optimisasi. Model optimisasi ini kelak akan diimplementasikan pada departemen PPIC sehingga tiga proses utama dalam pemilihan _supplier_ dan bahan baku bisa dilakukan secara cepat dan tepat. Diharapkan proses bisnis menjadi menjadi lebih efisien dan _cost_ yang ada bisa ditekan lebih baik lagi.
 
 ## Rangkaian Produksi
 
@@ -137,29 +142,28 @@ knitr::include_graphics("ilustrasi.png")
 
 ## Informasi Terkait Jenis Bahan Baku 
 
-Saat ini, ada __6__ jenis bahan baku yang bisa dipesan ke __6__ _supplier_ yang berbeda. Masing-masing bahan baku digunakan untuk membuat produk tertentu. Informasi lain yang perlu diketahui adalah:
+Saat ini, ada __6__ jenis bahan baku yang bisa dipesan ke __6__ _supplier_ yang berbeda. Informasi lain yang perlu diketahui adalah:
 
-- __Tidak ada kewajiban__ bagi NFI untuk membeli semua jenis bahan baku tersebut. 
-- Terkait penggunaan bahan baku:
+- Terkait produk dan bahan baku:
     - Sebagian kecil dari produk hanya bisa diproduksi dengan __satu jenis bahan baku saja__.
-    - Sebagian besar lainnya memungkinkan untuk diproduksi dengan __dua atau lebih jenis bahan baku__.
-        - Unit per jenis bahan baku yang digunakan untuk membuat produk adalah sama walau berbeda jenis bahan baku.
-- Setidaknya minimal ada __2 jenis bahan baku__ yang dibeli NFI sebagai _back up_ substitusi bahan baku.
-- Pembelian bahan baku harus memenuhi _minimum order_ yang ditetapkan oleh _supplier_ __tapi__ jika pembelian di atas _minimum order_ harus dilakukan __pembulatan__. Misalkan:
+    - Sebagian besar lainnya memungkinkan untuk diproduksi dengan __dua atau lebih jenis bahan baku__. Kebutuhan bahan baku untuk produk pada kelompok ini adalah sama. Ilustrasi sebagai berikut:
+        - Produk minuman __A__ bisa diproduksi menggunakan bahan baku $x_1$ sebanyak 1 ton atau $x_2$ sebanyak 1 ton juga.
+- Pembelian bahan baku harus memenuhi _minimum order_ yang ditetapkan oleh _supplier_ __tapi__ jika pembelian di atas _minimum order_ harus dilakukan __pembulatan__ (_order volume_ harus berupa _integer_). Misalkan:
     - _Minimum order_ adalah __10 ton__, maka:
         - Boleh membeli __11 ton__.
         - Tidak boleh membeli __10.5 ton__.
-- Harga masing-masing jenis bahan baku berbeda. Namun untuk lama pengiriman, pada kasus ini semua gula memiliki lama pengiriman yang sama.
+- Harga masing-masing jenis bahan baku berbeda. 
+- Lama pengiriman hingga bahan baku siap digunakan untuk semua _supplier_ sama.
 
 ### Ilustrasi Alur Pengadaan Bahan Baku: Gula
 
-Berikut adalah _summary_ alur pengadaan bahan baku gula yang dilakukan __NFI__:
+Berikut adalah _summary_ alur pengadaan bahan baku gula yang dilakukan __NFI__. Kelak alur ini akan dijadikan basis pembuatan model optimisasi.
 
 ```{r out.width="90%",echo=FALSE,fig.cap="Simplifikasi dari Penggunaan Bahan Baku",fig.align='center'}
-knitr::include_graphics("ilustrasi_2.png")
+knitr::include_graphics("timeline.png")
 ```
 
-Kelak alur ini akan dijadikan basis pembuatan model optimisasi.
+\newpage
 
 ## Informasi Terkait Substitusi Bahan Baku
 
@@ -167,9 +171,7 @@ Menurut informasi dari _product research and development_, beberapa bahan baku b
 
 ### Case I: Minimal __2 jenis__ bahan baku sebagai _back up_ {.unnumbered .unlisted}
 
-Dalam suatu bulan tertentu, untuk memproduksi produk __A__, __B__, dan __C__ dibutuhkan bahan baku $x_1$, $x_2$, __atau__ $x_3$.
-
-Untuk memastikan tidak ada masalah di kemudian hari (sebagai _back up_), maka minimal harus ada __2__ jenis bahan baku yang harus dibeli. Alternatifnya:
+Dalam suatu bulan tertentu, untuk memproduksi produk __A__, __B__, dan __C__ NFI bisa mempertimbangkan untuk menggunakan bahan baku $x_1$, $x_2$, __atau__ $x_3$. Untuk memastikan keamanan pasokan (sebagai _back up_), minimal harus ada dua jenis bahan baku yang harus dibeli. Alternatif pembelian yang bisa dilakukan:
 
 1. Membeli $x_1$ dan $x_2$,
 1. Membeli $x_1$ dan $x_3$,
@@ -178,28 +180,25 @@ Untuk memastikan tidak ada masalah di kemudian hari (sebagai _back up_), maka mi
 
 ### Case II: Unit bahan baku yang digunakan __sama__ {.unnumbered .unlisted}
 
-Dalam suatu bulan tertentu, untuk membuat produk __A__, kita bisa menggunakan:
+Dalam suatu bulan tertentu, untuk membuat produk __A__, NFI bisa menggunakan:
 
 1. 100 unit $x_1$ atau,
 1. 100 unit $x_2$.
 
-Sedangkan untuk membuat produk __B__, kita bisa menggunakan:
+Sedangkan untuk membuat produk __B__, NFI bisa menggunakan:
 
 1. 100 unit $x_2$ atau,
 1. 100 unit $x_3$.
-
-Dari kasus di atas, kita bisa menuliskan bahwa:
-
-1. Kebutuhan bahan baku 1 ada sebesar $x_1 \leq 100$.
-1. Kebutuhan bahan baku 2 ada sebesar $x_2 \leq 200$.
-1. Kebutuhan bahan baku 3 ada sebesar $x_3 \leq 100$.
 
 Karena minimal harus ada __2 bahan baku yang dipilih__, maka alternatif solusi yang ada adalah:
 
 1. 100 unit $x_1$ dan 100 unit $x_2$.
 1. 100 unit $x_1$ dan 100 unit $x_3$.
 1. 100 unit $x_2$ dan 100 unit $x_3$.
-1. 100 unit $x_1$, 100 unit $x_2$ dan 100 unit $x_3$.
+
+Selain alternatif di atas, NFI juga diperbolehkan membeli masing-masing 100 unit $x_1, x_2,$ atau $x_3$. Namun hal ini tidak optimal karena membeli lebih banyak dibandingkan kebutuhan.
+
+\newpage
 
 # DATA YANG DIGUNAKAN
 
@@ -237,19 +236,24 @@ data.frame(bahan_baku = paste0("bb_",1:6),
 Berikut ini adalah sampel data yang berisi informasi produk apa bisa dibuat menggunakan bahan baku mana saja.
 
 ```{r,echo=FALSE}
-data.frame(produk = paste0("fg_",1:8),
-           bb_1 = sample(c(0,1),8,replace = T),
-           bb_2 = sample(c(0,1),8,replace = T),
-           bb_3 = sample(c(0,1),8,replace = T),
-           bb_4 = sample(c(0,1),8,replace = T),
-           bb_5 = sample(c(0,1),8,replace = T),
-           bb_6 = sample(c(0,1),8,replace = T)
-           ) %>% 
+df_1 = 
+  data.frame(produk = paste0("fg_",1:14),
+           bb_1 = sample(c(0,1),14,replace = T),
+           bb_2 = sample(c(0,1),14,replace = T),
+           bb_3 = sample(c(0,1),14,replace = T),
+           bb_4 = sample(c(0,1),14,replace = T),
+           bb_5 = sample(c(0,1),14,replace = T),
+           bb_6 = sample(c(0,1),14,replace = T)
+           )
+
+df_1[15,] = list("fg_15",1,0,0,0,0,0)
+df_1[16,] = list("fg_16",0,0,1,0,0,0)
+df_1 %>% 
   rowwise() %>% 
   mutate(bb_bisa_digunakan = sum(bb_1,bb_2,bb_3,bb_4,bb_5,bb_6)) %>%
   ungroup() %>% 
   mutate(bb_bisa_digunakan = ifelse(bb_bisa_digunakan == 0,1,bb_bisa_digunakan),
-         bb_1 = ifelse(bb_bisa_digunakan == 0,1,bb_bisa_digunakan)) %>% 
+         bb_1 = ifelse(bb_bisa_digunakan == 0,1,bb_1)) %>% 
   knitr::kable(caption = "Contoh Sample Data Komposisi Bahan Baku")
 ```
 
