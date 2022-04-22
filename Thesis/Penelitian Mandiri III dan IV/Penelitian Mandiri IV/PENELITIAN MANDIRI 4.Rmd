@@ -51,7 +51,12 @@ Dalam mengarungi kompetisi, perusahaan perlu memahami dua faktor kunci, yakni _c
 
 Dalam prakteknya, perusahaan bisa menggunakan dua strategi terkait _supplier selection_, yakni: _single sourcing_ dan _multiple sourcing_. _Single sourcing_ berarti perusahaan hanya membeli bahan baku dari _supplier_ tunggal. Sedangkan _multiple sourcing_ berarti perusahaan bisa membeli bahan baku dari beberapa _supplier_. Strategi _single sourcing_ bisa menaikkan level risiko dari perusahaan sedangkan strategi _multiple sourcing_ menyebabkan _initial cost_ dan _ongoing cost_ yang lebih besar [@sourcing]. Bagi perusahaan yang menerapkan strategi _multiple sourcing_, banyak faktor yang akan membuat kompleks pengambilan keputusan. Misalnya harga, perjanjian transaksi, kualitas, kuantitas, jarak dan biaya pengantaran [@masood].
 
-PT. NFI adalah salah satu perusahaan manufaktur di Indonesia yang memproduksi 130 jenis minuman. Salah satu bahan baku yang paling sering digunakan untuk semua produk minuman tersebut adalah gula. Untuk pemenuhan bahan baku gula, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_. Spesifikasi bahan baku gula dan harga perton berbeda-beda antar _supplier_.
+PT. NFI adalah salah satu perusahaan manufaktur di Indonesia yang memproduksi 130 jenis minuman. Salah satu bahan baku yang paling sering digunakan untuk semua produk minuman tersebut adalah gula. Masing-masing produk minuman tersebut bisa dibagi menjadi dua kelompok, yakni:
+
+1. Minuman yang hanya bisa diproduksi oleh satu jenis bahan baku gula.
+1. Minuman yang bisa diproduksi menggunakan dua atau lebih jenis bahan baku gula.
+
+Untuk pemenuhan bahan baku gula, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_. Spesifikasi bahan baku gula dan harga perton berbeda-beda antar _supplier_.
 
 Pada penelitian ini, ada tiga masalah utama yang hendak diselesaikan, yakni:
 
@@ -61,7 +66,7 @@ Pada penelitian ini, ada tiga masalah utama yang hendak diselesaikan, yakni:
 
 dengan tujuan total biaya pembelian seminim mungkin tetapi memenuhi kebutuhan yang ada pada periode tertentu. Luaran dari penelitian ini adalah suatu model optimisasi yang bisa menyelesaikan permasalahan di atas.
 
-Laporan akhir penelitian mandiri dalam sains komputasi III ini adalah: _data collection_ dan dokumentasi _production system_ untuk penelitian berjudul _Optimization Method for Supplier Selection, Order Allocation, and Incorporating Raw-Material Characteristic: Case Study Beverages Manufacture_.
+Laporan akhir penelitian mandiri dalam sains komputasi IV ini adalah: model optimisasi yang telah disempurnakan untuk penelitian berjudul _Optimization Method for Supplier Selection, Order Allocation, and Incorporating Raw-Material Characteristic: Case Study Beverages Manufacture_.
 
 
 # MODEL OPTIMISASI
@@ -75,7 +80,6 @@ Berdasarkan informasi-informasi yang telah didapatkan dari `Penelitian Mandiri I
 Notasikan:
 
 - $M$ sebagai himpunan semua minggu. 
-    - $\hat{M} \setminus \{1,6\}$
 - $P = P_1 \bigcup P_2 \bigcup P_3 \bigcup P_4 \bigcup P_5 \bigcup P_6$ sebagai himpunan produk di semua minggu.
     - $\hat{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan minimal dua jenis bahan baku.
     - $\dot{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan satu jenis bahan baku saja.
