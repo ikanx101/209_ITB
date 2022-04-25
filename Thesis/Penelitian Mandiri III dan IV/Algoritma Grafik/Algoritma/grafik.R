@@ -1,4 +1,4 @@
-setwd("~/209_ITB/Thesis/Penelitian Mandiri III dan IV/Versi Dosbing/grafik timeline")
+setwd("~/209_ITB/Thesis/Penelitian Mandiri III dan IV/Algoritma Grafik/Output")
 
 library(dplyr)
 library(ggforce)
@@ -6,7 +6,8 @@ library(reshape2)
 
 rm(list=ls())
 
-jadwal = readxl::read_excel("ppic.xlsx", sheet = "jadwal all")
+jadwal = readxl::read_excel("~/209_ITB/Thesis/Penelitian Mandiri III dan IV/Algoritma Grafik/Input/ppic.xlsx", 
+                            sheet = "jadwal all")
 
 plt = 
   jadwal %>% 
