@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.11)  25 APR 2022 13:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.4.11)  26 APR 2022 08:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -923,7 +923,7 @@ LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <14.4> not available
 ] [13
 
 ]
-<penelitian-mandiri_files/figure-beamer/unnamed-chunk-1-1.pdf, id=180, 3292.3pt x 1357.07pt>
+<penelitian-mandiri_files/figure-beamer/unnamed-chunk-1-1.pdf, id=204, 3292.3pt x 1357.07pt>
 File: penelitian-mandiri_files/figure-beamer/unnamed-chunk-1-1.pdf Graphic file (type pdf)
 <use penelitian-mandiri_files/figure-beamer/unnamed-chunk-1-1.pdf>
 Package pdftex.def Info: penelitian-mandiri_files/figure-beamer/unnamed-chunk-1-1.pdf  used on input line 272.
@@ -954,7 +954,7 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
 [19
 
 ]
-<ilustrasi.png, id=256, 1084.05pt x 505.89pt>
+<ilustrasi.png, id=280, 1084.05pt x 505.89pt>
 File: ilustrasi.png Graphic file (type png)
 <use ilustrasi.png>
 Package pdftex.def Info: ilustrasi.png  used on input line 378.
@@ -972,7 +972,7 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <9> not available
 
 
 ]
-<ilustrasi_2.png, id=292, 1084.05pt x 578.16pt>
+<ilustrasi_2.png, id=317, 1084.05pt x 578.16pt>
 File: ilustrasi_2.png Graphic file (type png)
 <use ilustrasi_2.png>
 Package pdftex.def Info: ilustrasi_2.png  used on input line 445.
@@ -1016,6 +1016,54 @@ LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
 ] [36
 
 ]
+\openout4 = `penelitian-mandiri.vrb'.
+
+(./penelitian-mandiri.vrb
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 13.
+(/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)) [37
+
+] [38
+
+] [39
+
+] [40
+
+
+] [41
+
+] [42
+
+] [43
+
+] [44
+
+] [45
+
+] [46
+
+] [47
+
+] [48
+
+] [49
+
+] [50
+
+] [51
+
+] [52
+
+] [53
+
+] [54
+
+] [55
+
+] [56
+
+]
 \tf@nav=\write6
 \openout6 = `penelitian-mandiri.nav'.
 
@@ -1027,21 +1075,21 @@ LaTeX Font Info:    Font shape `T1/lmss/bx/it' in size <6> not available
 
 (./penelitian-mandiri.aux)
 Package rerunfilecheck Info: File `penelitian-mandiri.out' has not changed.
-(rerunfilecheck)             Checksum: 5B6B19D67245A00F07C503AF1388271D;1372.
+(rerunfilecheck)             Checksum: 32E3256C92CDC69CF220D56938989035;2396.
  ) 
 Here is how much of TeX's memory you used:
- 25710 strings out of 480228
- 503625 string characters out of 5895464
- 771571 words of memory out of 5000000
- 42830 multiletter control sequences out of 15000+600000
- 579317 words of font info for 183 fonts, out of 8000000 for 9000
+ 25892 strings out of 480228
+ 506045 string characters out of 5895464
+ 771574 words of memory out of 5000000
+ 42940 multiletter control sequences out of 15000+600000
+ 580009 words of font info for 187 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,14n,104p,1015b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmss10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmss9.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso9.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on penelitian-mandiri.pdf (36 pages, 1250953 bytes).
+{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmss10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmss8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmss9.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbo10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsso9.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on penelitian-mandiri.pdf (56 pages, 1336496 bytes).
 PDF statistics:
- 518 PDF objects out of 1000 (max. 8388607)
- 390 compressed objects within 4 object streams
- 113 named destinations out of 1000 (max. 500000)
- 67714 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 817 PDF objects out of 1000 (max. 8388607)
+ 613 compressed objects within 7 object streams
+ 171 named destinations out of 1000 (max. 500000)
+ 67762 words of extra memory for PDF output out of 74296 (max. 10000000)
 
