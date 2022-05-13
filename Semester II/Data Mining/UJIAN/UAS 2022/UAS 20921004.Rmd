@@ -1,0 +1,334 @@
+---
+title: "UJIAN AKHIR SEMESTER"
+subtitle: "Penambangan Data dalam Sains"
+author: "20921004 Mohammad Rizka Fadhli"
+date: "12 Mei 2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+library(dplyr)
+library(tidyr)
+```
+
+Diberikan data sebagai berikut:
+
+```{r,echo=FALSE}
+# diketahui
+df = data.frame(titik = paste0("p",1:10),
+                x = c(4,2.1,3.4,2.7,0.8,4.6,4.3,2.2,4.1,1.5),
+                y = c(5.2,3.9,3.1,2,4.1,2.9,1.2,1,4.1,3))
+df %>% knitr::kable(caption = "Data SOAL")
+```
+
+# SOAL 1 
+
+## Bagian a
+
+Diketahui _centroids_ (2,5) dan (4,3). Untuk membuat _k-means clustering_ dari data dan titi awal _centroids_, kita harus menghitung jarak masing-masing titik terhadap kedua _centroids_-nya terlebih dahulu. 
+
+Untuk menghitung matriks jarak, saya menggunakan _euclidean_ dengan formula:
+
+\begin{equation}
+r_{i,j} = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}
+\end{equation}
+
+dengan (i,j) adalah pasangan titik. 
+
+Berikut adalah iterasi pertama, yakni dengan cara menghitung jarak lalu meng-_assign_ titik-titik tersebut ke _centroid_ I atau II tergantung dari jarak terdekatnya.
+
+
+- Centroid I: (2,5)
+- Centroid II: (4,3)
+
+```{r,echo=FALSE}
+df_iter_1 = 
+  df %>% 
+  rowwise() %>% 
+  mutate(
+    # jarak k centroid I
+    sb_x = (x - 2)^2,
+    sb_y = (y - 5)^2,
+    jarak_centroid_1 = sqrt(sb_x + sb_y) %>% round(3)
+  ) %>% 
+  ungroup() %>% 
+  rowwise() %>% 
+  mutate(
+    # jarak k centroid II
+    sb_x = (x - 4)^2,
+    sb_y = (y - 3)^2,
+    jarak_centroid_2 = sqrt(sb_x + sb_y) %>% round(3)
+  ) %>% 
+  ungroup() %>% 
+  select(-sb_x,-sb_y) %>% 
+  mutate(membership = ifelse(jarak_centroid_1 < jarak_centroid_2,
+                             1,2))
+  
+df_iter_1 %>% knitr::kable(caption = "Hasil Iterasi I")
+```
+
+Iterasi kedua, yakni memilih titik pusat _centroid_ baru dengan cara menghitung rata-rata titik dari masing-masing _membership_.
+
+```{r,echo=FALSE}
+# menghitung centroids baru
+df_iter_1 %>% 
+  group_by(membership) %>% 
+  summarise(centroids_x = mean(x),
+            centroids_y = mean(y)) %>% 
+  ungroup() %>% 
+  rename(cluster = membership) %>% 
+  knitr::kable(caption = "Update Nilai Centroid dari Iterasi I")
+```
+
+Berdasarkan informasi di atas, kita dapatkan titik _centroids_ baru dan akan dihitung kembali jarak masing-masing titik dengan _centroids_ barunya.
+
+```{r,echo=FALSE}
+df_iter_2 = 
+  df %>% 
+  rowwise() %>% 
+  mutate(
+    # jarak k centroid I
+    sb_x = (x - 2.10)^2,
+    sb_y = (y - 4.050000)^2,
+    jarak_centroid_1 = sqrt(sb_x + sb_y) %>% round(3)
+  ) %>% 
+  ungroup() %>% 
+  rowwise() %>% 
+  mutate(
+    # jarak k centroid II
+    sb_x = (x - 3.55)^2,
+    sb_y = (y - 2.383333)^2,
+    jarak_centroid_2 = sqrt(sb_x + sb_y) %>% round(3)
+  ) %>% 
+  ungroup() %>% 
+  select(-sb_x,-sb_y) %>% 
+  mutate(membership = ifelse(jarak_centroid_1 < jarak_centroid_2,
+                             1,2))
+  
+df_iter_2 %>% knitr::kable(caption = "Hasil Iterasi II")
+```
+
+## Bagian b
+
+SSE didefinisikan sebagai berikut:
+
+\begin{equation}
+SSE = \sum_{i=1}^K \sum_{x \in C_i} dist^2 (m_i,x)
+\end{equation}
+
+di mana x adalah titik data pada _cluster_ ke-i dan $m_i$ adalah titik pusat pada cluster tersebut.
+
+Dari iterasi kedua, kita dapatkan titik _centroids_ baru, yakni:
+
+```{r,echo=FALSE}
+# menghitung centroids baru
+df_iter_2 %>% 
+  group_by(membership) %>% 
+  summarise(centroids_x = mean(x),
+            centroids_y = mean(y)) %>% 
+  ungroup() %>% 
+  rename(cluster = membership) %>% 
+  knitr::kable(caption = "Update Nilai Centroid dari Iterasi II")
+```
+
+Jika dilihat _centroids_ hasil iterasi I dan II sama. Bisa disimpulkan bahwa iterasi sudah konvergen.
+
+Sekarang kita akan hitung jarak masing-masing titik di cluster tersebut terhadap _centroids_-nya masing-masing:
+
+```{r,echo=FALSE}
+SSE_final = 
+  df_iter_2 %>% 
+  rowwise() %>% 
+  mutate(
+    # jarak k centroid I
+    sb_x = (x - 2.10)^2,
+    sb_y = (y - 4.050000)^2,
+    jarak_centroid_1 = sqrt(sb_x + sb_y) %>% round(3)
+  ) %>% 
+  ungroup() %>% 
+  rowwise() %>% 
+  mutate(
+    # jarak k centroid II
+    sb_x = (x - 3.55)^2,
+    sb_y = (y - 2.383333)^2,
+    jarak_centroid_2 = sqrt(sb_x + sb_y) %>% round(3)
+  ) %>% 
+  ungroup() %>% 
+  select(-sb_x,-sb_y) %>% 
+  mutate(jarak_thd_centroid = ifelse(membership == 1,
+                                     jarak_centroid_1,
+                                     jarak_centroid_2)) %>% 
+  select(-jarak_centroid_1,-jarak_centroid_2)
+
+SSE_final %>% knitr::kable()
+```
+
+dari tabel di atas, saya akan kuadratkan dan jumlah semua nilai di kolom `jarak_thd_centroid` sehingga didapatkan nilai:
+
+SSE = `r SSE_final$jarak_thd_centroid^2 %>% sum() %>% round(4)`
+
+\newpage
+
+# SOAL 2
+
+## Bagian a
+
+Untuk menghitung matriks jarak, saya menggunakan _euclidean_ dengan formula:
+
+\begin{equation}
+r_{i,j} = \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}
+\end{equation}
+
+dengan (i,j) adalah pasangan titik. 
+
+Oleh karena ada 10 buah titik, maka matriks jarak kelak akan berukuran $10 \times 10$. Berikut adalah hasilnya:
+
+```{r,echo=FALSE}
+# function
+jarak_euclid = function(i,j){
+  sb_x = (df$x[i] - df$x[j])^2
+  sb_y = (df$y[i] - df$y[j])^2
+  r = sqrt(sb_x + sb_y)
+  return(r)
+}
+
+# membuat matriks jarak
+matriks_jarak = matrix(0,nrow = 10,ncol = 10)
+for(i in 1:10){
+  for(j in 1:10){
+    matriks_jarak[i,j] = jarak_euclid(i,j)
+  }
+}
+
+# output hasil perhitungan
+matriks_jarak %>% round(3)
+```
+
+## Bagian b
+
+Berikutnya akan dibuat dendogram menggunakan metode __MIN__ sebagai _inter-cluster similarity_-nya (atau biasa disebut dengan _single link proximity hierarchical clustering_).
+
+
+Untuk melakukannya, berikut adalah algoritmanya:
+
+```
+Langkah 1
+  Menghitung matriks jarak
+  Membuat cluster dari sepasang titik terdekat
+Langkah 2
+  Repeat:
+    Gabung dua cluster terdekat
+    Update matriks jarak
+  Until:
+    Tersisa satu cluster
+```
+
+Berikut adalah hasilnya:
+
+```{r,echo=FALSE}
+dist_new = dist(df[,2:3])
+cl = hclust(dist_new,method = "single")
+plot(cl)
+```
+
+
+## Bagian c
+
+Ada berapa banyak _cluster_ yang terbaik?
+
+Untuk menjawabnya, saya akan lihat sumbu y pada dendogram di atas. Pada level _height_ berapa terjadi kenaikan yang drastis. _Height_ menunjukan seberapa jarak yang ada antar cluster yang terbentuk. Oleh karena itu, saat ada lonjakan, artinya cluster yang terbentuk sebelumnya sudah cukup jauh dan baik. 
+
+Oleh karena itu, pada level _height_ sekitar 1.3, kita bisa potong sehingga didapatkan __4 buah__ ___cluster___.
+
+\newpage
+
+# SOAL 3
+
+Menggunakan algoritma DBScan dengan _Eps_ = 2 dan _Minpts_ = 4, kita akan tentukan label untuk masing-masing titik. Mana yang termasuk _core points_, _border points_, atau _noise points_.
+
+Secara simpel, kita bisa definisikan:
+
+- _Core points_ adalah titik yang memiliki tetangga 4 titik lain pada jari-jari (jarak 2).
+- _Border points_ adalah titik yang tidak memiliki tetangga sebanyak 4 titik lain tapi bertetangga dengan _core points_.
+- _Noise points_ adalah titik yang berada di luar jangkauan _core points_.
+
+Mari kita lihat kembali matriks jarak pada soal nomor 2. Saya akan lakukan algoritma sebagai berikut:
+
+```
+Langkah I
+  Menghitung berapa banyak tetangga dari titik i dengan jarak < 2
+Langkah II
+  Assign label titik sesuai definisi
+```
+
+```{r,echo=FALSE}
+# definisi
+titik = paste0("p",1:10)
+
+# menentukan berapa banyak tetangga
+tetangga_1 = sum(matriks_jarak[1,] < 2 & matriks_jarak[1,] > 0)
+tetangga_2 = sum(matriks_jarak[2,] < 2 & matriks_jarak[2,] > 0)
+tetangga_3 = sum(matriks_jarak[3,] < 2 & matriks_jarak[3,] > 0)
+tetangga_4 = sum(matriks_jarak[4,] < 2 & matriks_jarak[4,] > 0)
+tetangga_5 = sum(matriks_jarak[5,] < 2 & matriks_jarak[5,] > 0)
+tetangga_6 = sum(matriks_jarak[6,] < 2 & matriks_jarak[6,] > 0)
+tetangga_7 = sum(matriks_jarak[7,] < 2 & matriks_jarak[7,] > 0)
+tetangga_8 = sum(matriks_jarak[8,] < 2 & matriks_jarak[8,] > 0)
+tetangga_9 = sum(matriks_jarak[9,] < 2 & matriks_jarak[9,] > 0)
+tetangga_10 = sum(matriks_jarak[10,] < 2 & matriks_jarak[10,] > 0)
+
+# output semua tetangga
+neig_1 = titik[matriks_jarak[1,] < 2 & matriks_jarak[1,] > 0] %>% paste(collapse = ",")
+neig_2 = titik[matriks_jarak[2,] < 2 & matriks_jarak[2,] > 0] %>% paste(collapse = ",")
+neig_3 = titik[matriks_jarak[3,] < 2 & matriks_jarak[3,] > 0] %>% paste(collapse = ",")
+neig_4 = titik[matriks_jarak[4,] < 2 & matriks_jarak[4,] > 0] %>% paste(collapse = ",")
+neig_5 = titik[matriks_jarak[5,] < 2 & matriks_jarak[5,] > 0] %>% paste(collapse = ",")
+neig_6 = titik[matriks_jarak[6,] < 2 & matriks_jarak[6,] > 0] %>% paste(collapse = ",")
+neig_7 = titik[matriks_jarak[7,] < 2 & matriks_jarak[7,] > 0] %>% paste(collapse = ",")
+neig_8 = titik[matriks_jarak[8,] < 2 & matriks_jarak[8,] > 0] %>% paste(collapse = ",")
+neig_9 = titik[matriks_jarak[9,] < 2 & matriks_jarak[9,] > 0] %>% paste(collapse = ",")
+neig_10 = titik[matriks_jarak[10,] < 2 & matriks_jarak[10,] > 0] %>% paste(collapse = ",")
+
+dbscan = data.frame(
+  titik,
+  n_titik_tetangga = c(tetangga_1,tetangga_2,tetangga_3,tetangga_4,tetangga_5,
+                       tetangga_6,tetangga_7,tetangga_8,tetangga_9,tetangga_10),
+  tetangga = c(neig_1,neig_2,neig_3,neig_4,neig_5,neig_6,neig_7,neig_8,neig_9,neig_10)
+)
+
+dbscan %>% knitr::kable()
+```
+
+Dari tabel di atas, kita sudah bisa tentukan titik-titik mana saja yang termasuk _core points_, yakni: `r dbscan %>% filter(n_titik_tetangga >= 4) %>% .$titik %>% paste(collapse = ",")`.
+
+Kemudian, titik yang termasuk ke dalam _border points_ adalah titik dengan tetangga $<4$ dan bertetangga langsung dengan _core points_, yakni: p5,p6,p7,p8,p9.
+
+Sedangkan titik yang termasuk ke dalam _noise points_ adalah p1 sendiri. Karena dia tidak bertetangga dengan _core points_.
+
+
+\newpage
+
+# SOAL 4
+
+Konsep dasar dari _clustering_ adalah mengelompokkan data sesuai dengan jarak yang ada antar titik data. Diharapkan setiap titik data yang dekat akan berada di _cluster_ yang sama dan masing-masing _cluster_ memiliki jarak yang jauh (sehingga terlihat perbedaannya dengan baik).
+
+Oleh karena itu, kita perlu melihat karakteristik dari datanya. Jika data cenderung berkumpul secara partisi, maka algoritma seperti _K-means clustering_ akan lebih cocok digunakan. Tentunya dengan penentuan _centroid_ yang tepat, hasil _clustering_ bisa akan sangat konklusif.
+
+Sedangkan untuk data yang tidak berkumpul secara partisi, kita bisa mempertimbangkan algoritma seperti _hierarchical clustering_ untuk mengumpulkan sepasang demi sepasang titik data (atau _cluster_) hingga terbentuk _cluster-cluster_ yang memiliki jarak tertentu. 
+
+Selain itu, kita bisa mempertimbangkan algoritma _clustering_ yang mengandalkan _density based_ jika data berkumpul berdasarkan kerapatan tertentu.
+
+Hal-hal di atas akan sangat dengan mudah dilakukan jika data yang ada hanya memiliki dua atribut sehingga bisa digambarkan dalam _scatterplot_ 2 dimensi.
+
+\newpage
+
+# SOAL 5
+
+Algoritma _K-means_ membutuhkan input berupa data yang terpisah secara partisi dan nilai _k_ sebagai tebakan awal berapa banyak _cluster_ yang mungkin dari data tersebut. Iterasi dilakukan sampai _centroids_ yang dihasilkan konvergen dan menghasilkan _SSE_ terkecil. Sedangkan algoritma _fuzzy c-means_ bekerja dengan mengelompokkan titik data kepada cluster tertentu berdasarkan derajat keanggotaannya tersebut. Sedangkan algoritma _mixture models_ mengandalkan distribusi data secara statistik.
+
+Jadi jika diberikan suatu data, kita bisa mempertimbangkan hal berikut ini:
+
+1. Secara teori _mixture models_ bisa digunakan untuk berbagai macam distribusi data. Sedangkan _k-means_ dan _fuzzy c-means_ akan lebih baik digunakan untuk tipe data partisi yang berkumpul seperti _centroids_.
+1. Jika atribut yang terlibat banyak, lebih baik menggunakan _k-means_ atau _fuzzy c-means_ dibandingkan _mixture models_.
