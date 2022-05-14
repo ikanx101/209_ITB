@@ -20,3 +20,7 @@ Berisi _update progress_ thesis.
 ## Kampus Merdeka
 
 Berisi materi kolaborasi saya dengan __P2MS ITB__.
+
+## _Metaheuristic_
+
+Berisi rangkuman terkait _Spiral Optimization Algorithm_. 

@@ -1,0 +1,2 @@
+language = "rlang"
+run = "shift enter"
