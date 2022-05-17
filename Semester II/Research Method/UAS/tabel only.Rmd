@@ -1,0 +1,17 @@
+---
+title: "Untitled"
+output: html_document
+date: '2022-05-17'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+library(dplyr)
+
+load("bahan review.rda")
+```
+
+```{r}
+gabung_all %>% knitr::kable()
+```
