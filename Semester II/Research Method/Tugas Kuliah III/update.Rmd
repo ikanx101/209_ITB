@@ -9,7 +9,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("~/209_ITB/Semester II/Research Method/Tugas Kuliah III")
+setwd("/cloud/project/Semester II/Research Method/Tugas Kuliah III")
 
 library(dplyr)
 library(ggplot2)
@@ -37,7 +37,7 @@ Adapun tujuan penelitian ini adalah:
 library(readxl)
 library(dplyr)
 
-data = read_excel("~/209_ITB/Semester II/Research Method/Tugas Kuliah I/20201207 Product list.xlsx") %>% janitor::clean_names() %>% filter(cost_benefit > 0)
+data = read_excel("/cloud/project/Semester II/Research Method/Tugas Kuliah I/20201207 Product list.xlsx") %>% janitor::clean_names() %>% filter(cost_benefit > 0)
 data %>% 
   select(product_code,brand,burn_3m,cost_benefit) %>% 
   head(20) %>% 
@@ -57,8 +57,8 @@ Secara total, ada $1.953$ baris data produk yang dimiliki.
 Berikut adalah model _binary linear programming_ dari masalah optimisasi portofolio diskon produk:
 
 $$\begin{matrix}
-\text{cari } Xi \in [0,1] \text{ sehingga } \max{(X_i  Pr_i)} , i \in \{ 1,2,3,..,n\} \\
-\text{terhadap } \sum_{i = 1}^n X_i Bg_i \leq 200.000.000
+\text{cari } Xi \in [0,1] \text{ sehingga } \max{(X_i  Pr_i)} , i \in \{ 1,2,3,..,100\} \\
+\text{terhadap } \sum_{i = 1}^{100} X_i Bg_i \leq 5.000.000
 \end{matrix}$$
  
  <br>
