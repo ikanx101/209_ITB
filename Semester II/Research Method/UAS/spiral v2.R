@@ -1,4 +1,4 @@
-setwd("/cloud/project/Semester II/Research Method/UAS")
+setwd("~/209_ITB/Semester II/Research Method/UAS")
 
 # sucikan hati dan diri
 rm(list=ls())
@@ -12,7 +12,7 @@ library(readxl)
 load("bahan.rda")
 
 # kita buat utk df1
-df_hit = df1
+df_hit = df10
 n = nrow(df_hit)
 
 # function matriks rotasi
@@ -148,10 +148,40 @@ df_hit %>%
 # perhitungan spiral
 finalista
 
+
+# =========================================
+# kita akan gunakan simulasi
+n_sim = 100
+budget_simu = rep(NA,n_sim)
+revenue_simu = rep(NA,n_sim)
+pilihan_simu = vector("list",n_sim)
+
+for(ikanx in 1:n_sim){
+  pilih_temp = big_bang()
+  simu_liu = 
+    df_hit %>% 
+    mutate(pilih_sim = pilih_temp) %>% 
+    filter(pilih_sim == 1) %>% 
+    summarise(budget = sum(burn_3m),
+              omset = sum(cost_benefit))
+  if(simu_liu$budget <= 5000000){
+    budget_simu[ikanx] = simu_liu$budget
+    revenue_simu[ikanx] = simu_liu$omset
+    pilihan_simu[[ikanx]] = pilih_temp
+  }
+}
+
+n_max = which.max(revenue_simu)
+budget_simu[n_max]
+revenue_simu[n_max]
+
+df_hit$pilih_simulasi = pilihan_simu[[n_max]]
+
 table(df_hit$pilih_spiral)
 table(df_hit$pilih_ompr)
+table(df_hit$pilih_simulasi)
 table(df_hit$pilih_spiral,
       df_hit$pilih_ompr)
 
 # save hasilnya
-save(df_hit,file = "dataset_1.rda")
+save(df_hit,file = "dataset_10.rda")
