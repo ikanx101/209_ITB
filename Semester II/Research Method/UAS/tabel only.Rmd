@@ -1,6 +1,6 @@
 ---
 title: "Untitled"
-output: html_document
+output: pdf_document
 date: '2022-05-17'
 ---
 
@@ -13,5 +13,74 @@ load("bahan review.rda")
 ```
 
 ```{r}
-gabung_all %>% knitr::kable()
+gabung_all %>%
+  select(contains("budget")) %>% 
+  mutate(eksak_budget = round(eksak_budget/5000000 * 100,2),
+         existing_budget = round(existing_budget/5000000 * 100,2),
+         spiral_budget = round(spiral_budget/5000000 * 100,2)) %>% 
+  mutate(dataset_ke = 1:10) %>% 
+  relocate(dataset_ke,.before = eksak_budget) %>% 
+  knitr::kable(caption = "Fullfilment Budget: Berapa persen budget dihabiskan oleh solusi?")
 ```
+
+```{r}
+gabung_all %>%
+  select(contains("revenue")) %>% 
+  mutate(existing_revenue = round(existing_revenue/eksak_revenue * 100,2),
+         spiral_revenue = round(spiral_revenue/eksak_revenue * 100,2)) %>% 
+  mutate(dataset_ke = 1:10) %>% 
+  relocate(dataset_ke,.before = eksak_revenue) %>% 
+  mutate(eksak_revenue = round(eksak_revenue / 1000000,3),
+         eksak_revenue = paste0("Rp ",eksak_revenue," juta"),
+         existing_revenue = paste0(existing_revenue,"%"),
+         spiral_revenue = paste0(spiral_revenue,"%")) %>% 
+  knitr::kable(caption = "Total Revenue: Berapa persen revenue yang diraih jika dibandingkan dengan revenue solusi eksak?")
+```
+
+
+```{r}
+summary = 
+  gabung_all %>%
+  select(contains("revenue")) %>% 
+  mutate(existing_revenue = round(existing_revenue/eksak_revenue * 100,2),
+         spiral_revenue = round(spiral_revenue/eksak_revenue * 100,2)) %>% 
+  mutate(dataset_ke = 1:10) %>% 
+  relocate(dataset_ke,.before = eksak_revenue) 
+
+mean(summary$spiral_revenue - summary$existing_revenue)
+mean(100 - summary$spiral_revenue)
+```
+
+\newpage
+
+```{r}
+sama_tdk = 
+  data.frame(dataset = 1:10,
+             banyak_produk_sama = sama,
+             banyak_produk_beda = 100-sama)
+
+sama_tdk %>% knitr::kable(caption = "Kesamaan Portofolio Produk")
+
+sama_tdk$banyak_produk_sama %>% mean()
+```
+
+\newpage
+
+```{r}
+data.frame(dataset = 1:10,
+           eksak_y = ompr_sum,
+           eksak_n = 100 - ompr_sum,
+           spiral_y = spiral_sum,
+           spiral_n = 100 - spiral_sum
+           ) %>% 
+  mutate(portofolio_eksak = paste0("Produk dg diskon: ",eksak_y,
+                                   "; Produk tanpa diskon: ",eksak_n),
+         portofolio_spiral = paste0("Produk dg diskon: ",spiral_y,
+                                   "; Produk tanpa diskon: ",spiral_n)) %>% 
+  select(-eksak_y,
+         -eksak_n,
+         -spiral_y,
+         -spiral_n) %>% 
+  knitr::kable(caption = "Proporsi Produk: Berapa banyak produk yang diberi diskon dan tidak diberi diskon?")
+```
+
