@@ -1,0 +1,20 @@
+---
+title: "Untitled"
+author: "Mohammad Rizka Fadhli"
+date: "5/19/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+
+library(dplyr)
+library(tidyr)
+```
+
+```{r}
+df = data.frame(
+  titik = paste0("p",1:10)
+)
+```
