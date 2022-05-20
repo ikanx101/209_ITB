@@ -13,6 +13,8 @@ library(dplyr)
 library(tidyr)
 ```
 
+\newpage
+
 # SOAL DAN PEMBAHASAN
 
 ## Soal I
@@ -41,6 +43,51 @@ df %>% knitr::kable(caption = "Data Soal I")
 1. Dari hasil ___SSE___ dan ___Sillhouette Coefficient___, menurut Anda, hasil klasterisasi mana
 yang memberikan hasil terbaik? Berikan alasannya!
 1. Apakah algoritma _K-means_ sudah memberikan hasil yang baik? Apa yang dapat dilakukan agar hasil klasterisasi lebih baik?
+
+### Pembahasan
+
+Untuk melakukan _k-means clustering_ ini, saya akan membuat algoritma sendiri dengan menggunakan 2 titik _random_ dan akan dilakukan sebanyak 10 kali.
+
+```{r}
+# program untuk membuat titik sentroid secara random
+random_titik = function(){
+  list(
+    sentroid_1 = runif(2,0,6),
+    sentroid_2 = runif(2,0,6)
+  )
+}
+
+# program untuk menghitung jarak
+jarak = function(x1,x2){
+  sb_1 = (x1[1] - x2[1])^2
+  sb_2 = (x1[2] - x2[2])^2
+  sqrt(sb_1 + sb_2)
+}
+```
+
+
+```{r}
+# iterasi pertama
+random = random_titik()
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+
+for(i in 1:nrow(df)){
+  titik = c(df$x[i],df$y[i])
+  df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+  df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+}
+
+df = 
+  df %>% 
+  mutate(membership = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+
+```
+
+\newpage
 
 ## Soal II
 
