@@ -108,4 +108,66 @@ df = data.frame(
 df %>% knitr::kable(align = "c",caption = "Data Soal II")
 ```
 
+### Pertanyaan
+
 Hitung nilai _entropy_ dan _purity_ untuk matriks tersebut! Berikan analisis untuk hasil yang didapat!
+
+### Pembahasan
+
+Entropi untuk masing-masing cluster dihitung sebagai berikut:
+
+$$
+\begin{align*}
+\text{Entropy 1} = & - \frac{1}{693} \log_2 (\frac{1}{693}) - \frac{1}{693} \log_2 (\frac{1}{693}) \\
+                   & - 0 - \frac{11}{693} \log_2 (\frac{11}{693}) \\
+                   & - \frac{4}{693} \log_2 (\frac{4}{693}) - \frac{676}{693} \log_2 (\frac{676}{693}) \\
+                 = & 0.200
+\end{align*}
+$$
+
+
+$$
+\begin{align*}
+\text{Entropy 2} = & - \frac{27}{1562} \log_2 (\frac{27}{1562}) - \frac{89}{1562} \log_2 (\frac{89}{1562}) \\
+                   & - \frac{333}{1562} \log_2 (\frac{333}{1562}) - \frac{872}{1562} \log_2 (\frac{872}{1562}) \\
+                   & - \frac{253}{1562} \log_2 (\frac{253}{1562}) - \frac{33}{1562} \log_2 (\frac{33}{1562}) \\
+                 = & 1.841
+\end{align*}
+
+$$
+
+
+$$
+\begin{align*}
+\text{Entropy 3} = & - \frac{326}{949} \log_2 (\frac{326}{949}) - \frac{465}{949} \log_2 (\frac{465}{949}) \\
+                   & - \frac{8}{949} \log_2 (\frac{8}{949}) - \frac{105}{949} \log_2 (\frac{105}{949}) \\
+                   & - \frac{16}{949} \log_2 (\frac{16}{949}) - \frac{29}{949} \log_2 (\frac{29}{949}) \\
+                 = & 1.696
+\end{align*}
+
+$$
+
+
+Sedangkan untuk _purity_ dihitung dengan cara:
+
+$$
+\begin{align*}
+\text{Purity 1} & = \frac{676}{693} &= 0.975 \\
+\text{Purity 2} & = \frac{827}{1562} &= 0.529 \\
+\text{Purity 3} & = \frac{465}{949} &= 0.490 \\
+\end{align*}
+$$
+
+_Total entropy_ dihitung sebagai berikut:
+
+$$
+\text{Total entropy} = \frac{693 \times 0.200 + 1562 \times 1.841 + 949 \times 0.490}{3204} = 0.614
+$$
+
+_Total purity_ dihitung sebagai berikut:
+
+$$
+\text{Total purity} = \frac{693 \times 0.975 + 1562 \times 0.529 + 949 \times 1.696}{3204} = 1.443
+$$
+
+
