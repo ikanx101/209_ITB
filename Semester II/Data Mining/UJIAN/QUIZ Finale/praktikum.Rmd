@@ -46,7 +46,15 @@ yang memberikan hasil terbaik? Berikan alasannya!
 
 ### Pembahasan
 
-Untuk melakukan _k-means clustering_ ini, saya akan membuat algoritma sendiri dengan menggunakan 2 titik _random_ dan akan dilakukan sebanyak 10 kali.
+Untuk melakukan _k-means clustering_ ini, saya akan membuat algoritma sendiri dengan menggunakan 2 titik _random_ dan akan dilakukan sebanyak 10 kali. Berikut ini adalah _flowchart_ dari algoritma tersebut:
+
+```{r,echo=FALSE}
+nomnoml::nomnoml("#direction: down
+                 [<start>start] -> [random sentroid di domain x dan y|sentroid_1|sentroid_2]
+                 [random sentroid di domain x dan y] -> [hitung jarak|semua titik ke sentroid]
+                 ")
+```
+
 
 ```{r}
 # program untuk membuat titik sentroid secara random
@@ -76,6 +84,13 @@ new_sentroid = function(data){
                 sentroid_2 = c(hit$x[2],hit$y[2]))
   return(output)
 }
+
+# program untuk menghitung selisih sentroid baru dengan sentroid lama
+konvergen_yn = function(){
+  part1 = sentroid_baru$sentroid_1 - sentroid_1
+  part2 = sentroid_baru$sentroid_2 - sentroid_2
+  sqrt(sum(part1^2) + sum(part2^2))
+}
 ```
 
 
@@ -89,8 +104,8 @@ df$jarak_sentroid1 = NA
 df$jarak_sentroid2 = NA
 
 konvergensi = 1000
-
-while(konvergensi <= 0.005){
+iter = 1
+while(konvergensi > 0.0000005){
   # hitung jarak terhadap sentroid
   for(i in 1:nrow(df)){
     titik = c(df$x[i],df$y[i])
@@ -103,12 +118,18 @@ while(konvergensi <= 0.005){
     mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
   # menghitung sentroid baru
   sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
   # assign ke dalam nama sentroid
   sentroid_1 = sentroid_baru$sentroid_1
   sentroid_2 = sentroid_baru$sentroid_2
+  
+  iter = iter + 1
 }
   
 df
+sentroid_1
+sentroid_2
 
 ```
 
