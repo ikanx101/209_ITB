@@ -35,6 +35,14 @@ set.seed(20921004)
 
 \newpage
 
+# PENDAHULUAN
+
+Salah satu analisa _unsupervised learning_ yang biasa dilakukan adalah _clustering_. Inti analisa ini adalah mengelompokkan sekumpilan data berdasarkan _similarity_ yang ada pada masing-masing atributnya.
+
+Ada berbagai metode yang bisa digunakan, yakni:
+
+1. _K-means clustering_
+
 # SOAL DAN PEMBAHASAN
 
 ## Soal I
