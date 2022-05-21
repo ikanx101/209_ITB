@@ -179,11 +179,34 @@ hitung_SSE = function(df){
 ### Program untuk menghitung _Silhouette Coefficient_ {.unlisted .unnumbered}
 
 ```{r}
-tes = 
-  df_1 %>% 
-  select(x,y)
-  
-dist(tes,upper = T)
+sil_coeff = function(df){
+  # menghitung distance matrix
+  tes = 
+    df %>% 
+    select(x,y)
+  mat_dist = dist(tes,upper = T) %>% as.matrix()
+  # mengambil id titik per cluster
+  id_cl_1 = which(df_1$cluster_no == 1)
+  id_cl_2 = which(df_1$cluster_no == 2)
+  # menghitung nilai a
+  a1 = mat_dist[id_cl_1,id_cl_1] %>% mean()
+  a2 = mat_dist[id_cl_2,id_cl_2] %>% mean()
+  a = mean(a1,a2)
+  # menghitung nilai b
+  b = rep(NA,10)
+  for(i in 1:10){
+    if(i %in% id_cl_1){
+      b[i] = mat_dist[i,id_cl_2] %>% mean()
+    } else
+    if(i %in% id_cl_2){
+      b[i] = mat_dist[i,id_cl_1] %>% mean()
+    }
+  }
+  b = min(b)
+  # menghitung silhouette coefficient
+  s_coeff = (b-a)/max(a,b)
+  return(s_coeff)
+}
 
 ```
 
@@ -255,6 +278,37 @@ Berikut adalah ___SSE___ dari perhitungan ini:
 SSE = hitung_SSE(df_1)
 SSE
 ```
+
+Berikut adalah ___silhouette coefficient___ dari perhitungan ini:
+
+```{r}
+SC = sil_coeff(df_1)
+SC
+```
+
+Berikut adalah grafik hasilnya:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil CLustering I"}
+df_1 %>% 
+  ggplot(aes(x,y)) +
+  geom_point(aes(color = factor(cluster_no))) +
+  geom_point(aes(x = sentroid_1[1],
+                 y = sentroid_1[2],
+                 color = factor(1)),
+             shape = 3,
+             size = 3) +
+  geom_point(aes(x = sentroid_2[1],
+                 y = sentroid_2[2],
+                 color = factor(2)),
+             shape = 3,
+             size = 3) +
+  labs(title = "Hasil Akhir Clustering",
+       subtitle = "Sentroid Trial I",
+       caption = "20921004\nVisualisasi dengan R",
+       color = "Cluster ke-")
+```
+
+
 
 
 
