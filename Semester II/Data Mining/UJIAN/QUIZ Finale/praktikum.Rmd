@@ -37,11 +37,53 @@ set.seed(20921004)
 
 # PENDAHULUAN
 
-Salah satu analisa _unsupervised learning_ yang biasa dilakukan adalah _clustering_. Inti analisa ini adalah mengelompokkan sekumpilan data berdasarkan _similarity_ yang ada pada masing-masing atributnya.
+Salah satu analisa _unsupervised learning_ yang biasa dilakukan adalah _clustering_. Inti analisa ini adalah mengelompokkan sekumpilan data berdasarkan _similarity_ yang ada pada masing-masing atributnya. 
 
 Ada berbagai metode yang bisa digunakan, yakni:
 
-1. _K-means clustering_
+1. _K-means clustering_,
+1. _Hierarchical clustering_,
+1. _DBScan clustering_,
+1. _Fuzzy c-means_,
+1. dan lainnya.
+
+Masing-masing metode _clustering_ tersebut memiliki keunggulan dan kelemahan tersendiri. Oleh karena itu, pemilihan metode yang tepat akan menentukan keberhasilan dan ketepatan _clustering_.
+
+Validitas dari _clustering_ bisa diukur menggunakan berbagai macam cara. Beberapa di antaranya adalah dengan menghitung:
+
+1. _Squared standard error_ (SSE),
+1. _Silhouette coeeficient_,
+1. _Purity_ dan _entropy_ dari masing-masing _cluster_.
+
+# DASAR TEORI
+
+## _K-Means Clustering_
+
+_K-means clustering_ merupakan pengelompokkan berdasarkan partisi di mana _input_ yang harus diketahui adalah banyaknya _clusters_. Dari _input_ tersebut, akan dilakukan iterasi pencarian sentroid (pusat _cluster_) hingga konvergen. Algoritmanya adalah sebagai berikut:
+
+```
+Langkah I
+  Pilih K titik sembarang sebagai sentroid awal
+Langkah II
+  Hitung jarak semua titik data ke sentroid
+  Assign titik tersebut ke sentroid terdekatnya
+Langkah III
+  Update sentroid ke titik terbaru
+Langkah IV
+  Ulangi langkah II dan III hingga konvergen
+```
+
+
+## Bahasa Pemrograman yang Digunakan
+
+Untuk mengerjakan tugas ini, saya menggunakan bahasa __R__ dengan algoritma yang dibuat sendiri dengan prinsip _tidy_ menggunakan operator ` %>% `.
+
+_Libraries_ yang digunakan adalah:
+
+1. `dplyr` untuk _data carpentry_.
+1. `ggplot2` untuk visualisasi data.
+
+\newpage
 
 # SOAL DAN PEMBAHASAN
 
