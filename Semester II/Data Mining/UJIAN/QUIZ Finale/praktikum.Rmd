@@ -1,9 +1,26 @@
 ---
-title: "Untitled"
-author: "Mohammad Rizka Fadhli"
-date: "5/19/2022"
-output: pdf_document
+title: "TUGAS BAGIAN II"
+subtitle: "SK-5222 PENAMBANGAN DATA DALAM SAINS"
+author: "Mohammad Rizka Fadhli - 20921004"
+date: "21 Mei 2022"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: false
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: tango
 ---
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -11,6 +28,9 @@ rm(list=ls())
 
 library(dplyr)
 library(tidyr)
+library(ggplot2)
+
+set.seed(20921004)
 ```
 
 \newpage
@@ -27,8 +47,8 @@ df = data.frame(
   x = c(4,2.1,3.4,2.7,.8,4.6,4.3,2.2,4.1,1.5),
   y = c(5.2,3.9,3.1,2,4.1,2.9,1.2,1,4.1,3)
 )
-
-df %>% knitr::kable(caption = "Data Soal I")
+soal = df
+soal %>% knitr::kable(caption = "Data Soal I")
 ```
 
 - Lakukan klasterisasi dari data tersebut dengan menggunakan algoritma _k-means_ dengan jumlah partisi $K=2$ sebanyak 10 kali.
@@ -46,7 +66,47 @@ yang memberikan hasil terbaik? Berikan alasannya!
 
 ### Pembahasan
 
-Untuk melakukan _k-means clustering_ ini, saya akan membuat algoritma sendiri dengan menggunakan 2 titik _random_ dan akan dilakukan sebanyak 10 kali.
+Untuk melakukan _k-means clustering_ ini, saya akan membuat algoritma sendiri dengan menggunakan 2 titik _random_ dan akan dilakukan sebanyak 10 kali. Berikut ini adalah _flowchart_ dari algoritma tersebut:
+
+```{r out.width="60%",echo=FALSE,fig.cap="Flowchart Pengerjaan K-Means Clustering",fig.align='center'}
+nomnoml::nomnoml("#direction: down
+                 [<start>start] -> [initial condition|konvergensi = 1000]
+                 [initial condition] -> [random sentroid di domain x dan y|sentroid_1|sentroid_2]
+                 [random sentroid di domain x dan y] -> [<choice>konvergensi > 10^(-7)]
+                 
+                 [<choice>konvergensi > 10^(-7)] -> T [hitung jarak|semua titik ke sentroid]
+                 [<choice>konvergensi > 10^(-7)] -> N [save final sentroids]
+                 [save final sentroids] -> [<end>end]
+                 
+                 [hitung jarak] -> [tentukan cluster membership|dari masing-masing titik]
+                 [tentukan cluster membership] -> [hitung sentroid baru|sentroid_1|sentroid_2]
+                 [hitung sentroid baru] -> [hitung konvergensi|update nilai konvergensi]
+                 ")
+```
+
+\newpage
+
+Sebagai pengingat, algoritma _k-means clustering_ dilakukan secara iteratif dengan mengandalkan suatu _stopping criteria_ tertentu. Pada tugas ini, _stopping criteria_ yang saya gunakan adalah sebagai berikut:
+
+$$\text{konvergensi} = \sqrt{(x_{1}^{(k+1)} - x_1^{(k)})^2 + (x_{2}^{(k+1)} - x_2^{(k)})^2}$$
+
+Dimana $x_1^{(k)}$ dan $x_2^{(k)}$ menandakan sentroid 1 dan 2 pada iterasi ke - $k$. 
+
+Sebagai gambaran, berikut adalah _scatterplot_ dari data soal tersebut:
+
+```{r,echo=FALSE,fig.cap="Scatterplot dari Data"}
+df %>% 
+  ggplot(aes(x,y)) +
+  geom_point() +
+  labs(title = "Scatterplot dari Data",
+       caption = "20921004\nVisualisasi dengan R")
+```
+
+\newpage
+
+Untuk menyelesaikan permasalahan ini, saya akan membuat beberapa program sebagai berikut:
+
+### Program untuk membuat sepasang titik secara _random_ {.unlisted .unnumbered}
 
 ```{r}
 # program untuk membuat titik sentroid secara random
@@ -56,7 +116,11 @@ random_titik = function(){
     sentroid_2 = runif(2,0,6)
   )
 }
+```
 
+### Program menghitung _euclidean distance_ {.unlisted .unnumbered}
+
+```{r}
 # program untuk menghitung jarak
 jarak = function(x1,x2){
   sb_1 = (x1[1] - x2[1])^2
@@ -65,27 +129,134 @@ jarak = function(x1,x2){
 }
 ```
 
+### Program untuk menghitung sentroid baru hasil iterasi ke-i {.unlisted .unnumbered}
 
 ```{r}
-# iterasi pertama
-random = random_titik()
-sentroid_1 = random$sentroid_1
-sentroid_2 = random$sentroid_2
-
-df$jarak_sentroid1 = NA
-df$jarak_sentroid2 = NA
-
-for(i in 1:nrow(df)){
-  titik = c(df$x[i],df$y[i])
-  df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
-  df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+# program untuk menghitung sentroid baru
+new_sentroid = function(data){
+  hit = 
+    data %>% 
+    group_by(cluster_no) %>% 
+    summarise(x = mean(x),
+              y = mean(y)) %>% 
+    ungroup()
+  output = list(sentroid_1 = c(hit$x[1],hit$y[1]),
+                sentroid_2 = c(hit$x[2],hit$y[2]))
+  return(output)
 }
+```
 
-df = 
-  df %>% 
-  mutate(membership = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+### Program untuk menghitung konvergensi {.unlisted .unnumbered}
+
+```{r}
+# program untuk menghitung selisih sentroid baru dengan sentroid lama
+konvergen_yn = function(){
+  part1 = sentroid_baru$sentroid_1 - sentroid_1
+  part2 = sentroid_baru$sentroid_2 - sentroid_2
+  sqrt(sum(part1^2) + sum(part2^2))
+}
+```
+
+### Program untuk menghitung SSE {.unlisted .unnumbered}
+
+```{r}
+hitung_SSE = function(df){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  SSE_final = 
+    df %>% 
+    mutate(jarak_thd_centroid = ifelse(cluster_no == 1,
+                                       jarak_sentroid1,
+                                       jarak_sentroid2))
+  SSE_final$jarak_thd_centroid^2 %>% sum() %>% round(4)
+}
+```
+
+### Program untuk menghitung _Silhouette Coefficient_ {.unlisted .unnumbered}
+
+```{r}
+tes = 
+  df_1 %>% 
+  select(x,y)
+  
+dist(tes,upper = T)
 
 ```
+
+\newpage
+
+### _K-Means Clustering_ pada pasangan titik _random_ I
+
+Menggunakan titik random berikut ini:
+
+```{r}
+random = random_titik()
+random
+```
+
+```{r,include=FALSE}
+df = soal
+```
+
+Saya akan lakukan _clustering_ berikut ini:
+
+```{r}
+# initial sentroid
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+# menyiapkan template untuk menghitung jarak
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+# initial konvergensi
+konvergensi = 1000
+# proses iterasi k-means hingga konvergensi tercapai
+while(konvergensi > 10^(-7)){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  # memasukkan masing-masing titik ke cluster terdekat
+  df = 
+    df %>% 
+    mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+  # menghitung sentroid baru
+  sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
+  # update sentroid baru
+  sentroid_1 = sentroid_baru$sentroid_1
+  sentroid_2 = sentroid_baru$sentroid_2
+}
+```
+
+```{r,include=FALSE}
+df_1 = df
+```
+
+```{r}
+# hasil final  
+df_1
+# sentroid 1
+sentroid_1
+# sentroid 2
+sentroid_2
+```
+
+Berikut adalah ___SSE___ dari perhitungan ini:
+
+```{r}
+# menghitung SSE
+SSE = hitung_SSE(df_1)
+SSE
+```
+
+
 
 \newpage
 
@@ -116,13 +287,58 @@ Hitung nilai _entropy_ dan _purity_ untuk matriks tersebut! Berikan analisis unt
 
 Entropi untuk masing-masing cluster dihitung sebagai berikut:
 
-$$
-matrix}
-\text{Entropy 1} = - & \frac{1}{693} \log_2 (\frac{1}{693}) - \frac{1}{693} \log_2 (\frac{1}{693}) \\
-- & 0 - \frac{11}{693} \log_2 (\frac{11}{693}) \\
-- & \frac{4}{693} \log_2 (\frac{4}{693}) - \frac{676}{693} \log_2 (\frac{676}{693}) \\
-= & 0.200
-\end{pmatrix}
-$$
+$$\begin{matrix}
+\text{Entropy 1} = & - \frac{1}{693} \log_2 (\frac{1}{693}) - \frac{1}{693} \log_2 (\frac{1}{693}) \\
+                   & - 0 - \frac{11}{693} \log_2 (\frac{11}{693}) \\
+                   & - \frac{4}{693} \log_2 (\frac{4}{693}) - \frac{676}{693} \log_2 (\frac{676}{693}) \\
+                   & = 0.200
+\end{matrix}$$
 
 
+$$\begin{matrix}
+\text{Entropy 2} = & - \frac{27}{1562} \log_2 (\frac{27}{1562}) - \frac{89}{1562} \log_2 (\frac{89}{1562}) \\
+                   & - \frac{333}{1562} \log_2 (\frac{333}{1562}) - \frac{872}{1562} \log_2 (\frac{872}{1562}) \\
+                   & - \frac{253}{1562} \log_2 (\frac{253}{1562}) - \frac{33}{1562} \log_2 (\frac{33}{1562}) \\
+                   & = 1.841
+\end{matrix}$$
+
+
+$$\begin{matrix}
+\text{Entropy 3} = & - \frac{326}{949} \log_2 (\frac{326}{949}) - \frac{465}{949} \log_2 (\frac{465}{949}) \\
+                   & - \frac{8}{949} \log_2 (\frac{8}{949}) - \frac{105}{949} \log_2 (\frac{105}{949}) \\
+                   & - \frac{16}{949} \log_2 (\frac{16}{949}) - \frac{29}{949} \log_2 (\frac{29}{949}) \\
+                   & = 1.696
+\end{matrix}$$
+
+
+Sedangkan untuk _purity_ dihitung dengan cara:
+
+$$\begin{matrix}
+\text{Purity 1} =& \frac{676}{693} &= 0.975 \\
+\text{Purity 2} =& \frac{827}{1562} &= 0.529 \\
+\text{Purity 3} =& \frac{465}{949} &= 0.490 \\
+\end{matrix}$$
+
+_Total entropy_ dihitung sebagai berikut:
+
+$$\text{Total entropy} = \frac{693 \times 0.200 + 1562 \times 1.841 + 949 \times 0.490}{3204} = 0.614$$
+
+_Total purity_ dihitung sebagai berikut:
+
+$$\text{Total purity} = \frac{693 \times 0.975 + 1562 \times 0.529 + 949 \times 1.696}{3204} = 1.443$$
+
+\newpage
+
+Berikut jika disajikan dalam bentuk tabel:
+
+
+```{r,echo=FALSE}
+df$Entropy = c(0.200,1.841,1.696,0.614)
+df$Purity = c(0.975,0.529,0.490,1.443)
+
+df %>% knitr::kable(align = "c",caption = "Hasil Perhitungan Entropy dan Purity")
+```
+
+Dari tabel di atas, kita bisa dapatkan informasi sebagai berikut:
+
+> _Cluster_ `#1` memiliki _purity_ yang sangat tinggi dan _entropy_ terendah. Artinya, cluster ini berhasil mengelompokkan data yang _unique_ karakteristiknya (berasal dari satu atribut dominan). Berbeda dengan _cluster_ `#2` dan `#3` yang tidak memiliki satu atribut yang dominan. Tapi secara keseluruhan, _cluster_ yang dihasilkan sudah bisa memisahkan data menjadi 3 kelompok dengan karakteristik yang berbeda-beda.
