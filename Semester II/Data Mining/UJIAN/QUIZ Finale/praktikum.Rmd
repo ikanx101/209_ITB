@@ -31,6 +31,10 @@ library(tidyr)
 library(ggplot2)
 
 set.seed(20921004)
+
+rekap = data.frame(cluster = paste0("Cluster ",1:10),
+                   SSE = rep(NA,10),
+                   Sil_Coeff = rep(NA,10))
 ```
 
 \newpage
@@ -82,6 +86,8 @@ _Libraries_ yang digunakan adalah:
 
 1. `dplyr` untuk _data carpentry_.
 1. `ggplot2` untuk visualisasi data.
+
+Tugas ini ditulis menggunakan __R__ ___markdown___ sehingga semua kode pemrograman bisa dilihat langsung di _chunks_ masing-masing.
 
 \newpage
 
@@ -314,7 +320,7 @@ df_1 = df
 
 ```{r}
 # hasil final  
-df_1
+df_1 %>% knitr::kable()
 # sentroid 1
 sentroid_1
 # sentroid 2
@@ -338,7 +344,10 @@ SC
 
 Berikut adalah grafik hasilnya:
 
-```{r,echo=FALSE,fig.align='center',fig.cap="Hasil CLustering I"}
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Clustering I"}
+rekap$SSE[1] = SSE
+rekap$Sil_Coeff[1] = SC
+
 df_1 %>% 
   ggplot(aes(x,y)) +
   geom_point(aes(color = factor(cluster_no))) +
@@ -358,8 +367,934 @@ df_1 %>%
        color = "Cluster ke-")
 ```
 
+\break
+
+Dengan prinsip yang sama, saya akan ulangi proses di atas hingga `10` kali.
+
+\newpage
+
+### _K-Means Clustering_ pada pasangan titik _random_ II
+
+Menggunakan titik random berikut ini:
+
+```{r}
+random = random_titik()
+random
+```
+
+```{r,include=FALSE}
+df = soal
+```
+
+Saya akan lakukan _clustering_ menghasilkan:
+
+```{r,echo=FALSE}
+# initial sentroid
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+# menyiapkan template untuk menghitung jarak
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+# initial konvergensi
+konvergensi = 1000
+# proses iterasi k-means hingga konvergensi tercapai
+while(konvergensi > 10^(-7)){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  # memasukkan masing-masing titik ke cluster terdekat
+  df = 
+    df %>% 
+    mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+  # menghitung sentroid baru
+  sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
+  # update sentroid baru
+  sentroid_1 = sentroid_baru$sentroid_1
+  sentroid_2 = sentroid_baru$sentroid_2
+}
+```
+
+```{r,include=FALSE}
+df_1 = df
+```
+
+```{r}
+# hasil final  
+df_1 %>% knitr::kable()
+# sentroid 1
+sentroid_1
+# sentroid 2
+sentroid_2
+```
+
+Berikut adalah ___SSE___ dari perhitungan ini:
+
+```{r}
+# menghitung SSE
+SSE = hitung_SSE(df_1)
+SSE
+```
+
+Berikut adalah ___silhouette coefficient___ dari perhitungan ini:
+
+```{r}
+SC = sil_coeff(df_1)
+SC
+```
+
+Berikut adalah grafik hasilnya:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Clustering II"}
+rekap$SSE[2] = SSE
+rekap$Sil_Coeff[2] = SC
+
+df_1 %>% 
+  ggplot(aes(x,y)) +
+  geom_point(aes(color = factor(cluster_no))) +
+  geom_point(aes(x = sentroid_1[1],
+                 y = sentroid_1[2],
+                 color = factor(1)),
+             shape = 3,
+             size = 3) +
+  geom_point(aes(x = sentroid_2[1],
+                 y = sentroid_2[2],
+                 color = factor(2)),
+             shape = 3,
+             size = 3) +
+  labs(title = "Hasil Akhir Clustering",
+       subtitle = "Sentroid Trial II",
+       caption = "20921004\nVisualisasi dengan R",
+       color = "Cluster ke-")
+```
 
 
+\newpage
+
+### _K-Means Clustering_ pada pasangan titik _random_ III
+
+Menggunakan titik random berikut ini:
+
+```{r}
+random = random_titik()
+random
+```
+
+```{r,include=FALSE}
+df = soal
+```
+
+Saya akan lakukan _clustering_ menghasilkan:
+
+```{r,echo=FALSE}
+# initial sentroid
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+# menyiapkan template untuk menghitung jarak
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+# initial konvergensi
+konvergensi = 1000
+# proses iterasi k-means hingga konvergensi tercapai
+while(konvergensi > 10^(-7)){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  # memasukkan masing-masing titik ke cluster terdekat
+  df = 
+    df %>% 
+    mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+  # menghitung sentroid baru
+  sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
+  # update sentroid baru
+  sentroid_1 = sentroid_baru$sentroid_1
+  sentroid_2 = sentroid_baru$sentroid_2
+}
+```
+
+```{r,include=FALSE}
+df_1 = df
+```
+
+```{r}
+# hasil final  
+df_1 %>% knitr::kable()
+# sentroid 1
+sentroid_1
+# sentroid 2
+sentroid_2
+```
+
+Berikut adalah ___SSE___ dari perhitungan ini:
+
+```{r}
+# menghitung SSE
+SSE = hitung_SSE(df_1)
+SSE
+```
+
+Berikut adalah ___silhouette coefficient___ dari perhitungan ini:
+
+```{r}
+SC = sil_coeff(df_1)
+SC
+```
+
+Berikut adalah grafik hasilnya:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Clustering III"}
+rekap$SSE[3] = SSE
+rekap$Sil_Coeff[3] = SC
+
+df_1 %>% 
+  ggplot(aes(x,y)) +
+  geom_point(aes(color = factor(cluster_no))) +
+  geom_point(aes(x = sentroid_1[1],
+                 y = sentroid_1[2],
+                 color = factor(1)),
+             shape = 3,
+             size = 3) +
+  geom_point(aes(x = sentroid_2[1],
+                 y = sentroid_2[2],
+                 color = factor(2)),
+             shape = 3,
+             size = 3) +
+  labs(title = "Hasil Akhir Clustering",
+       subtitle = "Sentroid Trial III",
+       caption = "20921004\nVisualisasi dengan R",
+       color = "Cluster ke-")
+```
+
+
+\newpage
+
+### _K-Means Clustering_ pada pasangan titik _random_ IV
+
+Menggunakan titik random berikut ini:
+
+```{r}
+random = random_titik()
+random
+```
+
+```{r,include=FALSE}
+df = soal
+```
+
+Saya akan lakukan _clustering_ menghasilkan:
+
+```{r,echo=FALSE}
+# initial sentroid
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+# menyiapkan template untuk menghitung jarak
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+# initial konvergensi
+konvergensi = 1000
+# proses iterasi k-means hingga konvergensi tercapai
+while(konvergensi > 10^(-7)){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  # memasukkan masing-masing titik ke cluster terdekat
+  df = 
+    df %>% 
+    mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+  # menghitung sentroid baru
+  sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
+  # update sentroid baru
+  sentroid_1 = sentroid_baru$sentroid_1
+  sentroid_2 = sentroid_baru$sentroid_2
+}
+```
+
+```{r,include=FALSE}
+df_1 = df
+```
+
+```{r}
+# hasil final  
+df_1 %>% knitr::kable()
+# sentroid 1
+sentroid_1
+# sentroid 2
+sentroid_2
+```
+
+Berikut adalah ___SSE___ dari perhitungan ini:
+
+```{r}
+# menghitung SSE
+SSE = hitung_SSE(df_1)
+SSE
+```
+
+Berikut adalah ___silhouette coefficient___ dari perhitungan ini:
+
+```{r}
+SC = sil_coeff(df_1)
+SC
+```
+
+Berikut adalah grafik hasilnya:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Clustering IV"}
+rekap$SSE[4] = SSE
+rekap$Sil_Coeff[4] = SC
+
+df_1 %>% 
+  ggplot(aes(x,y)) +
+  geom_point(aes(color = factor(cluster_no))) +
+  geom_point(aes(x = sentroid_1[1],
+                 y = sentroid_1[2],
+                 color = factor(1)),
+             shape = 3,
+             size = 3) +
+  geom_point(aes(x = sentroid_2[1],
+                 y = sentroid_2[2],
+                 color = factor(2)),
+             shape = 3,
+             size = 3) +
+  labs(title = "Hasil Akhir Clustering",
+       subtitle = "Sentroid Trial IV",
+       caption = "20921004\nVisualisasi dengan R",
+       color = "Cluster ke-")
+```
+
+
+\newpage
+
+### _K-Means Clustering_ pada pasangan titik _random_ V
+
+Menggunakan titik random berikut ini:
+
+```{r}
+random = random_titik()
+random
+```
+
+```{r,include=FALSE}
+df = soal
+```
+
+Saya akan lakukan _clustering_ menghasilkan:
+
+```{r,echo=FALSE}
+# initial sentroid
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+# menyiapkan template untuk menghitung jarak
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+# initial konvergensi
+konvergensi = 1000
+# proses iterasi k-means hingga konvergensi tercapai
+while(konvergensi > 10^(-7)){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  # memasukkan masing-masing titik ke cluster terdekat
+  df = 
+    df %>% 
+    mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+  # menghitung sentroid baru
+  sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
+  # update sentroid baru
+  sentroid_1 = sentroid_baru$sentroid_1
+  sentroid_2 = sentroid_baru$sentroid_2
+}
+```
+
+```{r,include=FALSE}
+df_1 = df
+```
+
+```{r}
+# hasil final  
+df_1 %>% knitr::kable()
+# sentroid 1
+sentroid_1
+# sentroid 2
+sentroid_2
+```
+
+Berikut adalah ___SSE___ dari perhitungan ini:
+
+```{r}
+# menghitung SSE
+SSE = hitung_SSE(df_1)
+SSE
+```
+
+Berikut adalah ___silhouette coefficient___ dari perhitungan ini:
+
+```{r}
+SC = sil_coeff(df_1)
+SC
+```
+
+Berikut adalah grafik hasilnya:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Clustering V"}
+rekap$SSE[5] = SSE
+rekap$Sil_Coeff[5] = SC
+
+df_1 %>% 
+  ggplot(aes(x,y)) +
+  geom_point(aes(color = factor(cluster_no))) +
+  geom_point(aes(x = sentroid_1[1],
+                 y = sentroid_1[2],
+                 color = factor(1)),
+             shape = 3,
+             size = 3) +
+  geom_point(aes(x = sentroid_2[1],
+                 y = sentroid_2[2],
+                 color = factor(2)),
+             shape = 3,
+             size = 3) +
+  labs(title = "Hasil Akhir Clustering",
+       subtitle = "Sentroid Trial V",
+       caption = "20921004\nVisualisasi dengan R",
+       color = "Cluster ke-")
+```
+
+\newpage
+
+### _K-Means Clustering_ pada pasangan titik _random_ VI
+
+Menggunakan titik random berikut ini:
+
+```{r}
+random = random_titik()
+random
+```
+
+```{r,include=FALSE}
+df = soal
+```
+
+Saya akan lakukan _clustering_ menghasilkan:
+
+```{r,echo=FALSE}
+# initial sentroid
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+# menyiapkan template untuk menghitung jarak
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+# initial konvergensi
+konvergensi = 1000
+# proses iterasi k-means hingga konvergensi tercapai
+while(konvergensi > 10^(-7)){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  # memasukkan masing-masing titik ke cluster terdekat
+  df = 
+    df %>% 
+    mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+  # menghitung sentroid baru
+  sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
+  # update sentroid baru
+  sentroid_1 = sentroid_baru$sentroid_1
+  sentroid_2 = sentroid_baru$sentroid_2
+}
+```
+
+```{r,include=FALSE}
+df_1 = df
+```
+
+```{r}
+# hasil final  
+df_1 %>% knitr::kable()
+# sentroid 1
+sentroid_1
+# sentroid 2
+sentroid_2
+```
+
+Berikut adalah ___SSE___ dari perhitungan ini:
+
+```{r}
+# menghitung SSE
+SSE = hitung_SSE(df_1)
+SSE
+```
+
+Berikut adalah ___silhouette coefficient___ dari perhitungan ini:
+
+```{r}
+SC = sil_coeff(df_1)
+SC
+```
+
+Berikut adalah grafik hasilnya:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Clustering VI"}
+rekap$SSE[6] = SSE
+rekap$Sil_Coeff[6] = SC
+
+df_1 %>% 
+  ggplot(aes(x,y)) +
+  geom_point(aes(color = factor(cluster_no))) +
+  geom_point(aes(x = sentroid_1[1],
+                 y = sentroid_1[2],
+                 color = factor(1)),
+             shape = 3,
+             size = 3) +
+  geom_point(aes(x = sentroid_2[1],
+                 y = sentroid_2[2],
+                 color = factor(2)),
+             shape = 3,
+             size = 3) +
+  labs(title = "Hasil Akhir Clustering",
+       subtitle = "Sentroid Trial VI",
+       caption = "20921004\nVisualisasi dengan R",
+       color = "Cluster ke-")
+```
+
+
+\newpage
+
+### _K-Means Clustering_ pada pasangan titik _random_ VII
+
+Menggunakan titik random berikut ini:
+
+```{r}
+random = random_titik()
+random
+```
+
+```{r,include=FALSE}
+df = soal
+```
+
+Saya akan lakukan _clustering_ menghasilkan:
+
+```{r,echo=FALSE}
+# initial sentroid
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+# menyiapkan template untuk menghitung jarak
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+# initial konvergensi
+konvergensi = 1000
+# proses iterasi k-means hingga konvergensi tercapai
+while(konvergensi > 10^(-7)){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  # memasukkan masing-masing titik ke cluster terdekat
+  df = 
+    df %>% 
+    mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+  # menghitung sentroid baru
+  sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
+  # update sentroid baru
+  sentroid_1 = sentroid_baru$sentroid_1
+  sentroid_2 = sentroid_baru$sentroid_2
+}
+```
+
+```{r,include=FALSE}
+df_1 = df
+```
+
+```{r}
+# hasil final  
+df_1 %>% knitr::kable()
+# sentroid 1
+sentroid_1
+# sentroid 2
+sentroid_2
+```
+
+Berikut adalah ___SSE___ dari perhitungan ini:
+
+```{r}
+# menghitung SSE
+SSE = hitung_SSE(df_1)
+SSE
+```
+
+Berikut adalah ___silhouette coefficient___ dari perhitungan ini:
+
+```{r}
+SC = sil_coeff(df_1)
+SC
+```
+
+Berikut adalah grafik hasilnya:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Clustering VII"}
+rekap$SSE[7] = SSE
+rekap$Sil_Coeff[7] = SC
+
+df_1 %>% 
+  ggplot(aes(x,y)) +
+  geom_point(aes(color = factor(cluster_no))) +
+  geom_point(aes(x = sentroid_1[1],
+                 y = sentroid_1[2],
+                 color = factor(1)),
+             shape = 3,
+             size = 3) +
+  geom_point(aes(x = sentroid_2[1],
+                 y = sentroid_2[2],
+                 color = factor(2)),
+             shape = 3,
+             size = 3) +
+  labs(title = "Hasil Akhir Clustering",
+       subtitle = "Sentroid Trial VII",
+       caption = "20921004\nVisualisasi dengan R",
+       color = "Cluster ke-")
+```
+
+
+\newpage
+
+### _K-Means Clustering_ pada pasangan titik _random_ VIII
+
+Menggunakan titik random berikut ini:
+
+```{r}
+random = random_titik()
+random
+```
+
+```{r,include=FALSE}
+df = soal
+```
+
+Saya akan lakukan _clustering_ menghasilkan:
+
+```{r,echo=FALSE}
+# initial sentroid
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+# menyiapkan template untuk menghitung jarak
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+# initial konvergensi
+konvergensi = 1000
+# proses iterasi k-means hingga konvergensi tercapai
+while(konvergensi > 10^(-7)){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  # memasukkan masing-masing titik ke cluster terdekat
+  df = 
+    df %>% 
+    mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+  # menghitung sentroid baru
+  sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
+  # update sentroid baru
+  sentroid_1 = sentroid_baru$sentroid_1
+  sentroid_2 = sentroid_baru$sentroid_2
+}
+```
+
+```{r,include=FALSE}
+df_1 = df
+```
+
+```{r}
+# hasil final  
+df_1 %>% knitr::kable()
+# sentroid 1
+sentroid_1
+# sentroid 2
+sentroid_2
+```
+
+Berikut adalah ___SSE___ dari perhitungan ini:
+
+```{r}
+# menghitung SSE
+SSE = hitung_SSE(df_1)
+SSE
+```
+
+Berikut adalah ___silhouette coefficient___ dari perhitungan ini:
+
+```{r}
+SC = sil_coeff(df_1)
+SC
+```
+
+Berikut adalah grafik hasilnya:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Clustering VIII"}
+rekap$SSE[8] = SSE
+rekap$Sil_Coeff[8] = SC
+
+df_1 %>% 
+  ggplot(aes(x,y)) +
+  geom_point(aes(color = factor(cluster_no))) +
+  geom_point(aes(x = sentroid_1[1],
+                 y = sentroid_1[2],
+                 color = factor(1)),
+             shape = 3,
+             size = 3) +
+  geom_point(aes(x = sentroid_2[1],
+                 y = sentroid_2[2],
+                 color = factor(2)),
+             shape = 3,
+             size = 3) +
+  labs(title = "Hasil Akhir Clustering",
+       subtitle = "Sentroid Trial VIII",
+       caption = "20921004\nVisualisasi dengan R",
+       color = "Cluster ke-")
+```
+
+
+\newpage
+
+### _K-Means Clustering_ pada pasangan titik _random_ IX
+
+Menggunakan titik random berikut ini:
+
+```{r}
+random = random_titik()
+random
+```
+
+```{r,include=FALSE}
+df = soal
+```
+
+Saya akan lakukan _clustering_ menghasilkan:
+
+```{r,echo=FALSE}
+# initial sentroid
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+# menyiapkan template untuk menghitung jarak
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+# initial konvergensi
+konvergensi = 1000
+# proses iterasi k-means hingga konvergensi tercapai
+while(konvergensi > 10^(-7)){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  # memasukkan masing-masing titik ke cluster terdekat
+  df = 
+    df %>% 
+    mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+  # menghitung sentroid baru
+  sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
+  # update sentroid baru
+  sentroid_1 = sentroid_baru$sentroid_1
+  sentroid_2 = sentroid_baru$sentroid_2
+}
+```
+
+```{r,include=FALSE}
+df_1 = df
+```
+
+```{r}
+# hasil final  
+df_1 %>% knitr::kable()
+# sentroid 1
+sentroid_1
+# sentroid 2
+sentroid_2
+```
+
+Berikut adalah ___SSE___ dari perhitungan ini:
+
+```{r}
+# menghitung SSE
+SSE = hitung_SSE(df_1)
+SSE
+```
+
+Berikut adalah ___silhouette coefficient___ dari perhitungan ini:
+
+```{r}
+SC = sil_coeff(df_1)
+SC
+```
+
+Berikut adalah grafik hasilnya:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Clustering IX"}
+rekap$SSE[9] = SSE
+rekap$Sil_Coeff[9] = SC
+
+df_1 %>% 
+  ggplot(aes(x,y)) +
+  geom_point(aes(color = factor(cluster_no))) +
+  geom_point(aes(x = sentroid_1[1],
+                 y = sentroid_1[2],
+                 color = factor(1)),
+             shape = 3,
+             size = 3) +
+  geom_point(aes(x = sentroid_2[1],
+                 y = sentroid_2[2],
+                 color = factor(2)),
+             shape = 3,
+             size = 3) +
+  labs(title = "Hasil Akhir Clustering",
+       subtitle = "Sentroid Trial IX",
+       caption = "20921004\nVisualisasi dengan R",
+       color = "Cluster ke-")
+```
+
+\newpage
+
+### _K-Means Clustering_ pada pasangan titik _random_ X
+
+Menggunakan titik random berikut ini:
+
+```{r}
+random = random_titik()
+random
+```
+
+```{r,include=FALSE}
+df = soal
+```
+
+Saya akan lakukan _clustering_ menghasilkan:
+
+```{r,echo=FALSE}
+# initial sentroid
+sentroid_1 = random$sentroid_1
+sentroid_2 = random$sentroid_2
+# menyiapkan template untuk menghitung jarak
+df$jarak_sentroid1 = NA
+df$jarak_sentroid2 = NA
+# initial konvergensi
+konvergensi = 1000
+# proses iterasi k-means hingga konvergensi tercapai
+while(konvergensi > 10^(-7)){
+  # hitung jarak terhadap sentroid
+  for(i in 1:nrow(df)){
+    titik = c(df$x[i],df$y[i])
+    df$jarak_sentroid1[i] = jarak(titik,sentroid_1)
+    df$jarak_sentroid2[i] = jarak(titik,sentroid_2)
+  }
+  # memasukkan masing-masing titik ke cluster terdekat
+  df = 
+    df %>% 
+    mutate(cluster_no = ifelse(jarak_sentroid1 < jarak_sentroid2,1,2))
+  # menghitung sentroid baru
+  sentroid_baru = new_sentroid(df)
+  # menghitung konvergensi
+  konvergensi = konvergen_yn()
+  # update sentroid baru
+  sentroid_1 = sentroid_baru$sentroid_1
+  sentroid_2 = sentroid_baru$sentroid_2
+}
+```
+
+```{r,include=FALSE}
+df_1 = df
+```
+
+```{r}
+# hasil final  
+df_1 %>% knitr::kable()
+# sentroid 1
+sentroid_1
+# sentroid 2
+sentroid_2
+```
+
+Berikut adalah ___SSE___ dari perhitungan ini:
+
+```{r}
+# menghitung SSE
+SSE = hitung_SSE(df_1)
+SSE
+```
+
+Berikut adalah ___silhouette coefficient___ dari perhitungan ini:
+
+```{r}
+SC = sil_coeff(df_1)
+SC
+```
+
+Berikut adalah grafik hasilnya:
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Hasil Clustering X"}
+rekap$SSE[10] = SSE
+rekap$Sil_Coeff[10] = SC
+
+df_1 %>% 
+  ggplot(aes(x,y)) +
+  geom_point(aes(color = factor(cluster_no))) +
+  geom_point(aes(x = sentroid_1[1],
+                 y = sentroid_1[2],
+                 color = factor(1)),
+             shape = 3,
+             size = 3) +
+  geom_point(aes(x = sentroid_2[1],
+                 y = sentroid_2[2],
+                 color = factor(2)),
+             shape = 3,
+             size = 3) +
+  labs(title = "Hasil Akhir Clustering",
+       subtitle = "Sentroid Trial X",
+       caption = "20921004\nVisualisasi dengan R",
+       color = "Cluster ke-")
+```
+
+\newpage
+
+### Kesimpulan dari 10 _Clustering_
+
+```{r,echo=FALSE}
+rekap %>% knitr::kable(caption = "Rekap Hasil 10 Kali Clustering")
+```
+
+Jika kita lihat nilai _silhouette coefficient_ yang ada, dari 10 kali proses _clustering_, nilai koefisien yang dihasilkan masih rendah (mendekati nol). Selain itu, nilai _SSE_ yang ada juga masih relatif besar. Sehingga kita tidak bisa menyimpulkan bahwa _cluster_ yang dihasilkan sudah baik.
 
 
 \newpage
@@ -423,6 +1358,8 @@ $$\begin{matrix}
 \text{Purity 3} =& \frac{465}{949} &= 0.490 \\
 \end{matrix}$$
 
+\newpage
+
 _Total entropy_ dihitung sebagai berikut:
 
 $$\text{Total entropy} = \frac{693 \times 0.200 + 1562 \times 1.841 + 949 \times 0.490}{3204} = 0.614$$
@@ -430,8 +1367,6 @@ $$\text{Total entropy} = \frac{693 \times 0.200 + 1562 \times 1.841 + 949 \times
 _Total purity_ dihitung sebagai berikut:
 
 $$\text{Total purity} = \frac{693 \times 0.975 + 1562 \times 0.529 + 949 \times 1.696}{3204} = 1.443$$
-
-\newpage
 
 Berikut jika disajikan dalam bentuk tabel:
 
@@ -446,3 +1381,14 @@ df %>% knitr::kable(align = "c",caption = "Hasil Perhitungan Entropy dan Purity"
 Dari tabel di atas, kita bisa dapatkan informasi sebagai berikut:
 
 > _Cluster_ `#1` memiliki _purity_ yang sangat tinggi dan _entropy_ terendah. Artinya, cluster ini berhasil mengelompokkan data yang _unique_ karakteristiknya (berasal dari satu atribut dominan). Berbeda dengan _cluster_ `#2` dan `#3` yang tidak memiliki satu atribut yang dominan. Tapi secara keseluruhan, _cluster_ yang dihasilkan sudah bisa memisahkan data menjadi 3 kelompok dengan karakteristik yang berbeda-beda.
+
+\newpage
+
+# PENUTUP
+
+Validitas hasil _clustering_ bisa dilihat menggunakan berbagai macam cara, yakni:
+
+1. _SSE_,
+1. _Silhouette coefficient_,
+1. _Purity_,
+1. _Entropy_.
