@@ -1296,6 +1296,10 @@ rekap %>% knitr::kable(caption = "Rekap Hasil 10 Kali Clustering")
 
 Jika kita lihat nilai _silhouette coefficient_ yang ada, dari 10 kali proses _clustering_, nilai koefisien yang dihasilkan masih rendah (mendekati nol). Selain itu, nilai _SSE_ yang ada juga masih relatif besar. Sehingga kita tidak bisa menyimpulkan bahwa _cluster_ yang dihasilkan sudah baik.
 
+Hal ini memberikan gambaran bahwa algoritma _k-means_ dengan $k=2$ belum bisa memberikan hasil yang terbaik. Oleh karena itu, kita bisa melakukan beberapa alternatif sebagai berikut:
+
+1. Menambah jumlah $k$, atau
+1. Menggunakan teknik _clustering_ lain yang lebih mengakomodir data tersebut seperti _hierarchical clustering_.
 
 \newpage
 
