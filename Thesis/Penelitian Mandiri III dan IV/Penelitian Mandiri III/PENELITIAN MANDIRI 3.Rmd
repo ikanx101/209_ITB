@@ -233,7 +233,7 @@ data.frame(bahan_baku = paste0("bb_",1:6),
 
 Berikut ini adalah sampel data yang berisi informasi produk apa bisa dibuat menggunakan bahan baku mana saja.
 
-```{r,echo=FALSE}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 library(janitor)
 df_1 = 
   data.frame(produk = paste0("fg_",1:14),

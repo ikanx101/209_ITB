@@ -71,7 +71,7 @@ Laporan akhir penelitian mandiri dalam sains komputasi IV ini adalah: model opti
 
 # MODEL OPTIMISASI
 
-Masalah _supplier selection_, _order allocation_, dan pemasangan bahan baku dengan produk adalah masalah dengan satu kriteria, yaitu total harga pengadaan (pembelian) tetapi ukuran masalahnya lebih besar karena ketiga masalah di atas hanya sebagian dari variabel keputusan. Variabel keputusan lainnya adalah bagaimana distribusi pengiriman dari tiap _supplier_ per minggu. Oleh karena itu, masalah krusial pertama dari penyelesaian masalah ini adalah menurunkan masalah optimisasi yang tepat yang dapat menjadi model dari masalah ini.
+Masalah _supplier selection_, _order allocation_, dan pemasangan bahan baku dengan produk adalah masalah dengan satu kriteria, yaitu total harga pengadaan (pembelian). Selain itu, ada satu variabel keputusan lain yang hendak dicari, yakni bagaimana distribusi pengiriman dari tiap _supplier_ per minggu. Oleh karena itu, masalah krusial pertama dari penyelesaian masalah ini adalah menurunkan masalah optimisasi yang tepat yang dapat menjadi model dari masalah ini.
 
 Berdasarkan informasi-informasi yang telah didapatkan dari `Penelitian Mandiri III`, berikut adalah model optimisasi dari permasalahan ini.
 
@@ -79,19 +79,17 @@ Berdasarkan informasi-informasi yang telah didapatkan dari `Penelitian Mandiri I
 
 Notasikan:
 
-- $M$ sebagai himpunan semua minggu. 
-- $P = P_1 \bigcup P_2 \bigcup P_3 \bigcup P_4 \bigcup P_5 \bigcup P_6$ sebagai himpunan produk di semua minggu.
-    - $\hat{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan minimal dua jenis bahan baku.
-    - $\dot{P}$ sebagai himpunan bagian dari $P$, yakni himpunan produk yang menggunakan satu jenis bahan baku saja.
+- $M = {1,2,3,4,5,6}$ sebagai himpunan semua minggu. 
+- $P = P_1 \bigcup P_2 \bigcup P_3 \bigcup P_4 \bigcup P_5 \bigcup P_6$ sebagai himpunan produk yang diproduksi per minggu.
 - $G = \{1,2,3,4,5,6\}$ sebagai himpunan bahan baku.
-- $D$ sebagai kebutuhan bahan baku di bulan perencanaan, yaitu: _week_ 3 - 6.
+- $D$ sebagai kebutuhan bahan baku (_demand_) di bulan perencanaan, yaitu: _week_ 3 - 6.
 - $maxcap$ sebagai kapasitas gudang bahan baku.
+- $\forall i \in P_j, \space g_{ijk}$ adalah kebutuhan bahan baku $k$ (dalam ton) dari produk $i$ pada _week_ $j$.
 - $\forall k \in G, Pr_k$ adalah total proporsi portofolio bahan baku yang ditetapkan dalam setahun (dalam ton).
-- $\forall i \in P_j, \space g_{ijk}$ adalah kebutuhan bahan baku (dalam ton) dari produk $i$ pada _week_ $k$.
 - $\forall k \in G, \space c_k$ adalah harga bahan baku $k$ per ton.
-- $\forall k \in G, \space \epsilon_k$ adalah _minimum order quantity_ dari bahan baku $k$.
+- $\forall k \in G, \space o_k$ adalah _minimum order quantity_ dari bahan baku $k$.
 - $\forall k \in G, \space \hat{d}_{2k}$ adalah total bahan baku $k$ yang dibutuhkan pada _week_ 2.
-- $\forall k \in G, \space Z_{ik}$ adalah stok level bahan baku $k$ di gudang pada akhir _week_ 1.
+- $\forall k \in G, \space Z_{1k}$ adalah stok level bahan baku $k$ di gudang pada akhir _week_ 1.
 
 ## Variabel Keputusan
 
@@ -99,12 +97,12 @@ Notasikan:
 
 Definisikan $\forall k \in G, \space x_k$ adalah banyaknya bahan baku $k$ yang dibeli.
 
-Berdasarkan informasi sebelumnya, kita ketahui bahwa $x_k$ bernilai bulat positif dan harus lebih besar atau sama dengan nilai $\epsilon_k$. Kemudian tidak ada kewajiban untuk membeli bahan baku dari seluruh _supplier_. 
+Berdasarkan informasi sebelumnya, kita ketahui bahwa $x_k$ bernilai bulat positif dan harus lebih besar atau sama dengan nilai $o_k$. Kemudian tidak ada kewajiban untuk membeli bahan baku dari seluruh _supplier_. 
 
-Maka kita bisa tuliskan: $x_k = 0$ atau $\epsilon_k \leq x_k \leq maxcap$. Untuk menghindari nilai diskontinu dari $x_k$ ini, definisikan:
+Maka kita bisa tuliskan: $x_k = 0$ atau $o_k \leq x_k \leq maxcap$. Untuk menghindari nilai diskontinu dari $x_k$ ini, definisikan:
 
 $$y_k = \left\{\begin{matrix}
-1, & x_k = 0 \\ 0, & \epsilon_k \leq x_k \leq maxcap
+1, & x_k = 0 \\ 0, & o_k \leq x_k \leq maxcap
 \end{matrix}\right.$$
 
 $\forall j \in M  \setminus \{1,6\}, \forall i \in P_j, \forall k \in G$,
@@ -197,7 +195,7 @@ $$\min \sum_{k \in G} c_k x_k$$
 
 $$\begin{matrix}
 \text{terhadap kendala I sampai VI dan } \\
-x_k = 0 \text{ atau } \epsilon_k \leq x_k \leq maxcap, \space x_k \in \mathbb{Z}^+ \\
+x_k = 0 \text{ atau } o_k \leq x_k \leq maxcap, \space x_k \in \mathbb{Z}^+ \\
 y_k \in \{ 0,1 \}, \hat{x}_{jk} \geq 0, a_{ijk} \in \{ 0,1 \} \\
 0 \leq b_{ijk} \leq 1 \\
 0 \leq z_{jk} \leq maxcap \\
