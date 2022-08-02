@@ -33,9 +33,9 @@ plt =
                    con.size = .5, con.border = "one",
                    con.type = "elbow") +
 
-  labs(title = "Timeline Pengadaan Bahan Baku",
-       subtitle = "Garis vertikal menandakan minggu",
-       caption = "Produksi sebenarnya dimulai pada saat minggu III.\nNamun, sejak BB mulai dikirim pada minggu I, kita harus mulai memperhitungkan kapasitas gudang.\nDemikian juga saat pengiriman BB di minggu II.\nOleh karena itu pemakaian pada minggu I dan II akan dijadikan parameter dalam model.")+
+  labs(title = "Timeline Raw Material Procurement",
+       subtitle = "The horizontal line indicates the week.",
+       caption = "Production starts in the third week.\nHowever, since the raw materials began to be shipped in the first week, we must consider the warehouse capacity.\nAs well as in the second week.\nTherefore, the first and the second weeks will be used as a parameter in the model.")+
   
   theme_void() +
   
@@ -43,9 +43,8 @@ plt =
         plot.title = element_text(hjust = 0.5, face = "bold", size = 25, family = "Patua"),
         plot.subtitle = element_text(hjust = 0.5, face = "italic", size = 22),
         plot.caption = element_text(hjust = 0.5, size = 10, color = "black", family = "Lato")) +
-  xlim(0,7)+ ylim(-200,200) +
-  coord_flip()
+  xlim(0,7)+ ylim(-130,130) 
 
-png("timeline.png", width = 10, height = 15, units = "in",res = 650)
+png("timeline.png", width = 15, height = 9, units = "in",res = 900)
 print(plt)
 dev.off()
