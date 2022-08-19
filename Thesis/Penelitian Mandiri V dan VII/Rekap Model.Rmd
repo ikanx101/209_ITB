@@ -1,0 +1,161 @@
+---
+title: "Model Optimisasi"
+subtitle: "Masalah _Supplier Selection_, _Order Allocation_, dan Pemasangan Bahan Baku dengan Produk"
+author: "Mohammad Rizka Fadhli"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/209_ITB/Thesis/Penelitian Mandiri V dan VII")
+```
+
+## _Flow_ Pengadaan dan Penggunaan Bahan Baku
+
+```{r out.width="100%",echo=FALSE,fig.align='center',fig.retina=10,fig.cap="Flow Pengadaan dan Penggunaan Bahan Baku"}
+knitr::include_graphics("timeline.png")
+```
+
+## Parameter-parameter yang terlibat
+
+Notasikan:
+
+- $M = {1,2,3,4,5,6}$ sebagai himpunan semua minggu. 
+- $P = P_1 \bigcup P_2 \bigcup P_3 \bigcup P_4 \bigcup P_5 \bigcup P_6$ sebagai himpunan produk yang diproduksi per minggu.
+    - $\hat{P}$ sebagai himpunan produk yang bisa diproduksi dengan minimal 2 jenis gula.
+    - $\dot{P}$ sebagai himpunan produk yang hanya bisa diproduksi dengan satu jenis gula saja.
+- $G = \{1,2,3,4,5,6\}$ sebagai himpunan bahan baku gula.
+- $D$ sebagai kebutuhan bahan baku gula (_demand_) di bulan perencanaan, yaitu: _week_ 3 - 6.
+- $maxcap$ sebagai kapasitas gudang bahan baku.
+- $\forall i \in P_j, \space g_{kij}$ adalah kebutuhan bahan baku gula $k$ (dalam kg) dari produk $i$ pada _week_ $j$.
+- $\forall k \in G, Q_k$ adalah total proporsi portofolio bahan baku gula $k$ yang ditetapkan dalam setahun (dalam kg).
+- $\forall k \in G, \space c_k$ adalah harga bahan baku gula $k$ per ton.
+- $\forall k \in G, \space o_k$ adalah _minimum order quantity_ dari bahan baku gula $k$.
+- $\forall k \in G, \space \hat{d}_{k2}$ adalah total bahan baku $k$ yang dibutuhkan pada _week_ 2.
+- $\forall k \in G, \space Z_{k1}$ adalah stok level bahan baku $k$ di gudang pada akhir _week_ 1.
+
+
+## Variabel Keputusan
+
+### Variabel I 
+
+Definisikan $\forall k \in G, \space x_k$ adalah banyaknya bahan baku $k$ yang dibeli.
+
+Berdasarkan informasi sebelumnya, kita ketahui bahwa $x_k$ bernilai bulat positif dan harus lebih besar atau sama dengan nilai $o_k$. Kemudian tidak ada kewajiban untuk membeli bahan baku dari seluruh _supplier_. 
+
+Maka kita bisa tuliskan: 
+
+$$x_k = \left\{\begin{matrix}
+\geq o_k & \text{atau } \\ 
+0
+\end{matrix}\right.$$
+
+
+### Variabel II
+
+Definisikan: $\hat{x}_{kj}$ sebagai banyaknya pengiriman bahan baku gula jenis $k$ di awal _week_ $j$.
+
+### Variabel III
+
+Definisikan $a_{kij}$ sebuah bilangan biner:
+
+$$a_{kij} = \left\{\begin{matrix}
+1, & \text{gula } k \text{ digunakan pada produk } i \text{ pada week } j \\ 
+0, & \text{lainnya}
+\end{matrix}\right.$$
+
+### Variabel IV
+
+Definisikan: $b_{kij}$ sebagai proporsi penggunaan bahan baku $k$ dari seluruh kebutuhan bahan baku untuk produk $i$ di _week_ $j$, $\forall j \in M \setminus \{ 1 \}, \forall k \in G$.
+
+### Variabel V 
+
+Definisikan: $z_{kj}$ sebagai stok level bahan baku $k$ di akhir _week_ $j$.
+
+## Kendala Optimisasi
+
+### Kendala I
+
+Kita definisikan $y_k$ sebagai penghubung nilai diskontinu dari variabel $x_k$:
+
+$$y_k = \left\{\begin{matrix}
+1, & x_k = 0 \\ 0, & o_k \leq x_k \leq maxcap
+\end{matrix}\right.$$
+
+$\forall j \in M  \setminus \{1,6\}, \forall i \in P_j, \forall k \in G$,
+
+
+Sehingga kendala I menjadi penghubung antara variabel keputusan biner, integer, atau kontinu yang berkaitan:
+
+$$\begin{matrix}
+\forall k \in G, &  \\
+ & x_k \leq Dy_k \\
+ & x_k \geq \epsilon y_k \\
+\forall j \in M \setminus \{ 1,2 \}, \forall i \in P_j, \forall k \in G, & \\
+ & b_{kij} \leq a_{kij} \\
+ & b_{kij} \geq \mu a_{kij}
+\end{matrix}$$
+
+untuk suatu nilai $\epsilon$ dan $\mu$ yang kecil.
+
+### Kendala II 
+
+Kendala II dibuat agar total bahan baku yang dipesan tidak kurang dari total _demand_ di bulan perencanaan.
+
+$$\sum_{k \in G} x_k \geq D$$
+Lalu barang yang dikirim tdk boleh melebihi maxcap.
+
+### Kendala III 
+
+Kendala III mengatur hubungan antara total pembelian bahan baku dan pengiriman setiap minggu.
+
+$$\begin{matrix}
+\forall k \in G, & \\
+ & x_k = \sum_{j \in \hat{M}} \hat{x}_{kj}
+\end{matrix}$$
+
+### Kendala IV
+
+Kendala IV berfungsi untuk menjaga komposisi bahan baku yang diinginkan.
+
+$$\begin{matrix}
+\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \hat{P}_j, & \\
+ & \sum_{k \in G} a_{kij} \geq 2 \\
+ & \sum_{k \in G} b_{kij} = 1 \\
+\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \dot{P}_j, & \\ 
+ & \sum_{k \in G} a_{kij} = 1 \\
+ & \sum_{k \in G} b_{kij} = 1
+\end{matrix}$$
+
+### Kendala V 
+
+Kendala V berfungsi untuk menjaga stok level sesaat setelah pengiriman bahan baku agar tidak melebihi kapasitas gudang.
+
+$$\begin{matrix}
+ & \sum_{k \in G} (Z_{k1} + \hat{x}_{k1} - \hat{d}_{k2} + z_{kj}) = maxcap \\
+\forall j \in M \setminus \{ 1,2 \} & \\
+ & \sum_{k \in G} (z_{k(j-1)} + \hat{x}_{k(j-1)}) - \sum_{i \in P_j} b_{kij} g_{kij} + z_{kj} = maxcap
+\end{matrix}$$
+
+### Kendala VI 
+
+Kendala VI menjaga agar pembelian bahan baku tidak melebihi proporsi portofolio yang sudah ditetapkan dalam setahun.
+
+$$\forall j: x_k \leq Q_k$$
+
+## Fungsi Objektif
+
+Permasalahan yang dihadapi adalah pemilihan _supplier_ dan bahan baku sebagai berikut:
+
+$$\min \sum_{k \in G} c_k x_k$$
+
+$$\begin{matrix}
+\text{s.t constraints and } \\
+x_k = 0 \text{ atau } o_k \leq x_k \leq maxcap, \space x_k \in \mathbb{Z}^+ \\
+y_k \in \{ 0,1 \}, \hat{x}_{jk} \geq 0, a_{ijk} \in \{ 0,1 \} \\
+0 \leq b_{ijk} \leq 1 \\
+0 \leq z_{jk} \leq maxcap \\
+\end{matrix}$$
+
+
