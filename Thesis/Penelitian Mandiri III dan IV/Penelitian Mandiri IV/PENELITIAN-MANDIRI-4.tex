@@ -1,0 +1,415 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  12pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+\fancyfoot[LE,RO]{hal \thepage}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Laporan Akhir Penelitian Mandiri dalam Sains Komputasi IV},
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Laporan Akhir Penelitian Mandiri dalam Sains Komputasi IV}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Model Optimisasi}
+\author{Mohammad Rizka Fadhli\\
+Program Studi Magister Sains Komputasi\\
+Fakultas Matematika dan Ilmu Pengetahuan Alam\\
+Institut Teknologi Bandung\\
+\href{mailto:20921004@mahasiswa.itb.ac.id}{\nolinkurl{20921004@mahasiswa.itb.ac.id}}}
+\date{19 August 2022}
+
+\begin{document}
+\maketitle
+
+\setstretch{1.75}
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+\newpage
+
+\hypertarget{latar-belakang}{%
+\section{LATAR BELAKANG}\label{latar-belakang}}
+
+Semenjak diperkenalkan pertama kali pada tahun 1982, \emph{Supply Chain
+Management} (SCM) memegang peranan penting dalam manufaktur sebagai
+suatu sistem produksi terintegrasi {[}1{]}. Di dalam SCM, bahan baku
+dibeli perusahaan dari berbagai \emph{supplier}, dibuat ke dalam suatu
+produk yang kemudian akan dijual ke pelanggan melalui berbagai
+\emph{channel} distribusi.
+
+Dalam mengarungi kompetisi, perusahaan perlu memahami dua faktor kunci,
+yakni \emph{cost reduction} dan \emph{product quality} {[}2{]}. Kedua
+faktor ini sangat bergantung pada pemilihan \emph{supplier} yang tepat.
+Sehingga proses \emph{supplier selection} menjadi proses yang krusial
+dalam setiap perusahaan.
+
+Dalam prakteknya, perusahaan bisa menggunakan dua strategi terkait
+\emph{supplier selection}, yakni: \emph{single sourcing} dan
+\emph{multiple sourcing}. \emph{Single sourcing} berarti perusahaan
+hanya membeli bahan baku dari \emph{supplier} tunggal. Sedangkan
+\emph{multiple sourcing} berarti perusahaan bisa membeli bahan baku dari
+beberapa \emph{supplier}. Strategi \emph{single sourcing} bisa menaikkan
+level risiko dari perusahaan sedangkan strategi \emph{multiple sourcing}
+menyebabkan \emph{initial cost} dan \emph{ongoing cost} yang lebih besar
+{[}3{]}. Bagi perusahaan yang menerapkan strategi \emph{multiple
+sourcing}, banyak faktor yang akan membuat kompleks pengambilan
+keputusan. Misalnya harga, perjanjian transaksi, kualitas, kuantitas,
+jarak dan biaya pengantaran {[}2{]}.
+
+PT. NFI adalah salah satu perusahaan manufaktur di Indonesia yang
+memproduksi 130 jenis minuman. Salah satu bahan baku yang paling sering
+digunakan untuk semua produk minuman tersebut adalah gula. Masing-masing
+produk minuman tersebut bisa dibagi menjadi dua kelompok, yakni:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Minuman yang hanya bisa diproduksi oleh satu jenis bahan baku gula.
+\item
+  Minuman yang bisa diproduksi menggunakan dua atau lebih jenis bahan
+  baku gula.
+\end{enumerate}
+
+Untuk pemenuhan bahan baku gula, NFI menggunakan prinsip \emph{multiple
+sourcing} dengan perjanjian untuk memasoknya dari enam buah
+\emph{supplier}. Spesifikasi bahan baku gula dan harga perton
+berbeda-beda antar \emph{supplier}.
+
+Pada penelitian ini, ada tiga masalah utama yang hendak diselesaikan,
+yakni:
+
+\begin{itemize}
+\tightlist
+\item
+  Memilih \emph{supplier} bahan baku.
+\item
+  Menentukan banyaknya bahan baku yang harus dibeli dari suatu
+  \emph{supplier}.
+\item
+  Menentukan bahan baku mana yang harus digunakan untuk memproduksi
+  setiap produk.
+\end{itemize}
+
+dengan tujuan total biaya pembelian seminim mungkin tetapi memenuhi
+kebutuhan yang ada pada periode tertentu. Luaran dari penelitian ini
+adalah suatu model optimisasi yang bisa menyelesaikan permasalahan di
+atas.
+
+Laporan akhir penelitian mandiri dalam sains komputasi IV ini adalah:
+model optimisasi yang telah disempurnakan untuk penelitian berjudul
+\emph{Optimization Method for Supplier Selection, Order Allocation, and
+Incorporating Raw-Material Characteristic: Case Study Beverages
+Manufacture}.
+
+\hypertarget{model-optimisasi}{%
+\section{MODEL OPTIMISASI}\label{model-optimisasi}}
+
+Masalah \emph{supplier selection}, \emph{order allocation}, dan
+pemasangan bahan baku dengan produk adalah masalah dengan satu kriteria,
+yaitu total harga pengadaan (pembelian). Selain itu, ada satu variabel
+keputusan lain yang hendak dicari, yakni bagaimana distribusi pengiriman
+dari tiap \emph{supplier} per minggu. Oleh karena itu, masalah krusial
+pertama dari penyelesaian masalah ini adalah menurunkan masalah
+optimisasi yang tepat yang dapat menjadi model dari masalah ini.
+
+Berdasarkan informasi-informasi yang telah didapatkan dari
+\texttt{Penelitian\ Mandiri\ III}, berikut adalah model optimisasi dari
+permasalahan ini.
+
+\hypertarget{parameter-yang-diketahui}{%
+\subsection{Parameter yang Diketahui}\label{parameter-yang-diketahui}}
+
+Notasikan:
+
+\begin{itemize}
+\tightlist
+\item
+  \(M = {1,2,3,4,5,6}\) sebagai himpunan semua minggu.
+\item
+  \(P = P_1 \bigcup P_2 \bigcup P_3 \bigcup P_4 \bigcup P_5 \bigcup P_6\)
+  sebagai himpunan produk yang diproduksi per minggu.
+\item
+  \(G = \{1,2,3,4,5,6\}\) sebagai himpunan bahan baku.
+\item
+  \(D\) sebagai kebutuhan bahan baku (\emph{demand}) di bulan
+  perencanaan, yaitu: \emph{week} 3 - 6.
+\item
+  \(maxcap\) sebagai kapasitas gudang bahan baku.
+\item
+  \(\forall i \in P_j, \space g_{ijk}\) adalah kebutuhan bahan baku
+  \(k\) (dalam ton) dari produk \(i\) pada \emph{week} \(j\).
+\item
+  \(\forall k \in G, Pr_k\) adalah total proporsi portofolio bahan baku
+  yang ditetapkan dalam setahun (dalam ton).
+\item
+  \(\forall k \in G, \space c_k\) adalah harga bahan baku \(k\) per ton.
+\item
+  \(\forall k \in G, \space o_k\) adalah \emph{minimum order quantity}
+  dari bahan baku \(k\).
+\item
+  \(\forall k \in G, \space \hat{d}_{2k}\) adalah total bahan baku \(k\)
+  yang dibutuhkan pada \emph{week} 2.
+\item
+  \(\forall k \in G, \space Z_{1k}\) adalah stok level bahan baku \(k\)
+  di gudang pada akhir \emph{week} 1.
+\end{itemize}
+
+\hypertarget{variabel-keputusan}{%
+\subsection{Variabel Keputusan}\label{variabel-keputusan}}
+
+\hypertarget{variabel-i}{%
+\subsubsection*{Variabel I}\label{variabel-i}}
+
+Definisikan \(\forall k \in G, \space x_k\) adalah banyaknya bahan baku
+\(k\) yang dibeli.
+
+Berdasarkan informasi sebelumnya, kita ketahui bahwa \(x_k\) bernilai
+bulat positif dan harus lebih besar atau sama dengan nilai \(o_k\).
+Kemudian tidak ada kewajiban untuk membeli bahan baku dari seluruh
+\emph{supplier}.
+
+Maka kita bisa tuliskan: \(x_k = 0\) atau \(o_k \leq x_k \leq maxcap\).
+Untuk menghindari nilai diskontinu dari \(x_k\) ini, definisikan:
+
+\[y_k = \left\{\begin{matrix}
+1, & x_k = 0 \\ 0, & o_k \leq x_k \leq maxcap
+\end{matrix}\right.\]
+
+\(\forall j \in M \setminus \{1,6\}, \forall i \in P_j, \forall k \in G\),
+
+\hypertarget{variabel-ii}{%
+\subsubsection*{Variabel II}\label{variabel-ii}}
+
+Definisikan: \(\hat{x}_{jk}\) sebagai banyaknya pengiriman bahan baku
+jenis \(k\) di awal \emph{week} \(j\).
+
+\[a_{ijk} = \left\{\begin{matrix}
+1, & \text{produk ke } i \text{ di week } j \text{ menggunakan BB } k \\ 
+0, & \text{lainnya}
+\end{matrix}\right.\]
+
+\hypertarget{variabel-iii}{%
+\subsubsection*{Variabel III}\label{variabel-iii}}
+
+Definisikan: \(b_{ijk}\) sebagai proporsi penggunaan bahan baku \(k\)
+dari seluruh kebutuhan bahan baku untuk produk \(i\) di \emph{week}
+\(j\), \(\forall j \in M \setminus \{ 1 \}, \forall k \in G\).
+
+\hypertarget{variabel-iv}{%
+\subsubsection*{Variabel IV}\label{variabel-iv}}
+
+Definisikan: \(z_{jk}\) sebagai stok level bahan baku \(k\) di akhir
+\emph{week} \(j\).
+
+\hypertarget{kendala-optimisasi}{%
+\subsection{Kendala Optimisasi}\label{kendala-optimisasi}}
+
+\hypertarget{kendala-i}{%
+\subsubsection*{Kendala I}\label{kendala-i}}
+
+Kendala I adalah penghubung yang benar antara variabel keputusan biner,
+integer, atau kontinu yang berkaitan:
+
+\[\begin{matrix}
+\forall k \in G, &  \\
+ & x_k \leq Dy_k \\
+ & x_k \geq \epsilon y_k \\
+\forall j \in M \setminus \{ 1,2 \}, \forall i \in P_j, \forall k \in G, & \\
+ & b_{ijk} \leq a_{ijk} \\
+ & b_{ijk} \geq \mu a_{ijk}
+\end{matrix}\]
+
+untuk suatu nilai \(\mu\) yang kecil.
+
+\hypertarget{kendala-ii}{%
+\subsubsection*{Kendala II}\label{kendala-ii}}
+
+Kendala II dibuat agar total bahan baku yang dipesan tidak kurang dari
+total \emph{demand} di bulan perencanaan.
+
+\[\sum_{k \in G} x_k \geq D\]
+
+\hypertarget{kendala-iii}{%
+\subsubsection*{Kendala III}\label{kendala-iii}}
+
+Kendala III mengatur hubungan antara total pembelian bahan baku dan
+pengiriman setiap minggu.
+
+\[\begin{matrix}
+\forall k \in G, & \\
+ & x_k = \sum_{j \in \hat{M}} \hat{x}_{jk}
+\end{matrix}\]
+
+\hypertarget{kendala-iv}{%
+\subsubsection*{Kendala IV}\label{kendala-iv}}
+
+Kendala IV berfungsi untuk menjaga komposisi bahan baku yang diinginkan.
+
+\[\begin{matrix}
+\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \hat{P}_j, & \\
+ & \sum_{k \in G} a_{ijk} \geq 2 \\
+ & \sum_{k \in G} b_{ijk} = 1 \\
+\forall j \in M \setminus \{ 1,2 \}, \space \forall i \in \dot{P}_j, & \\ 
+ & \sum_{k \in G} a_{ijk} = 1 \\
+ & \sum_{k \in G} b_{ijk} = 1
+\end{matrix}\]
+
+\hypertarget{kendala-v}{%
+\subsubsection*{Kendala V}\label{kendala-v}}
+
+Kendala V berfungsi untuk menjaga stok level sesaat setelah pengiriman
+bahan baku agar tidak melebihi kapasitas gudang.
+
+\[\begin{matrix}
+ & \sum_{k \in G} (Z_{1k} + \hat{x}_{1k} - \hat{d}_{2k} + z_{jk}) = maxcap \\
+\forall j \in M \setminus \{ 1,2 \} & \\
+ & \sum_{k \in G} (z_{(j-1)k} + \hat{x}_{(j-1)k}) - \sum_{i \in P_j} b_{ijk} g_{ijk} + z_{jk} = maxcap
+\end{matrix}\]
+
+\hypertarget{kendala-vi}{%
+\subsubsection*{Kendala VI}\label{kendala-vi}}
+
+Kendala VI menjaga agar pembelian bahan baku tidak melebihi proporsi
+portofolio yang sudah ditetapkan dalam setahun.
+
+\[\sum_{k \in G} x_k \leq Pr_k\]
+
+\hypertarget{fungsi-objektif}{%
+\subsection{Fungsi Objektif}\label{fungsi-objektif}}
+
+Permasalahan yang dihadapi adalah pemilihan \emph{supplier} dan bahan
+baku sebagai berikut:
+
+\[\min \sum_{k \in G} c_k x_k\]
+
+\[\begin{matrix}
+\text{terhadap kendala I sampai VI dan } \\
+x_k = 0 \text{ atau } o_k \leq x_k \leq maxcap, \space x_k \in \mathbb{Z}^+ \\
+y_k \in \{ 0,1 \}, \hat{x}_{jk} \geq 0, a_{ijk} \in \{ 0,1 \} \\
+0 \leq b_{ijk} \leq 1 \\
+0 \leq z_{jk} \leq maxcap \\
+\end{matrix}\]
+
+\newpage
+
+\hypertarget{referensi}{%
+\section*{REFERENSI}\label{referensi}}
+\addcontentsline{toc}{section}{REFERENSI}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-webber}{}}%
+1. Oliver RK, Webber MD. Supply-chain management: Logistics catches up
+with strategy. Outlook; 1982.
+
+\leavevmode\vadjust pre{\hypertarget{ref-masood}{}}%
+2. Rabieh M, Soukhakian MA, Shirazi ANM. Two models of inventory control
+with supplier selection in case of multiple sourcing: A case of isfahan
+steel company. Springerlink.com; 2016.
+
+\leavevmode\vadjust pre{\hypertarget{ref-sourcing}{}}%
+3. Costantino N, Pellegrino R. Choosing between single and multiple
+sourcing based on supplier default risk: A real options approach.
+Journal of Purchasing; Supply Management; 2010.
+
+\end{CSLReferences}
+
+\end{document}

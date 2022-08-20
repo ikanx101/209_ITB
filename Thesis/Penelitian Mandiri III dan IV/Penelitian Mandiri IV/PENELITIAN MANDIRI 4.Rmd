@@ -17,6 +17,7 @@ output:
     fig_height: 4
     fig_caption: true
     highlight: breezedark
+keep_tex: true
 bibliography: references.bib
 csl: academic-psychiatry.csl
 linestretch: 1.75

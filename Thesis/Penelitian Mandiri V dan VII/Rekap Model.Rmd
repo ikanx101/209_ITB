@@ -8,7 +8,7 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-setwd("~/209_ITB/Thesis/Penelitian Mandiri V dan VII")
+setwd("~/209 ITB/Thesis/Penelitian Mandiri V dan VII")
 ```
 
 ## _Flow_ Pengadaan dan Penggunaan Bahan Baku
@@ -29,7 +29,7 @@ Notasikan:
 - $D$ sebagai kebutuhan bahan baku gula (_demand_) di bulan perencanaan, yaitu: _week_ 3 - 6.
 - $maxcap$ sebagai kapasitas gudang bahan baku.
 - $\forall i \in P_j, \space g_{kij}$ adalah kebutuhan bahan baku gula $k$ (dalam kg) dari produk $i$ pada _week_ $j$.
-- $\forall k \in G, Q_k$ adalah total proporsi portofolio bahan baku gula $k$ yang ditetapkan dalam setahun (dalam kg).
+- $\forall k \in G, Pr_k$ adalah total proporsi portofolio bahan baku gula $k$ yang ditetapkan dalam setahun (dalam kg).
 - $\forall k \in G, \space c_k$ adalah harga bahan baku gula $k$ per ton.
 - $\forall k \in G, \space o_k$ adalah _minimum order quantity_ dari bahan baku gula $k$.
 - $\forall k \in G, \space \hat{d}_{k2}$ adalah total bahan baku $k$ yang dibutuhkan pada _week_ 2.
@@ -44,12 +44,13 @@ Definisikan $\forall k \in G, \space x_k$ adalah banyaknya bahan baku $k$ yang d
 
 Berdasarkan informasi sebelumnya, kita ketahui bahwa $x_k$ bernilai bulat positif dan harus lebih besar atau sama dengan nilai $o_k$. Kemudian tidak ada kewajiban untuk membeli bahan baku dari seluruh _supplier_. 
 
-Maka kita bisa tuliskan: 
+Maka kita bisa tuliskan: $x_k = 0$ atau $o_k \leq x_k \leq D$. Untuk menghindari nilai diskontinu dari $x_k$ ini, definisikan:
 
-$$x_k = \left\{\begin{matrix}
-\geq o_k & \text{atau } \\ 
-0
+$$y_k = \left\{\begin{matrix}
+0, & x_k = 0 \\ 1, & o_k \leq x_k \leq D
 \end{matrix}\right.$$
+
+$\forall j \in M  \setminus \{1,6\}, \forall i \in P_j, \forall k \in G$,
 
 
 ### Variabel II
@@ -80,7 +81,7 @@ Definisikan: $z_{kj}$ sebagai stok level bahan baku $k$ di akhir _week_ $j$.
 Kita definisikan $y_k$ sebagai penghubung nilai diskontinu dari variabel $x_k$:
 
 $$y_k = \left\{\begin{matrix}
-1, & x_k = 0 \\ 0, & o_k \leq x_k \leq maxcap
+0, & x_k = 0 \\ 1, & o_k \leq x_k \leq D
 \end{matrix}\right.$$
 
 $\forall j \in M  \setminus \{1,6\}, \forall i \in P_j, \forall k \in G$,
@@ -91,7 +92,7 @@ Sehingga kendala I menjadi penghubung antara variabel keputusan biner, integer, 
 $$\begin{matrix}
 \forall k \in G, &  \\
  & x_k \leq Dy_k \\
- & x_k \geq \epsilon y_k \\
+ & x_k \geq o_k y_k \\
 \forall j \in M \setminus \{ 1,2 \}, \forall i \in P_j, \forall k \in G, & \\
  & b_{kij} \leq a_{kij} \\
  & b_{kij} \geq \mu a_{kij}

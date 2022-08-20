@@ -7,6 +7,8 @@ library(ROI.plugin.glpk)    # untuk optimisasi
 
 rm(list=ls())
 
+options(scipen = 99)
+
 # ambil data yang dibutuhkan
 load("raw.rda")
 
@@ -24,6 +26,14 @@ df_4$code_product = 1:nrow(df_4)
 M = 1:6
 
 # himpunan produk yang diproduksi per minggu
+df_4 = 
+  df_4 %>% 
+  mutate(pakai_gula = Gula_1 + Gula_2 + Gula_3 + Gula_4 + Gula_5 + Gula_6)
+
+p_hat = df_4$code_product[df_4$pakai_gula >= 2]
+p_dot = df_4$code_product[df_4$pakai_gula == 1]
+
+  
 P1 = df_4$code_product[df_4$w1>0]
 P2 = df_4$code_product[df_4$w2>0]
 P3 = df_4$code_product[df_4$w3>0]
@@ -64,7 +74,7 @@ for(k in 1:6){
 maxcap = 1427 * 1000
 
 # total proporsi portofolio bahan baku gula k yang ditetapkan dalam setahun
-Qk = df_1$proporsi /100 * 2100000 * 12
+Prk = df_1$proporsi /100 * 3000000 * 12
 
 # harga gula per kg
 c_k = df_1$harga_gula
@@ -89,22 +99,18 @@ d_rujukan =
             d_62 = sum(d_62)
             ) %>% 
   reshape2::melt()
-d_k2 = d_rujukan$value
+d_2k = d_rujukan$value
 
 # stok level bahan baku k di gudang pada akhir week 1
-Z_k1 = df_1$stok_akhir_bulan
+#Z_1k = df_1$stok_akhir_bulan
+Z_1k = d_2k + 1000
+
 
 # eps suatu bilangan yang kecil
 eps = 10^(-5)
 miu = 10^(-5)
 
-# bikin function yk penghubung nilai diskontinu dari variabel xk
-yk = function(xk,k){
-  yk = 
-    if(xk == 0){1} else
-    if(o_k[k] <= xk & xk <= maxcap){0}
-  return(yk)
-}
+
 
 # ==============================================================================
 
@@ -127,18 +133,13 @@ milp_new =
   add_constraint(sum_expr(x[k]) >= D,
                  k = 1:6) %>%  
   # set objective
-  set_objective(sum_expr(c_k[k] * x[k], k = 1:6),"min")
-
-result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
-get_solution(result, x[k]) 
-
-
-
+  set_objective(sum_expr(c_k[k] * x[k], k = 1:6),"min") %>% 
+  
   # variabel keputusan kedua
   # banyaknya pengiriman bahan baku gula jenis k pada awal week j
   add_variable(x_hat[k,j],type = "integer",lb = 0,
                k = 1:6,
-               j = 1:6) %>% 
+               j = 3:6) %>% 
   
   # variabel keputusan ketiga
   # gula k digunakan pada produk i pada week j
@@ -169,8 +170,9 @@ get_solution(result, x[k])
   # untuk setiap k in gula
   add_constraint(x[k] <= D * y[k],
                  k = 1:6) %>% 
-  add_constraint(x[k] >= eps * y[k],
+  add_constraint(x[k] >= o_k[k] * y[k],
                  k = 1:6) %>% 
+  
   # untuk setiap j selain 1 dan 2
   # untuk semua i dan semua k
   add_constraint(b[k,i,j] <= a[k,i,j],
@@ -182,8 +184,128 @@ get_solution(result, x[k])
                  i = 1:51,
                  k = 1:6) %>% 
   
+  # kendala III
+  add_constraint(sum_expr(x_hat[k,j],
+                          j = 3:6) == x[k],
+                 k = 1:6) %>% 
   
+  # kendala IV-a
+  add_constraint(sum_expr(a[k,i,j],
+                          k = 1:6) >= 2,
+                 i = p_hat,
+                 j = 3:6
+                 ) %>% 
+  add_constraint(sum_expr(b[k,i,j],
+                          k = 1:6) == 1,
+                 i = p_hat,
+                 j = 3:6
+                 ) %>% 
+  
+  # kendala IV-b
+  add_constraint(sum_expr(a[k,i,j],
+                          k = 1:6) == 1,
+                 i = p_dot,
+                 j = 3:6
+                 ) %>% 
+  
+  add_constraint(sum_expr(b[k,i,j],
+                          k = 1:6) == 1,
+                 i = p_dot,
+                 j = 3:6
+                 ) %>% 
+  
+  add_constraint(z[k,3] == Z_1k[k] - d_2k[k] + x_hat[k,3],
+                 k = 1:6) %>% 
+  
+  add_constraint(z[k,3] <= maxcap,
+                 k = 1:6) %>% 
+  
+  add_constraint(z[k,4] == z[k,3] + x_hat[k,4] - sum_expr(b[k,i,4] * matt_g_kij[k,i,4],
+                                                          i = 1:51),
+                 k = 1:6
+                 ) %>% 
+  
+  add_constraint(z[k,4] <= maxcap,
+                 k = 1:6) %>% 
+  
+  add_constraint(z[k,5] == z[k,4] + x_hat[k,5] - sum_expr(b[k,i,5] * matt_g_kij[k,i,5],
+                                                          i = 1:51),
+                 k = 1:6
+                 ) %>% 
+  
+  add_constraint(z[k,5] <= maxcap,
+                 k = 1:6) %>% 
+  # kendala VI
+  add_constraint(x[k] <= Prk[k])
+  
+  #add_constraint(z[k,6] == z[k,5] + x_hat[k,6] - sum_expr(b[k,i,6] * matt_g_kij[k,i,6],
+  #                                                        i = 1:51),
+  #               k = 1:6
+  #               ) %>% 
+  #add_constraint(z[k,6] <= maxcap,
+  #               k = 1:6) %>% 
+
+  
+  
+  
+result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
+solusi_1 = get_solution(result, x[k]) %>% as.data.frame() 
+solusi_2 = get_solution(result, x_hat[k,j]) %>% as.data.frame() 
+solusi_3 = get_solution(result, z[k,j]) %>% as.data.frame() 
+get_solution(result, y[k]) 
+get_solution(result, a[k,i,j]) 
+get_solution(result, b[k,i,j]) 
+
+# ==============================================================================
+# save ke sini dulu
+library(expss)
+library(openxlsx)
+
+# kita bikin workbook-nya
+wb = createWorkbook()
+
+# lalu saya buat variabel bernama tabel_all
+# berisi list dari semua tabel yang telah kita buat bersama-sama
+tabel_all = list("Data Spek Bahan Baku",
+                 df_1,
+                 "Data Kebutuhan Bahan Baku Pada Bulan May",
+                 df_4,
+                 "kebutuhan gula di bulan perencanaan w3-w6",
+                 D,
+                 "max kapasitas",
+                 maxcap,
+                 "total proporsi portofolio bahan baku gula k yang ditetapkan dalam setahun",
+                 Prk,
+                 "Demand gula pada w1-w2",
+                 d_2k,
+                 "stok level bahan baku k di gudang pada akhir week 1",
+                 Z_1k
+                 )
+
+# bikin sheet
+nama_sheet = paste0("Raw Data")
+sh = addWorksheet(wb, nama_sheet)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
+# berisi list dari semua tabel yang telah kita buat bersama-sama
+tabel_all = list("Hasil x_k",
+                 solusi_1,
+                 "Hasil x_cap",
+                 solusi_2,
+                 "Hasil z_k",
+                 solusi_3)
+
+# bikin sheet
+nama_sheet = paste0("Hasil")
+sh = addWorksheet(wb, nama_sheet)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
 
 
+# export ke Excel
+saveWorkbook(wb, "data mentah dan hasil.xlsx", overwrite = TRUE)
 
 
