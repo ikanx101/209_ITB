@@ -1,26 +1,36 @@
 ---
-title: "Optimization of E-Commerce Product Discount Portfolio Using Modified Dynamic Spiral Optimization Algorithm"
+title: Optimization of E-Commerce Product Discount Portfolio Using Modified Dynamic
+  Spiral Optimization Algorithm
 author: "Mohammad Rizka Fadhli"
-date: |
-  | Department of Computational Science, Natural Sciences Faculty, 
-  | Institut Teknologi Bandung
-  | Jalan Ganesha No. 10 Bandung, West Java, Indonesia
-  | Corresponding author's email: 20921004@mahasiswa.itb.ac.id
-affiliation: ITB
-fontsize: 12pt
-output: 
+date: "| Department of Computational Science, Natural Sciences Faculty, \n| Institut
+  Teknologi Bandung\n| Jalan Ganesha No. 10 Bandung, West Java, Indonesia\n| Corresponding
+  author's email: 20921004@mahasiswa.itb.ac.id\n"
+output:
   pdf_document:
-    number_sections: false
-    toc: false
+    number_sections: no
+    toc: no
     fig_width: 7
     fig_height: 4
-    fig_caption: true
+    fig_caption: yes
     highlight: breezedark
+  word_document:
+    toc: no
+fontsize: 12pt
+affiliation: ITB
 bibliography: references.bib
 csl: academic-psychiatry.csl
 linestretch: 1.25
-colorlinks: true
-abstract: The development of the digital economy market in Indonesia is growing every year. As a result, marketplaces have to compete with each other to get consumers. Blibli.com is one of the pioneer marketplace in Indonesia has strategy to provide additional discounts on listed products. Product discount portfolio problem is a Binary Linear Programming (BLP) problem with a decision variable in the form of a binary number that states whether a product is eligible for a discount or not. With many decision variables involved, we developed metaheuristic approaches Spiral Dynamic Optimization Algorithm (SDOA) to solve the optimization problem. The SDOA solution is proven to be more optimal (generates higher revenur) than the existing Blibli.com solution by average $9.8 \%$.
+colorlinks: yes
+abstract: The development of the digital economy market in Indonesia is growing every
+  year. As a result, marketplaces have to compete with each other to get consumers.
+  Blibli.com is one of the pioneer marketplace in Indonesia has strategy to provide
+  additional discounts on listed products. Product discount portfolio problem is a
+  Binary Linear Programming (BLP) problem with a decision variable in the form of
+  a binary number that states whether a product is eligible for a discount or not.
+  With many decision variables involved, we developed metaheuristic approaches Spiral
+  Dynamic Optimization Algorithm (SDOA) to solve the optimization problem. The SDOA
+  solution is proven to be more optimal (generates higher revenur) than the existing
+  Blibli.com solution by average $9.8 \%$.
 header-includes:
 - \usepackage{fancyhdr}
 - \pagestyle{fancy}
@@ -45,7 +55,7 @@ BliBli.com is one of the pioneer and top marketplace in Indonesia. To win the co
 
 The problem is determining which products need to be given an additional discount. This problem is one of the binary linear programming (BLP) forms: choosing the right product to maximize sales with a constraint limited discount budget in a certain period. Binary programming is a form of an optimization method in which the variables involved are binary numbers. The main characteristic of BLP is the matching process between indexes [@lieberman]. One of the studies related to BLP is the matching process to determine the placement of phasor measuring units in a power system [@suresh]. Another study used BLP to optimize the selection of 100 marketing channels and activities against millions of customers [@ieee]. The goal is to optimize the marketing messages delivery so that sales increase. Business-related and consumer-centric optimization problems have not been widely published in journals.
 
-At least we can use two methods to solve BLP: the exact method and the meta-heuristic method. Meta-heuristic methods are developing rapidly that several algorithms can quickly solve optimization problems. The meta-heuristic algorithm such as SDOA can solve BLP in a small number of decision variables involved. SDOA is an algorithm inspired by spiral motion in natural events. The rotation matrix is​an algebraic principle closely related to SDOA [@tamura]. SDOA is proven to be used to solve BLP problems by modifying the existing objective function and constraints [@kun]. The basic idea is to turn a constrained problem into an unconstrained problem by creating a penalty function.
+At least we can use two methods to solve BLP: the exact method and the meta-heuristic method. Meta-heuristic methods are developing rapidly that several algorithms can quickly solve optimization problems. The meta-heuristic algorithm such as SDOA can solve BLP in a small number of decision variables involved. SDOA is an algorithm inspired by spiral motion in natural events. The rotation matrix is an algebraic principle closely related to SDOA [@tamura]. SDOA is proven to be used to solve BLP problems by modifying the existing objective function and constraints [@kun]. The basic idea is to turn a constrained problem into an unconstrained problem by creating a penalty function.
 
 In another study, researchers made an adaptive linear SDOA by changing the value of the contraction constant into a specific function that depends on the function value of each candidate solution [@sdoa2]. The latest study in 2022 conducted a thorough review, including making several improvements to SDOA [@sdoa3], such as:
 
@@ -122,8 +132,6 @@ OUTPUT:
 ```
 
 One of the crucial processes in SDOA is to rotate candidate solutions using a rotation matrix. In this case, one candidate solution is a vector of size 1 $\times$ 100 while the rotation matrix is of size 100 $\times$ 100. This process is quite computationally burdensome, especially since the number of candidate solutions used is relatively large. Therefore, we need to modify this rotation process by using matrix multiplication partitioning in linear algebra.
-
-Modifikasi seperti ini memungkinkan 
 
 Vector b is 1 $\times$ n, and matrix A is n $\times$ n. Both can be divided into two, namely:
 
