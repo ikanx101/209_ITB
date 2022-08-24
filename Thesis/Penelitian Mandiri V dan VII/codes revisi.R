@@ -131,7 +131,7 @@ c_k = df_1$harga_gula
 o_k = df_1$min_order
 
 # max kapasitas
-maxcap = 1427 * 1000
+maxcap = 1427 * 1000 * 10
 
 # total bahan baku k yang dibutuhkan pada week 1 dan 2
 d_rujukan = 
@@ -150,20 +150,23 @@ d_rujukan =
             d_62 = sum(d_62)
   ) %>% 
   reshape2::melt()
-d_2k = d_rujukan$value
+d_2k = d_rujukan$value/2
 
 # total proporsi portofolio bahan baku gula k yang ditetapkan dalam setahun
 Prk = df_1$proporsi /100 * 3000000 * 12
 
 # stok level bahan baku k di gudang pada akhir week 1
-#Z_1k = df_1$stok_akhir_bulan
 Z_1k = df_1$stok_akhir_bulan
 
 
-# eps suatu bilangan yang kecil
-eps = 10^(-5)
+# miu suatu bilangan yang kecil
 miu = 10^(-5)
 
+# x_hat_1k untuk k di G
+# banyak gula yang dikirim pada minggu 1
+x_hat_1k = sample(10:40,6) * 200
+# banyak gula yang dikirim pada minggu 2
+x_hat_2k = sample(10:40,6) * 200
 
 
 # ==============================================================================
@@ -200,8 +203,17 @@ milp_new =
   # variabel keputusan II
   # banyaknya pengiriman bahan baku gula jenis k pada awal week j
   add_variable(x_hat[j,k],type = "integer",lb = 0,
-               j = M_hat,
+               j = M,
                k = G) %>% 
+  
+  # kita buat constraint agar x_hat[1,k] jadi x_hat_1k
+  add_constraint(x_hat[j,k] == x_hat_1k[k],
+                 j = 1,
+                 k = G) %>% 
+  # kita buat constraint agar x_hat[2,k] jadi x_hat_2k
+  add_constraint(x_hat[j,k] == x_hat_2k[k],
+                 j = 2,
+                 k = G) %>% 
   
   # ============================================================================
   # variabel keputusan III
@@ -222,8 +234,13 @@ milp_new =
   # ============================================================================
   #  stok level bahan baku k di akhir week j
   add_variable(z[j,k],type = "continuous",lb = 0,
-               j = M_hat,
+               j = M,
                k = G) %>% 
+  
+  # kita buat constraint agar z_1k sama dengan yang distate di parameter
+  add_constraint(z[j,k] == Z_1k[k],
+                 j = 1,
+                 k = G) %>% 
   
   # ============================================================================
   # constraint (3)
@@ -232,10 +249,23 @@ milp_new =
                  k = G) %>% 
   
   # ============================================================================
-  # constraint (4)
+  # constraint (4) berlaku pada j = M_hat
+  # week 3
   #add_constraint(sum_expr(x_hat[j,k],
-  #                        k = G) >= Dj[j],
-  #               j = M_hat) %>% 
+  #                        k = G) <= Dj[3],
+  #               j = 3) %>% 
+  # week 4
+  #add_constraint(sum_expr(x_hat[j,k],
+  #                        k = G) <= Dj[4],
+  #               j = 4) %>% 
+  # week 5
+  #add_constraint(sum_expr(x_hat[j,k],
+  #                        k = G) <= Dj[5],
+  #               j = 5) %>%
+  # week 6
+  #add_constraint(sum_expr(x_hat[j,k],
+  #                        k = G) <= Dj[6],
+  #               j = 6) %>% 
   
   
   # ============================================================================
@@ -376,7 +406,52 @@ milp_new =
                           k = G) == 1,
                  j = 6,
                  i = P6) %>% 
+  
+  # ============================================================================
+  # constraint (11) pada bagian 1
+  # ini untuk menghitung saldo pada week 2 
+  add_constraint(z[j,k] == z[1,k] + x_hat[1,k] - d_2k[k],
+                 j = 2,
+                 k = G) %>% 
+  # ini agar si z[2,k] gak lebih dari maxcap
+  add_constraint(sum_expr(z[j,k],
+                          k = G) <= maxcap,
+                 j = 2) %>% 
+  
+  # constraint (11) pada bagian 2
+  # week 3
+  # ini untuk menghitung saldo pada week 3
+  add_constraint(z[3,k] == z[2,k] + x_hat[2,k] - sum_expr(b[i,3,k] * matt_g_ijk[i,3,k],
+                                                          i = P3),
+                 k = G) %>% 
 
+  # ini agar si z[3,k] gak lebih dari maxcap
+  add_constraint(sum_expr(z[j,k],
+                          k = G) <= maxcap,
+                 j = 3) %>% 
+  
+  # week 4
+  # ini untuk menghitung saldo pada week 4
+  add_constraint(z[4,k] == z[3,k] + x_hat[3,k] - sum_expr(b[i,4,k] * matt_g_ijk[i,4,k],
+                                                          i = P4),
+                 k = G) %>% 
+  
+  # ini agar si z[4,k] gak lebih dari maxcap
+  add_constraint(sum_expr(z[j,k],
+                          k = G) <= maxcap,
+                 j = 4) %>% 
+  
+  # week 5
+  # ini untuk menghitung saldo pada week 5
+  add_constraint(z[5,k] == z[4,k] + x_hat[4,k] - sum_expr(b[i,5,k] * matt_g_ijk[i,5,k],
+                                                          i = P5),
+                 k = G) %>% 
+  
+  # ini agar si z[5,k] gak lebih dari maxcap
+  add_constraint(sum_expr(z[j,k],
+                          k = G) <= maxcap,
+                 j = 5) %>% 
+  
   # ============================================================================
   # set objective
   set_objective(sum_expr(c_k[k] * x[k], k = G),"min")
@@ -389,13 +464,23 @@ solusi_2 = get_solution(result, x_hat[j,k]) %>% as.data.frame()
 solusi_3 = get_solution(result, z[j,k]) %>% as.data.frame() 
 
 solusi_1
-solusi_2
+solusi_2 %>% filter(j %in% M_hat) %>%  group_by(k) %>% summarise(sum(value)) %>% ungroup()
 solusi_3
 
   
 get_solution(result, y[k]) 
 get_solution(result, a[i,j,k]) 
 get_solution(result, b[i,j,k]) 
+
+
+
+
+solusi_2 %>% 
+  group_by(j) %>% 
+  summarise(total = sum(value)) %>% 
+  ungroup()
+
+Dj
 
 # ==============================================================================
 # save ke sini dulu
