@@ -6,46 +6,155 @@ library(openxlsx)
 # kita bikin workbook-nya
 wb = createWorkbook()
 
+solusi_1 = get_solution(result, x[k]) %>% as.data.frame() 
+solusi_2 = get_solution(result, x_hat[j,k]) %>% as.data.frame()  
+solusi_3 = get_solution(result, z[j,k]) %>% as.data.frame() 
+solusi_4 = get_solution(result, a[i,j,k]) %>% as.data.frame()
+solusi_5 = get_solution(result, b[i,j,k]) %>% as.data.frame()
+
+
 # lalu saya buat variabel bernama tabel_all
 # berisi list dari semua tabel yang telah kita buat bersama-sama
-tabel_all = list("Data Spek Bahan Baku",
-                 df_1,
-                 "Data Kebutuhan Bahan Baku Pada Bulan May",
-                 df_4,
-                 "kebutuhan gula di bulan perencanaan w3-w6",
-                 D,
-                 "max kapasitas",
-                 maxcap,
-                 "total proporsi portofolio bahan baku gula k yang ditetapkan dalam setahun",
-                 Prk,
-                 "Demand gula pada w1-w2",
-                 d_2k,
-                 "stok level bahan baku k di gudang pada akhir week 1",
-                 Z_1k
+tabel_all = list("Hasil x_k -- total gula k yang dibeli",
+                 solusi_1,
+                 "Hasil x_hat_jk -- total gula k yang dikirim pada minggu j. Notes: x_hat_1k dan x_hat_2k didapat dari parameter",
+                 solusi_2,
+                 "Hasil z_jk -- stok gula k pada akhir minggu j. Notes: z_1k adalah parameter",
+                 solusi_3,
+                 "Hasil a_ijk -- terisi 1 jika produk i menggunakan gula k pada minggu j",
+                 solusi_4,
+                 "Hasil b_ijk -- proporsi gula k yang digunakan pada produk i di minggu j",
+                 solusi_5
+                )
+
+# bikin sheet
+nama_sheet = paste0("Hasil Run Codes")
+sh = addWorksheet(wb, nama_sheet)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("x_hat_jk")
+sh = addWorksheet(wb, nama_sheet)
+
+tabel = 
+  solusi_2 %>% 
+  select(j,k,value) %>% 
+  reshape2::dcast(k~j,
+                  value.var = "value") %>% 
+  rename(jenis_gula = k,
+         w1 = `1`,
+         w2 = `2`,
+         w3 = `3`,
+         w4 = `4`,
+         w5 = `5`,
+         w6 = `6`)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel, wb, sh)
+
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("z_jk")
+sh = addWorksheet(wb, nama_sheet)
+
+tabel = 
+  solusi_3 %>% 
+  select(j,k,value) %>% 
+  reshape2::dcast(k~j,
+                  value.var = "value") %>% 
+  rename(jenis_gula = k,
+         w1 = `1`,
+         w2 = `2`,
+         w3 = `3`,
+         w4 = `4`,
+         w5 = `5`,
+         w6 = `6`)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel, wb, sh)
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("a_ijk")
+sh = addWorksheet(wb, nama_sheet)
+
+temporary = 
+  solusi_4 %>% 
+  select(i,j,k,value) %>% 
+  group_split(j)
+
+tabel_all = list(
+  "Penggunaan pada w3",
+  temporary[[1]] %>% reshape2::dcast(i ~ k,value.var = "value") %>% rename(produk = i,
+                                                                           gula_1 = `1`,gula_2 = `2`,
+                                                                           gula_3 = `3`,gula_4 = `4`,
+                                                                           gula_5 = `5`,gula_6 = `6`),
+  
+  "Penggunaan pada w4",
+  temporary[[2]] %>% reshape2::dcast(i ~ k,value.var = "value") %>% rename(produk = i,
+                                                                           gula_1 = `1`,gula_2 = `2`,
+                                                                           gula_3 = `3`,gula_4 = `4`,
+                                                                           gula_5 = `5`,gula_6 = `6`),
+  
+  "Penggunaan pada w5",
+  temporary[[3]] %>% reshape2::dcast(i ~ k,value.var = "value") %>% rename(produk = i,
+                                                                           gula_1 = `1`,gula_2 = `2`,
+                                                                           gula_3 = `3`,gula_4 = `4`,
+                                                                           gula_5 = `5`,gula_6 = `6`),
+  
+  "Penggunaan pada w6",
+  temporary[[4]] %>% reshape2::dcast(i ~ k,value.var = "value") %>% rename(produk = i,
+                                                                           gula_1 = `1`,gula_2 = `2`,
+                                                                           gula_3 = `3`,gula_4 = `4`,
+                                                                           gula_5 = `5`,gula_6 = `6`)
 )
 
-# bikin sheet
-nama_sheet = paste0("Raw Data")
-sh = addWorksheet(wb, nama_sheet)
-
 # masukin semua tabel ke sheet tersebut
 xl_write(tabel_all, wb, sh)
 
-# berisi list dari semua tabel yang telah kita buat bersama-sama
-tabel_all = list("Hasil x_k",
-                 solusi_1,
-                 "Hasil x_cap",
-                 solusi_2,
-                 "Hasil z_k",
-                 solusi_3)
 
+# ==============================================================================
 # bikin sheet
-nama_sheet = paste0("Hasil")
+nama_sheet = paste0("b_ijk")
 sh = addWorksheet(wb, nama_sheet)
+
+temporary = 
+  solusi_5 %>% 
+  select(i,j,k,value) %>% 
+  group_split(j)
+
+tabel_all = list(
+  "Penggunaan pada w3",
+  temporary[[1]] %>% reshape2::dcast(i ~ k,value.var = "value") %>% rename(produk = i,
+                                                                           gula_1 = `1`,gula_2 = `2`,
+                                                                           gula_3 = `3`,gula_4 = `4`,
+                                                                           gula_5 = `5`,gula_6 = `6`),
+  
+  "Penggunaan pada w4",
+  temporary[[2]] %>% reshape2::dcast(i ~ k,value.var = "value") %>% rename(produk = i,
+                                                                           gula_1 = `1`,gula_2 = `2`,
+                                                                           gula_3 = `3`,gula_4 = `4`,
+                                                                           gula_5 = `5`,gula_6 = `6`),
+  
+  "Penggunaan pada w5",
+  temporary[[3]] %>% reshape2::dcast(i ~ k,value.var = "value") %>% rename(produk = i,
+                                                                           gula_1 = `1`,gula_2 = `2`,
+                                                                           gula_3 = `3`,gula_4 = `4`,
+                                                                           gula_5 = `5`,gula_6 = `6`),
+  
+  "Penggunaan pada w6",
+  temporary[[4]] %>% reshape2::dcast(i ~ k,value.var = "value") %>% rename(produk = i,
+                                                                           gula_1 = `1`,gula_2 = `2`,
+                                                                           gula_3 = `3`,gula_4 = `4`,
+                                                                           gula_5 = `5`,gula_6 = `6`)
+)
 
 # masukin semua tabel ke sheet tersebut
 xl_write(tabel_all, wb, sh)
-
 
 # export ke Excel
-saveWorkbook(wb, "data mentah dan hasil.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "data hasil v2.xlsx", overwrite = TRUE)

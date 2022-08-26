@@ -337,38 +337,6 @@ solusi_1 = get_solution(result, x[k]) %>% as.data.frame()
 solusi_2 = get_solution(result, x_hat[j,k]) %>% as.data.frame() 
 solusi_3 = get_solution(result, z[j,k]) %>% as.data.frame() 
 
-# semua solusi
-solusi_1
-
-# liat x_hat di minggu perencanaan harus sama dengan solusi 1
-solusi_2 %>% filter(j %in% M_hat) %>%  group_by(k) %>% summarise(sum(value)) %>% ungroup()
-
-# x hat
-solusi_2
-
-
-# lihat stok total
-solusi_3 
-
-# lihat stok pada week 1
-solusi_3 %>% filter(j == 1)
-
-# lihat stok pada week 2
-solusi_3 %>% filter(j == 2) 
-
-# lihat stok pada week 3
-solusi_3 %>% filter(j == 3)
-
-# lihat stok pada week 4
-solusi_3 %>% filter(j == 4)
-
-# lihat stok pada week 5
-solusi_3 %>% filter(j == 5)
-
-# lihat stok pada week 6
-solusi_3 %>% filter(j == 6)
-
-  
 b = get_solution(result, b[i,j,k]) 
 
 # ===========================================================================
@@ -473,3 +441,6 @@ b_ %>% mutate(total = value * g_ijk) %>% group_by(k) %>% summarise(demand = sum(
 
 # bandingkan dengan stok pada week 4 hasil model
 solusi_3 %>% filter(j == 6) %>% .$value
+
+
+source("3 export hasil ke excel.R")

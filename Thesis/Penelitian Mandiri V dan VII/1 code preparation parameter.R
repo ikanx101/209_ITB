@@ -70,7 +70,7 @@ Dj = c(0,0,Dj)
 D = sum(Dj[3:6])
 
 # harga gula per kg
-c_k = df_1$harga_gula
+c_k = df_1$cost_obj_func
 
 # min order quantity
 o_k = df_1$min_order
