@@ -11,7 +11,7 @@ solusi_2 = get_solution(result, x_hat[j,k]) %>% as.data.frame()
 solusi_3 = get_solution(result, z[j,k]) %>% as.data.frame() 
 solusi_4 = get_solution(result, a[i,j,k]) %>% as.data.frame()
 solusi_5 = get_solution(result, b[i,j,k]) %>% as.data.frame()
-
+solusi_6 = get_solution(result, tot[k]) %>% as.data.frame()
 
 # lalu saya buat variabel bernama tabel_all
 # berisi list dari semua tabel yang telah kita buat bersama-sama
@@ -30,6 +30,30 @@ tabel_all = list("Hasil x_k -- total gula k yang dibeli",
 # bikin sheet
 nama_sheet = paste0("Hasil Run Codes")
 sh = addWorksheet(wb, nama_sheet)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("hasil obj function")
+sh = addWorksheet(wb, nama_sheet)
+
+# kita buat dulu tabel fungsi objective-nya
+temp_obj_1 = solusi_1 %>% select(k,value) %>% rename(x_k = value) %>% mutate(c_k = c_k,
+                                                                             `x_k * c_k` = x_k * c_k)
+temp_obj_2 = solusi_6 %>% select(k,value) %>% rename(total_z_k = value)
+temp_obj = merge(temp_obj_1,temp_obj_2) 
+
+tot_xk_ck = sum(temp_obj$`x_k * c_k`)
+tot_zk = sum(temp_obj$total_z_k)
+hasil = tot_xk_ck + tot_zk
+
+tabel_all = list(
+  "Berikut adalah summary tabel hasil fungsi objective:",
+  temp_obj,
+  "Total nilai Fungsi Objective:",
+  paste0("F = ",tot_xk_ck," + ",tot_zk," = ",hasil))
 
 # masukin semua tabel ke sheet tersebut
 xl_write(tabel_all, wb, sh)
@@ -157,4 +181,4 @@ tabel_all = list(
 xl_write(tabel_all, wb, sh)
 
 # export ke Excel
-saveWorkbook(wb, "data hasil v2.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "data hasil v4.xlsx", overwrite = TRUE)

@@ -302,24 +302,35 @@ milp_new =
                  j = M) %>% 
   
   # ============================================================================
+  # modifikasi dari constraint (4)
+  # week 3
   add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
                                                         i = P3),
                  j = 3) %>% 
   
+  # week 4
   add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
                                                          i = P4),
                  j = 4) %>% 
   
+  # week 5
   add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
                                                          i = P5),
                  j = 5) %>% 
   
+  # week 6
   add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
                                                         i = P6),
                  j = 6) %>% 
   
+  # ============================================================================
+  # modifikasi untuk menambahkan total z_jk ke dalam objective function
+  add_variable(tot[k],type = "continuous",lb = 0,k = G) %>%
+  add_constraint(tot[k] == sum_expr(z[j,k],j = M_hat),
+                 k = G) %>% 
   
-  set_objective(sum_expr(c_k[k] * x[k], k = G),"min")
+  # objective function
+  set_objective(sum_expr(c_k[k] * x[k] + tot[k], k = G),"min")
 
 
 
@@ -444,3 +455,4 @@ solusi_3 %>% filter(j == 6) %>% .$value
 
 
 source("3 export hasil ke excel.R")
+
