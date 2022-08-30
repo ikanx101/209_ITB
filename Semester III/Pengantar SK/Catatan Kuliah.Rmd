@@ -1,0 +1,140 @@
+---
+title: "SK500x PENGANTAR SAINS KOMPUTASI"
+subtitle: | 
+    | Catatan Kuliah
+    | Menggunakan R
+author: | 
+    | Ikang FADHLI
+    | ikanx101.com
+date: "`r format(Sys.time(), '%d %B %Y')`"
+fontsize: 12pt
+output: 
+  pdf_document:
+    number_sections: true
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: tango
+header-includes:
+- \usepackage{fancyhdr}
+- \pagestyle{fancy}
+- \fancyfoot[CO,CE]{20921004@mahasiswa.itb.ac.id}
+- \fancyfoot[LE,RO]{hal \thepage}  
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(ggplot2)
+
+options(scipen = 999)
+
+rm(list=ls())
+```
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+
+# Pertemuan I {.unnumbered .unlisted}
+
+# _Unconstrained Growth and Decay_
+
+Pada pembahasan kali ini kita akan membahas model dimana _rate_ perubahan itu proporsional dengan kondisi sekarang. Sebelumnya, mari kita bahas konsep dasar tentang __perubahan__ sebagai berikut:
+
+## Konsep Dasar
+
+### _Rate of Change_
+
+Misalkan dalam suatu gerak benda, $y$ menandakan posisi dinotasikan sebagai fungsi $(s)$ terhadap waktu $(t)$.
+
+Misalkan suatu mobil bergerak dari $t=0$ h pada $s(0) = 0$ km sampai $t=10$ h, $s(10) = 70$ km.
+
+__Rata-rata kecepatan__ bisa didefinisikan sebagai perubahan posisi $(\Delta s)$ terhadap perubahan waktu $(\Delta t)$. Pada kasus di atas:
+
+$$
+\text{average velocity} = \frac{\Delta s}{\Delta t} = \frac{70 - 0}{10 - 0} = 7 \frac{km}{h}
+$$
+
+Jika kita memperkecil perubahan $\Delta$, kita akan dapatkan ___instantaneous rate of change___.
+
+### _Instantaneous Rate of Change_
+
+Dari sini baru muncul yang namanya _derivative_ atau turunan.
+
+## _Differential Equation_
+
+Kita diperkenalkan kepada __Malthusian Model__ untuk pertumbuhan penduduk, yakni:
+
+$$
+\frac{dP}{dt} \sim P
+$$
+
+$$
+\frac{dP}{dt} = rP, \\
+r \text{ is growth rate}
+$$
+
+
+### Contoh Kasus
+
+Misalkan pada $t=0$, populasi bakteri ada sebanyak 100 dengan _instantaneous growth rate_ sebesar $10 \%$ di mana unit waktu yang digunakan adalah jam. Kita bisa tuliskan:
+
+$$
+\frac{dP}{dt} = 0.1P, P(0) = 100
+$$
+
+## _Finite Difference Equation_
+
+Komputer tidak bisa menyelesaikan masalah kontinu, oleh karena itu dibutuhkan pendekatan diskrit. Maka untuk kasus model di atas, kita bisa membuat persamaan beda agar kita bisa menghitungnya.
+
+Bentuk umumnya adalah sebagai berikut:
+
+$$
+\text{new value} = \text{old values} + \text{change in value}
+$$
+
+### Algoritma
+
+```
+initialize
+  sim_length
+  population
+  rate
+  dt
+compute:
+  rate_per_step = rate * dt
+  num_iter = sim_length / dt
+for i: 1 to num_iter
+  population = population + rate_per_step * population
+  t = i * dt
+  print(t, population)
+```
+
+### Penyelesaian Contoh Kasus
+
+Kita akan selesaikan contoh kasus dengan algoritma yang ada pada bagian sebelumnya.
+
+```{r,warning=FALSE,message=FALSE}
+# define
+sim_length = 1
+population = 100
+rate = 0.1
+dt = .05
+
+# compute
+rate_per_step = rate * dt
+num_iter = sim_length / dt
+
+for(i in 1:num_iter){
+  population = population + rate_per_step * population
+  t = i*dt
+  print(paste("Populasi = ",population," pada t = ",t))
+}
+```
+
