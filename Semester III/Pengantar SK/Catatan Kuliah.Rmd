@@ -171,7 +171,7 @@ hasil %>%
   geom_line(color = "steelblue") +
   labs(title = "Hasil Simulasi Pertumbuhan Bakteri",
        subtitle = "Menggunakan Metode Beda",
-       x = "Time",
+       x = "Time (hours)",
        y = "Population") +
   theme_classic()
 ```
