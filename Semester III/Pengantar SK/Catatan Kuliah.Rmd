@@ -138,3 +138,45 @@ for(i in 1:num_iter){
 }
 ```
 
+
+Berikut adalah hasil simulasi untuk $t$ yang lebih panjang lagi.
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE,fig.align='center',fig.retina=10,fig.cap="Hasil Simulasi Pertumbuhan Bakteri"}
+rm(list=ls())
+# define
+sim_length = 30
+population = 100
+rate = 0.1
+dt = .005
+
+# compute
+rate_per_step = rate * dt
+num_iter = sim_length / dt
+
+hasil = data.frame(pop = NA,
+                   t = NA)
+hasil[1,] = list(population,0)
+j = 2
+
+for(i in 1:num_iter){
+  population = population + rate_per_step * population
+  t = i*dt
+  hasil[j,] = list(population,t)
+  j = j+1
+}
+
+hasil %>% 
+  ggplot(aes(x = t,
+             y = pop)) +
+  geom_line(color = "steelblue") +
+  labs(title = "Hasil Simulasi Pertumbuhan Bakteri",
+       subtitle = "Menggunakan Metode Beda",
+       x = "Time",
+       y = "Population") +
+  theme_classic()
+```
+
+
+
+
+

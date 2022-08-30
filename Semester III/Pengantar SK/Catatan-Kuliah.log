@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.8.17)  30 AUG 2022 11:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.8.17)  30 AUG 2022 12:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -537,6 +537,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [5]
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf, id=96, 505.89pt x 289.08pt>
+File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
+<use Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf>
+Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf  used on input line 286.
+(pdftex.def)             Requested size: 505.90417pt x 289.0881pt.
+
+Overfull \hbox (36.14915pt too wide) in paragraph at lines 286--287
+ [][] 
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -544,23 +554,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[6] (./Catatan-Kuliah.aux)
+[6]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[7 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf>] (./Catatan-Kuliah.aux)
 Package rerunfilecheck Info: File `Catatan-Kuliah.out' has not changed.
 (rerunfilecheck)             Checksum: 579359FA5A362641BB8A7ACDF8D46104;1479.
  ) 
 Here is how much of TeX's memory you used:
- 13465 strings out of 479638
- 215132 string characters out of 5878094
- 549830 words of memory out of 5000000
- 31658 multiletter control sequences out of 15000+600000
+ 13479 strings out of 479638
+ 215732 string characters out of 5878094
+ 550886 words of memory out of 5000000
+ 31668 multiletter control sequences out of 15000+600000
  547055 words of font info for 128 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,12n,77p,1011b,488s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmro12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on Catatan-Kuliah.pdf (6 pages, 228940 bytes).
+Output written on Catatan-Kuliah.pdf (7 pages, 262306 bytes).
 PDF statistics:
- 160 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
- 29 named destinations out of 1000 (max. 500000)
- 41033 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 175 PDF objects out of 1000 (max. 8388607)
+ 139 compressed objects within 2 object streams
+ 31 named destinations out of 1000 (max. 500000)
+ 41038 words of extra memory for PDF output out of 42996 (max. 10000000)
 
