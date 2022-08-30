@@ -74,7 +74,8 @@ tabel =
          w3 = `3`,
          w4 = `4`,
          w5 = `5`,
-         w6 = `6`)
+         w6 = `6`) %>% 
+  janitor::adorn_totals()
 
 # masukin semua tabel ke sheet tersebut
 xl_write(tabel, wb, sh)
@@ -96,10 +97,17 @@ tabel =
          w3 = `3`,
          w4 = `4`,
          w5 = `5`,
-         w6 = `6`)
+         w6 = `6`) %>% 
+  janitor::adorn_totals()
+
+tabel_all = list(
+  "Tabel z_jk",
+  tabel,
+  paste0("Perhatikan bahwa maxcap adalah sebesar: ",maxcap)
+)
 
 # masukin semua tabel ke sheet tersebut
-xl_write(tabel, wb, sh)
+xl_write(tabel_all, wb, sh)
 
 # ==============================================================================
 # bikin sheet
@@ -180,5 +188,43 @@ tabel_all = list(
 # masukin semua tabel ke sheet tersebut
 xl_write(tabel_all, wb, sh)
 
+
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("Cek pers 4 Dj")
+sh = addWorksheet(wb, nama_sheet)
+
+tabel_1 = 
+  solusi_3 %>% 
+  select(j,k,value) %>% 
+  rename(z_jk = value)
+
+tabel_2 = 
+  solusi_2 %>% 
+  select(j,k,value) %>% 
+  rename(x_hat_jk = value)
+
+hasil_z_x_hat = 
+  merge(tabel_1,tabel_2) %>% 
+  group_by(j) %>% 
+  summarise(total_z_j = sum(z_jk),
+            total_x_hat_j = sum(x_hat_jk)) %>% 
+  ungroup() %>% 
+  mutate(`total z_j dan x_hat_j` = total_z_j + total_x_hat_j)
+
+tabel_Dj = data.frame(j = 3:6,
+                      Dj = Dj[3:6])
+
+tabel_all = list(
+  "Total hasil z_jk dan x_hat_jk",
+  hasil_z_x_hat,
+  "Total Dj pada j = M_hat",
+  tabel_Dj
+)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
 # export ke Excel
-saveWorkbook(wb, "data hasil v4.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "data hasil v5.xlsx", overwrite = TRUE)

@@ -43,7 +43,8 @@ G = 1:6
 Prk = df_1$proporsi /100 * 3000000 * 12
 
 # miu suatu bilangan yang kecil
-miu = 10^(-6)
+#miu = 10^(-6)
+miu = 10^(-10)
 
 
 
@@ -303,30 +304,39 @@ milp_new =
   
   # ============================================================================
   # modifikasi dari constraint (4)
+
   # week 3
-  add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                        i = P3),
-                 j = 3) %>% 
+  #add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+  #                                                      i = P3),
+  #               j = 3) %>% 
+  
+  # week all
+  add_constraint(sum_expr(z[(j-1),k] + x_hat[(j-1),k],
+                          k = G) >= Dj[j],
+                 j = M_hat) %>% 
+  
+  
   
   # week 4
-  add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                         i = P4),
-                 j = 4) %>% 
+  #add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+  #                                                       i = P4),
+  #               j = 4) %>% 
   
   # week 5
-  add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                         i = P5),
-                 j = 5) %>% 
+  #add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+  #                                                       i = P5),
+  #               j = 5) %>% 
   
   # week 6
-  add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                        i = P6),
-                 j = 6) %>% 
+  #add_constraint(z[(j-1),k] + x_hat[(j-1),k] >= sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+  #                                                      i = P6),
+  #               j = 6) %>% 
   
   # ============================================================================
   # modifikasi untuk menambahkan total z_jk ke dalam objective function
   add_variable(tot[k],type = "continuous",lb = 0,k = G) %>%
-  add_constraint(tot[k] == sum_expr(z[j,k],j = M_hat),
+  add_constraint(tot[k] == sum_expr(z[j,k],
+                                    j = M_hat),
                  k = G) %>% 
   
   # objective function
