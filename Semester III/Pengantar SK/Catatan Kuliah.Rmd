@@ -178,5 +178,96 @@ hasil %>%
 
 
 
+\newpage
+
+# Pertemuan II {.unnumbered .unlisted}
+
+# _Constrained Growth and Decay_
+
+Secara alamiah, pertumbuhan populasi yang bersifat eksponensial tidak tak terbatas. Karena lingkungan punya cara sendiri untuk menopang pertumbuhan populasi tersebut. Contohnya: sumber makanan yang terbatas, adanya _predator_, penyakit, dst.
+
+Pada kenyataannya, populasi akan bisa terus bertumbuh sampai ambang batas tertentu. Selanjutnya, akan selalu berada pada ambang batas tersebut.
+
+## Kapasitas Lingkungan
+
+Ukuran populasi maksimum yang bisa didukung oleh lingkungan disebut dengan __kapasitas lingkungan__ (_carrying capacity_).
+
+Kita telah mengenal model pada bagian sebelumnya:
+
+$$\frac{dP}{dt} = rP$$
+
+dimana $P_0$ adalah populasi awal.
+
+Lalu bagaimana kita memodelkan pertumbuhan terbatas dengan mengikutsertakan _carrying capacity_?
+
+## Model Terbatas
+
+Pada $t_0$, jika populasi masih berada di bawah _carrying capacity_, maka populasi masih bisa bertumbuh. Namun saat mendekat dengan CC, maka pertambahan populasi akan melambat. Semakin mendekat lagi ke CC, banyaknya kematian harus serupa dengan banyaknya kelahiran agar populasi cenderung konstan.
+
+Intinya kita perlu memodelkan pertumbuhan yang melambat.
+
+Konsepnya:
+
+```
+new population = growth - death
+```
+
+Misalkan $D$ menandakan kematian dan $M$ menandakan CC, maka:
+
+$$\frac{dD}{dt} = (\frac{rP}{M}) P$$
+
+Jika:
+
+- $P$ yang kecil, nilai $D$ akan mendekati nol.
+- $P$ yang besar, nilai $D$ akan mendekati _growth_ ($\Delta P$). Laju kematian akan sama dengan laju _growth_.
+
+Akibatnya:
+
+$$
+\frac{dP}{dt} = rP - (r \frac{P}{M}) P
+$$
+
+
+$$
+\frac{dP}{dt} = r (1 - \frac{P}{M}) P
+$$
+
+
+## Model Final Simulasi Diskrit
+
+Dengan demikian:
+
+$$
+\Delta P = (rP(t-\Delta t) \Delta t) - (r \frac{P(t-\Delta t)}{M}) P(t-\Delta t) \Delta t
+$$
+
+Persamaan ini disebut dengan __persamaan logistik__.
+
+
+## Kasus Lain
+
+Bagaimana jika $P_0 > M$ ?
+
+Maka populasi akan menurun (kematian akan lebih besar dibandingkan _growth_) hingga tercapai keseimbangan pada $M$.
+
+
+### Algoritma
+
+```
+initialize
+  sim_length
+  pop
+  rate
+  M
+  dt
+compute:
+  rate_per_step = rate * dt
+  num_iter = sim_length / dt
+for i: 1 to num_iter
+  pop = pop + rate_per_step * pop - (rate_per_step * pop / M) * pop
+  t = i * dt
+  print(t, population)
+```
+
 
 
