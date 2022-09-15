@@ -176,6 +176,102 @@ hasil %>%
   theme_classic()
 ```
 
+\newpage
+
+# Pertemuan II {.unnumbered .unlisted}
+
+# Pertumbuhan Terbatas
+
+Populasi secara teori memiliki kemampuan untuk terus bertumbuh secara eksponensial. Namun lingkungan memiliki daya dukung sehingga pertumbuhan yang terjadi menjadi terbatas. Di sini diperkenalkan konsep bernama _carrying capacity_.
+
+Pada __Model Malthus__ sebelumnya, kita miliki:
+
+$$\frac{dP}{dt} = r P$$
+
+dengan solusi analitik:
+
+$$P = P_0 e^{rt}$$
+
+di mana $P_0$ adalah populasi awal.
+
+## Model Baru dengan _Carrying Capacity_
+
+Dalam model baru, untuk populasi awal yang jauh lebih kecil dari kapasitas lingkungan, populasi akan bertambah serupa dengan model tak terbatas.
+
+Namun, seiring dengan mendekatnya ukuran populasi dengan kapasitas lingkungan, pertumbuhan akan semakin berkurang. Dekat dengan kapasitas lingkungan, banyaknya kematian harus serupa dengan banyaknya kelahiran, agar populasi cenderung konstan.
+
+Untuk memperoleh pertumbuhan yang diperlambat, kita dapat mengukur banyaknya kematian sebagai hasil kali dengan banyaknya kelahiran yang dimodelkan sebagai $r P$.
+
+Ketika populasi sangat kecil, hasil kali tersebut tersebut harusnya mendekati nol, karena hanya sedikit individu yang mati. 
+
+Ketika populasi dekat dengan kapasitas lingkungan, hasil kali tersebut haruslah mendekati satu. Jika $D$ menyatakan banyaknya kematian dan $M$ menyatakan kapasitas lingkungan, maka kita dapat memodelkan laju perubahan kematian sebagai:
+
+$$\frac{dP}{dt} = (\frac{r P}{M}) P$$
+
+Akibatnya:
+
+$$\frac{dP}{dt} = rP - (\frac{r P}{M}) P = r (1 - \frac{P}{M}) P$$
+
+_Births minus deaths_ 
+
+\newpage
+
+# Pertemuan III {.unnumbered .unlisted}
+
+# _Falling and Sky Diving_
+
+Kita akan gunakan _system dynamics_ untuk memodelkan orang yang _sky diving_ dari sebuah helikopter. Ada dua fase:
+
+1. _Free falling_,
+1. Setelah parasut terbuka.
+
+Pertama, kita akan pelajari terlebih dahulu gerak jatuh bebas (misalkan seseorang menjatuhkan bola dari suatu gedung):
+
+1. _Ignoring the friction with air_,
+1. _Taking into account the effect of kinetic friction_.
+
+### _Velocity_
+
+Perubahan instan posisi $s$ terhadap waktu $t$ disebut _velocity_.
+
+$$v(t) = \frac{ds}{dt}$$
+
+### _Acceleration_
+
+Perubahan isntan _velocity_ $v$ terhadap waktu $t$ disebut _acceleration_.
+
+$$a(t) = \frac{dv}{dt}$$
+
+## Gerak Bola Jatuh Bebas
+
+Untuk gerak bola yang jatuh bebas, kita membutuhkan kondisi awal sebagai berikut:
+
+1. Percepatan gravitasi $-9.8 \frac{m}{s^2}$.
+1. _Initial velocity_ $15 \frac{m}{s}$.
+1. _Initial position_ $11 m$.
+
+```{r}
+mass = 0.5 #kg
+acceleration_due_to_gravity = -9.81 #km/s2
+radius = 0.05 #m
+velocity = 0 #m/s ini velocity(0)
+position = 400 #m position(0)
+
+weight = mass * acceleration_due_to_gravity
+projected_area = pi * radius^2
+air_friction = -0.65 * projected_area * velocity * abs(velocity)
+total_force = weight + air_friction
+
+acceleration = total_force / mass
+
+change_in_velocity = acceleration
+change_in_position = velocity
+speed = abs(velocity)
+
+
+```
+
+
 
 
 

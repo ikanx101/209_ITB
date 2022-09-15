@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.8.17)  30 AUG 2022 12:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.3)  15 SEP 2022 08:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Catatan-Kuliah.tex
 (./Catatan-Kuliah.tex
 LaTeX2e <2022-06-01> patch level 5
-L3 programming layer <2022-08-05> (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/base/article.cls
+L3 programming layer <2022-08-30> (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
@@ -364,7 +364,7 @@ Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is usel
 Package fancyhdr Warning: \fancyfoot's `E' option without twoside option is useless on input line 105.
 
 (/home/ikanx_server/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-08-05 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2022-08-30 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count291
 \l__pdf_internal_box=\box55
 ) (./Catatan-Kuliah.aux)
@@ -537,7 +537,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [5]
-<Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf, id=96, 505.89pt x 289.08pt>
+<Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf, id=101, 505.89pt x 289.08pt>
 File: Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
 <use Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf  used on input line 286.
@@ -564,21 +564,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [7 <./Catatan-Kuliah_files/figure-latex/unnamed-chunk-2-1.pdf>] (./Catatan-Kuliah.aux)
 Package rerunfilecheck Info: File `Catatan-Kuliah.out' has not changed.
-(rerunfilecheck)             Checksum: 579359FA5A362641BB8A7ACDF8D46104;1479.
+(rerunfilecheck)             Checksum: 13DBC6ADFFEF8F12335574C3A32FB78C;1626.
  ) 
 Here is how much of TeX's memory you used:
- 13479 strings out of 479638
- 215732 string characters out of 5878094
- 550886 words of memory out of 5000000
- 31668 multiletter control sequences out of 15000+600000
+ 13488 strings out of 477035
+ 215884 string characters out of 5827629
+ 591265 words of memory out of 5000000
+ 34273 multiletter control sequences out of 15000+600000
  547055 words of font info for 128 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,12n,77p,1011b,488s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx_server/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbxi10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmro12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></home/ikanx_server/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on Catatan-Kuliah.pdf (7 pages, 262163 bytes).
+Output written on Catatan-Kuliah.pdf (7 pages, 263801 bytes).
 PDF statistics:
- 175 PDF objects out of 1000 (max. 8388607)
- 139 compressed objects within 2 object streams
- 31 named destinations out of 1000 (max. 500000)
- 41038 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 183 PDF objects out of 1000 (max. 8388607)
+ 147 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
+ 41046 words of extra memory for PDF output out of 42996 (max. 10000000)
 
