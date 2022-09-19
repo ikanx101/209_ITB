@@ -1,0 +1,262 @@
+---
+title: "PEKERJAAN RUMAH I"
+subtitle: "Pengantar Sains Komputasi"
+author: "20921004 Mohammad Rizka Fadhli"
+output: pdf_document
+linestretch: 1.5
+date: '19 September 2022'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+rm(list=ls())
+library(dplyr)
+library(ggplot2)
+```
+
+# SOAL I
+
+a. Write the differential equations for modelling competition with constrained growth for both populations.
+b. Find all equilibrium solutions to these equations.
+
+## Jawab
+
+Untuk memudahkan penulisan jawaban, saya akan mengambil contoh yang sama dengan buku yakni dua populasi WTS dan BTS.
+
+_Modelling competition_ dengan _unconstrained growth_ pada dua populasi bisa dituliskan sebagai berikut:
+
+$$\frac{dW}{dt} = r_1 W - wWB$$
+
+$$\frac{dB}{bt} = r_2 B - b BW$$
+
+Dengan:
+
+1. $W$ adalah populasi WTS.
+1. $B$ adalah populasi BTS.
+1. $r_1$ adalah _growth rate_ untuk $W$.
+1. $r_2$ adalah _growth rate_ untuk $B$.
+1. $w$ adalah _death rate_ untuk $W$ saat berinteraksi dengan $B$.
+1. $b$ adalah _death rate_ untuk $B$ saat berinteraksi dengan $W$.
+
+Untuk memodifikasi model tersebut agar menjadi ___constrained growth___ pada kedua populasi, kita memerlukan dua parameter baru, yakni _carrying capacity_ untuk kedua populasi.
+
+\newpage
+
+Misalkan:
+
+1. $M_1$ adalah _carrying capacity_ untuk WTS.
+1. $M_2$ adalah _carrying capacity_ untuk BTS.
+
+### Model _Constrained Growth_
+
+Maka berikut adalah modelnya:
+
+$$\frac{dW}{dt} = r_1 (1 - \frac{W}{M_1}) W - w WB$$
+
+$$\frac{dB}{bt} = r_2 (1 - \frac{B}{M_2}) B - b BW$$
+
+### Solusi _Equilibrium_
+
+_Equilibrium_ pada sistem persamaan diferensial di atas terjadi pada:
+
+$\frac{dW}{dt} = 0$, yakni saat _growth_ WTS sama dengan _death_ sehingga tidak ada perubahan pada laju $W$. Mari kita cari solusi _equlibrium_ pada populasi WTS:
+
+$$
+\begin{matrix}
+\frac{dW}{dt} = r_1 (1 - \frac{W}{M_1}) W - w WB = 0 \\
+r_1 (1 - \frac{W}{M_1}) W = w WB \\
+r_1 (1 - \frac{W}{M_1})  = w B \\
+r_1 = \frac{w B}{1 - \frac{W}{M_1}}
+\end{matrix}
+$$
+
+$\frac{dB}{dt} = 0$, yakni saat _growth_ BTS sama dengan _death_ sehingga tidak ada perubahan pada laju $B$. Mari kita cari solusi _equlibrium_ pada populasi BTS:
+
+$$
+\begin{matrix}
+\frac{dB}{bt} = r_2 (1 - \frac{B}{M_2}) B - b BW = 0 \\
+r_2 (1 - \frac{B}{M_2}) B = b BW \\
+r_2 (1 - \frac{B}{M_2}) = b W \\
+r_2 = \frac{b W}{1 - \frac{B}{M_2}}
+\end{matrix}
+$$
+
+### Simulasi
+
+Untuk membuktikan bahwa model yang dituliskan di atas sudah sesuai dengan kondisi yang ada, kita akan lakukan simulasi dengan beberapa parameter sebagai berikut:
+
+```{r,echo=FALSE}
+rm(list=ls())
+```
+
+```{r}
+W_0 = 20 # initial population WTS
+B_0 = 15 # initial population BTS
+w = .27 # death rate WTS
+b = .2  # death rate BTS
+M1 = 23 # carrying capacity untuk WTS
+M2 = 23 # carrying capacity untuk BTS
+r1 = 1 # growth WTS
+r2 = 1 # growth BTS
+```
+
+```{r,echo=FALSE,fig.retina=10,fig.align='center'}
+W = c(20) 
+B = c(15)
+
+t = 10
+iter = 100
+delta_t = t/iter
+bulan = c(0)
+
+for(i in 2:iter){
+  dW = r1 * (1 - (W[i-1] / M1)) * W[i-1] * delta_t - w * W[i-1] * B[i-1] * delta_t
+  W[i] = W[i-1] + dW
+  
+  dB = r2 * (1 - (B[i-1] / M2)) * B[i-1] * delta_t - b * B[i-1] * W[i-1] * delta_t
+  B[i] = B[i-1] + dB
+  
+  bulan[i] = bulan[i-1] + delta_t
+}
+
+data.frame(bulan,W,B) %>% 
+  reshape2::melt(id.vars = "bulan") %>% 
+  ggplot(aes(x = bulan,
+             y = value,
+             group = variable)) +
+  geom_line(aes(color = variable)) +
+  theme_minimal() +
+  labs(color = "Keterangan",
+       title = "Simulasi Populasi BTS dan WTS",
+       subtitle = "Menggunakan Model Kompetisi dengan Constrained Growth",
+       x = "Bulan",
+       y = "Banyak Populasi")
+
+rm(list=ls())
+```
+
+Terlihat dengan jelas bahwa populasi WTS terus menurun sedangkan populasi BTS meningkat namun akan terbatas saat populasi $BTS = 23$.
+
+\newpage
+
+# SOAL 2
+
+a. Write the differential or difference equations for predator-prey model where there is a carrying capacity $M$ for the predator.
+b. Write the algorithm that model this interaction.
+
+## Jawab
+
+Untuk memudahkan penulisan jawaban, saya akan gunakan contoh yang telah ada pada buku, yakni populasi _squirrel_ $s(t)$ dan _hawk_ $h(t)$.
+
+Bentuk umum dari _Model Lotka-Volterra_ adalah sebagai berikut:
+
+$$\frac{ds}{dt} = k_s s - k_{hs} h s$$
+
+$$\frac{dh}{dt} = k_{sh} s h - k_h h$$
+
+Kita akan memodifikasi pertumbuhan _predator_, yakni _hawk_ dengan menambahkan _carrying capacity_ $M$.
+
+### Modifikasi Model dengan _Carrying Capacity_
+
+Maka bentuk modelnya adalah sebagai berikut:
+
+$$\frac{ds}{dt} = k_s s - k_{hs} h s$$
+
+$$\frac{dh}{dt} = k_{sh} (1 - \frac{h}{M}) s h - k_h h$$
+
+### Persamaan Beda
+
+Sedangkan berikut adalah bentuk persamaan bedanya:
+
+$$\Delta s = k_s \times s(t - \Delta t) - k_{hs} \times h(t - \Delta t) \times s(t - \Delta t)$$
+
+$$\Delta h = k_{sh} \times (1 - \frac{h(t - \Delta t)}{M}) \times s(t - \Delta t) \times h(t - \Delta t) - k_h \times h(t - \Delta t)$$
+
+\newpage
+
+### Algoritma
+
+Berikut adalah algoritmanya:
+
+```
+# definisikan:
+  h(0)    # initial populasi hawk
+  s(0)    # initial populasi squirrel
+  k_s     # growth rate squirrel
+  k_hs    # death rate squirrel karena dimangsa hawk
+  k_sh    # growth rate hawk karena memangsa squirrel
+  k_h     # death rate hawk
+  M       # carrying capacity untuk hawk
+
+# untuk kebutuhan iterasi, definisikan:
+  t           # banyak waktu
+  max_iter    # banyak iterasi
+
+# hitung
+  delta_t = t / max_iter
+  
+# looping
+  for i 1 to max_iter
+      delta_s = k_s * s(i-1) * delta_t - k_hs * h(i-1) * s(i-1) * delta_t
+      s(i) = s(i-1) + delta_s
+      delta_h = k_sh * (1 - h(i-1) / M) * s(i-1) * h(i-1) * delta_t - k_h * h(i-1) * delta_t
+      h(i) = h(i-1) + delta_h
+```
+
+### Simulasi
+
+Untuk menguji algoritma di atas, kita akan lakukan simulasi dengan menggunakan paramater seperti yang ada di buku dengan penambahan parameter $M$.
+
+```{r}
+h = c(15)    # initial populasi hawk
+s = c(100)   # initial populasi squirrel
+k_s = 2      # growth rate squirrel
+k_hs = 0.02  # death rate squirrel karena dimangsa hawk
+k_sh = 0.01  # growth rate hawk karena memangsa squirrel
+k_h = 1.06   # death rate hawk
+M = 300      # carrying capacity untuk hawk
+```
+
+\newpage
+
+```{r,echo=FALSE}
+# untuk kebutuhan iterasi, definisikan:
+t = 24            # banyak waktu
+max_iter = 2000   # banyak iterasi
+bulan = c(0)
+
+# hitung
+delta_t = t / max_iter
+  
+# looping
+for(i in 2:max_iter){
+  delta_s = k_s * s[i-1] * delta_t - k_hs * h[i-1] * s[i-1] * delta_t
+  s[i] = s[i-1] + delta_s
+  delta_h = k_sh * (1 - (h[i-1] / M)) * s[i-1] * h[i-1] * delta_t - k_h * h[i-1] * delta_t
+  h[i] = h[i-1] + delta_h
+  
+  bulan[i] = bulan[i-1] + delta_t
+}
+
+df = 
+  data.frame(time = bulan,
+           squirrel = s,
+           hawk = h) 
+
+df %>% 
+  reshape2::melt(id.vars = "time") %>% 
+  ggplot(aes(x = time,
+             y = value,
+             group = variable)) +
+  geom_line(aes(color = variable)) +
+  theme_minimal() +
+  labs(color = "Keterangan",
+       title = "Simulasi Populasi Squirrel dan Hawk",
+       subtitle = "Menggunakan Model Lotka-Volterra dengan Carrying Capacity",
+       x = "Bulan",
+       y = "Banyak Populasi")
+```
+
+
+Terlihat pada simulasi di atas, populasi _squirrel_ dan _hawk_ akan menjadi konstan di akhir periode waktu.
