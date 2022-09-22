@@ -41,8 +41,6 @@ rm(list=ls())
 \listoffigures
 \newpage
 
-# Pertemuan I {.unnumbered .unlisted}
-
 # _Unconstrained Growth and Decay_
 
 Pada pembahasan kali ini kita akan membahas model dimana _rate_ perubahan itu proporsional dengan kondisi sekarang. Sebelumnya, mari kita bahas konsep dasar tentang __perubahan__ sebagai berikut:
@@ -176,9 +174,11 @@ hasil %>%
   theme_classic()
 ```
 
+
+
+\newpage
 \newpage
 
-# Pertemuan II {.unnumbered .unlisted}
 
 # Pertumbuhan Terbatas
 
@@ -215,68 +215,6 @@ $$\frac{dP}{dt} = rP - (\frac{r P}{M}) P = r (1 - \frac{P}{M}) P$$
 _Births minus deaths_ 
 
 \newpage
-
-# Pertemuan III {.unnumbered .unlisted}
-
-# _Falling and Sky Diving_
-
-Kita akan gunakan _system dynamics_ untuk memodelkan orang yang _sky diving_ dari sebuah helikopter. Ada dua fase:
-
-1. _Free falling_,
-1. Setelah parasut terbuka.
-
-Pertama, kita akan pelajari terlebih dahulu gerak jatuh bebas (misalkan seseorang menjatuhkan bola dari suatu gedung):
-
-1. _Ignoring the friction with air_,
-1. _Taking into account the effect of kinetic friction_.
-
-### _Velocity_
-
-Perubahan instan posisi $s$ terhadap waktu $t$ disebut _velocity_.
-
-$$v(t) = \frac{ds}{dt}$$
-
-### _Acceleration_
-
-Perubahan isntan _velocity_ $v$ terhadap waktu $t$ disebut _acceleration_.
-
-$$a(t) = \frac{dv}{dt}$$
-
-## Gerak Bola Jatuh Bebas
-
-Untuk gerak bola yang jatuh bebas, kita membutuhkan kondisi awal sebagai berikut:
-
-1. Percepatan gravitasi $-9.8 \frac{m}{s^2}$.
-1. _Initial velocity_ $15 \frac{m}{s}$.
-1. _Initial position_ $11 m$.
-
-```{r}
-mass = 0.5 #kg
-acceleration_due_to_gravity = -9.81 #km/s2
-radius = 0.05 #m
-velocity = 0 #m/s ini velocity(0)
-position = 400 #m position(0)
-
-weight = mass * acceleration_due_to_gravity
-projected_area = pi * radius^2
-air_friction = -0.65 * projected_area * velocity * abs(velocity)
-total_force = weight + air_friction
-
-acceleration = total_force / mass
-
-change_in_velocity = acceleration
-change_in_position = velocity
-speed = abs(velocity)
-
-
-```
-
-
-
-
-\newpage
-
-# Pertemuan II {.unnumbered .unlisted}
 
 # _Constrained Growth and Decay_
 
@@ -365,5 +303,49 @@ for i: 1 to num_iter
   print(t, population)
 ```
 
+\newpage
+
+# SIR Model
+
+_Suspected_, _infected_, _recovered_ digunakan untuk memodelkan penyebaran penyakit dengan populasi tertutup (tidak ada kelahiran, kematian, imigrasi, dan emigrasi).
+
+## SIR Model untuk $R$
+
+Dalam suatu waktu, orang yang terkena penyakit (misalkan flu) akan sembuh. Maka $R$ akan proporsional ke $I$.
+
+$$\frac{dR}{dt} = a \times I$$
+
+dengan $a$ adalah _recovery rate_. Biasanya $a = \frac{1}{d}$, dimana $d$ adalah _number of days infected_.
+
+## SIR Model untuk $S$
+
+_Suspect_ akan terkena flu saat berinteraksi dengan orang yang sakit $I$.
+
+$$\frac{dS}{dt} = -r \times S \times I$$
+
+dengan $r$ adalah _transmission constant_.
+
+Bagaimana cara menghitung $r$?
+
+Jika:
+
+- $N$ adalah total populasi.
+- $k$ adalah banyaknya kontak perhari antara $S$ dan $I$.
+- Peluang adanya kontak dengan $S$ adalah $\frac{S}{N}$.
+- Peluang orang $S$ terinfeksi saat kontak adalah $b$.
+
+Maka: 
+
+$$\frac{dS}{dt} = - (\frac{k \times b}{N}) \times S \times I$$
+
+## SIR Model untuk $I$
+
+$$\frac{dI}{dt} = -\frac{dS}{dt} - \frac{dR}{dt}$$
+
+a tidak
+b tidak
+c bisa
+d tidak
+e tidak
 
 
