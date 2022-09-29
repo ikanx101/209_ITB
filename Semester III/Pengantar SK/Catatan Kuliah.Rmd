@@ -342,10 +342,31 @@ $$\frac{dS}{dt} = - (\frac{k \times b}{N}) \times S \times I$$
 
 $$\frac{dI}{dt} = -\frac{dS}{dt} - \frac{dR}{dt}$$
 
-a tidak
-b tidak
-c bisa
-d tidak
-e tidak
+\newpage
+
+# _Errors_
+
+Kesalahan yang mungkin terjadi saat komputasi. Beberapa istilah yang penting:
+
+1. _Floating point number_
+    - Bilangan real biasa disebut dengan _floating point_.
+    - Biasanya ditulis sebagai bilangan desimal dikali 10 pangkat sesuatu $a \times 10^n$.
+    - Nilai $a$ tidak boleh __nol__.
+    - $a$ disebut __significand__ atau __mantissa__.
+    - $n$ disebut __eksponen__.
+1. _Significant digit_
+    - Semua angka integer selain nol di depan dan belakang pada _significand_.
+1. _Precision_
+    - Berapa banyak _significant digit_.
+1. _Magnitude_
+    - $10^n$ dari notasi _floating point_.
+    
+
+Ini adalah _computational errors_:
+
+- _Absolute and Relative Errors_
+- _Round-off Errors_
+- _Arithmetic Errors_
+- _Error Propagation_
 
 
