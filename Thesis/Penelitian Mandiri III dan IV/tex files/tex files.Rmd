@@ -1,0 +1,20 @@
+---
+title: "Untitled"
+output: 
+  pdf_document: 
+    keep_tex:  true
+date: '2022-10-03'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Currently, six types of raw materials can be ordered from 6 different suppliers. A small part of the product can only be produced with one type of raw material. In contrast, most others allow it to be produced with two or more types of raw materials. The raw material requirements for products in this group are the same.
+
+Purchase of raw materials must meet the minimum order set by the supplier, but if the purchase is above the minimum order must be rounded off (order volume must be an integer).
+
+The price of each type of raw material is different.
+
+The delivery time until the raw materials are ready for use for all suppliers is the same.
