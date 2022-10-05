@@ -1,29 +1,43 @@
 ---
-title: "Untitled"
+title: "PR 2 Pengantar Sains Komputasi"
+subtitle: "20921004 Mohammad Rizka Fadhli"
 output: pdf_document
-date: '2022-10-05'
+date: '5 Oktober 2022'
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
 ```
 
-## R Markdown
+# SOAL 1
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+_Give the magnitude and precision of_ $93.6 \times 10^7$
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# SOAL 2
 
-```{r cars}
-summary(cars)
-```
+_We do the calculation of_
 
-## Including Plots
+$$\begin{matrix}
+x = 0.536 \\
+y = 7 x \\
+z = y / 7
+\end{matrix}$$
 
-You can also embed plots, for example:
+_on the system that truncats to 3 digits of significand_. _Write an IF statement that puts 1 in the value of a variable p if the floating point of x and z are equal and otherwise puts 0_.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+# SOAL 3
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+_Consider a machine that rounds to 4 significant digits. Suppose initially _ $y = 9.649$ _and_ $x = 7.834$. _The following assignment statement, which calculates the expression on the right,_ $(y + x)$ _and the replaces the value of_ $y$ _on the left with the result, is in the loop that executes four times:_ $y = y + x$. _After each iteration of the loop, give the value stored in_ $y$ _and the absolute and relative error._
+
+\newpage
+
+# JAWABAN SOAL 1
+
+\newpage
+
+# JAWABAN SOAL 2
+
+\newpage
+
+# JAWABAN SOAL 3
