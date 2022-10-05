@@ -1,8 +1,8 @@
 ---
-title: "PR 2 Pengantar Sains Komputasi"
-subtitle: "20921004 Mohammad Rizka Fadhli"
+title: "PR II Pengantar Sains Komputasi"
+subtitle: "20921004 - Mohammad Rizka Fadhli"
 output: pdf_document
-linestretch: 1.5
+linestretch: 1.25
 fontsize: 12pt
 date: '5 Oktober 2022'
 ---
@@ -36,10 +36,107 @@ _Consider a machine that rounds to 4 significant digits. Suppose initially _ $y 
 
 # JAWABAN SOAL 1
 
+_Normalized number_ dari angka tersebut adalah $0.936 \times 10^9$. Maka kita dapatkan:
+
+- $0.936$ adalah _significand_.
+- $9$ adalah _eksponen_.
+- _Significant digits_-nya adalah: $9,3,6$.
+
+Sehingga _precision_ dari angka tersebut adalah: $3$ dan _magnitude_ sebesar $10^9$.
+
 \newpage
 
 # JAWABAN SOAL 2
 
+Kita ketahui bahwa:
+
+```{r}
+x = 0.536
+y = 7 * x
+z = y / 7
+```
+
+Kita bisa dapatkan hasil $z = 0.07657143$ dan $y = 3.752$. Untuk menjawab soal ini, saya akan ubah terlebih dahulu kedua nilai $z$ dan $y$ menjadi bentuk _normalized number_ sebagai berikut:
+
+- $z = 0.7657143 \times 10^{-1}$
+- $y = 0.3752 \times 10^1$
+
+Jika perhitungan menggunakan aturan _truncats_ ke 3 _digits significand_, maka kita bisa dapatkan:
+
+- $z = 0.765 \times 10^{-1}$
+- $y = 0.375 \times 10^1$
+
+Untuk membandingkan dua _floating points_, maka kita gunakan aturan sebagai berikut:
+
+Dua _floating points_ disebut sama jika $|y - z| < c$ di mana $c$ merupakan suatu nilai __konstanta yang kecil__.
+
+Untuk menuliskan $if$ _statement_ dari kondisi ini, maka kita perlu memilih suatu nilai $c$ yang tepat. Nilai $c$ bisa kita dapatkan dari _magnitude_ terkecil yang didapatkan dari $y$ atau $z$, yakni: $c = 10^{-1}$.
+
+Maka, bentuknya adalah sebagai berikut:
+
+```
+IF( |z - y| < 10^(-1) ) THEN p = 1
+    ELSE p = 0
+```
+
 \newpage
 
 # JAWABAN SOAL 3
+
+Dari definisi, kita dapatkan:
+
+$$\text{absolute error} = |correct - result|$$
+
+$$\text{relative error} = \frac{\text{absolute error}}{|correct|}$$
+
+Oleh karena itu, untuk menyelesaikan soal ini, saya akan membuat tabel sebagai berikut:
+
+```{r,include=FALSE}
+rm(list=ls())
+library(dplyr)
+
+# hitung jawaban correct
+y = c(9.649)
+x = 7.834
+
+for(i in 2:5){
+  y[i] = y[i-1] + x
+}
+
+correct = y
+iter = 0:4
+
+# hitung jawaban aproksimasi
+x = 0.7834
+y = c(0.9649)
+
+for(i in 2:5){
+    y[i] = x + y[i-1]
+    y[i] = round(y[i]/10,4) * 10
+}
+
+apro = y * 10
+```
+
+```{r,echo=FALSE}
+df = data.frame(iterasi = iter,
+                correct = correct,
+                new = apro)
+                
+df = 
+    df %>%
+    mutate(absolute = abs(new - correct),
+           relative = absolute / abs(correct),
+           relative = relative * 100,
+           relative = round(relative,4),
+           relative = paste0(relative,"%")
+           ) %>%
+    rename("Correct New Value" = correct,
+           "New Value" = new,
+           "Absolute Error" = absolute,
+           "Relative Error" = relative
+           )
+
+df %>% knitr::kable(align = "c",caption = "Hasil Perhitungan")
+```
+
