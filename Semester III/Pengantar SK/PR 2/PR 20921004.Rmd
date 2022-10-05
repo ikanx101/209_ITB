@@ -2,6 +2,8 @@
 title: "PR 2 Pengantar Sains Komputasi"
 subtitle: "20921004 Mohammad Rizka Fadhli"
 output: pdf_document
+linestretch: 1.5
+fontsize: 12pt
 date: '5 Oktober 2022'
 ---
 
