@@ -117,7 +117,7 @@ temp_4 = solusi_4 %>% filter(j == 4 & i %in% P_4_2) %>% group_by(i) %>% tally() 
          rename("butuh berapa gula" = n)
 
 tabel_all = list(
-  "Berikut adalah hasil summari dari a_ijk.\n======================================\nPada item dengan penggunaan min 2 jenis gula di minggu I:",
+  "Berikut adalah hasil summary dari a_ijk.\n======================================\nPada item dengan penggunaan min 2 jenis gula di minggu I:",
   temp_1,
   "======================================\nPada item dengan penggunaan min 2 jenis gula di minggu II:",
   temp_2,
@@ -130,6 +130,26 @@ tabel_all = list(
 # masukin semua tabel ke sheet tersebut
 xl_write(tabel_all, wb, sh)
 
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("Proporsi b_ijk")
+sh = addWorksheet(wb, nama_sheet)
+
+solusi_5 =
+  solusi_5 %>% 
+  select(-variable) %>%
+  reshape2::dcast(i + j ~ k,value.var = "value")
+
+colnames(solusi_5)[3:8] = paste0("gula ",1:6)
+
+tabel_all = list(
+  "Berikut adalah proporsi penggunaan gula pada produk i di minggu j",
+  solusi_5
+)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
 
 # export ke Excel
 saveWorkbook(wb, "output.xlsx", overwrite = TRUE)

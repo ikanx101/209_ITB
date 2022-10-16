@@ -106,7 +106,7 @@ milp_new =
                k = G) %>% 
                
   # ============================================================================
-  # constrain II
+  # constraint II
   # modifikasi dari Bu Rieske
   # kita pecah dua karena ada pengaruh dari Z_0k
     # untuk j = 1
@@ -117,7 +117,7 @@ milp_new =
                    j = 2:4) %>%
                    
   # ============================================================================
-  # constrain V
+  # constraint V
   # memastikan bahwa semua produk yg bisa diproduksi dengan dua gula bisa dibeli
   # minggu 1 - untuk setiap produk yg bisa diproduksi dengan min 2 gula
   add_constraint(sum_expr(a[i,j,k],k = G) >= 2,
@@ -206,6 +206,605 @@ milp_new =
                  i = P4,
                  j = 4) %>% 
   
+  # ============================================================================
+  # constraint persamaan 12
+  # week 1
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,2]) >= b[i,j,1] - b[i,j,2],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,2]) >= b[i,j,1] - b[i,j,2],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,2]) >= b[i,j,1] - b[i,j,2],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,2]) >= b[i,j,1] - b[i,j,2],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 13
+  # week 1
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,2]) >= b[i,j,2] - b[i,j,1],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,2]) >= b[i,j,2] - b[i,j,1],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,2]) >= b[i,j,2] - b[i,j,1],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,2]) >= b[i,j,2] - b[i,j,1],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 14
+  # week 1
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,3]) >= b[i,j,1] - b[i,j,3],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,3]) >= b[i,j,1] - b[i,j,3],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,3]) >= b[i,j,1] - b[i,j,3],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,3]) >= b[i,j,1] - b[i,j,3],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 15
+  # week 1
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,3]) >= b[i,j,3] - b[i,j,1],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,3]) >= b[i,j,3] - b[i,j,1],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,3]) >= b[i,j,3] - b[i,j,1],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,3]) >= b[i,j,3] - b[i,j,1],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 16
+  # week 1
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,4]) >= b[i,j,1] - b[i,j,4],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,4]) >= b[i,j,1] - b[i,j,4],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,4]) >= b[i,j,1] - b[i,j,4],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,4]) >= b[i,j,1] - b[i,j,4],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 17
+  # week 1
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,1],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,1],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,1],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,1],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 18
+  # week 1
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,5]) >= b[i,j,1] - b[i,j,5],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,5]) >= b[i,j,1] - b[i,j,5],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,5]) >= b[i,j,1] - b[i,j,5],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,5]) >= b[i,j,1] - b[i,j,5],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 19
+  # week 1
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,1],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,1],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,1],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,1],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 20
+  # week 1
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,6]) >= b[i,j,1] - b[i,j,6],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,6]) >= b[i,j,1] - b[i,j,6],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,6]) >= b[i,j,1] - b[i,j,6],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,6]) >= b[i,j,1] - b[i,j,6],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 21
+  # week 1
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,1],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,1],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,1],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,1]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,1],
+                 i = P4,
+                 j = 4) %>%
+                 
+                 
+  # constraint persamaan 22
+  # week 1
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,3]) >= b[i,j,2] - b[i,j,3],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,3]) >= b[i,j,2] - b[i,j,3],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,3]) >= b[i,j,2] - b[i,j,3],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,3]) >= b[i,j,2] - b[i,j,3],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 23
+  # week 1
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,3]) >= b[i,j,3] - b[i,j,2],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,3]) >= b[i,j,3] - b[i,j,2],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,3]) >= b[i,j,3] - b[i,j,2],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,3]) >= b[i,j,3] - b[i,j,2],
+                 i = P4,
+                 j = 4) %>%
+  
+                 
+  # constraint persamaan 24
+  # week 1
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,4]) >= b[i,j,2] - b[i,j,4],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,4]) >= b[i,j,2] - b[i,j,4],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,4]) >= b[i,j,2] - b[i,j,4],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,4]) >= b[i,j,2] - b[i,j,4],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 25
+  # week 1
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,2],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,2],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,2],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,2],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 26
+  # week 1
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,5]) >= b[i,j,2] - b[i,j,5],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,5]) >= b[i,j,2] - b[i,j,5],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,5]) >= b[i,j,2] - b[i,j,5],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,5]) >= b[i,j,2] - b[i,j,5],
+                 i = P4,
+                 j = 4) %>%
+  
+  
+  # constraint persamaan 27
+  # week 1
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,2],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,2],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,2],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,2],
+                 i = P4,
+                 j = 4) %>%
+                 
+                 
+  # constraint persamaan 28
+  # week 1
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,6]) >= b[i,j,2] - b[i,j,6],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,6]) >= b[i,j,2] - b[i,j,6],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,6]) >= b[i,j,2] - b[i,j,6],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,6]) >= b[i,j,2] - b[i,j,6],
+                 i = P4,
+                 j = 4) %>%
+                 
+                 
+  # constraint persamaan 29
+  # week 1
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,2],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,2],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,2],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,2]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,2],
+                 i = P4,
+                 j = 4) %>%               
+  
+  
+  # constraint persamaan 30
+  # week 1
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,4]) >= b[i,j,3] - b[i,j,4],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,4]) >= b[i,j,3] - b[i,j,4],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,4]) >= b[i,j,3] - b[i,j,4],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,4]) >= b[i,j,3] - b[i,j,4],
+                 i = P4,
+                 j = 4) %>%        
+  
+  
+  # constraint persamaan 31
+  # week 1
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,3],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,3],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,3],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,4]) >= b[i,j,4] - b[i,j,3],
+                 i = P4,
+                 j = 4) %>%    
+  
+  
+  
+  # constraint persamaan 32
+  # week 1
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,5]) >= b[i,j,3] - b[i,j,5],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,5]) >= b[i,j,3] - b[i,j,5],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,5]) >= b[i,j,3] - b[i,j,5],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,5]) >= b[i,j,3] - b[i,j,5],
+                 i = P4,
+                 j = 4) %>%    
+  
+  
+  # constraint persamaan 33
+  # week 1
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,3],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,3],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,3],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,3],
+                 i = P4,
+                 j = 4) %>%    
+  
+  
+  # constraint persamaan 34
+  # week 1
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,6]) >= b[i,j,3] - b[i,j,6],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,6]) >= b[i,j,3] - b[i,j,6],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,6]) >= b[i,j,3] - b[i,j,6],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,6]) >= b[i,j,3] - b[i,j,6],
+                 i = P4,
+                 j = 4) %>%    
+  
+  
+  # constraint persamaan 35
+  # week 1
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,3],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,3],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,3],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,3]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,3],
+                 i = P4,
+                 j = 4) %>% 
+  
+  
+  # constraint persamaan 36
+  # week 1
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,5]) >= b[i,j,4] - b[i,j,5],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,5]) >= b[i,j,4] - b[i,j,5],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,5]) >= b[i,j,4] - b[i,j,5],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,5]) >= b[i,j,4] - b[i,j,5],
+                 i = P4,
+                 j = 4) %>% 
+                 
+                 
+  # constraint persamaan 37
+  # week 1
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,4],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,4],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,4],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,5]) >= b[i,j,5] - b[i,j,4],
+                 i = P4,
+                 j = 4) %>%               
+                 
+                 
+  # constraint persamaan 38
+  # week 1
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,6]) >= b[i,j,4] - b[i,j,6],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,6]) >= b[i,j,4] - b[i,j,6],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,6]) >= b[i,j,4] - b[i,j,6],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,6]) >= b[i,j,4] - b[i,j,6],
+                 i = P4,
+                 j = 4) %>%  
+  
+  
+  # constraint persamaan 39
+  # week 1
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,4],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,4],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,4],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,4]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,4],
+                 i = P4,
+                 j = 4) %>%  
+  
+  
+  # constraint persamaan 40
+  # week 1
+  add_constraint((1 - a[i,j,5]) + (1 - a[i,j,6]) >= b[i,j,5] - b[i,j,6],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,5]) + (1 - a[i,j,6]) >= b[i,j,5] - b[i,j,6],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,5]) + (1 - a[i,j,6]) >= b[i,j,5] - b[i,j,6],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,5]) + (1 - a[i,j,6]) >= b[i,j,5] - b[i,j,6],
+                 i = P4,
+                 j = 4) %>%  
+  
+  
+  # constraint persamaan 41
+  # week 1
+  add_constraint((1 - a[i,j,5]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,5],
+                 i = P1,
+                 j = 1) %>%
+  # week 2
+  add_constraint((1 - a[i,j,5]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,5],
+                 i = P2,
+                 j = 2) %>%
+  # week 3
+  add_constraint((1 - a[i,j,5]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,5],
+                 i = P3,
+                 j = 3) %>%
+  # week 4
+  add_constraint((1 - a[i,j,5]) + (1 - a[i,j,6]) >= b[i,j,6] - b[i,j,5],
+                 i = P4,
+                 j = 4) %>% 
+  
+  
+  # ============================================================================
+  # constraint VI 
+  # week 1
+  add_constraint(sum_expr(b[i,j,k],
+                          k = G) == 1,
+                 j = 1,
+                 i = P1) %>% 
+  # week 2
+  add_constraint(sum_expr(b[i,j,k],
+                          k = G) == 1,
+                 j = 2,
+                 i = P2) %>% 
+  # week 3
+  add_constraint(sum_expr(b[i,j,k],
+                          k = G) == 1,
+                 j = 3,
+                 i = P3) %>% 
+  # week 4
+  add_constraint(sum_expr(b[i,j,k],
+                          k = G) == 1,
+                 j = 4,
+                 i = P4) %>% 
+               
+               
+               
+               
+               
   # objective function
   set_objective(sum_expr(c_k[k] * x[k], k = G),"min")
   
