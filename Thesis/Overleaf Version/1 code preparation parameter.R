@@ -7,13 +7,9 @@
   # j menandakan index minggu
 
 # set working directory dulu
-setwd("/mnt/chromeos/removable/Workstation/209_ITB/Thesis/Penelitian Mandiri V dan VII/")
+setwd("/mnt/chromeos/removable/Workstation/209_ITB/Thesis/Overleaf version/")
 
-rm(list=ls())
-
-library(readxl)
-library(dplyr)
-
+# read database input
 nama = "data input.xlsx"
 sheets = excel_sheets(nama)
 
@@ -27,8 +23,6 @@ df_4[is.na(df_4)] = 0
 
 maxcap = read_excel(nama,sheet = sheets[4]) # ambil max capacity gudang 
 maxcap = maxcap$maxcap
-
-temporary = read_excel(nama,sheet = sheets[5])
 
 # bikin f_ik
 # produk i bisa diproduksi dengan gula k
@@ -46,10 +40,10 @@ df_4 =
 # mengambil list produk dengan pemakaian gula >= 2
 P_j_2 = df_4$code_product[df_4$pakai_gula >= 2]
   # bikin perminggu
+  P_1_2 = df_4$code_product[df_4$pakai_gula >= 2 & df_4$w1 > 0]
+  P_2_2 = df_4$code_product[df_4$pakai_gula >= 2 & df_4$w2 > 0]
   P_3_2 = df_4$code_product[df_4$pakai_gula >= 2 & df_4$w3 > 0]
   P_4_2 = df_4$code_product[df_4$pakai_gula >= 2 & df_4$w4 > 0]
-  P_5_2 = df_4$code_product[df_4$pakai_gula >= 2 & df_4$w5 > 0]
-  P_6_2 = df_4$code_product[df_4$pakai_gula >= 2 & df_4$w6 > 0]
 
 # mengambil list produk dengan pemakaian gula == 1
 P_j_1 = df_4$code_product[df_4$pakai_gula == 1]
@@ -59,29 +53,26 @@ P1 = df_4$code_product[df_4$w1 > 0]
 P2 = df_4$code_product[df_4$w2 > 0]
 P3 = df_4$code_product[df_4$w3 > 0]
 P4 = df_4$code_product[df_4$w4 > 0]
-P5 = df_4$code_product[df_4$w5 > 0]
-P6 = df_4$code_product[df_4$w6 > 0]
 
 # Dj sebagai kebutuhan gula di minggu perencanaan
 temp = 
   df_3 %>% 
-  select(w3,w4,w5,w6) %>% 
+  select(w1,w2,w3,w4) %>% 
   reshape2::melt() %>% 
   group_by(variable) %>% 
   summarise(Dj = sum(value)) %>% 
   ungroup()
 Dj = temp$Dj
-Dj = c(0,0,Dj)
 
 # total semua kebutuhan gula di bulan perencanaan
-D = sum(Dj[3:6])
+D = sum(Dj)
 
 # harga gula per kg
-c_k = df_1$cost_obj_func
+# ini saya pakai harga gula dulu
+c_k = df_1$harga_gula
 
 # min order quantity
 o_k = df_1$min_order
-
 
 # kebutuhan bahan baku gula k (dalam ton) dari produk i pada week j
 g_ijk = function(i,j,k){
@@ -94,9 +85,9 @@ g_ijk = function(i,j,k){
 }
 
 # contoh
-matt_g_ijk = array(NA,dim = c(51,6,6))
+matt_g_ijk = array(NA,dim = c(51,4,6))
 for(i in 1:51){
-  for(j in 1:6){
+  for(j in 1:4){
     for(k in 1:6){
       matt_g_ijk[i,j,k] = g_ijk(i,
                                 paste0("w",j),
@@ -106,15 +97,12 @@ for(i in 1:51){
   }
 }  
 
-# total bahan baku k yang dibutuhkan pada week 1 dan 2
-d_2k = temporary$d2k
-
 # stok level bahan baku k di gudang pada akhir week 1
-Z_1k = df_1$stok_akhir_bulan
+Z_0k = df_1$stok_akhir_bulan
 
+cat("\014")
+print("DONE load database input")
 
-# x_hat_1k untuk k di G
-# banyak gula yang dikirim pada minggu 1
-x_hat_1k = temporary$x_hat_1k
-# banyak gula yang dikirim pada minggu 2
-x_hat_2k = temporary$x_hat_2k
+# summary
+o_k # min order per gula
+Z_0k # stok akhir cycle sebelumnya
