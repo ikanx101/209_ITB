@@ -5,6 +5,10 @@
 #
 # ==============================================================================
 
+# set working directory dulu
+setwd("~/209_ITB/Thesis/Overleaf Version")
+
+
 # memanggil libraries
 library(readxl)             # untuk mengimport data excel
 library(dplyr)              # untuk data carpentry
@@ -808,13 +812,29 @@ milp_new =
    # yakni mengubah menjadi definisi z_jk lalu jumlahnya gak boleh lebih dari maxcap
   
   # bagian definisi z_jk
-  # ini untuk menghitung saldo pada week 3 
-  add_constraint(z[j,k] == Z_0k[k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+  # ini untuk menghitung saldo pada week 1 
+  add_constraint(z[j,k] >= Z_0k[k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
                                                             i = P1),
                  j = 1,
                  k = G) %>% 
   
+  # ini untuk menghitung saldo pada week 2 
+  add_constraint(z[j,k] == z[(j-1),k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+                                                           i = P2),
+                 j = 2,
+                 k = G) %>% 
   
+  # ini untuk menghitung saldo pada week 3 
+  add_constraint(z[j,k] == z[(j-1),k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+                                                              i = P3),
+                 j = 3,
+                 k = G) %>% 
+  
+  # ini untuk menghitung saldo pada week 4 
+  add_constraint(z[j,k] == z[(j-1),k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+                                                              i = P4),
+                 j = 4,
+                 k = G) %>% 
   
   
   # bagian constraint max cap

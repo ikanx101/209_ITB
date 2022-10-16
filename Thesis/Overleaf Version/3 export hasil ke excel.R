@@ -45,6 +45,110 @@ xl_write(tabel_all, wb, sh)
 
 
 
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("Objective Func")
+sh = addWorksheet(wb, nama_sheet)
+
+final = 
+  solusi_1 %>% 
+  mutate(price = df_1$harga_gula) %>%
+  mutate(total_cost = value * price) %>%
+  mutate(cost_obj_func = c_k) %>% 
+  mutate(total_cost_obj = value * cost_obj_func) %>% 
+  rename(pembelian = value) 
+
+cost = sum(final$total_cost) / 1000000000
+cost = round(cost,3)
+
+pesan = paste0("Total biaya yang dikeluarkan: Rp",
+               cost,
+               " Miliar"
+)
+
+cost = sum(final$total_cost_obj) / 1000000000
+cost = round(cost,3)
+
+pesan_lagi = paste0("Total Cost Obj Function: Rp",
+                    cost,
+                    " Miliar")
+
+# hapus variabel
+final = final %>% select(-total_cost,-total_cost_obj)
+
+tabel_all = list(
+  pesan,
+  pesan_lagi,
+  final
+)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("Hasil z_jk")
+sh = addWorksheet(wb, nama_sheet)
+
+df_z = 
+  solusi_3 %>% 
+  select(-variable) %>%
+  reshape2::dcast(k ~ j)
+
+colnames(df_z)[2:5] = paste0("week ",1:4)
+
+tabel_all = list(
+  "Stok akhir gula k pada week j",
+  df_z
+)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
+
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("Hasil a_ijk")
+sh = addWorksheet(wb, nama_sheet)
+
+solusi_4 = get_solution(result, a[i,j,k]) %>% as.data.frame() 
+solusi_4 =
+  solusi_4 %>% 
+  select(-variable) %>%
+  reshape2::dcast(i + j ~ k,value.var = "value")
+
+colnames(solusi_4)[3:8] = paste0("gula ",1:6)
+
+tabel_all = list(
+  "Jika item i diproduksi dengan gula k pada week j",
+  solusi_4
+)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("Proporsi b_ijk")
+sh = addWorksheet(wb, nama_sheet)
+
+solusi_5 =
+  solusi_5 %>% 
+  select(-variable) %>%
+  reshape2::dcast(i + j ~ k,value.var = "value")
+
+colnames(solusi_5)[3:8] = paste0("gula ",1:6)
+
+tabel_all = list(
+  "Berikut adalah proporsi penggunaan gula pada produk i di minggu j",
+  solusi_5
+)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
 
 # ==============================================================================
 # bikin sheet
@@ -97,6 +201,8 @@ xl_write(tabel_all, wb, sh)
 nama_sheet = paste0("Bukti constraint V")
 sh = addWorksheet(wb, nama_sheet)
 
+solusi_4 = get_solution(result, a[i,j,k]) %>% as.data.frame() 
+
 # pembuktian constraint V
 solusi_4 = solusi_4 %>% filter(value == 1)
 
@@ -129,77 +235,6 @@ tabel_all = list(
 
 # masukin semua tabel ke sheet tersebut
 xl_write(tabel_all, wb, sh)
-
-
-# ==============================================================================
-# bikin sheet
-nama_sheet = paste0("Proporsi b_ijk")
-sh = addWorksheet(wb, nama_sheet)
-
-solusi_5 =
-  solusi_5 %>% 
-  select(-variable) %>%
-  reshape2::dcast(i + j ~ k,value.var = "value")
-
-colnames(solusi_5)[3:8] = paste0("gula ",1:6)
-
-tabel_all = list(
-  "Berikut adalah proporsi penggunaan gula pada produk i di minggu j",
-  solusi_5
-)
-
-# masukin semua tabel ke sheet tersebut
-xl_write(tabel_all, wb, sh)
-
-
-# ==============================================================================
-# bikin sheet
-nama_sheet = paste0("Hasil a_ijk")
-sh = addWorksheet(wb, nama_sheet)
-
-solusi_4 = get_solution(result, a[i,j,k]) %>% as.data.frame() 
-solusi_4 =
-  solusi_4 %>% 
-  select(-variable) %>%
-  reshape2::dcast(i + j ~ k,value.var = "value")
-
-colnames(solusi_4)[3:8] = paste0("gula ",1:6)
-
-tabel_all = list(
-  "Jika item i diproduksi dengan gula k pada week j",
-  solusi_4
-)
-
-# masukin semua tabel ke sheet tersebut
-xl_write(tabel_all, wb, sh)
-
-# ==============================================================================
-# bikin sheet
-nama_sheet = paste0("Objective Func")
-sh = addWorksheet(wb, nama_sheet)
-
-final = 
-  solusi_1 %>% 
-  mutate(price = c_k) %>%
-  mutate(total_cost = value * price) %>%
-  rename(pembelian = value)
-
-cost = sum(final$total_cost) / 1000000
-cost = round(cost,3)
-
-pesan = paste0("Total biaya yang dikeluarkan: Rp",
-                cost,
-                " juta"
-               )
-
-tabel_all = list(
-  pesan,
-  final
-)
-
-# masukin semua tabel ke sheet tersebut
-xl_write(tabel_all, wb, sh)
-
 
 # export ke Excel
 saveWorkbook(wb, "output.xlsx", overwrite = TRUE)

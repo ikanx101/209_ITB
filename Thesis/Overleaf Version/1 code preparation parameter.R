@@ -6,9 +6,6 @@
   # k menandakan index gula
   # j menandakan index minggu
 
-# set working directory dulu
-setwd("/mnt/chromeos/removable/Workstation/209_ITB/Thesis/Overleaf version/")
-
 # read database input
 nama = "data input.xlsx"
 sheets = excel_sheets(nama)
@@ -69,7 +66,7 @@ D = sum(Dj)
 
 # harga gula per kg
 # ini saya pakai harga gula dulu
-c_k = df_1$harga_gula
+c_k = df_1$cost_obj_func
 
 # min order quantity
 o_k = df_1$min_order
