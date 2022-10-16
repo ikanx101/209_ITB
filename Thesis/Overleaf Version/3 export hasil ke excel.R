@@ -151,5 +151,55 @@ tabel_all = list(
 # masukin semua tabel ke sheet tersebut
 xl_write(tabel_all, wb, sh)
 
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("Hasil a_ijk")
+sh = addWorksheet(wb, nama_sheet)
+
+solusi_4 = get_solution(result, a[i,j,k]) %>% as.data.frame() 
+solusi_4 =
+  solusi_4 %>% 
+  select(-variable) %>%
+  reshape2::dcast(i + j ~ k,value.var = "value")
+
+colnames(solusi_4)[3:8] = paste0("gula ",1:6)
+
+tabel_all = list(
+  "Jika item i diproduksi dengan gula k pada week j",
+  solusi_4
+)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("Objective Func")
+sh = addWorksheet(wb, nama_sheet)
+
+final = 
+  solusi_1 %>% 
+  mutate(price = c_k) %>%
+  mutate(total_cost = value * price) %>%
+  rename(pembelian = value)
+
+cost = sum(final$total_cost) / 1000000
+cost = round(cost,3)
+
+pesan = paste0("Total biaya yang dikeluarkan: Rp",
+                cost,
+                " juta"
+               )
+
+tabel_all = list(
+  pesan,
+  final
+)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
+
 # export ke Excel
 saveWorkbook(wb, "output.xlsx", overwrite = TRUE)

@@ -802,8 +802,26 @@ milp_new =
                  i = P4) %>% 
                
                
-               
-               
+  # ============================================================================
+  # constraint VII
+  # kita akan modifikasi constraint 7 dari Bu Rieske ke bentuk lain
+   # yakni mengubah menjadi definisi z_jk lalu jumlahnya gak boleh lebih dari maxcap
+  
+  # bagian definisi z_jk
+  # ini untuk menghitung saldo pada week 3 
+  add_constraint(z[j,k] == Z_0k[k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+                                                            i = P1),
+                 j = 1,
+                 k = G) %>% 
+  
+  
+  
+  
+  # bagian constraint max cap
+  # ini agar si z[j,k] gak lebih dari maxcap
+  add_constraint(sum_expr(z[j,k],
+                          k = G) <= maxcap,
+                 j = M) %>% 
                
   # objective function
   set_objective(sum_expr(c_k[k] * x[k], k = G),"min")
