@@ -808,51 +808,28 @@ milp_new =
                
   # ============================================================================
   # constraint VII
-  # kita akan modifikasi constraint 7 dari Bu Rieske ke bentuk lain
-   # yakni mengubah menjadi definisi z_jk lalu jumlahnya gak boleh lebih dari maxcap
-  
-  # bagian definisi z_jk
-  # ini untuk menghitung saldo pada week 1 
-  add_constraint(z[j,k] >= Z_0k[k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                            i = P1),
+  # week 1
+  add_constraint(maxcap >= sum_expr(Z_0k[k] + x_hat[j,k],k = G) - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],i = P1) + z[j,k],
                  j = 1,
                  k = G) %>% 
   
-  # ini untuk menghitung saldo pada week 2 
-  add_constraint(z[j,k] == z[(j-1),k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                           i = P2),
+  # week 2
+  add_constraint(maxcap >= sum_expr(z[(j-1),k] + x_hat[j,k],k = G) - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],i = P2) + z[j,k],
                  j = 2,
                  k = G) %>% 
   
-  # ini untuk menghitung saldo pada week 3 
-  add_constraint(z[j,k] == z[(j-1),k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                              i = P3),
+  # week 3
+  add_constraint(maxcap >= sum_expr(z[(j-1),k] + x_hat[j,k],k = G) - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],i = P3) + z[j,k],
                  j = 3,
                  k = G) %>% 
   
-  # ini untuk menghitung saldo pada week 4 
-  add_constraint(z[j,k] == z[(j-1),k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                              i = P4),
+  # week 4
+  add_constraint(maxcap >= sum_expr(z[(j-1),k] + x_hat[j,k],k = G) - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],i = P4) + z[j,k],
                  j = 4,
                  k = G) %>% 
-  
-  
-  # bagian constraint max cap
-  # ini agar si z[j,k] gak lebih dari maxcap
-  add_constraint(sum_expr(z[j,k],
-                          k = G) <= maxcap,
-                 j = M) %>% 
-  
-  # ============================================================================
-  # modifikasi untuk menambahkan total z_jk ke dalam objective function
-  add_variable(tot[k],type = "continuous",lb = 0,k = G) %>%
-  add_constraint(tot[k] == sum_expr(z[j,k],
-                                    j = M),
-                 k = G) %>% 
-  
-  # objective function
-  set_objective(sum_expr(c_k[k] * x[k] + tot[k], k = G),"min")
                
+  # objective function
+  set_objective(sum_expr(c_k[k] * x[k], k = G),"min")
   
 # solver
 result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
