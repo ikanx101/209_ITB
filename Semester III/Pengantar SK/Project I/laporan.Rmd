@@ -35,7 +35,51 @@ Buatlah model rantai reaksi radioaktif yang berisi 3 elemen: dari zat A luruh me
 
 # Dasar Teori
 
-## Unconstrained Growth and Decay
+## _Unconstrained Growth and Decay_
+
+Model _unconstrained growth and decay_ pada dasarnya merupakan model pertumbuhan atau peluruhan yang laju perubahannya proporsional dengan populasi (kondisi) saat ini. Populasi akan bertumbuh atau berkurang tanpa ada batasan atau hal yang menghalangi perubahannya. Pada masalah yang dihadapi, suatu zat radio aktif akan meluruh mengikuti persamaan diferensial berikut:
+
+$$\frac{dQ}{dt} = -r Q(t)$$
+
+dan akan bertumbuh juga mengikuti persamaan diferensial berikut:
+
+$$\frac{dQ}{dt} = r Q(t)$$
+
+Perbedannya adalah pada nilai $r$ yang kelak akan digunakan untuk masing-masing zat radio aktif $A$, $B$, dan $C$.
+
+Solusi analitik dari peluruhan adalah:
+
+$$P = P_0 e^{-rt}$$
+
+sedangkan solusi analitik dari pertumbuhan adalah:
+
+$$P = P_0 e^{rt}$$
+
+## _Finite Difference Equation_
+
+Pendekatan diskrit untuk menyelesaikan persamaan diferensial menggunakan komputer adalah dengan membuat persamaan kontinu di atas menjadi bentuk persamaan beda. Komputer tidak bisa menyelesaikan masalah pada $t$ kontinu, oleh karena itu dibutuhkan pendekatan diskrit berupa laju perubahan pada $\Delta t$ yang relatif kecil. Bentuk umum persamaan beda adalah sebagai berikut:
+
+$$
+\text{new value} = \text{old values} + \text{change in value}
+$$
+
+Algoritma dasar dari bentuk di atas untuk menyelesaikan persamaan diferensialnya adalah sebagai berikut:
+
+```
+initialize
+  sim_length
+  population
+  rate
+  dt
+compute:
+  rate_per_step = rate * dt
+  num_iter = sim_length / dt
+for i: 1 to num_iter
+  population = population + rate_per_step * population
+  t = i * dt
+  print(t, population)
+```
+
 
 ## Algoritma Euler
 
