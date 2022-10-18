@@ -19,6 +19,12 @@ output:
 linestretch: 1.25
 ---
 
+```{r,include=FALSE}
+rm(list=ls())
+
+setwd("/cloud/project/Semester III/Pengantar SK/Project I")
+```
+
 # Pendahuluan
 
 Sains komputasi adalah disiplin ilmu yang mempelajari penyelesaian berbagai masalah dalam sains melalui pendekatan komputasi. Salah satunya adalah mencari solusi dari persamaan diferensial yang merupakan fungsi kontinu menggunakan pendekatan yang bersifat diskrit. Sebagai pembahasan pada laporan ini, diberikan satu masalah persamaan diferensial berupa _unconstrained growth and decay_ dari suatu permasalahan peluruhan dan pembentukan beberapa zat radioaktif lalu kemudian akan diselesaikan menggunakan metode pendekatan diskrit.
@@ -89,6 +95,10 @@ for i: 1 to num_iter
 # Model Matematika
 
 ## Diagram Model
+
+```{r out.width = "80%",echo=FALSE,fig.retina = 10,fig.cap = "Diagram Model",fig.align='center'}
+knitr::include_graphics("Project I.png")
+```
 
 ## Persamaan Diferensial
 
