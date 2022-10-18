@@ -39,11 +39,18 @@ Untuk suatu $r$ bernilai positif (_decay rate_) dan $Q(t)$ adalah fungsi massa z
 
 Buatlah model rantai reaksi radioaktif yang berisi 3 elemen: dari zat A luruh menjadi zat B dan luruh menjadi zat C.
 
+## Bahasa Pemrograman
+
+Saya menggunakan bahasa pemrograman **R** versi `4.0.4` untuk membuat program dan melakukan simulasi untuk menyelesaikan permasalahan di atas. _Libraries_ yang terlibat antara lain:
+
+1. `library(dplyr)` untuk memanipulasi tabel (sebagai kebutuhan _output_ pada laporan).
+1. `library(ggplot2)` untuk membuat beberapa grafik hasil simulasi.
+
 # Dasar Teori
 
 ## _Unconstrained Growth and Decay_
 
-Model _unconstrained growth and decay_ pada dasarnya merupakan model pertumbuhan atau peluruhan yang laju perubahannya proporsional dengan populasi (kondisi) saat ini. Populasi akan bertumbuh atau berkurang tanpa ada batasan atau hal yang menghalangi perubahannya. Pada masalah yang dihadapi, suatu zat radio aktif akan meluruh mengikuti persamaan diferensial berikut:
+Model _unconstrained growth and decay_ pada dasarnya merupakan model pertumbuhan atau peluruhan yang laju perubahannya proporsional dengan populasi (kondisi) saat ini. Populasi akan bertumbuh atau berkurang tanpa ada batasan atau hal yang menghalangi perubahannya. Pada masalah yang dihadapi, suatu zat radioaktif akan meluruh mengikuti persamaan diferensial berikut:
 
 $$\frac{dQ}{dt} = -r Q(t)$$
 
@@ -51,7 +58,7 @@ dan akan bertumbuh juga mengikuti persamaan diferensial berikut:
 
 $$\frac{dQ}{dt} = r Q(t)$$
 
-Perbedannya adalah pada nilai $r$ yang kelak akan digunakan untuk masing-masing zat radio aktif $A$, $B$, dan $C$.
+Perbedannya adalah pada nilai $r$ yang kelak akan digunakan untuk masing-masing zat radioaktif $A$, $B$, dan $C$.
 
 Solusi analitik dari peluruhan adalah:
 
@@ -86,7 +93,6 @@ for i: 1 to num_iter
   print(t, population)
 ```
 
-
 ## Algoritma Euler
 
 ## Algoritma Runge Kutta $4^{th}$
@@ -94,16 +100,52 @@ for i: 1 to num_iter
 
 # Model Matematika
 
+Untuk membuat model matematika dari permasalahan ini, saya akan membuat diagram dari model sehingga hubungan antara ketiga zat radioaktif tersebut bisa terlihat dengan jelas.
+
 ## Diagram Model
+
+Berikut ini adalah diagram model:
 
 ```{r out.width = "80%",echo=FALSE,fig.retina = 10,fig.cap = "Diagram Model",fig.align='center'}
 knitr::include_graphics("Project I.png")
 ```
 
+Zat A akan luruh dengan laju sebesar $r_A$ membentuk zat B dengan laju pertumbuhan sebesar $r_A$ juga. Kemudian zat B akan luruh dengan laju sebesar $r_B$ membentuk zat C dengan laju pertumbuhan sebesar $r_B$ juga. Kemudian zat C akan luruh dengan lajur sebesar $r_C$.
+
 ## Persamaan Diferensial
+
+Berdasarkan diagram dan keterangan di atas, kita dapatkan bahwa:
+
+1. Perubahan massa zat A hanya bergantung pada peluruhan saja.
+1. Perubahan massa zat B bergantung pada pembentukan dan peluruhan.
+1. Perubahan massa zat C bergantung pada pembentukan dan peluruhan.
+
+Dari sini, maka didapatkan sistem persamaan diferensial sebagai berikut:
+
+Model perubahan massa zat A:
+
+$$\frac{dA}{dt} = -r_A A$$
+
+Model perubahan massa zat B:
+
+$$\frac{dB}{dt} = r_A A - r_B B$$
+
+Model perubahan massa zat C:
+
+$$\frac{dC}{dt} = r_B B - r_C C$$
 
 ## Algoritma Penyelesaian
 
+## Program Model Matematika
+
+### Metode Euler
+
+### Metode Runge Kutta $4^{th}$
+
 # Diskusi
+
+## Simulasi
+
+## Grafik Hasil Simulasi
 
 # Kesimpulan
