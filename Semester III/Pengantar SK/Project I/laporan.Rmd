@@ -1,0 +1,55 @@
+---
+title: "PROJECT I"
+subtitle: |
+  | SK5004 
+  | PENGANTAR SAINS KOMPUTASI
+author: |
+  | Mohammad Rizka Fadhli
+  | 20921004
+date: "`r format(Sys.time(),'%d %B %Y')`"
+fontsize: 12pt
+output:
+  pdf_document:
+    number_section: true
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: breezedark
+linestretch: 1.25
+---
+
+# Pendahuluan
+
+Sains komputasi adalah disiplin ilmu yang mempelajari penyelesaian berbagai masalah dalam sains melalui pendekatan komputasi. Salah satunya adalah mencari solusi dari persamaan diferensial yang merupakan fungsi kontinu menggunakan pendekatan yang bersifat diskrit. Sebagai pembahasan pada laporan ini, diberikan satu masalah persamaan diferensial berupa _unconstrained growth and decay_ dari suatu permasalahan peluruhan dan pembentukan beberapa zat radioaktif lalu kemudian akan diselesaikan menggunakan metode pendekatan diskrit.
+
+## Masalah
+
+Laju peluruhan suatu zat radioaktif bisa dituliskan dalam persamaan diferensial berikut ini:
+
+$$\frac{dQ}{dt} = -r Q(t)$$
+
+Untuk suatu $r$ bernilai positif (_decay rate_) dan $Q(t)$ adalah fungsi massa zat radioaktif terhadap waktu ($t$). Suatu zat radioaktif bisa luruh membentuk zat radioaktif lainnya membuat rantai reaksi.
+
+Buatlah model rantai reaksi radioaktif yang berisi 3 elemen: dari zat A luruh menjadi zat B dan luruh menjadi zat C.
+
+# Dasar Teori
+
+## Unconstrained Growth and Decay
+
+## Algoritma Euler
+
+## Algoritma Runge Kutta $4^{th}$
+
+
+# Model Matematika
+
+## Diagram Model
+
+## Persamaan Diferensial
+
+## Algoritma Penyelesaian
+
+# Diskusi
+
+# Kesimpulan
