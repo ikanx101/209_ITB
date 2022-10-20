@@ -32,6 +32,9 @@ linestretch: 1.25
 ```{r,include=FALSE}
 rm(list=ls())
 
+library(dplyr)
+library(ggplot2)
+
 # setwd("/mnt/chromeos/removable/Workstation/209_ITB/Semester III/Pengantar SK/Project I")
 setwd("/cloud/project/Semester III/Pengantar SK/Project I")
 ```
@@ -74,9 +77,59 @@ Solusi analitik dari peluruhan adalah:
 
 $$P = P_0 e^{-rt}$$
 
+Berikut adalah ilustrasi dari peluruhan:
+
+```{r,echo=FALSE,fig.cap = "Ilustrasi Peluruhan"}
+rm(list=ls())
+
+r = 0.55
+f = function(t){
+  P0 * exp(-r * t)
+}
+
+t = seq(0,15,by = .05)
+P0 = 10
+P = f(t)
+
+data.frame(t,P) %>% 
+  ggplot(aes(x = t,
+             y = P)) +
+  geom_line(color = "steelblue") +
+  labs(title = "Ilustrasi Peluruhan Tak Terbatas",
+       subtitle = "P0 = 10 dan r = -0.55",
+       caption = "20921004\nMohammad Rizka Fadhli",
+       y = "Populasi - P(t)",
+       x = "Waktu - t")
+```
+
 sedangkan solusi analitik dari pertumbuhan adalah:
 
 $$P = P_0 e^{rt}$$
+
+Berikut adalah ilustrasi dari pertumbuhan:
+
+```{r,echo=FALSE,fig.cap = "Ilustrasi Pertumbuhan"}
+rm(list=ls())
+
+r = 0.55
+f = function(t){
+  P0 * exp(r * t)
+}
+
+t = seq(0,15,by = .05)
+P0 = 10
+P = f(t)
+
+data.frame(t,P) %>% 
+  ggplot(aes(x = t,
+             y = P)) +
+  geom_line(color = "steelblue") +
+  labs(title = "Ilustrasi Pertumbuhan Tak Terbatas",
+       subtitle = "P0 = 10 dan r = 0.55",
+       caption = "20921004\nMohammad Rizka Fadhli",
+       y = "Populasi - P(t)",
+       x = "Waktu - t")
+```
 
 ## _Finite Difference Equation_
 
