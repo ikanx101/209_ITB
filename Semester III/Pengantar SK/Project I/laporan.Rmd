@@ -136,7 +136,50 @@ $$\frac{dC}{dt} = r_B B - r_C C$$
 
 ## Algoritma Penyelesaian
 
+Berikut adalah algoritma penyelesaian dengan cara mengubah persamaan diferensial menjadi persamaan beda hingga:
+
+```
+# definisi dan initial condition
+r_a   # rate peluruhan A dan pertumbuhan B
+r_b   # rate peluruhan B dan pertumbuhan C
+r_c   # rate peluruhan C
+
+q_a   # massa awal zat radioaktif A
+q_b   # massa awal zat radioaktif B
+q_c   # massa awal zat radioaktif C
+t     # waktu awal t = 0
+
+dt           # delta t
+iter_length  # panjang iterasi
+num_iter = iter_length / dt  # berapa banyak iterasi 
+
+# proses iterasi
+for i in 1 to num_iter do
+    # peluruhan A dan pertumbuhan B
+    rate_1 = r_a * q_a[i-1] * dt
+
+    # peluruhan B dan pertumbuhan C
+    rate_2 = r_b * q_b[i-1] * dt
+
+    # peluruhan C
+    rate_3 = r_c * q_c[i-1] * dt
+    
+    q_a[i] = q_a[i-1] - rate_1
+    q_b[i] = q_b[i-1] + rate_1 - rate_2
+    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    t[i] = t[i-1] + dt
+
+
+print(t,q_a,q_b,q_c)
+
+```
+
+Algoritma di atas merupakan penerapan metode Euler untuk menyelesaikan sistem persamaan diferensial.
+
 ## Program Model Matematika
+
+Pada bagian ini, saya akan membuat duaBerikut ini adalah program yang saya buat menggunakan **R**:
+
 
 ### Metode Euler
 
