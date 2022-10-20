@@ -7,20 +7,34 @@ setwd("/mnt/chromeos/removable/Workstation/209_ITB/Semester III/Pengantar SK/Pro
 # memanggil library yang dibutuhkan
 library(dplyr)
 
-# definisi dan initial condition
-r_a = .05  # rate peluruhan A dan pertumbuhan B
-r_b = .05  # rate peluruhan B dan pertumbuhan C
-r_c = .05  # rate peluruhan C
+# INPUT dari user:
+  # rate peluruhan A dan pertumbuhan B
+  r_a = readline(prompt = "Rate peluruhan A: ") %>% as.numeric()
+  # rate peluruhan B dan pertumbuhan C
+  r_b = readline(prompt = "Rate peluruhan B: ") %>% as.numeric()
+  # rate peluruhan C
+  r_c = readline(prompt = "Rate peluruhan C: ") %>% as.numeric()
+  # massa awal zat radioaktif A
+  qa0 = readline(prompt = "massa awal zat radioaktif A: ") %>% as.numeric()
+  # massa awal zat radioaktif B
+  qb0 = readline(prompt = "massa awal zat radioaktif B: ") %>% as.numeric()
+  # massa awal zat radioaktif C
+  qc0 = readline(prompt = "massa awal zat radioaktif C: ") %>% as.numeric()
+  # delta t
+  dt0 = readline(prompt = "nilai delta t: ") %>% as.numeric()
+  # panjang iterasi
+  iter_length = readline(prompt = "seberapa panjang iterasi dilakukan: ") %>% as.numeric()
 
-q_a = c(10) # massa awal zat radioaktif A
-q_b = c(0)  # massa awal zat radioaktif B
-q_c = c(0)  # massa awal zat radioaktif C
-t = c(0)    # waktu awal t = 0
 
-dt = c(.05)
-iter_length = 3
+# proses perhitungan dengan metode Euler
+q_a = c(qa0)  # array massa zat radioaktif A
+q_b = c(qb0)  # array massa zat radioaktif B
+q_c = c(qc0)  # array massa zat radioaktif C
+t = c(0)      # waktu awal t = 0
+dt = c(dt0)
 num_iter = iter_length / dt[1]
 
+# proses iterasi
 for(i in 2:num_iter){
     # peluruhan A dan pertumbuhan B
     rate_1 = r_a * q_a[i-1] * dt
@@ -41,4 +55,4 @@ for(i in 2:num_iter){
 
 df = data.frame(t,q_a,q_b,q_c)
 
-df
+print(df)
