@@ -22,7 +22,7 @@ linestretch: 1.25
 ```{r,include=FALSE}
 rm(list=ls())
 
-setwd("/cloud/project/Semester III/Pengantar SK/Project I")
+setwd("/mnt/chromeos/removable/Workstation/209_ITB/Semester III/Pengantar SK/Project I")
 ```
 
 # Pendahuluan
