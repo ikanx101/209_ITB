@@ -15,14 +15,25 @@ output:
     fig_width: 7
     fig_height: 4
     fig_caption: true
-    highlight: breezedark
+    highlight: tango
 linestretch: 1.25
 ---
+
+
+\newpage
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\listoffigures
+\newpage
+
 
 ```{r,include=FALSE}
 rm(list=ls())
 
-setwd("/mnt/chromeos/removable/Workstation/209_ITB/Semester III/Pengantar SK/Project I")
+# setwd("/mnt/chromeos/removable/Workstation/209_ITB/Semester III/Pengantar SK/Project I")
+setwd("/cloud/project/Semester III/Pengantar SK/Project I")
 ```
 
 # Pendahuluan
@@ -37,14 +48,13 @@ $$\frac{dQ}{dt} = -r Q(t)$$
 
 Untuk suatu $r$ bernilai positif (_decay rate_) dan $Q(t)$ adalah fungsi massa zat radioaktif terhadap waktu ($t$). Suatu zat radioaktif bisa luruh membentuk zat radioaktif lainnya membuat rantai reaksi.
 
-Buatlah model rantai reaksi radioaktif yang berisi 3 elemen: dari zat A luruh menjadi zat B dan luruh menjadi zat C.
+Buatlah model rantai reaksi radioaktif yang berisi 3 elemen: dari zat A luruh menjadi zat B dan luruh menjadi zat C!
 
 ## Bahasa Pemrograman
 
-Saya menggunakan bahasa pemrograman **R** versi `4.0.4` untuk membuat program dan melakukan simulasi untuk menyelesaikan permasalahan di atas. _Libraries_ yang terlibat antara lain:
+Saya menggunakan bahasa pemrograman **R** versi `4.0.4` untuk membuat program dan melakukan simulasi untuk menyelesaikan permasalahan di atas. 
 
-1. `library(dplyr)` untuk memanipulasi tabel (sebagai kebutuhan _output_ pada laporan).
-1. `library(ggplot2)` untuk membuat beberapa grafik hasil simulasi.
+\newpage
 
 # Dasar Teori
 
@@ -76,7 +86,11 @@ $$
 \text{new value} = \text{old values} + \text{change in value}
 $$
 
-Algoritma dasar dari bentuk di atas untuk menyelesaikan persamaan diferensialnya adalah sebagai berikut:
+Berdasarkan bentuk di atas, saya akan membuat dua algoritma untuk menyelesaikannya, yakni:
+
+## Algoritma Euler
+
+Algoritma Euler untuk menyelesaikan persamaan diferensial adalah sebagai berikut:
 
 ```
 initialize
@@ -87,16 +101,52 @@ initialize
 compute:
   rate_per_step = rate * dt
   num_iter = sim_length / dt
-for i: 1 to num_iter
+for i: 1 to num_iter do
   population = population + rate_per_step * population
   t = i * dt
   print(t, population)
 ```
 
-## Algoritma Euler
-
 ## Algoritma Runge Kutta $4^{th}$
 
+Bentuk umum dari metode Runge Kutta orde 4 adalah sebagai berikut:
+
+$$y_{n+1} = y_n + h \sum_{i=1}^n b_i k_i$$
+
+dimana:
+
+1. $y(t=0)$ diketahui.
+1. $k_i$ adalah konstanta yang harus dicari.
+
+Berikut adalah algoritmanya:
+
+\newpage
+
+```
+initialize
+  f # fungsi persamaan diferensial
+  x0
+  y0
+  h
+  sim_length
+  rate
+  dt
+
+compute:
+  num_iter = sim_length / dt
+  
+for i: 1 to num_iter do
+  compute:
+    k1 = f(x0,y0)
+    k2 = f(x0 + 0.5*h,y0 + 0.5*k1*h)
+    k3 = f(x0 + 0.5*h,y0 + 0.5*k2*h)
+    k4 = f(x0 + h,y0 + k3*h)
+    y0 = y0 + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+    x0 = x0 + h
+    print(x0,y0)
+```
+
+\newpage
 
 # Model Matematika
 
