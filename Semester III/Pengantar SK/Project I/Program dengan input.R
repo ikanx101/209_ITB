@@ -29,9 +29,13 @@ for(i in 2:num_iter){
     # peluruhan C
     rate_3 = r_c * q_c[i-1] * dt
     
+    # perhitungan massa zat A
     q_a[i] = q_a[i-1] - rate_1
+    # perhitungan massa zat B
     q_b[i] = q_b[i-1] + rate_1 - rate_2
+    # perhitungan massa zat C
     q_c[i] = q_c[i-1] + rate_2 - rate_3
+    # perhitungan massa waktu
     t[i] = t[i-1] + dt
 }
 
