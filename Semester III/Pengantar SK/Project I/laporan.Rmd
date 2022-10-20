@@ -15,7 +15,7 @@ output:
     fig_width: 7
     fig_height: 4
     fig_caption: true
-    highlight: tango
+    highlight: espresso
 linestretch: 1.25
 ---
 
@@ -71,15 +71,11 @@ dan akan bertumbuh juga mengikuti persamaan diferensial berikut:
 
 $$\frac{dQ}{dt} = r Q(t)$$
 
-Perbedannya adalah pada nilai $r$ yang kelak akan digunakan untuk masing-masing zat radioaktif $A$, $B$, dan $C$.
+Perbedaannya adalah pada nilai $r$ yang kelak akan digunakan untuk masing-masing zat radioaktif $A$, $B$, dan $C$.
 
-Solusi analitik dari peluruhan adalah:
+Solusi analitik dari peluruhan adalah: $P = P_0 e^{-rt}$
 
-$$P = P_0 e^{-rt}$$
-
-Berikut adalah ilustrasi dari peluruhan:
-
-```{r,echo=FALSE,fig.cap = "Ilustrasi Peluruhan"}
+```{r,echo=FALSE,fig.cap = "Ilustrasi Peluruhan",fig.height=3.5}
 rm(list=ls())
 
 r = 0.55
@@ -102,13 +98,11 @@ data.frame(t,P) %>%
        x = "Waktu - t")
 ```
 
-sedangkan solusi analitik dari pertumbuhan adalah:
+\newpage
 
-$$P = P_0 e^{rt}$$
+sedangkan solusi analitik dari pertumbuhan adalah: $P = P_0 e^{rt}$
 
-Berikut adalah ilustrasi dari pertumbuhan:
-
-```{r,echo=FALSE,fig.cap = "Ilustrasi Pertumbuhan"}
+```{r,echo=FALSE,fig.cap = "Ilustrasi Pertumbuhan",fig.height=3.5}
 rm(list=ls())
 
 r = 0.55
@@ -228,6 +222,8 @@ Dari sini, maka didapatkan sistem persamaan diferensial sebagai berikut:
 Model perubahan massa zat A:
 
 $$\frac{dA}{dt} = -r_A A$$
+
+\newpage
 
 Model perubahan massa zat B:
 
