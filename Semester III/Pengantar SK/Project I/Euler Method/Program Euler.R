@@ -31,8 +31,8 @@ q_a = c(qa0)  # array massa zat radioaktif A
 q_b = c(qb0)  # array massa zat radioaktif B
 q_c = c(qc0)  # array massa zat radioaktif C
 t = c(0)      # waktu awal t = 0
-dt = c(dt0)
-num_iter = (iter_length / dt[1]) + 1
+dt = dt0
+num_iter = (iter_length / dt) + 1
 
 # proses iterasi
 for(i in 2:num_iter){

@@ -167,7 +167,6 @@ dimana:
 
 Berikut adalah algoritmanya:
 
-\newpage
 
 ```
 initialize
@@ -310,8 +309,8 @@ q_a = c(qa0)  # array massa zat radioaktif A
 q_b = c(qb0)  # array massa zat radioaktif B
 q_c = c(qc0)  # array massa zat radioaktif C
 t = c(0)      # waktu awal t = 0
-dt = c(dt0)
-num_iter = (iter_length / dt[1]) + 1
+dt = dt0
+num_iter = (iter_length / dt) + 1
 
 # proses iterasi
 for(i in 2:num_iter){
@@ -345,11 +344,56 @@ data.frame(Parameter = c("r_a","r_b","r_c","qa0","qb0","qc0","dt0","iter_length"
            Value = c(.5,.4,.3,10,0,0,.25,5)) %>% knitr::kable(caption = "Parameter Simulasi Program Euler")
 ```
 
-```{r,echo=FALSE,fig.cap = "Hasil Simulasi Program Euler"}
+```{r out.height="45%",echo=FALSE,fig.cap = "Hasil Simulasi Program Euler",fig.align='center'}
 knitr::include_graphics("skrinsut_1.png")
 ```
 
-Sekarang saya akan _run_ program ini sekali lagi menggunakan parameter yang ada di soal, yakni:
+\newpage
+
+Program tersebut saya simpan dengan nama __Program Euler.R__ dan saya lampirkan bersamaan dengan laporan ini. Untuk menggunakannya, silakan buka __R__ dan ketikkan perintah `source("Program Euler.R")`. 
+
+
+### Program dengan Metode Runge Kutta $4^{th}$
+
+```
+
+d_a = function(r_a,q_a){-ra * q_a}
+d_b = function(r_a,q_a,r_b,q_b){(r_a * q_a) - (r_b * q_b)}
+d_c = function(r_b,q_b,r_c,q_c){(r_b * q_b) - (r_c * q_c)}
+
+
+rk_4order = function(f, x0, y0, h, n){
+  # initial condition
+  x = x0
+  y = y0
+  # proses iterasi
+  for(i in 1:n){
+    k1 = f(x0,y0)
+    k2 = f(x0 + 0.5*h,y0 + 0.5*k1*h)
+    k3 = f(x0 + 0.5*h,y0 + 0.5*k2*h)
+    k4 = f(x0 + h,y0 + k3*h)
+    y0 = y0 + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+    x0 = x0 + h
+    x = c(x, x0)
+    y = c(y, y0)
+  }
+  # output
+  output = data.frame(x = x,
+                      y = y)
+  return(output)
+}
+```
+
+
+\newpage
+
+# Diskusi
+
+Sekarang saya akan _run_ program Euler menggunakan parameter yang ada di soal.
+
+## Simulasi
+
+Berikut adalah parameter di soal:
 
 ```{r,echo=FALSE}
 data.frame(Parameter = c("r_a","r_b","r_c","qa0","qb0","qc0","dt0","iter_length"),
@@ -392,16 +436,61 @@ for(i in 2:(num_iter + 1)){
 
 df = data.frame(t,q_a,q_b,q_c)
 
-df %>% kable::knitr(caption = "Hasil Simulasi Program Euler Menggunakan Parameter Soal")
+df 
 ```
-
-
-### Program dengan Metode Runge Kutta $4^{th}$
-
-# Diskusi
-
-## Simulasi
 
 ## Grafik Hasil Simulasi
 
+Berikut ini adalah grafiknya jika saya perpanjang nilai $t$-nya menjadi 300 dan $dt = 0.05$ :
+
+```{r,echo=FALSE,fig.cap = "Ilustrasi Hasil Simulasi Menggunakan Parameter Soal"}
+rm(list=ls())
+
+# definisi dan initial condition
+r_a = .0137  # rate peluruhan A dan pertumbuhan B
+r_b = .051  # rate peluruhan B dan pertumbuhan C
+r_c = .0  # rate peluruhan C
+
+q_a = c(4*10^(-8)) # massa awal zat radioaktif A
+q_b = c(0)  # massa awal zat radioaktif B
+q_c = c(0)  # massa awal zat radioaktif C
+t = c(0)    # waktu awal t = 0
+
+dt = .05
+iter_length = 300
+num_iter = iter_length / dt
+
+for(i in 2:(num_iter + 1)){
+    # peluruhan A dan pertumbuhan B
+    rate_1 = r_a * q_a[i-1] * dt
+    # peluruhan B dan pertumbuhan C
+    rate_2 = r_b * q_b[i-1] * dt
+    # peluruhan C
+    rate_3 = r_c * q_c[i-1] * dt
+    
+    q_a[i] = q_a[i-1] - rate_1
+    q_b[i] = q_b[i-1] + rate_1 - rate_2
+    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    t[i] = t[i-1] + dt
+}
+
+df = data.frame(t,q_a,q_b,q_c)
+
+
+df %>% 
+  reshape2::melt(id.vars = "t") %>% 
+  ggplot(aes(x = t,y = value,color = variable)) +
+  geom_line() +
+  scale_color_manual(values = c("darkred","steelblue","darkgreen")) +
+  labs(title = "Hasil Simulasi dengan Parameter dari Soal",
+       subtitle = "Menggunakan Program Euler",
+       y = "Massa zat",
+       color = "Jenis Zat Radioaktif")
+```
+
+Terlihat bahwa zat A luruh sepenuhnya membentuk zat B yang kemudian luruh sepenuhnya sehingga hanya menyisakan zat C yang terus bertumbuh hingga massanya sebesar $Q_A(t = 0)$.
+
+\newpage
+
 # Kesimpulan
+
