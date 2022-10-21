@@ -2,7 +2,7 @@
 rm(list=ls())
 
 # set working directory
-setwd("/mnt/chromeos/removable/Workstation/209_ITB/Semester III/Pengantar SK/Project I")
+setwd("/mnt/chromeos/removable/Workstation/209_ITB/Semester III/Pengantar SK/Project I/Euler Method")
 
 # memanggil library yang dibutuhkan
 library(dplyr)
@@ -32,7 +32,7 @@ q_b = c(qb0)  # array massa zat radioaktif B
 q_c = c(qc0)  # array massa zat radioaktif C
 t = c(0)      # waktu awal t = 0
 dt = c(dt0)
-num_iter = iter_length / dt[1]
+num_iter = (iter_length / dt[1]) + 1
 
 # proses iterasi
 for(i in 2:num_iter){

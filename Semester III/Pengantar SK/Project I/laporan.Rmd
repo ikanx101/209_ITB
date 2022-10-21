@@ -311,7 +311,7 @@ q_b = c(qb0)  # array massa zat radioaktif B
 q_c = c(qc0)  # array massa zat radioaktif C
 t = c(0)      # waktu awal t = 0
 dt = c(dt0)
-num_iter = iter_length / dt[1]
+num_iter = (iter_length / dt[1]) + 1
 
 # proses iterasi
 for(i in 2:num_iter){
@@ -342,8 +342,59 @@ Berikut adalah _screenshoot_ saat program dijalankan dengan parameter sebagai be
 
 ```{r,echo=FALSE}
 data.frame(Parameter = c("r_a","r_b","r_c","qa0","qb0","qc0","dt0","iter_length"),
-           Value = c(.5,.4,.3,10,0,0,.25,5)) %>% knitr::kable(caption = "Simulasi Program Euler")
+           Value = c(.5,.4,.3,10,0,0,.25,5)) %>% knitr::kable(caption = "Parameter Simulasi Program Euler")
 ```
+
+```{r,echo=FALSE,fig.cap = "Hasil Simulasi Program Euler"}
+knitr::include_graphics("skrinsut_1.png")
+```
+
+Sekarang saya akan _run_ program ini sekali lagi menggunakan parameter yang ada di soal, yakni:
+
+```{r,echo=FALSE}
+data.frame(Parameter = c("r_a","r_b","r_c","qa0","qb0","qc0","dt0","iter_length"),
+           Value = c(.0137,.051,0,4*10^(-8),0,0,.5,10)) %>% 
+           knitr::kable(caption = "Parameter di Soal")
+```
+
+Massa zat A adalah $S \times 10^{-8}$ dengan $S$ adalah 2 digit terakhir NIM saya (20921004). Sehingga $S = 4$. _Rate_ peluruhan untuk zat C saya buat sama dengan nol (karena tidak dinyatakan dalam soal).
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+# definisi dan initial condition
+r_a = .0137  # rate peluruhan A dan pertumbuhan B
+r_b = .051  # rate peluruhan B dan pertumbuhan C
+r_c = .0  # rate peluruhan C
+
+q_a = c(4*10^(-8)) # massa awal zat radioaktif A
+q_b = c(0)  # massa awal zat radioaktif B
+q_c = c(0)  # massa awal zat radioaktif C
+t = c(0)    # waktu awal t = 0
+
+dt = c(.5)
+iter_length = 10
+num_iter = iter_length / dt[1]
+
+for(i in 2:(num_iter + 1)){
+    # peluruhan A dan pertumbuhan B
+    rate_1 = r_a * q_a[i-1] * dt
+    # peluruhan B dan pertumbuhan C
+    rate_2 = r_b * q_b[i-1] * dt
+    # peluruhan C
+    rate_3 = r_c * q_c[i-1] * dt
+    
+    q_a[i] = q_a[i-1] - rate_1
+    q_b[i] = q_b[i-1] + rate_1 - rate_2
+    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    t[i] = t[i-1] + dt
+}
+
+df = data.frame(t,q_a,q_b,q_c)
+
+df %>% kable::knitr(caption = "Hasil Simulasi Program Euler Menggunakan Parameter Soal")
+```
+
 
 ### Program dengan Metode Runge Kutta $4^{th}$
 
