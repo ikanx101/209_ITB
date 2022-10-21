@@ -301,7 +301,8 @@ Pada bagian ini, saya akan membuat dua program untuk menyelesaikan permasalahan 
   # delta t
   dt0 = readline(prompt = "nilai delta t: ") %>% as.numeric()
   # panjang iterasi
-  iter_length = readline(prompt = "seberapa panjang iterasi dilakukan: ") %>% as.numeric()
+  iter_length = readline(prompt = "seberapa panjang iterasi dilakukan: ") %>% 
+                as.numeric()
 
 
 # proses perhitungan dengan metode Euler
@@ -335,6 +336,13 @@ for(i in 2:num_iter){
 df = data.frame(t,q_a,q_b,q_c)
 # print output pada layar
 print(df)
+```
+
+Berikut adalah _screenshoot_ saat program dijalankan dengan parameter sebagai berikut:
+
+```{r,echo=FALSE}
+data.frame(Parameter = c("r_a","r_b","r_c","qa0","qb0","qc0","dt0","iter_length"),
+           Value = c(.5,.4,.3,10,0,0,.25,5)) %>% knitr::kable(caption = "Simulasi Program Euler")
 ```
 
 ### Program dengan Metode Runge Kutta $4^{th}$
