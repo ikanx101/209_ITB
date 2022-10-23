@@ -1,19 +1,21 @@
+# ==============================================================================
+# Program Euler
+#
+# Project I - Pengantar Sains Komputasi
+#
+# Mohammad Rizka Fadhli - 20921004
+#
+# ==============================================================================
+
+
 # membersihkan global environment
 rm(list=ls())
-
-# set working directory
-setwd("/mnt/chromeos/removable/Workstation/209_ITB/Semester III/Pengantar SK/Project I/Euler Method")
-
-# memanggil library yang dibutuhkan
-library(dplyr)
 
 # INPUT dari user:
   # rate peluruhan A dan pertumbuhan B
   r_a = readline(prompt = "Rate peluruhan A: ") %>% as.numeric()
   # rate peluruhan B dan pertumbuhan C
   r_b = readline(prompt = "Rate peluruhan B: ") %>% as.numeric()
-  # rate peluruhan C
-  r_c = readline(prompt = "Rate peluruhan C: ") %>% as.numeric()
   # massa awal zat radioaktif A
   qa0 = readline(prompt = "massa awal zat radioaktif A: ") %>% as.numeric()
   # massa awal zat radioaktif B
@@ -40,15 +42,13 @@ for(i in 2:num_iter){
     rate_1 = r_a * q_a[i-1] * dt
     # peluruhan B dan pertumbuhan C
     rate_2 = r_b * q_b[i-1] * dt
-    # peluruhan C
-    rate_3 = r_c * q_c[i-1] * dt
     
     # perhitungan massa zat A
     q_a[i] = q_a[i-1] - rate_1
     # perhitungan massa zat B
     q_b[i] = q_b[i-1] + rate_1 - rate_2
     # perhitungan massa zat C
-    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    q_c[i] = q_c[i-1] + rate_2 
     # perhitungan massa waktu
     t[i] = t[i-1] + dt
 }

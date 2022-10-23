@@ -163,7 +163,16 @@ $$y_{n+1} = y_n + h \sum_{i=1}^n b_i k_i$$
 dimana:
 
 1. $y(t=0)$ diketahui.
-1. $k_i$ adalah konstanta yang harus dicari.
+1. $k_i$ adalah konstanta yang harus dicari, yakni:
+
+$$\begin{matrix}
+k_1 = f(t_n,y_n) \\
+k_2 = f(t_n + \frac{h}{2}, y_n + h \frac{k_1}{2}) \\
+k_3 = f(t_n + \frac{h}{2}, y_n + h \frac{k_2}{2}) \\ 
+k_4 = f(t_n + h, y_n + h k_3) \\
+\end{matrix}$$
+
+\newpage
 
 Berikut adalah algoritmanya:
 
@@ -355,34 +364,110 @@ Program tersebut saya simpan dengan nama __Program Euler.R__ dan saya lampirkan 
 
 ### Program dengan Metode Runge Kutta $4^{th}$
 
+Berikut adalah program yang saya buat menggunakan metode Runge Kutta $4^{th}$:
+
 ```
+# INPUT dari user:
+  # rate peluruhan A dan pertumbuhan B
+  r_a = readline(prompt = "Rate peluruhan A: ") %>% as.numeric()
+  # rate peluruhan B dan pertumbuhan C
+  r_b = readline(prompt = "Rate peluruhan B: ") %>% as.numeric()
+  # rate peluruhan C
+  r_c = readline(prompt = "Rate peluruhan C: ") %>% as.numeric()
+  # massa awal zat radioaktif A
+  q_a = readline(prompt = "massa awal zat radioaktif A: ") %>% as.numeric()
+  # massa awal zat radioaktif B
+  q_b = readline(prompt = "massa awal zat radioaktif B: ") %>% as.numeric()
+  # massa awal zat radioaktif C
+  q_c = readline(prompt = "massa awal zat radioaktif C: ") %>% as.numeric()
+  # panjang iterasi
+  iter_length = readline(prompt = "seberapa panjang iterasi dilakukan: ") %>% 
+                as.numeric()
+  # h
+  h = readline(prompt = "selang h: ") %>% as.numeric()
+  
+# initial condition
+t   = 0   # waktu awal t = 0
 
-d_a = function(r_a,q_a){-ra * q_a}
-d_b = function(r_a,q_a,r_b,q_b){(r_a * q_a) - (r_b * q_b)}
-d_c = function(r_b,q_b,r_c,q_c){(r_b * q_b) - (r_c * q_c)}
+# kalkulasi banyak iterasi yang dilakukan
+num_iter = (iter_length / h) + 1
 
-
-rk_4order = function(f, x0, y0, h, n){
-  # initial condition
-  x = x0
-  y = y0
-  # proses iterasi
-  for(i in 1:n){
-    k1 = f(x0,y0)
-    k2 = f(x0 + 0.5*h,y0 + 0.5*k1*h)
-    k3 = f(x0 + 0.5*h,y0 + 0.5*k2*h)
-    k4 = f(x0 + h,y0 + k3*h)
-    y0 = y0 + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
-    x0 = x0 + h
-    x = c(x, x0)
-    y = c(y, y0)
+# definisi fungsi persamaan diferensial
+  # zat radio aktif A
+  d_a = function(t,q_a){
+    (-r_a * q_a) 
   }
-  # output
-  output = data.frame(x = x,
-                      y = y)
-  return(output)
+  # zat radio aktif B
+  d_b = function(t,q_a,q_b){
+    ((r_a * q_a) - (r_b * q_b)) 
+  }
+  # zat radio aktif C
+  d_c = function(t,q_b,q_c){
+    ((r_b * q_b) - (r_c * q_c)) 
+  }
+
+# persiapan array utk iterasi
+A = c(q_a)
+B = c(q_b)
+C = c(q_c)
+t_ = c(t)
+
+
+# proses iterasi
+for(i in 2:num_iter){
+  # kita akan hitung dulu zat a
+  k1 = d_a(t,A[i-1]) 
+  k2 = d_a(t + 0.5*h,A[i-1] + 0.5*k1*h) 
+  k3 = d_a(t + 0.5*h,A[i-1] + 0.5*k2*h) 
+  k4 = d_a(t + h,A[i-1] + k3*h) 
+  
+  A[i] = A[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  # kita hitung zat b
+  k1 = d_b(t,
+           A[i-1],
+           B[i-1]) 
+  k2 = d_b(t + 0.5*h,
+           A[i-1] + 0.5*k1*h,
+           B[i-1] + 0.5*k1*h) 
+  k3 = d_b(t + 0.5*h,
+           A[i-1] + 0.5*k2*h,
+           B[i-1] + 0.5*k2*h) 
+  k4 = d_b(t + h,
+           A[i-1] + k3*h,
+           B[i-1] + k3*h) 
+  
+  B[i] = B[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  # kita hitung zat c
+  k1 = d_c(t,
+           B[i-1],
+           C[i-1]) 
+  k2 = d_c(t + 0.5*h,
+           B[i-1] + 0.5*k1*h,
+           C[i-1] + 0.5*k1*h) 
+  k3 = d_c(t + 0.5*h,
+           B[i-1] + 0.5*k2*h,
+           C[i-1] + 0.5*k2*h) 
+  k4 = d_c(t + h,
+           B[i-1] + k3*h,
+           C[i-1] + k3*h) 
+  
+  C[i] = C[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  t_[i] = t_[i-1] + h
+  
 }
+
+# output
+output = data.frame(t_,A,B,C)
+
+# mengeluarkan output ke layar
+print(output)
+
 ```
+
+Program tersebut saya simpan dengan nama __Program RK 4.R__ dan saya lampirkan bersamaan dengan laporan ini. Untuk menggunakannya, silakan buka __R__ dan ketikkan perintah `source("Program RK 4.R")`. 
 
 
 \newpage
@@ -391,7 +476,9 @@ rk_4order = function(f, x0, y0, h, n){
 
 Sekarang saya akan _run_ program Euler menggunakan parameter yang ada di soal.
 
-## Simulasi
+## Menggunakan Program Euler
+
+### Simulasi
 
 Berikut adalah parameter di soal:
 
@@ -439,7 +526,7 @@ df = data.frame(t,q_a,q_b,q_c)
 df 
 ```
 
-## Grafik Hasil Simulasi
+### Grafik Hasil Simulasi
 
 Berikut ini adalah grafiknya jika saya perpanjang nilai $t$-nya menjadi 300 dan $dt = 0.05$ :
 
@@ -489,6 +576,13 @@ df %>%
 ```
 
 Terlihat bahwa zat A luruh sepenuhnya membentuk zat B yang kemudian luruh sepenuhnya sehingga hanya menyisakan zat C yang terus bertumbuh hingga massanya sebesar $Q_A(t = 0)$.
+
+## Menggunakan Program Runge Kutta $4^{th}$
+
+### Simulasi
+
+
+### Grafik Hasil Simulasi
 
 \newpage
 
