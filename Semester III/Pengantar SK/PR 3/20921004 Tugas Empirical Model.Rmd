@@ -1,0 +1,37 @@
+---
+title: "Tugas Empirical Model"
+subtitle: |
+  | SK5004 
+  | PENGANTAR SAINS KOMPUTASI
+author: |
+  | Mohammad Rizka Fadhli
+  | 20921004
+date: "`r format(Sys.time(),'%d %B %Y')`"
+fontsize: 12pt
+output:
+  pdf_document:
+    number_section: false
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: espresso
+linestretch: 1.25
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd("/cloud/project/Semester III/Pengantar SK/PR 3")
+
+```
+
+# Tugas
+
+1. Pilih salah satu data yang ada dalam `File/Tugas Empirical`. 
+1. Linearkan data tersebut dengan mengubah sumbu-x dan/atau sumbu-y seperti yang dijelaskan di kelas.
+1. _Fitting_ regresi linear pada data yang telah dilinearkan.
+1. _Plot_ kembali data seperti semula dengan mengubah sumbu-x dan sumbu-y seperti di awal dengan persamaan garis yang telah diubah.
+
+# Jawab
+
