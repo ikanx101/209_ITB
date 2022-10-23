@@ -7,6 +7,9 @@
 #
 # ==============================================================================
 
+# library
+library(dplyr)
+
 # membersihkan global environment
 rm(list=ls())
 
@@ -15,8 +18,6 @@ rm(list=ls())
   r_a = readline(prompt = "Rate peluruhan A: ") %>% as.numeric()
   # rate peluruhan B dan pertumbuhan C
   r_b = readline(prompt = "Rate peluruhan B: ") %>% as.numeric()
-  # rate peluruhan C
-  r_c = readline(prompt = "Rate peluruhan C: ") %>% as.numeric()
   # massa awal zat radioaktif A
   q_a = readline(prompt = "massa awal zat radioaktif A: ") %>% as.numeric()
   # massa awal zat radioaktif B
@@ -46,7 +47,7 @@ num_iter = (iter_length / h) + 1
   }
   # zat radio aktif C
   d_c = function(t,q_b,q_c){
-    ((r_b * q_b) - (r_c * q_c)) 
+    (r_b * q_b) 
   }
 
 # persiapan array utk iterasi
@@ -104,5 +105,4 @@ for(i in 2:num_iter){
 
 # output
 output = data.frame(t_,A,B,C)
-
 print(output)

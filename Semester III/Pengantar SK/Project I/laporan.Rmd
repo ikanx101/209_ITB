@@ -184,11 +184,9 @@ initialize
   y0
   h
   sim_length
-  rate
-  dt
 
 compute:
-  num_iter = sim_length / dt
+  num_iter = sim_length / h
   
 for i: 1 to num_iter do
   compute:
@@ -215,7 +213,7 @@ Berikut ini adalah diagram model:
 knitr::include_graphics("Project I.png")
 ```
 
-Zat A akan luruh dengan laju sebesar $r_A$ membentuk zat B dengan laju pertumbuhan sebesar $r_A$ juga. Kemudian zat B akan luruh dengan laju sebesar $r_B$ membentuk zat C dengan laju pertumbuhan sebesar $r_B$ juga. Kemudian zat C akan luruh dengan lajur sebesar $r_C$.
+Zat A akan luruh dengan laju sebesar $r_A$ membentuk zat B dengan laju pertumbuhan sebesar $r_A$ juga. Kemudian zat B akan luruh dengan laju sebesar $r_B$ membentuk zat C dengan laju pertumbuhan sebesar $r_B$ juga. 
 
 ## Persamaan Diferensial
 
@@ -223,7 +221,7 @@ Berdasarkan diagram dan keterangan di atas, kita dapatkan bahwa:
 
 1. Perubahan massa zat A hanya bergantung pada peluruhan saja.
 1. Perubahan massa zat B bergantung pada pembentukan dan peluruhan.
-1. Perubahan massa zat C bergantung pada pembentukan dan peluruhan.
+1. Perubahan massa zat C bergantung pada pembentukan saja.
 
 Dari sini, maka didapatkan sistem persamaan diferensial sebagai berikut:
 
@@ -239,7 +237,7 @@ $$\frac{dB}{dt} = r_A A - r_B B$$
 
 Model perubahan massa zat C:
 
-$$\frac{dC}{dt} = r_B B - r_C C$$
+$$\frac{dC}{dt} = r_B B$$
 
 ## Algoritma Penyelesaian
 
@@ -249,7 +247,6 @@ Berikut adalah algoritma penyelesaian dengan cara mengubah persamaan diferensial
 # definisi dan initial condition
 r_a   # rate peluruhan A dan pertumbuhan B
 r_b   # rate peluruhan B dan pertumbuhan C
-r_c   # rate peluruhan C
 
 q_a   # massa awal zat radioaktif A
 q_b   # massa awal zat radioaktif B
@@ -268,15 +265,12 @@ for i in 1 to num_iter do
     # peluruhan B dan pertumbuhan C
     rate_2 = r_b * q_b[i-1] * dt
 
-    # peluruhan C
-    rate_3 = r_c * q_c[i-1] * dt
-    
     # perhitungan massa zat A
     q_a[i] = q_a[i-1] - rate_1
     # perhitungan massa zat B
     q_b[i] = q_b[i-1] + rate_1 - rate_2
     # perhitungan massa zat C
-    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    q_c[i] = q_c[i-1] + rate_2
     # perhitungan massa waktu
     t[i] = t[i-1] + dt
 
@@ -293,13 +287,13 @@ Pada bagian ini, saya akan membuat dua program untuk menyelesaikan permasalahan 
 ### Program dengan Metode Euler
 
 ```
+# ============================================================================
 # INPUT dari user:
   # rate peluruhan A dan pertumbuhan B
   r_a = readline(prompt = "Rate peluruhan A: ") %>% as.numeric()
   # rate peluruhan B dan pertumbuhan C
   r_b = readline(prompt = "Rate peluruhan B: ") %>% as.numeric()
-  # rate peluruhan C
-  r_c = readline(prompt = "Rate peluruhan C: ") %>% as.numeric()
+
   # massa awal zat radioaktif A
   qa0 = readline(prompt = "massa awal zat radioaktif A: ") %>% as.numeric()
   # massa awal zat radioaktif B
@@ -327,33 +321,36 @@ for(i in 2:num_iter){
     rate_1 = r_a * q_a[i-1] * dt
     # peluruhan B dan pertumbuhan C
     rate_2 = r_b * q_b[i-1] * dt
-    # peluruhan C
-    rate_3 = r_c * q_c[i-1] * dt
-    
+
     # perhitungan massa zat A
     q_a[i] = q_a[i-1] - rate_1
     # perhitungan massa zat B
     q_b[i] = q_b[i-1] + rate_1 - rate_2
     # perhitungan massa zat C
-    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    q_c[i] = q_c[i-1] + rate_2
     # perhitungan massa waktu
     t[i] = t[i-1] + dt
 }
 
 # membuat data output
 df = data.frame(t,q_a,q_b,q_c)
+
 # print output pada layar
 print(df)
+# ============================================================================
+
 ```
+
+\newpage
 
 Berikut adalah _screenshoot_ saat program dijalankan dengan parameter sebagai berikut:
 
 ```{r,echo=FALSE}
-data.frame(Parameter = c("r_a","r_b","r_c","qa0","qb0","qc0","dt0","iter_length"),
-           Value = c(.5,.4,.3,10,0,0,.25,5)) %>% knitr::kable(caption = "Parameter Simulasi Program Euler")
+data.frame(Parameter = c("r_a","r_b","qa0","qb0","qc0","dt0","iter_length"),
+           Value = c(.5,.4,10,0,0,.25,5)) %>% knitr::kable(caption = "Parameter Simulasi Program Euler")
 ```
 
-```{r out.height="45%",echo=FALSE,fig.cap = "Hasil Simulasi Program Euler",fig.align='center'}
+```{r out.height="50%",echo=FALSE,fig.cap = "Hasil Simulasi Program Euler",fig.align='center'}
 knitr::include_graphics("skrinsut_1.png")
 ```
 
@@ -367,24 +364,216 @@ Program tersebut saya simpan dengan nama __Program Euler.R__ dan saya lampirkan 
 Berikut adalah program yang saya buat menggunakan metode Runge Kutta $4^{th}$:
 
 ```
+# ============================================================================
 # INPUT dari user:
   # rate peluruhan A dan pertumbuhan B
   r_a = readline(prompt = "Rate peluruhan A: ") %>% as.numeric()
   # rate peluruhan B dan pertumbuhan C
   r_b = readline(prompt = "Rate peluruhan B: ") %>% as.numeric()
-  # rate peluruhan C
-  r_c = readline(prompt = "Rate peluruhan C: ") %>% as.numeric()
+  
   # massa awal zat radioaktif A
   q_a = readline(prompt = "massa awal zat radioaktif A: ") %>% as.numeric()
   # massa awal zat radioaktif B
   q_b = readline(prompt = "massa awal zat radioaktif B: ") %>% as.numeric()
   # massa awal zat radioaktif C
   q_c = readline(prompt = "massa awal zat radioaktif C: ") %>% as.numeric()
+  
   # panjang iterasi
   iter_length = readline(prompt = "seberapa panjang iterasi dilakukan: ") %>% 
                 as.numeric()
   # h
   h = readline(prompt = "selang h: ") %>% as.numeric()
+  
+# initial condition
+t   = 0   # waktu awal t = 0
+
+# kalkulasi banyak iterasi yang dilakukan
+num_iter = (iter_length / h) + 1
+
+# definisi fungsi persamaan diferensial
+  # zat radio aktif A
+  d_a = function(t,q_a){(-r_a * q_a)}
+  
+  # zat radio aktif B
+  d_b = function(t,q_a,q_b){((r_a * q_a) - (r_b * q_b))}
+  
+  # zat radio aktif C
+  d_c = function(t,q_b,q_c){(r_b * q_b)}
+
+# persiapan array utk iterasi
+A = c(q_a)
+B = c(q_b)
+C = c(q_c)
+t_ = c(t)
+
+
+# proses iterasi
+for(i in 2:num_iter){
+  # kita akan hitung dulu zat a
+  k1 = d_a(t,A[i-1]) 
+  k2 = d_a(t + 0.5*h,A[i-1] + 0.5*k1*h) 
+  k3 = d_a(t + 0.5*h,A[i-1] + 0.5*k2*h) 
+  k4 = d_a(t + h,A[i-1] + k3*h) 
+  
+  A[i] = A[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  # kita hitung zat b
+  k1 = d_b(t,A[i-1],B[i-1]) 
+  k2 = d_b(t + 0.5*h,A[i-1] + 0.5*k1*h,B[i-1] + 0.5*k1*h) 
+  k3 = d_b(t + 0.5*h,A[i-1] + 0.5*k2*h,B[i-1] + 0.5*k2*h) 
+  k4 = d_b(t + h,A[i-1] + k3*h,B[i-1] + k3*h) 
+  
+  B[i] = B[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  # kita hitung zat c
+  k1 = d_c(t,B[i-1],C[i-1]) 
+  k2 = d_c(t + 0.5*h,B[i-1] + 0.5*k1*h,C[i-1] + 0.5*k1*h) 
+  k3 = d_c(t + 0.5*h,B[i-1] + 0.5*k2*h,C[i-1] + 0.5*k2*h) 
+  k4 = d_c(t + h,B[i-1] + k3*h,C[i-1] + k3*h) 
+  
+  C[i] = C[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  t_[i] = t_[i-1] + h
+  
+}
+
+# output
+output = data.frame(t_,A,B,C)
+
+# mengeluarkan output ke layar
+print(output)
+# ============================================================================
+
+```
+
+Program tersebut saya simpan dengan nama __Program RK 4.R__ dan saya lampirkan bersamaan dengan laporan ini. Untuk menggunakannya, silakan buka __R__ dan ketikkan perintah `source("Program RK 4.R")`. 
+
+
+\newpage
+
+# Diskusi
+
+Sekarang saya akan _run_ program Euler dan Runge Kutta $4^{th}$ menggunakan parameter yang ada di soal, yakni:
+
+```{r,echo=FALSE}
+data.frame(Parameter = c("r_a","r_b","qa0","qb0","qc0","dt0","iter_length"),
+           Value = c(.0137,.051,4*10^(-8),0,0,.5,10)) %>% 
+           knitr::kable(caption = "Parameter di Soal")
+```
+
+Massa zat A adalah $S \times 10^{-8}$ dengan $S$ adalah 2 digit terakhir NIM saya (20921004). Sehingga $S = 4$.
+
+## Menggunakan Program Euler
+
+### Tabel Simulasi
+
+Berikut ini adalah hasil simulasi menggunakan program Euler:
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+# definisi dan initial condition
+r_a = .0137  # rate peluruhan A dan pertumbuhan B
+r_b = .051  # rate peluruhan B dan pertumbuhan C
+r_c = .0  # rate peluruhan C
+
+q_a = c(4*10^(-8)) # massa awal zat radioaktif A
+q_b = c(0)  # massa awal zat radioaktif B
+q_c = c(0)  # massa awal zat radioaktif C
+t = c(0)    # waktu awal t = 0
+
+dt = c(.5)
+iter_length = 10
+num_iter = iter_length / dt[1]
+
+for(i in 2:(num_iter + 1)){
+    # peluruhan A dan pertumbuhan B
+    rate_1 = r_a * q_a[i-1] * dt
+    # peluruhan B dan pertumbuhan C
+    rate_2 = r_b * q_b[i-1] * dt
+    # peluruhan C
+    rate_3 = r_c * q_c[i-1] * dt
+    
+    q_a[i] = q_a[i-1] - rate_1
+    q_b[i] = q_b[i-1] + rate_1 - rate_2
+    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    t[i] = t[i-1] + dt
+}
+
+df = data.frame(t,q_a,q_b,q_c)
+
+df 
+```
+
+### Grafik Hasil Simulasi
+
+Berikut ini adalah grafiknya jika saya perpanjang nilai $t$-nya menjadi 300 dan $dt = 0.05$ :
+
+```{r,echo=FALSE,fig.cap = "Ilustrasi Hasil Simulasi Euler Menggunakan Parameter Soal"}
+rm(list=ls())
+
+# definisi dan initial condition
+r_a = .0137  # rate peluruhan A dan pertumbuhan B
+r_b = .051  # rate peluruhan B dan pertumbuhan C
+r_c = .0  # rate peluruhan C
+
+q_a = c(4*10^(-8)) # massa awal zat radioaktif A
+q_b = c(0)  # massa awal zat radioaktif B
+q_c = c(0)  # massa awal zat radioaktif C
+t = c(0)    # waktu awal t = 0
+
+dt = .05
+iter_length = 300
+num_iter = iter_length / dt
+
+for(i in 2:(num_iter + 1)){
+    # peluruhan A dan pertumbuhan B
+    rate_1 = r_a * q_a[i-1] * dt
+    # peluruhan B dan pertumbuhan C
+    rate_2 = r_b * q_b[i-1] * dt
+    # peluruhan C
+    rate_3 = r_c * q_c[i-1] * dt
+    
+    q_a[i] = q_a[i-1] - rate_1
+    q_b[i] = q_b[i-1] + rate_1 - rate_2
+    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    t[i] = t[i-1] + dt
+}
+
+df = data.frame(t,A = q_a,B = q_b,C = q_c)
+
+
+df %>% 
+  reshape2::melt(id.vars = "t") %>% 
+  ggplot(aes(x = t,y = value,color = variable)) +
+  geom_line() +
+  scale_color_manual(values = c("darkred","steelblue","green")) +
+  labs(title = "Hasil Simulasi dengan Parameter dari Soal",
+       subtitle = "Menggunakan Program Euler",
+       y = "Massa zat",
+       color = "Jenis Zat Radioaktif",
+       caption = "20921004 - Mohammad Rizka Fadhli")
+```
+
+Terlihat bahwa zat A luruh sepenuhnya membentuk zat B yang kemudian luruh sepenuhnya sehingga hanya menyisakan zat C yang terus bertumbuh hingga massanya sebesar $Q_A(t = 0) = 4 \times 10^{-8}$ gram di akhir waktu.
+
+## Menggunakan Program Runge Kutta $4^{th}$
+
+### Tabel Hasil Simulasi
+
+Berikut ini adalah hasil simulasi menggunakan program Runge Kutta $4^{th}$:
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+# INPUT dari user:
+  r_a = .0137
+  r_b = .051
+  q_a = 4 * 10^(-8)
+  q_b = 0
+  q_c = 0
+  iter_length = 10
+  h = .5
   
 # initial condition
 t   = 0   # waktu awal t = 0
@@ -403,7 +592,7 @@ num_iter = (iter_length / h) + 1
   }
   # zat radio aktif C
   d_c = function(t,q_b,q_c){
-    ((r_b * q_b) - (r_c * q_c)) 
+    (r_b * q_b) 
   }
 
 # persiapan array utk iterasi
@@ -461,81 +650,257 @@ for(i in 2:num_iter){
 
 # output
 output = data.frame(t_,A,B,C)
-
-# mengeluarkan output ke layar
-print(output)
+output
 
 ```
 
-Program tersebut saya simpan dengan nama __Program RK 4.R__ dan saya lampirkan bersamaan dengan laporan ini. Untuk menggunakannya, silakan buka __R__ dan ketikkan perintah `source("Program RK 4.R")`. 
-
-
-\newpage
-
-# Diskusi
-
-Sekarang saya akan _run_ program Euler menggunakan parameter yang ada di soal.
-
-## Menggunakan Program Euler
-
-### Simulasi
-
-Berikut adalah parameter di soal:
-
-```{r,echo=FALSE}
-data.frame(Parameter = c("r_a","r_b","r_c","qa0","qb0","qc0","dt0","iter_length"),
-           Value = c(.0137,.051,0,4*10^(-8),0,0,.5,10)) %>% 
-           knitr::kable(caption = "Parameter di Soal")
-```
-
-Massa zat A adalah $S \times 10^{-8}$ dengan $S$ adalah 2 digit terakhir NIM saya (20921004). Sehingga $S = 4$. _Rate_ peluruhan untuk zat C saya buat sama dengan nol (karena tidak dinyatakan dalam soal).
-
-```{r,echo=FALSE}
-rm(list=ls())
-
-# definisi dan initial condition
-r_a = .0137  # rate peluruhan A dan pertumbuhan B
-r_b = .051  # rate peluruhan B dan pertumbuhan C
-r_c = .0  # rate peluruhan C
-
-q_a = c(4*10^(-8)) # massa awal zat radioaktif A
-q_b = c(0)  # massa awal zat radioaktif B
-q_c = c(0)  # massa awal zat radioaktif C
-t = c(0)    # waktu awal t = 0
-
-dt = c(.5)
-iter_length = 10
-num_iter = iter_length / dt[1]
-
-for(i in 2:(num_iter + 1)){
-    # peluruhan A dan pertumbuhan B
-    rate_1 = r_a * q_a[i-1] * dt
-    # peluruhan B dan pertumbuhan C
-    rate_2 = r_b * q_b[i-1] * dt
-    # peluruhan C
-    rate_3 = r_c * q_c[i-1] * dt
-    
-    q_a[i] = q_a[i-1] - rate_1
-    q_b[i] = q_b[i-1] + rate_1 - rate_2
-    q_c[i] = q_c[i-1] + rate_2 - rate_3
-    t[i] = t[i-1] + dt
-}
-
-df = data.frame(t,q_a,q_b,q_c)
-
-df 
-```
 
 ### Grafik Hasil Simulasi
 
-Berikut ini adalah grafiknya jika saya perpanjang nilai $t$-nya menjadi 300 dan $dt = 0.05$ :
+Berikut ini adalah grafiknya jika saya perpanjang nilai $t$-nya menjadi 300 dan $h = 0.05$ :
 
-```{r,echo=FALSE,fig.cap = "Ilustrasi Hasil Simulasi Menggunakan Parameter Soal"}
+```{r,echo=FALSE,fig.cap = "Ilustrasi Hasil Simulasi RK4 Menggunakan Parameter Soal"}
+rm(list=ls())
+
+# INPUT dari user:
+  r_a = .0137
+  r_b = .051
+  q_a = 4 * 10^(-8)
+  q_b = 0
+  q_c = 0
+  iter_length = 300
+  h = .05
+  
+# initial condition
+t   = 0   # waktu awal t = 0
+
+# kalkulasi banyak iterasi yang dilakukan
+num_iter = (iter_length / h) + 1
+
+# definisi fungsi persamaan diferensial
+  # zat radio aktif A
+  d_a = function(t,q_a){
+    (-r_a * q_a) 
+  }
+  # zat radio aktif B
+  d_b = function(t,q_a,q_b){
+    ((r_a * q_a) - (r_b * q_b)) 
+  }
+  # zat radio aktif C
+  d_c = function(t,q_b,q_c){
+    (r_b * q_b) 
+  }
+
+# persiapan array utk iterasi
+A = c(q_a)
+B = c(q_b)
+C = c(q_c)
+t_ = c(t)
+
+
+# proses iterasi
+for(i in 2:num_iter){
+  # kita akan hitung dulu zat a
+  k1 = d_a(t,A[i-1]) 
+  k2 = d_a(t + 0.5*h,A[i-1] + 0.5*k1*h) 
+  k3 = d_a(t + 0.5*h,A[i-1] + 0.5*k2*h) 
+  k4 = d_a(t + h,A[i-1] + k3*h) 
+  
+  A[i] = A[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  # kita hitung zat b
+  k1 = d_b(t,
+           A[i-1],
+           B[i-1]) 
+  k2 = d_b(t + 0.5*h,
+           A[i-1] + 0.5*k1*h,
+           B[i-1] + 0.5*k1*h) 
+  k3 = d_b(t + 0.5*h,
+           A[i-1] + 0.5*k2*h,
+           B[i-1] + 0.5*k2*h) 
+  k4 = d_b(t + h,
+           A[i-1] + k3*h,
+           B[i-1] + k3*h) 
+  
+  B[i] = B[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  # kita hitung zat c
+  k1 = d_c(t,
+           B[i-1],
+           C[i-1]) 
+  k2 = d_c(t + 0.5*h,
+           B[i-1] + 0.5*k1*h,
+           C[i-1] + 0.5*k1*h) 
+  k3 = d_c(t + 0.5*h,
+           B[i-1] + 0.5*k2*h,
+           C[i-1] + 0.5*k2*h) 
+  k4 = d_c(t + h,
+           B[i-1] + k3*h,
+           C[i-1] + k3*h) 
+  
+  C[i] = C[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  t_[i] = t_[i-1] + h
+  
+}
+
+# output
+output = data.frame(t = t_,A,B,C)
+df = output
+
+df %>% 
+  reshape2::melt(id.vars = "t") %>% 
+  ggplot(aes(x = t,y = value,color = variable)) +
+  geom_line() +
+  scale_color_manual(values = c("darkred","steelblue","green")) +
+  labs(title = "Hasil Simulasi dengan Parameter dari Soal",
+       subtitle = "Menggunakan Program Runge Kutta 4th",
+       y = "Massa zat",
+       color = "Jenis Zat Radioaktif",
+       caption = "20921004 - Mohammad Rizka Fadhli")
+
+```
+
+Terlihat bahwa grafik yang dihasilkan program Runge Kutta $4^{th}$ sama. Hasilnya adalah zat A luruh sepenuhnya membentuk zat B yang kemudian luruh sepenuhnya sehingga hanya menyisakan zat C yang terus bertumbuh hingga massanya sebesar $Q_A(t = 0) = 4 \times 10^{-8}$ gram di akhir waktu.
+
+## Nilai Maksimum Massa Zat B
+
+Jika kita lihat pada grafik sebelumnya, nilai massa zat B akan maksimal di suatu waktu $t$ tertentu. Kita akan coba aproksimasi nilainya.
+
+Secara analitik, nilai maksimum terjadi saat $\frac{dB}{dt} = 0$.
+
+$$\frac{dB}{dt} = r_A A - r_B B = 0$$
+
+$$r_A A = r_B B$$
+
+$$0.0137 A = 0.051 B$$
+
+$$\frac{A}{B} = \frac{0.051}{0.0137} = 3.722628$$
+
+B akan mencapai maksimum saat rasio $\frac{A}{B}$ di suatu $t$ tertentu bernilai $3.722628$. Oleh karena itu, saya akan _run_ ulang __Program RK4.R__ dengan parameter $h$ dibuat kecil ($h = 0.0001$). Kemudian saya akan cari $t$ tertentu saat rasio $\frac{A}{B}$ sesuai dengan perhitungan analitik di atas.
+
+Saya dapatkan:
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+# INPUT dari user:
+  r_a = .0137
+  r_b = .051
+  q_a = 4 * 10^(-8)
+  q_b = 0
+  q_c = 0
+  iter_length = 50
+  h = .0001
+  
+# initial condition
+t   = 0   # waktu awal t = 0
+
+# kalkulasi banyak iterasi yang dilakukan
+num_iter = (iter_length / h) + 1
+
+# definisi fungsi persamaan diferensial
+  # zat radio aktif A
+  d_a = function(t,q_a){
+    (-r_a * q_a) 
+  }
+  # zat radio aktif B
+  d_b = function(t,q_a,q_b){
+    ((r_a * q_a) - (r_b * q_b)) 
+  }
+  # zat radio aktif C
+  d_c = function(t,q_b,q_c){
+    (r_b * q_b) 
+  }
+
+# persiapan array utk iterasi
+A = c(q_a)
+B = c(q_b)
+C = c(q_c)
+t_ = c(t)
+
+
+# proses iterasi
+for(i in 2:num_iter){
+  # kita akan hitung dulu zat a
+  k1 = d_a(t,A[i-1]) 
+  k2 = d_a(t + 0.5*h,A[i-1] + 0.5*k1*h) 
+  k3 = d_a(t + 0.5*h,A[i-1] + 0.5*k2*h) 
+  k4 = d_a(t + h,A[i-1] + k3*h) 
+  
+  A[i] = A[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  # kita hitung zat b
+  k1 = d_b(t,
+           A[i-1],
+           B[i-1]) 
+  k2 = d_b(t + 0.5*h,
+           A[i-1] + 0.5*k1*h,
+           B[i-1] + 0.5*k1*h) 
+  k3 = d_b(t + 0.5*h,
+           A[i-1] + 0.5*k2*h,
+           B[i-1] + 0.5*k2*h) 
+  k4 = d_b(t + h,
+           A[i-1] + k3*h,
+           B[i-1] + k3*h) 
+  
+  B[i] = B[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  # kita hitung zat c
+  k1 = d_c(t,
+           B[i-1],
+           C[i-1]) 
+  k2 = d_c(t + 0.5*h,
+           B[i-1] + 0.5*k1*h,
+           C[i-1] + 0.5*k1*h) 
+  k3 = d_c(t + 0.5*h,
+           B[i-1] + 0.5*k2*h,
+           C[i-1] + 0.5*k2*h) 
+  k4 = d_c(t + h,
+           B[i-1] + k3*h,
+           C[i-1] + k3*h) 
+  
+  C[i] = C[i-1] + (1/6)*(k1 + 2*k2 + 2*k3 + k4) * h
+  
+  t_[i] = t_[i-1] + h
+  
+}
+
+# output
+output = data.frame(t_,A,B,C)
+output %>% filter(B == max(B))
+
+```
+
+Saya dapatkan massa B maksimum adalah sekitar $B = 6.630437 \times 10^{-9}$ gram pada $t = 35.2394$.
+
+Rasio $\frac{A}{B} =$ `r 2.468263e-08 / 6.630437e-09` hampir sama dengan rasio hasil analitik.
+
+
+## Perubahan Laju Peluruhan $r_A$ dan $r_B$
+
+Apa yang akan terjadi jika:
+
+### $r_A < r_B$
+
+Kasus ini sama persis dengan apa yang sudah disimulasikan pada bagian sebelumnya. Hal yang akan terjadi adalah:
+
+- Peluruhan zat A akan relatif lebih lama sehingga pembentukan zat B juga akan sama lamanya.
+- Namun zat B akan lebih cepat luruh dibandingkan terbentuk.
+- Akibatnya:
+    - C akan lebih cepat terbentuk.
+    - B akan lebih cepat mencapai maksimum sebelum A luruh sepenuhnya. 
+    - B akan lebih cepat luruh sebelum A luruh.
+
+Berikut ini adalah beberapa simulasi lain menggunakan parameter $r_A$ dan $r_B$ yang berbeda-beda.
+
+
+```{r,echo=FALSE,fig.cap = "Ilustrasi Hasil Simulasi Saat rA < rB (1)"}
 rm(list=ls())
 
 # definisi dan initial condition
-r_a = .0137  # rate peluruhan A dan pertumbuhan B
-r_b = .051  # rate peluruhan B dan pertumbuhan C
+r_a = .01  # rate peluruhan A dan pertumbuhan B
+r_b = .05  # rate peluruhan B dan pertumbuhan C
 r_c = .0  # rate peluruhan C
 
 q_a = c(4*10^(-8)) # massa awal zat radioaktif A
@@ -561,30 +926,183 @@ for(i in 2:(num_iter + 1)){
     t[i] = t[i-1] + dt
 }
 
-df = data.frame(t,q_a,q_b,q_c)
+df = data.frame(t,A = q_a,B = q_b,C = q_c)
 
 
 df %>% 
   reshape2::melt(id.vars = "t") %>% 
   ggplot(aes(x = t,y = value,color = variable)) +
   geom_line() +
-  scale_color_manual(values = c("darkred","steelblue","darkgreen")) +
-  labs(title = "Hasil Simulasi dengan Parameter dari Soal",
-       subtitle = "Menggunakan Program Euler",
+  scale_color_manual(values = c("darkred","steelblue","green")) +
+  labs(title = "Hasil Simulasi dengan rA < rB",
+       subtitle = "rA = 0.01 dan rB = 0.05",
        y = "Massa zat",
-       color = "Jenis Zat Radioaktif")
+       color = "Jenis Zat Radioaktif",
+       caption = "20921004 - Mohammad Rizka Fadhli")
 ```
 
-Terlihat bahwa zat A luruh sepenuhnya membentuk zat B yang kemudian luruh sepenuhnya sehingga hanya menyisakan zat C yang terus bertumbuh hingga massanya sebesar $Q_A(t = 0)$.
 
-## Menggunakan Program Runge Kutta $4^{th}$
+```{r,echo=FALSE,fig.cap = "Ilustrasi Hasil Simulasi Saat rA < rB (2)"}
+rm(list=ls())
 
-### Simulasi
+# definisi dan initial condition
+r_a = .3  # rate peluruhan A dan pertumbuhan B
+r_b = .7  # rate peluruhan B dan pertumbuhan C
+r_c = .0  # rate peluruhan C
+
+q_a = c(4*10^(-8)) # massa awal zat radioaktif A
+q_b = c(0)  # massa awal zat radioaktif B
+q_c = c(0)  # massa awal zat radioaktif C
+t = c(0)    # waktu awal t = 0
+
+dt = .05
+iter_length = 10
+num_iter = iter_length / dt
+
+for(i in 2:(num_iter + 1)){
+    # peluruhan A dan pertumbuhan B
+    rate_1 = r_a * q_a[i-1] * dt
+    # peluruhan B dan pertumbuhan C
+    rate_2 = r_b * q_b[i-1] * dt
+    # peluruhan C
+    rate_3 = r_c * q_c[i-1] * dt
+    
+    q_a[i] = q_a[i-1] - rate_1
+    q_b[i] = q_b[i-1] + rate_1 - rate_2
+    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    t[i] = t[i-1] + dt
+}
+
+df = data.frame(t,A = q_a,B = q_b,C = q_c)
 
 
-### Grafik Hasil Simulasi
+df %>% 
+  reshape2::melt(id.vars = "t") %>% 
+  ggplot(aes(x = t,y = value,color = variable)) +
+  geom_line() +
+  scale_color_manual(values = c("darkred","steelblue","green")) +
+  labs(title = "Hasil Simulasi dengan rA < rB",
+       subtitle = "rA = 0.3 dan rB = 0.7",
+       y = "Massa zat",
+       color = "Jenis Zat Radioaktif",
+       caption = "20921004 - Mohammad Rizka Fadhli")
+```
+
+
+\newpage
+
+### $r_A > r_B$
+
+Jika kondisi yang terjadi adalah $r_A > r_B$, maka:
+
+- Peluruhan zat A akan relatif lebih cepat sehingga pembentukan zat B juga akan sama cepatnya.
+- Zat B akan lebih cepat terbentuk dibandingkan meluruh.
+- Akibatnya:
+    - C akan lebih lambat terbentuk.
+    - B akan lebih cepat mencapai maksimum bersamaan dengan A luruh sepenuhnya. 
+    - A akan lebih cepat luruh sebelum B luruh.
+
+Berikut ini adalah beberapa simulasi lain menggunakan parameter $r_A$ dan $r_B$ yang berbeda-beda.
+
+```{r,echo=FALSE,fig.cap = "Ilustrasi Hasil Simulasi Saat rA > rB (1)"}
+rm(list=ls())
+
+# definisi dan initial condition
+r_a = .09  # rate peluruhan A dan pertumbuhan B
+r_b = .02  # rate peluruhan B dan pertumbuhan C
+r_c = .0  # rate peluruhan C
+
+q_a = c(4*10^(-8)) # massa awal zat radioaktif A
+q_b = c(0)  # massa awal zat radioaktif B
+q_c = c(0)  # massa awal zat radioaktif C
+t = c(0)    # waktu awal t = 0
+
+dt = .05
+iter_length = 200
+num_iter = iter_length / dt
+
+for(i in 2:(num_iter + 1)){
+    # peluruhan A dan pertumbuhan B
+    rate_1 = r_a * q_a[i-1] * dt
+    # peluruhan B dan pertumbuhan C
+    rate_2 = r_b * q_b[i-1] * dt
+    # peluruhan C
+    rate_3 = r_c * q_c[i-1] * dt
+    
+    q_a[i] = q_a[i-1] - rate_1
+    q_b[i] = q_b[i-1] + rate_1 - rate_2
+    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    t[i] = t[i-1] + dt
+}
+
+df = data.frame(t,A = q_a,B = q_b,C = q_c)
+
+
+df %>% 
+  reshape2::melt(id.vars = "t") %>% 
+  ggplot(aes(x = t,y = value,color = variable)) +
+  geom_line() +
+  scale_color_manual(values = c("darkred","steelblue","green")) +
+  labs(title = "Hasil Simulasi dengan rA > rB",
+       subtitle = "rA = 0.09 dan rB = 0.02",
+       y = "Massa zat",
+       color = "Jenis Zat Radioaktif",
+       caption = "20921004 - Mohammad Rizka Fadhli")
+```
+
+
+\newpage
+
+```{r,echo=FALSE,fig.cap = "Ilustrasi Hasil Simulasi Saat rA > rB (2)"}
+rm(list=ls())
+
+# definisi dan initial condition
+r_a = .3  # rate peluruhan A dan pertumbuhan B
+r_b = .05  # rate peluruhan B dan pertumbuhan C
+r_c = .0  # rate peluruhan C
+
+q_a = c(4*10^(-8)) # massa awal zat radioaktif A
+q_b = c(0)  # massa awal zat radioaktif B
+q_c = c(0)  # massa awal zat radioaktif C
+t = c(0)    # waktu awal t = 0
+
+dt = .05
+iter_length = 100
+num_iter = iter_length / dt
+
+for(i in 2:(num_iter + 1)){
+    # peluruhan A dan pertumbuhan B
+    rate_1 = r_a * q_a[i-1] * dt
+    # peluruhan B dan pertumbuhan C
+    rate_2 = r_b * q_b[i-1] * dt
+    # peluruhan C
+    rate_3 = r_c * q_c[i-1] * dt
+    
+    q_a[i] = q_a[i-1] - rate_1
+    q_b[i] = q_b[i-1] + rate_1 - rate_2
+    q_c[i] = q_c[i-1] + rate_2 - rate_3
+    t[i] = t[i-1] + dt
+}
+
+df = data.frame(t,A = q_a,B = q_b,C = q_c)
+
+
+df %>% 
+  reshape2::melt(id.vars = "t") %>% 
+  ggplot(aes(x = t,y = value,color = variable)) +
+  geom_line() +
+  scale_color_manual(values = c("darkred","steelblue","green")) +
+  labs(title = "Hasil Simulasi dengan rA > rB",
+       subtitle = "rA = 0.3 dan rB = 0.05",
+       y = "Massa zat",
+       color = "Jenis Zat Radioaktif",
+       caption = "20921004 - Mohammad Rizka Fadhli")
+```
 
 \newpage
 
 # Kesimpulan
+
+- Masalah persamaan diferensial bisa diselesaikan dengan menggunakan metode aproksimasi diskrit seperti algoritma Euler dan Runge Kutta $4^{th}$ _order_. Hasil kedua algoritma tersebut bisa mendekati hasil analitik jika kita perkecil $\Delta t$ yang digunakan pada saat kita _run_ program tersebut.
+- Dinamika model akan bisa terlihat saat kita mengubah-ubah nilai laju peluruhan zat ($r_A$ dan $r_B$).
 

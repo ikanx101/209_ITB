@@ -7,6 +7,8 @@
 #
 # ==============================================================================
 
+# library
+library(dplyr)
 
 # membersihkan global environment
 rm(list=ls())
@@ -42,7 +44,6 @@ for(i in 2:num_iter){
     rate_1 = r_a * q_a[i-1] * dt
     # peluruhan B dan pertumbuhan C
     rate_2 = r_b * q_b[i-1] * dt
-    
     # perhitungan massa zat A
     q_a[i] = q_a[i-1] - rate_1
     # perhitungan massa zat B
@@ -53,6 +54,6 @@ for(i in 2:num_iter){
     t[i] = t[i-1] + dt
 }
 
+# output
 df = data.frame(t,q_a,q_b,q_c)
-
 print(df)
