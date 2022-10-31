@@ -2,7 +2,7 @@
 rm(list=ls())
 
 # set working directory
-setwd("/mnt/chromeos/removable/Workstation/209_ITB/Semester III/Pengantar SK/Project I")
+setwd("/root/209_ITB/Semester III/Pengantar SK/Project I/Euler Method")
 
 # memanggil library yang dibutuhkan
 library(dplyr)
