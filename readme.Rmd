@@ -9,7 +9,7 @@ output: github_document
 _Repository_ ini berisi semua _resources_ yang saya kumpulkan selama berkuliah di Magister Sains Komputasi ITB.
 
 
-## Semester I
+## Semester I - Semester III
 
 Berisi catatan per mata kuliah.
 
