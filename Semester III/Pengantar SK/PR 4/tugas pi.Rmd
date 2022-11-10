@@ -29,6 +29,8 @@ Untuk menghitung $\pi$ menggunakan simulasi Monte Carlo, saya menggunakan prinsi
 
 Misalkan saya memiliki lingkaran sebagai berikut:
 
+\newpage
+
 ```{r, echo=FALSE,fig.retina=10,fig.width=5,fig.align = "center",fig.cap = "Lingkaran dengan r=1"}
 # gambar lingkaran
 xc = 0
@@ -48,19 +50,23 @@ ggplot() + annotate("path",
   coord_equal()
 ```
 
+
+
 Dari gambar di atas, luas area pada $x$ di range $[0,1]$ saya tuliskan sebagai berikut:
 
-$$L1 = \frac{1}{4} * L_{lingkaran} = \frac{1}{4} * \pi * r^2$$
+$$L1 = \frac{1}{4} \times L_{lingkaran} = \frac{1}{4} \pi r^2$$
 
-$$L1 = \frac{1}{4} * \pi * (1^2) = \frac{1}{4} * \pi$$
+$$L1 = \frac{1}{4} \pi (1^2) = \frac{\pi}{4}$$
 
 Berdasarkan informasi di atas, kunci untuk mencari nilai $\pi$ adalah dengan menghitung $L1$.
 
-Untuk menghitung $L1$ saya melakukan _generating random dots_ di area $x \in [0,1]$ dan $y \in [0,1]$. Setiap titik yang memenuhi persyaratan $x^2 + y^2 \leq 1$ akan saya tandai sebagai `inner` dan diluar itu akan saya tandai sebagai `outer`.
+\newpage
+
+Untuk menghitung $L1$ saya melakukan _generating random dots_ di area $x \in [0,1]$ dan $y \in [0,1]$. Setiap titik yang memenuhi persyaratan $x^2 + y^2 \leq 1$ akan saya tandai sebagai `accept` dan diluar itu akan saya tandai sebagai `reject`.
 
 Perhatikan grafik di bawah ini:
 
-```{r,echo=FALSE,fig.retina=10,fig.width=5,fig.align = "center",fig.cap = "Ilustrasi proses generating random dots"}
+```{r,echo=FALSE,fig.retina=10,fig.width=6,fig.align = "center",fig.cap = "Ilustrasi proses generating random dots"}
 rm(list=ls())
 # bikin fungsi utk generate data
   # lalu kita rbind
@@ -99,36 +105,77 @@ Jika dilihat dari grafik di atas, semakin banyak _dots_ yang saya buat, semakin 
 
 Luas $L1$ dapat saya tuliskan sebagai:
 
-$$L1 \approx \frac{count(dots_{inner})}{count(all.dots)}$$
+$$L1 \approx \frac{count(dots_{accept})}{count(all.dots)}$$
 
-Lalu: $\pi = 4 * L1$
+Lalu: $\pi = 4 \times L1$
 
-Berikut algoritma yang saua gunakan untuk melakukan simulasi _generating random dots_ dengan berbagai nilai $n$.
+Berikut algoritma yang saya gunakan untuk melakukan simulasi _generating random dots_ dengan berbagai nilai $n$.
 
 ```{r,fig.retina=10}
 hitung_pi = function(n){
+  # proses generating random dot di sb x
   x = runif(n)
+  # proses generating random dot di sb y
   y = runif(n)
   data = data.frame(x,y)
   data =
     data %>%
     distinct() %>%
     mutate(jatuh = x^2 + y^2,
+           # proses accept dan reject
            ket = ifelse(jatuh <= 1, 1,0))
+  # menghitung nilai pi
   return(4 * sum(data$ket)/length(data$ket))
 }
 ```
 
-Berikut adalah proses dan hasilnya:
+Untuk melihat akurasi perhitungan, saya akan bandingkan hasil simulasi dengan nilai $\pi$ _default_ dari __R__ yakni $\pi=$ `r pi`.
+
+Berikut adalah proses _run_ dan hasilnya:
 
 ```{r}
 # saatnya simulasi
 simulasi = data.frame(
-  n = c(10,20,50,75,100,400,600,10000,20000,500000,
-        1000000,2000000,4000000),
+  n = c(100,200,500,900,
+        1000,2000,5000,
+        10000,50000,100000,500000,
+        1000000),
   pi = 0
 )
-simulasi$pi = sapply(simulasi$n,hitung_pi)
-simulasi$beda = pi - simulasi$pi
-simulasi %>% knitr::kable(caption = "Nilai Pi Hasil Simulasi dengan Berbagai Nilai n")
+simulasi$pi_simulasi = sapply(simulasi$n,hitung_pi)
+simulasi$`beda dengan pi R` = pi - simulasi$pi_simulasi
+simulasi %>% 
+  knitr::kable(caption = "Nilai Pi Hasil Simulasi dengan Berbagai Nilai n")
+```
+
+
+Agar hasilnya lebih akurat, proses di atas saya akan ulang `5` kali dan saya akan hitung nilai _expected_ dari rata-rata nilai $\pi$ hasil simulasi.
+
+
+```{r,echo=FALSE}
+# saatnya simulasi
+simulasi = data.frame(
+  n = c(100,200,500,900,
+        1000,2000,5000,
+        10000,50000,100000,500000,
+        1000000)
+)
+
+hasil = vector("list",5)
+for(i in 1:5){
+  hasil[[i]] = sapply(simulasi$n,hitung_pi)
+}
+
+simulasi$s1 = hasil[[1]]
+simulasi$s2 = hasil[[2]]
+simulasi$s3 = hasil[[3]]
+simulasi$s4 = hasil[[4]]
+simulasi$s5 = hasil[[5]]
+
+simulasi %>% 
+  rowwise() %>% 
+  mutate(pi_simulasi = sum(s1,s2,s3,s4,s5) / 5) %>% 
+  ungroup() %>% 
+  mutate(`beda dengan pi R` = pi - pi_simulasi) %>% 
+  knitr::kable(caption = "Nilai Pi Hasil Simulasi dengan Berbagai Nilai n")
 ```
