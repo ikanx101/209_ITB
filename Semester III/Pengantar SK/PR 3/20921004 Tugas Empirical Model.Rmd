@@ -1,0 +1,166 @@
+---
+title: "Tugas Empirical Model"
+subtitle: |
+  | SK5004 
+  | PENGANTAR SAINS KOMPUTASI
+author: |
+  | Mohammad Rizka Fadhli
+  | 20921004
+date: "`r format(Sys.time(),'%d %B %Y')`"
+fontsize: 12pt
+output:
+  pdf_document:
+    number_section: false
+    toc: false
+    fig_width: 7
+    fig_height: 4
+    fig_caption: true
+    highlight: espresso
+linestretch: 1.25
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd("/cloud/project/Semester III/Pengantar SK/PR 3")
+
+library(dplyr)
+library(ggplot2)
+
+```
+
+# Tugas
+
+1. Pilih salah satu data yang ada dalam `File/Tugas Empirical`. 
+1. Linearkan data tersebut dengan mengubah sumbu-x dan/atau sumbu-y seperti yang dijelaskan di kelas.
+1. _Fitting_ regresi linear pada data yang telah dilinearkan.
+1. _Plot_ kembali data seperti semula dengan mengubah sumbu-x dan sumbu-y seperti di awal dengan persamaan garis yang telah diubah.
+
+# Jawab
+
+Pada tugas ini, saya menggunakan bahasa pemrograman __R__. Saya akan lampirkan pula baris _codes_ untuk melakukan perhitungan pada data. Saya memilih data bernama `Lanczos1EM.dat` sebagai berikut:
+
+```{r}
+# proses load data soal
+nama_file = "Lanczos1EM.dat"
+df = read.table(nama_file) 
+```
+
+```{r,echo=FALSE}
+# print data ke laporan
+df %>% knitr::kable(caption = "Data Lanczos1EM.dat")
+```
+
+Jika kita perhatikan dengan seksama, data pada kolom `V2` memiliki penambahan yang linear dan konstan sedangkan data pada kolom `V1` cenderung menurun tak linear. Saya akan coba gambarkan dalam _scatterplot_ sebagai berikut:
+
+```{r,echo=TRUE,fig.retina=10,fig.cap="Scatterplot V2 dan V1"}
+# membuat scatterplot
+df %>% 
+  ggplot(aes(x = V2,y = V1)) +
+  geom_point(size = 1,color = "steelblue") +
+  labs(title = "Scatterplot Antara V2 dan V1",
+       caption = "20921004 - Mohammad Rizka Fadhli") +
+  theme_minimal()
+
+```
+
+Terlihat hubungan `V1` dan `V2` tidak linear. Oleh karena itu, saya akan mencoba melakukan transformasi data di sumbu $y$ (yaitu kolom `V1`). Untuk itu, fungsi transformasi yang saya pilih adalah:
+
+$$\hat{V_1} = log(V_1)$$
+
+```{r}
+# transformasi nilai y menjadi y_hat
+df = df %>% mutate(V1_hat = log(V1))
+# print data ke laporan
+df %>% knitr::kable(caption = "Data Hasil Transformasi")
+```
+
+Saya akan buat _scatterplot_ kembali dari data yang ada:
+
+```{r,echo=TRUE,fig.retina=10,fig.cap="Scatterplot V2 dan V1"}
+# membuat scatterplot
+df %>% 
+  reshape2::melt(id.vars = "V2") %>% 
+  ggplot(aes(x = V2,y = value,color = variable)) +
+  geom_point(size = 1) +
+  scale_color_manual(values = c("steelblue","green")) +
+  labs(title = "Scatterplot Antara V2 dan V1 Hasil Transformasi",
+       caption = "20921004 - Mohammad Rizka Fadhli",
+       color = "Keterangan",
+       y = "V1 atau V1_hat") +
+  theme_minimal()
+
+```
+
+
+Kita bisa lihat sekilas bahwa `V1_hat` relatif lebih linear dibandingkan `V1` asalnya. Selanjutnya saya akan membuat fungsi regresi linear antara `V2` dan `V1_hat` sebagai berikut:
+
+
+```{r}
+# membuat model regresi linear
+reg_lin = lm(V1_hat~V2,data = df)
+summary(reg_lin)
+```
+
+Kita dapatkan formula regresi linear sebagai berikut:
+
+$$\hat{V_1} = 0.73863 - 3.22034 V_2$$
+
+dengan _adjusted_ $R^2 = 0.9923$ (berarti model memiliki performa yang sangat baik). Saya akan coba buat tabel dan grafiknya kembali sebagai berikut:
+
+```{r}
+# fungsi regresi linear
+reg_lin = function(x){0.73863 - 3.22034 * x}
+
+# menghitung aproksimasi V1_reg dari V2 berdasarkan model regresi linear
+df = 
+  df %>% 
+  rowwise() %>% 
+  mutate(V1_reg = reg_lin(V2)) %>% 
+  ungroup()
+
+# print tabel hasil
+df %>% knitr::kable(caption = "Tabel Hasil Perhitungan V1 Hasil Regresi Linear")
+
+# membuat plot terbaru
+df %>% 
+  ggplot(aes(x = V2)) +
+  geom_point(aes(y = V1_hat),
+             color = "green") +
+  geom_line(aes(y = V1_reg,group = 1),
+            color = "darkred") +
+  labs(title = "Scatterplot Antara V2 dan V1_hat Serta Hasil Regresi",
+       subtitle = "Garis merah adalah model regresi linear",
+       caption = "20921004 - Mohammad Rizka Fadhli") +
+  theme_minimal()
+```
+
+Sekarang dari kolom `V1_reg`, akan saya kembalikan ke bentuk asalnya dengan fungsi inverse dari transformasi yang telah dilakukan sebelumnya:
+
+$$V_1 \text{inverse} = e^{V_1 \text{reg}}$$
+
+```{r}
+# menginverse transformasi yang dilakukan
+df = 
+  df %>% 
+  mutate(V1_inv = exp(V1_reg))
+
+# print tabel hasil
+df %>% knitr::kable(caption = "Tabel Hasil Perhitungan V1 inverse dari Regresi Linear")
+
+# membuat plot terbaru
+df %>% 
+  ggplot(aes(x = V2)) +
+  geom_point(aes(y = V1),
+             color = "steelblue") +
+  geom_line(aes(y = V1_inv,group = 1),
+            color = "darkred") +
+  labs(title = "Scatterplot Antara V2 dan V1",
+       subtitle = "Garis merah adalah model regresi linear yang telah diinverse ke nilai asal V1",
+       caption = "20921004 - Mohammad Rizka Fadhli") +
+  theme_minimal()
+```
+
+Bentuk persamaan regresi finalnya adalah:
+
+$$V1 = e^{0.73863 - 3.22034 V_2}$$
