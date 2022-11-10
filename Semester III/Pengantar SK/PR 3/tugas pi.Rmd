@@ -1,0 +1,144 @@
+---
+title: "PR III Pengantar Sains Komputasi"
+subtitle: "20921004 - Mohammad Rizka Fadhli"
+output: pdf_document
+linestretch: 1.25
+fontsize: 12pt
+date: '10 November 2022'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+```
+
+## Cara Menghitung $\pi$
+
+Bagi matematikawan, ada banyak cara menghitung nilai pi. Ada yang cara deterministik dan ada cara probabilistik.
+
+Kali ini saya akan mencoba menghitung nilai $\pi$ dengan cara kedua yakni dengan pendekatan simulasi MonteCarlo. Bagaimana cara kerjanya? _Yuk_ perhatikan dengan seksama.
+
+### Lingkaran dengan $r = 1$
+
+Saya mulai dari lingkaran dengan $r = 1$ berikut ini:
+
+```{r, echo=FALSE,fig.retina=10,fig.width=7,fig.height=7}
+# gambar lingkaran
+xc = 0
+yc = 0
+r = 1
+ggplot() + annotate("path",
+   x=xc+r*cos(seq(0,2*pi,length.out=100)),
+   y=yc+r*sin(seq(0,2*pi,length.out=100))) +
+   labs(title = "Lingkaran r=1",
+        caption = "digambar dengan R\nikanx101.com") +
+   annotate("text",
+            x = .4,
+            y = .4,
+            label = "Luas Area Ini\n(L1)") +
+  geom_vline(xintercept = 0) +
+  geom_hline(yintercept = 0)
+```
+
+Dari gambar di atas, luas area pada $x$ di range $[0,1]$ saya tuliskan sebagai berikut:
+
+$$L1 = \frac{1}{4} * L_{lingkaran} = \frac{1}{4} * \pi * r^2$$
+
+$$L1 = \frac{1}{4} * \pi * (1^2) = \frac{1}{4} * \pi$$
+
+### Mencari Nilai $L1$
+
+Kunci untuk mencari nilai $\pi$ adalah dengan menghitung $L1$.
+
+> Bagaimana menghitung $L1$?
+Untuk menghitungnya saya akan gunakan metode yang tidak biasa, yakni dengan melakukan _generating random dots_ di area $x \in [0,1]$ dan $y \in [0,1]$. Setiap titik yang memenuhi persyaratan $x^2 + y^2 \leq 1$ akan saya tandai sebagai `inner` dan diluar itu akan saya tandai sebagai `outer`.
+
+Perhatikan grafik di bawah ini:
+
+```{r,echo=FALSE,fig.retina=10,fig.width=5,fig.height=5}
+rm(list=ls())
+# bikin fungsi utk generate data
+  # lalu kita rbind
+generate_sim = function(n){
+  data = data.frame(
+  x = runif(n),
+  y = runif(n),
+  iterasi = n
+  ) %>%
+  mutate(penanda = ifelse(x^2 + y^2 <= 1, 1, 0)) %>% distinct()
+  return(data)
+}
+# sekarang kita bikin datasetnya
+n_sim = c(10,20,50,100,400,1000,5000)
+# kita mulai iterasinya
+i = 1
+data_sim = generate_sim(n_sim[i])
+for(i in 2:length(n_sim)){
+  temp = generate_sim(n_sim[i])
+  data_sim = rbind(data_sim,temp)
+}
+# yuk kita bikin dulu titiknya
+data_sim %>%
+    ggplot(aes(x = x, y = y)) +
+    geom_point(aes(color = penanda)) +
+    facet_wrap(~iterasi) +
+    theme_minimal() +
+    labs(x = "x",
+         y = "y",
+         title = "Proses Menghitung L1\nDengan cara generating random dots",
+         subtitle = "Berapa banyak random dots yang dibuat:") +
+         theme(legend.position = "none")
+```
+
+Jika dilihat dari grafik di atas, semakin banyak _dots_ yang saya buat, semakin banyak area $L1$ yang ter-_cover_. Akibatnya semakin akurat saya menghitung $L1$.
+
+Luas $L1$ dapat saya tuliskan sebagai:
+
+$$L1 \approx \frac{count(dots_{inner})}{count(all.dots)}$$
+
+Lalu: $\pi = 4 * L1$
+
+Berikut algoritma dan hasil perhitungan saya:
+
+```{r,fig.retina=10}
+hitung_pi = function(n){
+  x = runif(n)
+  y = runif(n)
+  data = data.frame(x,y)
+  data =
+    data %>%
+    distinct() %>%
+    mutate(jatuh = x^2 + y^2,
+           ket = ifelse(jatuh <= 1, 1,0))
+  return(4 * sum(data$ket)/length(data$ket))
+}
+```
+
+```{r,echo=FALSE,fig.retina=10}
+# saatnya simulasi
+simulasi = data.frame(
+  n = c(10,20,50,75,100,400,600,20000,30000,500000,
+        1000000,2000000,4000000),
+  pi = 0
+)
+simulasi$pi = sapply(simulasi$n,hitung_pi)
+simulasi$beda = pi - simulasi$pi
+simulasi %>%
+    ggplot(aes(x = n,
+               y = pi)) +
+    geom_line(color = "darkred") +
+    labs(title = "Berapa nilai Pi?\nDihitung dengan pendekatan luas lingkaran yang memiliki radius = 1",
+        subtitle = "Perhitungan menggunakan simulasi Monte Carlo",
+        caption = "Simulasi dan visualisasi\nmenggunakan R\nikanx101.com",
+        x = "Banyak Dots",
+        y = "Nilai aproksimasi") +
+        annotate("text",
+                 x = 2000000, 
+                 y = 3.22, 
+                 label = paste0("Pi ~ ",simulasi$pi[length(simulasi$n)],
+                                "\nselisih dengan Pi aslinya = ",round(simulasi$beda[length(simulasi$n)],7))
+                 )
+```
+
+Ternyata hasil perhitungan saya dengan membuat 4 juta _dots_ lebih akurat dibandingkan pendekatan $\frac{22}{7}$.
