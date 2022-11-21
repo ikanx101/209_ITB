@@ -1,51 +1,31 @@
+# ======================================================
+# bebersih global environment
 rm(list=ls())
-
+# libraries yang dibutuhkan
 library(dplyr)
+library(tidyr)
 library(ggplot2)
-library(gganimate)
 
-# misal ada 3 benda
+# ======================================================
+# banyak benda
 n_benda = 3
 
-# parameter yang masuk
-m = sample(100,n_benda) # sebagai massa dari n body
+# kita generate posisi masing-masing benda
+r_1 = sample(100,2,replace = T) 
+r_2 = sample(100,2,replace = T) 
+r_3 = sample(100,2,replace = T) 
 
-# posisi benda
-x = sample(10,n_benda) # sebagai posisi di sumbu x
-y = sample(10,n_benda) # sebagai posisi di sumbu y
-pos = data.frame(id = 1:n_benda,x,y,
-                 iter = 1)
+r_1
+r_2
+r_3
 
-# konstanta gravitasi
-G = 6.67 * 10^(-11)
+# ======================================================
+# bikin grafik posisi awal
+x = c(r_1[1],r_2[1],r_3[1])
+y = c(r_1[2],r_2[2],r_3[2])
 
-# hitung waktu dan banyak iterasi
-t = 10
-dt = .5
-iter_max = t/dt
-
-# initial velocity dan acceleration
-v = rep(0,n_benda)
-a = rep(0,n_benda)
-
-# kita mulai
-i = 1
-
-# update kecepatan half kick
-v = v + a * dt/2
-
-# ambil data frame yang dibutuhkan
-temp_pos = pos %>% filter(iter == i)
-
-# update ppsisi sementara
-temp_pos$x = temp_pos$x * dt
-temp_pos$y = temp_pos$y * dt
-
-# kita update acceleration
-for(j in 1:n_benda){
-  for(k in 1:n_benda){
-    
-  }
-}
-
+data.frame(x,y) %>%
+  ggplot(aes(x = x,y = y)) +
+  geom_point() +
+  theme_void()
 
