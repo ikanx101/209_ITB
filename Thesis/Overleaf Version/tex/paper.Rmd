@@ -203,44 +203,44 @@ The following mathematical expressions are the constraints for our mathematical 
 __Constraints I__ are set to handle the discontinuity value of $x_k$. $\forall k \in \mathcal{N}$,
 
 \begin{equation}
-     x_k \leq  y_k D (\#eq:1a)
+     x_k \leq  y_k D 
 \end{equation}
 \begin{equation}
-   x_k \geq \sigma_k y_k (\#eq:1b)
+   x_k \geq \sigma_k y_k 
 \end{equation}
 
 __Constraints II__ are set to fulfill the weekly allocation of each type of raw material. $\forall k \in \mathcal{N}$,
 
 \begin{equation}
-    x_k = \sum_{j \in \mathcal{M}} \hat{x}_{jk} (\#eq:2a)
+    x_k = \sum_{j \in \mathcal{M}} \hat{x}_{jk} 
 \end{equation}
 
 __Constraints III__ are set to fulfill the raw-material demand each week. $\forall j \in \mathcal{M}$,
 
 \begin{equation}
-   \sum_{k=1}^N \hat x_{jk} + \sum_{k=1}^N z_{(j-1)k} \geq  D_{j} (\#eq:3a)
+   \sum_{k=1}^N \hat x_{jk} + \sum_{k=1}^N z_{(j-1)k} \geq  D_{j} 
 \end{equation}
 
 __Constraints IV__ are set to ensure each item in $P^2$ is produced by using at least two raw materials. $\forall j \in \mathcal{M} \forall i \in P_j^2$,
 
 \begin{equation}
-\sum_{k \in \mathcal N} a_{ijk} \geq 2 (\#eq:4a)
+\sum_{k \in \mathcal N} a_{ijk} \geq 2 
 \end{equation}
 
 __Constraints V__ concern on  the relation among $f_{ik}, a_{ijk}, b_{ijk}$, and $x_{jk}$. $\forall j \in \mathcal{M}$, $i \in P_j, k \in \mathcal{N}$, 
 
 \begin{equation}
- a_{ijk} \leq f_{ik} (\#eq:5a)
+ a_{ijk} \leq f_{ik}
 \end{equation}
 
 $\forall j \in \mathcal{M}, \forall i \in P_j, \forall k \in \mathcal{N}$,
 
 \begin{equation}
-    b_{ijk} \leq f_{ik} a_{ijk} (\#eq:5b)
+    b_{ijk} \leq f_{ik} a_{ijk}
 \end{equation}
 
 \begin{equation}
- \mu a_{ijk} \leq  b_{ijk} (\#eq:5c)
+ \mu a_{ijk} \leq  b_{ijk} 
 \end{equation}
 
 for a small value of $\mu$.
@@ -248,7 +248,7 @@ for a small value of $\mu$.
 $\forall j \in \hat{M}, \forall i \in P_j$,
 
 \begin{equation}
-\sum_{k \in \mathcal N} b_{ijk} =1 (\#eq:5d)
+\sum_{k \in \mathcal N} b_{ijk} =1
 \end{equation}
 
 __Constraints VI__ are set to fulfill the Policy II.
@@ -256,11 +256,11 @@ __Constraints VI__ are set to fulfill the Policy II.
 $\forall j \in \hat{M}, \forall i \in P_j^2, k_1, k_2 \in \mathcal{N}, k_1 \neq k_2$,
 
 \begin{equation}
-  (1- a_{ijk_1}) + (1- a_{ijk_2}) \geq  b_{ijk_1}-b_{ijk_2} (\#eq:6a)
+  (1- a_{ijk_1}) + (1- a_{ijk_2}) \geq  b_{ijk_1}-b_{ijk_2} 
 \end{equation}
 
 \begin{equation}
-  (1- a_{ijk_1}) + (1- a_{ijk_2}) \geq  b_{ijk_2}-b_{ijk_1} (\#eq:6b)
+  (1- a_{ijk_1}) + (1- a_{ijk_2}) \geq  b_{ijk_2}-b_{ijk_1} 
 \end{equation}
 
 
@@ -269,19 +269,19 @@ __Constraints VII__ are set to ensure that the level of inventory just after raw
 On the beginning of week 1,
 
 \begin{equation}
-\sum_{k \in \mathcal N} (z_{0k} + \hat{x}_{1k} -  + z_{1k}) - D_1\leq maxcap  (\#eq:7a)
+\sum_{k \in \mathcal N} (z_{0k} + \hat{x}_{1k} -  + z_{1k}) - D_1\leq maxcap  
 \end{equation}
 
 $\forall j \in \{2, 3, 4\}$,
 
 \begin{equation}
-    \sum_{k \in \mathcal N} (z_{(j-1)k} + \hat{x}_{(j-1)k}) - \sum_{i \in P_j} b_{ijk} g_{ik} + z_{jk} \leq maxcap  (\#eq:7b)
+    \sum_{k \in \mathcal N} (z_{(j-1)k} + \hat{x}_{(j-1)k}) - \sum_{i \in P_j} b_{ijk} g_{ik} + z_{jk} \leq maxcap  
 \end{equation}
 
 $\forall j \in \mathcal{M}$,
 
 \begin{equation}
-    \sum_{k \in \mathcal N} (z_{(j-1)k} + \hat{x}_{jk}) - \sum_{i \in P_j} b_{ijk} g_{ik} + z_{jk} \leq maxcap  (\#eq:7c)
+    \sum_{k \in \mathcal N} (z_{(j-1)k} + \hat{x}_{jk}) - \sum_{i \in P_j} b_{ijk} g_{ik} + z_{jk} \leq maxcap  
 \end{equation}
 
 __Constraints VIII__ are set to ensure that the level of inventory at the end of each week must be greater than or equal to the safety stock.
@@ -289,7 +289,7 @@ __Constraints VIII__ are set to ensure that the level of inventory at the end of
 $\forall j \in \mathcal{M},\forall k \in P_j$,
 
 \begin{equation}
-    z_{jk}\geq ss (\#eq:8a)
+    z_{jk}\geq ss 
 \end{equation}
 
 ## Objective function
@@ -305,19 +305,19 @@ knitr::include_graphics("inventory.jpg")
 So that the inventory cost can be given as:
 
 \begin{equation}
-    \frac{1}{2} ic\sum_{j \in \mathcal M} \sum_{k \in \mathcal N} (z_{(j-1)k} + z_{jk} + \hat x _{jk}) (\#eq:9a)
+    \frac{1}{2} ic\sum_{j \in \mathcal M} \sum_{k \in \mathcal N} (z_{(j-1)k} + z_{jk} + \hat x _{jk}) 
 \end{equation}
 
 Meanwhile the purchase cost can be given as: 
 
 \begin{equation}
- \sum_{k \in \mathcal N}c_k x_k (\#eq:9b)
+ \sum_{k \in \mathcal N}c_k x_k 
 \end{equation}
 
 We consider another function in the objective function, which is created to accommodate the one-year minimum order quantity contracts. Constraints I - VIII concern fulfillment of the minimum purchase agreements,   the monthly demand,   warehouse capacity constraint, safety stock constraint, and raw material composition requirements. Meanwhile, the one-year minimum order quantity contract is quite difficult to be expressed as a constraint in the optimization model that has a one-month-long planning horizon. Therefore, we accommodate the yearly purchase contract which we represent as a part of the objective function of our optimization problem. To fulfill the  one-year minimum order quantity contracts, we define a penalty function
 
 \begin{equation}
- \sum_{k \in \mathcal N} \alpha_k mo_k x_k (\#eq:9c)
+ \sum_{k \in \mathcal N} \alpha_k mo_k x_k
 \end{equation}
 
 where for \(k \in \mathcal N, \, \alpha_k \) is multiplier constants that will be discussed later. 
@@ -325,7 +325,7 @@ where for \(k \in \mathcal N, \, \alpha_k \) is multiplier constants that will b
 The objective function of our optimization model is then can be written as:
 
 \begin{equation}
-    \frac{1}{2} ic\sum_{j \in \mathcal M} \sum_{k \in \mathcal N} (z_{(j-1)k} + z_{jk} + \hat x _{jk}) + \sum_{k \in \mathcal N}c_k x_k - \sum_{k \in \mathcal N} \alpha _k mo_k x_k (\#eq:9d)
+    \frac{1}{2} ic\sum_{j \in \mathcal M} \sum_{k \in \mathcal N} (z_{(j-1)k} + z_{jk} + \hat x _{jk}) + \sum_{k \in \mathcal N}c_k x_k - \sum_{k \in \mathcal N} \alpha _k mo_k x_k
 \end{equation}
 
 ## Optimization model
@@ -333,7 +333,7 @@ The objective function of our optimization model is then can be written as:
 The optimization model for supplier selection, order allocation, and raw material composition can be written as a mixed integer linear programming.
 
 \begin{equation}
-    \frac{1}{2} ic\sum_{j \in \mathcal M} \sum_{k \in \mathcal N} (z_{(j-1)k} + z_{jk} + \hat x _{jk}) + \sum_{k \in \mathcal N}c_k x_k - \sum_{k \in \mathcal N} \alpha _k mo_k x_k (\#eq:10)
+    \frac{1}{2} ic\sum_{j \in \mathcal M} \sum_{k \in \mathcal N} (z_{(j-1)k} + z_{jk} + \hat x _{jk}) + \sum_{k \in \mathcal N}c_k x_k - \sum_{k \in \mathcal N} \alpha _k mo_k x_k 
 \end{equation}
 
 $$\text{subject to Constraints I - VIII}$$
