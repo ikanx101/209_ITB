@@ -11,6 +11,17 @@ solusi_2 = get_solution(result, x_hat[j,k]) %>% as.data.frame()
 solusi_3 = get_solution(result, z[j,k]) %>% as.data.frame() 
 solusi_4 = get_solution(result, a[i,j,k]) %>% as.data.frame() 
 solusi_5 = get_solution(result, b[i,j,k]) %>% as.data.frame() 
+solusi_6 = get_solution(result, butuh[j,k]) %>% as.data.frame()
+solusi_7 = get_solution(result, x_stb[k]) %>% as.data.frame()
+solusi_8 = get_solution(result, x_hat_stb[j,k]) %>% as.data.frame()
+
+save(solusi_1,
+     solusi_2,
+     solusi_3,
+     solusi_6,
+     solusi_7,
+     solusi_8,
+     file = "report.rda")
 
 # stok pada akhir cycle
 stok = data.frame(k = 1:6,Z_0k)
@@ -149,6 +160,16 @@ tabel_all = list(
 # masukin semua tabel ke sheet tersebut
 xl_write(tabel_all, wb, sh)
 
+# ==============================================================================
+# bikin sheet
+nama_sheet = paste0("FINAL")
+sh = addWorksheet(wb, nama_sheet)
+
+tabel_all = list(solusi_6,solusi_7,solusi_8)
+
+# masukin semua tabel ke sheet tersebut
+xl_write(tabel_all, wb, sh)
+
 
 # ==============================================================================
 # bikin sheet
@@ -237,4 +258,4 @@ tabel_all = list(
 xl_write(tabel_all, wb, sh)
 
 # export ke Excel
-saveWorkbook(wb, "output v2.xlsx", overwrite = TRUE)
+saveWorkbook(wb, nama_file_output, overwrite = TRUE)

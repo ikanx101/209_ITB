@@ -19,7 +19,7 @@ df_4 = merge(df_2,df_3)  # gabung menjadi matriks besar gula x produk x minggu
 df_4[is.na(df_4)] = 0
 
 maxcap = read_excel(nama,sheet = sheets[4]) # ambil max capacity gudang 
-maxcap = maxcap$maxcap
+maxcap = 900000 #maxcap$maxcap
 
 # bikin f_ik
 # produk i bisa diproduksi dengan gula k
@@ -96,6 +96,12 @@ for(i in 1:51){
 
 # stok level bahan baku k di gudang pada akhir week 1
 Z_0k = df_1$stok_akhir_bulan
+
+# safety stock
+ss = 2500
+
+# inventory cost
+ic = 1000
 
 cat("\014")
 print("DONE load database input")

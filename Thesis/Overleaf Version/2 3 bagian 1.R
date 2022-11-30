@@ -42,7 +42,9 @@ I = 1:nrow(df_4)
 G = 1:6
 
 # total proporsi portofolio bahan baku gula k yang ditetapkan dalam setahun
-Prk = df_1$proporsi /100 * 3000000 * 12
+mo_k = df_1$proporsi /100 * 3000000 * 12
+alfa = 500
+mo_k = (1 / alfa) * mo_k
 
 # miu suatu bilangan yang kecil
 #miu = 10^(-6)
@@ -117,8 +119,7 @@ milp_new =
     add_constraint(sum_expr(x_hat[1,k],k = G) + sum_expr(Z_0k[k],k = G) >= Dj[1]) %>%
     
     # untuk j >= 1
-    add_constraint(sum_expr(x_hat[j,k],k = G) + sum_expr(z[j-1,k],k = G) >= Dj[j],
-                   j = 2:4) %>%
+    add_constraint(sum_expr(x_hat[j,k],k = G) + sum_expr(z[j-1,k],k = G) >= Dj[j],j = 2:4) %>%
                    
   # ============================================================================
   # constraint V
@@ -805,7 +806,34 @@ milp_new =
                  j = 4,
                  i = P4) %>% 
                
-               
+  
+  # ============================================================================
+  # kita keluarkan angka kebutuhan
+  add_variable(butuh[j,k],type = "continuous",lb = 0,
+             j = M,
+             k = G) %>% 
+  
+  # kebutuhan pada week 1
+  add_constraint(butuh[j,k] == sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+                                        i = P1),
+                 j = 1,
+                 k = G) %>% 
+  # kebutuhan pada week 2
+  add_constraint(butuh[j,k] == sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+                                        i = P2),
+                 j = 2,
+                 k = G) %>% 
+  # kebutuhan pada week 3
+  add_constraint(butuh[j,k] == sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+                                        i = P3),
+                 j = 3,
+                 k = G) %>% 
+  # kebutuhan pada week 4
+  add_constraint(butuh[j,k] == sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
+                                        i = P4),
+                 j = 4,
+                 k = G) %>% 
+  
   # ============================================================================
   # constraint VII
   # kita akan modifikasi constraint 7 dari Bu Rieske ke bentuk lain
@@ -813,29 +841,37 @@ milp_new =
   
   # bagian definisi z_jk
   # ini untuk menghitung saldo pada week 1 
-  add_constraint(z[j,k] >= Z_0k[k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                            i = P1),
+  add_constraint(z[j,k] >= Z_0k[k] + x_hat[j,k] - butuh[j,k],
                  j = 1,
                  k = G) %>% 
   
-  # ini untuk menghitung saldo pada week 2 
-  add_constraint(z[j,k] == z[(j-1),k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                           i = P2),
-                 j = 2,
+  # ini untuk menghitung saldo pada week 2 - 4
+  add_constraint(z[j,k] == z[(j-1),k] + x_hat[j,k] - butuh[j,k],
+                 j = 2:4,
                  k = G) %>% 
   
-  # ini untuk menghitung saldo pada week 3 
-  add_constraint(z[j,k] == z[(j-1),k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                              i = P3),
-                 j = 3,
+  # ============================================================================
+  # yang dikirim harus lebih banyak dari yang dibutuhkan
+  add_variable(x_hat_stb[j,k],type = "continuous",lb = 0,
+               j = M,
+               k = G) %>%
+  
+  add_variable(x_stb[k],type = "continuous",lb = 0,
+               k = G) %>%
+  
+  # week 1
+  add_constraint(x_hat_stb[j,k] == z[j,k] - Z_0k[k] + butuh[j,k],
+                 j = 1,
                  k = G) %>% 
   
-  # ini untuk menghitung saldo pada week 4 
-  add_constraint(z[j,k] == z[(j-1),k] + x_hat[j,k] - sum_expr(b[i,j,k] * matt_g_ijk[i,j,k],
-                                                              i = P4),
-                 j = 4,
+  # week 2:4
+  add_constraint(x_hat_stb[j,k] == z[j,k] - z[(j-1),k] + butuh[j,k],
+                 j = 2:4,
                  k = G) %>% 
-  
+  # total
+  add_constraint(sum_expr(x_hat_stb[j,k],
+                          j = M) == x_stb[k],
+                 k = G) %>% 
   
   # bagian constraint max cap
   # ini agar si z[j,k] gak lebih dari maxcap
@@ -845,23 +881,36 @@ milp_new =
   
   # bagian constraint safety stok
   # ini agar si z[j,k] gak kurang dari safety stok
-  add_constraint(sum_expr(z[j,k],k = G) - Dj[j] >= ss,
+  add_constraint(z[j,k] >= ss,
+                 k = G,
                  j = M) %>% 
   
   # ============================================================================
-  # modifikasi untuk menambahkan total z_jk ke dalam objective function
-  #add_variable(tot[k],type = "continuous",lb = 0,k = G) %>%
-  #add_constraint(tot[k] == sum_expr(z[j,k],
-  #                                  j = M),
+  # modifikasi untuk menambahkan cost ke dalam objective function
+  # week 1
+  add_variable(cost_w1[k],type = "continuous",lb = 0,k = G) %>%
+  add_constraint(cost_w1[k] == z[j,k] * c_k[k],j = 1,k = G) %>% 
+  
+  # week 2-4
+  #add_variable(tot_w24[k],type = "continuous",lb = 0,k = G) %>%
+  #add_constraint(tot_w24[k] == 0.5 * ic * sum_expr(z[j,k] + z[j-1,k] + x_hat_stb[j,k],
+  #                                            j = 2:4),
+  #               k = G) %>% 
+  
+  # yearly contract
+  #add_variable(yearly[k],type = "continuous",lb = 0,k = G) %>% 
+  #add_constraint(yearly[k] == mo_k[k] * x_stb[k],
   #               k = G) %>% 
   
   # objective function
-  set_objective(sum_expr(c_k[k] * x[k] #+ tot[k]
-                         , k = G),"min")
+  set_objective(sum_expr((c_k[k] * x[k]) + cost_w1[k], #+ tot_w1[k] + tot_w24[k] - yearly[k]
+                         k = G),
+                "min")
                
   
 # solver
 result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
+nama_file_output = "output bagian 1 modif dan maxcap.xlsx"
 source("3 export hasil ke excel.R")  
 
 toc()

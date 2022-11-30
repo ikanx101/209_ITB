@@ -1,0 +1,53 @@
+---
+title: "Untitled"
+author: "Mohammad Rizka Fadhli"
+date: "11/29/2022"
+output: 
+  pdf_document:
+    keep_tex: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(kableExtra)
+
+rm(list=ls())
+load("~/209_ITB/Thesis/Overleaf Version/report.rda")
+```
+
+\newpage
+
+```{r,echo=FALSE}
+solusi_7 %>% 
+  mutate(value = value/1000,
+         value = round(value,1)) %>% 
+  rename("Raw material" = k,
+         "Total order qty (in tons)" = value) %>% 
+  select(-variable) %>% 
+  janitor::adorn_totals() %>% 
+  knitr::kable(caption = "Optimal Solution",align = "c")
+
+
+df = 
+  solusi_8 %>% 
+  mutate(value = value/1000,
+         value = round(value,1)) %>% 
+  reshape2::dcast(k~j,value.var = "value") %>% 
+  rename("Raw material" = k)
+colnames(df)[2:5] = paste0("Week ",1:4)
+df %>% knitr::kable(caption = "Raw Material order per week (in tons)",align = "c")
+
+df = 
+  solusi_3 %>% 
+  mutate(value = value/1000,
+         value = round(value,1)) %>% 
+  reshape2::dcast(k~j,value.var = "value") %>% 
+  rename("Raw material" = k)
+colnames(df)[2:5] = paste0("Week ",1:4)
+df %>% knitr::kable(caption = "Stock at the end of the week (in tons)",align = "c")
+
+
+```
+
+
