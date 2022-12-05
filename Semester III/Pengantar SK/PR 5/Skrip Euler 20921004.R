@@ -1,48 +1,59 @@
 # ======================================================
 # tugas pengantar sains komputasi
 # program n-body simulation
-# by:
+# menggunakan pendekatan metode euler
+# oleh :
 # 20921004 - mohammad rizka fadhli
 # ======================================================
 
-setwd("/root/209_ITB/Semester III/Pengantar SK/PR 5/skrip.R")
+# catatan terkait skrip ini
+# saya menggunakan bahasa R versi > 4.0 dengan memanfaatkan prinsip tidy
+ # untuk menyelesaikan masalah n-body simulation secara paralel pada perhitungan
+ # acceleration di tiap-tiap iterasi dt.
+# libraries yang digunakan adalah:
+ # dplyr, ggplot, gganimate, dan av.
+
+# set working directory 
+# catatan: harap diubah sesuai dengan working directory masing-masing
+setwd("/root/209_ITB/Semester III/Pengantar SK/PR 5")
 
 # ======================================================
-# bebersih global environment
+# membersihkan global environment
 rm(list=ls())
+
 # libraries yang dibutuhkan
-library(dplyr) # sebagai data manipulation
-library(ggplot2) # sebagai data visualization
+library(dplyr)     # sebagai data manipulation
+library(ggplot2)   # sebagai data visualization
 library(gganimate) # sebagai animator grafik
-library(av) # untuk render animasi ke dalam mp4
+library(av)        # untuk render animasi ke dalam mp4
 
-# ======================================================
-# Simulation parameters
-N         = 5     # Number of particles
-t         = 0     # current time of the simulation
-tEnd      = 10    # time at which simulation ends
-dt        = 0.01  # timestep
-max_iter  = (tEnd - t)/dt # berapa banyak iterasi dilakukan
-softening = 0.1   # softening length
-G         = 1     # Newton's Gravitational Constant
-
-# kita buat dulu rumahnya
-final = vector("list",max_iter)
-
-# Generate Initial Conditions
+# seed untuk randomisasi angka
 set.seed(20921004)
 
-mass = rep(20/N,N)  # total mass of particles is 20
-pos = runif(N*2)    # randomly selected positions
-pos = matrix(pos,ncol = 2)
-vel = runif(N*2)    # randomly selected velocities
-vel = matrix(vel,ncol = 2)
+# ======================================================
+# parameter yang digunakan dalam simulasi
+N         = 3     # banyak benda
+t         = 0     # t initial
+tEnd      = 3     # t akhir
+dt        = 0.001 # delta t
+max_iter  = (tEnd - t)/dt # berapa banyak iterasi dilakukan
+softening = 0.1   # softening agar jarak r_j - r_i tidak nol
+G         = 1     # Newton's Gravitational Constant
+mass      = rep(20/N,N)   # massa per benda (dibuat total sama dengan 20)
+pos       = runif(N*2)    # randomisasi initial posisi setiap benda
+pos       = matrix(pos,ncol = 2) # dibuat dalam bentuk matriks
+vel       = runif(N*2)    # randomisasi initial velocity setiap benda
+vel       = matrix(vel,ncol = 2) # dibuat dalam bentuk matriks
 
-# Convert to Center-of-Mass Frame
+# Mengubah ke bentuk Center-of-Mass
 vel = vel - mean(mass * vel) / mean(mass)
 
-# Initial condition for acceleration
-acc = matrix(rep(0,N*2),ncol = 2)
+# Initial condition untuk acceleration
+acc = matrix(rep(0,N*2),ncol = 2) # yakni dibuat sama dengan nol
+
+# saya gunakan vector berisi list untuk menampung hasil komputasi
+ # setiap iterasi
+final = vector("list",max_iter)
 
 # kita mulai iterasinya dari sini
 for(iter in 1:max_iter){
@@ -59,9 +70,11 @@ for(iter in 1:max_iter){
         mutate(iter = iter,
                t_iter = t)
     df$id_bintang = 1:N
-    # simpan ke dalam list
+    # simpan ke dalam vector list final
     final[[iter]] = df
 
+    # proses perhitungan acceleration dengan memanfaatkan
+     # paralelisasi dalam bentuk data frame dan tidy
     # kita akan buat pairwise dari semua kemungkinan yang ada
     pair_wise = expand.grid(i = 1:N,
                             j = 1:N) %>% filter(i != j) %>%
@@ -71,13 +84,17 @@ for(iter in 1:max_iter){
                                    x_j = pos[j,1],
                                    y_i = pos[i,2],
                                    y_j = pos[j,2]) %>%
+                            # menghitung dx dan dy
                             mutate(dx = x_j - x_i,
                                    dy = y_j - y_i) %>%
                             # menghitung norm dari r_j - r_i
                             mutate(inv_r3 = (dx^2 + dy^2 + softening^2)^(-3/2)) %>%
+                            # menambahkan variabel mass
                             mutate(m_j = mass[j]) %>%
+                            # menghitung acceleration masing-masing titik
                             mutate(a_i_x = G * m_j * dx * inv_r3,
                                    a_i_y = G * m_j * dy * inv_r3) %>%
+                            # melakukan summary untuk setiap benda ke i
                             group_by(i) %>%
                             summarise(a_i_x = sum(a_i_x),
                                       a_i_y = sum(a_i_y)) %>%
@@ -85,17 +102,16 @@ for(iter in 1:max_iter){
     
     # menghitung acceleration
     acc = pair_wise %>% select(-i) %>% rename(V1 = a_i_x,V2 = a_i_y)
-    acc = data.matrix(acc)
+    acc = data.matrix(acc) # mengubah accalaration dalam bentuk matriks
 
     # update time
     t = t + dt
 }
 
-# kita gabung kembali datanya
+# kita gabung kembali data dari masing-masing iterasi
 df_all = do.call(rbind,final)
-df_all
 
-# bikin grafiknya
+# kita buat grafiknya
 plt = 
   df_all %>%
   ggplot(aes(x = x,y = y)) +
@@ -103,13 +119,14 @@ plt =
   #scale_color_manual(values = c("yellow","red","purple")) +
   transition_time(t_iter) +
   shadow_wake(wake_length = 0.1, alpha = FALSE) +
-  labs(title = "Pergerakan Benda Angkasa",
-       caption = "Dibuat dengan R\nikanx101.com") +
+  labs(title = "Project Pengantar Sains Komputasi: Pergerakan Benda Luar Angkasa",
+       subtitle = 'Posisi dan velocity awal benda dibuat random sedangkan massa setiap benda sama',
+       caption = "Dibuat dengan R\n20921004 Mohammad Rizka Fadhli",
+       color = 'Benda ke-') +
   theme_minimal()
 
 # animasikan
 a = animate(plt, duration = 30, fps = 20, renderer = av_renderer())
 
 # save ke local
-anim_save("animation bintang.mp4", a)
-
+anim_save("animation Euler 20921004.mp4", a)
