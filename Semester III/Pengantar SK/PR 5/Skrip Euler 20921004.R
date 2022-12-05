@@ -34,8 +34,8 @@ set.seed(20921004)
 # parameter yang digunakan dalam simulasi
 N         = 3     # banyak benda
 t         = 0     # t initial
-tEnd      = 3     # t akhir
-dt        = 0.001 # delta t
+tEnd      = 2     # t akhir
+dt        = 10^(-3) # delta t
 max_iter  = (tEnd - t)/dt # berapa banyak iterasi dilakukan
 softening = 0.1   # softening agar jarak r_j - r_i tidak nol
 G         = 1     # Newton's Gravitational Constant
@@ -59,9 +59,10 @@ final = vector("list",max_iter)
 # kita hitung terlebih dahulu energinya
  # e_kin = 1/2 * v^2
  # e_pot = - 1/r
-e_kin = 0.5 * sum(sum( mass * vel^2 ))
+e_kin = 0.5 * sum(vel^2 )
 e_pot = -1 / sum(sqrt(pos^2))
-e_tot = e_kin + e_tot
+e_tot = e_kin + e_pot
+E0 = e_tot
 
 # ======================================================
 # kita mulai iterasinya dari sini
@@ -72,12 +73,20 @@ for(iter in 1:max_iter){
     # update position
     pos = pos + vel * dt
 
+    # perhitungan energi
+    e_kin = 0.5 * sum(vel^2 )
+    e_pot = -1 / sum(sqrt(pos^2))
+    e_tot = e_kin + e_pot
+
     # saya akan simpan masing-masing iterasinya
     df = 
         as.data.frame(pos) %>%
         rename(x = V1,y = V2) %>%
         mutate(iter = iter,
                t_iter = t)
+    df$e_kin = e_kin # menyimpan energi kinetik
+    df$e_pot = e_pot # menyimpan energi potensial
+    df$e_tot = e_tot # menghitung total energi
     df$id_bintang = 1:N
     # simpan ke dalam vector list final
     final[[iter]] = df
@@ -128,8 +137,8 @@ plt =
   #scale_color_manual(values = c("yellow","red","purple")) +
   transition_time(t_iter) +
   shadow_wake(wake_length = 0.1, alpha = FALSE) +
-  labs(title = "Project Pengantar Sains Komputasi: Pergerakan Benda Luar Angkasa",
-       subtitle = 'Posisi dan velocity awal benda dibuat random sedangkan massa setiap benda sama',
+  labs(title = "Project Pengantar Sains Komputasi\nPergerakan Benda Luar Angkasa",
+       subtitle = 'Posisi dan velocity awal benda dibuat random\nsedangkan massa setiap benda sama',
        caption = "Dibuat dengan R\n20921004 Mohammad Rizka Fadhli",
        color = 'Benda ke-') +
   theme_minimal()
@@ -137,5 +146,30 @@ plt =
 # animasikan
 a = animate(plt, duration = 30, fps = 20, renderer = av_renderer())
 
-# save ke local
+# save animasi ke local
 anim_save("animation Euler 20921004.mp4", a)
+
+# kita buat grafik dari energinya sekarang
+plt = 
+  df_all %>% 
+  mutate(t_iter = round(t_iter,2)) %>%
+  group_by(t_iter) %>%
+  summarise(E = mean(e_tot)) %>%
+  ungroup() %>%
+  mutate(graf = (E - E0)/E0,
+         graf = round(graf,1))
+
+# membuat grafik
+plt %>%
+  ggplot(aes(x = t_iter,
+             y = graf)) +
+  geom_line(color = "darkred") +
+  theme_minimal() +
+  labs(title = "Grafik (E-E0)/E0 untuk Setiap t",
+       subtitle = "Metode Euler dengan dt = 10^-3",
+       caption = "Dibuat dengan R\n20921004 Mohammad Rizka Fadhli")
+# save ke local
+ggsave("Plot Energi Metode Euler 20921004.png")
+
+# terima kasih
+# visit ikanx101.com
