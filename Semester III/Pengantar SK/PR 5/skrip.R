@@ -5,6 +5,8 @@
 # 20921004 - mohammad rizka fadhli
 # ======================================================
 
+setwd("/root/209_ITB/Semester III/Pengantar SK/PR 5")
+
 # ======================================================
 # bebersih global environment
 rm(list=ls())
@@ -12,10 +14,11 @@ rm(list=ls())
 library(dplyr) # sebagai data manipulation
 library(ggplot2) # sebagai data visualization
 library(gganimate) # sebagai animator grafik
+library(av)
 
 # ======================================================
 # banyak benda
-n_benda = 25
+n_benda = 5
 
 # kita generate random posisi masing-masing benda
 r_mat = sample(1000,n_benda * 2,replace = T)
@@ -131,7 +134,7 @@ plt =
   theme_minimal()
 
 # animasikan
-a = animate(plt, renderer = ffmpeg_renderer())
+a = animate(plt, duration = 30, fps = 20, renderer = av_renderer())
 
 # save ke local
 anim_save("animation.mp4", a)
