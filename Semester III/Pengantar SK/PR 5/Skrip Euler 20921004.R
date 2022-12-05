@@ -55,6 +55,15 @@ acc = matrix(rep(0,N*2),ncol = 2) # yakni dibuat sama dengan nol
  # setiap iterasi
 final = vector("list",max_iter)
 
+# ======================================================
+# kita hitung terlebih dahulu energinya
+ # e_kin = 1/2 * v^2
+ # e_pot = - 1/r
+e_kin = 0.5 * sum(sum( mass * vel^2 ))
+e_pot = -1 / sum(sqrt(pos^2))
+e_tot = e_kin + e_tot
+
+# ======================================================
 # kita mulai iterasinya dari sini
 for(iter in 1:max_iter){
     # update velocity 
