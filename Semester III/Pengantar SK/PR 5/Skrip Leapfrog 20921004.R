@@ -32,10 +32,10 @@ set.seed(20921004)
 
 # ======================================================
 # parameter yang digunakan dalam simulasi
-N         = 3     # banyak benda
+N         = 20    # banyak benda
 t         = 0     # t initial
-tEnd      = 4     # t akhir
-dt        = 10^(-3) # delta t
+tEnd      = 5     # t akhir
+dt        = 10^(-2) # delta t
 max_iter  = (tEnd - t)/dt # berapa banyak iterasi dilakukan
 softening = 0.1   # softening agar jarak r_j - r_i tidak nol
 G         = 1     # Newton's Gravitational Constant
@@ -138,8 +138,8 @@ plt =
   transition_time(t_iter) +
   shadow_wake(wake_length = 0.1, alpha = FALSE) +
   labs(title = "Project Pengantar Sains Komputasi\nPergerakan Benda Luar Angkasa",
-       subtitle = 'Posisi dan velocity awal benda dibuat random\nsedangkan massa setiap benda sama',
-       caption = "Dibuat dengan R\n20921004 Mohammad Rizka Fadhli",
+       subtitle = 'Posisi awal benda dibuat random\nsedangkan massa setiap benda sama',
+       caption = "Dibuat dengan R\nikanx101.com",
        color = 'Benda ke-') +
   theme_minimal()
 
