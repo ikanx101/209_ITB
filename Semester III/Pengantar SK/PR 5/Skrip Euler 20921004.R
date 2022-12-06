@@ -35,7 +35,7 @@ set.seed(20921004)
 N         = 3     # banyak benda
 t         = 0     # t initial
 tEnd      = 2     # t akhir
-dt        = 10^(-3) # delta t
+dt        = 10^(-2) # delta t
 max_iter  = (tEnd - t)/dt # berapa banyak iterasi dilakukan
 softening = 0.1   # softening agar jarak r_j - r_i tidak nol
 G         = 1     # Newton's Gravitational Constant
@@ -166,7 +166,7 @@ plt %>%
   geom_line(color = "darkred") +
   theme_minimal() +
   labs(title = "Grafik (E-E0)/E0 untuk Setiap t",
-       subtitle = "Metode Euler dengan dt = 10^-3",
+       subtitle = "Metode Euler dengan dt = 10^-2",
        caption = "Dibuat dengan R\n20921004 Mohammad Rizka Fadhli")
 # save ke local
 ggsave("Plot Energi Metode Euler 20921004.png")
