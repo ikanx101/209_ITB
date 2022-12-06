@@ -34,8 +34,8 @@ set.seed(20921004)
 # parameter yang digunakan dalam simulasi
 N         = 3     # banyak benda
 t         = 0     # t initial
-tEnd      = 2     # t akhir
-dt        = 10^(-2) # delta t
+tEnd      = 4     # t akhir
+dt        = 10^(-3) # delta t
 max_iter  = (tEnd - t)/dt # berapa banyak iterasi dilakukan
 softening = 0.1   # softening agar jarak r_j - r_i tidak nol
 G         = 1     # Newton's Gravitational Constant
@@ -44,7 +44,6 @@ pos       = runif(N*2)    # randomisasi initial posisi setiap benda
 pos       = matrix(pos,ncol = 2) # dibuat dalam bentuk matriks
 vel       = rep(0,N*2)    # randomisasi initial velocity setiap benda
 vel       = matrix(vel,ncol = 2) # dibuat dalam bentuk matriks
-
 
 # Initial condition untuk acceleration
 acc = matrix(rep(0,N*2),ncol = 2) # yakni dibuat sama dengan nol
@@ -148,7 +147,7 @@ plt =
 a = animate(plt, duration = 30, fps = 20, renderer = av_renderer())
 
 # save animasi ke local
-anim_save("animation Leapfrog 20921004.mp4", a)
+anim_save("animation Leapfrog 20921004 dt 2.mp4", a)
 
 # kita buat grafik dari energinya sekarang
 plt = 
@@ -167,10 +166,10 @@ plt %>%
   geom_line(color = "darkred") +
   theme_minimal() +
   labs(title = "Grafik (E-E0)/E0 untuk Setiap t",
-       subtitle = "Metode Leapfrog dengan dt = 10^-2",
+       subtitle = "Metode Leapfrog dengan dt = 10^-3",
        caption = "Dibuat dengan R\n20921004 Mohammad Rizka Fadhli")
 # save ke local
-ggsave("Plot Energi Metode Leapfrog 20921004.png")
+ggsave("Plot Energi Metode Leapfrog 20921004 dt 2.png")
 
 # terima kasih
 # visit ikanx101.com

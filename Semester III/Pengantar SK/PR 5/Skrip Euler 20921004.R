@@ -147,7 +147,7 @@ plt =
 a = animate(plt, duration = 30, fps = 20, renderer = av_renderer())
 
 # save animasi ke local
-anim_save("animation Euler 20921004.mp4", a)
+anim_save("animation Euler 20921004 dt 1.mp4", a)
 
 # kita buat grafik dari energinya sekarang
 plt = 
@@ -169,7 +169,7 @@ plt %>%
        subtitle = "Metode Euler dengan dt = 10^-2",
        caption = "Dibuat dengan R\n20921004 Mohammad Rizka Fadhli")
 # save ke local
-ggsave("Plot Energi Metode Euler 20921004.png")
+ggsave("Plot Energi Metode Euler 20921004 dt 1.png")
 
 # terima kasih
 # visit ikanx101.com
