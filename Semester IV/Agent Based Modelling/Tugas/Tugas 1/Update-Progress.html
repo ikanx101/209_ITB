@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Laporan Eksperimen dengan NetLogo</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Mohammad Rizka Fadhli" />
+    <meta name="date" content="2023-02-19" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/fc.css" rel="stylesheet" />
+    <link href="libs/remark-css/fc-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="footer-header.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Laporan Eksperimen dengan NetLogo
+## Agent Based Modelling
+### Mohammad Rizka Fadhli
+### <a href="mailto:20921004@mahasiswa.itb.ac.id" class="email">20921004@mahasiswa.itb.ac.id</a>
+### 19 February 2023
+
+---
+
+layout: true
+
+&lt;div class="my-footer"&gt;&lt;span&gt;Agent Based Modelling ---- 20921004@mahasiswa.itb.ac.id&lt;/span&gt;&lt;/div&gt;
+
+
+
+---
+class: middle,center
+
+# PENDAHULUAN
+
+---
+class: middle
+
+# PENDAHULUAN
+
+## Latar Belakang
+
+.pull-left[
+
+Digitalisasi yang terjadi dalam beberapa tahun belakangan ini membuat dunia yang kita tinggali menjadi saling terhubung dan kompleks. Model sederhana yang selama ini kita gunakan sudah tidak mampu lagi menjawab permasalahan-permasalah. Oleh karena itu, _Agent Based Modelling_ (__ABM__) diperkenalkan untuk menyelesaikan dan memahami permasalahan kompleks tersebut.
+
+__NetLogo__ adalah salah satu _toolkits_ __ABM__ yang sudah digunakan oleh banyak orang di dunia.
+
+Laporan ini berisi beberapa eksperimen atau percobaan yang dilakukan pada tiga model yang ada pada __NetLogo__.
+
+]
+
+.pull-right[
+
+&lt;img src="netlogo 1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+class: middle
+
+# PENDAHULUAN
+
+.pull-left[
+
+## Model __ABM__ yang Dicoba
+
+Ada tiga model __ABM__ yang akan dicoba pada __NetLogo__ kali ini, yaitu:
+
+1. Model _game of life_ atau _cellular automata_,
+1. Model _heroes and coward_, dan
+1. Model _simple economy_.
+
+## Versi __NetLogo__ yang Digunakan
+
+Kali ini saya akan menggunakan __NetLogo__ versi _web_ yang berada pada _url_: __http://www.netlogoweb.org/__.
+
+]
+
+.pull-right[
+
+&lt;img src="netlogo 2 new.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+class: middle, center, inverse
+
+# _CELLULAR AUTOMATA 1D_
+
+## Model Pertama
+
+---
+
+class: middle
+
+# _CELLULAR AUTOMATA 1D_
+
+## Penjelasan Singkat
+
+_Cellular automata_ 1 dimensi adalah kondisi _cellular automata_ di mana hanya ada satu dimensi dengan kondisi dari _cell_ hanya `hitam` atau `putih` saja. Kondisi _cell_ pada baris tertentu dipengaruhi oleh kondisi _cell_ pada baris di atasnya dan tetangga terdekatnya (hanya satu _cell_ di sebelah kanan atau kirinya). 
+
+&gt; Ada banyak kombinasi _rules_ yang mendefinisikan kondisi _cells_ pada suatu baris dari _cells_ baris di atasnya.
+
+Sebagai contoh, berikut adalah contoh _rules_ `0` di mana semua kombinasi _cells_ para baris sebelumnya memberikan hasil yang sama pada _cell_ di bawahnya berupa nilai `hitam`.
+
+&lt;img src="rules 0.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+Konsekuensi dari _rules_ `0` ini adalah apapun nilai _cells_ di suatu baris, maka baris setelahnya akan bernilai `hitam`.
+
+---
+
+class: middle
+
+# _CELLULAR AUTOMATA 1D_
+
+.pull-left[
+
+## _Rules_ `1`
+
+Berikut adalah _rules_ `1`:
+
+&lt;img src="rules 1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Saatnya mencoba dengan _cells_ baris pertama bernilai _random_ dengan cara meng-_input_ _setup random_ pada _density_ sebesar `57%`.
+
+&lt;img src="hasil rules 1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Saat _cells_ baris pertama diubah-ubah nilainya, didapatkan hasil yang berbeda juga dari hasil di atas. _Rules_ `1` ini tidak menghasilkan pola yang konvergen ke satu bentuk yang sama.
+
+]
+
+.pull-right[
+
+## _Rules_ `21`
+
+Berikut adalah _rules_ `21`:
+
+&lt;img src="rules 21.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Saatnya mencoba dengan _cells_ baris pertama bernilai _random_ dengan cara meng-_input_ _setup random_ pada _density_ sebesar `51%`.
+
+&lt;img src="hasil rules 21.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Saat _cells_ baris pertama diubah-ubah nilainya, didapatkan hasil yang berbeda juga dari hasil di atas. _Rules_ `21` ini tidak menghasilkan pola yang konvergen ke satu bentuk yang sama.
+
+]
+
+---
+
+class: middle
+
+# _CELLULAR AUTOMATA 1D_
+
+### Apakah ada _rules_ CA 1D yang menghasilkan pola yang konvergen walaupun apapun nilai _cells_ baris awalnya?
+
+---
+
+class: middle
+
+# _CELLULAR AUTOMATA 1D_
+
+## _Rules_ `22`
+
+Berikut adalah pola dari _rules_ `22`:
+
+&lt;img src="rule 22.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Perhatikan saat kita mengganti nilai _density_ menjadi beberapa nilai dan men-_generate_ _cells_ baris awal secara _random_.
+
+.pull-left[
+
+### _Density_ Sebesar `14%`
+
+&lt;img src="rule 22 density 14.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+### _Density_ Sebesar `51%`
+
+&lt;img src="rule 22 density 51.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+class: middle
+
+# _CELLULAR AUTOMATA 1D_
+
+## _Rules_ `22`
+
+.pull-left[
+
+### _Density_ Sebesar `67%`
+
+&lt;img src="rule 22 density 67.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+### _Density_ Sebesar `74%`
+
+&lt;img src="rule 22 density 74.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+Pola yang dihasilkan dari berbagai nilai _density_ untuk _cells_ baris pertama adalah hampir mirip dengan pola utama berbentuk segitiga.
+
+Satu hal yang berbeda terjadi jika seluruh _cells_ baris pertama bernilai `hitam` yang menghasilkan keseluruhan baris berikutnya tetap `hitam`.
+
+---
+class: middle, center, inverse
+
+# _HEROES AND COWARD_
+
+## Model Kedua
+
+---
+class: middle
+
+# _HEROES AND COWARD_
+
+.pull-left[
+
+## Penjelasan Singkat
+
+_Heroes and coward_ adalah suatu permainan yang dilakukan secara beramai-ramai. Setiap pemain diwajibkan memilih secara rahasia satu orang sebagai _friend_ dan satu orang sebagai _enemy_. Kemudian setiap pemain akan diberikan satu kepribadian, yakni di antara _heroes_ atau _coward_.
+
+]
+
+.pull-right[
+
+&lt;img src="heroes.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+
+]
+
+## Aturan Main
+
+.pull-left[
+
+- Jika pemain memiliki kepribadian _coward_, maka pemain tersebut harus selalu bersembunyi di belakang _friend_ (menjadikan pemain yang dipilih sebagai _friend_ sebagai tameng antara pemain tersebu dengan pemain yang dipilihnya sebagai _enemy_).
+
+]
+.pull-right[
+
+- Jika pemain memiliki kepribadian _heroes_, maka pemain tersebut harus berada di depan _friend_ (melindungi pemain yang dipilih sebagai _friend_ dari pemain yang dipilihnya menjadi _enemy_).
+
+]
+
+---
+class: middle
+
+# _HEROES AND COWARD_
+
+## Percobaan Pertama
+
+Pada percobaan pertama ini, kita akan men-_generate_ 20 orang pemain yang pada awalnya memiliki posisi secara acak. Kemudian kita buat semua pemain memiliki kepribadian _coward_. Apa yang terjadi saat kita _run_ __NetLogo__?
+
+.pull-left[
+
+### Kondisi Awal
+
+&lt;img src="all coward awal.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+### Kondisi Akhir
+
+&lt;img src="all coward akhir.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+Jika kita amati pergerakan para pemain sejak __NetLogo__ di-_run_, terlihat jelas bahwa semua pemain melarikan diri satu sama lain ke pojok area permainan. Tengah area permainan menjadi kosong dari pemain karena semua pemain saling menghindar satu sama lain.
+
+
+---
+class: middle
+
+# _HEROES AND COWARD_
+
+## Percobaan Kedua
+
+Pada percobaan kedua ini, kita akan men-_generate_ 20 orang pemain yang pada awalnya memiliki posisi secara acak. Kemudian kita buat semua pemain memiliki kepribadian _heroes_. Apa yang terjadi saat kita _run_ __NetLogo__?
+
+.pull-left[
+
+### Kondisi Awal
+
+&lt;img src="all heroes awal.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+### Kondisi Akhir
+
+&lt;img src="all heroes akhir.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+Jika kita amati pergerakan para pemain sejak __NetLogo__ di-_run_, terlihat jelas bahwa semua pemain berusaha saling melindungi satu sama lain sehingga semuanya akan berkumpul menjadi satu titik di tengah area permainan.
+
+
+---
+class: middle
+
+# _HEROES AND COWARD_
+
+## Percobaan Ketiga
+
+Pada percobaan ketiga ini, kita akan men-_generate_ 50 orang pemain yang pada awalnya memiliki posisi secara acak. Kemudian kita _random_ semua pemain memiliki kepribadian _heroes_ atau _coward_. Apa yang terjadi saat kita _run_ __NetLogo__?
+
+Warna menandakan `merah` adalah pemain _coward_ sedangkan `biru` adalah _heroes_.
+
+.pull-left[
+
+### Kondisi Awal
+
+&lt;img src="mixed awal.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+### Kondisi Akhir
+
+&lt;img src="mixed akhir.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+class: middle
+
+# _HEROES AND COWARD_
+
+## Pergerakan Pemain pada Percobaan Ketiga
+
+Jika kita amati, sejak kondisi awal hingga kondisi akhir, para pemain bergerak ke segala arah mencari posisi terbaik sesuai dengan kepribadian yang sesuai dengan mereka miliki.
+
+.pull-left[
+
+Pola akhir yang dibentuk dari semua pemain bisa berbentuk macam-macam. 
+
+- Ada kalanya berbentuk acak seperti pada _slide_ sebelumnya. 
+- Bisa juga berbentuk garis lurus di mana semua pemain saling menghindar atau saling melindungi. 
+- Atau bisa juga tidak konvergen ke suatu bentuk dan terus bergerak sepanjang waktu tidak berhenti. Hal ini sangat dimungkinkan jika antara setiap pemain saling memiliki _friend_ dan _enemy_ yang berlawanan. Lihat gambar di sebelah kanan. 
+    - Misalkan: pemain 1 mengganggap pemain 2 sebagai _friend_, sedangkan pemain 2 mengganggap pemain 1 sebagai _enemy_.
+
+]
+
+.pull-right[
+
+&lt;img src="mixed not konvergern.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+Pemain akan terus bergerak tanpa henti.
+
+]
+
+---
+class: middle, center, inverse
+
+# _SIMPLE ECONOMY_
+
+## Model Ketiga
+
+---
+class: middle
+
+# _SIMPLE ECONOMY_
+
+.pull-left[
+
+## Penjelasan Singkat
+
+Perilaku masyarakat dalam hal ekonomi bisa dimodelkan dengan __ABM__. Sudah banyak ekonom yang mencoba memodelkan hal ini. Kali ini kita akan mencoba model __ABM__ yang berkaitan dengan penyebaran kekayaan.
+
+Misalkan dalam suatu area, ada `\(n\)` orang yang diberi "kekayaan" yang sama (misalkan uang sebesar 100$). Dalam setiap unit waktu, `\(n\)` orang tersebut akan memberikan uangnya ke orang lain secara _random_. Jumlah total uang yang ada adalah tetap, sehingga jika ada pemain yang uangnya sudah habis, pemain tersebut baru akan memiliki uang kembali saat ada pemain lain yang memberikan uangnya kepada pemain tersebut.
+
+&gt; Bagaimana hasil akhir distribusi kekayaan pada area tersebut?
+
+]
+
+.pull-right[
+
+&lt;img src="wealth.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+class: middle
+
+# _SIMPLE ECONOMY_
+
+Jika kita perhatikan kembali kondisi ini, setidaknya akan ada dua kemungkinan:
+
+1. Kekayaan akan terdistribusi secara merata kembali.
+1. Kekayaan akan terdistribusi tidak merata dan mengikuti suatu distribusi tertentu (mungkin berbentuk_bell curved_ atau bisa jadi berbentuk _pareto_). Artinya akan ada beberapa pemain yang memiliki kekayanan yang lebih dibandingkan pemain lain.
+
+.pull-left[
+
+### Kondisi Awal
+
+Semua pemain memiliki kekayaan yang sama.
+
+&lt;img src="wealth awal.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+### Kondisi Pada Unit Waktu `182`
+
+Semua pemain mulai memiliki kekayaan yang berbeda-beda. Mulai berbentuk _bell curved_.
+
+&lt;img src="wealth 182.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+class: middle
+
+# _SIMPLE ECONOMY_
+
+.pull-left[
+
+### Kondisi Pada Unit Waktu `1117`
+
+Distribusinya sudah masih berbentuk _bell curved_.
+
+&lt;img src="wealth 1117.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+### Kondisi Pada Unit Waktu `16347`
+
+Distribusi kekayaan para pemain sudah membentuk distibusi _pareto_, dimana kekayaan ___top 10%___ pemain yang kaya sudah melebihi kekayaan pemain-pemain di ___bottom 50%___.
+
+&lt;img src="wealth 16347.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+class: middle
+
+# _SIMPLE ECONOMY_
+
+## Kondisi Waktu di Akhir
+
+.pull-left[
+
+&lt;img src="wealth akhir.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+### Kesimpulan
+
+Sebuah akhir yang menarik bahwa tidak akan kita dapatkan kekayaan tersebar secara merata. Kekayaan juga tidak tersebar mengikuti _bell curved_. 
+
+&gt; Justru kekayaan tersebar mengikuti distribusi pareto.
+
+Akan selalu ada sekelompok kecil orang yang memiliki total kekayaan yang melebihi total kekayaan mayoritas orang-orang lain. 
+
+]
+
+---
+class: middle,center,inverse
+
+# Terima Kasih
+
+_Find me at_ [ikanx101.com](https://ikanx101.com/)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "18:10",
+"slideNumberFormat": "%current%",
+"highlightStyle": "ir-black",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
