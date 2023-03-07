@@ -1,0 +1,133 @@
+---
+title: An R-based end-to-end optimization program for multi-product multi-period multi-supplier raw-material selection and composition, and order quantity problem with minimum one-year order quantity contract
+author:
+  - name: Mohammad Rizka Fadhli
+    email: 20921004@mahasiswa.itb.ac.id
+    correspondingauthor: true
+    affiliation: lala
+  - name: Saladin Uttunggadewa
+    affiliation: lili
+  - name: Rieske Hadianti
+    affiliation: lulu
+  - name: Sri Redjeki Pudjaprasetya
+    affiliation: lili
+address:
+  - code: lala
+    address: Magister of Computational Sciences Program, Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung
+  - code: lili
+    address: Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung
+  - code: lulu
+    address: Center for Mathematical Modeling and Simulation, Institut Teknologi Bandung
+abstract: |
+  This paper concerns the optimization model for a multi product multi period raw-material selection and composition, and order quantity problem faced by a beverage company. There are some criteria in raw material selection, which we accommodate all the criteria in the objective function. There are a number of suppliers, and one of the decision criteria is minimum one-year order quantity contracts between the company and the suppliers. The actual one-year demand of raw materials may deviate significantly from the minimum one-year order quantities. In this paper, we derive a function that can be regarded as a penalty function in order to maintain the total order quantities in one year fulfill the minimum one-year order quantity contracts. This penalty function is  a part of the objective function, and can be relaxed once the the minimum one-year order quantity contracts are fulfilled. 
+  This optimization problem defined as mixed integer linear programming. We create an R-based end-to-end program to solve this optimization problem. Using various data inputs such as raw-material details, product's raw-material composition, and products demand, the end results of the program is weekly raw-material order allocation and composition. This program can be used in various manufacture industry.
+keywords: 
+  - inventory control
+  - multi criteria raw-material selection
+  - mix-integer linear programming
+  - R programming
+journal: "Software X"
+date: "`r Sys.Date()`"
+classoption: preprint, 3p, authoryear
+bibliography: mybibfile.bib
+linenumbers: false
+numbersections: true
+# Use a CSL with `citation_package = "default"`
+# csl: https://www.zotero.org/styles/elsevier-harvard
+output: 
+  rticles::elsevier_article:
+    keep_tex: true
+    citation_package: natbib
+---
+
+# Introduction
+
+This paper concerns the optimization model for supplier selection, order allocation, and raw-material composition in a beverage company that produces a large number of drink powders. There are a number of suppliers that can provide the same key raw material of the drink powders, but the color or some physical characteristics are slightly different so we may assume those raw materials are different. The drink powders produced by this company, which in the remainder of this paper are called items, can be classified into two classes of items. 
+
+  - The first class consists of items that can be produced by using exactly a single type of raw material.
+  - The second class consists of more flexible items, where each item in this class can be produced by using one raw material or by using a composition of a number of raw materials. For each item in this class, we then have a set of possible raw materials. The sets of possible materials may vary from one to the other.
+
+In order to avoid supply disruption, the company decides to use multiple sources for these raw materials. The company has established selection criteria for each raw material, which are based on the estimated one-year total demand of raw materials and  a subjective assessment of whether the raw material cannot be substituted, price, service, and the minimum order required for each purchase. After determining the score for each raw material, the company decided to make contracts or agreements with six suppliers. Each contract stated the unit price price and the minimum order quantity within a year. Based on these contracts, production planning and inventory control of raw materials are carried out.
+
+The estimated total one-year demand for items is obtained from the forecasting process performed yearly.  This forecasting process yields the monthly total demand for items, which is time varying. But at the production level, the company refines the monthly total demand on a monthly basis as a response to some disruptions such as sudden additional requests due to flash sales practices in e-commerce, and others.
+
+Once the demand for items for a month is issued, the company must perform the decision for purchasing the raw materials from some suppliers. This purchase decision from a supplier includes purchase for four serial deliveries one week apart. The first delivery must be no later than 17 days before the following  month's start. The period of 17 days here is the total time required for  the company's internal inspection and preparation of raw materials.
+
+This decision process is a complex one since there are a large number of items that have to be produced which mostly belong to the second class, and the monthly demand may vary. Additionally, the company imposes a production regulation for the second class of items as a result of the multiple-sources policy, which states that each item in the second class must be produced using a composition of at least two types of the corresponding possible raw materials. The decision process must be performed carefully in order to obtain results in the form of:
+
+  - which raw materials are purchased along with the delivery size for every four corresponding weeks, 
+  - the composition of raw materials for every item in the second class which has to be produced,
+
+while minimizing the total inventory cost.
+
+The company developed a decision support system for this monthly decision process, which is developed based on an optimization model. 
+
+\newpage
+
+# Hapus
+
+Please make sure that your manuscript follows the guidelines in the 
+Guide for Authors of the relevant journal. It is not necessary to 
+typeset your manuscript in exactly the same way as an article, 
+unless you are submitting to a camera-ready copy (CRC) journal.
+
+For detailed instructions regarding the elsevier article class, see   <https://www.elsevier.com/authors/policies-and-guidelines/latex-instructions>
+
+# Bibliography styles
+
+Here are two sample references: @Feynman1963118.
+
+uji coba [@Dirac1953888]
+
+By default, natbib will be used with the `authoryear` style, set in `classoption` variable in YAML. 
+You can sets extra options with `natbiboptions` variable in YAML header. Example 
+```yaml
+natbiboptions: longnamesfirst,angle,semicolon
+```
+
+There are various more specific bibliography styles available at
+<https://support.stmdocs.in/wiki/index.php?title=Model-wise_bibliographic_style_files>. 
+To use one of these, add it in the header using, for example, `biblio-style: model1-num-names`.
+
+## Using CSL 
+
+If `citation_package` is set to `default` in `elsevier_article()`, then pandoc is used for citations instead of `natbib`. In this case, the `csl` option is used to format the references. Alternative `csl` files are available from <https://www.zotero.org/styles?q=elsevier>. These can be downloaded
+and stored locally, or the url can be used as in the example header.
+
+# Equations
+
+Here is an equation:
+$$ 
+  f_{X}(x) = \left(\frac{\alpha}{\beta}\right)
+  \left(\frac{x}{\beta}\right)^{\alpha-1}
+  e^{-\left(\frac{x}{\beta}\right)^{\alpha}}; 
+  \alpha,\beta,x > 0 .
+$$
+
+Here is another:
+\begin{align}
+  a^2+b^2=c^2.
+\end{align}
+
+Inline equations: $\sum_{i = 2}^\infty\{\alpha_i^\beta\}$
+
+# Figures and tables
+
+Figure \ref{fig2} is generated using an R chunk.
+
+```{r fig2, fig.width = 5, fig.height = 5, fig.align='center', out.width="50%", fig.cap = "\\label{fig2}A meaningless scatterplot.", echo = FALSE}
+plot(runif(25), runif(25))
+```
+
+# Tables coming from R
+
+Tables can also be generated using R chunks, as shown in Table \ref{tab1} for example.
+
+```{r tab1, echo = TRUE}
+knitr::kable(head(mtcars)[,1:4], 
+    caption = "\\label{tab1}Caption centered above table"
+)
+```
+
+# References {-}
+
