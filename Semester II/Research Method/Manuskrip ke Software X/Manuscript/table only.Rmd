@@ -1,0 +1,96 @@
+---
+title: "Tables"
+output: 
+  pdf_document:
+    keep_tex: true
+date: "2023-03-07"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+```
+
+```{r,echo=FALSE}
+library(readxl)
+df = read_excel("~/209_ITB/Semester II/Research Method/Tugas Kuliah I/20201207 Product list.xlsx") %>% janitor::clean_names()
+df %>% 
+  select(product_code,burn_3m,cost_benefit) %>% 
+  rename(budget = burn_3m,
+         expected_revenue = cost_benefit) %>% 
+  filter(expected_revenue > 0) %>% 
+  head(15) %>% 
+  knitr::kable(caption = "Sample Portfolio Data")
+```
+
+\newpage
+
+```{r,include=FALSE}
+load("~/209_ITB/Semester II/Research Method/Paper Finale/bahan review.rda")
+```
+
+```{r,echo=FALSE}
+gabung_all %>%
+  select(contains("budget")) %>% 
+  mutate(eksak_budget = round(eksak_budget/5000000 * 100,2),
+         existing_budget = round(existing_budget/5000000 * 100,2),
+         spiral_budget = round(spiral_budget/5000000 * 100,2)) %>% 
+  mutate(dataset_ke = 1:10) %>% 
+  relocate(dataset_ke,.before = eksak_budget) %>% 
+  rename("#portfolio" = dataset_ke,
+         exact_budget = eksak_budget) %>%
+  knitr::kable(caption = "Budget Fullfilment: What percentage of the budget is spent on the solution?")
+```
+
+\newpage
+
+
+```{r,echo=FALSE}
+gabung_all %>%
+  select(contains("revenue")) %>% 
+  mutate(existing_revenue = round(existing_revenue/eksak_revenue * 100,2),
+         spiral_revenue = round(spiral_revenue/eksak_revenue * 100,2)) %>% 
+  mutate(dataset_ke = 1:10) %>% 
+  relocate(dataset_ke,.before = eksak_revenue) %>% 
+  mutate(eksak_revenue = round(eksak_revenue / 1000000,3),
+         eksak_revenue = paste0(eksak_revenue," mil IDR"),
+         existing_revenue = paste0(existing_revenue,"%"),
+         spiral_revenue = paste0(spiral_revenue,"%")) %>% 
+  rename("#portfolio" = dataset_ke) %>% 
+  knitr::kable(caption = "Total Expected Revenue: What is the percentage of revenue achieved compared to the revenue of the exact solution?")
+```
+
+\newpage
+
+
+```{r,echo=FALSE}
+sama_tdk = 
+  data.frame(dataset = 1:10,
+             banyak_produk_sama = sama,
+             banyak_produk_beda = 100-sama) %>% 
+  rename(similar_product = banyak_produk_sama,
+         dissimilar_product = banyak_produk_beda) %>% 
+  rename("#portfolio" = dataset)
+sama_tdk %>% knitr::kable(caption = "Similarity Product Portfolio")
+```
+
+\newpage
+
+```{r,echo=FALSE}
+data.frame(dataset = 1:10,
+           eksak_y = ompr_sum,
+           eksak_n = 100 - ompr_sum,
+           spiral_y = spiral_sum,
+           spiral_n = 100 - spiral_sum
+           ) %>% 
+  mutate(portofolio_eksak = paste0("Discount: ",eksak_y,
+                                   "; No discount: ",eksak_n),
+         portofolio_spiral = paste0("Discount: ",spiral_y,
+                                   "; No Discount: ",spiral_n)) %>% 
+  rename("#portfolio" = dataset) %>% 
+  select(-eksak_y,
+         -eksak_n,
+         -spiral_y,
+         -spiral_n) %>% 
+  knitr::kable(caption = "Product Proportion: How many products are given and not discounted?")
+```

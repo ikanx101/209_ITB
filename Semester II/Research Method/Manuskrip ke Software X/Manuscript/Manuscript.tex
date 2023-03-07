@@ -1,0 +1,620 @@
+\documentclass[preprint, 3p,
+authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
+%%% Begin My package additions %%%%%%%%%%%%%%%%%%%
+
+\usepackage[hyphens]{url}
+
+  \journal{Software X} % Sets Journal name
+
+\usepackage{lineno} % add
+
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%% end my additions to header
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={An R-base program to build e-commerce product discount portfolio using spiral dynamic optimization algorithm},
+            colorlinks=false,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+
+\setcounter{secnumdepth}{5}
+% Pandoc toggle for numbering sections (defaults to be off)
+
+
+% tightlist command for lists without linebreak
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% From pandoc table feature
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+
+
+
+
+
+\begin{document}
+
+
+\begin{frontmatter}
+
+  \title{An R-base program to build e-commerce product discount
+portfolio using spiral dynamic optimization algorithm}
+    \author[lala]{Mohammad Rizka Fadhli%
+  \corref{cor1}%
+  }
+   \ead{20921004@mahasiswa.itb.ac.id} 
+    \author[lili]{Saladin Uttunggadewa%
+  %
+  }
+  
+    \author[lulu]{Rieske Hadianti%
+  %
+  }
+  
+    \author[lili]{Sri Redjeki Pudjaprasetya%
+  %
+  }
+  
+      \affiliation[lala]{Magister of Computational Sciences Program,
+Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung}
+    \affiliation[lili]{Faculty of Mathematics and Natural Sciences,
+Institut Teknologi Bandung}
+    \affiliation[lulu]{Center for Mathematical Modeling and Simulation,
+Institut Teknologi Bandung}
+    \cortext[cor1]{Corresponding author}
+  
+  \begin{abstract}
+  The development of the digital economy market in Indonesia is growing
+  every year. As a result, marketplaces have to compete with each other
+  to get consumers. One of the marketplace startup in Indonesia has
+  strategy to provide additional discounts on their listed products.
+  Product discount portfolio problem is a Binary Linear Programming
+  (BLP) problem with a decision variable in the form of a binary number
+  that states whether a product is eligible for a discount or not. With
+  many decision variables involved, we developed metaheuristic
+  approaches Spiral Dynamic Optimization Algorithm (SDOA) to solve the
+  optimization problem. The SDOA solution is proven to be more optimal
+  (generates higher revenur) than the existing startup solution by
+  average \(9.8 \%\).
+  \end{abstract}
+    \begin{keyword}
+    binary linear programming \sep spiral dynamic optimization
+algorithm \sep R programming \sep 
+    e-commerce
+  \end{keyword}
+  
+ \end{frontmatter}
+
+\hypertarget{introduction}{%
+\section{INTRODUCTION}\label{introduction}}
+
+Currently, 30 million Indonesians are used to buying and selling online,
+creating a market of 8 trillion rupiahs. This market can continue to
+grow to 40 trillion in the next five years. Online transactions are
+divided into social commerce (trading via social media platforms) and
+e-commerce (trading via marketplace platforms). By 2022, the revenue
+projection from the e-commerce market will exceed US\$62 million. It was
+highly contributed by the increasing number of MSMEs that listed their
+products in e-commerce. The total number of MSMEs that market their
+products in e-commerce is currently 14.5 million MSMEs. The number has
+not reached half of the target set in 2023, which is 30 million MSMEs.
+
+One of the top marketplace in Indonesia use a product discount strategy
+to win the competition. Each listed product on the marketplace has an
+initial price defined by the seller. Marketplace can intervene in its
+price indirectly by providing discounts, so consumers pay lower than the
+initial price. A study at an online retailer in China shows an influence
+between product discounts and consumer purchase behavior such as
+purchase incident, purchase quantity, and spending. Especially in
+specific discount percentage ranges \citep{cny}. The pricing and
+discount aim to attract consumers to buy products in the marketplace for
+a certain period. One of the mathematical models that can be used to
+determine prices is the Price Elasticity Model, a causality model
+between price and demand. A study comparing the price elasticity model
+with linear, polynomial, and exponential bases found that the linear
+model is the most commonly used, and it is easier to interpret
+\citep{linear_reg}.
+
+The problem is determining which products need to be given an additional
+discount. This problem is one of the binary linear programming (BLP)
+forms: choosing the right product to maximize sales with a constraint
+limited discount budget in a certain period. Binary programming is a
+form of an optimization method in which the variables involved are
+binary numbers. The main characteristic of BLP is the matching process
+between indexes \citep{lieberman}. One of the studies related to BLP is
+the matching process to determine the placement of phasor measuring
+units in a power system \citep{suresh}. Another study used BLP to
+optimize the selection of 100 marketing channels and activities against
+millions of customers \citep{ieee}. The goal is to optimize the
+marketing messages delivery so that sales increase. Business-related and
+consumer-centric optimization problems have not been widely published in
+journals.
+
+At least we can use two methods to solve BLP: the exact method and the
+meta-heuristic method. Meta-heuristic methods are developing rapidly
+that several algorithms can quickly solve optimization problems. The
+meta-heuristic algorithm such as SDOA can solve BLP in a small number of
+decision variables involved. SDOA is an algorithm inspired by spiral
+motion in natural events. The rotation matrix is an algebraic principle
+closely related to SDOA \citep{tamura}. SDOA is proven to be used to
+solve BLP problems by modifying the existing objective function and
+constraints \citep{kun}. The basic idea is to turn a constrained problem
+into an unconstrained problem by creating a penalty function.
+
+In another study, researchers made an adaptive linear SDOA by changing
+the value of the contraction constant into a specific function that
+depends on the function value of each candidate solution \citep{sdoa2}.
+The latest study in 2022 conducted a thorough review, including making
+several improvements to SDOA \citep{sdoa3}, such as:
+
+\begin{itemize}
+\tightlist
+\item
+  Changing the value of the contraction constant,
+\item
+  Utilizing alternative functions (linear, quadratic, fuzzy, and
+  exponential), and
+\item
+  Crossing between SDOA and PSO into PSO with a spiral movement.
+\end{itemize}
+
+Currently, the marketplace determines which product to give a discount
+by trial and error from several possible combinations - (this method is
+similar to Monte Carlo simulation but on a simpler computational scale).
+In this research, we develop a computational model based on SDOA to
+solve the discount product portfolio optimization problem. Then we will
+compare the solution with the existing product portfolio.
+
+\hypertarget{method}{%
+\section{METHOD}\label{method}}
+
+The marketplace has created the following portfolio:
+
+\begin{longtable}[]{@{}lrr@{}}
+\caption{Sample Portfolio Data}\tabularnewline
+\toprule()
+product\_code & budget & expected\_revenue \\
+\midrule()
+\endfirsthead
+\toprule()
+product\_code & budget & expected\_revenue \\
+\midrule()
+\endhead
+6000094-0002 & 240.0 & 112.800 \\
+6000100-0003 & 70350.0 & 78289.500 \\
+6000301-0004 & 15300.0 & 7191.000 \\
+6000307-0005 & 2700.0 & 2079.000 \\
+6000348-0007 & 50460.0 & 55036.200 \\
+6000378-0010 & 1425.0 & 1097.250 \\
+6000514-0014 & 28774200.0 & 15355284.000 \\
+6000134-0026 & 3072.0 & 1443.840 \\
+6000149-0029 & 2052.0 & 964.440 \\
+6000245-0036 & 5670.0 & 1449.900 \\
+6000014-0038 & 65016.0 & 41897.520 \\
+6000027-0040 & 5625.0 & 4331.250 \\
+6000030-0041 & 21168.0 & 22548.960 \\
+6000042-0044 & 6747.3 & 1725.381 \\
+6000062-0048 & 6349.5 & 2424.015 \\
+\bottomrule()
+\end{longtable}
+
+Each portfolio contains 100 product candidates. The marketplace has the
+following problem: choosing the right product from the portfolio to
+generate the maximal revenue with a budget limit of 5 million rupiahs.
+
+The problem can be written as follows:
+
+\begin{align}
+\begin{matrix} 
+\text{find }x_i \in [0,1] \space \text{so that} \space \max{r_i x_i}, \space i \in \{1,2,..,100\} \\
+\text{with constraint} \space \sum_{i = 1}^{100}x_i b_i \leq 5000000
+\end{matrix} 
+\end{align}
+
+whereas \(r_i\) is expected revenue if the product \(i\) is given a
+discount and \(b_i\) is the amount of budget that needs to be spent to
+give a discount on a product \(i\).
+
+To solve using SDOA, we need to convert the constrained problem to an
+unconstrained problem. The general form is as follows: for any MILP or
+MIP:
+
+\begin{align}
+\begin{matrix} 
+\min_{x \in \mathbb{R}} f(x) \\
+\text{subject to } \space h(x) \leq 0 \\
+x = (x_1,x_2,..,x_n)^T \in \mathbb{R}
+\end{matrix}
+\end{align}
+
+The general unconstrained form is as follows:
+
+\begin{align}
+F(x,\beta) = f(x) + \beta \max(h(x),0)^2
+\end{align}
+
+where \(\beta\) is penalty constant (defined by large number). Finding
+\(x\) so that \(F(x,\beta)\) is minimum.
+
+This is general form of spiral dynamic optimization algorithm:
+
+\begin{verbatim}
+INPUT
+  N number of candidate solutions
+  theta rotation degree
+    A(theta) is rotation matrix
+  r contraction constant
+  iter_max iteration limit
+PROCESS:
+  Step 1: Generate N random candidate solutions: xi in feasible region. 
+  Step 2: set k = 0.
+  Step 3: Evaluate all F(xi). Find x0 which makes F(x0) the minimum. Set x0 as rotation center.
+  Step 4: Update xi(k+1) = x0 + r (A(theta) (xi(k+1) - x0)).
+  Step 5: Update k = k + 1.
+  Step 6: Repeat step 3 - 5 until k reach iter_max.
+OUTPUT:
+  The last x0 is the optimal solution which makes F(X0) the minimum.
+\end{verbatim}
+
+One of the crucial processes in SDOA is to rotate candidate solutions
+using a rotation matrix. In this case, one candidate solution is a
+vector of size 1 \(\times\) 100 while the rotation matrix is of size 100
+\(\times\) 100. This process is quite computationally burdensome,
+especially since the number of candidate solutions used is relatively
+large. Therefore, we need to modify this rotation process by using
+matrix multiplication partitioning in linear algebra.
+
+For instance: vector b is 1 \(\times\) n, and matrix A is n \(\times\)
+n.~Both can be divided into two, namely:
+
+\begin{itemize}
+\tightlist
+\item
+  Vector b1 is 1 \(\times \frac{n}{2}\) and vector b2 is 1
+  \(\times \frac{n}{2}\). Vector b1 contains the 1st to
+  \(\frac{n}{2}\)-th elements of vector b. Vector b2 contains elements
+  \(\frac{n}{2} + 1\)-th to \(n\)-th of vector b.
+\item
+  Matrix A is divided into 4 for the same size matrix
+  \(\frac{n}{2} \times \frac{n}{2}\).
+\end{itemize}
+
+\begin{align}
+A = \begin{pmatrix}
+a_{11} & a_{12} & .. & a_{1n} \\
+a_{21} & a_{22} & .. & a_{2n} \\
+a_{31} & a_{32} & .. & a_{3n} \\
+.. & .. & .. \\
+a_{n1} & a_{n2} & .. & a_{nn} \\
+\end{pmatrix}
+\end{align}
+
+\begin{itemize}
+\tightlist
+\item
+  Matrix A11 is the top-left element of matrix A.
+\item
+  Matrix A12 is the top-right element of matrix A.
+\item
+  Matrix A21 is the lower-left element of matrix A.
+\item
+  Matrix A22 is the lower-right element of matrix A.
+\end{itemize}
+
+\begin{align}
+r = A b
+\end{align}
+
+So we get the result vector \(r\) with 1 \(\times\) n elements:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Elements 1 to \(\frac{n}{2}\) = b1 * A11 + b2 * A12
+\item
+  Elements \(\frac{n}{2} + 1\) to \(n\) = b1 * A21 + b2 * A22
+\end{enumerate}
+
+The algorithm for solving optimization problems using modified SDOA was
+made in R programming language. As a form of evaluation of the
+algorithm, we compared the SDOA solution with:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The existing solution from the marketplace.
+\item
+  The exact solution uses the simplex method created using the R
+  programming language with \texttt{library(ompr)} \citep{ompr}.
+\end{enumerate}
+
+This comparison uses portfolio data from as many as ten portfolios with
+100 products per portfolio each. Two factors that will be compared are
+the total budget issued and the total expected revenue.
+
+\hypertarget{results-and-discussion}{%
+\section{RESULTS AND DISCUSSION}\label{results-and-discussion}}
+
+SDOA is created using the following parameters:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{N} candidate solutions are made up of 200 candidates in the form
+  of a binary vector measuring 1 \(\times\) 100.
+\item
+  \(\theta\) is \(\frac{50}{2 \pi}\).
+\item
+  Contraction constant of \(0.85\).
+\item
+  The iteration limit is \(70\).
+\end{enumerate}
+
+The following are some of the results of SDOA solutions in ten
+portfolios and their comparison to existing solutions and exact
+solutions.
+
+\hypertarget{budget-comparison}{%
+\subsection{Budget Comparison}\label{budget-comparison}}
+
+First, we compare the budget from the exact method
+(\texttt{exact\_budget} using simplex) with the budget using the SDOA
+and the existing budget from the marketplace.
+
+\begin{longtable}[]{@{}rrrr@{}}
+\caption{Budget Fullfilment: What percentage of the budget is spent on
+the solution?}\tabularnewline
+\toprule()
+\#portfolio & exact\_budget & existing\_budget & spiral\_budget \\
+\midrule()
+\endfirsthead
+\toprule()
+\#portfolio & exact\_budget & existing\_budget & spiral\_budget \\
+\midrule()
+\endhead
+1 & 100.00 & 93.96 & 99.98 \\
+2 & 99.99 & 92.19 & 99.99 \\
+3 & 100.00 & 89.16 & 99.99 \\
+4 & 100.00 & 98.62 & 99.99 \\
+5 & 100.00 & 95.91 & 99.96 \\
+6 & 100.00 & 97.65 & 99.74 \\
+7 & 100.00 & 89.16 & 99.51 \\
+8 & 100.00 & 97.01 & 99.80 \\
+9 & 96.85 & 72.53 & 95.97 \\
+10 & 100.00 & 80.77 & 100.00 \\
+\bottomrule()
+\end{longtable}
+
+The total discounted budget per portfolio is five million rupiahs. If we
+look at the table above, each method produces a solution that does not
+violate the total budget limit. However, the exact solution always
+consumes all of the total budget, while the SDOA solution still has a
+smaller budget remaining than the existing solution. These findings
+found that the SDOA solution was better in using the total budget than
+the existing solution.
+
+\hypertarget{total-expected-revenue-comparison}{%
+\subsection{Total Expected Revenue
+Comparison}\label{total-expected-revenue-comparison}}
+
+\begin{longtable}[]{@{}rlll@{}}
+\caption{Total Expected Revenue: What is the percentage of revenue
+achieved compared to the revenue of the exact solution?}\tabularnewline
+\toprule()
+\#portfolio & eksak\_revenue & existing\_revenue & spiral\_revenue \\
+\midrule()
+\endfirsthead
+\toprule()
+\#portfolio & eksak\_revenue & existing\_revenue & spiral\_revenue \\
+\midrule()
+\endhead
+1 & 4.778 mil IDR & 81.67\% & 90.19\% \\
+2 & 7.194 mil IDR & 74.56\% & 80.52\% \\
+3 & 7.428 mil IDR & 34.93\% & 50.24\% \\
+4 & 5.568 mil IDR & 88.26\% & 92.53\% \\
+5 & 2.606 mil IDR & 81.92\% & 90.65\% \\
+6 & 6.203 mil IDR & 94.74\% & 94.57\% \\
+7 & 7.4 mil IDR & 74.04\% & 88.4\% \\
+8 & 4.146 mil IDR & 91.13\% & 99.41\% \\
+9 & 5.097 mil IDR & 82.27\% & 99.34\% \\
+10 & 5.525 mil IDR & 80.41\% & 97.02\% \\
+\bottomrule()
+\end{longtable}
+
+The following comparison shows how much total expected revenue can be
+achieved. If the revenue from the exact solution is used as a benchmark
+value (the highest revenue that can be achieved from each portfolio),
+the percentage in the table is calculated by dividing the revenue from
+the existing solution or SDOA by the revenue from the exact solution.
+The revenue generated by the SDOA solution is 9.8\% higher (on average)
+than the existing solution. However, the SDOA solution revenue is still
+11.7\% lower (on average) than the exact solution.
+
+\hypertarget{similarity-between-exact-and-sdoa-solution}{%
+\subsection{Similarity Between Exact and SDOA
+Solution}\label{similarity-between-exact-and-sdoa-solution}}
+
+The exact solution is the most optimal, while SDOA has not been able to
+achieve that optimality. What do the two have in common? Suppose we
+count how many products are discounted or not discounted in both
+portfolios (exact and SDOA); here are the results:
+
+\begin{longtable}[]{@{}rrr@{}}
+\caption{Similarity Product Portfolio}\tabularnewline
+\toprule()
+\#portfolio & similar\_product & dissimilar\_product \\
+\midrule()
+\endfirsthead
+\toprule()
+\#portfolio & similar\_product & dissimilar\_product \\
+\midrule()
+\endhead
+1 & 63 & 37 \\
+2 & 36 & 64 \\
+3 & 55 & 45 \\
+4 & 59 & 41 \\
+5 & 74 & 26 \\
+6 & 48 & 52 \\
+7 & 63 & 37 \\
+8 & 85 & 15 \\
+9 & 91 & 9 \\
+10 & 68 & 32 \\
+\bottomrule()
+\end{longtable}
+
+On average, the similarity between the two portfolios is 64.2\%. Now we
+see what proportion of products are given and not discounted on the
+exact method and SDOA.
+
+\begin{longtable}[]{@{}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1549}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4225}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4225}}@{}}
+\caption{Product Proportion: How many products are given and not
+discounted?}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+\#portfolio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+portofolio\_eksak
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+portofolio\_spiral
+\end{minipage} \\
+\midrule()
+\endfirsthead
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+\#portfolio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+portofolio\_eksak
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+portofolio\_spiral
+\end{minipage} \\
+\midrule()
+\endhead
+1 & Discount: 69; No discount: 31 & Discount: 62; No Discount: 38 \\
+2 & Discount: 14; No discount: 86 & Discount: 72; No Discount: 28 \\
+3 & Discount: 33; No discount: 67 & Discount: 56; No Discount: 44 \\
+4 & Discount: 54; No discount: 46 & Discount: 69; No Discount: 31 \\
+5 & Discount: 87; No discount: 13 & Discount: 73; No Discount: 27 \\
+6 & Discount: 42; No discount: 58 & Discount: 72; No Discount: 28 \\
+7 & Discount: 62; No discount: 38 & Discount: 83; No Discount: 17 \\
+8 & Discount: 86; No discount: 14 & Discount: 89; No Discount: 11 \\
+9 & Discount: 99; No discount: 1 & Discount: 90; No Discount: 10 \\
+10 & Discount: 82; No discount: 18 & Discount: 74; No Discount: 26 \\
+\bottomrule()
+\end{longtable}
+
+Although there is a 64.2\% similarity, the differences in the range of
+selected products in the two portfolios are apparent. The SDOA solution
+can still not explore the possibility of the optimal solution like an
+exact solution in the feasible area.
+
+\hypertarget{conclusion}{%
+\section{CONCLUSION}\label{conclusion}}
+
+SDOA is proven to provide better solutions than existing solutions,
+namely: spending better budgets and generating more revenue. However, to
+achieve an optimal solution, such as an exact solution, further
+modification is needed to make SDOA explore more potential candidates in
+a feasible area. Some alternatives to consider are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Using a pseudo-random algorithm in generating candidate solutions at
+  an early stage.
+\item
+  Multiply N candidate solutions made.
+\end{enumerate}
+
+\hypertarget{declarations}{%
+\section{DECLARATIONS}\label{declarations}}
+
+\hypertarget{study-limitations}{%
+\subsection{Study Limitations}\label{study-limitations}}
+
+In this study, the portfolio used is derived from the calculation of the
+price elasticity study previously conducted by the marketplace data
+analytic team.
+
+\begin{itemize}
+\tightlist
+\item
+  The basic assumption of this portfolio is that changes in sales only
+  come from changes in product prices. The interaction between products
+  in the same category (competitor effect) is not considered in this
+  study.
+\item
+  The budget and expected revenue per product are assumed to be fixed
+  values (not dynamic or probabilistic).
+\item
+  The total revenue calculation achieved from the solution of each
+  method in the previous section is derived from the value in the
+  portfolio.
+\end{itemize}
+
+\hypertarget{acknowledgements}{%
+\subsection{Acknowledgements}\label{acknowledgements}}
+
+The author would like to thank the marketplace data analytic team for
+entrusting its product portfolio data to be used as a case study in
+developing an SDOA-based optimization algorithm.
+
+\hypertarget{declaration-of-competing-interest}{%
+\subsection{Declaration of Competing
+Interest}\label{declaration-of-competing-interest}}
+
+The author stated that there was no conflict of interest during this
+research.
+
+\renewcommand\refname{REFERENCES}
+\bibliography{mybibfile.bib}
+
+
+\end{document}

@@ -1,0 +1,289 @@
+---
+title: An R-base program to build e-commerce product discount portfolio using spiral dynamic optimization algorithm
+author:
+  - name: Mohammad Rizka Fadhli
+    email: 20921004@mahasiswa.itb.ac.id
+    correspondingauthor: true
+    affiliation: lala
+  - name: Saladin Uttunggadewa
+    affiliation: lili
+  - name: Rieske Hadianti
+    affiliation: lulu
+  - name: Sri Redjeki Pudjaprasetya
+    affiliation: lili
+address:
+  - code: lala
+    address: Magister of Computational Sciences Program, Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung
+  - code: lili
+    address: Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung
+  - code: lulu
+    address: Center for Mathematical Modeling and Simulation, Institut Teknologi Bandung
+abstract: |
+  The development of the digital economy market in Indonesia is growing every year. As a result, marketplaces have to compete with each other to get consumers. One of the marketplace startup in Indonesia has strategy to provide additional discounts on their listed products. Product discount portfolio problem is a Binary Linear Programming (BLP) problem with a decision variable in the form of a binary number that states whether a product is eligible for a discount or not. With many decision variables involved, we developed metaheuristic approaches Spiral Dynamic Optimization Algorithm (SDOA) to solve the optimization problem. The SDOA solution is proven to be more optimal (generates higher revenur) than the existing startup solution by average $9.8 \%$.
+keywords: 
+  - binary linear programming
+  - spiral dynamic optimization algorithm
+  - R programming
+  - e-commerce
+journal: "Software X"
+date: "`r Sys.Date()`"
+classoption: preprint, 3p, authoryear
+bibliography: mybibfile.bib
+linenumbers: false
+numbersections: true
+# Use a CSL with `citation_package = "default"`
+# csl: https://www.zotero.org/styles/elsevier-harvard
+output: 
+  rticles::elsevier_article:
+    keep_tex: true
+    citation_package: natbib
+---
+
+```{r,include=FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+# INTRODUCTION
+
+Currently, 30 million Indonesians are used to buying and selling online, creating a market of 8 trillion rupiahs. This market can continue to grow to 40 trillion in the next five years. Online transactions are divided into social commerce (trading via social media platforms) and e-commerce (trading via marketplace platforms). By 2022, the revenue projection from the e-commerce market will exceed US$62 million. It was highly contributed by the increasing number of MSMEs that listed their products in e-commerce. The total number of MSMEs that market their products in e-commerce is currently 14.5 million MSMEs. The number has not reached half of the target set in 2023, which is 30 million MSMEs. 
+
+One of the top marketplace in Indonesia use a product discount strategy to win the competition. Each listed product on the marketplace has an initial price defined by the seller. Marketplace can intervene in its price indirectly by providing discounts, so consumers pay lower than the initial price. A study at an online retailer in China shows an influence between product discounts and consumer purchase behavior such as purchase incident, purchase quantity, and spending. Especially in specific discount percentage ranges [@cny]. The pricing and discount aim to attract consumers to buy products in the marketplace for a certain period. One of the mathematical models that can be used to determine prices is the Price Elasticity Model, a causality model between price and demand. A study comparing the price elasticity model with linear, polynomial, and exponential bases found that the linear model is the most commonly used, and it is easier to interpret [@linear_reg].
+
+The problem is determining which products need to be given an additional discount. This problem is one of the binary linear programming (BLP) forms: choosing the right product to maximize sales with a constraint limited discount budget in a certain period. Binary programming is a form of an optimization method in which the variables involved are binary numbers. The main characteristic of BLP is the matching process between indexes [@lieberman]. One of the studies related to BLP is the matching process to determine the placement of phasor measuring units in a power system [@suresh]. Another study used BLP to optimize the selection of 100 marketing channels and activities against millions of customers [@ieee]. The goal is to optimize the marketing messages delivery so that sales increase. Business-related and consumer-centric optimization problems have not been widely published in journals.
+
+At least we can use two methods to solve BLP: the exact method and the meta-heuristic method. Meta-heuristic methods are developing rapidly that several algorithms can quickly solve optimization problems. The meta-heuristic algorithm such as SDOA can solve BLP in a small number of decision variables involved. SDOA is an algorithm inspired by spiral motion in natural events. The rotation matrix is an algebraic principle closely related to SDOA [@tamura]. SDOA is proven to be used to solve BLP problems by modifying the existing objective function and constraints [@kun]. The basic idea is to turn a constrained problem into an unconstrained problem by creating a penalty function.
+
+In another study, researchers made an adaptive linear SDOA by changing the value of the contraction constant into a specific function that depends on the function value of each candidate solution [@sdoa2]. The latest study in 2022 conducted a thorough review, including making several improvements to SDOA [@sdoa3], such as:
+
+- Changing the value of the contraction constant,
+- Utilizing alternative functions (linear, quadratic, fuzzy, and exponential), and
+- Crossing between SDOA and PSO into PSO with a spiral movement.
+
+Currently, the marketplace determines which product to give a discount by trial and error from several possible combinations - (this method is similar to Monte Carlo simulation but on a simpler computational scale). In this research, we develop a computational model based on SDOA to solve the discount product portfolio optimization problem. Then we will compare the solution with the existing product portfolio.
+
+# METHOD
+
+The marketplace has created the following portfolio:
+
+```{r,echo=FALSE}
+library(readxl)
+df = read_excel("~/209_ITB/Semester II/Research Method/Tugas Kuliah I/20201207 Product list.xlsx") %>% janitor::clean_names()
+df %>% 
+  select(product_code,burn_3m,cost_benefit) %>% 
+  rename(budget = burn_3m,
+         expected_revenue = cost_benefit) %>% 
+  filter(expected_revenue > 0) %>% 
+  head(15) %>% 
+  knitr::kable(caption = "Sample Portfolio Data")
+```
+
+Each portfolio contains 100 product candidates. The marketplace has the following problem: choosing the right product from the portfolio to generate the maximal revenue with a budget limit of 5 million rupiahs.
+
+The problem can be written as follows:
+
+\begin{align}
+\begin{matrix} 
+\text{find }x_i \in [0,1] \space \text{so that} \space \max{r_i x_i}, \space i \in \{1,2,..,100\} \\
+\text{with constraint} \space \sum_{i = 1}^{100}x_i b_i \leq 5000000
+\end{matrix} 
+\end{align}
+
+whereas $r_i$ is expected revenue if the product $i$ is given a discount and
+$b_i$ is the amount of budget that needs to be spent to give a discount on a product $i$.
+
+To solve using SDOA, we need to convert the constrained problem to an unconstrained problem. The general form is as follows: for any MILP or MIP:
+
+\begin{align}
+\begin{matrix} 
+\min_{x \in \mathbb{R}} f(x) \\
+\text{subject to } \space h(x) \leq 0 \\
+x = (x_1,x_2,..,x_n)^T \in \mathbb{R}
+\end{matrix}
+\end{align}
+
+The general unconstrained form is as follows:
+
+\begin{align}
+F(x,\beta) = f(x) + \beta \max(h(x),0)^2
+\end{align}
+
+where $\beta$ is penalty constant (defined by large number). Finding $x$ so that $F(x,\beta)$ is minimum.
+
+This is general form of spiral dynamic optimization algorithm:
+
+```
+INPUT
+  N number of candidate solutions
+  theta rotation degree
+    A(theta) is rotation matrix
+  r contraction constant
+  iter_max iteration limit
+PROCESS:
+  Step 1: Generate N random candidate solutions: xi in feasible region. 
+  Step 2: set k = 0.
+  Step 3: Evaluate all F(xi). Find x0 which makes F(x0) the minimum. Set x0 as rotation center.
+  Step 4: Update xi(k+1) = x0 + r (A(theta) (xi(k+1) - x0)).
+  Step 5: Update k = k + 1.
+  Step 6: Repeat step 3 - 5 until k reach iter_max.
+OUTPUT:
+  The last x0 is the optimal solution which makes F(X0) the minimum.
+```
+
+One of the crucial processes in SDOA is to rotate candidate solutions using a rotation matrix. In this case, one candidate solution is a vector of size 1 $\times$ 100 while the rotation matrix is of size 100 $\times$ 100. This process is quite computationally burdensome, especially since the number of candidate solutions used is relatively large. Therefore, we need to modify this rotation process by using matrix multiplication partitioning in linear algebra.
+
+For instance: vector b is 1 $\times$ n, and matrix A is n $\times$ n. Both can be divided into two, namely:
+
+- Vector b1 is 1 $\times \frac{n}{2}$ and vector b2 is 1 $\times \frac{n}{2}$. Vector b1 contains the 1st to $\frac{n}{2}$-th elements of vector b. Vector b2 contains elements $\frac{n}{2} + 1$-th to $n$-th of vector b.
+- Matrix A is divided into 4 for the same size matrix $\frac{n}{2} \times \frac{n}{2}$.
+
+\begin{align}
+A = \begin{pmatrix}
+a_{11} & a_{12} & .. & a_{1n} \\
+a_{21} & a_{22} & .. & a_{2n} \\
+a_{31} & a_{32} & .. & a_{3n} \\
+.. & .. & .. \\
+a_{n1} & a_{n2} & .. & a_{nn} \\
+\end{pmatrix}
+\end{align}
+
+- Matrix A11 is the top-left element of matrix A.
+- Matrix A12 is the top-right element of matrix A.
+- Matrix A21 is the lower-left element of matrix A.
+- Matrix A22 is the lower-right element of matrix A.
+
+\begin{align}
+r = A b
+\end{align}
+
+So we get the result vector $r$ with 1 $\times$ n elements:
+
+1. Elements 1 to $\frac{n}{2}$ = b1 * A11 + b2 * A12
+1. Elements $\frac{n}{2} + 1$ to $n$ = b1 * A21 + b2 * A22
+
+The algorithm for solving optimization problems using modified SDOA was made in R programming language. As a form of evaluation of the algorithm, we compared the SDOA solution with:
+
+1. The existing solution from the marketplace.
+1. The exact solution uses the simplex method created using the R programming language with `library(ompr)` [@ompr].
+
+This comparison uses portfolio data from as many as ten portfolios with 100 products per portfolio each. Two factors that will be compared are the total budget issued and the total expected revenue.
+
+# RESULTS AND DISCUSSION
+
+SDOA is created using the following parameters:
+
+1. _N_ candidate solutions are made up of 200 candidates in the form of a binary vector measuring 1 $\times$ 100.
+1. $\theta$ is $\frac{50}{2 \pi}$.
+1. Contraction constant of $0.85$.
+1. The iteration limit is $70$.
+
+The following are some of the results of SDOA solutions in ten portfolios and their comparison to existing solutions and exact solutions.
+
+```{r,include=FALSE}
+load("~/209_ITB/Semester II/Research Method/Paper Finale/bahan review.rda")
+```
+
+## Budget Comparison
+
+First, we compare the budget from the exact method (`exact_budget` using simplex) with the budget using the SDOA and the existing budget from the marketplace.
+
+```{r,echo=FALSE}
+gabung_all %>%
+  select(contains("budget")) %>% 
+  mutate(eksak_budget = round(eksak_budget/5000000 * 100,2),
+         existing_budget = round(existing_budget/5000000 * 100,2),
+         spiral_budget = round(spiral_budget/5000000 * 100,2)) %>% 
+  mutate(dataset_ke = 1:10) %>% 
+  relocate(dataset_ke,.before = eksak_budget) %>% 
+  rename("#portfolio" = dataset_ke,
+         exact_budget = eksak_budget) %>%
+  knitr::kable(caption = "Budget Fullfilment: What percentage of the budget is spent on the solution?")
+```
+
+The total discounted budget per portfolio is five million rupiahs. If we look at the table above, each method produces a solution that does not violate the total budget limit. However, the exact solution always consumes all of the total budget, while the SDOA solution still has a smaller budget remaining than the existing solution. These findings found that the SDOA solution was better in using the total budget than the existing solution.
+
+
+## Total Expected Revenue Comparison
+
+```{r,echo=FALSE}
+gabung_all %>%
+  select(contains("revenue")) %>% 
+  mutate(existing_revenue = round(existing_revenue/eksak_revenue * 100,2),
+         spiral_revenue = round(spiral_revenue/eksak_revenue * 100,2)) %>% 
+  mutate(dataset_ke = 1:10) %>% 
+  relocate(dataset_ke,.before = eksak_revenue) %>% 
+  mutate(eksak_revenue = round(eksak_revenue / 1000000,3),
+         eksak_revenue = paste0(eksak_revenue," mil IDR"),
+         existing_revenue = paste0(existing_revenue,"%"),
+         spiral_revenue = paste0(spiral_revenue,"%")) %>% 
+  rename("#portfolio" = dataset_ke) %>% 
+  knitr::kable(caption = "Total Expected Revenue: What is the percentage of revenue achieved compared to the revenue of the exact solution?")
+```
+
+The following comparison shows how much total expected revenue can be achieved. If the revenue from the exact solution is used as a benchmark value (the highest revenue that can be achieved from each portfolio), the percentage in the table is calculated by dividing the revenue from the existing solution or SDOA by the revenue from the exact solution. The revenue generated by the SDOA solution is 9.8% higher (on average) than the existing solution. However, the SDOA solution revenue is still 11.7% lower (on average) than the exact solution.
+
+## Similarity Between Exact and SDOA Solution
+
+The exact solution is the most optimal, while SDOA has not been able to achieve that optimality. What do the two have in common? Suppose we count how many products are discounted or not discounted in both portfolios (exact and SDOA); here are the results:
+
+```{r,echo=FALSE}
+sama_tdk = 
+  data.frame(dataset = 1:10,
+             banyak_produk_sama = sama,
+             banyak_produk_beda = 100-sama) %>% 
+  rename(similar_product = banyak_produk_sama,
+         dissimilar_product = banyak_produk_beda) %>% 
+  rename("#portfolio" = dataset)
+sama_tdk %>% knitr::kable(caption = "Similarity Product Portfolio")
+```
+
+On average, the similarity between the two portfolios is 64.2%. Now we see what proportion of products are given and not discounted on the exact method and SDOA.
+
+```{r,echo=FALSE}
+data.frame(dataset = 1:10,
+           eksak_y = ompr_sum,
+           eksak_n = 100 - ompr_sum,
+           spiral_y = spiral_sum,
+           spiral_n = 100 - spiral_sum
+           ) %>% 
+  mutate(portofolio_eksak = paste0("Discount: ",eksak_y,
+                                   "; No discount: ",eksak_n),
+         portofolio_spiral = paste0("Discount: ",spiral_y,
+                                   "; No Discount: ",spiral_n)) %>% 
+  rename("#portfolio" = dataset) %>% 
+  select(-eksak_y,
+         -eksak_n,
+         -spiral_y,
+         -spiral_n) %>% 
+  knitr::kable(caption = "Product Proportion: How many products are given and not discounted?")
+```
+
+Although there is a 64.2% similarity, the differences in the range of selected products in the two portfolios are apparent. The SDOA solution can still not explore the possibility of the optimal solution like an exact solution in the feasible area.
+
+# CONCLUSION
+
+SDOA is proven to provide better solutions than existing solutions, namely: spending better budgets and generating more revenue. However, to achieve an optimal solution, such as an exact solution, further modification is needed to make SDOA explore more potential candidates in a feasible area. Some alternatives to consider are:
+
+1. Using a pseudo-random algorithm in generating candidate solutions at an early stage.
+2. Multiply N candidate solutions made.
+
+# DECLARATIONS
+
+## Study Limitations
+
+In this study, the portfolio used is derived from the calculation of the price elasticity study previously conducted by the marketplace data analytic team. 
+
+- The basic assumption of this portfolio is that changes in sales only come from changes in product prices. The interaction between products in the same category (competitor effect) is not considered in this study. 
+- The budget and expected revenue per product are assumed to be fixed values (not dynamic or probabilistic).
+- The total revenue calculation achieved from the solution of each method in the previous section is derived from the value in the portfolio.
+
+## Acknowledgements
+
+The author would like to thank the marketplace data analytic team for entrusting its product portfolio data to be used as a case study in developing an SDOA-based optimization algorithm.
+
+## Declaration of Competing Interest
+
+The author stated that there was no conflict of interest during this research.
+
+# REFERENCES {-}
+
