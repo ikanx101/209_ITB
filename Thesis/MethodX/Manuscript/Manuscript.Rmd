@@ -1,0 +1,270 @@
+---
+title: Optimization model for multi-product multi-period multi-supplier raw-material selection and composition, and order quantity problem with minimum one-year order quantity contract
+author:
+  - name: Mohammad Rizka Fadhli
+    email: 20921004@mahasiswa.itb.ac.id
+    correspondingauthor: true
+    affiliation: lala
+  - name: Saladin Uttunggadewa
+    affiliation: lili
+  - name: Rieske Hadianti
+    affiliation: lulu
+  - name: Sri Redjeki Pudjaprasetya
+    affiliation: lili
+address:
+  - code: lala
+    address: Magister of Computational Sciences Program, Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung
+  - code: lili
+    address: Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung
+  - code: lulu
+    address: Center for Mathematical Modeling and Simulation, Institut Teknologi Bandung
+abstract: |
+  This paper concerns the optimization model for a multi-product multi-period raw-material selection and composition, and order quantity problem faced by a beverage company. There are some criteria in raw material selection, which we accommodate all the criteria in the objective function. There are a number of suppliers, and one of the decision criteria is minimum one-year order quantity contract between the company and the suppliers. The actual one-year demand of raw materials may deviate significantly from the minimum one-year order quantities. In this paper, we derive a function that can be regarded as a penalty function in order to maintain the total order quantities in one year fulfil the minimum one-year order quantity contracts. This penalty function is  a part of the objective function and can be relaxed once the minimum one-year order quantity contracts are fulfilled. 
+
+  We performed a number of numerical experiments to check the optimal solutions for various demands and for various objective functions.  These experiments show our MILP gives the desired optimal solutions and also show the influence of decision criteria on the optimal solution.
+keywords: 
+  - inventory control 
+  - multi-period multi-product multi criteria raw-material selection
+  - mix-integer linear programming
+journal: "MethodX"
+date: "`r Sys.Date()`"
+classoption: preprint, 3p, authoryear
+bibliography: mybibfile.bib
+linenumbers: false
+numbersections: true
+# Use a CSL with `citation_package = "default"`
+# csl: https://www.zotero.org/styles/elsevier-harvard
+csl: csl new.csl
+output: 
+  rticles::elsevier_article:
+    keep_tex: true
+    citation_package: default
+---
+
+```{r,include=FALSE}
+setwd("~/209_ITB/Thesis/MethodX/Manuscript")
+```
+
+# Introduction
+
+This paper concerns the optimization model for supplier selection, order allocation, and raw-material composition in a beverage company that produces a large number of drink powders. There are a number of suppliers that can provide the same key raw material of the drink powders, but the color or some physical characteristics are slightly different so we may assume those raw materials are different. The drink powders produced by this company, which in the remainder of this paper are called items, can be classified into two classes of items. 
+
+- The first class consists of items that can be produced by using exactly a single type of raw material.
+- The second class consists of more flexible items, where each item in this class can be produced by using one raw material or by using a composition of a number of raw materials. For each item in this class, we then have a set of possible raw materials. The sets of possible materials may vary from one to the other.
+
+In order to avoid supply disruption, the company decides to use multiple sources for these raw materials. The company has established selection criteria for each raw material, which are based on the estimated one-year total demand of raw materials and  a subjective assessment of whether the raw material cannot be substituted, price, service, and the minimum order required for each purchase. After determining the score for each raw material, the company decided to make contracts or agreements with six suppliers. Each contract stated the unit price price and the minimum order quantity within a year. Based on these contracts, production planning and inventory control of raw materials are carried out.
+
+The estimated total one-year demand for items is obtained from the forecasting process performed yearly.  This forecasting process yields the monthly total demand for items, which is time varying. But at the production level, the company refines the monthly total demand on a monthly basis as a response to some disruptions such as sudden additional requests due to flash sales practices in e-commerce, and others.
+
+Once the demand for items for a month is issued, the company must perform the decision for purchasing the raw materials from some suppliers. This purchase decision from a supplier includes purchase for four serial deliveries one week apart. The first delivery must be no later than 17 days before the following  month's start. The period of 17 days here is the total time required for  the company's internal inspection and preparation of raw materials.
+
+This decision process is a complex one since there are a large number of items that have to be produced which mostly belong to the second class, and the monthly demand may vary. Additionally, the company imposes a production regulation for the second class of items as a result of the multiple-sources policy, which states that each item in the second class must be produced using a composition of at least two types of the corresponding possible raw materials. The decision process must be performed carefully in order to obtain results in the form of:
+
+- which raw materials are purchased along with the delivery size for every four corresponding weeks,
+- the composition of raw materials for every item in the second class which has to be produced,
+
+while minimizing the total inventory cost.
+
+The company developed a decision support system for this monthly decision process, which is developed based on an optimization model. This paper concerns the derivation of the optimization model, which can be categorized as a  multi-product multi-period multi-supplier raw material selection and composition, and order quantity problem.  The multi-product multi-period multi-supplier raw material selection problem has been addressed in a number of articles such as Sambatt, Woarawichai, and Naenna [@a1], but they do not address the minimum one-year order quantity contracts so that their optimization problem is simpler than our optimization problem. In general, our optimization problem is much more complex compared to the one criterion supplier selection studied in an enormous articles such as  Reck & Long [@a2], Monckza & Trecha [@a3], & Porter, and Harding papers. Later, supplier selection research has developed into a problem with multiple criteria, such as criteria for quality of goods, on time delivery, after-sales service, as well as environmental and socio-political criteria for suppliers (see Smytka & Clemens [@a4], Gray [@a5]).  What is interesting is that in general these criteria contradict each other, for example, goods offered at low prices (positive values for the price criteria) may have negative values for on time delivery criteria. The complexity of this issue is compounded by the fact that some criteria are quantitative (price, timeliness of delivery, specification/quality of goods, etc.), but other criteria are qualitative (after-sales service, environmental and socio-political criteria of suppliers).
+
+The paper by Weber Current & Benton [@a6] is a paper at the beginning of this research on multi-criteria supplier selection, which presents research results with four criteria, namely Price, Quality, Delivery and Service (PDQS). This paper together with Hurkens, van der Valk, Wynstra [@a7] introduces the supplier selection problem under the concept of Total Cost Ownership (TCO), a financial analysis tool to examine the direct and indirect costs of a product's production. These direct and indirect costs then become the criteria in the supplier selection process. These papers on TCO include Ferrin & Plank [@a8], Degraeve & Roodhooft [@a9]. Our optimization problem is categorized as a multi-criteria one, where one of the criteria is a new one, i.e the minimum one-year order quantity.  
+
+After the rise of conceptual research on supplier selection with multi-criteria, then we quite easily find a proposal to use the Analytic Hierarchy Process (AHP), a decision-making method when it comes to ranking of many criteria (see Dyer [@a10]), as a method of solving supplier problems. selection. AHP provides a framework for addressing various criteria involving intuitive, rational, qualitative and quantitative aspects. Other papers that discuss the AHP approach to supplier selection solutions include Bard, Belton [@a11], Bhutta & Huq [@a12], Nydick & Hill [@a13]. 
+
+Another method proposed as a solution to the supplier selection problem is an optimization method or mathematical programming as proposed by Degraeve & Roodhooft [@a9], Khalifa & Mohammed Al-Shabi [@a14], and Nispeling [@a15]. A special optimization method, namely multi-objective goal programming, was proposed by Weber & Ellram [@a16]. Multi-objective programming is very suitable to be used to resolve conflicts between existing criteria and the existence of just-in-time scenarios. Meanwhile, Masella &  Rangone [@a17] offer a dynamic programming method as a method of completing this supplier selection, where input variables are set as controls and environmental variables and status variables are set as the internal workings of the organization, and output variables are seen as company performance. Another optimization method used as a solution method is Data Envelopment Analysis (DEA), as proposed in the paper of Pitchipoo, et al. [@a18] and Shahrzad, et al. [@a19].
+
+Apart from these methods, we get the combined use of the two methods above (hybrid method), such as the one proposed by Li, Wong, & Kwong [@a20]  which combines the AHP method and multi-objective programming. Another approach is the metaheuristic method proposed by Alejo-Reyes, et al. [@a21]. We accommodate  all criteria in one objective function, so that our optimization model can be categorized as a mix-integer linear programming. 
+
+This paper is written as follow. After this introduction, we describe the production planning and inventory control in the company in Section 2. After that we derive the optimization model in Section 3. In this section, we discuss the definition of the objective function which expresses all criteria for decision making. Then, in Section 5 we present the result of our numerical experimentation for obtaining the optimal solution. We end this paper by discussing the sensitivity analysis of the decision criteria to the optimal solution which we present in Section 5. 
+
+# Research methodology
+
+## Production Planning and Inventory Control for Raw Materials
+
+As mentioned above, the company deals with six raw material suppliers. The decision process for supplier selection and order allocation is carried out every month based on the results of demand forecasting at the beginning of the year and production performance in the previous month. From this demand forecasting process, the company then makes the purchase and sales agreements with all six suppliers concerning the one-year minimum purchase, unit price, and minimum one-month delivery. The serial process in one calendar year can be seen in figure 1.  At the beginning of a month, the company forecasts the demand for items in the following month.
+
+```{r out.width="80%",fig.align='center',echo=FALSE,fig.cap="One-year production planning and inventory control"}
+knitr::include_graphics("production planning and inventory control.jpg")
+```
+
+From the estimated monthly demand for items obtained from the yearly forecasting process, we directly can find out the estimated monthly total demand for raw materials in one year. In practice, this one-month estimated demand must be reviewed due to several things, such as production in the previous month experiencing disruptions, sudden additional requests due to flash sales practices in e-commerce, and others. Reviewing the one-month demand and determining the production schedule we call production planning for one month. 
+
+As soon as the production planning is performed, the company performs the decision process for purchasing the raw materials from some suppliers. In the following, we assume that one month can be divided into four weeks (the fourth week may be longer than seven days). This purchase decision covers purchases for four serial deliveries one week apart. The first delivery must be no later than 17 days before the following month's start since the internal inspection and the preparation for the raw materials delivered takes 17 days. Figure 2 in the following illustrates a one-month planning horizon and raw material selection,  and four consecutive delivery points follow it. 
+
+
+```{r out.width="80%",fig.align='center',echo=FALSE,fig.cap="Decision proccess planning horizon"}
+knitr::include_graphics("Supply Cycle 2.jpg")
+```
+
+The decision process considers some parameters for decision making such as: 
+
+- raw materials purchase prices, 
+- existing stock of raw materials in the warehouse,
+- the minimum one-month delivery  of raw materials(if ordered),
+- the minimum one-year purchase of each raw material,
+- raw-material flexibility of each item, which is known by the number of raw materials that can be used to produce the item. The larger this number for an item, the more flexible the item,
+- and others.
+
+The purchase must also comply with the company's internal policies in the following. 
+
+__Policy 1.__ purchase raw materials from at least two suppliers in order to maintain supply security, 
+
+__Policy 2.__ if an item must be produced by using more than one raw material, the proportions of raw materials used are the same. 
+
+In the following section, we will accommodate all these policies into some constraints of an optimization model that can be regarded as the main engine of the Decision Support System developed by the company in order to achieve an optimal decision in inventory control.  
+
+# Mathematical model of the problem
+
+In this section, we formulate a mathematical model of the decision problem. As described before, we need to make a decision for raw material selection, delivery quantities, and raw material compositions on the four consecutive weeks covered. In the following, we derive a mixed integer linear programming that represent the decision problem. We first present the sets, the parameters, and the decision variables used in the mathematical model. We then present the constraints which represent the production rules and capacity, followed by the discussion concerning the objective function of the optimization model. The integer linear programming is written after that.
+
+## Sets and parameters
+
+- $M = \left\{ 1,2,3,4 \right\}$ as the set of weeks on the supply cycle, 
+- $N$ as the number of raw materials, 
+- $\mathfrak{N}= \left\{ 1,2,...,N \right\}$ as the set of raw-materials,
+- $I$ as the number of items,
+- $\mathfrak{J} =  \left\{ 1, 2, ..., I  \right\}$ as the number of items,
+- $P \bigcup_{j \in M} P_j$ as the set of items to be produced on the planning horizon, where $P_j$ as the set of items to be produced on week $j$.
+- For $i \in \mathfrak{J}, k \in \mathfrak{N}$,
+
+$$f_{ik} = 
+\left\{\begin{matrix}
+1 & , & \text{if item } i \text{ can be produce by using raw material } k  \\ 
+0 & , & \text{otherwise}
+\end{matrix}\right. 
+$$
+
+- For $j \in M, D_j$ as the set of the total demand on week $j$.
+- For $k \in \mathfrak{N}, mo_k$ as the the one-year minimum order quantity of raw material $k$.
+- For $k \in \mathfrak{N}, c_k$ as the unit price of raw material $k$.
+- For $k \in \mathfrak{N}, \sigma_k$ as the minimum one-month order quantity of raw material $k$, if purchased, 
+- For $k \in \mathfrak{N}, z_{0k}$ as the level of inventory of raw material $k$ just before the first delivery on the first week, 
+- $ss$ as the  safety stock for each raw material at the end of each week,
+- $maxcap$ as the  warehouse capacity, 
+- $hc$ as the holding cost per item per week. 
+
+### Decision variables 
+
+Define:
+
+- $\forall k \in N, x_k$ as the amount of raw material $k$ purchased. $x_k = 0$ if raw material $k$ is not purchased, and $\sigma_k \leq x_k \leq D$ otherwise.
+- $\forall k \in N$,
+
+$$y_k = 
+\left\{\begin{matrix}
+0 & , & x_k  \\ 
+1 & , & \sigma_k \leq x_k \leq D
+\end{matrix}\right. 
+$$
+
+- The variables $y_k$ are defined to handle the discontinuity property of the variables $x_k$.
+- $\forall j \in M, \forall k \in N, \hat{x}_{jk}$ as the amount of raw material $k$ delivered at the beginning of week $j$.
+- $\forall j \in M, \forall i \in P_j, \forall k \in N,$
+
+$$a_{ijk} = 
+\left\{\begin{matrix}
+1 & , & \text{if item } i \text{ on the week }j \text{ produced by using raw material } k  \\ 
+0 & , & \text{otherwise}
+\end{matrix}\right. 
+$$
+
+- $\forall j \in M, \forall i \in P_j, \forall k \in N, b_{ijk}$ as the proportion of raw material $k$ used to produce item $i$ on the week $j$ if it uses raw material $k$.
+- $\forall j \in M, \forall k \in N, z_{jk}$ as the level of inventory raw material $k$ at the end of week $j$. 
+
+### Constraints
+
+The following mathematical expressions are the constraints for our mathematical model. We write these constraints in groups where we give a short explanation in each group the purpose of creating the constraints.
+
+__Constraint I__ are set to handle the discontinuity value of $x_k$. $\forall k \in N,$
+
+\begin{align}
+  x_k \leq y_k \space D
+\end{align}
+
+\begin{align}
+  x_k \geq \sigma_k \space y_k 
+\end{align}
+
+__Constraint II__ are set to fulfill the weekly allocation of each type of raw material. $\forall k \in N,$
+
+\begin{align}
+  x_k = \sum_{j \in M} \hat{x}_{jk}
+\end{align}
+
+__Constraints III__ are set to fulfill the raw-material demand each week. $\forall j \in M,$
+
+\begin{align}
+  \sum^{N}_{k=1} \hat{x}_{jk} + \sum^{N}_{k=1} z_{(j-1)k} \geq D_j 
+\end{align}
+
+__Constraints IV__ are set to ensure each item in $P^2$ is produced by using at least two raw materials. $\forall j \in M, \forall i \in P^2_j$
+
+\begin{align}
+  \sum_{k \in N} a_{ijk} \geq 2
+\end{align}
+
+__Constraints V__ concern on the relation among $f_{ik}, a_{ijk}, b_{ijk},$ and $x_{jk}$. $\forall j \in M, i \in P, k \in N$.
+
+\begin{align}
+  a_{ijk} \leq f_{ik}
+\end{align}
+
+$\forall j \in M, \forall i \in P, \forall k \in N$
+
+\begin{align}
+  b_{ijk} \leq f_{ik} a_{ijk}
+\end{align}
+
+\begin{align}
+  \mu a_{ijk} \leq b_{ijk}
+\end{align}
+
+for a small value of $\mu$.
+
+$\forall j \in \hat{M}, \forall i \in P_j,$
+
+\begin{align}
+  \sum_{k \in N} b_{ijk} = 1
+\end{align}
+
+__Constraints VI__ are set to fulfill the Policy II.
+
+
+
+
+
+
+
+# Equations
+
+Here is an equation:
+$$ 
+  f_{X}(x) = \left(\frac{\alpha}{\beta}\right)
+  \left(\frac{x}{\beta}\right)^{\alpha-1}
+  e^{-\left(\frac{x}{\beta}\right)^{\alpha}}; 
+  \alpha,\beta,x > 0 .
+$$
+
+Here is another:
+\begin{align}
+  a^2+b^2=c^2.
+\end{align}
+
+Inline equations: $\sum_{i = 2}^\infty\{\alpha_i^\beta\}$
+
+
+# Tables coming from R
+
+Tables can also be generated using R chunks, as shown in Table \ref{tab1} for example.
+
+```{r tab1, echo = TRUE}
+knitr::kable(head(mtcars)[,1:4], 
+    caption = "\\label{tab1}Caption centered above table"
+)
+```
+
+\newpage
+
+# References
+
+

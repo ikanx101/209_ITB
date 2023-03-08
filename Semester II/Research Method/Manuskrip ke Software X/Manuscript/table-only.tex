@@ -1,0 +1,287 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Tables},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Tables}
+\author{}
+\date{\vspace{-2.5em}2023-03-07}
+
+\begin{document}
+\maketitle
+
+\begin{longtable}[]{@{}lrr@{}}
+\caption{Sample Portfolio Data}\tabularnewline
+\toprule()
+product\_code & budget & expected\_revenue \\
+\midrule()
+\endfirsthead
+\toprule()
+product\_code & budget & expected\_revenue \\
+\midrule()
+\endhead
+6000094-0002 & 240.0 & 112.800 \\
+6000100-0003 & 70350.0 & 78289.500 \\
+6000301-0004 & 15300.0 & 7191.000 \\
+6000307-0005 & 2700.0 & 2079.000 \\
+6000348-0007 & 50460.0 & 55036.200 \\
+6000378-0010 & 1425.0 & 1097.250 \\
+6000514-0014 & 28774200.0 & 15355284.000 \\
+6000134-0026 & 3072.0 & 1443.840 \\
+6000149-0029 & 2052.0 & 964.440 \\
+6000245-0036 & 5670.0 & 1449.900 \\
+6000014-0038 & 65016.0 & 41897.520 \\
+6000027-0040 & 5625.0 & 4331.250 \\
+6000030-0041 & 21168.0 & 22548.960 \\
+6000042-0044 & 6747.3 & 1725.381 \\
+6000062-0048 & 6349.5 & 2424.015 \\
+\bottomrule()
+\end{longtable}
+
+\newpage
+
+\begin{longtable}[]{@{}rrrr@{}}
+\caption{Budget Fullfilment: What percentage of the budget is spent on
+the solution?}\tabularnewline
+\toprule()
+\#portfolio & exact\_budget & existing\_budget & spiral\_budget \\
+\midrule()
+\endfirsthead
+\toprule()
+\#portfolio & exact\_budget & existing\_budget & spiral\_budget \\
+\midrule()
+\endhead
+1 & 100.00 & 93.96 & 99.98 \\
+2 & 99.99 & 92.19 & 99.99 \\
+3 & 100.00 & 89.16 & 99.99 \\
+4 & 100.00 & 98.62 & 99.99 \\
+5 & 100.00 & 95.91 & 99.96 \\
+6 & 100.00 & 97.65 & 99.74 \\
+7 & 100.00 & 89.16 & 99.51 \\
+8 & 100.00 & 97.01 & 99.80 \\
+9 & 96.85 & 72.53 & 95.97 \\
+10 & 100.00 & 80.77 & 100.00 \\
+\bottomrule()
+\end{longtable}
+
+\newpage
+
+\begin{longtable}[]{@{}rlll@{}}
+\caption{Total Expected Revenue: What is the percentage of revenue
+achieved compared to the revenue of the exact solution?}\tabularnewline
+\toprule()
+\#portfolio & eksak\_revenue & existing\_revenue & spiral\_revenue \\
+\midrule()
+\endfirsthead
+\toprule()
+\#portfolio & eksak\_revenue & existing\_revenue & spiral\_revenue \\
+\midrule()
+\endhead
+1 & 4.778 mil IDR & 81.67\% & 90.19\% \\
+2 & 7.194 mil IDR & 74.56\% & 80.52\% \\
+3 & 7.428 mil IDR & 34.93\% & 50.24\% \\
+4 & 5.568 mil IDR & 88.26\% & 92.53\% \\
+5 & 2.606 mil IDR & 81.92\% & 90.65\% \\
+6 & 6.203 mil IDR & 94.74\% & 94.57\% \\
+7 & 7.4 mil IDR & 74.04\% & 88.4\% \\
+8 & 4.146 mil IDR & 91.13\% & 99.41\% \\
+9 & 5.097 mil IDR & 82.27\% & 99.34\% \\
+10 & 5.525 mil IDR & 80.41\% & 97.02\% \\
+\bottomrule()
+\end{longtable}
+
+\newpage
+
+\begin{longtable}[]{@{}rrr@{}}
+\caption{Similarity Product Portfolio}\tabularnewline
+\toprule()
+\#portfolio & similar\_product & dissimilar\_product \\
+\midrule()
+\endfirsthead
+\toprule()
+\#portfolio & similar\_product & dissimilar\_product \\
+\midrule()
+\endhead
+1 & 63 & 37 \\
+2 & 36 & 64 \\
+3 & 55 & 45 \\
+4 & 59 & 41 \\
+5 & 74 & 26 \\
+6 & 48 & 52 \\
+7 & 63 & 37 \\
+8 & 85 & 15 \\
+9 & 91 & 9 \\
+10 & 68 & 32 \\
+\bottomrule()
+\end{longtable}
+
+\newpage
+
+\begin{longtable}[]{@{}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1549}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4225}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4225}}@{}}
+\caption{Product Proportion: How many products are given and not
+discounted?}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+\#portfolio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+portofolio\_eksak
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+portofolio\_spiral
+\end{minipage} \\
+\midrule()
+\endfirsthead
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+\#portfolio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+portofolio\_eksak
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+portofolio\_spiral
+\end{minipage} \\
+\midrule()
+\endhead
+1 & Discount: 69; No discount: 31 & Discount: 62; No Discount: 38 \\
+2 & Discount: 14; No discount: 86 & Discount: 72; No Discount: 28 \\
+3 & Discount: 33; No discount: 67 & Discount: 56; No Discount: 44 \\
+4 & Discount: 54; No discount: 46 & Discount: 69; No Discount: 31 \\
+5 & Discount: 87; No discount: 13 & Discount: 73; No Discount: 27 \\
+6 & Discount: 42; No discount: 58 & Discount: 72; No Discount: 28 \\
+7 & Discount: 62; No discount: 38 & Discount: 83; No Discount: 17 \\
+8 & Discount: 86; No discount: 14 & Discount: 89; No Discount: 11 \\
+9 & Discount: 99; No discount: 1 & Discount: 90; No Discount: 10 \\
+10 & Discount: 82; No discount: 18 & Discount: 74; No Discount: 26 \\
+\bottomrule()
+\end{longtable}
+
+\begin{itemize}
+\tightlist
+\item
+  tes 1
+\item
+  tes 2
+\end{itemize}
+
+\hypertarget{sek-1}{%
+\section{Sek 1}\label{sek-1}}
+
+\hypertarget{sek-2}{%
+\subsection{Sek 2}\label{sek-2}}
+
+\hypertarget{lalala}{%
+\subsubsection{lalala}\label{lalala}}
+
+\textbf{Policy 1}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Let:
+
+\begin{itemize}
+\tightlist
+\item
+  \(M = \left\{ 1,2,3,4 \right\}\) as the set of weeks on the supply
+  cycle,
+\item
+  \(N\) as the number of raw materials,
+\item
+  \(\mathfrak{N}= \left\{ 1,2,...,N \right\}\) as the set of
+  raw-materials,
+\item
+  \(I\) as the number of items,
+\item
+  \(\mathfrak{J} = \left\{ 1, 2, ..., I \right\}\) as the number of
+  items,
+\item
+  \(P \bigcup_{j \in M} P_j\) as the set of items to be produced on the
+  planning horizon, where \(P_j\) as the set of items to be produced on
+  week \(j\).
+\item
+  For \(i \in \mathfrak{J}, k \in \mathfrak{N}\),
+\end{itemize}
+
+\[f_{ik} = 
+\left\{\begin{matrix}
+1 & , & \text{if item } i \text{ can be produce by using raw material } k  \\ 
+0 & , & \text{otherwise}
+\end{matrix}\right. 
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  lala
+\end{itemize}
+
+\end{document}

@@ -94,3 +94,39 @@ data.frame(dataset = 1:10,
          -spiral_n) %>% 
   knitr::kable(caption = "Product Proportion: How many products are given and not discounted?")
 ```
+
+
+
+
+- tes 1
+- tes 2
+
+# Sek 1
+
+## Sek 2
+
+### lalala
+
+__Policy 1__
+
+
+---
+
+Let:
+
+- $M = \left\{ 1,2,3,4 \right\}$ as the set of weeks on the supply cycle, 
+- $N$ as the number of raw materials, 
+- $\mathfrak{N}= \left\{ 1,2,...,N \right\}$ as the set of raw-materials,
+- $I$ as the number of items,
+- $\mathfrak{J} =  \left\{ 1, 2, ..., I  \right\}$ as the number of items,
+- $P \bigcup_{j \in M} P_j$ as the set of items to be produced on the planning horizon, where $P_j$ as the set of items to be produced on week $j$.
+- For $i \in \mathfrak{J}, k \in \mathfrak{N}$,
+
+$$f_{ik} = 
+\left\{\begin{matrix}
+1 & , & \text{if item } i \text{ can be produce by using raw material } k  \\ 
+0 & , & \text{otherwise}
+\end{matrix}\right. 
+$$
+
+- lala
