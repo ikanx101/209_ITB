@@ -50,63 +50,11 @@ authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
 \setcounter{secnumdepth}{5}
 % Pandoc toggle for numbering sections (defaults to be off)
 
-% Pandoc syntax highlighting
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 
 % tightlist command for lists without linebreak
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
-% From pandoc table feature
-\usepackage{longtable,booktabs,array}
-\usepackage{calc} % for calculating minipage widths
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
 
 % Pandoc citation processing
 \newlength{\cslhangindent}
@@ -138,6 +86,20 @@ authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 
 
 
@@ -481,14 +443,14 @@ linear programming is written after that.
 \item
   \(I\) as the number of items,
 \item
-  \(\mathfrak{J} = \left\{ 1, 2, ..., I \right\}\) as the number of
+  \(\mathfrak{I} = \left\{ 1, 2, ..., I \right\}\) as the number of
   items,
 \item
   \(P \bigcup_{j \in M} P_j\) as the set of items to be produced on the
   planning horizon, where \(P_j\) as the set of items to be produced on
   week \(j\).
 \item
-  For \(i \in \mathfrak{J}, k \in \mathfrak{N}\),
+  For \(i \in \mathfrak{I}, k \in \mathfrak{N}\),
 \end{itemize}
 
 \[f_{ik} = 
@@ -641,54 +603,406 @@ for a small value of \(\mu\).
   \sum_{k \in N} b_{ijk} = 1
 \end{align}
 
-\hypertarget{equations}{%
-\section{Equations}\label{equations}}
+\textbf{Constraints VI} are set to fulfill the Policy II.
+\(\forall j \in \hat{M}, \forall i \in P^2_j, k_1, k_2 \in N, k_1 \neq k_2,\)
 
-Here is an equation: \[ 
-  f_{X}(x) = \left(\frac{\alpha}{\beta}\right)
-  \left(\frac{x}{\beta}\right)^{\alpha-1}
-  e^{-\left(\frac{x}{\beta}\right)^{\alpha}}; 
-  \alpha,\beta,x > 0 .
-\]
-
-Here is another: \begin{align}
-  a^2+b^2=c^2.
+\begin{align}
+  (1 - a_{ijk_1}) + (1 - a_{ijk_2}) \geq b_{ijk_1} - b_{ijk_2}
 \end{align}
 
-Inline equations: \(\sum_{i = 2}^\infty\{\alpha_i^\beta\}\)
+\begin{align}
+  (1 - a_{ijk_1}) + (1 - a_{ijk_2}) \geq b_{ijk_2} - b_{ijk_1}
+\end{align}
 
-\hypertarget{tables-coming-from-r}{%
-\section{Tables coming from R}\label{tables-coming-from-r}}
+\textbf{Constraints VII} are set to ensure that the level of inventory
+just after raw material delivery does not exceed the maximum capacity.
+On the beginning of week 1,
 
-Tables can also be generated using R chunks, as shown in Table
-\ref{tab1} for example.
+\begin{align}
+  \sum_{k \in N} (z_{0k} + \hat{x}_{1k} + z_{1k}) - D_1 \leq maxcap
+\end{align}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(mtcars)[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{], }
-    \AttributeTok{caption =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{label\{tab1\}Caption centered above table"}
-\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\(\forall j \in \left\{ 2,3,4 \right\},\)
 
-\begin{longtable}[]{@{}lrrrr@{}}
-\caption{\label{tab1}Caption centered above table}\tabularnewline
-\toprule()
-& mpg & cyl & disp & hp \\
-\midrule()
-\endfirsthead
-\toprule()
-& mpg & cyl & disp & hp \\
-\midrule()
-\endhead
-Mazda RX4 & 21.0 & 6 & 160 & 110 \\
-Mazda RX4 Wag & 21.0 & 6 & 160 & 110 \\
-Datsun 710 & 22.8 & 4 & 108 & 93 \\
-Hornet 4 Drive & 21.4 & 6 & 258 & 110 \\
-Hornet Sportabout & 18.7 & 8 & 360 & 175 \\
-Valiant & 18.1 & 6 & 225 & 105 \\
-\bottomrule()
-\end{longtable}
+\begin{align}
+  \sum_{k \in N} (z_{(j-1)k} + \hat{x}_{(j-1)k}) - \sum_{i \in P_j} b_{ijk} g_{ik} + z_jk \leq maxcap
+\end{align}
+
+\(\forall j \in M,\)
+
+\begin{align}
+  \sum_{k \in N} (z_{(j-1)k} + \hat{x}_{jk}) - \sum_{i \in P_j} b_{ijk} g_{ik} + z_jk \leq maxcap
+\end{align}
+
+\textbf{Constraints VIII} are set to ensure that the level of inventory
+at the end of each week must be greater than or equal to the safety
+stock. \(\forall j \in M, \forall k \in P,\)
+
+\begin{align}
+  z_{jk} \geq ss
+\end{align}
+
+\hypertarget{objective-function}{%
+\subsubsection{Objective function}\label{objective-function}}
+
+We define the objective function as the sum of the holding cost, the
+purchase cost, and a function for accommodating the minimum one-year
+order quantity contracts.
+
+The level of inventory of raw-material \(k\) during one week can be seen
+in figure 3.
+
+\newpage
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{inventory} 
+
+}
+
+\caption{Illustration for inventory cost calculation}\label{fig:unnamed-chunk-4}
+\end{figure}
+
+So that the holding cost can be given as:
+
+\[
+\frac{1}{2} hc \sum_{j \in \mathfrak{M}} \sum_{k \in \mathfrak{N}} (z_{(j-1)k} + z_{jk} + \hat{x}_{jk})
+\]
+
+Meanwhile the purchase cost can be given as:
+
+\[
+  \sum_{k \in \mathfrak{N}} c_k x_k
+\]
+
+We consider another function in the objective function, which is created
+to accommodate the one-year minimum order quantity contracts.
+
+Constraints I - VIII concern fulfillment of the minimum one-month order
+quantity contract, the monthly demand, warehouse capacity constraint,
+safety stock constraint, and raw material composition requirements.
+Meanwhile, the one-year minimum order quantity contract is quite
+difficult to be expressed as a constraint in the optimization model that
+has a one-month-long planning horizon.
+
+Therefore, we accommodate the yearly purchase contract which we
+represent as a part of the objective function of our optimization
+problem. To fulfill the one-year minimum order quantity contracts, we
+define a penalty function:
+
+\[
+  - \sum_{k \in \mathfrak{N}} \alpha_k mo_k x_k
+\]
+
+where for \(k \in \mathfrak{N}, \alpha_k\) is multiplier constants that
+will be discussed later. By denoting \(\bar{x}\) as the vector with
+elements \(x_k\) and \(\hat{x}_{jk},\) and \(\bar{z}\) as the vector
+with elements \(z_{jk}\) the objective function of our optimization
+model is then can be written as:
+
+\[
+  F(\bar{x},\bar{z}) = \frac{1}{2} hc \sum_{j \in \mathfrak{M}} \sum_{k \in \mathfrak{N}} (z_{(j-1)k} + z_{jk} + \hat{x}_{jk}) + \sum_{k \in \mathfrak{N}} c_k x_k - \sum_{k \in \mathfrak{N}} \alpha_k mo_k x_k
+\]
+
+\hypertarget{optimization-model}{%
+\subsubsection{Optimization model}\label{optimization-model}}
+
+The optimization model for supplier selection, order allocation, and raw
+material composition can be written as a mixed integer linear
+programming:
+
+\[
+\begin{matrix}
+minimize & F(\bar{x},\bar{z}) \\
+subject \space to & Constraint \space I-VIII \\
+ & x_k, \hat{x}_{jk}, z_{jk} \in \mathbb{Z}^+, y_k, a_{ijk} \in \left\{0,1 \right\}, 0 \leq b_{ijk} \leq 1
+\end{matrix}
+\]
+
+where the set of \textbf{Constraints I} up to \textbf{Constraints VIII}
+are given by equations (1) - (15).
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+In this section, we give an example of the solution of the optimization
+model we derived in the previous section. In this example, we consider
+an instant where \(N=6\) and \(I=51,\) so that we have 2508 decision
+variables.
+
+\hypertarget{parameters-values}{%
+\subsection{Parameters values}\label{parameters-values}}
+
+The following tables show the matrix of raw-material flexibility of all
+items.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-5}the flexibility matrix of items 1-25}
+\centering
+\begin{tabular}[t]{r|r|r|r|r|r|r}
+\hline
+\multicolumn{1}{c|}{ } & \multicolumn{6}{c}{Raw material} \\
+\cline{2-7}
+item & 1 & 2 & 3 & 4 & 5 & 6\\
+\hline
+1 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+2 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+3 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+4 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+5 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+6 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+7 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+8 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+9 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+10 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+11 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+12 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+13 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+14 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+15 & 1 & 0 & 0 & 1 & 0 & 0\\
+\hline
+16 & 1 & 0 & 0 & 1 & 0 & 0\\
+\hline
+17 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+18 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+19 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+20 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+21 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+22 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+23 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+24 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+25 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+\end{tabular}
+\end{table}
+\pagebreak
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-6}the flexibility matrix of items 26-51}
+\centering
+\begin{tabular}[t]{r|r|r|r|r|r|r}
+\hline
+\multicolumn{1}{c|}{ } & \multicolumn{6}{c}{Raw material} \\
+\cline{2-7}
+item & 1 & 2 & 3 & 4 & 5 & 6\\
+\hline
+26 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+27 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+28 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+29 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+30 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+31 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+32 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+33 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+34 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+35 & 1 & 1 & 0 & 1 & 0 & 1\\
+\hline
+36 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+37 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+38 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+39 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+40 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+41 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+42 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+43 & 1 & 1 & 1 & 1 & 0 & 1\\
+\hline
+44 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+45 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+46 & 1 & 1 & 0 & 1 & 0 & 1\\
+\hline
+47 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+48 & 1 & 1 & 1 & 1 & 1 & 1\\
+\hline
+49 & 0 & 0 & 0 & 1 & 0 & 0\\
+\hline
+50 & 0 & 0 & 0 & 1 & 0 & 0\\
+\hline
+51 & 1 & 1 & 0 & 1 & 0 & 0\\
+\hline
+\end{tabular}
+\end{table}
+
+Next, we present the instant of the total raw material demands during a
+planning horizon.
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-7}the flexibility matrix of items 1-11}
+\centering
+\begin{tabular}[t]{r|r|r|r|r}
+\hline
+\multicolumn{1}{c|}{ } & \multicolumn{4}{c}{raw -material demand (in kg)} \\
+\cline{2-5}
+item & week 1 & week 2 & week 3 & week 4\\
+\hline
+1 & 2555.1 & 2555.1 & 0 & 10220.4\\
+\hline
+2 & 0.0 & 4300.0 & 8600 & 0.0\\
+\hline
+3 & 0.0 & 0.0 & 0 & 1800.0\\
+\hline
+4 & 0.0 & 495.0 & 0 & 0.0\\
+\hline
+5 & 0.0 & 0.0 & 0 & 0.0\\
+\hline
+6 & 3150.0 & 0.0 & 6300 & 0.0\\
+\hline
+7 & 0.0 & 1050.0 & 0 & 350.0\\
+\hline
+8 & 1650.0 & 0.0 & 0 & 2200.0\\
+\hline
+9 & 2080.0 & 1560.0 & 1040 & 0.0\\
+\hline
+10 & 0.0 & 1280.0 & 0 & 0.0\\
+\hline
+11 & 0.0 & 0.0 & 4200 & 0.0\\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-8}the flexibility matrix of items 12-51}
+\centering
+\begin{tabular}[t]{r|r|r|r|r}
+\hline
+\multicolumn{1}{c|}{ } & \multicolumn{4}{c}{raw -material demand (in kg)} \\
+\cline{2-5}
+item & week 1 & week 2 & week 3 & week 4\\
+\hline
+12 & 0 & 2700 & 0 & 0\\
+\hline
+13 & 350 & 350 & 0 & 0\\
+\hline
+14 & 0 & 300 & 500 & 200\\
+\hline
+15 & 85 & 0 & 0 & 0\\
+\hline
+16 & 110 & 165 & 0 & 0\\
+\hline
+17 & 0 & 0 & 17400 & 17400\\
+\hline
+18 & 74050 & 222150 & 14800 & 0\\
+\hline
+19 & 0 & 11605 & 0 & 0\\
+\hline
+20 & 12750 & 0 & 0 & 0\\
+\hline
+21 & 3500 & 0 & 14000 & 14000\\
+\hline
+22 & 42100 & 0 & 10550 & 0\\
+\hline
+23 & 0 & 0 & 5600 & 11200\\
+\hline
+24 & 5400 & 5400 & 0 & 5400\\
+\hline
+25 & 1350 & 2250 & 0 & 0\\
+\hline
+26 & 0 & 32400 & 43200 & 0\\
+\hline
+27 & 10350 & 31050 & 0 & 0\\
+\hline
+28 & 118200 & 0 & 0 & 0\\
+\hline
+29 & 3330 & 4995 & 0 & 0\\
+\hline
+30 & 0 & 1950 & 0 & 5850\\
+\hline
+31 & 0 & 6300 & 6300 & 0\\
+\hline
+32 & 2310 & 3465 & 0 & 0\\
+\hline
+33 & 0 & 2500 & 0 & 0\\
+\hline
+34 & 0 & 0 & 20850 & 0\\
+\hline
+35 & 12150 & 0 & 0 & 0\\
+\hline
+36 & 0 & 0 & 0 & 0\\
+\hline
+37 & 12750 & 12750 & 8500 & 8500\\
+\hline
+38 & 1550 & 3100 & 0 & 0\\
+\hline
+39 & 0 & 10600 & 5300 & 21200\\
+\hline
+40 & 0 & 0 & 10450 & 20900\\
+\hline
+41 & 9625 & 0 & 1375 & 1375\\
+\hline
+42 & 0 & 0 & 3080 & 0\\
+\hline
+43 & 0 & 2250 & 450 & 2250\\
+\hline
+44 & 0 & 0 & 14100 & 0\\
+\hline
+45 & 6700 & 13400 & 10050 & 6700\\
+\hline
+46 & 6500 & 13000 & 0 & 0\\
+\hline
+47 & 26200 & 13100 & 0 & 0\\
+\hline
+48 & 12000 & 8000 & 0 & 12000\\
+\hline
+49 & 0 & 126 & 0 & 0\\
+\hline
+50 & 1323 & 0 & 3969 & 0\\
+\hline
+51 & 1170 & 1170 & 0 & 780\\
+\hline
+\end{tabular}
+\end{table}
+
+We can see that items 5 and 36 do not have to be produced during this
+planning horizon. We also can see that most items have to be produced
+only in to or three weeks of this planning horizon, with varying demand.
+
+The others parameters values are given in the following table.
 
 \newpage
 

@@ -43,6 +43,8 @@ output:
 
 ```{r,include=FALSE}
 setwd("~/209_ITB/Thesis/MethodX/Manuscript")
+
+library(dplyr)
 ```
 
 # Introduction
@@ -123,9 +125,9 @@ In this section, we formulate a mathematical model of the decision problem. As d
 - $N$ as the number of raw materials, 
 - $\mathfrak{N}= \left\{ 1,2,...,N \right\}$ as the set of raw-materials,
 - $I$ as the number of items,
-- $\mathfrak{J} =  \left\{ 1, 2, ..., I  \right\}$ as the number of items,
+- $\mathfrak{I} =  \left\{ 1, 2, ..., I  \right\}$ as the number of items,
 - $P \bigcup_{j \in M} P_j$ as the set of items to be produced on the planning horizon, where $P_j$ as the set of items to be produced on week $j$.
-- For $i \in \mathfrak{J}, k \in \mathfrak{N}$,
+- For $i \in \mathfrak{I}, k \in \mathfrak{N}$,
 
 $$f_{ik} = 
 \left\{\begin{matrix}
@@ -227,41 +229,156 @@ $\forall j \in \hat{M}, \forall i \in P_j,$
   \sum_{k \in N} b_{ijk} = 1
 \end{align}
 
-__Constraints VI__ are set to fulfill the Policy II.
+__Constraints VI__ are set to fulfill the Policy II. $\forall j \in \hat{M}, \forall i \in P^2_j, k_1, k_2 \in N, k_1 \neq k_2,$
 
-
-
-
-
-
-
-# Equations
-
-Here is an equation:
-$$ 
-  f_{X}(x) = \left(\frac{\alpha}{\beta}\right)
-  \left(\frac{x}{\beta}\right)^{\alpha-1}
-  e^{-\left(\frac{x}{\beta}\right)^{\alpha}}; 
-  \alpha,\beta,x > 0 .
-$$
-
-Here is another:
 \begin{align}
-  a^2+b^2=c^2.
+  (1 - a_{ijk_1}) + (1 - a_{ijk_2}) \geq b_{ijk_1} - b_{ijk_2}
 \end{align}
 
-Inline equations: $\sum_{i = 2}^\infty\{\alpha_i^\beta\}$
+\begin{align}
+  (1 - a_{ijk_1}) + (1 - a_{ijk_2}) \geq b_{ijk_2} - b_{ijk_1}
+\end{align}
 
 
-# Tables coming from R
+__Constraints VII__ are set to ensure that the level of inventory just after raw material delivery does not exceed the maximum capacity. On the beginning of week 1,
 
-Tables can also be generated using R chunks, as shown in Table \ref{tab1} for example.
+\begin{align}
+  \sum_{k \in N} (z_{0k} + \hat{x}_{1k} + z_{1k}) - D_1 \leq maxcap
+\end{align}
 
-```{r tab1, echo = TRUE}
-knitr::kable(head(mtcars)[,1:4], 
-    caption = "\\label{tab1}Caption centered above table"
-)
+$\forall j \in \left\{ 2,3,4 \right\},$
+
+
+\begin{align}
+  \sum_{k \in N} (z_{(j-1)k} + \hat{x}_{(j-1)k}) - \sum_{i \in P_j} b_{ijk} g_{ik} + z_jk \leq maxcap
+\end{align}
+
+$\forall j \in M,$
+
+\begin{align}
+  \sum_{k \in N} (z_{(j-1)k} + \hat{x}_{jk}) - \sum_{i \in P_j} b_{ijk} g_{ik} + z_jk \leq maxcap
+\end{align}
+
+__Constraints VIII__ are set to ensure that the level of inventory at the end of each week must be greater than or equal to the safety stock. $\forall j \in M, \forall k \in P,$
+
+\begin{align}
+  z_{jk} \geq ss
+\end{align}
+
+### Objective function
+
+We define the objective function as the sum of the holding cost, the purchase cost, and a function for accommodating the minimum one-year order quantity contracts.
+
+The level of inventory of raw-material $k$ during one week can be seen in figure 3.
+
+\newpage
+
+```{r out.width="70%",fig.align='center',echo=FALSE,fig.cap="Illustration for inventory cost calculation"}
+knitr::include_graphics("inventory.jpg")
 ```
+
+So that the holding cost can be given as:
+
+$$
+\frac{1}{2} hc \sum_{j \in \mathfrak{M}} \sum_{k \in \mathfrak{N}} (z_{(j-1)k} + z_{jk} + \hat{x}_{jk})
+$$
+
+Meanwhile the purchase cost can be given as:
+
+$$
+  \sum_{k \in \mathfrak{N}} c_k x_k
+$$
+
+We consider another function in the objective function, which is created to accommodate the one-year minimum order quantity contracts. 
+
+Constraints I - VIII concern fulfillment of the minimum one-month order quantity contract, the monthly demand,   warehouse capacity constraint, safety stock constraint, and raw material composition requirements. Meanwhile, the one-year minimum order quantity contract is quite difficult to be expressed as a constraint in the optimization model that has a one-month-long planning horizon. 
+
+Therefore, we accommodate the yearly purchase contract which we represent as a part of the objective function of our optimization problem. To fulfill the one-year minimum order quantity contracts, we define a penalty function:
+
+$$
+  - \sum_{k \in \mathfrak{N}} \alpha_k mo_k x_k
+$$
+
+where for $k \in \mathfrak{N}, \alpha_k$ is multiplier constants that will be discussed later. By denoting $\bar{x}$ as the vector with elements $x_k$ and $\hat{x}_{jk},$ and $\bar{z}$ as the vector with elements $z_{jk}$ the objective function of our optimization model is then can be written as:
+
+$$
+  F(\bar{x},\bar{z}) = \frac{1}{2} hc \sum_{j \in \mathfrak{M}} \sum_{k \in \mathfrak{N}} (z_{(j-1)k} + z_{jk} + \hat{x}_{jk}) + \sum_{k \in \mathfrak{N}} c_k x_k - \sum_{k \in \mathfrak{N}} \alpha_k mo_k x_k
+$$
+
+### Optimization model
+
+The optimization model for supplier selection, order allocation, and raw material composition can be written as a mixed integer linear programming: 
+
+$$
+\begin{matrix}
+minimize & F(\bar{x},\bar{z}) \\
+subject \space to & Constraint \space I-VIII \\
+ & x_k, \hat{x}_{jk}, z_{jk} \in \mathbb{Z}^+, y_k, a_{ijk} \in \left\{0,1 \right\}, 0 \leq b_{ijk} \leq 1
+\end{matrix}
+$$
+
+where the set of __Constraints I__ up to __Constraints VIII__ are given by equations (1) - (15). 
+
+# Results
+
+In this section, we give an example of the solution of the optimization model we derived in the previous section. In this example, we consider an instant where $N=6$ and $I=51,$ so that we have 2508 decision variables.
+
+## Parameters values
+
+The following tables show the matrix of raw-material flexibility of all items.
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+rm(list=ls())
+
+library(readxl)
+library(kableExtra)
+
+df = read_excel("~/209_ITB/Thesis/Overleaf Version/data input.xlsx",sheet = "matriks gula x produk")
+df[is.na(df)] = 0
+colnames(df)[2:7] = 1:6
+df[1:25,] %>% 
+  rename(item = code_product) %>% 
+  knitr::kable(caption = "the flexibility matrix of items 1-25") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Raw material" = 6))
+```
+\pagebreak
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+df[26:51,] %>% 
+  rename(item = code_product) %>% 
+  knitr::kable(caption = "the flexibility matrix of items 26-51") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Raw material" = 6))
+```
+
+Next, we present the instant of the total raw material demands during a planning horizon.
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+rm(list=ls())
+
+df = read_excel("~/209_ITB/Thesis/Overleaf Version/data input.xlsx",sheet = "matriks produk x minggu")
+colnames(df)[2:5] = paste0("week ",1:4)
+df[1:11,] %>% 
+  rename(item = code_product) %>% 
+  knitr::kable(caption = "the flexibility matrix of items 1-11") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"raw -material demand (in kg)" = 4))
+```
+
+\newpage
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+df[12:51,] %>% 
+  rename(item = code_product) %>% 
+  knitr::kable(caption = "the flexibility matrix of items 12-51") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"raw -material demand (in kg)" = 4))
+```
+
+We can see that items 5 and 36 do not have to be produced during this planning horizon. We also can see that most items have to be produced only in to or three weeks of this planning horizon, with varying demand.
+
+The others parameters values are given in the following table.
 
 \newpage
 
