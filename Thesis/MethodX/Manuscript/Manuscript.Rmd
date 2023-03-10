@@ -4,20 +4,23 @@ author:
   - name: Mohammad Rizka Fadhli
     email: 20921004@mahasiswa.itb.ac.id
     correspondingauthor: true
-    affiliation: lala
+    affiliation: a1
   - name: Saladin Uttunggadewa
-    affiliation: lili
+    email: s_uttunggadewa@math.itb.ac.id
+    affiliation: a2
   - name: Rieske Hadianti
-    affiliation: lulu
+    email: ike.hadianti@gmail.com
+    affiliation: a3
   - name: Sri Redjeki Pudjaprasetya
-    affiliation: lili
+    email: srpudjap@gmail.com
+    affiliation: a2
 address:
-  - code: lala
-    address: Magister of Computational Sciences Program, Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung
-  - code: lili
-    address: Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung
-  - code: lulu
-    address: Center for Mathematical Modeling and Simulation, Institut Teknologi Bandung
+  - code: a1
+    address: Master's Program in Computational Science; Faculty of Mathematics and Natural Sciences; Institut Teknologi Bandung
+  - code: a2
+    address: Faculty of Mathematics and Natural Sciences; Institut Teknologi Bandung
+  - code: a3
+    address: Center for Mathematical Modeling and Simulation; Institut Teknologi Bandung
 abstract: |
   This paper concerns the optimization model for a multi-product multi-period raw-material selection and composition, and order quantity problem faced by a beverage company. There are some criteria in raw material selection, which we accommodate all the criteria in the objective function. There are a number of suppliers, and one of the decision criteria is minimum one-year order quantity contract between the company and the suppliers. The actual one-year demand of raw materials may deviate significantly from the minimum one-year order quantities. In this paper, we derive a function that can be regarded as a penalty function in order to maintain the total order quantities in one year fulfil the minimum one-year order quantity contracts. This penalty function is  a part of the objective function and can be relaxed once the minimum one-year order quantity contracts are fulfilled. 
 
@@ -65,7 +68,9 @@ This decision process is a complex one since there are a large number of items t
 - which raw materials are purchased along with the delivery size for every four corresponding weeks,
 - the composition of raw materials for every item in the second class which has to be produced,
 
-while minimizing the total inventory cost.
+\setlength{\parindent}{0pt} while minimizing the total inventory cost.
+
+\setlength{\parindent}{10pt}
 
 The company developed a decision support system for this monthly decision process, which is developed based on an optimization model. This paper concerns the derivation of the optimization model, which can be categorized as a  multi-product multi-period multi-supplier raw material selection and composition, and order quantity problem.  The multi-product multi-period multi-supplier raw material selection problem has been addressed in a number of articles such as Sambatt, Woarawichai, and Naenna [@a1], but they do not address the minimum one-year order quantity contracts so that their optimization problem is simpler than our optimization problem. In general, our optimization problem is much more complex compared to the one criterion supplier selection studied in an enormous articles such as  Reck & Long [@a2], Monckza & Trecha [@a3], & Porter, and Harding papers. Later, supplier selection research has developed into a problem with multiple criteria, such as criteria for quality of goods, on time delivery, after-sales service, as well as environmental and socio-political criteria for suppliers (see Smytka & Clemens [@a4], Gray [@a5]).  What is interesting is that in general these criteria contradict each other, for example, goods offered at low prices (positive values for the price criteria) may have negative values for on time delivery criteria. The complexity of this issue is compounded by the fact that some criteria are quantitative (price, timeliness of delivery, specification/quality of goods, etc.), but other criteria are qualitative (after-sales service, environmental and socio-political criteria of suppliers).
 
@@ -97,6 +102,8 @@ As soon as the production planning is performed, the company performs the decisi
 ```{r out.width="80%",fig.align='center',echo=FALSE,fig.cap="Decision proccess planning horizon"}
 knitr::include_graphics("Supply Cycle 2.jpg")
 ```
+
+\newpage
 
 The decision process considers some parameters for decision making such as: 
 
@@ -311,8 +318,8 @@ The optimization model for supplier selection, order allocation, and raw materia
 
 $$
 \begin{matrix}
-minimize & F(\bar{x},\bar{z}) \\
-subject \space to & Constraint \space I-VIII \\
+\text{minimize} & F(\bar{x},\bar{z}) \\
+\text{subject to} & \text{Constraint I-VIII} \\
  & x_k, \hat{x}_{jk}, z_{jk} \in \mathbb{Z}^+, y_k, a_{ijk} \in \left\{0,1 \right\}, 0 \leq b_{ijk} \leq 1
 \end{matrix}
 $$

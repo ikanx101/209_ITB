@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.9)  9 MAR 2023 15:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.9)  10 MAR 2023 09:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -729,25 +729,25 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 <production planning and inventory control.jpg, id=90, 599.74063pt x 313.17pt>
 File: production planning and inventory control.jpg Graphic file (type jpg)
 <use production planning and inventory control.jpg>
-Package pdftex.def Info: production planning and inventory control.jpg  used on input line 344.
+Package pdftex.def Info: production planning and inventory control.jpg  used on input line 346.
 (pdftex.def)             Requested size: 374.40143pt x 195.50616pt.
 <Supply Cycle 2.jpg, id=91, 480.29437pt x 221.82875pt>
 File: Supply Cycle 2.jpg Graphic file (type jpg)
 <use Supply Cycle 2.jpg>
-Package pdftex.def Info: Supply Cycle 2.jpg  used on input line 373.
+Package pdftex.def Info: Supply Cycle 2.jpg  used on input line 375.
 (pdftex.def)             Requested size: 374.40143pt x 172.92416pt.
 [3] [4
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.392   t
-         he minimum one-year purchase of each raw material,
+l.382 \newpage
+              
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.392   t
-         he minimum one-year purchase of each raw material, <./production planning and inventory control.jpg> <./Supply Cycle 2.jpg>]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 441.
+l.382 \newpage
+               <./production planning and inventory control.jpg> <./Supply Cycle 2.jpg>]
+LaTeX Font Info:    Trying to load font information for U+euf on input line 445.
 (/home/ikanx101/.TinyTeX/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 ) (/home/ikanx101/.TinyTeX/texmf-dist/tex/latex/microtype/mt-euf.cfg
@@ -756,33 +756,33 @@ File: mt-euf.cfg 2006/07/03 v1.1 microtype config. file: AMS Euler Fraktur (RS)
 <inventory.jpg, id=146, 427.5975pt x 290.58563pt>
 File: inventory.jpg Graphic file (type jpg)
 <use inventory.jpg>
-Package pdftex.def Info: inventory.jpg  used on input line 659.
+Package pdftex.def Info: inventory.jpg  used on input line 663.
 (pdftex.def)             Requested size: 327.59857pt x 222.62982pt.
 [8
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.714 \[
+l.718 \[
          <./inventory.jpg>] [9
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.802 
+l.806 
       ] [10
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.906 \newpage
+l.910 \newpage
               
 pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.906 \newpage
+l.910 \newpage
               ] [11
 pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1007 \newpage
+l.1011 \newpage
                ]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -791,144 +791,144 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 pdfTeX warning (ext4): destination with the same identifier (name{table.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1116 
+l.1120 
        
 pdfTeX warning (ext4): destination with the same identifier (name{table.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1116 
+l.1120 
        ] [13
 pdfTeX warning (ext4): destination with the same identifier (name{table.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1174 
+l.1178 
        
 pdfTeX warning (ext4): destination with the same identifier (name{table.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1174 
+l.1178 
        
 pdfTeX warning (ext4): destination with the same identifier (name{table.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1174 
+l.1178 
        ] [14
 pdfTeX warning (ext4): destination with the same identifier (name{table.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1258 \section*{References}\label{references}}
+l.1262 \section*{References}\label{references}}
                                                ]
-Underfull \hbox (badness 10000) in paragraph at lines 1263--1272
+Underfull \hbox (badness 10000) in paragraph at lines 1267--1276
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1273--1278
+Underfull \hbox (badness 10000) in paragraph at lines 1277--1282
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1279--1284
+Underfull \hbox (badness 10000) in paragraph at lines 1283--1288
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1285--1291
+Underfull \hbox (badness 10000) in paragraph at lines 1289--1295
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1292--1298
+Underfull \hbox (badness 10000) in paragraph at lines 1296--1302
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1299--1304
+Underfull \hbox (badness 10000) in paragraph at lines 1303--1308
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1305--1311
+Underfull \hbox (badness 10000) in paragraph at lines 1309--1315
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1312--1317
+Underfull \hbox (badness 10000) in paragraph at lines 1316--1321
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1318--1324
+Underfull \hbox (badness 10000) in paragraph at lines 1322--1328
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1325--1329
+Underfull \hbox (badness 10000) in paragraph at lines 1329--1333
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1330--1335
+Underfull \hbox (badness 10000) in paragraph at lines 1334--1339
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1336--1342
+Underfull \hbox (badness 10000) in paragraph at lines 1340--1346
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1343--1349
+Underfull \hbox (badness 10000) in paragraph at lines 1347--1353
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1350--1355
+Underfull \hbox (badness 10000) in paragraph at lines 1354--1359
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1356--1361
+Underfull \hbox (badness 10000) in paragraph at lines 1360--1365
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1362--1368
+Underfull \hbox (badness 10000) in paragraph at lines 1366--1372
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1369--1376
+Underfull \hbox (badness 10000) in paragraph at lines 1373--1380
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1377--1384
+Underfull \hbox (badness 10000) in paragraph at lines 1381--1388
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 1385--1392
+Underfull \hbox (badness 10000) in paragraph at lines 1389--1396
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1393--1400
+Underfull \hbox (badness 10000) in paragraph at lines 1397--1404
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1401--1407
+Underfull \hbox (badness 10000) in paragraph at lines 1405--1411
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1408--1412
+Underfull \hbox (badness 10000) in paragraph at lines 1412--1416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1413--1418
+Underfull \hbox (badness 10000) in paragraph at lines 1417--1422
 
  []
 
@@ -938,14 +938,14 @@ Package rerunfilecheck Info: File `Manuscript.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  16030 strings out of 477984
- 255929 string characters out of 5838972
+ 255923 string characters out of 5838972
  1878388 words of memory out of 5000000
  35659 multiletter control sequences out of 15000+600000
- 575941 words of font info for 153 fonts, out of 8000000 for 9000
+ 575930 words of font info for 153 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,11n,76p,1007b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,76p,1007b,531s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/home/ikanx101/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/ikanx101/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/home/ikanx101/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/ikanx101/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/home/ikanx101/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/ikanx101/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri7.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri8.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></home/ikanx101/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Manuscript.pdf (16 pages, 581405 bytes).
+Output written on Manuscript.pdf (16 pages, 583270 bytes).
 PDF statistics:
  369 PDF objects out of 1000 (max. 8388607)
  295 compressed objects within 3 object streams

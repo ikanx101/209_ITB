@@ -111,27 +111,27 @@ authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
   \title{Optimization model for multi-product multi-period
 multi-supplier raw-material selection and composition, and order
 quantity problem with minimum one-year order quantity contract}
-    \author[lala]{Mohammad Rizka Fadhli%
+    \author[a1]{Mohammad Rizka Fadhli%
   \corref{cor1}%
   }
    \ead{20921004@mahasiswa.itb.ac.id} 
-    \author[lili]{Saladin Uttunggadewa%
+    \author[a2]{Saladin Uttunggadewa%
   %
   }
-  
-    \author[lulu]{Rieske Hadianti%
+   \ead{s\_uttunggadewa@math.itb.ac.id} 
+    \author[a3]{Rieske Hadianti%
   %
   }
-  
-    \author[lili]{Sri Redjeki Pudjaprasetya%
+   \ead{ike.hadianti@gmail.com} 
+    \author[a2]{Sri Redjeki Pudjaprasetya%
   %
   }
-  
-      \affiliation[lala]{Magister of Computational Sciences Program,
-Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung}
-    \affiliation[lili]{Faculty of Mathematics and Natural Sciences,
+   \ead{srpudjap@gmail.com} 
+      \affiliation[a1]{Master's Program in Computational Science;
+Faculty of Mathematics and Natural Sciences; Institut Teknologi Bandung}
+    \affiliation[a2]{Faculty of Mathematics and Natural Sciences;
 Institut Teknologi Bandung}
-    \affiliation[lulu]{Center for Mathematical Modeling and Simulation,
+    \affiliation[a3]{Center for Mathematical Modeling and Simulation;
 Institut Teknologi Bandung}
     \cortext[cor1]{Corresponding author}
   
@@ -237,7 +237,9 @@ performed carefully in order to obtain results in the form of:
   which has to be produced,
 \end{itemize}
 
-while minimizing the total inventory cost.
+\setlength{\parindent}{0pt} while minimizing the total inventory cost.
+
+\setlength{\parindent}{10pt}
 
 The company developed a decision support system for this monthly
 decision process, which is developed based on an optimization model.
@@ -376,6 +378,8 @@ selection, and four consecutive delivery points follow it.
 
 \caption{Decision proccess planning horizon}\label{fig:unnamed-chunk-2}
 \end{figure}
+
+\newpage
 
 The decision process considers some parameters for decision making such
 as:
@@ -713,8 +717,8 @@ programming:
 
 \[
 \begin{matrix}
-minimize & F(\bar{x},\bar{z}) \\
-subject \space to & Constraint \space I-VIII \\
+\text{minimize} & F(\bar{x},\bar{z}) \\
+\text{subject to} & \text{Constraint I-VIII} \\
  & x_k, \hat{x}_{jk}, z_{jk} \in \mathbb{Z}^+, y_k, a_{ijk} \in \left\{0,1 \right\}, 0 \leq b_{ijk} \leq 1
 \end{matrix}
 \]
