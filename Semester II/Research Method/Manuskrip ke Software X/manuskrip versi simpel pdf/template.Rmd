@@ -1,33 +1,9 @@
 ---
-title: An R-base program to build e-commerce product discount portfolio using spiral dynamic optimization algorithm
-author:
-  - name: Mohammad Rizka Fadhli
-    email: 20921004@mahasiswa.itb.ac.id
-    correspondingauthor: true
-    affiliation: lala
-address:
-  - code: lala
-    address: Magister of Computational Sciences Program, Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung
-abstract: |
-  The development of the digital economy market in Indonesia is growing every year. As a result, marketplaces have to compete with each other to get consumers. One of the marketplace startup in Indonesia has strategy to provide additional discounts on their listed products. Product discount portfolio problem is a Binary Linear Programming (BLP) problem with a decision variable in the form of a binary number that states whether a product is eligible for a discount or not. With many decision variables involved, we developed metaheuristic approaches Spiral Dynamic Optimization Algorithm (SDOA) to solve the optimization problem. The SDOA solution is proven to be more optimal (generates higher revenur) than the existing startup solution by average $9.8 \%$.
-keywords: 
-  - binary linear programming
-  - spiral dynamic optimization algorithm
-  - R programming
-  - e-commerce
-journal: "Software X"
-date: "`r Sys.Date()`"
-classoption: preprint, 3p, authoryear
-bibliography: mybibfile.bib
-linenumbers: false
-numbersections: true
-# Use a CSL with `citation_package = "default"`
-# csl: https://www.zotero.org/styles/elsevier-harvard
+title: "Untitled"
+output: word_document
+date: "2023-03-13"
+bibliography: references.bib
 csl: csl new.csl
-output: 
-  rticles::elsevier_article:
-    keep_tex: true
-    citation_package: default
 ---
 
 ```{r,include=FALSE}
@@ -304,4 +280,3 @@ The author would like to thank the marketplace data analytic team for entrusting
 The author stated that there was no conflict of interest during this research.
 
 # REFERENCES {-}
-

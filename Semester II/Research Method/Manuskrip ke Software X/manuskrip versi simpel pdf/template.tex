@@ -1,61 +1,39 @@
-\documentclass[preprint, 3p,
-authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
-%%% Begin My package additions %%%%%%%%%%%%%%%%%%%
-
-\usepackage[hyphens]{url}
-
-  \journal{Software X} % Sets Journal name
-
-\usepackage{lineno} % add
-
-\usepackage{graphicx}
-%%%%%%%%%%%%%%%% end my additions to header
-
-\usepackage[T1]{fontenc}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
-% use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \usepackage{fontspec}
-  \ifxetex
-    \usepackage{xltxtra,xunicode}
-  \fi
-  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
-  \newcommand{\euro}{€}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use microtype if available
-\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
-
-\ifxetex
-  \usepackage[setpagesize=false, % page size defined by xetex
-              unicode=false, % unicode breaks when used with xetex
-              xetex]{hyperref}
-\else
-  \usepackage[unicode=true]{hyperref}
-\fi
-\hypersetup{breaklinks=true,
-            bookmarks=true,
-            pdfauthor={},
-            pdftitle={An R-base program to build e-commerce product discount portfolio using spiral dynamic optimization algorithm},
-            colorlinks=false,
-            urlcolor=blue,
-            linkcolor=magenta,
-            pdfborder={0 0 0}}
-
-\setcounter{secnumdepth}{5}
-% Pandoc toggle for numbering sections (defaults to be off)
-
-
-% tightlist command for lists without linebreak
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
-% From pandoc table feature
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -66,19 +44,29 @@ authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
-
-% Pandoc citation processing
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{3em}
 \newlength{\cslentryspacingunit} % times entry-spacing
 \setlength{\cslentryspacingunit}{\parskip}
-% for Pandoc 2.8 to 2.10.1
-\newenvironment{cslreferences}%
-  {}%
-  {\par}
-% For Pandoc 2.11+
 \newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
  {% don't indent paragraphs
   \setlength{\parindent}{0pt}
@@ -96,46 +84,23 @@ authoryear]{elsarticle} %review=doublespace preprint=single 5p=2 column
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Untitled},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
-
-
+\title{Untitled}
+\author{}
+\date{\vspace{-2.5em}2023-03-13}
 
 \begin{document}
-
-
-\begin{frontmatter}
-
-  \title{An R-base program to build e-commerce product discount
-portfolio using spiral dynamic optimization algorithm}
-    \author[lala]{Mohammad Rizka Fadhli%
-  \corref{cor1}%
-  }
-   \ead{20921004@mahasiswa.itb.ac.id} 
-      \affiliation[lala]{Magister of Computational Sciences Program,
-Faculty of Mathematics and Natural Sciences, Institut Teknologi Bandung}
-    \cortext[cor1]{Corresponding author}
-  
-  \begin{abstract}
-  The development of the digital economy market in Indonesia is growing
-  every year. As a result, marketplaces have to compete with each other
-  to get consumers. One of the marketplace startup in Indonesia has
-  strategy to provide additional discounts on their listed products.
-  Product discount portfolio problem is a Binary Linear Programming
-  (BLP) problem with a decision variable in the form of a binary number
-  that states whether a product is eligible for a discount or not. With
-  many decision variables involved, we developed metaheuristic
-  approaches Spiral Dynamic Optimization Algorithm (SDOA) to solve the
-  optimization problem. The SDOA solution is proven to be more optimal
-  (generates higher revenur) than the existing startup solution by
-  average \(9.8 \%\).
-  \end{abstract}
-    \begin{keyword}
-    binary linear programming \sep spiral dynamic optimization
-algorithm \sep R programming \sep 
-    e-commerce
-  \end{keyword}
-  
- \end{frontmatter}
+\maketitle
 
 \hypertarget{introduction}{%
 \section{INTRODUCTION}\label{introduction}}
@@ -733,6 +698,5 @@ integer linear programs}. Retrieved from
 \url{https://github.com/dirkschumacher/ompr}}
 
 \end{CSLReferences}
-
 
 \end{document}
