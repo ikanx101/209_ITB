@@ -462,7 +462,7 @@ df %>%
 
 Besides the values $x_k$ above, we also get $\hat{x}_{ijk}, a_{ijk}, b_{ijk}$ and values $z_{jk}$ in the optimal solution. We have checked that set of __Constraints II – V__ are satisfied by this optimal solution. For brevity, we do not present those values here. We just present and discuss some of them, to show that the remaining constraints are satisfied.
 
-Most values of $b_{ijk}$ are $0.5$ which mean most of items are produced by using a composition of two raw materials. The values of $b_{ijk}$ may vary from one week to another wee, as illustrated in Table 7. The composition of raw materials for item 46 in week 1is different from the composition in week 2. Furthermore, Table 7 shows us that the proportions of raw materials used for producing an item are the same. We have checked this property through all  for all  and for all  so that we are sure that set of __Constraints VI__ are satisfied.
+Most values of $b_{ijk}$ are $0.5$ which mean most of items are produced by using a composition of two raw materials. The values of $b_{ijk}$ may vary from one week to another week, as illustrated in Table 7. The composition of raw materials for item 46 in week 1is different from the composition in week 2. Furthermore, Table 7 shows us that the proportions of raw materials used for producing an item are the same. We have checked this property through all  for all  and for all  so that we are sure that set of __Constraints VI__ are satisfied.
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 rm(list=ls())
