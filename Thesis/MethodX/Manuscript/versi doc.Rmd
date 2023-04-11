@@ -28,6 +28,29 @@ library(kableExtra)
 ```
 \pagebreak
 
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+rm(list=ls())
+
+library(readxl)
+library(kableExtra)
+
+df = read_excel("~/209_ITB/Thesis/Overleaf Version/data input.xlsx",sheet = "matriks gula x produk")
+df[is.na(df)] = 0
+colnames(df)[2:7] = 1:6
+df[1:15,] %>% 
+  rename(item = code_product) %>% 
+  knitr::kable(caption = "the flexibility matrix of items 1-25") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Raw material" = 6))
+```
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+df[16:51,] %>% 
+  rename(item = code_product) %>% 
+  knitr::kable(caption = "the flexibility matrix of items 26-51") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Raw material" = 6))
+```
 
 Next, we present the instant of the total raw material demands during a planning horizon.
 
@@ -44,7 +67,7 @@ df$`week 2` = my_comma(df$`week 2`)
 df$`week 3` = my_comma(df$`week 3`)
 df$`week 4` = my_comma(df$`week 4`)
 
-df[1:20,] %>% 
+df[1:10,] %>% 
   rename(item = code_product) %>% 
   knitr::kable(caption = "the flexibility matrix of items 1-11") %>% 
   kable_styling(latex_options = "hold_position") %>% 
@@ -54,169 +77,9 @@ df[1:20,] %>%
 \newpage
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
-df[21:51,] %>% 
+df[11:51,] %>% 
   rename(item = code_product) %>% 
   knitr::kable(caption = "the flexibility matrix of items 12-51") %>% 
   kable_styling(latex_options = "hold_position") %>% 
   add_header_above(c(" " = 1,"raw-material demand (in kg)" = 4))
-```
-
-We can see that items 5 and 36 do not have to be produced during this planning horizon. We also can see that most items have to be produced only in to or three weeks of this planning horizon, with varying demand.
-
-The others parameters values are given in the following table.
-
-\newpage
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-rm(list=ls())
-
-my_comma = scales::label_comma(accuracy = .1, big.mark = ",", decimal.mark = ".")
-
-df = read_excel("parameter.xlsx")
-df$`1` = my_comma(df$`1`)
-df$`2` = my_comma(df$`2`)
-df$`3` = my_comma(df$`3`)
-df$`4` = my_comma(df$`4`)
-df$`5` = my_comma(df$`5`)
-df$`6` = my_comma(df$`6`)
-
-df$code_gula[2] = '$\\sigma_k$ (in kg)'
-df$code_gula[3] = '$z_{0k}$ (in kg)'
-df$code_gula[4] = '$m_{0k}$ (in kg)'
-df$code_gula[5] = '$ss$ (in kg)'
-
-colnames(df)[1] = " "
-
-df %>% 
-  knitr::kable("latex", align="c", booktabs=TRUE, escape = F,
-               caption = "the other parameter's values") %>% 
-  kable_styling(latex_options = "hold_position") %>% 
-  add_header_above(c(" " = 1,"raw-material" = 6)) %>% 
-  footnote(general = c("maxcap (in kg) = 1,427,000"))
-```
-
-
-From Table 2 we know that raw material 4 must be purchased since item 49 and 50 can be produced just by using raw material 4.  The price of raw material 4 is the lowest one. But the minimal one-year order quantity is the second smallest. So that we may guess that on the optimal solution, $x_4$ will have a big value but is not the biggest one among others.
-
-## Optimal solution
-
-We solve the optimization problem by creating computer codes using R language (version 4) where the optimization problem formulation and the solution technique used are referred to dplyr [@dplyr] and ompr [@ompr] libraries. This program runs on a computer with the Linux Ubuntu 20 LTS operating system with an Intel i7 8 Cores processor and 16 GB RAM.
-
-The values of $x_k,k \in \mathfrak{N},$ are given in the second column of Table 6 in the following. The weekly deliveries are given on columns 4 up to 6.  We see that the total one-month order quantity exceeds the minimum one-month order quantity $\sigma_k,$ so that set of Constraints I is satisfied.
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-rm(list=ls())
-
-df = data.frame(
-  x1 = c(1:6,"Total"),
-  x2 = c("192,649","543,385","90,742","56,508","52,958","202,853","1,139,094"),
-  x3 = c("6,553","354,839","41,092","33,264","42,608","70,728","6,553"),
-  x4 = c("65,295","23,595","26,550","209","10,350","111,075","65,295"),
-  x5 = c("81,722","96,122","14,400","18,369","0","0","81,722"),
-  x6 = c("39,079","68,829","8,700","4,666","0","21,050","39,079")
-) 
-
-colnames(df)[1]   = "Raw Material"
-colnames(df)[2]   = "Order Qty\n(in kg)"
-colnames(df)[3]   = "Week 1"
-colnames(df)[4]   = "Week 2"
-colnames(df)[5]   = "Week 3"
-colnames(df)[6]   = "Week 4"
-
-df %>% 
-  knitr::kable("latex",align="c", booktabs=TRUE, escape = F,
-               caption = "Total order quantity and weekly deliveries") %>% 
-  add_header_above(c(" " = 2,"weekly deliveries (in kg)" = 4)) %>% 
-  kable_styling(latex_options = "hold_position")
-```
-
-Besides the values $x_k$ above, we also get $\hat{x}_{ijk}, a_{ijk}, b_{ijk}$ and values $z_{jk}$ in the optimal solution. We have checked that set of __Constraints II – V__ are satisfied by this optimal solution. For brevity, we do not present those values here. We just present and discuss some of them, to show that the remaining constraints are satisfied.
-
-Most values of $b_{ijk}$ are $0.5$ which mean most of items are produced by using a composition of two raw materials. The values of $b_{ijk}$ may vary from one week to another week, as illustrated in Table 7. The composition of raw materials for item 46 in week 1is different from the composition in week 2. Furthermore, Table 7 shows us that the proportions of raw materials used for producing an item are the same. We have checked this property through all  for all  and for all  so that we are sure that set of __Constraints VI__ are satisfied.
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-rm(list=ls())
-
-my_comma = scales::label_comma(accuracy = .01, big.mark = ",", decimal.mark = ".")
-
-df = data.frame(
-  item = c(rep(45,4),rep(46,4)),
-  week = c(1:4,1:4),
-  x1   = c(0,0.5,0.5,0.5,0.333,0.5,0,0),
-  x2   = c(0.5,0.5,0.5,0.5,0.333,0.5,0,0),
-  x3   = rep(0,8),
-  x4   = c(0.5,0,0,0,0.333,0,0,0),
-  x5   = rep(0,8),
-  x6   = rep(0,8)
-) %>% 
-  mutate(x1 = my_comma(x1),
-         x2 = my_comma(x2),
-         x3 = my_comma(x3),
-         x4 = my_comma(x4),
-         x5 = my_comma(x5),
-         x6 = my_comma(x6))
-
-colnames(df)[3:8] = 1:6
-
-df %>% 
-  knitr::kable("latex", align="c", booktabs=TRUE, escape = F,
-               caption = "the values of $b_{ijk}$ for $i = 45$ and $i = 46$") %>% 
-  kable_styling(latex_options = "hold_position") %>% 
-  add_header_above(c(" " = 2,"raw-material" = 6)) 
-```
-
-The following table shows the composition of raw materials for items 49 and 50. We can see that these items are produced by using raw material 4, which confirm the flexibility matrix in Table 3.
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-rm(list=ls())
-
-my_comma = scales::label_comma(accuracy = 1, big.mark = ",", decimal.mark = ".")
-
-df = data.frame(
-  item = c(rep(49,4),rep(50,4)),
-  week = c(1:4,1:4),
-  x1   = rep(0,8),
-  x2   = rep(0,8),
-  x3   = rep(0,8),
-  x4   = c(0,1,0,0,1,0,1,0),
-  x5   = rep(0,8),
-  x6   = rep(0,8)
-) %>% 
-  mutate(x1 = my_comma(x1),
-         x2 = my_comma(x2),
-         x3 = my_comma(x3),
-         x4 = my_comma(x4),
-         x5 = my_comma(x5),
-         x6 = my_comma(x6))
-
-colnames(df)[3:8] = 1:6
-
-df %>% 
-  knitr::kable("latex", align="c", booktabs=TRUE, escape = F,
-               caption = "the values of $b_{ijk}$ for $i = 49$ and $i = 50$") %>% 
-  kable_styling(latex_options = "hold_position") %>% 
-  add_header_above(c(" " = 2,"raw-material" = 6)) 
-```
-
-The fulfillment of the safety stock constraint and the maximum capacity constraint (set of __Constraints VII and VIII__) can be seen in the following table.
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-rm(list=ls())
-
-df = data.frame(
-  raw = 1:6,
-  x1  = c("2,501","181,743","2,500","2,500","2,500","2,500"),
-  x2  = c("2,501","2,501","2,500","2,501","2,500","2,500"),
-  x3  = c("2,500","2,500","2,500","2,501","2,500","2,500"),
-  x4  = c(rep("2,500",6))
-)
-
-colnames(df)[1]   = "Raw material"
-colnames(df)[2:5] = paste0("week ",1:4)
-
-df %>% 
-  knitr::kable("latex", align="c", booktabs=TRUE, escape = F,
-               caption = "The fulfillment of the safety stock constraint and the maximum capacity constraint (set of Constraints VII and VIII)") %>% 
-  kable_styling(latex_options = "hold_position") %>% 
-  add_header_above(c(" " = 1,"end-of-week stock (in kg)" = 4)) 
 ```
