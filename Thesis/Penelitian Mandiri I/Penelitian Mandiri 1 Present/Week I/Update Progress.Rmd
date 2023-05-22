@@ -16,6 +16,8 @@ output:
       highlightStyle: ir-black
       highlightLines: true
       countIncrementalSlides: false
+    includes:
+      after_body: insert-logo.html
 ---
 layout: true
 
@@ -23,6 +25,9 @@ layout: true
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+
+# reference:
+# https://www.garrickadenbuie.com/blog/xaringan-tip-logo-all-slides/
 ```
 
 ---
