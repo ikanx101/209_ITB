@@ -1,0 +1,271 @@
+---
+subtitle: "Pengembangan <i>Decision Support System</i> untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun"
+title: "Proposal Thesis"
+author: "Mohammad Rizka Fadhli<br>Dr. Saladin Uttunggadewa, M.Si, S.Si<br>Dr. Rieske Hadianti, M.Si, S.Si<br>Prof. Dr. Sri Redjeki, M.Si, S.Si<br>Astri Kurniati, ST., M.App.Sc."
+institute: "20921004@mahasiswa.itb.ac.id"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output:
+  xaringan::moon_reader:
+    mathjax: default
+    lib_dir: libs
+    css: [default,"footer-header.css", fc, fc-fonts]
+    seal: true
+    nature:
+      ratio: '18:10'
+      slideNumberFormat: '%current%' 
+      highlightStyle: ir-black
+      highlightLines: true
+      countIncrementalSlides: false
+    includes:
+      after_body: insert-logo.html
+---
+layout: true
+
+<div class="my-footer"><span>Presentasi Proposal Thesis</span></div>
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+setwd("~/209_ITB/Thesis/Proposal Thesis/Present")
+# reference:
+# https://www.garrickadenbuie.com/blog/xaringan-tip-logo-all-slides/
+```
+
+---
+class: middle
+
+# TERIMA KASIH KEPADA
+
+.pull-left[
+
+# Para Dosen Pembimbing
+
+## ITB
+
+- Ibu Rieske Hadianti
+- Bapak Saladin Uttunggadewa
+- Ibu Sri Redjeki
+
+Atas bimbingan dan kesabaran selama ini.
+
+## Nutrifood
+
+- Ibu Astri Kurniati
+
+Atas izin yang diberikan untuk mengikuti perkuliahan.
+
+]
+
+.pull-right[
+
+## Dosen Penguji
+
+- Ibu Novry Erwina
+
+Atas waktu dan kesediaannya.
+
+## Kaprodi Sains Komputasi
+
+- Bapak Dwi Irwanto
+
+Atas bantuan dan informasi yang diberikan.
+
+]
+
+---
+class: middle
+
+# PERKENALAN
+
+.pull-left[
+
+## Mohammad Rizka Fadhli
+
+Mahasiswa pasca sarjana program __MBR__ Prodi Sains Komputasi 2021.
+
+_Market Research Specialist_ di PT. Nutrifood Indonesia.
+
+]
+
+.pull-right[
+
+```{r out.width="40%",echo=FALSE,fig.align='center'}
+knitr::include_graphics("logo nutrifood.png")
+```
+
+]
+
+---
+class: middle,center,inverse
+
+# AGENDA HARI INI
+## Perkenalan terhadap Permasalahan yang Dibahas pada _Thesis_
+
+### Pengembangan _Decision Support System_ untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun
+
+---
+class: middle,center
+
+# PENDAHULUAN
+
+---
+# PENDAHULUAN
+## Latar Belakang
+
+.pull-left[
+
+PT. XYZ adalah salah satu perusahaan _fast moving consumer goods_ (_FMCG_) di Indonesia yang bergerak di bidang makanan dan minuman. Sejak 40 tahun, PT. XYZ menawarkan berbagai jenis produk makanan dan minuman sehat kepada masyarakat Indonesia.
+
+Untuk menjalankan produksinya, PT. XYZ memiliki tiga _plants_ yang memproduksi produk-produk yang sama (tidak ada perbedaan produk antar _plant_).
+
+Salah satu jenis produk yang menjadi _backbone_ adalah minuman serbuk.
+
+]
+
+.pull-right[
+
+```{r out.width="100%", echo=FALSE,fig.align='center'}
+#knitr::include_graphics("p05lkcw8.jpg")
+```
+
+]
+
+---
+
+# PENDAHULUAN
+## Masalah
+
+.pull-left[
+
+Saat ini, ada $>130$ SKU minuman serbuk yang diproduksi. Beberapa SKU masuk ke dalam kategori _high demand_ sedangkan beberapa lainnya masuk ke dalam kategori _medium demand_ dan _low demand_.
+
+Salah satu strategi perencanaan yang baik adalah menyelaraskan antara _production_ dan _demand_.
+
+Topik yang diangkat dalam penelitian ini adalah upaya pencegahan ___loss sales___.
+
+]
+
+.pull-right[
+
+```{r,echo=FALSE}
+nomnoml::nomnoml("#direction: down,
+                 [Plan] -> [Realita]
+                 
+                 [Plan|
+                    [Production vs Demand]
+                    ]
+                    
+                 [Realita|
+                    [Prod > Demand] -> [Overstock]
+                    [Prod = Demand] -> [Ideal]
+                    [Prod < Demand] -> [Loss Sales]
+                    ]
+                 ")
+```
+
+]
+
+---
+# PENDAHULUAN
+## _Deep Dive_ Masalah
+
+.pull-left[
+
+> Apa penyebab $production < demand$ ?
+
+Ada beberapa kemungkinan:
+
+1. Ketiadaan _raw material_.
+1. _Production downtime_.
+1. Perubahan _demand_ mendadak.
+
+Di antara ketiga kemungkinan tersebut, kemungkinan pertama seharusnya __berada pada kontrol kita__ jika direncanakan dengan baik.
+]
+.pull-right[
+
+```{r out.width="100%",echo=FALSE,fig.align='center'}
+#knitr::include_graphics("images.jpeg")
+```
+
+]
+
+---
+
+# PENDAHULUAN
+## _Deep Dive_ Masalah
+
+.pull-left[
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+#knitr::include_graphics("images-1.jpeg")
+```
+
+]
+.pull-right[
+
+Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada beberapa komponen _raw material_ digunakan oleh __keseluruhan produk__.
+
+PT. XYZ juga menerapkan prinsip ___multi supplier___ untuk menjaga keamanan pasokan dan ketersediaan _raw material_. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal:
+
+1. Harga,
+1. Minimum order,
+1. Durasi pengiriman.
+1. Kualitas _raw material_ per _supplier_.
+]
+
+---
+
+# PENDAHULUAN
+## Masalah Optimisasi
+
+.pull-left[
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+#knitr::include_graphics("optimize.png")
+```
+
+]
+
+.pull-right[
+
+Setelah dilakukan _review_ menyeluruh terhadap prosedur dan tata cara perhitungan serta pemesanan _raw material_, disimpulkan bahwa __ada masalah optimisasi__ yang dihadapi.
+
+Kenapa?
+
+Kuantitas _raw material_ yang hendak dibeli harus disesuaikan dengan:
+
+- Stok existing (sedang dipakai dan belum dipakai),
+- Demand produk,
+- Faktor _supplier_ (harga, _min order_, dan durasi pengiriman).
+
+Secara _bussiness value_, masalah ini perlu diselesaikan dengan baik.
+
+__Catatan:__ Proses _review_ tersebut akan menjadi pembahasan tersendiri pada __Penelitian Mandiri II__.
+]
+
+---
+class: middle,center
+
+# _Conclusion_
+## Rencana Judul Thesis
+
+### Optimisasi Pembelian Raw Material Minuman Serbuk Menggunakan Metode XXX: Studi Kasus PT. XYZ.
+
+__Catatan:__ Pencarian terhadap metode `XXX` yang hendak digunakan akan dibahas pada pertemuan selanjutnya.
+
+---
+class: middle,center
+
+# _Conclusion_
+## _Output_ Perkuliahan
+
+Dokumentasi model-model optimisasi yang relevan dengan penelitian dan _computer codes_ dari metode optimisasi yang dipelajari.
+
+---
+class: middle,center,inverse
+
+# Terima Kasih
+## _Feel free to discuss_
+
+_Find me at_ [ikanx101.com](https://ikanx101.com/)
+
+##### _created using Xaringan in R_
