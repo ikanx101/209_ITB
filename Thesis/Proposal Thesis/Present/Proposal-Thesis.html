@@ -4,17 +4,11 @@
     <title>Proposal Thesis</title>
     <meta charset="utf-8" />
     <meta name="author" content="Mohammad Rizka Fadhli Dr. Saladin Uttunggadewa, M.Si, S.Si Dr. Rieske Hadianti, M.Si, S.Si Prof. Dr. Sri Redjeki, M.Si, S.Si Astri Kurniati, ST., M.App.Sc." />
-    <meta name="date" content="2023-05-23" />
+    <meta name="date" content="2023-05-25" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/fc.css" rel="stylesheet" />
     <link href="libs/remark-css/fc-fonts.css" rel="stylesheet" />
-    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
-    <script src="libs/es6shim/es6shim.js"></script>
-    <script src="libs/es7shim/es7shim.js"></script>
-    <script src="libs/graphre/graphre.js"></script>
-    <script src="libs/nomnoml/nomnoml.js"></script>
-    <script src="libs/nomnoml-binding/nomnoml.js"></script>
     <link rel="stylesheet" href="footer-header.css" type="text/css" />
   </head>
   <body>
@@ -34,7 +28,7 @@ class: center, middle, inverse, title-slide
 ### <a href="mailto:20921004@mahasiswa.itb.ac.id" class="email">20921004@mahasiswa.itb.ac.id</a>
 ]
 .date[
-### 23 May 2023
+### 25 May 2023
 ]
 
 ---
@@ -46,7 +40,8 @@ layout: true
 
 
 ---
-class: middle
+
+class: middle hide
 
 # TERIMA KASIH KEPADA
 
@@ -72,13 +67,13 @@ Atas izin yang diberikan untuk mengikuti perkuliahan.
 
 .pull-right[
 
-## Dosen Penguji
+# Dosen Penguji
 
 - Ibu Novry Erwina
 
 Atas waktu dan kesediaannya.
 
-## Kaprodi Sains Komputasi
+# Kaprodi Sains Komputasi
 
 - Bapak Dwi Irwanto
 
@@ -87,11 +82,14 @@ Atas bantuan dan informasi yang diberikan.
 ]
 
 ---
+
 class: middle
 
-# PERKENALAN
+
 
 .pull-left[
+
+# PERKENALAN
 
 ## Mohammad Rizka Fadhli
 
@@ -103,32 +101,35 @@ _Market Research Specialist_ di PT. Nutrifood Indonesia.
 
 .pull-right[
 
-&lt;img src="logo nutrifood.png" width="40%" style="display: block; margin: auto;" /&gt;
+&lt;img src="logo nutrifood.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
+
 class: middle,center,inverse
 
 # AGENDA HARI INI
-## Perkenalan terhadap Permasalahan yang Dibahas pada _Thesis_
+## Penjelasan Mengenai Permasalahan yang Dibahas pada _Thesis_
 
 ### Pengembangan _Decision Support System_ untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun
 
 ---
+
 class: middle,center
 
 # PENDAHULUAN
 
 ---
-# PENDAHULUAN
-## Latar Belakang
+
+class: middle
 
 .pull-left[
 
-PT. XYZ adalah salah satu perusahaan _fast moving consumer goods_ (_FMCG_) di Indonesia yang bergerak di bidang makanan dan minuman. Sejak 40 tahun, PT. XYZ menawarkan berbagai jenis produk makanan dan minuman sehat kepada masyarakat Indonesia.
+# PENDAHULUAN
+## Latar Belakang
 
-Untuk menjalankan produksinya, PT. XYZ memiliki tiga _plants_ yang memproduksi produk-produk yang sama (tidak ada perbedaan produk antar _plant_).
+PT. Nutrifood Indonesia (NFI) bergerak di industri makanan dan minuman yang menawarkan berbagai macam jenis produk makanan dan minuman sehat kepada masyarakat, mulai dari _cookies_ hingga minuman serbuk. Untuk menjalankan produksinya, PT. NFI memiliki tiga _plants_ yang memproduksi produk-produk yang sama (tidak ada perbedaan produk antar _plant_).
 
 Salah satu jenis produk yang menjadi _backbone_ adalah minuman serbuk.
 
@@ -136,37 +137,101 @@ Salah satu jenis produk yang menjadi _backbone_ adalah minuman serbuk.
 
 .pull-right[
 
-
+&lt;img src="logo nutrifood.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ]
 
 ---
 
-# PENDAHULUAN
-## Masalah
+class: middle
 
 .pull-left[
 
-Saat ini, ada `\(&gt;130\)` SKU minuman serbuk yang diproduksi. Beberapa SKU masuk ke dalam kategori _high demand_ sedangkan beberapa lainnya masuk ke dalam kategori _medium demand_ dan _low demand_.
+# PENDAHULUAN
 
-Salah satu strategi perencanaan yang baik adalah menyelaraskan antara _production_ dan _demand_.
+## Latar Belakang
+
+### _Production Planning and Inventory Control_ (PPIC)
+
+Departemen PPIC bertugas untuk melakukan perencanaan produksi ketiga _plants_ tersebut. Perencanaan ini juga termasuk tahap:
+
+1. Perencanaan pembelian bahan baku dan bahan kemas.
+1. Perencanaan produksi masing-masing SKU produk di _plant_ tertentu.
+1. Perencanaan stok _finished goods_ di masing-masing gudang.
+
+Secara garis besar, pelaksanaan _supply chain management_ (SCM) dilakukan oleh PPIC.
+
+]
+
+.pull-right[
+
+
+```
+## [1] "Poto PPIC"
+```
+
+]
+
+---
+
+class: middle
+
+
+
+# PENDAHULUAN
+
+## Apa itu SCM?
+
+.pull-left[
+
+Semenjak diperkenalkan pertama kali, SCM memegang peranan penting dalam manufaktur sebagai suatu sistem produksi terintegrasi (Oliver and Webber, 1982). Di dalam SCM, bahan baku dibeli perusahaan dari berbagai _supplier_, dibuat ke dalam suatu produk yang kemudian akan dijual ke pelanggan melalui berbagai _channel_ distribusi.
+
+Dalam mengarungi kompetisi perusahaan perlu memahami dua faktor kunci, yakni _cost reduction_ dan _product quality_ (Rabieh, Soukhakian, and Shirazi, 2016). Kedua faktor ini sangat bergantung pada pemilihan _supplier_ yang tepat. Sehingga proses _supplier selection_ menjadi proses yang krusial dalam setiap perusahaan.
+
+]
+
+.pull-right[
+
+Dalam prakteknya, perusahaan bisa menggunakan dua strategi terkait _supplier selection_, yakni:
+
+- _Single sourcing_ berarti perusahaan hanya membeli bahan baku dari _supplier_ tunggal. 
+- _Multiple sourcing_ berarti perusahaan bisa membeli bahan baku dari beberapa _supplier_. 
+
+Strategi _single sourcing_ bisa menaikkan level risiko dari perusahaan sedangkan strategi _multiple sourcing_ menyebabkan _initial cost_ dan _ongoing cost_ yang lebih besar (Costantino and Pellegrino, 2010). 
+
+Bagi perusahaan yang menerapkan strategi _multiple sourcing_, banyak faktor yang akan membuat kompleks pengambilan keputusan. Misalnya harga, perjanjian transaksi, kualitas, kuantitas, jarak dan biaya pengantaran.
+
+]
+
+---
+
+class: middle
+
+# PENDAHULUAN
+
+## Masalah
+
+### Semua tahap pekerjaan dan pengambilan keputusan saat ini masih dilakukan secara manual dan berdasarkan _best practice_ serta pengalaman _team member_.
+
+---
+
+class: middle
+
+# PENDAHULUAN
+
+## Latar Belakang
+
+.pull-left[
+
+Padahal salah satu strategi perencanaan yang baik adalah menyelaraskan antara _production_ dan _demand_.
+
+&lt;img src="prodemand.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 Topik yang diangkat dalam penelitian ini adalah upaya pencegahan ___loss sales___.
 
 ]
 
 .pull-right[
-
-<div class="nomnoml html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4b372667e6f66e00a922" style="width:504px;height:504px;"></div>
-<script type="application/json" data-for="htmlwidget-4b372667e6f66e00a922">{"x":{"code":"\n#fill: #FEFEFF\n#lineWidth: 1\n#zoom: 4\n#direction: right\n\n#direction: down,\n                 [Plan] -> [Realita]\n                 \n                 [Plan|\n                    [Production vs Demand]\n                    ]\n                    \n                 [Realita|\n                    [Prod > Demand] -> [Overstock]\n                    [Prod = Demand] -> [Ideal]\n                    [Prod < Demand] -> [Loss Sales]\n                    ]\n                 ","svg":false,"png":null},"evals":[],"jsHooks":[]}</script>
-
-]
-
----
-# PENDAHULUAN
-## _Deep Dive_ Masalah
-
-.pull-left[
 
 &gt; Apa penyebab `\(production &lt; demand\)` ?
 
@@ -177,6 +242,71 @@ Ada beberapa kemungkinan:
 1. Perubahan _demand_ mendadak.
 
 Di antara ketiga kemungkinan tersebut, kemungkinan pertama seharusnya __berada pada kontrol kita__ jika direncanakan dengan baik.
+
+]
+
+---
+
+class: middle
+
+# PENDAHULUAN
+## Masalah
+
+.pull-left[
+
+Saat ini, ada `\(130\)` SKU minuman serbuk yang diproduksi. Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada satu komponen _raw material_ yang bisa digunakan oleh __keseluruhan produk__.
+
+PT. XYZ juga menerapkan prinsip ___multi supplier___ untuk menjaga keamanan pasokan dan ketersediaan _raw material_. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal:
+
+1. Harga,
+1. Minimum order,
+1. Durasi pengiriman.
+1. Kualitas _raw material_ per _supplier_.
+
+
+]
+
+.pull-right[
+
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+class: middle,center
+
+# DASAR TEORI
+
+
+
+
+
+
+
+
+
+---
+
+# PENDAHULUAN
+## _Deep Dive_ Masalah
+
+.pull-left[
+
+
 ]
 .pull-right[
 
@@ -196,14 +326,6 @@ Di antara ketiga kemungkinan tersebut, kemungkinan pertama seharusnya __berada p
 ]
 .pull-right[
 
-Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada beberapa komponen _raw material_ digunakan oleh __keseluruhan produk__.
-
-PT. XYZ juga menerapkan prinsip ___multi supplier___ untuk menjaga keamanan pasokan dan ketersediaan _raw material_. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal:
-
-1. Harga,
-1. Minimum order,
-1. Durasi pengiriman.
-1. Kualitas _raw material_ per _supplier_.
 ]
 
 ---
@@ -235,6 +357,7 @@ __Catatan:__ Proses _review_ tersebut akan menjadi pembahasan tersendiri pada __
 ]
 
 ---
+
 class: middle,center
 
 # _Conclusion_
@@ -253,6 +376,25 @@ class: middle,center
 Dokumentasi model-model optimisasi yang relevan dengan penelitian dan _computer codes_ dari metode optimisasi yang dipelajari.
 
 ---
+
+# _References_
+
+Costantino, N. and R. Pellegrino (2010). _Choosing Between Single and
+Multiple Sourcing Based on Supplier Default Risk: A Real Options
+Approach_. DOI 10.1016/j.pursup.2009.08.001. Journal of Purchasing and
+Supply Management.
+
+Oliver, R. K. and M. D. Webber (1982). _Supply-Chain Management:
+Logistics Catches up with Strategy_. DOI 10.1007/978-3-642-27922-5_15.
+Outlook.
+
+Rabieh, M., M. A. Soukhakian, and A. N. M. Shirazi (2016). _Two Models
+of Inventory Control With Supplier Selection In Case of Multiple
+Sourcing: a case of Isfahan Steel Company_. DOI
+10.1007/s40092-016-0145-y. Springerlink.com.
+
+---
+
 class: middle,center,inverse
 
 # Terima Kasih
