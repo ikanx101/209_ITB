@@ -147,15 +147,17 @@ knitr::include_graphics("logo nutrifood.png")
 
 ---
 
-class: middle
-
-.pull-left[
+class:middle
 
 # PENDAHULUAN
 
 ## Latar Belakang
 
+.pull-left[
+
 ### _Production Planning and Inventory Control_ (PPIC)
+
+Secara garis besar, pelaksanaan _supply chain management_ (SCM) dilakukan oleh PPIC. 
 
 Departemen PPIC bertugas untuk melakukan perencanaan produksi ketiga _plants_ tersebut. Perencanaan ini juga termasuk tahap:
 
@@ -163,17 +165,14 @@ Departemen PPIC bertugas untuk melakukan perencanaan produksi ketiga _plants_ te
 1. Perencanaan produksi masing-masing SKU produk di _plant_ tertentu.
 1. Perencanaan stok _finished goods_ di masing-masing gudang.
 
-Secara garis besar, pelaksanaan _supply chain management_ (SCM) dilakukan oleh PPIC.
-
 > Semua tahap pekerjaan dan pengambilan keputusan saat ini masih dilakukan secara manual dan berdasarkan _best practice_ serta pengalaman _team member_.
 
 ]
 
 .pull-right[
 
-```{r out.width="60%",echo=FALSE,fig.align='center'}
-#knitr::include_graphics("logo nutrifood.png")
-print("Poto PPIC")
+```{r,echo=FALSE,fig.align='center'}
+knitr::include_graphics("ppic.jpg")
 ```
 
 ]
@@ -194,17 +193,19 @@ Padahal salah satu strategi perencanaan yang baik adalah menyelaraskan antara _p
 knitr::include_graphics("prodemand.png")
 ```
 
-Topik yang diangkat dalam penelitian ini adalah upaya pencegahan ___loss sales___.
+Upaya pencegahan ___loss sales___ menjadi hal yang paling penting.
 
 ]
 
+--
+
 .pull-right[
 
-> Apa penyebab $production < demand$ ?
+## Apa penyebab $production < demand$ ?
 
 Ada beberapa kemungkinan:
 
-1. Ketiadaan _raw material_.
+1. Ketiadaan bahan baku.
 1. _Production downtime_.
 1. Perubahan _demand_ mendadak.
 
@@ -212,6 +213,9 @@ Di antara ketiga kemungkinan tersebut, kemungkinan pertama seharusnya __berada p
 
 ]
 
+--
+
+### Bagaimana melakukan perencanaan pengadaan / pembelian bahan baku yang __baik__?
 
 ---
 
@@ -239,6 +243,8 @@ Dalam mengarungi kompetisi perusahaan perlu memahami dua faktor kunci, yakni _co
 
 ]
 
+--
+
 .pull-right[
 
 Dalam prakteknya, perusahaan bisa menggunakan dua strategi terkait _supplier selection_, yakni:
@@ -259,134 +265,174 @@ class: middle
 # PENDAHULUAN
 ## Masalah
 
-.pull-left[
+NFI memproduksi $130$ jenis minuman serbuk. Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada satu komponen bahan baku yang bisa digunakan oleh __keseluruhan produk__ tersebut.
 
-Saat ini, ada $130$ SKU minuman serbuk yang diproduksi. Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada satu komponen _raw material_ yang bisa digunakan oleh __keseluruhan produk__.
+Untuk pemenuhan bahan baku tersebut, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_. Perjanjian kerja sama antar _supplier_ berupa komitmen pembelian sejumlah bahan baku selama setahun ke depan. Spesifikasi bahan baku dan harganya per-ton berbeda-beda antar _supplier_. 
 
-PT. XYZ juga menerapkan prinsip ___multi supplier___ untuk menjaga keamanan pasokan dan ketersediaan _raw material_. Akibatnya masing-masing _supplier_ memiliki perbedaan dalam hal:
+Semua produk minuman tersebut bisa dibagi menjadi dua kelompok, yakni:
 
-1. Harga,
-1. Minimum order,
-1. Durasi pengiriman.
-1. Kualitas _raw material_ per _supplier_.
+1. Minuman yang hanya bisa diproduksi oleh satu jenis bahan baku.
+1. Minuman yang bisa diproduksi menggunakan dua atau lebih jenis bahan baku.
 
+--
 
-]
+### Kenapa bisa begitu?
 
-.pull-right[
+---
 
+class: middle
 
+# MASALAH
 
-]
+## Kondisi Saat Ini
 
+NFI memilih _supplier_ dan menentukan kuantitas pembelian bahan baku secara __manual__ dengan mempertimbangkan data-data terkait secara mingguan oleh departemen PPIC. Namun proses tersebut belum sampai ke dalam tahap mengalokasikan bahan baku yang dibeli tersebut dengan produk yang akan diproduksi kelak sehingga berpotensi menimbulkan _loss sales_ akibat ketiadaan bahan baku saat produksi. Selain itu, proses perhitungan ini memerlukan __waktu yang cukup lama__.
 
+## Masalah Utama _Thesis_
 
+Pada _thesis_ ini, ada tiga masalah utama yang hendak diselesaikan, yakni:
 
+- Memilih _supplier_ bahan baku.
+- Menentukan banyaknya bahan baku yang harus dibeli dari suatu _supplier_.
+- Menentukan bahan baku mana yang harus digunakan untuk memproduksi setiap produk.
 
+dengan tujuan total biaya pembelian seminim mungkin tetapi memenuhi kebutuhan yang ada pada periode tertentu. 
 
+Kemudian akan dibuat suatu _decision support system_ agar memudahkan proses pekerjaan PPIC.
 
+---
 
+class: middle,center,inverse
 
+# JUDUL THESIS
 
+### Pengembangan _Decision Support System_ untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun
 
+--
 
+# LUARAN THESIS
 
+--
+
+## Model Optimisasi
+
+--
+
+## _Decision Support System_
 
 ---
 
 class: middle,center
 
-# DASAR TEORI
-
-
-
-
-
-
-
-
+# MODEL OPTIMISASI
 
 ---
 
-# PENDAHULUAN
-## _Deep Dive_ Masalah
+class: middle
 
-.pull-left[
+# MODEL OPTIMISASI
 
-
-]
-.pull-right[
-
-```{r out.width="100%",echo=FALSE,fig.align='center'}
-#knitr::include_graphics("images.jpeg")
-```
-
-]
-
----
-
-# PENDAHULUAN
-## _Deep Dive_ Masalah
-
-.pull-left[
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-#knitr::include_graphics("images-1.jpeg")
-```
-
-]
-.pull-right[
-
-]
-
----
-
-# PENDAHULUAN
 ## Masalah Optimisasi
 
+Meminimalkan ongkos pembelian bahan baku dengan tetap mengamankan stok bahan baku agar proses produksi tetap berjalan.
+
+Masalah ini termasuk ke dalam _mixed integer linear programming_ (__MILP__), alasannya:
+
+1. Parameter dan variabel yang terlibat merupakan suatu nilai pasti.
+1. Variabel yang terlibat meliputi:
+    - _Binary_ karena melibatkan pengambilan keputusan bahan baku dari _supplier_ mana yang harus dipesan.
+    - _Integer_ karena melibatkan angka kuantitas bahan baku yang harus dipesan. 
+1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
+    - Meminimumkan ongkos pembelian $harga \times tonase$.
+    - Kapasitas gudang bahan baku dan rencana produksi produk.
+    - Kontrak pembelian selama setahun.
+    - dan seterusnya.
+
+---
+
+class: middle,center
+
+# MODEL OPTIMISASI
+
+## Rangkaian Produksi
+
+```{r out.width="60%",echo=FALSE,warning=FALSE,message=FALSE,fig.align='center',fig.cap="Simplifikasi Rangkaian Produksi"}
+knitr::include_graphics("simple_process.png")
+```
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Rangkaian Produksi
+
+Proses pra produksi seperti _supplier selection_ dan penentuan kuantitas pembelian bahan baku dilakukan setiap bulan sekali, untuk merencanakan produksi di bulan depannya.
+
 .pull-left[
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-#knitr::include_graphics("optimize.png")
-```
+Dalam rangkaian produksi suatu produk, __NFI__ menggunakan banyak sekali bahan baku tapi ada beberapa bahan baku utama yang paling sering digunakan di berbagai produknya. Selama ini __NFI__ memesan bahan-bahan baku tersebut secara langsung setiap bulannya dengan besarnya pemesanan disesuaikan dengan:
+
+1. Angka _demand_ atau _forecast_ masing-masing produk yang menggunakan bahan-bahan baku tersebut.
+1. _Existing stock_ bahan baku yang ada di gudang bahan baku.
+1. _Minimum order_ per jenis bahan baku yang ditetapkan _supplier_.
 
 ]
 
 .pull-right[
 
-Setelah dilakukan _review_ menyeluruh terhadap prosedur dan tata cara perhitungan serta pemesanan _raw material_, disimpulkan bahwa __ada masalah optimisasi__ yang dihadapi.
+Pemesanan ini juga harus disesuaikan dengan _policy_ yang ada pada __SCM__, seperti:
 
-Kenapa?
+1. Pembelian bahan baku harus berasal dari minimal 2 _suppliers_ untuk menjaga keamanan pasokan.
+1. Pembelian bahan baku dari _supplier_ harus memenuhi proporsi portofolio yang ditetapkan di awal tahun oleh __NFI__. Angka ini kelak menjadi patokan berapa tonase minimal yang harus __NFI__ beli kepada masing-masing _supplier_ dalam setahun.
 
-Kuantitas _raw material_ yang hendak dibeli harus disesuaikan dengan:
-
-- Stok existing (sedang dipakai dan belum dipakai),
-- Demand produk,
-- Faktor _supplier_ (harga, _min order_, dan durasi pengiriman).
-
-Secara _bussiness value_, masalah ini perlu diselesaikan dengan baik.
-
-__Catatan:__ Proses _review_ tersebut akan menjadi pembahasan tersendiri pada __Penelitian Mandiri II__.
 ]
 
 ---
 
-class: middle,center
+class: middle
 
-# _Conclusion_
-## Rencana Judul Thesis
+# MODEL OPTIMISASI
 
-### Optimisasi Pembelian Raw Material Minuman Serbuk Menggunakan Metode XXX: Studi Kasus PT. XYZ.
+## Informasi Terkait Pengiriman Bahan Baku 
 
-__Catatan:__ Pencarian terhadap metode `XXX` yang hendak digunakan akan dibahas pada pertemuan selanjutnya.
+Pengiriman bahan baku oleh para _supplier_ dilakukan sebanyak 4 kali dalam sebulan dengan jumlah sesuai dengan aturan berikut:
+
+- Banyaknya bahan baku pada setiap pengiriman adalah fleksibel disesuaikan dengan __stok__ ___existing___ dan ___demand___ produk pada minggu tersebut.
+- __Waktu pengiriman dan inspeksi__ adalah selama 17 hari setelah pemesanan bahan baku sampai akhirnya bahan baku tersebut dapat digunakan untuk produksi. 
+
+Oleh karena itu, perencanaan pembelian bahan baku dilakukan setidaknya sebulan sebelum bahan baku tersebut akan digunakan.
 
 ---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Ilustrasi Pengiriman Bahan Baku
+
+Contoh pada suatu bulan tertentu:
+
+- Kebutuhan bahan baku diperkirakan sebesar __400 ton__.
+- Stok _existing_ bahan baku di gudang bahan baku ada __50 ton__.
+- Maka __NFI__ perlu memesan bahan baku sebesar __350 ton__.
+- Pengiriman dilakukan __4 kali__.
+    - Pada minggu I, diperkirakan kebutuhan bahan baku ada sebesar __100 ton__. Oleh karena itu, __pengiriman pertama__ adalah sebesar __50 ton__ saja.
+    - Pada minggu II, III, dan IV pengiriman bahan baku akan disesuaikan dengan kebutuhan masing-masing (misalkan dibuat proporsional __100 ton__).
+
+Oleh karena itu, kelak pada model optimisasi perlu ada _constraints_ terkait hal ini.
+
+---
+
 class: middle,center
 
-# _Conclusion_
-## _Output_ Perkuliahan
+```{r out.width="80%",echo=FALSE,fig.cap="Simplifikasi dari Penggunaan Bahan Baku",fig.align='center'}
+knitr::include_graphics("ilustrasi.png")
+```
 
-Dokumentasi model-model optimisasi yang relevan dengan penelitian dan _computer codes_ dari metode optimisasi yang dipelajari.
+---
+
 
 ---
 
