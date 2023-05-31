@@ -4,7 +4,7 @@
     <title>Proposal Thesis</title>
     <meta charset="utf-8" />
     <meta name="author" content="Mohammad Rizka Fadhli Dr. Saladin Uttunggadewa, M.Si, S.Si Dr. Rieske Hadianti, M.Si, S.Si Prof. Dr. Sri Redjeki, M.Si, S.Si Astri Kurniati, ST., M.App.Sc." />
-    <meta name="date" content="2023-05-30" />
+    <meta name="date" content="2023-05-31" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/fc.css" rel="stylesheet" />
@@ -28,7 +28,7 @@ class: center, middle, inverse, title-slide
 ### <a href="mailto:20921004@mahasiswa.itb.ac.id" class="email">20921004@mahasiswa.itb.ac.id</a>
 ]
 .date[
-### 30 May 2023
+### 31 May 2023
 ]
 
 ---
@@ -336,10 +336,12 @@ Masalah ini termasuk ke dalam _mixed integer linear programming_ (__MILP__), ala
 
 class: middle,center
 
+# MODEL OPTIMISASI
+
 ## Rangkaian Produksi
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="simple_process.png" alt="Simplifikasi Rangkaian Produksi" width="50%" /&gt;
+&lt;img src="simple_process.png" alt="Simplifikasi Rangkaian Produksi" width="60%" /&gt;
 &lt;p class="caption"&gt;Simplifikasi Rangkaian Produksi&lt;/p&gt;
 &lt;/div&gt;
 
@@ -415,8 +417,35 @@ class: middle,center
 &lt;p class="caption"&gt;Simplifikasi dari Penggunaan Bahan Baku&lt;/p&gt;
 &lt;/div&gt;
 
+---
+
+# MODEL OPTIMISASI
+
+## Informasi Terkait Jenis Bahan Baku 
+
+Saat ini, ada __6__ jenis bahan baku yang bisa dipesan ke __6__ _supplier_ yang berbeda. Informasi lain yang perlu diketahui adalah:
+
+- Terkait produk dan bahan baku:
+    - Sebagian kecil dari produk hanya bisa diproduksi dengan __satu jenis bahan baku saja__.
+    - Sebagian besar lainnya memungkinkan untuk diproduksi dengan __dua atau lebih jenis bahan baku__. Kebutuhan bahan baku untuk produk pada kelompok ini adalah sama. Ilustrasi sebagai berikut:
+        - Produk minuman __A__ bisa diproduksi menggunakan bahan baku `\(x_1\)` sebanyak 1 ton atau `\(x_2\)` sebanyak 1 ton juga.
+- Pembelian bahan baku harus memenuhi _minimum order_ yang ditetapkan oleh _supplier_ __tapi__ jika pembelian di atas _minimum order_ harus dilakukan __pembulatan__ (_order volume_ harus berupa _integer_). Misalkan:
+    - _Minimum order_ adalah __10 ton__, maka:
+        - Boleh membeli __11 ton__.
+        - Tidak boleh membeli __10.5 ton__.
+- Harga masing-masing jenis bahan baku berbeda. 
+- Lama pengiriman hingga bahan baku siap digunakan untuk semua _supplier_ sama.
+
 
 ---
+class:middle
+
+## Ilustrasi Alur Pengadaan Bahan Baku
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="timeline.png" alt="Simplifikasi dari Penggunaan Bahan Baku" width="90%" /&gt;
+&lt;p class="caption"&gt;Simplifikasi dari Penggunaan Bahan Baku&lt;/p&gt;
+&lt;/div&gt;
 
 # _References_
 
