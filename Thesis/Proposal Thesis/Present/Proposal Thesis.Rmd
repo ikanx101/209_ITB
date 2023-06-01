@@ -473,7 +473,9 @@ Menurut informasi dari _product research and development_, beberapa bahan baku b
 
 class: middle,center
 
-# DATA YANG DIGUNAKAN
+# DATA YANG TERLIBAT
+
+## Semua data yang terlibat dalam _business process_
 
 ```{r,include=FALSE}
 library(readxl)
@@ -504,14 +506,14 @@ df_2[is.na(df_2)] = 0
 
 class:middle
 
-# DATA YANG DIGUNAKAN
+# DATA YANG TERLIBAT
 
 ## Data terkait Spesifikasi Bahan Baku
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 library(kableExtra)
 df_1 %>% 
-  knitr::kable(caption = "Spek Bahan Baku") %>% 
+  knitr::kable(caption = "Spek Bahan Baku",align = "c") %>% 
   kable_styling(latex_options = "hold_position") %>% 
   add_header_above(c(" " = 1,"Informasi Detail" = 5))
 ```
@@ -520,19 +522,35 @@ df_1 %>%
 
 class:middle
 
-# DATA YANG DIGUNAKAN
+# DATA YANG TERLIBAT
 
 ## Komposisi Bahan Baku per Produk
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 df_2 %>% 
-  head(10) %>%
-  knitr::kable(caption = "Produk apa bisa dibuat menggunakan bahan baku yang mana?\nSampel 10 produk") %>% 
+  head(7) %>%
+  knitr::kable(caption = "Produk apa bisa dibuat menggunakan bahan baku yang mana?<br>Sampel 7 produk",align = "c") %>% 
   kable_styling(latex_options = "hold_position") %>% 
   add_header_above(c(" " = 1,"Bahan Baku" = 6))
 ```
 
+---
 
+class:middle
+
+# DATA YANG TERLIBAT
+
+## Data _Demand_ Mingguan per Produk
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+df_3 %>% 
+  head(7) %>%
+  select(-w1,-w2) %>% 
+  knitr::kable(caption = "Data kebutuhan bahan baku per produk<br>Sampel 7 produk",
+               align = "c") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Minggu ke-" = 4))
+```
 
 ---
 
