@@ -475,18 +475,16 @@ class: middle,center
 
 # DATA YANG DIGUNAKAN
 
----
-
-# DATA YANG DIGUNAKAN
-
-## Data terkait Spesifikasi Bahan Baku
-
 ```{r,include=FALSE}
 library(readxl)
 library(dplyr)
 
 nama   = "~/209_ITB/Thesis/Penelitian Mandiri V dan VII/data input.xlsx"
 sheets = excel_sheets(nama)
+
+format_money = function(x) {
+  paste0("Rp", formatC(as.numeric(x), format="f", digits=0, big.mark=","))
+}
 
 # ambilin data
 df_1 = read_excel(nama,sheet = sheets[1]) # ambil spek
@@ -495,11 +493,45 @@ df_3 = read_excel(nama,sheet = sheets[3]) # ambil matriks produk x minggu
 
 df_1 = df_1 %>% rename(bahan_baku = code_gula,
                        harga      = harga_gula) %>% 
-       select(-multiplicator,-cost_obj_func)
+       select(-multiplicator,-cost_obj_func) %>% 
+       mutate(harga = format_money(harga))
 
 colnames(df_2)[2:7] = paste0("bahan_baku_",1:6)
-
+df_2[is.na(df_2)] = 0
 ```
+
+---
+
+class:middle
+
+# DATA YANG DIGUNAKAN
+
+## Data terkait Spesifikasi Bahan Baku
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+library(kableExtra)
+df_1 %>% 
+  knitr::kable(caption = "Spek Bahan Baku") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Informasi Detail" = 5))
+```
+
+---
+
+class:middle
+
+# DATA YANG DIGUNAKAN
+
+## Komposisi Bahan Baku per Produk
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+df_2 %>% 
+  head(10) %>%
+  knitr::kable(caption = "Produk apa bisa dibuat menggunakan bahan baku yang mana?\nSampel 10 produk") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Bahan Baku" = 6))
+```
+
 
 
 ---
