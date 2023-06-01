@@ -479,7 +479,27 @@ class: middle,center
 
 # DATA YANG DIGUNAKAN
 
-##
+## Data terkait Spesifikasi Bahan Baku
+
+```{r,include=FALSE}
+library(readxl)
+library(dplyr)
+
+nama   = "~/209_ITB/Thesis/Penelitian Mandiri V dan VII/data input.xlsx"
+sheets = excel_sheets(nama)
+
+# ambilin data
+df_1 = read_excel(nama,sheet = sheets[1]) # ambil spek
+df_2 = read_excel(nama,sheet = sheets[2]) # ambil matriks gula x produk
+df_3 = read_excel(nama,sheet = sheets[3]) # ambil matriks produk x minggu
+
+df_1 = df_1 %>% rename(bahan_baku = code_gula,
+                       harga      = harga_gula) %>% 
+       select(-multiplicator,-cost_obj_func)
+
+colnames(df_2)[2:7] = paste0("bahan_baku_",1:6)
+
+```
 
 
 ---
