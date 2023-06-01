@@ -471,6 +471,13 @@ Menurut informasi dari _product research and development_, beberapa bahan baku b
 
 ---
 
+class: middle,center
+
+# DATA YANG DIGUNAKAN
+
+---
+
+
 
 ---
 
