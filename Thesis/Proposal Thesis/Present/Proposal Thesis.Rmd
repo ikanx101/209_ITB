@@ -450,7 +450,6 @@ Saat ini, ada __6__ jenis bahan baku yang bisa dipesan ke __6__ _supplier_ yang 
 - Harga masing-masing jenis bahan baku berbeda. 
 - Lama pengiriman hingga bahan baku siap digunakan untuk semua _supplier_ sama.
 
-
 ---
 class:middle
 
@@ -459,6 +458,18 @@ class:middle
 ```{r out.width="85%",echo=FALSE,fig.cap="Simplifikasi dari Penggunaan Bahan Baku",fig.align='center'}
 knitr::include_graphics("timeline.png")
 ```
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Informasi Terkait Substitusi Bahan Baku
+
+Menurut informasi dari _product research and development_, beberapa bahan baku bisa dijadikan substitusi bagi bahan baku yang lain. Hal ini diperbolehkan karena kesamaan karakteristik yang ada pada beberapa bahan baku tersebut. Satu-satunya perbedaan mendasar antar bahan baku adalah warna. Sedangkan derajat rasa dan ukuran partikel sudah disesuaikan dengan standar baku pangan yang ada.
+
+---
 
 # _References_
 
