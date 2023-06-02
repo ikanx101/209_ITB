@@ -276,7 +276,7 @@ Semua produk minuman tersebut bisa dibagi menjadi dua kelompok, yakni:
 
 --
 
-### Kenapa bisa begitu?
+### Kenapa bisa / diperbolehkan begitu?
 
 ---
 
@@ -342,17 +342,13 @@ Masalah ini termasuk ke dalam _mixed integer linear programming_ (__MILP__), ala
 1. Variabel yang terlibat meliputi:
     - _Binary_ karena melibatkan pengambilan keputusan bahan baku dari _supplier_ mana yang harus dipesan.
     - _Integer_ karena melibatkan angka kuantitas bahan baku yang harus dipesan. 
+    - _Continuous_ karena melibatkan persentase bahan baku yang hendak dialokasikan ke produksi _finished goods_ per pekan.
 1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
     - Meminimumkan ongkos pembelian $harga \times tonase$.
     - Kapasitas gudang bahan baku dan rencana produksi produk.
     - Kontrak pembelian selama setahun.
+    - Pemenuhan _demand_ bahan baku per pekan.
     - dan seterusnya.
-
----
-
-# MODEL OPTIMISASI
-
-## _Mixed Integer Linear Programming_
 
 ---
 
