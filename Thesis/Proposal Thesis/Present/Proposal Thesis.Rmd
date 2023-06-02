@@ -589,11 +589,11 @@ class: middle, center
 
 # RENCANA KERJA
 
-```{r out.width="100%",echo=FALSE,fig.retina=7,fig.align='center',fig.cap="Rencana Penyelesaian Masalah"}
+```{r out.width="120%",echo=FALSE,fig.retina=7,fig.align='center',fig.cap="Rencana Penyelesaian Masalah"}
 nomnoml::nomnoml("#direction: right
-                 [<start> start] -> [pembuatan model\noptimisasi|Berdasarkan alur produksi]
-                 [pembuatan model\noptimisasi] -> [program|R codes|library(ompr)]
-                 [program] -> [validasi|Menggunakan data pada rentang\nwaktu tertentu]
+                 [<start> start] -> [pembuatan model\noptimisasi|Berdasarkan alur produksi|modifikasi pada obj function]
+                 [pembuatan model\noptimisasi] -> [pembuatan program|R codes|library(ompr)]
+                 [pembuatan program] -> [validasi|Menggunakan data\npada rentang\nwaktu tertentu]
                  [validasi] -> [<choice>solusi optimal?]
                  [<choice>solusi optimal?] -> N [pembuatan model\noptimisasi]
                  [<choice>solusi optimal?] -> Y [pembuatan DSS|berbasis shinyapps]
