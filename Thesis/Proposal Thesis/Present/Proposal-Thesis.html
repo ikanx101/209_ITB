@@ -262,7 +262,7 @@ Semua produk minuman tersebut bisa dibagi menjadi dua kelompok, yakni:
 
 --
 
-### Kenapa bisa begitu?
+### Kenapa bisa / diperbolehkan begitu?
 
 ---
 
@@ -328,10 +328,12 @@ Masalah ini termasuk ke dalam _mixed integer linear programming_ (__MILP__), ala
 1. Variabel yang terlibat meliputi:
     - _Binary_ karena melibatkan pengambilan keputusan bahan baku dari _supplier_ mana yang harus dipesan.
     - _Integer_ karena melibatkan angka kuantitas bahan baku yang harus dipesan. 
+    - _Continuous_ karena melibatkan persentase bahan baku yang hendak dialokasikan ke produksi _finished goods_ per pekan.
 1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
     - Meminimumkan ongkos pembelian `\(harga \times tonase\)`.
     - Kapasitas gudang bahan baku dan rencana produksi produk.
     - Kontrak pembelian selama setahun.
+    - Pemenuhan _demand_ bahan baku per pekan.
     - dan seterusnya.
 
 ---
@@ -714,12 +716,42 @@ class:middle
 
 ---
 
+class: middle,center
+
+# _DECISION SUPPORT SYSTEM_
+
+---
+
+class: middle
+
+# _DECISION SUPPORT SYSTEM_
+
+## Definisi
+
+_DSS is a computer based information system that supports business or organizational Decision making activities_ (Jain, 2016).
+
+
+---
+
+---
+
+class: middle,center,inverse
+
+# Terima Kasih
+## _Feel free to discuss_
+
+
+---
+
 # _REFERENCES_
 
 Costantino, N. and R. Pellegrino (2010). _Choosing Between Single and
 Multiple Sourcing Based on Supplier Default Risk: A Real Options
 Approach_. DOI 10.1016/j.pursup.2009.08.001. Journal of Purchasing and
 Supply Management.
+
+Jain, R. (2016). _Decision Support Systems: an Overview_ , pp. 42-50.
+ISBN: 9788183213950.
 
 Oliver, R. K. and M. D. Webber (1982). _Supply-Chain Management:
 Logistics Catches up with Strategy_. DOI 10.1007/978-3-642-27922-5_15.
@@ -729,17 +761,6 @@ Rabieh, M., M. A. Soukhakian, and A. N. M. Shirazi (2016). _Two Models
 of Inventory Control With Supplier Selection In Case of Multiple
 Sourcing: a case of Isfahan Steel Company_. DOI
 10.1007/s40092-016-0145-y. Springerlink.com.
-
----
-
-class: middle,center,inverse
-
-# Terima Kasih
-## _Feel free to discuss_
-
-_Find me at_ [ikanx101.com](https://ikanx101.com/)
-
-##### _created using Xaringan in R_
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

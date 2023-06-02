@@ -568,6 +568,9 @@ class: middle
 
 # _DECISION SUPPORT SYSTEM_
 
+## Definisi
+
+_DSS is a computer based information system that supports business or organizational Decision making activities_ `r Citep(myBib, "dssdef")`.
 
 
 ---
