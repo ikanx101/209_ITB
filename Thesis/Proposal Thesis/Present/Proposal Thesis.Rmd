@@ -575,8 +575,9 @@ _Decision Support System (DSS) is a computer based information system that suppo
 ## Kenapa Harus Membuat DSS?
 
 - Sebagai _business user_, tim PPIC membutuhkan _tools_ yang mudah digunakan dan mempercepat produktivitas dalam bekerja. 
-    - Formatnya _single app_ tanpa _compiler_.
 - DSS yang dibutuhkan harus berwujud aplikasi dengan _user interface_ yang intuitif bagi mereka.
+
+## Pembuatan DSS
 
 ---
 class: middle, center
