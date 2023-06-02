@@ -350,6 +350,12 @@ Masalah ini termasuk ke dalam _mixed integer linear programming_ (__MILP__), ala
 
 ---
 
+# MODEL OPTIMISASI
+
+## _Mixed Integer Linear Programming_
+
+---
+
 class: middle,center
 
 # MODEL OPTIMISASI
