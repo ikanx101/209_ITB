@@ -11,6 +11,12 @@
     <link href="libs/remark-css/fc-fonts.css" rel="stylesheet" />
     <script src="libs/kePrint/kePrint.js"></script>
     <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/es6shim/es6shim.js"></script>
+    <script src="libs/es7shim/es7shim.js"></script>
+    <script src="libs/graphre/graphre.js"></script>
+    <script src="libs/nomnoml/nomnoml.js"></script>
+    <script src="libs/nomnoml-binding/nomnoml.js"></script>
     <link rel="stylesheet" href="footer-header.css" type="text/css" />
   </head>
   <body>
@@ -728,8 +734,30 @@ class: middle
 
 ## Definisi
 
-_DSS is a computer based information system that supports business or organizational Decision making activities_ (Jain, 2016).
+_Decision Support System (DSS) is a computer based information system that supports business or organizational Decision making activities_ (Jain, 2016).
 
+## Kenapa Harus Membuat DSS?
+
+- Sebagai _business user_, tim PPIC membutuhkan _tools_ yang mudah digunakan dan mempercepat produktivitas dalam bekerja. 
+    - Formatnya _single app_ tanpa _compiler_.
+- DSS yang dibutuhkan harus berwujud aplikasi dengan _user interface_ yang intuitif bagi mereka.
+
+---
+class: middle, center
+
+# RENCANA KERJA
+
+## Langkah Berikutnya untuk Penyelesaian Thesis
+
+---
+
+# RENCANA KERJA
+
+&lt;div class="figure" style="text-align: center"&gt;
+<div class="nomnoml html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c63bb166417c7fbf58b8" style="width:100%;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-c63bb166417c7fbf58b8">{"x":{"code":"\n#fill: #FEFEFF\n#lineWidth: 1\n#zoom: 4\n#direction: right\n\n#direction: right\n                 [<start> start] -> [pembuatan model\noptimisasi|Berdasarkan alur produksi]\n                 [pembuatan model\noptimisasi] -> [program|R codes|library(ompr)]\n                 [program] -> [validasi|Menggunakan data pada rentang\nwaktu tertentu]\n                 [validasi] -> [<choice>solusi optimal?]\n                 [<choice>solusi optimal?] -> N [pembuatan model\noptimisasi]\n                 [<choice>solusi optimal?] -> Y [pembuatan DSS|berbasis shinyapps]\n                 [pembuatan DSS] -> [trial DSS|business user]\n                 [trial DSS] -> [<choice>any feedback?]\n                 [<choice>any feedback?] -> Y [pembuatan DSS]\n                 [<choice>any feedback?] -> N [<end> end]\n                 ","svg":false,"png":null},"evals":[],"jsHooks":[]}</script>
+&lt;p class="caption"&gt;Rencana Penyelesaian Masalah&lt;/p&gt;
+&lt;/div&gt;
 
 ---
 

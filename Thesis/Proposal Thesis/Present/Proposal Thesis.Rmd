@@ -570,8 +570,39 @@ class: middle
 
 ## Definisi
 
-_DSS is a computer based information system that supports business or organizational Decision making activities_ `r Citep(myBib, "dssdef")`.
+_Decision Support System (DSS) is a computer based information system that supports business or organizational Decision making activities_ `r Citep(myBib, "dssdef")`.
 
+## Kenapa Harus Membuat DSS?
+
+- Sebagai _business user_, tim PPIC membutuhkan _tools_ yang mudah digunakan dan mempercepat produktivitas dalam bekerja. 
+    - Formatnya _single app_ tanpa _compiler_.
+- DSS yang dibutuhkan harus berwujud aplikasi dengan _user interface_ yang intuitif bagi mereka.
+
+---
+class: middle, center
+
+# RENCANA KERJA
+
+## Langkah Berikutnya untuk Penyelesaian Thesis
+
+---
+
+# RENCANA KERJA
+
+```{r out.width="100%",echo=FALSE,fig.retina=7,fig.align='center',fig.cap="Rencana Penyelesaian Masalah"}
+nomnoml::nomnoml("#direction: right
+                 [<start> start] -> [pembuatan model\noptimisasi|Berdasarkan alur produksi]
+                 [pembuatan model\noptimisasi] -> [program|R codes|library(ompr)]
+                 [program] -> [validasi|Menggunakan data pada rentang\nwaktu tertentu]
+                 [validasi] -> [<choice>solusi optimal?]
+                 [<choice>solusi optimal?] -> N [pembuatan model\noptimisasi]
+                 [<choice>solusi optimal?] -> Y [pembuatan DSS|berbasis shinyapps]
+                 [pembuatan DSS] -> [trial DSS|business user]
+                 [trial DSS] -> [<choice>any feedback?]
+                 [<choice>any feedback?] -> Y [pembuatan DSS]
+                 [<choice>any feedback?] -> N [<end> end]
+                 ")
+```
 
 ---
 
