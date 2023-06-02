@@ -579,6 +579,51 @@ _Decision Support System (DSS) is a computer based information system that suppo
 
 ## Pembuatan DSS
 
+DSS dibuat dengan basis program berbahasa __R__. _Library_ yang dilibatkan untuk menyusun model optimisasi adalah `library(ompr)` `r Citep(myBib, "ompr")`.
+
+---
+
+class: middle
+
+# _DECISION SUPPORT SYSTEM_
+
+## Optimisasi dengan __R__
+
+.pull-left[
+
+Untuk menyelesaikan masalah optimisasi menggunakan __R__, ada beberapa _packages_ yang bisa digunakan. Saya akan bahas beberapa _packages_ yang biasa digunakan untuk menyelesaikan masalah optimisasi di __R__, yakni:
+
+1. `ROI` _packages_ `r Citep(myBib, "roi")`.
+1. `ompr` _packages_ `r Citep(myBib, "ompr")`.
+
+_Packages_ `ompr` dibuat oleh __Dirk Schumacher__ pada [2018](https://www.r-orms.org/). Salah satu keuntungan dari _library_ ini adalah pengunaan operator _pipe_ ` %>% ` pada perumusan algoritmanya. Sehingga untuk masalah-masalah yang melibatkan pengolahan _dataframe_ (`tidyverse`) akan lebih terbantu.
+
+]
+
+--
+
+.pull-right[
+
+_Framework_ untuk menuliskan model optimisasi menggunakan `ompr` adalah sebagai berikut:
+
+```
+# mulai membangun model
+MIPModel() %>% 
+  
+  # menambah variabel
+  add_variable() %>% 
+  
+  # set objective
+  set_objective() %>% 
+  
+  # menambah constraints
+  add_constraint()
+```
+
+Salah satu ciri khas `ompr` adalah penulisannya yang mirip dengan notasi matematika sehingga saat kita memiliki suatu model dengan banyak variabel, kita tidak perlu menginputnya ke dalam bentuk matriks.
+
+]
+
 ---
 class: middle, center
 
