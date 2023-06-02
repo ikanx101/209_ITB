@@ -652,8 +652,6 @@ nomnoml::nomnoml("#direction: right
 
 ---
 
----
-
 class: middle,center,inverse
 
 # Terima Kasih
