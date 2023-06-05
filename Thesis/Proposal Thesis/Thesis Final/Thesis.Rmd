@@ -1,0 +1,392 @@
+---
+subtitle: "Pengembangan <i>Decision Support System</i> untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun"
+title: "Presentasi Tesis"
+author: "Mohammad Rizka Fadhli<br>Dr. Saladin Uttunggadewa, M.Si, S.Si<br>Dr. Rieske Hadianti, M.Si, S.Si<br>Prof. Dr. Sri Redjeki, M.Si, S.Si<br>Astri Kurniati, ST., M.App.Sc."
+institute: "20921004@mahasiswa.itb.ac.id"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output:
+  xaringan::moon_reader:
+    mathjax: default
+    lib_dir: libs
+    css: [default,"footer-header.css", fc, fc-fonts]
+    seal: true
+    nature:
+      ratio: '18:10'
+      slideNumberFormat: '%current%' 
+      highlightStyle: ir-black
+      highlightLines: true
+      countIncrementalSlides: false
+    includes:
+      after_body: insert-logo.html
+---
+layout: true
+
+<div class="my-footer"><span>Presentasi Tesis</span></div>
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+setwd("~/209_ITB/Thesis/Proposal Thesis/Thesis Final")
+# reference:
+# https://www.garrickadenbuie.com/blog/xaringan-tip-logo-all-slides/
+```
+
+---
+
+class: middle
+
+.pull-left[
+
+# PERKENALAN
+
+## Mohammad Rizka Fadhli
+
+Mahasiswa pasca sarjana program __MBR__ Prodi Sains Komputasi 2021.
+
+_Market Research Specialist_ di PT. Nutrifood Indonesia.
+
+]
+
+.pull-right[
+
+```{r out.width="60%",echo=FALSE,fig.align='center'}
+knitr::include_graphics("logo nutrifood.png")
+```
+
+]
+
+---
+
+class: middle
+
+# SEKILAS _UPDATE_ 
+
+```{r out.width="80%",echo=FALSE,fig.align='center'}
+knitr::include_graphics("status.JPG")
+```
+
+---
+
+class: middle,center,inverse
+
+# AGENDA HARI INI
+## Penjelasan Mengenai Luaran pada _Thesis_
+
+### Pengembangan _Decision Support System_ untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun
+
+---
+
+class: middle,center,inverse
+
+# JUDUL THESIS
+
+### Pengembangan _Decision Support System_ untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun
+
+--
+
+# LUARAN THESIS
+
+--
+
+## Model Optimisasi
+
+--
+
+## _Decision Support System_
+
+---
+
+class: middle,center
+
+# _QUICK RECAP_
+
+### Sebelum masuk ke pembahasan utama
+
+---
+
+class: middle
+
+# _QUICK RECAP_
+## Masalah
+
+NFI memproduksi `51` jenis minuman serbuk. Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada satu komponen bahan baku yang bisa digunakan oleh __keseluruhan produk__ tersebut.
+
+Untuk pemenuhan bahan baku tersebut, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_. Perjanjian kerja sama antar _supplier_ berupa komitmen pembelian sejumlah bahan baku selama setahun ke depan. Spesifikasi bahan baku dan harganya per-ton berbeda-beda antar _supplier_. 
+
+Semua produk minuman tersebut bisa dibagi menjadi dua kelompok, yakni:
+
+1. Minuman yang hanya bisa diproduksi oleh __satu jenis__ bahan baku.
+1. Minuman yang bisa diproduksi menggunakan __dua atau lebih jenis__ bahan baku.
+
+---
+
+class: middle
+
+# _QUICK RECAP_
+
+## Kondisi Saat Ini
+
+NFI memilih _supplier_ dan menentukan kuantitas pembelian bahan baku secara __manual__ dengan mempertimbangkan data-data terkait secara mingguan oleh departemen PPIC. Namun proses tersebut belum sampai ke dalam tahap mengalokasikan bahan baku yang dibeli tersebut dengan produk yang akan diproduksi kelak sehingga berpotensi menimbulkan _loss sales_ akibat ketiadaan bahan baku saat produksi. Selain itu, proses perhitungan ini memerlukan __waktu yang cukup lama__.
+
+## Masalah Utama _Thesis_
+
+Pada _thesis_ ini, ada tiga masalah utama yang hendak diselesaikan, yakni:
+
+- Memilih _supplier_ bahan baku.
+- Menentukan banyaknya bahan baku yang harus dibeli dari suatu _supplier_.
+- Menentukan bahan baku mana yang harus digunakan untuk memproduksi setiap produk.
+
+dengan tujuan total biaya pembelian seminim mungkin tetapi memenuhi kebutuhan yang ada pada periode tertentu. 
+
+Kemudian akan dibuat suatu _decision support system_ agar memudahkan proses pekerjaan PPIC.
+
+
+---
+
+class: middle
+
+# _QUICK RECAP_
+
+## Informasi Terkait Jenis Bahan Baku 
+
+Saat ini, ada __6__ jenis bahan baku yang bisa dipesan ke __6__ _supplier_ yang berbeda. Informasi lain yang perlu diketahui adalah:
+
+- Terkait produk dan bahan baku:
+    - Sebagian kecil dari produk hanya bisa diproduksi dengan __satu jenis bahan baku saja__.
+    - Sebagian besar lainnya memungkinkan untuk diproduksi dengan __dua atau lebih jenis bahan baku__. Kebutuhan bahan baku untuk produk pada kelompok ini adalah sama. Ilustrasi sebagai berikut:
+        - Produk minuman __A__ bisa diproduksi menggunakan bahan baku $x_1$ sebanyak 1 ton atau $x_2$ sebanyak 1 ton juga.
+- Pembelian bahan baku harus memenuhi _minimum order_ yang ditetapkan oleh _supplier_ __tapi__ jika pembelian di atas _minimum order_ harus dilakukan __pembulatan__ (_order volume_ harus berupa _integer_). Misalkan:
+    - _Minimum order_ adalah __10 ton__, maka:
+        - Boleh membeli __11 ton__.
+        - Tidak boleh membeli __10.5 ton__.
+- Harga masing-masing jenis bahan baku berbeda. 
+- Lama pengiriman hingga bahan baku siap digunakan untuk semua _supplier_ sama.
+
+---
+
+class: middle
+
+# _QUICK RECAP_
+
+## _Policies_ Pembelian Bahan Baku
+
+Pembelian ini juga harus disesuaikan dengan _policies_ yang ada pada __SCM__, seperti:
+
+1. Pembelian bahan baku harus berasal dari minimal 2 _suppliers_ untuk menjaga keamanan pasokan.
+1. Pembelian bahan baku dari _supplier_ harus memenuhi proporsi portofolio yang ditetapkan di awal tahun oleh __NFI__. Angka ini kelak menjadi patokan berapa tonase minimal yang harus __NFI__ beli kepada masing-masing _supplier_ dalam setahun.
+
+---
+
+class:middle
+
+## Ilustrasi Alur Pembelian Bahan Baku
+
+```{r out.width="85%",echo=FALSE,fig.cap="Simplifikasi dari Penggunaan Bahan Baku",fig.align='center'}
+knitr::include_graphics("timeline.png")
+```
+
+---
+
+class: middle,center
+
+# DATA YANG TERLIBAT
+
+## Semua data yang terlibat dalam _business process_
+
+```{r,include=FALSE}
+library(readxl)
+library(dplyr)
+
+nama   = "~/209_ITB/Thesis/Penelitian Mandiri V dan VII/data input.xlsx"
+sheets = excel_sheets(nama)
+
+format_money = function(x) {
+  paste0("Rp", formatC(as.numeric(x), format="f", digits=0, big.mark=","))
+}
+
+# ambilin data
+df_1 = read_excel(nama,sheet = sheets[1]) # ambil spek
+df_2 = read_excel(nama,sheet = sheets[2]) # ambil matriks gula x produk
+df_3 = read_excel(nama,sheet = sheets[3]) # ambil matriks produk x minggu
+
+df_1 = df_1 %>% rename(supplier   = code_gula,
+                       harga      = harga_gula) %>% 
+       select(-multiplicator,-cost_obj_func) %>% 
+       mutate(harga = format_money(harga))
+
+colnames(df_2)[2:7] = paste0("bahan_baku_",1:6)
+
+df_2 = imputeTS::na.replace(df_2,0)
+
+```
+
+---
+
+class:middle
+
+# _QUICK RECAP_
+
+## Data terkait Spesifikasi Bahan Baku
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+library(kableExtra)
+df_1 %>% 
+  knitr::kable(caption = "Spek Bahan Baku",align = "c") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Informasi Detail" = 5))
+```
+
+---
+
+class:middle
+
+# _QUICK RECAP_
+
+## Komposisi Bahan Baku per Produk
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+df_2 %>% 
+  head(7) %>%
+  knitr::kable(caption = "Produk apa bisa dibuat menggunakan bahan baku yang mana?<br>Sampel 7 produk",align = "c") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Bahan Baku" = 6))
+```
+
+---
+
+class:middle
+
+# _QUICK RECAP_
+
+## Data _Demand_ Mingguan per Produk
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+df_3 %>% 
+  head(7) %>%
+  select(-w1,-w2) %>% 
+  knitr::kable(caption = "Data kebutuhan bahan baku per produk<br>Sampel 7 produk",
+               align = "c") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Minggu ke-" = 4))
+```
+
+---
+
+class:middle
+
+# _QUICK RECAP_
+
+## Data Lain
+
+- _Max capacity_ gudang bahan baku: 1,427,000
+- Sisa saldo masing-masing bahan baku yang ada di gudang pada saat pengiriman minggu pertama.
+- _Safety stock_ bahan baku, yakni minimal saldo masing-masing bahan baku di akhir minggu.
+
+---
+
+
+class: middle,center
+
+# MODEL OPTIMISASI
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Masalah Optimisasi
+
+Meminimalkan ongkos pembelian bahan baku dengan tetap mengamankan stok bahan baku agar proses produksi tetap berjalan.
+
+Masalah ini termasuk ke dalam _mixed integer linear programming_ (__MILP__), alasannya:
+
+1. Parameter dan variabel yang terlibat merupakan suatu nilai pasti.
+1. Variabel yang terlibat meliputi:
+    - _Binary_ karena melibatkan pengambilan keputusan bahan baku dari _supplier_ mana yang harus dipesan.
+    - _Integer_ karena melibatkan angka kuantitas bahan baku yang harus dipesan. 
+    - _Continuous_ karena melibatkan persentase bahan baku yang hendak dialokasikan ke produksi _finished goods_ per pekan.
+1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
+    - Meminimumkan ongkos pembelian `harga x tonase`.
+    - Kapasitas gudang bahan baku dan rencana produksi produk.
+    - Kontrak pembelian selama setahun.
+    - Pemenuhan _demand_ bahan baku per pekan.
+    - dan seterusnya.
+
+---
+
+---
+
+class: middle,center
+
+# _DECISION SUPPORT SYSTEM_
+
+---
+
+class: middle
+
+# _DECISION SUPPORT SYSTEM_
+
+## Definisi
+
+## Kenapa Harus Membuat DSS?
+
+- Sebagai _business user_, tim PPIC membutuhkan _tools_ yang mudah digunakan dan mempercepat produktivitas dalam bekerja. 
+- DSS yang dibutuhkan harus berwujud aplikasi dengan _user interface_ yang intuitif bagi mereka.
+
+## Pembuatan DSS
+
+DSS dibuat dengan basis program berbahasa __R__. _Library_ yang dilibatkan untuk menyusun model optimisasi adalah `library(ompr)`.
+
+---
+
+class: middle
+
+# _DECISION SUPPORT SYSTEM_
+
+## Optimisasi dengan __R__
+
+.pull-left[
+
+Untuk menyelesaikan masalah optimisasi menggunakan __R__, ada beberapa _packages_ yang bisa digunakan. Saya akan bahas beberapa _packages_ yang biasa digunakan untuk menyelesaikan masalah optimisasi di __R__, yakni:
+
+1. `ROI` _packages_.
+1. `ompr` _packages_.
+
+_Packages_ `ompr` dibuat oleh __Dirk Schumacher__ pada [2018](https://www.r-orms.org/). Salah satu keuntungan dari _library_ ini adalah pengunaan operator _pipe_ ` %>% ` pada perumusan algoritmanya. Sehingga untuk masalah-masalah yang melibatkan pengolahan _dataframe_ (`tidyverse`) akan lebih terbantu.
+
+]
+
+--
+
+.pull-right[
+
+_Framework_ untuk menuliskan model optimisasi menggunakan `ompr` adalah sebagai berikut:
+
+```
+# mulai membangun model
+MIPModel() %>% 
+  
+  # menambah variabel
+  add_variable() %>% 
+  
+  # set objective
+  set_objective() %>% 
+  
+  # menambah constraints
+  add_constraint()
+```
+
+Salah satu ciri khas `ompr` adalah penulisannya yang mirip dengan notasi matematika sehingga saat kita memiliki suatu model dengan banyak variabel, kita tidak perlu menginputnya ke dalam bentuk matriks.
+
+]
+
+
+---
+
+class: middle,center,inverse
+
+# Terima Kasih
+## _Feel free to discuss_
+
+
+---
