@@ -4,7 +4,7 @@
     <title>Proposal Thesis</title>
     <meta charset="utf-8" />
     <meta name="author" content="Mohammad Rizka Fadhli Dr. Saladin Uttunggadewa, M.Si, S.Si Dr. Rieske Hadianti, M.Si, S.Si Prof. Dr. Sri Redjeki, M.Si, S.Si Astri Kurniati, ST., M.App.Sc." />
-    <meta name="date" content="2023-06-02" />
+    <meta name="date" content="2023-06-05" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/fc.css" rel="stylesheet" />
@@ -36,7 +36,7 @@ class: center, middle, inverse, title-slide
 ### <a href="mailto:20921004@mahasiswa.itb.ac.id" class="email">20921004@mahasiswa.itb.ac.id</a>
 ]
 .date[
-### 02 June 2023
+### 05 June 2023
 ]
 
 ---
@@ -46,48 +46,6 @@ layout: true
 &lt;div class="my-footer"&gt;&lt;span&gt;Presentasi Proposal Thesis&lt;/span&gt;&lt;/div&gt;
 
 
-
----
-
-class: middle hide
-
-# TERIMA KASIH KEPADA
-
-.pull-left[
-
-# Para Dosen Pembimbing
-
-## ITB
-
-- Ibu Rieske Hadianti
-- Bapak Saladin Uttunggadewa
-- Ibu Sri Redjeki
-
-Atas bimbingan dan kesabaran selama ini.
-
-## Nutrifood
-
-- Ibu Astri Kurniati
-
-Atas izin yang diberikan untuk mengikuti perkuliahan.
-
-]
-
-.pull-right[
-
-# Dosen Penguji
-
-- Ibu Novry Erwina
-
-Atas waktu dan kesediaannya.
-
-# Kaprodi Sains Komputasi
-
-- Bapak Dwi Irwanto
-
-Atas bantuan dan informasi yang diberikan.
-
-]
 
 ---
 
@@ -112,6 +70,14 @@ _Market Research Specialist_ di PT. Nutrifood Indonesia.
 &lt;img src="logo nutrifood.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 ]
+
+---
+
+class: middle
+
+# SEKILAS _UPDATE_ 
+
+&lt;img src="status.JPG" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -201,7 +167,7 @@ Upaya pencegahan ___loss sales___ menjadi hal yang paling penting.
 
 .pull-right[
 
-## Apa penyebab `\(production &lt; demand\)` ?
+## Apa penyebab `production &lt; demand` ?
 
 Ada beberapa kemungkinan:
 
@@ -257,14 +223,14 @@ class: middle
 # PENDAHULUAN
 ## Masalah
 
-NFI memproduksi `\(130\)` jenis minuman serbuk. Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada satu komponen bahan baku yang bisa digunakan oleh __keseluruhan produk__ tersebut.
+NFI memproduksi `130` jenis minuman serbuk. Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada satu komponen bahan baku yang bisa digunakan oleh __keseluruhan produk__ tersebut.
 
 Untuk pemenuhan bahan baku tersebut, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_. Perjanjian kerja sama antar _supplier_ berupa komitmen pembelian sejumlah bahan baku selama setahun ke depan. Spesifikasi bahan baku dan harganya per-ton berbeda-beda antar _supplier_. 
 
 Semua produk minuman tersebut bisa dibagi menjadi dua kelompok, yakni:
 
-1. Minuman yang hanya bisa diproduksi oleh satu jenis bahan baku.
-1. Minuman yang bisa diproduksi menggunakan dua atau lebih jenis bahan baku.
+1. Minuman yang hanya bisa diproduksi oleh __satu jenis__ bahan baku.
+1. Minuman yang bisa diproduksi menggunakan __dua atau lebih jenis__ bahan baku.
 
 --
 
@@ -336,7 +302,7 @@ Masalah ini termasuk ke dalam _mixed integer linear programming_ (__MILP__), ala
     - _Integer_ karena melibatkan angka kuantitas bahan baku yang harus dipesan. 
     - _Continuous_ karena melibatkan persentase bahan baku yang hendak dialokasikan ke produksi _finished goods_ per pekan.
 1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
-    - Meminimumkan ongkos pembelian `\(harga \times tonase\)`.
+    - Meminimumkan ongkos pembelian `harga x tonase`.
     - Kapasitas gudang bahan baku dan rencana produksi produk.
     - Kontrak pembelian selama setahun.
     - Pemenuhan _demand_ bahan baku per pekan.
@@ -367,7 +333,7 @@ Proses pra produksi seperti _supplier selection_ dan penentuan kuantitas pembeli
 
 .pull-left[
 
-Dalam rangkaian produksi suatu produk, __NFI__ menggunakan banyak sekali bahan baku tapi ada beberapa bahan baku utama yang paling sering digunakan di berbagai produknya. Selama ini __NFI__ memesan bahan-bahan baku tersebut secara langsung setiap bulannya dengan besarnya pemesanan disesuaikan dengan:
+Dalam rangkaian produksi suatu produk, __NFI__ menggunakan banyak sekali bahan baku tapi ada __satu bahan baku utama__ yang paling sering digunakan di berbagai produknya. Selama ini __NFI__ memesan bahan-bahan baku tersebut secara langsung setiap bulannya dengan besarnya pemesanan disesuaikan dengan:
 
 1. Angka _demand_ atau _forecast_ masing-masing produk yang menggunakan bahan-bahan baku tersebut.
 1. _Existing stock_ bahan baku yang ada di gudang bahan baku.
@@ -722,6 +688,18 @@ class:middle
 
 ---
 
+class:middle
+
+# DATA YANG TERLIBAT
+
+## Data Lain
+
+- _Max capacity_ gudang bahan baku: 1,427,000
+- Sisa saldo masing-masing bahan baku yang ada di gudang pada saat pengiriman minggu pertama.
+- _Safety stock_ bahan baku, yakni minimal saldo masing-masing bahan baku di akhir minggu.
+
+---
+
 class: middle,center
 
 # _DECISION SUPPORT SYSTEM_
@@ -800,8 +778,8 @@ class: middle, center
 # RENCANA KERJA
 
 &lt;div class="figure" style="text-align: center"&gt;
-<div class="nomnoml html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9a28ceb1c4de3f26dffb" style="width:120%;height:504px;"></div>
-<script type="application/json" data-for="htmlwidget-9a28ceb1c4de3f26dffb">{"x":{"code":"\n#fill: #FEFEFF\n#lineWidth: 1\n#zoom: 4\n#direction: right\n\n#direction: right\n                 [<start> start] -> [pembuatan model\noptimisasi|Berdasarkan alur produksi|modifikasi pada obj function]\n                 [pembuatan model\noptimisasi] -> [pembuatan program|R codes|library(ompr)]\n                 [pembuatan program] -> [validasi|Menggunakan data\npada rentang\nwaktu tertentu]\n                 [validasi] -> [<choice>solusi optimal?]\n                 [<choice>solusi optimal?] -> N [pembuatan model\noptimisasi]\n                 [<choice>solusi optimal?] -> Y [pembuatan DSS|berbasis shinyapps]\n                 [pembuatan DSS] -> [trial DSS|business user]\n                 [trial DSS] -> [<choice>any feedback?]\n                 [<choice>any feedback?] -> Y [pembuatan DSS]\n                 [<choice>any feedback?] -> N [<end> end]\n                 ","svg":false,"png":null},"evals":[],"jsHooks":[]}</script>
+<div class="nomnoml html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-79ddd754f16dd0d412c7" style="width:70%;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-79ddd754f16dd0d412c7">{"x":{"code":"\n#fill: #FEFEFF\n#lineWidth: 1\n#zoom: 4\n#direction: right\n\n#direction: right\n                 [<start> start] -> [pembuatan model\noptimisasi|Berdasarkan alur produksi|modifikasi pada obj function]\n                 [pembuatan model\noptimisasi] -> [pembuatan program|R codes|library(ompr)]\n                 [pembuatan program] -> [validasi|Menggunakan data\npada rentang\nwaktu tertentu]\n                 [validasi] -> [<choice>solusi optimal?]\n                 [<choice>solusi optimal?] -> N [pembuatan model\noptimisasi]\n                 [<choice>solusi optimal?] -> Y [pembuatan DSS|berbasis shinyapps]\n                 [pembuatan DSS] -> [trial DSS|business user]\n                 [trial DSS] -> [<choice>any feedback?]\n                 [<choice>any feedback?] -> Y [pembuatan DSS]\n                 [<choice>any feedback?] -> N [<end> end]\n                 ","svg":false,"png":null},"evals":[],"jsHooks":[]}</script>
 &lt;p class="caption"&gt;Rencana Penyelesaian Masalah&lt;/p&gt;
 &lt;/div&gt;
 
