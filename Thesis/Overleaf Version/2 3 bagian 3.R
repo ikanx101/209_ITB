@@ -43,7 +43,7 @@ G = 1:6
 
 # total proporsi portofolio bahan baku gula k yang ditetapkan dalam setahun
 mo_k = df_1$proporsi /100 * 3000000 * 12
-alfa = 10^(7)
+alfa = 10^7
 mo_k = (1 / alfa) * mo_k
 
 # miu suatu bilangan yang kecil
@@ -909,7 +909,7 @@ milp_new =
   
 # solver
 result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
-nama_file_output = "output bagian 3 modif alfa ganti.xlsx"
+nama_file_output = "output fungsi ketiga test.xlsx"
 source("3 export hasil ke excel.R")  
 
 toc()

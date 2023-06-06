@@ -145,27 +145,6 @@ class: middle
 
 # _QUICK RECAP_
 
-## Informasi Terkait Jenis Bahan Baku 
-
-Saat ini, ada __6__ jenis bahan baku yang bisa dipesan ke __6__ _supplier_ yang berbeda. Informasi lain yang perlu diketahui adalah:
-
-- Terkait produk dan bahan baku:
-    - Sebagian kecil dari produk hanya bisa diproduksi dengan __satu jenis bahan baku saja__.
-    - Sebagian besar lainnya memungkinkan untuk diproduksi dengan __dua atau lebih jenis bahan baku__. Kebutuhan bahan baku untuk produk pada kelompok ini adalah sama. Ilustrasi sebagai berikut:
-        - Produk minuman __A__ bisa diproduksi menggunakan bahan baku $x_1$ sebanyak 1 ton atau $x_2$ sebanyak 1 ton juga.
-- Pembelian bahan baku harus memenuhi _minimum order_ yang ditetapkan oleh _supplier_ __tapi__ jika pembelian di atas _minimum order_ harus dilakukan __pembulatan__ (_order volume_ harus berupa _integer_). Misalkan:
-    - _Minimum order_ adalah __10 ton__, maka:
-        - Boleh membeli __11 ton__.
-        - Tidak boleh membeli __10.5 ton__.
-- Harga masing-masing jenis bahan baku berbeda. 
-- Lama pengiriman hingga bahan baku siap digunakan untuk semua _supplier_ sama.
-
----
-
-class: middle
-
-# _QUICK RECAP_
-
 ## _Policies_ Pembelian Bahan Baku
 
 Pembelian ini juga harus disesuaikan dengan _policies_ yang ada pada __SCM__, seperti:
@@ -241,6 +220,7 @@ class: middle
 - $I$ sebagai banyaknya _item_ (produk jadi),
 - $\mathfrak{I} =  \left\{ 1, 2, ..., I  \right\}$ sebagai himpunan _item_,
 - $P$ sebagai himpunan _item_ yang hendak diproduksi pada bulan perencanaan,
+    - $P^2$ sebagai himpunan _item_ yang bisa diproduksi menggunakan __minimal dua jenis bahan baku__.
 - Untuk $j \in M, \space P_j$ sebagai himpunan _item_ yang diproduksi pada minggu ke $j$.
 - Untuk $i \in \mathfrak{I}, \space k \in \mathfrak{N}$,
 
@@ -257,6 +237,7 @@ f_{ik} =
 
 .pull-right[
 
+- Untuk $i \in P_j, \space g_{ijk}$ adalah kebutuhan bahan baku $k$ dari item $i$ pada minggu ke $j$.
 - Untuk $j \in M, D_j$ sebagai himpunan _demand_ bahan baku pada minggu ke $j$.
 - Untuk $k \in \mathfrak{N}, mo_k$ sebagai nilai _one-year minimum order quantity_ untuk bahan baku $k$.
 - Untuk $k \in \mathfrak{N}, c_k$ sebagai harga per unit bahan baku $k$.
@@ -324,9 +305,11 @@ class: middle
 
 ## _Constraints_
 
+.pull-left[
+
 ### _Constraint I_
 
-Dibuat untuk menghubungkan $x_k$ dengan $y_k$ akibat diskontinuitas atau sifat dari $x_k$.
+Dibuat untuk menghubungkan $x_k$ dengan $y_k$ akibat diskontinuitas atau sifat dari $x_k$.  $\forall k \in N,$
 
 \begin{align}
   x_k \leq y_k \space D
@@ -336,7 +319,245 @@ Dibuat untuk menghubungkan $x_k$ dengan $y_k$ akibat diskontinuitas atau sifat d
   x_k \geq \sigma_k \space y_k 
 \end{align}
 
+### _Constraint II_
 
+Dibuat sebagai penjumlahan total bahan baku $k$ yang dibeli per minggu $j$. $\forall k \in N,$
+
+\begin{align}
+  x_k = \sum_{j \in M} \hat{x}_{jk}
+\end{align}
+
+]
+
+.pull-right[
+
+### _Constraint III_
+
+Dibuat agar _demand_ bahan baku mingguan terpenuhi. $\forall j \in M,$
+
+\begin{align}
+  \sum^{N}_{k=1} \hat{x}_{jk} + \sum^{N}_{k=1} z_{(j-1)k} \geq D_j 
+\end{align}
+
+### _Constraint IV_
+
+Dibuat agar setiap _item_ pada $P^2$ diproduksi oleh minimal dua bahan baku. $\forall j \in M, \forall i \in P^2_j$
+
+\begin{align}
+  \sum_{k \in N} a_{ijk} \geq 2
+\end{align}
+
+]
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## _Constraints_
+
+.pull-left[
+
+### _Constraint V_
+
+Dibuat untuk menghubungkan antara variabel $f_{ik}, a_{ijk}, b_{ijk},$ dan $x_{jk}$. $\forall j \in M, i \in P, k \in N$.
+
+\begin{align}
+  a_{ijk} \leq f_{ik}
+\end{align}
+
+$\forall j \in M, \forall i \in P, \forall k \in N$
+
+\begin{align}
+  b_{ijk} \leq f_{ik} a_{ijk}
+\end{align}
+
+\begin{align}
+  \mu a_{ijk} \leq b_{ijk}
+\end{align}
+
+untuk suatu nilai $\mu$ yang kecil.
+
+$\forall j \in \hat{M}, \forall i \in P_j,$
+
+\begin{align}
+  \sum_{k \in N} b_{ijk} = 1
+\end{align}
+
+]
+
+.pull-right[
+
+### _Constraint VI_
+
+Dibuat agar memenuhi kebijakan pembelian minimal dari dua pemasok (untuk _item_ yang bisa diproduksi menggunakan minimal 2 bahan baku). $\forall j \in \hat{M}, \forall i \in P^2_j, k_1, k_2 \in N, k_1 \neq k_2,$
+
+\begin{align}
+  (1 - a_{ijk_1}) + (1 - a_{ijk_2}) \geq b_{ijk_1} - b_{ijk_2}
+\end{align}
+
+\begin{align}
+  (1 - a_{ijk_1}) + (1 - a_{ijk_2}) \geq b_{ijk_2} - b_{ijk_1}
+\end{align}
+
+]
+
+???
+
+## Pada _Constraint V_
+
+Perhatikan bahwa $\hat{M}$ adalah setiap minggu yang sedang direncanakan. 
+
+## Pada _Constraint VI_
+
+Perhatikan bahwa pasangan $k_1$ dan $k_2$ adalah semua kemungkinan yang ada dari 6 bahan baku per item.
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## _Constraints_
+
+.pull-left[
+
+### _Constraint VII_
+
+Dibuat agar saldo bahan baku setelah pengiriman tidak akan melebihi kapasitas maksimum gudang.
+
+$\forall j \in M,$
+
+\begin{align}
+  \sum_{k \in N} (z_{(j-1)k} + \hat{x}_{jk}) - \sum_{i \in P_j} b_{ijk} g_{ik} + z_jk \leq maxcap
+\end{align}
+
+]
+
+.pull-right[
+
+### _Constraint VIII_
+
+Dibuat agar memastikan saldo di akhir minggu $j$ berada di atas atau sama dengan _safety stock_. $\forall j \in M, \forall k \in P,$
+
+\begin{align}
+  z_{jk} \geq ss
+\end{align}
+
+]
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Fungsi Objektif
+
+Secara sederhana, tujuan utama dari model optimisasi ini adalah meminimumkan _purchase cost_. 
+
+\begin{align}
+PC = \sum_{k \in \mathfrak{N}} c_k x_k
+\end{align}
+
+--
+Namun seiring iterasi pada saat pencarian solusi secara numerik, didapatkan ada dua hal lain yang perlu dipertimbangkan, yakni:
+
+1. _Holding cost_,
+    - Secara definisi: _Holding costs are costs associated with storing unsold inventory_.
+    - _Holding cost_ digunakan untuk menghindari _excess_ pembelian bahan baku yang tidak langsung terpakai.
+    - Manfaat tak langsung: kapasitas gudang bahan baku menjadi terkendali.
+--
+1. Kriteria pembelian minimum dalam setahun.
+    - Diperlukan sehingga perusahaan tidak secara berlebihan membeli bahan baku yang lebih murah langsung di awal tahun. Sehingga tidak mengganggu kontrak kerjasama (portofolio) antara perusahaan dan pemasok.
+    - Pendefinisiannya akan dijelaskan kemudian.
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Fungsi Objektif
+
+.pull-left[
+
+### _Holding Cost_
+
+Saldo bahan baku $k$ untuk satu minggu bisa diilustrasikan di grafik berikut.
+
+Sehingga total _holding cost_ dituliskan:
+
+\begin{align}
+HC = \frac{1}{2} ic \sum_{j \in \mathfrak{M}} \sum_{k \in \mathfrak{N}} (z_{(j-1)k} + z_{jk} + \hat{x}_{jk})
+\end{align}
+
+Untuk suatu nilai $ic$ tertentu.
+
+]
+
+.pull-right[
+
+```{r out.width="80%",fig.align='center',echo=FALSE,fig.cap="Illustration for inventory cost calculation"}
+knitr::include_graphics("inventory.png")
+```
+
+]
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Fungsi Objektif
+
+### Kriteria Pembelian Minimum dalam Setahun
+
+_Constraints I - VIII_ berbicara mengenai bagaimana _demand_ bisa dipenuhi tanpa melanggar kondisi-kondisi yang ada. Namun terkait _policy_ kontrak _minimum order quantity_ selama setahun cukup sulit untuk diekspresikan dalam bentuk _constraint_ dalam model yang rentang waktunya adalah satu bulan.
+
+Oleh karena itu _policy_ ini kita akomodir pada fungsi objektif sebagai penalti yang didefinisikan sebagai:
+
+\begin{align}
+  {- \sum_{k \in \mathfrak{N}} \alpha_k mo_k x_k}
+\end{align}
+
+Untuk suatu nilai $\alpha_k$ tertentu. Kelak akan dibahas lebih lanjut terkait pemilihan nilai $\alpha_k$ pada bagian `VALIDASI`.
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Fungsi Objektif
+
+Dari uraian-uraian sebelumnya, kita bisa tuliskan fungsi objektif untuk model optimisasi ini adalah:
+
+\begin{align}
+  F(\bar{x},\bar{z}) = \frac{1}{2} hc \sum_{j \in \mathfrak{M}} \sum_{k \in \mathfrak{N}} (z_{(j-1)k} + z_{jk} + \hat{x}_{jk}) + \sum_{k \in \mathfrak{N}} c_k x_k - \sum_{k \in \mathfrak{N}} \alpha_k mo_k x_k
+\end{align}
+
+dengan notasi:
+
+- $\bar{x}$ sebagai vektor dari elemen $x_k$ dan $\hat{x}_{jk}$ 
+- $\bar{z}$ sebagai vektor dari elemen $z_{jk}$ 
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+Model optimisasi untuk pemilihan pemasok, banyaknya pesanan bahan baku mingguan, dan alokasi komposisi bahan baku per _item_ bisa dituliskan sebagai berikut:
+
+
+\begin{matrix}
+\text{minimize} & F(\bar{x},\bar{z}) \\
+\text{subject to} & \text{Constraint I-VIII} \\
+\text{ } & x_k, \hat{x}_{jk}, z_{jk} \in \mathbb{Z}^+, y_k, a_{ijk} \in \left\{0,1 \right\}, 0 \leq b_{ijk} \leq 1
+\end{matrix}
 
 ---
 
@@ -344,17 +565,57 @@ class: middle,center
 
 # VALIDASI MODEL
 
+---
+
+class: middle
+
+# VALIDASI MODEL
+
 ## Menggunakan Data pada _Business Process_
 
+Pada bagian ini, kita akan berikan satu contoh solusi dari model optimisasi yang telah dituliskan pada bagian sebelumnya. 
+
+Data yang digunakan adalah:
+
+- $N = 6$ bahan baku (atau 6 pemasok).
+- $I = 51$ buah _item_.
+
+Sehingga akan ada `2.508` buah variabel keputusan.
+
+???
+
+$x_k$ ada 6
+
+$\hat{x}_{jk}$ ada 24
+
+$y_k$ ada 6
+
+$z_{jk}$ ada 24
+
+$a_{ijk}$ ada 1224
+
+$b_{ijk}$ ada 1224
+
+
+---
+
 ```{r,include=FALSE}
+rm(list=ls())
+
 library(readxl)
 library(dplyr)
+library(kableExtra)
+library(formattable)
 
-nama   = "~/209_ITB/Thesis/Penelitian Mandiri V dan VII/data input.xlsx"
+nama   = "~/209_ITB/Thesis/Overleaf Version/data input.xlsx"
 sheets = excel_sheets(nama)
 
 format_money = function(x) {
   paste0("Rp", formatC(as.numeric(x), format="f", digits=0, big.mark=","))
+}
+
+format_biasa = function(x) {
+  paste0(formatC(as.numeric(x), format="f", digits=0, big.mark=","))
 }
 
 # ambilin data
@@ -362,18 +623,30 @@ df_1 = read_excel(nama,sheet = sheets[1]) # ambil spek
 df_2 = read_excel(nama,sheet = sheets[2]) # ambil matriks gula x produk
 df_3 = read_excel(nama,sheet = sheets[3]) # ambil matriks produk x minggu
 
-df_1 = df_1 %>% rename(supplier   = code_gula,
+df_1 = 
+  df_1 %>% rename(bahan_baku = code_gula,
                        harga      = harga_gula) %>% 
        select(-multiplicator,-cost_obj_func) %>% 
-       mutate(harga = format_money(harga))
+  mutate(ss = 2500) %>% 
+  mutate(mo_k = proporsi /100 * 3000000 * 12) %>% 
+  select(-proporsi) %>% 
+  relocate(mo_k,.before = ss)
 
-colnames(df_2)[2:7] = paste0("bahan_baku_",1:6)
+df_1_print = 
+  df_1 %>% 
+  mutate(stok_akhir_bulan = format_biasa(stok_akhir_bulan),
+         min_order        = format_biasa(min_order),
+         mo_k             = format_biasa(mo_k),
+         ss               = format_biasa(ss),
+         harga            = format_money(harga))
+  
+
+colnames(df_2)[2:7] = paste0("raw_mat",1:6)
 
 df_2 = imputeTS::na.replace(df_2,0)
 
 ```
 
----
 
 class:middle
 
@@ -382,11 +655,16 @@ class:middle
 ## Data terkait Spesifikasi Bahan Baku
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
-library(kableExtra)
-df_1 %>% 
-  knitr::kable(caption = "Spek Bahan Baku",align = "c") %>% 
-  kable_styling(latex_options = "hold_position") %>% 
-  add_header_above(c(" " = 1,"Informasi Detail" = 5))
+df_1_print$mo_k <- color_bar("lightgreen")(df_1$mo_k)
+df_1_print$harga <- color_bar("lightblue")(df_1$harga)
+df_1_print$stok_akhir_bulan <- color_bar("yellow")(df_1$stok_akhir_bulan)
+df_1_print$min_order <- color_bar("pink")(df_1$min_order)
+
+
+kbl(df_1_print, escape = F) %>%
+  kable_paper("hover", full_width = F) %>% 
+  column_spec(5, width = "3cm") %>%
+  add_header_above(c(" " = 1,"Informasi Detail" = 6))
 ```
 
 ---
@@ -398,13 +676,60 @@ class:middle
 ## Komposisi Bahan Baku per Produk
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
+library(DT)
 df_2 %>% 
-  head(7) %>%
-  knitr::kable(caption = "Produk apa bisa dibuat menggunakan bahan baku yang mana?<br>Sampel 7 produk",align = "c") %>% 
-  kable_styling(latex_options = "hold_position") %>% 
-  add_header_above(c(" " = 1,"Bahan Baku" = 6))
+  DT::datatable(class = "compact", rownames = FALSE, extensions = "Buttons",
+                options = list(dom = 'tBp', buttons = c("csv","excel"), 
+                               pageLength = 8)) %>% 
+  DT::formatRound(1:7, digits = 0)
+
 ```
 
+---
+class: middle
+
+## Komposisi Bahan Baku per Produk
+
+.pull-left[
+
+```{r,echo=FALSE,fig.retina=7,fig.align='center',fig.cap="Komposisi bahan baku yang diperbolehkan"}
+library(ggplot2)
+df_2 %>% 
+  mutate(tot = raw_mat1 + raw_mat2 + raw_mat3 + raw_mat4 + raw_mat5 + raw_mat6) %>% 
+  group_by(tot) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  mutate(persen = n/sum(n) * 100,
+         persen = round(persen,1),
+         label  = paste0(n," item\n",
+                         persen,"%")) %>% 
+  mutate(ket = c("Hanya bisa menggunakan 1\nbahan baku saja",
+                 paste0("Bisa dengan\n",2:6," bahan baku")),
+         ket = factor(ket,
+                         level = ket)) %>% 
+  ggplot(aes(x = ket,
+             y = persen)) +
+  geom_col(color = "black",fill = "lightblue") +
+  geom_label(aes(y = persen + 5,label = label)) +
+  coord_flip() +
+  ylim(0,72) +
+  theme_minimal() +
+  labs(title = "Berapa banyak item yang bisa diproduksi\ndengan ... bahan baku?") +
+  theme(axis.title = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 10))
+```
+
+]
+
+.pull-right[
+
+### Temuan
+
+- Hanya ada __2__ _item_ saja yang bisa diproduksi dengan satu jenis bahan baku. 
+- Sedangkan sebagian besar _item_ bisa diproduksi dengan minimal 2 jenis bahan baku.
+
+]
 ---
 
 class:middle
@@ -416,7 +741,6 @@ class:middle
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 df_3 %>% 
   head(7) %>%
-  select(-w1,-w2) %>% 
   knitr::kable(caption = "Data kebutuhan bahan baku per produk<br>Sampel 7 produk",
                align = "c") %>% 
   kable_styling(latex_options = "hold_position") %>% 
