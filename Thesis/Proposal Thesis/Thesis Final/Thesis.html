@@ -4,7 +4,7 @@
     <title>Presentasi Tesis</title>
     <meta charset="utf-8" />
     <meta name="author" content="Mohammad Rizka Fadhli Dr. Saladin Uttunggadewa, M.Si, S.Si Dr. Rieske Hadianti, M.Si, S.Si Prof. Dr. Sri Redjeki, M.Si, S.Si Astri Kurniati, ST., M.App.Sc." />
-    <meta name="date" content="2023-06-05" />
+    <meta name="date" content="2023-06-06" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/fc.css" rel="stylesheet" />
@@ -30,7 +30,7 @@ class: center, middle, inverse, title-slide
 ### <a href="mailto:20921004@mahasiswa.itb.ac.id" class="email">20921004@mahasiswa.itb.ac.id</a>
 ]
 .date[
-### 05 June 2023
+### 06 June 2023
 ]
 
 ---
@@ -67,9 +67,9 @@ _Market Research Specialist_ di PT. Nutrifood Indonesia.
 
 class: middle
 
-# SEKILAS _UPDATE_ 
+# SEKILAS _UPDATE_ SUBMISI JURNAL
 
-&lt;img src="status.JPG" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="Status.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -115,7 +115,7 @@ class: middle
 # _QUICK RECAP_
 ## Masalah
 
-NFI memproduksi `51` jenis minuman serbuk. Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada satu komponen bahan baku yang bisa digunakan oleh __keseluruhan produk__ tersebut.
+NFI memproduksi beberapa jenis minuman serbuk. Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada satu komponen bahan baku yang bisa digunakan oleh __keseluruhan produk__ tersebut.
 
 Untuk pemenuhan bahan baku tersebut, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_. Perjanjian kerja sama antar _supplier_ berupa komitmen pembelian sejumlah bahan baku selama setahun ke depan. Spesifikasi bahan baku dan harganya per-ton berbeda-beda antar _supplier_. 
 
@@ -145,7 +145,6 @@ Pada _thesis_ ini, ada tiga masalah utama yang hendak diselesaikan, yakni:
 dengan tujuan total biaya pembelian seminim mungkin tetapi memenuhi kebutuhan yang ada pada periode tertentu. 
 
 Kemudian akan dibuat suatu _decision support system_ agar memudahkan proses pekerjaan PPIC.
-
 
 ---
 
@@ -193,12 +192,167 @@ class:middle
 &lt;/div&gt;
 
 ---
+class: middle
+
+# _QUICK RECAP_
+
+## _Remarks_
+
+- Untuk memudahkan pemodelan, indeks minggu yang dipakai adalah `\(\{ 1,2,3,4 \}\)` saja.
+- Ada 6 buah pemasok, masing-masing memberikan satu jenis bahan baku. Sehingga kita memiliki 6 jenis bahan baku.
+    - Pada model kelak akan dituliskan `bahan baku`, sehingga masalah pemilihan pemasok sama dengan pemilihan bahan baku.
+
+
+---
 
 class: middle,center
 
-# DATA YANG TERLIBAT
+# MODEL OPTIMISASI
 
-## Semua data yang terlibat dalam _business process_
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Masalah Optimisasi
+
+Meminimalkan ongkos pembelian bahan baku dengan tetap mengamankan stok bahan baku agar proses produksi tetap berjalan.
+
+Masalah ini termasuk ke dalam _mixed integer linear programming_ (__MILP__).
+
+1. Parameter dan variabel yang terlibat merupakan suatu nilai pasti.
+1. Variabel yang terlibat meliputi:
+    - _Binary_ karena melibatkan pengambilan keputusan bahan baku dari _supplier_ mana yang harus dipesan.
+    - _Integer_ karena melibatkan angka kuantitas bahan baku yang harus dipesan. 
+    - _Continuous_ karena melibatkan persentase bahan baku yang hendak dialokasikan ke produksi _finished goods_ per pekan.
+1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
+    - Meminimumkan ongkos pembelian `harga x tonase`.
+    - Kapasitas gudang bahan baku dan rencana produksi produk.
+    - Kontrak pembelian selama setahun.
+    - Pemenuhan _demand_ bahan baku per pekan.
+    - dan seterusnya.
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Indeks, Himpunan, dan Parameter yang Terlibat
+
+.pull-left[
+
+- `\(M = \left\{ 1,2,3,4 \right\}\)` sebagai himpunan minggu, 
+- `\(N\)` sebagai banyaknya bahan baku, 
+- `\(\mathfrak{N}= \left\{ 1,2,...,N \right\}\)` sebagai himpunan bahan baku,
+- `\(I\)` sebagai banyaknya _item_ (produk jadi),
+- `\(\mathfrak{I} =  \left\{ 1, 2, ..., I  \right\}\)` sebagai himpunan _item_,
+- `\(P\)` sebagai himpunan _item_ yang hendak diproduksi pada bulan perencanaan,
+- Untuk `\(j \in M, \space P_j\)` sebagai himpunan _item_ yang diproduksi pada minggu ke `\(j\)`.
+- Untuk `\(i \in \mathfrak{I}, \space k \in \mathfrak{N}\)`,
+
+`\begin{align}
+f_{ik} = 
+\left\{\begin{matrix}
+1 &amp; , &amp; \text{jika item } i \text{ bisa diproduksi dengan bahan baku } k  \\ 
+0 &amp; , &amp; \text{lainnya}
+\end{matrix}\right. 
+\end{align}`
+
+
+]
+
+.pull-right[
+
+- Untuk `\(j \in M, D_j\)` sebagai himpunan _demand_ bahan baku pada minggu ke `\(j\)`.
+- Untuk `\(k \in \mathfrak{N}, mo_k\)` sebagai nilai _one-year minimum order quantity_ untuk bahan baku `\(k\)`.
+- Untuk `\(k \in \mathfrak{N}, c_k\)` sebagai harga per unit bahan baku `\(k\)`.
+- Untuk `\(k \in \mathfrak{N}, \sigma_k\)` sebagai _minimum one-month order quantity_ dari bahan baku `\(k\)` jika terjadi pembelian,
+- Untuk `\(k \in \mathfrak{N}, z_{0k}\)` sebagai saldo bahan baku `\(k\)` di gudang sebelum pengiriman pada minggu pertama,
+- `\(ss\)` sebagai _safety stock_ setiap bahan baku di akhir minggu,
+- `\(maxcap\)` sebagai kapasitas gudang bahan baku,
+- `\(hc\)` sebagai _holding cost_ bahan baku setiap minggu. 
+
+]
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Variabel Keputusan
+
+Definisikan:
+
+- `\(\forall k \in N, x_k\)` sebagai banyaknya bahan baku `\(k\)` yang dibeli. 
+    - `\(x_k \in \mathbb{Z}^+\)`, merupakan bilangan bulat.
+    - `\(x_k = 0\)` jika bahan baku `\(k\)` tidak dibeli, 
+    - `\(\sigma_k \leq x_k \leq D\)` lainnya.
+- `\(\forall k \in N\)`,
+
+`\begin{align}
+y_k = 
+\left\{\begin{matrix}
+0 &amp; , &amp; x_k  \\ 
+1 &amp; , &amp; \sigma_k \leq x_k \leq D
+\end{matrix}\right. 
+\end{align}`
+
+- Variabel `\(y_k\)` didefinisikan untuk mengatasi sifat diskontinuitas dari variabel `\(x_k\)`.
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## Variabel Keputusan (lanjutan)
+
+- `\(\forall j \in M, \forall k \in N, \hat{x}_{jk}\)` sebagai banyaknya bahan baku `\(k\)` yang dikirim pada awal minggu ke `\(j\)`.
+- `\(\forall j \in M, \forall i \in P_j, \forall k \in N,\)`
+
+`\begin{align}
+a_{ijk} = 
+\left\{\begin{matrix}
+1 &amp; , &amp; \text{jika item } i \text{ pada minggu }j \text{ diproduksi menggunakan bahan baku } k  \\ 
+0 &amp; , &amp; \text{lainnya}
+\end{matrix}\right. 
+\end{align}`
+
+- `\(\forall j \in M, \forall i \in P_j, \forall k \in N, b_{ijk}\)` sebagai proporsi dari bahan baku `\(k\)` yang digunakan untuk memproduksi _item_ `\(i\)` pada minggu ke `\(j\)` (jika bahan baku `\(k\)` digunakan).
+- `\(\forall j \in M, \forall k \in N, z_{jk}\)` sebagai saldo dari bahan baku `\(k\)` di akhir minggu ke `\(j\)`. 
+
+---
+
+class: middle
+
+# MODEL OPTIMISASI
+
+## _Constraints_
+
+### _Constraint I_
+
+Dibuat untuk menghubungkan `\(x_k\)` dengan `\(y_k\)` akibat diskontinuitas atau sifat dari `\(x_k\)`.
+
+`\begin{align}
+  x_k \leq y_k \space D
+\end{align}`
+
+`\begin{align}
+  x_k \geq \sigma_k \space y_k 
+\end{align}`
+
+
+
+---
+
+class: middle,center
+
+# VALIDASI MODEL
+
+## Menggunakan Data pada _Business Process_
 
 
 
@@ -206,7 +360,7 @@ class: middle,center
 
 class:middle
 
-# _QUICK RECAP_
+# VALIDASI MODEL
 
 ## Data terkait Spesifikasi Bahan Baku
 
@@ -282,7 +436,7 @@ class:middle
 
 class:middle
 
-# _QUICK RECAP_
+# VALIDASI MODEL
 
 ## Komposisi Bahan Baku per Produk
 
@@ -374,7 +528,7 @@ class:middle
 
 class:middle
 
-# _QUICK RECAP_
+# VALIDASI MODEL
 
 ## Data _Demand_ Mingguan per Produk
 
@@ -450,7 +604,7 @@ class:middle
 
 class:middle
 
-# _QUICK RECAP_
+# VALIDASI MODEL
 
 ## Data Lain
 
@@ -461,37 +615,7 @@ class:middle
 ---
 
 
-class: middle,center
 
-# MODEL OPTIMISASI
-
----
-
-class: middle
-
-# MODEL OPTIMISASI
-
-## Masalah Optimisasi
-
-Meminimalkan ongkos pembelian bahan baku dengan tetap mengamankan stok bahan baku agar proses produksi tetap berjalan.
-
-Masalah ini termasuk ke dalam _mixed integer linear programming_ (__MILP__), alasannya:
-
-1. Parameter dan variabel yang terlibat merupakan suatu nilai pasti.
-1. Variabel yang terlibat meliputi:
-    - _Binary_ karena melibatkan pengambilan keputusan bahan baku dari _supplier_ mana yang harus dipesan.
-    - _Integer_ karena melibatkan angka kuantitas bahan baku yang harus dipesan. 
-    - _Continuous_ karena melibatkan persentase bahan baku yang hendak dialokasikan ke produksi _finished goods_ per pekan.
-1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
-    - Meminimumkan ongkos pembelian `harga x tonase`.
-    - Kapasitas gudang bahan baku dan rencana produksi produk.
-    - Kontrak pembelian selama setahun.
-    - Pemenuhan _demand_ bahan baku per pekan.
-    - dan seterusnya.
-
----
-
----
 
 class: middle,center
 
