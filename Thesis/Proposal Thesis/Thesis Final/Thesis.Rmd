@@ -869,6 +869,80 @@ class: middle
 
 ## Solusi Optimal
 
+Perbandingan pengiriman pada minggu $j$, saldo pada minggu $j-1$ dan _demand_ pada minggu $j$.
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+data.frame(
+  info    = c("Demand","Saldo week j-1","Pengiriman week j","Sisa Saldo"),
+  week_1  = c("373,288","18,450","549,083","194,245"),
+  week_2  = c("416,316","194,245","237,074","15,002"),
+  week_3  = c("210,614","15,002","210,613","15,001"),
+  week_4  = c("142,325","15,001","142,324","15,000")
+) %>% 
+  kbl(escape = F) %>% 
+  kable_paper("hover", full_width = F) %>% 
+  column_spec(5, width = "3cm") %>% 
+  add_header_above(c(" " = 1,"Week j = ..." = 4))
+```
+
+Terlihat bahwa tidak ada pelanggaran pada _constraint III_.
+
+???
+
+_constraint III_ dibuat agar _demand_ bahan baku mingguan terpenuhi.
+
+
+Lalu coba perhatikan bahwa di akhir minggu 4, ada saldo sebanyak 15.000 itu dari mana asalnya?
+
+
+---
+
+class: middle
+
+# VALIDASI MODEL
+
+## Solusi Optimal
+
+### Saldo bahan baku di akhir minggu
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+rm(list=ls())
+
+df = data.frame(
+  raw = 1:6,
+  x1  = c("2,501","181,743","2,500","2,500","2,500","2,500"),
+  x2  = c("2,501","2,501","2,500","2,501","2,500","2,500"),
+  x3  = c("2,500","2,500","2,500","2,501","2,500","2,500"),
+  x4  = c(rep("2,500",6))
+)
+
+colnames(df)[1]   = "Bahan Baku"
+colnames(df)[2:5] = paste0("Week ",1:4)
+
+kbl(df, escape = F) %>%
+  kable_paper("hover", full_width = F) %>% 
+  column_spec(5, width = "3cm") %>%
+  add_header_above(c("Pemasok" = 1,"Saldo akhir" = 4))
+
+```
+
+Tidak ada pelanggaran pada _constraint VII_ dan _VIII_.
+
+???
+
+Terlihat angka detail saldo pada slide sebelumnya
+
+
+---
+
+class: middle
+
+# VALIDASI MODEL
+
+## Solusi Optimal
+
 ### Matriks $b_{ijk}$
 
 ```{r,echo=FALSE}
@@ -891,6 +965,11 @@ df %>%
 ???
 
 Berikut adalah matriks $b_{ijk}$ yang terbentuk. Mayoritas memang berisi 50% proporsinya. Namun ada juga yang 33% tergantung dari kondisi yang ada.
+
+contoh:
+
+- item 6 dan 25 butuh 5 gula pada week 1
+
 
 Bagaimana cara membacanya? terangkan dulu
 
@@ -938,7 +1017,8 @@ Pengecekan menyeluruh membuktikan bahwa tidak ada pelanggaran terhadap _constrai
 
 ???
 
-_Constraint V_
+_Constraint V_ dibuat untuk menghubungkan antara variabel $f_{ik}, a_{ijk}, b_{ijk},$ dan $x_{jk}$. $\forall j \in M, i \in P, k \in N$.
+ 
 
 _Constraint VI_ berbicara mengenai policy minimal 2 jenis bahan baku untuk $P^2$
 
@@ -948,34 +1028,89 @@ class: middle
 
 # VALIDASI MODEL
 
-## Solusi Optimal
+## Hasil Pengecekan
 
-### Saldo bahan baku di akhir minggu
+Hasil pengecekan menyeluruh didapatkan bahwa semua variabel keputusan:
+
+- $x_k$, 
+- $\hat{x}_k$, 
+- $a_{ijk}$, 
+- $b_{ijk}$, dan 
+- $z_{jk}$ 
+
+tidak ada yang melanggar _constraints_ dan merupakan solusi optimal.
+
+---
+
+class: middle
+
+# VALIDASI MODEL
+
+## Histori Modifikasi Fungsi Objektif
+
+Pada pembahasan terkait fungsi objektif, telah disebutkan bahwa fungsi objektif saat ini telah memperhitungkan _purchase cost_, _holding cost_, dan kontrak pembelian minimal setahun.
+
+Sebelum mencapai fungsi terakhir, kami telah mencoba beberapa fungsi objektif seperti:
+
+- _Objective function_ 1:
+
+\begin{align}
+hc_{j=1} + \sum_{k \in \mathfrak{N}} c_k x_k
+\end{align}
+
+- _Objective function_ 2:
+
+\begin{align}
+\frac{1}{2} hc \sum_{j \in M} \sum_{k \in \mathfrak{N}} (z_{(j-1)k} + z_{jk} + \hat{x}_{jk}) + \sum_{k \in \mathfrak{N}} c_k x_k
+\end{align}
+
+- _Objective function_ 3 (saat ini):
+
+\begin{align}
+\frac{1}{2} hc \sum_{j \in M} \sum_{k \in \mathfrak{N}} (z_{(j-1)k} + z_{jk} + \hat{x}_{jk}) + \sum_{k \in \mathfrak{N}} c_k x_k - \sum_{k \in \mathfrak{N}} \alpha_k mo_k x_k
+\end{align}
+
+---
+
+class: middle
+
+# VALIDASI MODEL
+
+## Histori Modifikasi Fungsi Objektif (lanjutan)
+
+.pull-left[
+
+Berikut adalah komparasi solusi antar fungsi objektif:
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 rm(list=ls())
 
 df = data.frame(
-  raw = 1:6,
-  x1  = c("2,501","181,743","2,500","2,500","2,500","2,500"),
-  x2  = c("2,501","2,501","2,500","2,501","2,500","2,500"),
-  x3  = c("2,500","2,500","2,500","2,501","2,500","2,500"),
-  x4  = c(rep("2,500",6))
+  raw = c(1:6,"Total"),
+  x1  = c("276,780","464,388","35,645","214,811","29,400","118,070","1,139,094"),
+  x2  = c("363,486","532,404","20,402","60,124","16,888","145,791","1,139,094"),
+  x3  = c("192,649","543,385","90,742","56,508","52,958","202,853","1,139,094")
 )
 
-colnames(df)[1]   = "Bahan Baku"
-colnames(df)[2:5] = paste0("Week ",1:4)
+colnames(df)[1]   = "Raw material"
+colnames(df)[2:4] = paste0("obj function ",1:3)
 
-kbl(df, escape = F) %>%
-  kable_paper("hover", full_width = F) %>% 
-  column_spec(5, width = "3cm") %>%
-  add_header_above(c("Pemasok" = 1,"Saldo akhir" = 4))
-
+df %>% 
+  knitr::kable("html", align="c", booktabs=TRUE, escape = F,
+               caption = "Optimal solution comparison between different objective functions") %>% 
+  kable_styling(latex_options = "hold_position") %>% 
+  add_header_above(c(" " = 1,"Optimal solution" = 3)) 
 ```
 
-Tidak ada pelanggaran pada _constraint VII_ dan _VIII_.
+]
 
+.pull-right[
 
+Dari tabel tersebut, terlihat bahwa jika penggunaan _purchase cost_ dominan, maka bahan baku `4` akan mendapatkan porsi pembelian yang besar. Namun karena kita ketahui bahwa dari $mo_{k=4}$ adalah yang terkecil ketiga, maka sebaiknya pembeliannya haruslah lebih kecil untuk mengakomodir nilai kontrak selama setahun. Sehingga fungsi objektif terakhir memiliki solusi yang terbaik.
+
+Selain itu, $\alpha_k$ harus bernilai positif di setiap bulan perencanaan selama nilai minimum _order_ selama setahun ( $mo_k$ ) masih jauh. Namun saat nilai _order_ tersebut akan habis, kita bisa membuat $\alpha_{k=0}$.
+
+]
 
 ---
 class: middle,center
@@ -988,8 +1123,6 @@ class: middle
 
 # _DECISION SUPPORT SYSTEM_
 
-## Definisi
-
 ## Kenapa Harus Membuat DSS?
 
 - Sebagai _business user_, tim PPIC membutuhkan _tools_ yang mudah digunakan dan mempercepat produktivitas dalam bekerja. 
@@ -999,49 +1132,24 @@ class: middle
 
 DSS dibuat dengan basis program berbahasa __R__. _Library_ yang dilibatkan untuk menyusun model optimisasi adalah `library(ompr)`.
 
+Penentuan solusi pada bagian sebelumnya adalah menggunakan program __R__ yang membutuhkan _compiler_ __R Studio__. Proses _runtime_ yang dibutuhkan adalah `51.093 detik`.
+
+Program ini disebut sebagai DSS versi 1.0.
+
 ---
 
 class: middle
 
 # _DECISION SUPPORT SYSTEM_
 
-## Optimisasi dengan __R__
+## Pengembangan DSS versi 2.0
 
-.pull-left[
-
-Untuk menyelesaikan masalah optimisasi menggunakan __R__, ada beberapa _packages_ yang bisa digunakan. Saya akan bahas beberapa _packages_ yang biasa digunakan untuk menyelesaikan masalah optimisasi di __R__, yakni:
-
-1. `ROI` _packages_.
-1. `ompr` _packages_.
-
-_Packages_ `ompr` dibuat oleh __Dirk Schumacher__ pada [2018](https://www.r-orms.org/). Salah satu keuntungan dari _library_ ini adalah pengunaan operator _pipe_ ` %>% ` pada perumusan algoritmanya. Sehingga untuk masalah-masalah yang melibatkan pengolahan _dataframe_ (`tidyverse`) akan lebih terbantu.
-
-]
-
---
-
-.pull-right[
-
-_Framework_ untuk menuliskan model optimisasi menggunakan `ompr` adalah sebagai berikut:
+```{r,echo=FALSE}
+nomnoml::nomnoml("#direction:right,
+                 [<start>start] -> 
+                 ")
 
 ```
-# mulai membangun model
-MIPModel() %>% 
-  
-  # menambah variabel
-  add_variable() %>% 
-  
-  # set objective
-  set_objective() %>% 
-  
-  # menambah constraints
-  add_constraint()
-```
-
-Salah satu ciri khas `ompr` adalah penulisannya yang mirip dengan notasi matematika sehingga saat kita memiliki suatu model dengan banyak variabel, kita tidak perlu menginputnya ke dalam bentuk matriks.
-
-]
-
 
 ---
 
