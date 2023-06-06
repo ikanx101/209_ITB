@@ -632,14 +632,7 @@ df_1 =
   select(-proporsi) %>% 
   relocate(mo_k,.before = ss)
 
-df_1_print = 
-  df_1 %>% 
-  mutate(stok_akhir_bulan = format_biasa(stok_akhir_bulan),
-         min_order        = format_biasa(min_order),
-         mo_k             = format_biasa(mo_k),
-         ss               = format_biasa(ss),
-         harga            = format_money(harga))
-  
+df_1_print = df_1 
 
 colnames(df_2)[2:7] = paste0("raw_mat",1:6)
 
@@ -647,27 +640,6 @@ df_2 = imputeTS::na.replace(df_2,0)
 
 ```
 
-
-class:middle
-
-# VALIDASI MODEL
-
-## Data terkait Spesifikasi Bahan Baku
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-df_1_print$mo_k <- color_bar("lightgreen")(df_1$mo_k)
-df_1_print$harga <- color_bar("lightblue")(df_1$harga)
-df_1_print$stok_akhir_bulan <- color_bar("yellow")(df_1$stok_akhir_bulan)
-df_1_print$min_order <- color_bar("pink")(df_1$min_order)
-
-
-kbl(df_1_print, escape = F) %>%
-  kable_paper("hover", full_width = F) %>% 
-  column_spec(5, width = "3cm") %>%
-  add_header_above(c(" " = 1,"Informasi Detail" = 6))
-```
-
----
 
 class:middle
 
@@ -684,6 +656,10 @@ df_2 %>%
   DT::formatRound(1:7, digits = 0)
 
 ```
+
+???
+
+Kasih unjuk _item_ `49` dan `50` yang merupakan dua _items_ yang hanya bisa dibuat dengan `1` bahan baku saja.
 
 ---
 class: middle
@@ -738,15 +714,53 @@ class:middle
 
 ## Data _Demand_ Mingguan per Produk
 
+Data kebutuhan bahan baku per produk.
+
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 df_3 %>% 
-  head(7) %>%
-  knitr::kable(caption = "Data kebutuhan bahan baku per produk<br>Sampel 7 produk",
-               align = "c") %>% 
-  kable_styling(latex_options = "hold_position") %>% 
-  add_header_above(c(" " = 1,"Minggu ke-" = 4))
+  DT::datatable(class = "compact", rownames = FALSE, extensions = "Buttons",
+                options = list(dom = 'tBp', buttons = c("csv","excel"), 
+                               pageLength = 8)) %>% 
+  DT::formatRound(1:5, digits = 0)
 ```
 
+???
+
+We can see that items `5` and `36` do not have to be produced during this planning horizon. We also see that most items must be produced within only two or three weeks of this planning horizon, with varying demand. 
+
+> jangan lupa kasih unjuk produk `49` dan `50`
+
+`49` hanya ada di week 2
+
+`50` hany ada di week 1 dan 3
+
+---
+
+class:middle
+
+# VALIDASI MODEL
+
+## Data terkait Spesifikasi Bahan Baku
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+df_1_print$mo_k <- color_bar("lightgreen")(df_1$mo_k)
+df_1_print$harga <- color_bar("lightblue")(round(df_1$harga,0))
+df_1_print$stok_akhir_bulan <- color_bar("yellow")(df_1$stok_akhir_bulan)
+df_1_print$min_order <- color_bar("pink")(df_1$min_order)
+
+
+kbl(df_1_print, escape = F) %>%
+  kable_paper("hover", full_width = F) %>% 
+  column_spec(5, width = "3cm") %>%
+  add_header_above(c(" " = 1,"Informasi Detail" = 6))
+```
+
+???
+
+- We know that raw material 4 must be purchased since item 49 and 50 can be produced just by using raw material 4. 
+- The price of raw material 4 is the lowest one. But the minimal one-year order quantity is the third smallest. 
+    - So that we may guess that the optimal solution, $x_4$ will have immense value but is not the biggest one, among others. 
+ 
 ---
 
 class:middle
@@ -755,15 +769,215 @@ class:middle
 
 ## Data Lain
 
-- _Max capacity_ gudang bahan baku: 1,427,000
-- Sisa saldo masing-masing bahan baku yang ada di gudang pada saat pengiriman minggu pertama.
-- _Safety stock_ bahan baku, yakni minimal saldo masing-masing bahan baku di akhir minggu.
+_Max capacity_ gudang bahan baku: 1,427,000
 
 ---
 
+class:middle
+
+# VALIDASI MODEL
+
+## Pencarian Solusi
+
+Pencarian solusi dilakukan secara numerik dengan membuat program (kode / skrip) di bahasa pemrograman __R__ memanfaatkan _framework_ di `library(ompr)`.
+
+## Pembuatan Program (DSS versi 1.0)
+
+Program dibuat dengan 3 tahapan utama, yakni:
+
+1. __Tahap I__ mengekstrak parameter-parameter dari 3 tabel yang ditunjukkan pada bagian sebelumnya.
+    - _Input_ : 3 tabel (termasuk _maxcap_) dalam format file `.xlsx`.
+    - _Output_ : parameter-parameter yang dibutuhkan, berupa vektor dan matriks.
+1. __Tahap II__ mencari solusi optimal dari model dan _input_ parameter di tahap I.
+    - _Input_ : parameter _output_ tahap I.
+    - _Output_ : solusi optimal dalam bentuk matriks (hasil keluaran __R__).
+1. __Tahap III__ konversi bentuk matriks ke dalam tabel yang mudah dipahami (dalam format `.xlsx`).
+    - _Input_ : solusi optimal dari tahap II.
+    - _Output_ : tabel dalam _file_ _excel_.
+
+Masing-masing tahapan disimpan dalam skrip terpisah namun dijalankan dalam program yang sama.
+
+---
+
+class: middle
+
+# VALIDASI MODEL
+
+## Solusi Optimal
+
+### Total pemesanan bahan baku dan pengiriman mingguan
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+rm(list=ls())
+
+format_biasa = function(x) {
+  paste0(formatC(as.numeric(x), format="f", digits=0, big.mark=","))
+}
+
+df_dummy = data.frame(
+  x1 = c(1:6,"Total"),
+  x2 = c(192649,543385,90742,56508,52958,202853,1139094),
+  x3 = c(6553,354839,41092,33264,42608,70728,549083),
+  x4 = c(65295,23595,26550,209,10350,111075,237074),
+  x5 = c(81722,96122,14400,18369,0,0,210613),
+  x6 = c(39079,68829,8700,4666,0,21050,142324)
+) 
+
+df = data.frame(
+  x1 = c(1:6,"Total"),
+  x2 = c("192,649","543,385","90,742","56,508","52,958","202,853","1,139,094"),
+  x3 = c("6,553","354,839","41,092","33,264","42,608","70,728","549,083"),
+  x4 = c("65,295","23,595","26,550","209","10,350","111,075","237,074"),
+  x5 = c("81,722","96,122","14,400","18,369","0","0","210,613"),
+  x6 = c("39,079","68,829","8,700","4,666","0","21,050","142,324")
+) 
+
+df$x2 <- color_bar("lightgreen")(df_dummy$x2)
+df$x3 <- color_bar("yellow")(df_dummy$x3)
+df$x4 <- color_bar("cyan")(df_dummy$x4)
+df$x5 <- color_bar("pink")(df_dummy$x5)
+df$x6 <- color_bar("lightblue")(df_dummy$x6)
+
+colnames(df)[1]   = "Bahan Baku"
+colnames(df)[2]   = "Order Qty"
+colnames(df)[3]   = "Week 1"
+colnames(df)[4]   = "Week 2"
+colnames(df)[5]   = "Week 3"
+colnames(df)[6]   = "Week 4"
+
+
+kbl(df, escape = F) %>%
+  kable_paper("hover", full_width = F) %>% 
+  column_spec(5, width = "3cm") %>%
+  add_header_above(c("Pemasok" = 1,"Total Pengiriman" = 1,"Pengiriman Mingguan" = 4))
+
+```
+
+Tidak ada pelanggaran terhadap _constraint I_ dan _II_. 
+
+???
+
+_constraint I_: semua $x_k \geq \sigma_k$.
+
+_constraint II_ : $\sum \hat{x}_k = x_k$
+
+---
+
+class: middle
+
+# VALIDASI MODEL
+
+## Solusi Optimal
+
+### Matriks $b_{ijk}$
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+df = read_excel("~/209_ITB/Thesis/Overleaf Version/output fungsi ketiga.xlsx",
+                sheet = "Proporsi b_ijk",
+                skip  = 2)
+
+colnames(df)[3:8] = paste0("raw_mat",1:6)
+df %>% 
+  rename(code_product = i,
+         week         = j) %>% 
+  DT::datatable(class = "compact", rownames = FALSE, extensions = "Buttons",
+                options = list(dom = 'tBp', buttons = c("csv","excel"), 
+                               pageLength = 8)) %>% 
+  DT::formatRound(3:8, digits = 1)
+```
+
+???
+
+Berikut adalah matriks $b_{ijk}$ yang terbentuk. Mayoritas memang berisi 50% proporsinya. Namun ada juga yang 33% tergantung dari kondisi yang ada.
+
+Bagaimana cara membacanya? terangkan dulu
+
+
+---
+
+### Contoh kasus pada _item_ _i_ = 1
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Data demand bahan baku per $item$ per minggu (parameter yang diketahui)"}
+knitr::include_graphics("bukti 1-2.png")
+```
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Data bahan baku yang diperbolehkan untuk masing-masing $item$ (parameter yang diketahui)"}
+knitr::include_graphics("bukti 1-3.png")
+```
+
+```{r,echo=FALSE,fig.align='center',fig.cap="matriks $b_{ijk}$ (hasil solusi optimal)"}
+knitr::include_graphics("bukti 1-1.png")
+```
+
+---
+
+### Contoh kasus pada _i_ = 49
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Data demand bahan baku per $item$ per minggu (parameter yang diketahui)"}
+knitr::include_graphics("bukti 2-2.png")
+```
+
+```{r,echo=FALSE,fig.align='center',fig.cap="Data bahan baku yang diperbolehkan untuk masing-masing $item$ (parameter yang diketahui)"}
+knitr::include_graphics("bukti 2-1.png")
+```
+
+```{r,echo=FALSE}
+df %>% 
+  filter(i == 49) %>% 
+  rename(code_product = i,
+         week         = j) %>% 
+  DT::datatable(class = "compact", rownames = FALSE, extensions = "Buttons",
+                options = list(dom = 'tBp', buttons = c("csv","excel"), 
+                               pageLength = 4)) %>% 
+  DT::formatRound(3:8, digits = 1)
+```
+
+Pengecekan menyeluruh membuktikan bahwa tidak ada pelanggaran terhadap _constraint V_ dan _VI_.
+
+???
+
+_Constraint V_
+
+_Constraint VI_ berbicara mengenai policy minimal 2 jenis bahan baku untuk $P^2$
+
+---
+
+class: middle
+
+# VALIDASI MODEL
+
+## Solusi Optimal
+
+### Saldo bahan baku di akhir minggu
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+rm(list=ls())
+
+df = data.frame(
+  raw = 1:6,
+  x1  = c("2,501","181,743","2,500","2,500","2,500","2,500"),
+  x2  = c("2,501","2,501","2,500","2,501","2,500","2,500"),
+  x3  = c("2,500","2,500","2,500","2,501","2,500","2,500"),
+  x4  = c(rep("2,500",6))
+)
+
+colnames(df)[1]   = "Bahan Baku"
+colnames(df)[2:5] = paste0("Week ",1:4)
+
+kbl(df, escape = F) %>%
+  kable_paper("hover", full_width = F) %>% 
+  column_spec(5, width = "3cm") %>%
+  add_header_above(c("Pemasok" = 1,"Saldo akhir" = 4))
+
+```
+
+Tidak ada pelanggaran pada _constraint VII_ dan _VIII_.
 
 
 
+---
 class: middle,center
 
 # _DECISION SUPPORT SYSTEM_

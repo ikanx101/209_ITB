@@ -16,7 +16,13 @@ rm(list=ls())
 load("~/209_ITB/Thesis/Overleaf Version/report.rda")
 ```
 
+
 \newpage
+
+\newpage
+
+
+
 
 ```{r,echo=FALSE}
 solusi_7 %>% 
