@@ -1112,6 +1112,22 @@ Selain itu, $\alpha_k$ harus bernilai positif di setiap bulan perencanaan selama
 
 ]
 
+???
+
+Urutannya itu 
+
+bahan baku 2 - 1 - 6 - 4 - 3 - 5
+
+
+$\alpha_k mo_k x_k$ urutannya 2 -1 -6 - 4 - 3 - 5 jadi, seolah-olah aspek ini memaksa agar hasil yang keluar itu tetap ke proporsi awal $mo_k$.
+
+```{r,echo=FALSE}
+rm(list=ls())
+
+data.frame(k           = 1:6,
+           alfa_mok_xk = c("153,271.21","1,083,727.64","5,880.06","16,681.18","1,525.18","85,441.47"))
+```
+
 ---
 class: middle,center
 
@@ -1144,12 +1160,44 @@ class: middle
 
 ## Pengembangan DSS versi 2.0
 
-```{r,echo=FALSE}
-nomnoml::nomnoml("#direction:right,
-                 [<start>start] -> 
+```{r out.width="80%",echo=FALSE,fig.align='center',fig.cap = "Flowchart DSS"}
+knitr::include_graphics("flow.png")
+
+```
+
+```{r,include=FALSE}
+nomnoml::nomnoml("
+                 [<start>start] -> [<input>input tahap 1]
+                 
+                 [<input>input tahap 1|
+                  data spek|
+                  data demand bb per item mingguan|
+                  data komposisi bb per item]
+                 
+                 [<input>input tahap 1] -> [ekstraksi parameter]
+                 [ekstraksi parameter] -> [<database>data tahap 2]
+                 
+                 [<database>data tahap 2] -> [visualisasi]
+                 
+                 [<database>data tahap 2] -> [pencarian solusi]
+                 
+                 [pencarian solusi] -> [<choice>solusi ditemukan?]
+                 
+                 [<choice>solusi ditemukan?] -> N [<input>input tahap 1]
+                 
+                 [<choice>solusi ditemukan?] -> Y [<database>solusi]
+                 
+                 [<database>solusi] -> [export ke xlsx]
+                 [<database>solusi] -> [visualisasi]
+                 
+                 [export ke xlsx] -> [<end>end]
                  ")
 
 ```
+
+???
+
+Cerita ini partnya sains komputasi. terbantu betul saat ambil kuliah perancangan perangkat lunak.
 
 ---
 
@@ -1157,6 +1205,3 @@ class: middle,center,inverse
 
 # Terima Kasih
 ## _Feel free to discuss_
-
-
----
