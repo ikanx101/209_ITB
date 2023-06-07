@@ -905,7 +905,7 @@ milp_new =
   
 # solver
 result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
-nama_file_output = "output fungsi kedua.xlsx"
+nama_file_output = "output fungsi ketiga demo video.xlsx"
 source("3 export hasil ke excel.R")  
 
 toc()

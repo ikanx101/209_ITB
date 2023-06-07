@@ -1199,6 +1199,20 @@ nomnoml::nomnoml("
 
 Cerita ini partnya sains komputasi. terbantu betul saat ambil kuliah perancangan perangkat lunak.
 
+Masih ada yang belum 100% otomatis seperti pada penemuan error akibat tidak ada solusi optimal.
+
+---
+
+class: middle
+
+# _DECISION SUPPORT SYSTEM_
+
+## Diskusi terkait DSS
+
+### Pengembangan DSS Lebih Lanjut
+
+Mengawinkan antara skrip optimisasi dengan _shinyapps_ memiliki tantangan tersendiri karena sumber daya komputasi yang dibutuhkan menjadi sangat besar. Oleh karena itu bisa dicoba untuk meng-_contain_ _computing environment_ termasuk _compiler_ menggunakan `DOCKER`, lalu __menempelkannya__ ke _high performance computer_.
+
 ---
 
 class: middle,center,inverse
