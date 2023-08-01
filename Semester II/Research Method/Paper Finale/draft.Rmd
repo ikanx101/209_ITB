@@ -23,14 +23,14 @@ linestretch: 1.25
 colorlinks: yes
 abstract: The development of the digital economy market in Indonesia is growing every
   year. As a result, marketplaces have to compete with each other to get consumers.
-  Blibli.com is one of the pioneer marketplace in Indonesia has strategy to provide
+  abc.com is one of the pioneer marketplace in Indonesia has strategy to provide
   additional discounts on listed products. Product discount portfolio problem is a
   Binary Linear Programming (BLP) problem with a decision variable in the form of
   a binary number that states whether a product is eligible for a discount or not.
   With many decision variables involved, we developed metaheuristic approaches Spiral
   Dynamic Optimization Algorithm (SDOA) to solve the optimization problem. The SDOA
   solution is proven to be more optimal (generates higher revenur) than the existing
-  Blibli.com solution by average $9.8 \%$.
+  abc.com solution by average $9.8 \%$.
 header-includes:
 - \usepackage{fancyhdr}
 - \pagestyle{fancy}
@@ -51,7 +51,7 @@ library(ggplot2)
 
 Currently, 30 million Indonesians are used to buying and selling online, creating a market of 8 trillion rupiahs. This market can continue to grow to 40 trillion in the next five years. Online transactions are divided into social commerce (trading via social media platforms) and e-commerce (trading via marketplace platforms). By 2022, the revenue projection from the e-commerce market will exceed US$62 million. It was highly contributed by the increasing number of MSMEs that listed their products in e-commerce. The total number of MSMEs that market their products in e-commerce is currently 14.5 million MSMEs. The number has not reached half of the target set in 2023, which is 30 million MSMEs. 
 
-BliBli.com is one of the pioneer and top marketplace in Indonesia. To win the competition, they use a product discount strategy. Each listed product on the Blibli.com has an initial price defined by the seller. Blibli.com can intervene in its price indirectly by providing discounts, so consumers pay lower than the initial price. A study at an online retailer in China shows an influence between product discounts and consumer purchase behavior such as purchase incident, purchase quantity, and spending. Especially in specific discount percentage ranges [@cny]. The pricing and discount aim to attract consumers to buy products in the marketplace for a certain period. One of the mathematical models that can be used to determine prices is the Price Elasticity Model, a causality model between price and demand. A study comparing the price elasticity model with linear, polynomial, and exponential bases found that the linear model is the most commonly used, and it is easier to interpret [@linear_reg].
+abc.com is one of the pioneer and top marketplace in Indonesia. To win the competition, they use a product discount strategy. Each listed product on the abc.com has an initial price defined by the seller. abc.com can intervene in its price indirectly by providing discounts, so consumers pay lower than the initial price. A study at an online retailer in China shows an influence between product discounts and consumer purchase behavior such as purchase incident, purchase quantity, and spending. Especially in specific discount percentage ranges [@cny]. The pricing and discount aim to attract consumers to buy products in the marketplace for a certain period. One of the mathematical models that can be used to determine prices is the Price Elasticity Model, a causality model between price and demand. A study comparing the price elasticity model with linear, polynomial, and exponential bases found that the linear model is the most commonly used, and it is easier to interpret [@linear_reg].
 
 The problem is determining which products need to be given an additional discount. This problem is one of the binary linear programming (BLP) forms: choosing the right product to maximize sales with a constraint limited discount budget in a certain period. Binary programming is a form of an optimization method in which the variables involved are binary numbers. The main characteristic of BLP is the matching process between indexes [@lieberman]. One of the studies related to BLP is the matching process to determine the placement of phasor measuring units in a power system [@suresh]. Another study used BLP to optimize the selection of 100 marketing channels and activities against millions of customers [@ieee]. The goal is to optimize the marketing messages delivery so that sales increase. Business-related and consumer-centric optimization problems have not been widely published in journals.
 
@@ -63,11 +63,11 @@ In another study, researchers made an adaptive linear SDOA by changing the value
 - Utilizing alternative functions (linear, quadratic, fuzzy, and exponential), and
 - Crossing between SDOA and PSO into PSO with a spiral movement.
 
-Currently, Blibli.com determines which product to give a discount by trial and error from several possible combinations - (this method is similar to Monte Carlo simulation but on a simpler computational scale). In this research, we develop a computational model based on SDOA to solve the discount product portfolio optimization problem. Then we will compare the solution with the existing product portfolio.
+Currently, abc.com determines which product to give a discount by trial and error from several possible combinations - (this method is similar to Monte Carlo simulation but on a simpler computational scale). In this research, we develop a computational model based on SDOA to solve the discount product portfolio optimization problem. Then we will compare the solution with the existing product portfolio.
 
 # METHOD
 
-Blibli.com has created the following portfolio:
+abc.com has created the following portfolio:
 
 ```{r,echo=FALSE}
 library(readxl)
@@ -82,7 +82,7 @@ df %>%
   knitr::kable(caption = "Sample Portfolio Data")
 ```
 
-Each portfolio contains 100 product candidates. Blibli.com has the following problem: choosing the right product from the portfolio to generate the maximal revenue with a budget limit of 5 million rupiahs.
+Each portfolio contains 100 product candidates. abc.com has the following problem: choosing the right product from the portfolio to generate the maximal revenue with a budget limit of 5 million rupiahs.
 
 The problem can be written as follows:
 
@@ -160,7 +160,7 @@ The algorithm for solving optimization problems using modified SDOA was made in 
 
 \newpage
 
-1. The existing solution from blibli.com.
+1. The existing solution from abc.com.
 1. The exact solution uses the simplex method created using the R programming language.
 
 This comparison uses portfolio data from as many as ten portfolios with 100 products per portfolio each. Two factors that will be compared are the total budget issued and the total expected revenue.
@@ -265,7 +265,7 @@ SDOA is proven to provide better solutions than existing solutions, namely: spen
 
 ## Study Limitations
 
-In this study, the portfolio used is derived from the calculation of the price elasticity study previously conducted by Blibli.com. 
+In this study, the portfolio used is derived from the calculation of the price elasticity study previously conducted by abc.com. 
 
 - The basic assumption of this portfolio is that changes in sales only come from changes in product prices. The interaction between products in the same category (competitor effect) is not considered in this study. 
 - The budget and expected revenue per product are assumed to be fixed values (not dynamic or probabilistic).
@@ -273,6 +273,6 @@ In this study, the portfolio used is derived from the calculation of the price e
 
 ## Acknowledgements
 
-The author would like to thank the Blibli.com data analytic team for entrusting its product portfolio data to be used as a case study in developing an SDOA-based optimization algorithm. The author also thanks Professor Kuntjoro for inspiration for the modification of SDOA. The author stated that there was no conflict of interest during this research.
+The author would like to thank the abc.com data analytic team for entrusting its product portfolio data to be used as a case study in developing an SDOA-based optimization algorithm. The author also thanks Professor Kuntjoro for inspiration for the modification of SDOA. The author stated that there was no conflict of interest during this research.
 
 # REFERENCES

@@ -7,7 +7,7 @@
   # j menandakan index minggu
 
 # set working directory dulu
-setwd("/mnt/chromeos/removable/Workstation/209_ITB/Thesis/Penelitian Mandiri V dan VII/")
+#setwd("/mnt/chromeos/removable/Workstation/209_ITB/Thesis/Penelitian Mandiri V dan VII/")
 
 rm(list=ls())
 

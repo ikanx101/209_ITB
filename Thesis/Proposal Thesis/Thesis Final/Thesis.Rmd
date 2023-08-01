@@ -1,7 +1,7 @@
 ---
 subtitle: "Pengembangan <i>Decision Support System</i> untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun"
-title: "Presentasi Tesis"
-author: "Mohammad Rizka Fadhli<br>Dr. Saladin Uttunggadewa, M.Si, S.Si<br>Dr. Rieske Hadianti, M.Si, S.Si<br>Prof. Dr. Sri Redjeki, M.Si, S.Si<br>Astri Kurniati, ST., M.App.Sc."
+title: "T E S I S"
+author: "Mohammad Rizka Fadhli<br>Dr. Saladin Uttunggadewa<br>Dr. Rieske Hadianti<br>Prof. Dr. Sri Redjeki<br>Astri Kurniati, ST., M.App.Sc."
 institute: "20921004@mahasiswa.itb.ac.id"
 date: "`r format(Sys.Date(), '%d %B %Y')`"
 output:
@@ -28,6 +28,7 @@ options(htmltools.dir.version = FALSE)
 setwd("~/209_ITB/Thesis/Proposal Thesis/Thesis Final")
 # reference:
 # https://www.garrickadenbuie.com/blog/xaringan-tip-logo-all-slides/
+# https://garthtarr.github.io/sydney_xaringan/#48
 ```
 
 ---
@@ -69,35 +70,35 @@ knitr::include_graphics("Status.png")
 class: middle,center,inverse
 
 # AGENDA HARI INI
-## Penjelasan Mengenai Luaran pada _Thesis_
 
-### Pengembangan _Decision Support System_ untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun
+## Penjelasan Mengenai Luaran pada Tesis
+
 
 ---
 
 class: middle,center,inverse
 
-# JUDUL THESIS
+# JUDUL TESIS
 
-### Pengembangan _Decision Support System_ untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun
-
---
-
-# LUARAN THESIS
+## Pengembangan _Decision Support System_ untuk Menyelesaikan Masalah Optimisasi pada Pemilihan dan Penentuan Komposisi Bahan Baku untuk Multi-Produk, Multi-Periode, Multi-Supplier, serta Kontrak Pembelian Minimum Selama Satu Tahun
 
 --
 
-## Model Optimisasi
+# LUARAN TESIS
 
 --
 
 ## _Decision Support System_
 
+--
+
+## Model Optimisasi
+
 ---
 
 class: middle,center
 
-# _QUICK RECAP_
+# _QUICK RECAP_: Presentasi Proposal Tesis
 
 ### Sebelum masuk ke pembahasan utama
 
@@ -110,12 +111,29 @@ class: middle
 
 NFI memproduksi beberapa jenis minuman serbuk. Masing-masing produk minuman tersebut memiliki __resep__ yang _unique_, namun ada satu komponen bahan baku yang bisa digunakan oleh __keseluruhan produk__ tersebut.
 
-Untuk pemenuhan bahan baku tersebut, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_. Perjanjian kerja sama antar _supplier_ berupa komitmen pembelian sejumlah bahan baku selama setahun ke depan. Spesifikasi bahan baku dan harganya per-ton berbeda-beda antar _supplier_. 
+Untuk pemenuhan bahan baku tersebut, NFI menggunakan prinsip _multiple sourcing_ dengan perjanjian untuk memasoknya dari enam buah _supplier_.
+
+> Catatan: __Satu supplier memasok satu jenis bahan baku__.
+
+--
+
+Perjanjian kerja sama antar _supplier_ berupa komitmen pembelian sejumlah bahan baku selama setahun ke depan. Spesifikasi bahan baku dan harganya per-unit berbeda-beda antar _supplier_. 
 
 Semua produk minuman tersebut bisa dibagi menjadi dua kelompok, yakni:
 
 1. Minuman yang hanya bisa diproduksi oleh __satu jenis__ bahan baku.
 1. Minuman yang bisa diproduksi menggunakan __dua atau lebih jenis__ bahan baku.
+
+
+???
+
+Jadi walau beda-beda rasa dan warna, __tapi__ ada satu bahan baku utama.
+
+Jelasin bahwa satu _supplier_ itu memasok hanya satu jenis bahan baku saja.
+
+Lalu jelasin kenapa hanya bisa diproduksi oleh satu jenis bahan baku saja? Kenapa diperbolehkan dua atau lebih?
+
+> Perbedaan mendasar antar bahan baku ini adalah pada warnanya. Untuk produk dengan warna-warna muda, hanya bisa oleh bahan baku warna muda. Kalau gelap, bisa semua.
 
 ---
 
@@ -139,6 +157,10 @@ dengan tujuan total biaya pembelian seminim mungkin tetapi memenuhi kebutuhan ya
 
 Kemudian akan dibuat suatu _decision support system_ agar memudahkan proses pekerjaan PPIC.
 
+???
+
+Jelasin dulu siapa itu PPIC alias _production planning and inventory control_
+
 ---
 
 class: middle
@@ -150,7 +172,7 @@ class: middle
 Pembelian ini juga harus disesuaikan dengan _policies_ yang ada pada __SCM__, seperti:
 
 1. Pembelian bahan baku harus berasal dari minimal 2 _suppliers_ untuk menjaga keamanan pasokan.
-1. Pembelian bahan baku dari _supplier_ harus memenuhi proporsi portofolio yang ditetapkan di awal tahun oleh __NFI__. Angka ini kelak menjadi patokan berapa tonase minimal yang harus __NFI__ beli kepada masing-masing _supplier_ dalam setahun.
+1. Pembelian bahan baku dari _supplier_ harus memenuhi proporsi portofolio yang ditetapkan di awal tahun oleh __NFI__. Angka ini kelak menjadi patokan berapa kuantitas minimal yang harus __NFI__ beli kepada masing-masing _supplier_ dalam setahun.
 
 ---
 
@@ -161,6 +183,10 @@ class:middle
 ```{r out.width="85%",echo=FALSE,fig.cap="Simplifikasi dari Penggunaan Bahan Baku",fig.align='center'}
 knitr::include_graphics("timeline.png")
 ```
+
+??? 
+
+ingat aturan 17 hari
 
 ---
 class: middle
@@ -198,8 +224,8 @@ Masalah ini termasuk ke dalam _mixed integer linear programming_ (__MILP__).
     - _Integer_ karena melibatkan angka kuantitas bahan baku yang harus dipesan. 
     - _Continuous_ karena melibatkan persentase bahan baku yang hendak dialokasikan ke produksi _finished goods_ per pekan.
 1. Fungsi _objective_ dan _constraints_ masih berupa _linear_.
-    - Meminimumkan ongkos pembelian `harga x tonase`.
-    - Kapasitas gudang bahan baku dan rencana produksi produk.
+    - Meminimumkan ongkos pembelian `harga x kuantitas pembelian`.
+    - Kapasitas gudang bahan baku.
     - Kontrak pembelian selama setahun.
     - Pemenuhan _demand_ bahan baku per pekan.
     - dan seterusnya.
@@ -248,6 +274,14 @@ f_{ik} =
 - $hc$ sebagai _holding cost_ bahan baku setiap minggu. 
 
 ]
+
+???
+
+Data-data ini diperoleh dari NFI.
+
+sebagai contoh $f_{ik}$ didapatkan dari __resep produksi__.
+
+Sementara $g_{ijk}$ itu diturunkan dari data resep produksi dan demand mingguan bahan baku per item.
 
 ---
 
@@ -409,6 +443,11 @@ Dibuat agar memenuhi kebijakan pembelian minimal dari dua pemasok (untuk _item_ 
 
 Perhatikan bahwa $\hat{M}$ adalah setiap minggu yang sedang direncanakan. 
 
+
+Misal suatu produk tidak dipilih, maka $a_{ijk}=0$ walau $f_{ik} = 1$ akibatnya $b_{ijk} = 0$ yang bawahnya terpenuhi
+
+Misal suatu produk dipilih, maka $a_{ijk}=1$ misal $f_{ik} = 1$ akibatnya $b_{ijk} \geq 0$ maka diperlukan $\mu$ agar terpenuhi
+
 ## Pada _Constraint VI_
 
 Perhatikan bahwa pasangan $k_1$ dan $k_2$ adalah semua kemungkinan yang ada dari 6 bahan baku per item.
@@ -426,6 +465,19 @@ class: middle
 ### _Constraint VII_
 
 Dibuat agar saldo bahan baku setelah pengiriman tidak akan melebihi kapasitas maksimum gudang.
+
+Pada minggu I:
+
+\begin{align}
+  \sum_{k \in N} (z_{0k} + \hat{x}_{1k} + z_{1k}) - D_1 \leq maxcap
+\end{align}
+
+$\forall j \in \left\{ 2,3,4 \right\},$
+
+
+\begin{align}
+  \sum_{k \in N} (z_{(j-1)k} + \hat{x}_{(j-1)k}) - \sum_{i \in P_j} b_{ijk} g_{ik} + z_jk \leq maxcap
+\end{align}
 
 $\forall j \in M,$
 
@@ -504,6 +556,12 @@ knitr::include_graphics("inventory.png")
 ```
 
 ]
+
+???
+
+Kita pakai rumus luas trapesium
+
+$\frac{1}{2} (alas_1 + alas_2) \times tinggi$
 
 ---
 
@@ -1055,7 +1113,7 @@ Sebelum mencapai fungsi terakhir, kami telah mencoba beberapa fungsi objektif se
 - _Objective function_ 1:
 
 \begin{align}
-hc_{j=1} + \sum_{k \in \mathfrak{N}} c_k x_k
+\frac{1}{2} hc \sum_{j \in M} \sum_{k \in \mathfrak{N}} (z_{(j-1)k} + z_{jk} + \hat{x}_{jk})
 \end{align}
 
 - _Objective function_ 2:
@@ -1200,6 +1258,8 @@ nomnoml::nomnoml("
 Cerita ini partnya sains komputasi. terbantu betul saat ambil kuliah perancangan perangkat lunak.
 
 Masih ada yang belum 100% otomatis seperti pada penemuan error akibat tidak ada solusi optimal.
+
+__DEMO__
 
 ---
 

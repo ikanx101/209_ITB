@@ -1,8 +1,8 @@
 ---
 title: "Introduction to Market Research"
 subtitle: |
-  | P2MS-ITB 
-  | TEACHING FACTORY-NETWORK
+  | Sebuah Kuliah Perkenalan Sederhana Tentang Market Research
+  | Dari Sudut Pandang Praktisi
 author: |
   | Mohammad Rizka Fadhli
   | ikanx101.com
@@ -2528,12 +2528,3 @@ Sedangkan _market size_ adalah menghitung seberapa besar pasar yang bisa diraih 
 
 Sebagai contoh, jika semua produk yang ada di atas berada pada kategori yang sama (misalkan: minuman ringan), maka kita bisa hitung _market size_-nya adalah sebesar `r paste0("Rp ",total," jt")`
 
-## _TV Campaign Research_
-
-## _Brand Health_
-
-## _Market Entry Research_
-
-## _Service Audit: Mistery Shopping_
-
-## _Discussion_  {.unlisted .unnumbered}
