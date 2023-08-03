@@ -893,7 +893,7 @@ milp_new =
   
   # week 2-4
   add_variable(tot_w24[k],type = "continuous",lb = 0,k = G) %>%
-  add_constraint(tot_w24[k] == 0.5 * ic * sum_expr(z[j,k] + z[j-1,k] + x_hat[j,k],
+  add_constraint(tot_w24[k] == 0.5 * ic * sum_expr(z[j,k] + z[j-1,k] + x_hat_stb[j,k],
                                               j = 2:4),
                  k = G) %>% 
   
@@ -905,7 +905,7 @@ milp_new =
   
 # solver
 result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
-nama_file_output = "output fungsi ketiga demo video.xlsx"
+nama_file_output = "output fungsi kedua new.xlsx"
 source("3 export hasil ke excel.R")  
 
 toc()

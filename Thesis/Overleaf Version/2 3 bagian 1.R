@@ -43,12 +43,12 @@ G = 1:6
 
 # total proporsi portofolio bahan baku gula k yang ditetapkan dalam setahun
 mo_k = df_1$proporsi /100 * 3000000 * 12
-alfa = 500
+alfa = 5000
 mo_k = (1 / alfa) * mo_k
 
 # miu suatu bilangan yang kecil
-#miu = 10^(-6)
-miu = 10^(-10)
+miu = 10^(-6)
+#miu = 10^(-10)
 
 # ==============================================================================
 # model utama
@@ -892,10 +892,10 @@ milp_new =
   add_constraint(cost_w1[k] == z[j,k] * c_k[k],j = 1,k = G) %>% 
   
   # week 2-4
-  #add_variable(tot_w24[k],type = "continuous",lb = 0,k = G) %>%
-  #add_constraint(tot_w24[k] == 0.5 * ic * sum_expr(z[j,k] + z[j-1,k] + x_hat_stb[j,k],
-  #                                            j = 2:4),
-  #               k = G) %>% 
+  add_variable(tot_w24[k],type = "continuous",lb = 0,k = G) %>%
+  add_constraint(tot_w24[k] == 0.5 * ic * sum_expr(z[j,k] + z[j-1,k] + x_hat_stb[j,k],
+                                              j = 2:4),
+                 k = G) %>% 
   
   # yearly contract
   #add_variable(yearly[k],type = "continuous",lb = 0,k = G) %>% 
@@ -903,14 +903,14 @@ milp_new =
   #               k = G) %>% 
   
   # objective function
-  set_objective(sum_expr((c_k[k] * x[k]) + cost_w1[k], #+ tot_w1[k] + tot_w24[k] - yearly[k]
+  set_objective(sum_expr((c_k[k] * x[k]) + cost_w1[k] + tot_w24[k],#  - yearly[k]
                          k = G),
                 "min")
                
   
 # solver
 result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
-nama_file_output = "output fungsi awal.xlsx"
+nama_file_output = "output fungsi awal new xhat.xlsx"
 source("3 export hasil ke excel.R")  
 
 toc()

@@ -28,7 +28,7 @@ df_4[is.na(df_4)] = 0
 maxcap = read_excel(nama,sheet = sheets[4]) # ambil max capacity gudang 
 maxcap = maxcap$maxcap
 
-temporary = read_excel(nama,sheet = sheets[5])
+#temporary = read_excel(nama,sheet = sheets[5])
 
 # bikin f_ik
 # produk i bisa diproduksi dengan gula k

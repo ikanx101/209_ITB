@@ -227,4 +227,4 @@ tabel_all = list(
 xl_write(tabel_all, wb, sh)
 
 # export ke Excel
-saveWorkbook(wb, "data hasil v5.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "data hasil v6.xlsx", overwrite = TRUE)
