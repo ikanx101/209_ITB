@@ -43,8 +43,11 @@ G = 1:6
 
 # total proporsi portofolio bahan baku gula k yang ditetapkan dalam setahun
 mo_k = df_1$proporsi /100 * 3000000 * 12
-alfa = 500
+alfa = 10^7
 mo_k = (1 / alfa) * mo_k
+
+
+c_k = rep(0.000001,6)
 
 # miu suatu bilangan yang kecil
 #miu = 10^(-6)
@@ -79,7 +82,7 @@ milp_new =
   # ============================================================================
   # variabel keputusan II
   # banyaknya pengiriman bahan baku gula jenis k pada awal week j
-  add_variable(x_hat[j,k],type = "integer",lb = 0,
+  add_variable(x_hat[j,k],type = "integer",lb = 0, # cobain dulu
                j = M,
                k = G) %>% 
                
@@ -116,7 +119,7 @@ milp_new =
   # modifikasi dari Bu Rieske
   # kita pecah dua karena ada pengaruh dari Z_0k
     # untuk j = 1
-    #add_constraint(sum_expr(x_hat[1,k],k = G) + sum_expr(Z_0k[k],k = G) >= Dj[1]) %>%
+    add_constraint(sum_expr(x_hat[1,k],k = G) + sum_expr(Z_0k[k],k = G) >= Dj[1]) %>%
     
     # untuk j >= 1
     #add_constraint(sum_expr(x_hat[j,k],k = G) + sum_expr(z[j-1,k],k = G) >= Dj[j],j = 2:4) %>%
@@ -887,9 +890,8 @@ milp_new =
   
   # ============================================================================
   # modifikasi untuk menambahkan cost ke dalam objective function
-  add_variable(cost_w1[k],type = "continuous",lb = 0,k = G) %>%
-  add_constraint(cost_w1[k] >= z[j,k] * c_k[k],j = 1,k = G) %>% 
-  
+  #add_variable(cost_w1[k],type = "continuous",lb = 0,k = G) %>%
+  #add_constraint(cost_w1[k] >= z[j,k] * c_k[k],j = 1,k = G) %>% 
   
   # week 2-4
   add_variable(tot_w24[k],type = "continuous",lb = 0,k = G) %>%
@@ -898,14 +900,15 @@ milp_new =
                  k = G) %>% 
   
   # objective function
-  set_objective(sum_expr((c_k[k] * x[k]) + cost_w1[k] + tot_w24[k],# + tot_w1[k]  - yearly[k]
+  set_objective(sum_expr((c_k[k] * x[k]) + tot_w24[k],
                          k = G),
                 "min")
                
   
 # solver
 result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
-nama_file_output = "output fungsi kedua 4 agustus reload only.xlsx"
+nama_file_output = "output fungsi pertama 4 agustus.xlsx"
 source("3 export hasil ke excel.R")  
 
 toc()
+solusi_1

@@ -7,7 +7,7 @@
   # j menandakan index minggu
 
 # read database input
-nama = "data input video.xlsx"
+nama = "data input.xlsx"
 sheets = excel_sheets(nama)
 
 # ambilin data
@@ -98,7 +98,7 @@ for(i in 1:51){
 Z_0k = df_1$stok_akhir_bulan
 
 # safety stock
-ss = 3000
+ss = 2500
 
 # inventory cost
 ic = 1000

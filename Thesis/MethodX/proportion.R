@@ -19,7 +19,7 @@ df %>%
   mutate(f1 = obj_1 * price,
          f2 = obj_2 * price,
          f3 = obj_3 * price) %>% 
-  summarise_all(sum) %>% 
+  summarise_all(sum) 
   
 
 df %>% 
@@ -32,13 +32,14 @@ df %>%
   mutate(variable = case_when(
     variable == "obj_1" ~ "Obj Func 1",
     variable == "obj_2" ~ "Obj Func 2",
-    variable == "obj_3" ~ "Obj Func 3",
+    variable == "obj_3" ~ "Obj Func III",
     variable == "fix"   ~ "One-year min order"
   )) %>% 
   mutate(variable = factor(variable,levels = c("One-year min order",
                                                "Obj Func 1",
                                                "Obj Func 2",
-                                               "Obj Func 3"))) %>% 
+                                               "Obj Func III"))) %>%
+  filter(variable %in% c("One-year min order","Obj Func III")) %>%
   ggplot(aes(x = variable,
              y = persen,
              fill = factor(raw))) +
@@ -46,9 +47,7 @@ df %>%
   ggrepel::geom_label_repel(aes(label = label),position = position_stack(vjust = 0.5),
                             size = 4) +
   scale_fill_brewer(palette = "Paired") +
-  labs(title = "Raw Material Proportion Comparation",
-       subtitle = "between one-year min order and 3rd objective function result",
-       y = "Percentage",
+  labs(y = "Percentage",
        fill = "Raw Material") +
   theme_classic() +
   theme(axis.text.y = element_blank(),
@@ -61,7 +60,7 @@ df %>%
         legend.position = "bottom",
         legend.text = element_text(size = 12),
         legend.title = element_text(size = 13)) +
-  ggsave("proportion.png",
+  ggsave("proportion 2.png",
          width = 14,
          height = 8,
          dpi = 550)

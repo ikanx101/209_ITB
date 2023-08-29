@@ -886,26 +886,15 @@ milp_new =
                  j = M) %>% 
   
   # ============================================================================
-  # modifikasi untuk menambahkan cost ke dalam objective function
-  add_variable(cost_w1[k],type = "continuous",lb = 0,k = G) %>%
-  add_constraint(cost_w1[k] >= z[j,k] * c_k[k],j = 1,k = G) %>% 
-  
-  
-  # week 2-4
-  add_variable(tot_w24[k],type = "continuous",lb = 0,k = G) %>%
-  add_constraint(tot_w24[k] == 0.5 * ic * sum_expr(z[j,k] + z[j-1,k] + x_hat_stb[j,k],
-                                              j = 2:4),
-                 k = G) %>% 
-  
   # objective function
-  set_objective(sum_expr((c_k[k] * x[k]) + cost_w1[k] + tot_w24[k],# + tot_w1[k]  - yearly[k]
+  set_objective(sum_expr((c_k[k] * x[k]) ,# + tot_w1[k]  - yearly[k]
                          k = G),
                 "min")
                
   
 # solver
 result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
-nama_file_output = "output fungsi kedua 4 agustus reload only.xlsx"
+nama_file_output = "output fungsi khusus cost 4 agustus.xlsx"
 source("3 export hasil ke excel.R")  
 
 toc()
