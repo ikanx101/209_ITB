@@ -6,7 +6,7 @@
 # ==============================================================================
 
 # set working directory dulu
-#setwd("~/209_ITB/Thesis/Overleaf Version")
+setwd("~/209_ITB/Thesis/Overleaf Version")
 
 
 # memanggil libraries
@@ -17,7 +17,7 @@ library(ompr.roi)           # untuk optimisasi
 library(ROI.plugin.glpk)    # untuk optimisasi
 library(tictoc)             # untuk menghitung runtime
 
-#tic("Keseluruhan Proses: ")
+tic("Keseluruhan Proses: ")
 
 rm(list=ls())
 
@@ -79,7 +79,7 @@ milp_new =
   # ============================================================================
   # variabel keputusan II
   # banyaknya pengiriman bahan baku gula jenis k pada awal week j
-  add_variable(x_hat[j,k],type = "integer",lb = 0, # cobain dulu
+  add_variable(x_hat[j,k],type = "integer",lb = 0,
                j = M,
                k = G) %>% 
                
@@ -892,13 +892,13 @@ milp_new =
   
   # week 2-4
   add_variable(tot_w24[k],type = "continuous",lb = 0,k = G) %>%
-  add_constraint(tot_w24[k] == 0.5 * ic * sum_expr(z[j,k] + z[j-1,k] + x_hat_stb[j,k],
+  add_constraint(tot_w24[k] == 0.5 * ic * sum_expr(z[j,k] + z[j-1,k] + x_hat[j,k],
                                               j = 2:4),
                  k = G) %>% 
   
   # yearly contract
   add_variable(yearly[k],type = "continuous",lb = 0,k = G) %>% 
-  add_constraint(yearly[k] == mo_k[k] * x_stb[k],
+  add_constraint(yearly[k] == mo_k[k] * x[k],
                  k = G) %>% 
   
   # objective function
@@ -909,7 +909,7 @@ milp_new =
   
 # solver
 result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
-nama_file_output = "output fungsi ketiga demo video 4 agustus.xlsx"
+nama_file_output = "output fungsi ketiga demo video 3 agustus new.xlsx"
 source("3 export hasil ke excel.R")  
 
 toc()
