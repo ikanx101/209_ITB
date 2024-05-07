@@ -6,8 +6,9 @@
   # k menandakan index gula
   # j menandakan index minggu
 
+
 # read database input
-nama = "data input.xlsx"
+nama = "data input next.xlsx"
 sheets = excel_sheets(nama)
 
 # ambilin data

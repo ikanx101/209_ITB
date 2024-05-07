@@ -6,8 +6,7 @@
 # ==============================================================================
 
 # set working directory dulu
-setwd("~/209_ITB/Thesis/Overleaf Version")
-
+setwd("~/209_ITB/Thesis/Skrip")
 
 # memanggil libraries
 library(readxl)             # untuk mengimport data excel
@@ -909,7 +908,7 @@ milp_new =
   
 # solver
 result = milp_new %>% solve_model(with_ROI("glpk", verbose = TRUE))
-nama_file_output = "output fungsi ketiga demo video 3 agustus new.xlsx"
+nama_file_output = "output fungsi ketiga demo video 7 may.xlsx"
 source("3 export hasil ke excel.R")  
 
 toc()
